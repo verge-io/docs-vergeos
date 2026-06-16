@@ -1,6 +1,6 @@
 ---
 description: Troubleshooting articles, how-tos, and field guidance for VergeOS operators.
-icon: life-ring
+icon: book
 ---
 
 # VergeOS Knowledge Base

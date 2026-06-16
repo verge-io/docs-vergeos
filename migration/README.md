@@ -2,7 +2,7 @@
 
 Ports the VergeOS MkDocs site (`/Users/jasonyaeger/Workspaces/docs/docs`) into this
 GitBook Git Sync monorepo. Each top-level dir (`home/ deploy/ run/ automate/
-help-center/ release-notes/`) is the Project directory for one GitBook space of
+knowledge-base/ release-notes/`) is the Project directory for one GitBook space of
 the **VergeOS Docs** site (org `Verge.io`, site `site_1U4gk`).
 
 ## Re-run
@@ -18,7 +18,7 @@ with `find <space> -mindepth 1 -not -name .gitbook.yaml -delete` first for a pri
 ## What it does
 
 - Placement mirrors the GitBook-generated demo repo `gitbook-demo-sites/verge-demo-site-20260608`
-  (`migration/demo/` holds its SUMMARYs/READMEs). Help Center routing uses the live
+  (`migration/demo/` holds its SUMMARYs/READMEs). Knowledge Base routing uses the live
   space's slug→group map (`migration/demo/helpcenter.json`).
 - Converts MkDocs → GitBook: admonitions `!!!/???` → `{% hint %}`, content tabs
   `=== "x"` → `{% tabs %}`, drops `template:`/`draft:` frontmatter, strips abbr/attr_list.

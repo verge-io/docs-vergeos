@@ -26,7 +26,7 @@ any new cross-space link must use the correct ID.
 | `run/`           | Run the platform                                   | `pODKGSQETqL1gSqyxIq3` |
 | `automate/`      | Automate, protect, and extend                      | `sppYQkyIET58BuAo0kqm` |
 | `learn/`         | Learn the platform (space still titled "Training") | `qLUTTK5fxfW4S9FoS9GE` |
-| `help-center/`   | Help Center                                        | `QZBMFpokMv2vWTIRbFzA` |
+| `knowledge-base/` | Knowledge Base                                    | `QZBMFpokMv2vWTIRbFzA` |
 | `release-notes/` | Release notes                                      | `33mA7es4mQYkyUa7dMvu` |
 
 The site also has an **API Reference** space that is intentionally NOT in this repo — it
@@ -55,7 +55,7 @@ When adding/moving a page, update that space's `SUMMARY.md` too, or it won't app
 ## Migration tooling (`migration/`)
 
 One-time port from the MkDocs source. `migration/demo/` holds the GitBook-generated
-reference repo's SUMMARYs/READMEs and the live Help Center slug→group map, which are the
+reference repo's SUMMARYs/READMEs and the live Knowledge Base slug→group map, which are the
 authority for page placement.
 
 ```bash
@@ -73,7 +73,7 @@ find <space> -mindepth 1 -not -name .gitbook.yaml -delete
 `build_mapping.py` prints a coverage report (mapped / excluded / UNMAPPED / collisions) —
 UNMAPPED must be 0. Placement rules: `deploy`/`run`/`automate` come from the demo
 SUMMARYs; other `product-guide/*` route by subdirectory; KB posts route by frontmatter
-`slug` → live Help Center group; release notes group by version era (26.x→2026, 4.x→2025).
+`slug` → live Knowledge Base group; release notes group by version era (26.x→2026, 4.x→2025).
 
 ### Conversion rules (MkDocs → GitBook), all in `convert.py`
 
@@ -90,7 +90,7 @@ SUMMARYs; other `product-guide/*` route by subdirectory; KB posts route by front
 After re-running the converter, these must all come back clean:
 
 ```bash
-SPACES="home deploy run automate help-center release-notes"
+SPACES="home deploy run automate knowledge-base release-notes"
 grep -rEl '^[[:space:]]*([!]{3}|[?]{3})' $SPACES   # leftover admonitions (expect none)
 grep -rEl '^[[:space:]]*=== "' $SPACES             # leftover content tabs (expect none)
 grep -rhoE '\]\((/assets/|/product-guide/|\.\./assets/)[^)]*\)' $SPACES  # unrewritten asset paths (expect none)

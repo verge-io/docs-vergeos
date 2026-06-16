@@ -6,7 +6,7 @@ Placement authority:
     path mapping, already verified to exist in source).
   - product-guide files the demo omitted: routed by subdirectory to the same
     space/group the demo uses for that subdirectory.
-  - knowledge-base posts: routed by frontmatter `slug` -> live Help Center group.
+  - knowledge-base posts: routed by frontmatter `slug` -> live Knowledge Base group.
   - release-notes: grouped by version era (26.x -> 2026, 4.x -> 2025).
 Run:  python3 migration/build_mapping.py
 """
@@ -21,7 +21,7 @@ SPACE_IDS = {
     "deploy": "Q2bN3ctQdjv01GivTI08",
     "run": "pODKGSQETqL1gSqyxIq3",
     "automate": "sppYQkyIET58BuAo0kqm",
-    "help-center": "QZBMFpokMv2vWTIRbFzA",
+    "knowledge-base": "QZBMFpokMv2vWTIRbFzA",
     "release-notes": "33mA7es4mQYkyUa7dMvu",
 }
 
@@ -135,7 +135,7 @@ def main():
                              title=title_of(os.path.join(SRC, rel))))
             mapped.add(rel)
 
-    # 3. knowledge-base posts -> help-center by slug
+    # 3. knowledge-base posts -> knowledge-base space by slug
     for rel in all_source_md():
         if rel in mapped or rel in EXCLUDE: continue
         if rel.startswith("knowledge-base/posts/"):
@@ -146,7 +146,7 @@ def main():
                 group = "Troubleshooting"  # safe default; reported below
             prefix = group2prefix[group]
             dest = f"{prefix}/{slug}.md"
-            rows.append(dict(src=rel, space="help-center", dest=dest, group=group,
+            rows.append(dict(src=rel, space="knowledge-base", dest=dest, group=group,
                              title=fm.get("title") or title_of(os.path.join(SRC, rel))))
             mapped.add(rel)
 

@@ -18,19 +18,19 @@ DEMO = os.path.join(ROOT, "migration", "demo")
 SPACE_IDS = {
     "home": "uJc5d3O7cwI7qD8muSyG", "deploy": "Q2bN3ctQdjv01GivTI08",
     "run": "pODKGSQETqL1gSqyxIq3", "automate": "sppYQkyIET58BuAo0kqm",
-    "help-center": "QZBMFpokMv2vWTIRbFzA", "release-notes": "33mA7es4mQYkyUa7dMvu",
+    "knowledge-base": "QZBMFpokMv2vWTIRbFzA", "release-notes": "33mA7es4mQYkyUa7dMvu",
 }
 GROUP_ORDER = {
     "deploy": ["Implementation guide", "Reference architectures"],
     "automate": ["Backup and DR", "Automation", "Integrations and APIs",
                  "Private AI", "Shared admin surfaces"],
-    "help-center": ["Getting Started & Installation", "Virtual Machines", "Networking",
+    "knowledge-base": ["Getting Started & Installation", "Virtual Machines", "Networking",
                     "Storage & vSAN", "Tenants", "Backup & DR", "Automation & API",
                     "System Administration", "Troubleshooting"],
     "release-notes": ["2026", "2025"],
 }  # run order is taken from its demo SUMMARY headers
 SECTION_ICON = {"home": "house", "deploy": "compass-drafting", "run": "server",
-                "automate": "robot", "help-center": "life-ring", "release-notes": "notes"}
+                "automate": "robot", "knowledge-base": "book", "release-notes": "notes"}
 
 # ---------------------------------------------------------------- transforms
 ADM_RE = re.compile(r'^(?P<indent>[ \t]*)(?P<marker>!!!|\?\?\?\+?)\s+(?P<type>[\w-]+)(?:\s+"(?P<title>.*)")?\s*$')
@@ -158,7 +158,7 @@ def build_indices(rows):
         src2dests[r['src']].append((r['space'], r['dest']))
     kbslug2 = {}
     for r in rows:
-        if r['space'] == 'help-center':
+        if r['space'] == 'knowledge-base':
             slug = os.path.splitext(os.path.basename(r['dest']))[0]
             kbslug2[slug] = (r['space'], r['dest'])
     return src2dests, kbslug2
@@ -169,15 +169,15 @@ REDIRECT = {
     'verge-bot': ('home', 'support-and-services.md'),
     'index': ('home', 'README.md'),
     'glossary': ('home', 'glossary.md'),
-    'knowledge-base': ('help-center', 'README.md'),
-    'knowledge-base/index': ('help-center', 'README.md'),
-    'knowledge-base/category/api-reference': ('help-center', 'README.md'),
+    'knowledge-base': ('knowledge-base', 'README.md'),
+    'knowledge-base/index': ('knowledge-base', 'README.md'),
+    'knowledge-base/category/api-reference': ('knowledge-base', 'README.md'),
     'release-notes': ('release-notes', 'README.md'),
     'reference-architecture': ('deploy', 'README.md'),
     'product-guide/storage': ('run', 'README.md'),
-    # stale source slug -> current Help Center page
+    # stale source slug -> current Knowledge Base page
     'knowledge-base/posts/understanding-vsan-growth':
-        ('help-center', 'storage-vsan/understanding-and-explaining-unexpected-vsan-growth.md'),
+        ('knowledge-base', 'storage-vsan/understanding-and-explaining-unexpected-vsan-growth.md'),
 }
 
 def resolve_doc(target, src_rel, src2dests, kbslug2):
@@ -372,10 +372,10 @@ def main():
 
     # 3. generated READMEs for spaces without a demo one (release-notes README came from source)
     hc_readme = ('---\ndescription: Troubleshooting articles, how-tos, and field guidance '
-                 'for VergeOS operators.\nicon: life-ring\n---\n\n# VergeOS Knowledge Base\n\n'
+                 'for VergeOS operators.\nicon: book\n---\n\n# VergeOS Knowledge Base\n\n'
                  'Practical, task-focused articles maintained by the VergeOS team. Browse by '
                  'category in the sidebar or search for a specific issue.\n')
-    open(os.path.join(ROOT, "help-center", "README.md"), 'w', encoding='utf-8').write(hc_readme)
+    open(os.path.join(ROOT, "knowledge-base", "README.md"), 'w', encoding='utf-8').write(hc_readme)
 
     # 4. copy assets
     for (space, space_asset), abspath in asset_jobs.items():
@@ -393,7 +393,7 @@ def main():
         rows_for_summary = srows
         if space == 'home':
             rows_for_summary = home_extra + srows
-        if space == 'help-center':
+        if space == 'knowledge-base':
             rows_for_summary = srows + [{'dest': 'README.md', 'group': None, 'title': 'VergeOS Knowledge Base'}]
         summ = write_summary(space, rows_for_summary, dorder)
         open(os.path.join(ROOT, space, "SUMMARY.md"), 'w', encoding='utf-8').write(summ)
