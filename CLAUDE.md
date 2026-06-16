@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this repo is
 
-A **GitBook Git Sync monorepo**. Each top-level directory is the *Project directory*
+A **GitBook Git Sync monorepo**. Each top-level directory is the _Project directory_
 for one GitBook space of the **VergeOS Docs** site. There is no app to build, lint, or
 test — GitBook renders the content when each space's Project directory is synced. The
 content was ported from the MkDocs source site at `/Users/jasonyaeger/Workspaces/docs/docs`
@@ -19,21 +19,26 @@ Each dir below git-syncs to one space. The **space IDs are load-bearing**: cross
 links are written as `https://app.gitbook.com/s/<spaceId>/<dest-path-without-.md>`, so
 any new cross-space link must use the correct ID.
 
-| Dir | GitBook space | Space ID |
-|-----|---------------|----------|
-| `home/` | Home | `uJc5d3O7cwI7qD8muSyG` |
-| `deploy/` | Plan and deploy | `Q2bN3ctQdjv01GivTI08` |
-| `run/` | Run the platform | `pODKGSQETqL1gSqyxIq3` |
-| `automate/` | Automate, protect, and extend | `sppYQkyIET58BuAo0kqm` |
-| `help-center/` | Help Center | `QZBMFpokMv2vWTIRbFzA` |
-| `release-notes/` | Release notes | `33mA7es4mQYkyUa7dMvu` |
+| Dir              | GitBook space                                      | Space ID               |
+| ---------------- | -------------------------------------------------- | ---------------------- |
+| `home/`          | Home                                               | `uJc5d3O7cwI7qD8muSyG` |
+| `deploy/`        | Plan and deploy                                    | `Q2bN3ctQdjv01GivTI08` |
+| `run/`           | Run the platform                                   | `pODKGSQETqL1gSqyxIq3` |
+| `automate/`      | Automate, protect, and extend                      | `sppYQkyIET58BuAo0kqm` |
+| `learn/`         | Learn the platform (space still titled "Training") | `qLUTTK5fxfW4S9FoS9GE` |
+| `help-center/`   | Help Center                                        | `QZBMFpokMv2vWTIRbFzA` |
+| `release-notes/` | Release notes                                      | `33mA7es4mQYkyUa7dMvu` |
 
-The site also has **Training** and **API Reference** spaces that are intentionally NOT
-in this repo — they have no source equivalent and are edited directly in GitBook.
+The site also has an **API Reference** space that is intentionally NOT in this repo — it
+has no source equivalent and is edited directly in GitBook. (**Training** previously had no
+source equivalent; it now lives here as `learn/`, ported from the `vergeos-technical-training`
+repo. Its **Learn the platform** section — `sitesc_pD33P` — already exists on the site; the
+remaining step is repointing that space's Git Sync at this repo's `learn/` directory.)
 
 ## Per-space layout (GitBook conventions)
 
 Every space dir contains:
+
 - `.gitbook.yaml` — always `root: ./` + `structure.readme: README.md` + `structure.summary: SUMMARY.md`.
 - `README.md` — the space root page. Frontmatter uses `description` + `icon` (FontAwesome name).
 - `SUMMARY.md` — the table of contents and the source of truth for sidebar order/titles:
@@ -71,6 +76,7 @@ SUMMARYs; other `product-guide/*` route by subdirectory; KB posts route by front
 `slug` → live Help Center group; release notes group by version era (26.x→2026, 4.x→2025).
 
 ### Conversion rules (MkDocs → GitBook), all in `convert.py`
+
 - Admonitions `!!! type "Title"` / `???` → `{% hint style="info|success|warning|danger" %}` (see `STYLE` map).
 - Content tabs `=== "Tab"` → `{% tabs %}{% tab %}…`.
 - Frontmatter: drops `template:` and `draft:`, keeps the rest.
