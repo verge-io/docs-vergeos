@@ -5,18 +5,22 @@ icon: book
 
 # VergeOS Knowledge Base
 
-Practical, task-focused articles maintained by the VergeOS team. The fastest way in is **search** — start with the error message, symptom, or task you're working on.
+<h2 align="center">What can we help you find?</h2>
 
-{% hint style="info" %}
-**Search the Knowledge Base:** click the search bar at the top of the page, or press `Ctrl + K` (Windows/Linux) or `⌘ + K` (Mac). Type an error message, a symptom, or the name of the component you're working with.
-{% endhint %}
+<p align="center">Search the Knowledge Base, or browse the topics below.</p>
 
-## Search tips
+<p align="center"><button type="button" class="button primary" data-action="ask" data-icon="magnifying-glass">Search the Knowledge Base</button></p>
 
-- **Paste the exact error.** Verbatim error text or log lines usually land on the right article fastest.
-- **Name the component.** Terms like `vSAN`, `tenant`, `WireGuard`, or `NAS` narrow results to the relevant category.
-- **Describe the symptom.** If you don't have an error, search what you see — for example, "Windows disks offline after restart."
+## Browse by category
 
-## Or browse by category
-
-Prefer to explore? Use the sidebar to browse articles grouped by topic — Getting Started, Virtual Machines, Networking, Storage & vSAN, Tenants, Backup & DR, Automation & API, System Administration, and Troubleshooting.
+<table data-view="cards"><thead><tr><th></th><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody>
+<tr><td><h3><i class="fa-rocket" style="color:$primary;">:rocket:</i></h3></td><td><h4><strong>Getting Started &#x26; Installation</strong></h4></td><td>Plan, install, license, and update VergeOS.</td><td><a href="getting-started/README.md">getting-started</a></td></tr>
+<tr><td><h3><i class="fa-desktop" style="color:$primary;">:desktop_computer:</i></h3></td><td><h4><strong>Virtual Machines</strong></h4></td><td>Create, import, configure, and manage virtual machines.</td><td><a href="virtual-machines/README.md">virtual-machines</a></td></tr>
+<tr><td><h3><i class="fa-network-wired" style="color:$primary;">:globe_with_meridians:</i></h3></td><td><h4><strong>Networking</strong></h4></td><td>Networks, rules, routing, VPNs, and firewalls.</td><td><a href="networking/README.md">networking</a></td></tr>
+<tr><td><h3><i class="fa-database" style="color:$primary;">:floppy_disk:</i></h3></td><td><h4><strong>Storage &#x26; vSAN</strong></h4></td><td>vSAN architecture, tiers, scaling, encryption, and NAS.</td><td><a href="storage-vsan/README.md">storage-vsan</a></td></tr>
+<tr><td><h3><i class="fa-users" style="color:$primary;">:busts_in_silhouette:</i></h3></td><td><h4><strong>Tenants</strong></h4></td><td>Create and operate tenants in multi-tenant environments.</td><td><a href="tenants/README.md">tenants</a></td></tr>
+<tr><td><h3><i class="fa-shield-halved" style="color:$primary;">:shield:</i></h3></td><td><h4><strong>Backup &#x26; DR</strong></h4></td><td>Snapshots, sync jobs, restores, and disaster recovery.</td><td><a href="backup-dr/README.md">backup-dr</a></td></tr>
+<tr><td><h3><i class="fa-robot" style="color:$primary;">:robot_face:</i></h3></td><td><h4><strong>Automation &#x26; API</strong></h4></td><td>The VergeOS API, automation tasks, Terraform, and tooling.</td><td><a href="automation-api/README.md">automation-api</a></td></tr>
+<tr><td><h3><i class="fa-gears" style="color:$primary;">:gear:</i></h3></td><td><h4><strong>System Administration</strong></h4></td><td>Updates, security, authentication, branding, and performance.</td><td><a href="system-administration/README.md">system-administration</a></td></tr>
+<tr><td><h3><i class="fa-bug" style="color:$primary;">:beetle:</i></h3></td><td><h4><strong>Troubleshooting</strong></h4></td><td>Diagnostic procedures and fixes for common VergeOS issues.</td><td><a href="troubleshooting/README.md">troubleshooting</a></td></tr>
+</tbody></table>
