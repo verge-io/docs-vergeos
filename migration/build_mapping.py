@@ -169,7 +169,7 @@ def main():
     # 5. glossary -> home page
     if "glossary.md" in all_source_md() and "glossary.md" not in mapped:
         rows.append(dict(src="glossary.md", space="home", dest="glossary.md",
-                         group=None, title="Glossary"))
+                         group=None, title="Key terms"))
         mapped.add("glossary.md")
 
     # ---- coverage report ----
