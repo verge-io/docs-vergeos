@@ -1,0 +1,54 @@
+---
+title: "Tenant Usage Reports"
+description: "How to run tenant usage history reports for 95th percentile billing, view average and maximum statistics, export CSV data, and configure subscription-based usage report emails."
+semantic_keywords:
+  - "tenant usage reports 95th percentile billing VergeOS"
+  - "tenant history statistics CSV export"
+  - "tenant resource usage reporting subscription email"
+  - "tenant billing capacity planning reports"
+use_cases:
+  - "run_tenant_usage_history_report"
+  - "export_tenant_usage_csv"
+  - "configure_tenant_usage_subscription"
+  - "tenant_billing_reporting"
+tags:
+  - tenants
+  - usage-reports
+  - billing
+  - statistics
+  - subscriptions
+  - csv-export
+categories:
+  - Tenants
+---
+
+# Tenant Usage Reports
+
+VergeOS stores usage statistics per tenant to accommodate 95th percentile billing. Additionally, max and average information are recorded.
+
+## Run a History Report for an Individual Tenant
+
+1. Navigate to the **individual tenant dashboard**. 
+2. Click **History** on the left menu.
+3. Select **Filter Period**. (Also enter from/to dates if the custom option is selected.)
+4. Click **Apply** to run the reports for the selected period.
+5. Graphs will show usage for the specified period. Scroll down the page to see the statistics listing of Average, Maximum, and 95th percentile.
+6. Statistics can be exported to a comma delimited text file using the **Export CSV** menu option.  
+
+## Receive Subscription Report (Email) of Tenant Usage
+
+1. Navigate to **System > Subscriptions > New**.
+2. Configure fields as follows:  
+
+   * **Target Type:** *Tenants Dashboard*
+   * **Target:** *Tenants Dashboard*
+   * **Type:** *Scheduled*
+   * **Subscription Profile:** *Tenants Usage*
+
+For full instructions on creating Subscriptions, see: [**Subscriptions-Overview**](../system/subscriptions-overview.md)
+
+{% hint style="success" %}
+**API Usage**
+
+The [VergeOS API](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/automation-api/verge-api-guide) can also be utilized to run tenant usage reports and send to external systems for processing.
+{% endhint %}

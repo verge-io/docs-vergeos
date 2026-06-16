@@ -1,0 +1,208 @@
+---
+title: "Licensing and Software Updates"
+description: "Reference for VergeOS update settings, including update source, authentication, automatic updates, warm reboot, multi-cluster updates, snapshot policies, and privacy settings."
+semantic_keywords:
+  - "VergeOS update settings configuration reference"
+  - "update source branch authentication credentials"
+  - "automatic update schedule warm reboot kexec"
+  - "multi-cluster update vSAN usage threshold"
+  - "cloud snapshot update rollback privacy"
+use_cases:
+  - configure_update_settings
+  - set_automatic_update_schedule
+  - enable_warm_reboot_for_updates
+  - configure_multi_cluster_updates
+  - manage_update_snapshot_settings
+tags:
+  - updates
+  - settings
+  - configuration
+  - licensing
+  - snapshots
+  - maintenance
+categories:
+  - System Administration
+---
+
+# Licensing and Software Updates
+
+This guide explains how to manage software updates and licensing in VergeOS.
+
+## Accessing System Updates
+
+1. From the top menu, click **System**.
+2. Select **Updates**.
+
+## Update Server Dashboard
+
+The Update Server dashboard provides information about:
+
+- Current update server status
+- Package versions and availability
+- Update logs and history
+- System update settings
+
+### Current Status Information
+
+The dashboard displays key information about the update server:
+
+- **Status**: Current state (e.g., Idle, Updating)
+- **Name**: Update server name (Verge.io Updates)
+- **Description**: Server purpose and capabilities
+- **URL**: Update server address
+- **Account User**: Account Username
+- **Last Checked**: Timestamp of last update check
+- **Last Updated**: Timestamp of last successful update
+
+### Package Information
+
+The Packages section shows:
+
+- Package names and versions
+- Associated branch (e.g., stable-4.13)
+- Package descriptions
+- Last modified dates
+
+## Update Process
+
+The update process consists of three main steps:
+
+1. **Download**: 
+   - After checking for updates, newly available packages can be downloaded
+   - Progress can be monitored in the Updates dashboard
+
+2. **Install**: 
+   - Downloaded updates are distributed to all nodes
+   - System prepares updates for application
+
+3. **Reboot**: 
+   - Updates are applied one node at a time
+   - For each node:
+     - Workloads are automatically migrated to other nodes
+     - Node is rebooted and updated
+     - Node returns to service
+     - Process continues to next node
+   - No system downtime if adequate resources are available for workload migration
+
+{% hint style="info" %}
+The system handles workload migration transparently during the update process. VMs and other workloads continue running without interruption as long as there are sufficient resources available on the remaining nodes.
+{% endhint %}
+
+{% hint style="success" %}
+Monitor the Updates dashboard during the process to track progress across all nodes. The "Nodes Updated" counter shows how many nodes have completed the update process.
+{% endhint %}
+
+## Update Settings
+
+### Required Settings
+
+- **Update Source**: Select the appropriate update server
+    - "Verge.io Updates" for normal installations
+    - "Verge.io Trial/NFR" for POC and Not-for-resale licenses
+
+- **User/Password**: Authentication credentials provided by [Verge.io Support](https://app.gitbook.com/s/uJc5d3O7cwI7qD8muSyG/support-and-services) team
+
+- **Branch**: Selects product version (e.g., 4.13 Release)
+    - Updates are available within the selected branch
+    - System notifies when updates in newer branches are available
+
+{% hint style="warning" %}
+**Critical Setting**
+
+Proper authentication is required for core system functionality including:
+- Virtual machine operations
+- NAS functionality
+- System updates
+{% endhint %}
+
+### Automatic Update Options
+
+- **Auto Check For Updates**: 
+    - Enabled by default
+    - Checks hourly for available updates
+    - Updates appear in Updates Dashboard
+    - Does not automatically install updates
+
+- **Auto Update**:
+    - Optional automatic update installation
+    - Requires specified update time
+
+- **Update Time**: 
+    - Scheduled time for automatic updates
+    - Uses 24-hour format (e.g., 00:46)
+
+### System Update Settings
+
+- **Max vSAN Usage Percentage**:
+    - Default: 80
+    - Defines threshold for automatic node updates
+    - Manual updates required if vSAN usage exceeds this percentage
+
+- **Warm Reboot (Fast)**:
+    - When enabled, uses kexec for node reboots
+    - Bypasses BIOS/EFI
+    - Faster than standard reboot
+
+- **Multi-Cluster Update**:
+    - When enabled, allows multiple clusters to update simultaneously
+    - Improves update efficiency in multi-cluster environments
+
+### Snapshot Settings
+
+- **Take Cloud Snapshot on Update**:
+    - Enabled by default
+    - Creates system snapshot before updates
+    - Allows rollback if needed
+
+- **Cloud Snapshot Expiration**:
+    - Default: 6 hours
+    - Configurable retention period
+    - Units can be selected (e.g., Hours)
+
+### Privacy Settings
+
+- **Keep System Information Anonymous When Sending Usage Statistics**:
+    - Optional anonymization of system information
+    - Removes identifying information like VM/tenant names
+    - Applies to update server communications
+
+## Update Status Dashboard
+
+The dashboard provides real-time information about:
+
+- **Nodes Updated**: Count of updated nodes
+- **Tasks**: Active update tasks
+- **Events**: Update-related events
+- **Update Logs**: Detailed system update logs
+
+## Air-Gap Licensing
+
+{% hint style="warning" %}
+**Air-gap licensing is not common and requires justification.**
+
+
+{% endhint %}
+
+For environments without outbound internet access, VergeOS supports air-gap licensing. This process involves:
+
+1. Generating a license request file from the system
+2. Emailing the request file to [Verge.io Support](https://app.gitbook.com/s/uJc5d3O7cwI7qD8muSyG/support-and-services)
+3. Receiving and applying an air-gap license file
+
+{% hint style="info" %}
+**Air-Gap Updates**
+
+Systems with air-gap licensing can be updated using ISO files. See [Updating a VergeOS System with Airgap License](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/system-administration/updating-vergeos-system-with-airgap-license) for detailed instructions.
+{% endhint %}
+
+## Additional Resources
+
+- [Updating the VergeOS System](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/system-administration/updating-vergeos-system)
+- [Requesting an Airgap License](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/getting-started/requesting-an-airgap-license)
+- [Updating a VergeOS System with Airgap License](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/system-administration/updating-vergeos-system-with-airgap-license)
+- [System Snapshots](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/product-guide/backup-dr/system-snapshots)
+- [Restores from System Snapshots](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/product-guide/backup-dr/system-snapshot-restores)
+
+{% hint style="success" %}
+Regular monitoring of the Update Status Dashboard helps ensure system health and security.
+{% endhint %}

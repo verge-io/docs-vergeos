@@ -1,0 +1,111 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## What this repo is
+
+A **GitBook Git Sync monorepo**. Each top-level directory is the *Project directory*
+for one GitBook space of the **VergeOS Docs** site. There is no app to build, lint, or
+test — GitBook renders the content when each space's Project directory is synced. The
+content was ported from the MkDocs source site at `/Users/jasonyaeger/Workspaces/docs/docs`
+by the scripts in `migration/`.
+
+GitBook target: org **Verge.io** (`FpusSnrkRHyZiVEsXf9X`), site **VergeOS Docs**
+(`site_1U4gk`, published at `https://verge-io.gitbook.io/vergeos-docs/`).
+
+## Space directories and IDs
+
+Each dir below git-syncs to one space. The **space IDs are load-bearing**: cross-space
+links are written as `https://app.gitbook.com/s/<spaceId>/<dest-path-without-.md>`, so
+any new cross-space link must use the correct ID.
+
+| Dir | GitBook space | Space ID |
+|-----|---------------|----------|
+| `home/` | Home | `uJc5d3O7cwI7qD8muSyG` |
+| `deploy/` | Plan and deploy | `Q2bN3ctQdjv01GivTI08` |
+| `run/` | Run the platform | `pODKGSQETqL1gSqyxIq3` |
+| `automate/` | Automate, protect, and extend | `sppYQkyIET58BuAo0kqm` |
+| `help-center/` | Help Center | `QZBMFpokMv2vWTIRbFzA` |
+| `release-notes/` | Release notes | `33mA7es4mQYkyUa7dMvu` |
+
+The site also has **Training** and **API Reference** spaces that are intentionally NOT
+in this repo — they have no source equivalent and are edited directly in GitBook.
+
+## Per-space layout (GitBook conventions)
+
+Every space dir contains:
+- `.gitbook.yaml` — always `root: ./` + `structure.readme: README.md` + `structure.summary: SUMMARY.md`.
+- `README.md` — the space root page. Frontmatter uses `description` + `icon` (FontAwesome name).
+- `SUMMARY.md` — the table of contents and the source of truth for sidebar order/titles:
+  `# Table of contents`, then `## Group Name` headers create sidebar groups, and
+  `* [Title](relative/path.md)` bullets are pages. The link text — not the page H1 — is
+  what GitBook shows in the sidebar.
+- Content `.md` files, which **preserve the original MkDocs source paths** (e.g.
+  `run/product-guide/storage/overview.md`, `deploy/implementation-guide/intro.md`).
+- `assets/` — images for that space only (GitBook does not share assets across spaces).
+  Screenshots live under `assets/screenshots/`.
+
+When adding/moving a page, update that space's `SUMMARY.md` too, or it won't appear.
+
+## Migration tooling (`migration/`)
+
+One-time port from the MkDocs source. `migration/demo/` holds the GitBook-generated
+reference repo's SUMMARYs/READMEs and the live Help Center slug→group map, which are the
+authority for page placement.
+
+```bash
+python3 migration/build_mapping.py   # source .md -> {space, dest, group, title}; writes mapping.yaml/.json
+python3 migration/convert.py         # convert + write content, copy assets, generate SUMMARY/README
+```
+
+`convert.py` overwrites content but does not delete stale files. For a pristine rebuild
+of a space first run:
+
+```bash
+find <space> -mindepth 1 -not -name .gitbook.yaml -delete
+```
+
+`build_mapping.py` prints a coverage report (mapped / excluded / UNMAPPED / collisions) —
+UNMAPPED must be 0. Placement rules: `deploy`/`run`/`automate` come from the demo
+SUMMARYs; other `product-guide/*` route by subdirectory; KB posts route by frontmatter
+`slug` → live Help Center group; release notes group by version era (26.x→2026, 4.x→2025).
+
+### Conversion rules (MkDocs → GitBook), all in `convert.py`
+- Admonitions `!!! type "Title"` / `???` → `{% hint style="info|success|warning|danger" %}` (see `STYLE` map).
+- Content tabs `=== "Tab"` → `{% tabs %}{% tab %}…`.
+- Frontmatter: drops `template:` and `draft:`, keeps the rest.
+- Links: same-space → relative `.md`; cross-space → `app.gitbook.com/s/<id>/…`;
+  `/knowledge-base/<slug>` resolves via the slug map; folded targets (`/support`, etc.)
+  use the `REDIRECT` table.
+- Images: copied into the space `assets/`, parens/spaces stripped from filenames.
+
+## Validating a rebuild
+
+After re-running the converter, these must all come back clean:
+
+```bash
+SPACES="home deploy run automate help-center release-notes"
+grep -rEl '^[[:space:]]*([!]{3}|[?]{3})' $SPACES   # leftover admonitions (expect none)
+grep -rEl '^[[:space:]]*=== "' $SPACES             # leftover content tabs (expect none)
+grep -rhoE '\]\((/assets/|/product-guide/|\.\./assets/)[^)]*\)' $SPACES  # unrewritten asset paths (expect none)
+```
+
+`convert.py` itself reports `link misses` (must be 0) and broken-image counts.
+
+## GitBook API
+
+`.env.local` holds `GITBOOK_API_TOKEN` (gitignored). To query the API:
+
+```bash
+source .env.local
+curl -s -H "Authorization: Bearer $GITBOOK_API_TOKEN" "https://api.gitbook.com/v1/orgs/FpusSnrkRHyZiVEsXf9X/sites/site_1U4gk/structure"
+```
+
+Useful endpoints: `/v1/orgs/{org}/sites/{site}/structure` (sections + spaces),
+`/v1/spaces/{spaceId}/content` (page tree).
+
+## Important: Git Sync direction
+
+Connecting Git Sync makes this repo the source of truth and the **first sync overwrites
+the existing space content**. Pilot one space (`deploy/`, smallest) and verify the GitBook
+preview before wiring the rest.

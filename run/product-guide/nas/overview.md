@@ -1,0 +1,53 @@
+---
+title: "NAS Overview"
+description: "Overview of the VergeOS NAS feature for file-level storage, including benefits, setup steps, local and remote volumes, Active Directory integration, and share creation."
+semantic_keywords:
+  - "VergeOS NAS file-level storage overview"
+  - "NAS setup steps volumes shares and AD integration"
+  - "network attached storage with vSAN deduplication"
+  - "mount external file systems and manage backups"
+use_cases:
+  - understand_nas_capabilities
+  - plan_nas_deployment
+  - manage_file_level_storage
+  - import_external_data
+  - export_data_for_backup_compliance
+tags:
+  - nas
+  - overview
+  - file storage
+  - vsan
+  - volumes
+  - shares
+  - active directory
+  - deduplication
+categories:
+  - NAS
+---
+
+# NAS Overview
+
+The NAS feature provides file-level storage/access within a VergeOS system, allowing you to create volumes of files to store on your distributed storage and mount external
+file systems.  
+
+## Benefits of the NAS Feature
+
+* Manage and backup file-level storage within your VergeOS system
+* Take advantage of VergeOS storage efficiencies, such as deduplication, for file-level storage
+* Mount external file systems to access within your VergeOS environment
+* Import data into your VergeOS system for absorbing external workloads, performing backups, etc. 
+* Export data and/or workloads from VergeOS for third-party backup, compliance, etc.
+
+## NAS Setup Steps 
+
+1. [**Add a NAS Service**](nas-service.md)
+
+2. **Optional - **[**Integrate with Active Directory**](nas-join-ad-domain.md)
+
+3. **Create Volumes** (Each volume is its own directory tree that can be customized for security, snapshot, access, antivirus, max size, and sharing settings.)
+
+    * [**Local Volumes**](nas-local-volumes.md) are stored within VergeOS, consuming vSAN storage.
+    * [**Remote Volumes**](nas-remote-volumes.md) are external file systems that are mounted to the VergeOS system and presented as if local.
+
+4. [**Create Shares**](nas-shares.md) to provide NFS and/or CIFS access to NAS volumes.
+5. **Optional - **[**Configure Volume Snapshots**](volume-snapshots-restores.md) for customized volume retention and/or quiesced snapshots (Non-quiesced NAS volumes can be restored from system snapshots to be used for restore.)

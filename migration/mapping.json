@@ -1,0 +1,2193 @@
+[
+ {
+  "src": "implementation-guide/intro.md",
+  "space": "deploy",
+  "dest": "implementation-guide/intro.md",
+  "group": "Implementation guide",
+  "title": "Introduction"
+ },
+ {
+  "src": "implementation-guide/concepts.md",
+  "space": "deploy",
+  "dest": "implementation-guide/concepts.md",
+  "group": "Implementation guide",
+  "title": "Core concepts"
+ },
+ {
+  "src": "implementation-guide/sizing.md",
+  "space": "deploy",
+  "dest": "implementation-guide/sizing.md",
+  "group": "Implementation guide",
+  "title": "Node sizing"
+ },
+ {
+  "src": "implementation-guide/network-design.md",
+  "space": "deploy",
+  "dest": "implementation-guide/network-design.md",
+  "group": "Implementation guide",
+  "title": "Network design"
+ },
+ {
+  "src": "implementation-guide/pre-installation.md",
+  "space": "deploy",
+  "dest": "implementation-guide/pre-installation.md",
+  "group": "Implementation guide",
+  "title": "Pre-installation checklist"
+ },
+ {
+  "src": "implementation-guide/install-media.md",
+  "space": "deploy",
+  "dest": "implementation-guide/install-media.md",
+  "group": "Implementation guide",
+  "title": "Creating bootable installation media"
+ },
+ {
+  "src": "implementation-guide/installation-guide.md",
+  "space": "deploy",
+  "dest": "implementation-guide/installation-guide.md",
+  "group": "Implementation guide",
+  "title": "Installation guide"
+ },
+ {
+  "src": "implementation-guide/post-installation.md",
+  "space": "deploy",
+  "dest": "implementation-guide/post-installation.md",
+  "group": "Implementation guide",
+  "title": "Post-installation configuration"
+ },
+ {
+  "src": "implementation-guide/scale-out-nodes.md",
+  "space": "deploy",
+  "dest": "implementation-guide/scale-out-nodes.md",
+  "group": "Implementation guide",
+  "title": "Scale-out node installation guide"
+ },
+ {
+  "src": "implementation-guide/compute-nodes.md",
+  "space": "deploy",
+  "dest": "implementation-guide/compute-nodes.md",
+  "group": "Implementation guide",
+  "title": "Compute only node installation guide"
+ },
+ {
+  "src": "implementation-guide/storage-nodes.md",
+  "space": "deploy",
+  "dest": "implementation-guide/storage-nodes.md",
+  "group": "Implementation guide",
+  "title": "Storage node installation guide"
+ },
+ {
+  "src": "implementation-guide/switch-configuration.md",
+  "space": "deploy",
+  "dest": "implementation-guide/switch-configuration.md",
+  "group": "Implementation guide",
+  "title": "Switch configuration guide"
+ },
+ {
+  "src": "reference-architecture/edge.md",
+  "space": "deploy",
+  "dest": "reference-architecture/edge.md",
+  "group": "Reference architectures",
+  "title": "Edge cluster deployments"
+ },
+ {
+  "src": "reference-architecture/csp.md",
+  "space": "deploy",
+  "dest": "reference-architecture/csp.md",
+  "group": "Reference architectures",
+  "title": "Multi-tenant deployments"
+ },
+ {
+  "src": "reference-architecture/data-science.md",
+  "space": "deploy",
+  "dest": "reference-architecture/data-science.md",
+  "group": "Reference architectures",
+  "title": "High-performance cluster deployments"
+ },
+ {
+  "src": "reference-architecture/homelab.md",
+  "space": "deploy",
+  "dest": "reference-architecture/homelab.md",
+  "group": "Reference architectures",
+  "title": "VergeOS homelab reference architecture"
+ },
+ {
+  "src": "product-guide/intro/new-system-configuration.md",
+  "space": "run",
+  "dest": "product-guide/intro/new-system-configuration.md",
+  "group": "Platform overview",
+  "title": "New System Configuration"
+ },
+ {
+  "src": "product-guide/intro/platform-capabilities.md",
+  "space": "run",
+  "dest": "product-guide/intro/platform-capabilities.md",
+  "group": "Platform overview",
+  "title": "VergeOS Platform Capabilities"
+ },
+ {
+  "src": "product-guide/intro/transition-from-vmware.md",
+  "space": "run",
+  "dest": "product-guide/intro/transition-from-vmware.md",
+  "group": "Platform overview",
+  "title": "Transitioning from VMware to VergeOS"
+ },
+ {
+  "src": "product-guide/intro/what-is-vergeos.md",
+  "space": "run",
+  "dest": "product-guide/intro/what-is-vergeos.md",
+  "group": "Platform overview",
+  "title": "What is VergeOS"
+ },
+ {
+  "src": "product-guide/storage/external-storage-integration.md",
+  "space": "run",
+  "dest": "product-guide/storage/external-storage-integration.md",
+  "group": "Storage",
+  "title": "External Storage Integration"
+ },
+ {
+  "src": "product-guide/storage/fibre-channel.md",
+  "space": "run",
+  "dest": "product-guide/storage/fibre-channel.md",
+  "group": "Storage",
+  "title": "Using Fibre Channel Storage with vSAN"
+ },
+ {
+  "src": "product-guide/storage/overview.md",
+  "space": "run",
+  "dest": "product-guide/storage/overview.md",
+  "group": "Storage",
+  "title": "Storage Overview"
+ },
+ {
+  "src": "product-guide/storage/preferred-tiers.md",
+  "space": "run",
+  "dest": "product-guide/storage/preferred-tiers.md",
+  "group": "Storage",
+  "title": "Preferred Tier"
+ },
+ {
+  "src": "product-guide/storage/removing-iso-refs.md",
+  "space": "run",
+  "dest": "product-guide/storage/removing-iso-refs.md",
+  "group": "Storage",
+  "title": "Removing ISO Files with References"
+ },
+ {
+  "src": "product-guide/storage/storage-tiers.md",
+  "space": "run",
+  "dest": "product-guide/storage/storage-tiers.md",
+  "group": "Storage",
+  "title": "Storage Tiers in VergeOS vSAN"
+ },
+ {
+  "src": "product-guide/storage/storage-units.md",
+  "space": "run",
+  "dest": "product-guide/storage/storage-units.md",
+  "group": "Storage",
+  "title": "Storage Units and Capacity Reporting"
+ },
+ {
+  "src": "product-guide/storage/uploading-files-to-vsan.md",
+  "space": "run",
+  "dest": "product-guide/storage/uploading-files-to-vsan.md",
+  "group": "Storage",
+  "title": "Uploading Files to the vSAN"
+ },
+ {
+  "src": "product-guide/storage/vsan-architecture.md",
+  "space": "run",
+  "dest": "product-guide/storage/vsan-architecture.md",
+  "group": "Storage",
+  "title": "VergeOS vSAN Block-Level Architecture and Data Distribution"
+ },
+ {
+  "src": "product-guide/storage/vsan-deletion-process.md",
+  "space": "run",
+  "dest": "product-guide/storage/vsan-deletion-process.md",
+  "group": "Storage",
+  "title": "VergeOS vSAN Deletion Process"
+ },
+ {
+  "src": "product-guide/storage/vsan-diagnostics.md",
+  "space": "run",
+  "dest": "product-guide/storage/vsan-diagnostics.md",
+  "group": "Storage",
+  "title": "vSAN Diagnostics Guide"
+ },
+ {
+  "src": "product-guide/storage/vsan-redundancy-levels.md",
+  "space": "run",
+  "dest": "product-guide/storage/vsan-redundancy-levels.md",
+  "group": "Storage",
+  "title": "Understanding vSAN Redundancy Levels"
+ },
+ {
+  "src": "product-guide/networks/aliases.md",
+  "space": "run",
+  "dest": "product-guide/networks/aliases.md",
+  "group": "Networking",
+  "title": "Aliases"
+ },
+ {
+  "src": "product-guide/networks/assign-external-ip.md",
+  "space": "run",
+  "dest": "product-guide/networks/assign-external-ip.md",
+  "group": "Networking",
+  "title": "Assigning External IP Addresses to Internal Networks"
+ },
+ {
+  "src": "product-guide/networks/authoritative-dns.md",
+  "space": "run",
+  "dest": "product-guide/networks/authoritative-dns.md",
+  "group": "Networking",
+  "title": "VergeOS Authoritative DNS"
+ },
+ {
+  "src": "product-guide/networks/bonded-vlans.md",
+  "space": "run",
+  "dest": "product-guide/networks/bonded-vlans.md",
+  "group": "Networking",
+  "title": "Bonded VLAN-tagged Networks"
+ },
+ {
+  "src": "product-guide/networks/connect-lan-wan.md",
+  "space": "run",
+  "dest": "product-guide/networks/connect-lan-wan.md",
+  "group": "Networking",
+  "title": "Connect VergeOS to an Existing LAN/WAN"
+ },
+ {
+  "src": "product-guide/networks/create-vlan.md",
+  "space": "run",
+  "dest": "product-guide/networks/create-vlan.md",
+  "group": "Networking",
+  "title": "Configuring VLANs"
+ },
+ {
+  "src": "product-guide/networks/dhcp-static-lease.md",
+  "space": "run",
+  "dest": "product-guide/networks/dhcp-static-lease.md",
+  "group": "Networking",
+  "title": "Create a DHCP Static Lease"
+ },
+ {
+  "src": "product-guide/networks/internal-external-access.md",
+  "space": "run",
+  "dest": "product-guide/networks/internal-external-access.md",
+  "group": "Networking",
+  "title": "Creating an Internal Network with External Access"
+ },
+ {
+  "src": "product-guide/networks/internal-layer2.md",
+  "space": "run",
+  "dest": "product-guide/networks/internal-layer2.md",
+  "group": "Networking",
+  "title": "Creating an Internal Layer 2 Network"
+ },
+ {
+  "src": "product-guide/networks/internal-layer3.md",
+  "space": "run",
+  "dest": "product-guide/networks/internal-layer3.md",
+  "group": "Networking",
+  "title": "Creating an Internal Network managed within VergeOS (layer3)"
+ },
+ {
+  "src": "product-guide/networks/internal-networks.md",
+  "space": "run",
+  "dest": "product-guide/networks/internal-networks.md",
+  "group": "Networking",
+  "title": "Internal Networks (General Instructions)"
+ },
+ {
+  "src": "product-guide/networks/nat-1to1.md",
+  "space": "run",
+  "dest": "product-guide/networks/nat-1to1.md",
+  "group": "Networking",
+  "title": "Configuring NAT 1-to-1 Translation"
+ },
+ {
+  "src": "product-guide/networks/net-troubleshooting.md",
+  "space": "run",
+  "dest": "product-guide/networks/net-troubleshooting.md",
+  "group": "Networking",
+  "title": "Network Troubleshooting"
+ },
+ {
+  "src": "product-guide/networks/network-concepts.md",
+  "space": "run",
+  "dest": "product-guide/networks/network-concepts.md",
+  "group": "Networking",
+  "title": "Networking Concepts"
+ },
+ {
+  "src": "product-guide/networks/network-dashboards.md",
+  "space": "run",
+  "dest": "product-guide/networks/network-dashboards.md",
+  "group": "Networking",
+  "title": "Network Dashboards"
+ },
+ {
+  "src": "product-guide/networks/network-diagnostics.md",
+  "space": "run",
+  "dest": "product-guide/networks/network-diagnostics.md",
+  "group": "Networking",
+  "title": "Network Diagnostics Guide"
+ },
+ {
+  "src": "product-guide/networks/network-overview.md",
+  "space": "run",
+  "dest": "product-guide/networks/network-overview.md",
+  "group": "Networking",
+  "title": "Networking (VergeFabric)"
+ },
+ {
+  "src": "product-guide/networks/network-quickstart.md",
+  "space": "run",
+  "dest": "product-guide/networks/network-quickstart.md",
+  "group": "Networking",
+  "title": "Quick Start Links"
+ },
+ {
+  "src": "product-guide/networks/network-rules.md",
+  "space": "run",
+  "dest": "product-guide/networks/network-rules.md",
+  "group": "Networking",
+  "title": "Network Rules"
+ },
+ {
+  "src": "product-guide/networks/port-mirroring.md",
+  "space": "run",
+  "dest": "product-guide/networks/port-mirroring.md",
+  "group": "Networking",
+  "title": "Port Mirroring"
+ },
+ {
+  "src": "product-guide/networks/tracking-net-statistics.md",
+  "space": "run",
+  "dest": "product-guide/networks/tracking-net-statistics.md",
+  "group": "Networking",
+  "title": "Tracking Network Statistics"
+ },
+ {
+  "src": "product-guide/vpn/ipsec.md",
+  "space": "run",
+  "dest": "product-guide/vpn/ipsec.md",
+  "group": "VPN",
+  "title": "IPsec Configuration"
+ },
+ {
+  "src": "product-guide/vpn/vpn-overview.md",
+  "space": "run",
+  "dest": "product-guide/vpn/vpn-overview.md",
+  "group": "VPN",
+  "title": "VPN"
+ },
+ {
+  "src": "product-guide/vpn/wireguard-config.md",
+  "space": "run",
+  "dest": "product-guide/vpn/wireguard-config.md",
+  "group": "VPN",
+  "title": "WireGuard"
+ },
+ {
+  "src": "product-guide/vpn/wireguard-examples.md",
+  "space": "run",
+  "dest": "product-guide/vpn/wireguard-examples.md",
+  "group": "VPN",
+  "title": "WireGuard Configuration Examples"
+ },
+ {
+  "src": "product-guide/auth/auth-sources-general.md",
+  "space": "run",
+  "dest": "product-guide/auth/auth-sources-general.md",
+  "group": "Authentication",
+  "title": "Authorization Sources - Overview"
+ },
+ {
+  "src": "product-guide/auth/auth-sources-overview.md",
+  "space": "run",
+  "dest": "product-guide/auth/auth-sources-overview.md",
+  "group": "Authentication",
+  "title": "Authorization Sources - Overview"
+ },
+ {
+  "src": "product-guide/auth/azure-auth.md",
+  "space": "run",
+  "dest": "product-guide/auth/azure-auth.md",
+  "group": "Authentication",
+  "title": "Using Entra ID (Azure AD) for Authentication"
+ },
+ {
+  "src": "product-guide/auth/google-auth.md",
+  "space": "run",
+  "dest": "product-guide/auth/google-auth.md",
+  "group": "Authentication",
+  "title": "Using Google for Authentication"
+ },
+ {
+  "src": "product-guide/auth/multifactor-auth.md",
+  "space": "run",
+  "dest": "product-guide/auth/multifactor-auth.md",
+  "group": "Authentication",
+  "title": "Two-Factor Authentication (MFA)"
+ },
+ {
+  "src": "product-guide/auth/oidc-apps-overview.md",
+  "space": "run",
+  "dest": "product-guide/auth/oidc-apps-overview.md",
+  "group": "Authentication",
+  "title": "VergeOS OIDC Applications Overview"
+ },
+ {
+  "src": "product-guide/system/advanced-system-settings.md",
+  "space": "run",
+  "dest": "product-guide/system/advanced-system-settings.md",
+  "group": "System administration",
+  "title": "Advanced System Settings"
+ },
+ {
+  "src": "product-guide/system/api-keys.md",
+  "space": "run",
+  "dest": "product-guide/system/api-keys.md",
+  "group": "System administration",
+  "title": "API Keys"
+ },
+ {
+  "src": "product-guide/system/certificates.md",
+  "space": "run",
+  "dest": "product-guide/system/certificates.md",
+  "group": "System administration",
+  "title": "Server Certificates"
+ },
+ {
+  "src": "product-guide/system/cluster-settings.md",
+  "space": "run",
+  "dest": "product-guide/system/cluster-settings.md",
+  "group": "System administration",
+  "title": "Cluster Settings"
+ },
+ {
+  "src": "product-guide/system/clusters-overview.md",
+  "space": "run",
+  "dest": "product-guide/system/clusters-overview.md",
+  "group": "System administration",
+  "title": "VergeOS Clusters Overview"
+ },
+ {
+  "src": "product-guide/system/core-fabric-status.md",
+  "space": "run",
+  "dest": "product-guide/system/core-fabric-status.md",
+  "group": "System administration",
+  "title": "Core Fabric Status Guide"
+ },
+ {
+  "src": "product-guide/system/device-pass-overview.md",
+  "space": "run",
+  "dest": "product-guide/system/device-pass-overview.md",
+  "group": "System administration",
+  "title": "Device Passthrough Overview"
+ },
+ {
+  "src": "product-guide/system/diagnostics.md",
+  "space": "run",
+  "dest": "product-guide/system/diagnostics.md",
+  "group": "System administration",
+  "title": "System Diagnostics"
+ },
+ {
+  "src": "product-guide/system/drive-replacement.md",
+  "space": "run",
+  "dest": "product-guide/system/drive-replacement.md",
+  "group": "System administration",
+  "title": "Drive Replacement"
+ },
+ {
+  "src": "product-guide/system/generic-pci-passthrough.md",
+  "space": "run",
+  "dest": "product-guide/system/generic-pci-passthrough.md",
+  "group": "System administration",
+  "title": "One-to-One PCI Passthrough"
+ },
+ {
+  "src": "product-guide/system/ipmi.md",
+  "space": "run",
+  "dest": "product-guide/system/ipmi.md",
+  "group": "System administration",
+  "title": "IPMI"
+ },
+ {
+  "src": "product-guide/system/license-updates-verify.md",
+  "space": "run",
+  "dest": "product-guide/system/license-updates-verify.md",
+  "group": "System administration",
+  "title": "Verify Licensing and Update Server Configuration"
+ },
+ {
+  "src": "product-guide/system/licensing-and-updates.md",
+  "space": "run",
+  "dest": "product-guide/system/licensing-and-updates.md",
+  "group": "System administration",
+  "title": "Licensing and Software Updates"
+ },
+ {
+  "src": "product-guide/system/licensing-overview.md",
+  "space": "run",
+  "dest": "product-guide/system/licensing-overview.md",
+  "group": "System administration",
+  "title": "Licensing Overview"
+ },
+ {
+  "src": "product-guide/system/node-diagnostics.md",
+  "space": "run",
+  "dest": "product-guide/system/node-diagnostics.md",
+  "group": "System administration",
+  "title": "Node Diagnostics Guide"
+ },
+ {
+  "src": "product-guide/system/nodes-overview.md",
+  "space": "run",
+  "dest": "product-guide/system/nodes-overview.md",
+  "group": "System administration",
+  "title": "Nodes Overview"
+ },
+ {
+  "src": "product-guide/system/nvidia-vgpu-configuration.md",
+  "space": "run",
+  "dest": "product-guide/system/nvidia-vgpu-configuration.md",
+  "group": "System administration",
+  "title": "NVIDIA vGPU Configuration"
+ },
+ {
+  "src": "product-guide/system/permissions.md",
+  "space": "run",
+  "dest": "product-guide/system/permissions.md",
+  "group": "System administration",
+  "title": "Permissions"
+ },
+ {
+  "src": "product-guide/system/running-updates.md",
+  "space": "run",
+  "dest": "product-guide/system/running-updates.md",
+  "group": "System administration",
+  "title": "Licensing and Software Updates"
+ },
+ {
+  "src": "product-guide/system/sel.md",
+  "space": "run",
+  "dest": "product-guide/system/sel.md",
+  "group": "System administration",
+  "title": "The System Event Log (SEL)"
+ },
+ {
+  "src": "product-guide/system/service-containers.md",
+  "space": "run",
+  "dest": "product-guide/system/service-containers.md",
+  "group": "System administration",
+  "title": "Service Containers"
+ },
+ {
+  "src": "product-guide/system/settings-overview.md",
+  "space": "run",
+  "dest": "product-guide/system/settings-overview.md",
+  "group": "System administration",
+  "title": "System Settings"
+ },
+ {
+  "src": "product-guide/system/site-dashboard-add-sites.md",
+  "space": "run",
+  "dest": "product-guide/system/site-dashboard-add-sites.md",
+  "group": "System administration",
+  "title": "Configuring the Sites Dashboard (Adding Sites)"
+ },
+ {
+  "src": "product-guide/system/sites-overview.md",
+  "space": "run",
+  "dest": "product-guide/system/sites-overview.md",
+  "group": "System administration",
+  "title": "Sites Dashboard"
+ },
+ {
+  "src": "product-guide/system/smtp.md",
+  "space": "run",
+  "dest": "product-guide/system/smtp.md",
+  "group": "System administration",
+  "title": "SMTP"
+ },
+ {
+  "src": "product-guide/system/sriov-nics.md",
+  "space": "run",
+  "dest": "product-guide/system/sriov-nics.md",
+  "group": "System administration",
+  "title": "SR-IOV NICs"
+ },
+ {
+  "src": "product-guide/system/subscription-profiles.md",
+  "space": "run",
+  "dest": "product-guide/system/subscription-profiles.md",
+  "group": "System administration",
+  "title": "Subscription Profiles"
+ },
+ {
+  "src": "product-guide/system/subscriptions-accessing.md",
+  "space": "run",
+  "dest": "product-guide/system/subscriptions-accessing.md",
+  "group": "System administration",
+  "title": "Viewing and Accessing Subscriptions"
+ },
+ {
+  "src": "product-guide/system/subscriptions-overview.md",
+  "space": "run",
+  "dest": "product-guide/system/subscriptions-overview.md",
+  "group": "System administration",
+  "title": "Creating Subscriptions"
+ },
+ {
+  "src": "product-guide/system/tags.md",
+  "space": "run",
+  "dest": "product-guide/system/tags.md",
+  "group": "System administration",
+  "title": "Tags"
+ },
+ {
+  "src": "product-guide/system/themes.md",
+  "space": "run",
+  "dest": "product-guide/system/themes.md",
+  "group": "System administration",
+  "title": "VergeOS Theme Functionality"
+ },
+ {
+  "src": "product-guide/system/update-settings.md",
+  "space": "run",
+  "dest": "product-guide/system/update-settings.md",
+  "group": "System administration",
+  "title": "Licensing and Software Updates"
+ },
+ {
+  "src": "product-guide/system/usb-passthrough.md",
+  "space": "run",
+  "dest": "product-guide/system/usb-passthrough.md",
+  "group": "System administration",
+  "title": "USB Passthrough"
+ },
+ {
+  "src": "product-guide/system/users-groups.md",
+  "space": "run",
+  "dest": "product-guide/system/users-groups.md",
+  "group": "System administration",
+  "title": "Users and Groups"
+ },
+ {
+  "src": "product-guide/nas/nas-diagnostics.md",
+  "space": "run",
+  "dest": "product-guide/nas/nas-diagnostics.md",
+  "group": "NAS",
+  "title": "NAS Diagnostics Guide"
+ },
+ {
+  "src": "product-guide/nas/nas-join-ad-domain.md",
+  "space": "run",
+  "dest": "product-guide/nas/nas-join-ad-domain.md",
+  "group": "NAS",
+  "title": "Joining a NAS to a Windows AD Network"
+ },
+ {
+  "src": "product-guide/nas/nas-local-volumes.md",
+  "space": "run",
+  "dest": "product-guide/nas/nas-local-volumes.md",
+  "group": "NAS",
+  "title": "Local Volumes"
+ },
+ {
+  "src": "product-guide/nas/nas-remote-volumes.md",
+  "space": "run",
+  "dest": "product-guide/nas/nas-remote-volumes.md",
+  "group": "NAS",
+  "title": "Remote Volumes"
+ },
+ {
+  "src": "product-guide/nas/nas-service.md",
+  "space": "run",
+  "dest": "product-guide/nas/nas-service.md",
+  "group": "NAS",
+  "title": "Add a NAS Service"
+ },
+ {
+  "src": "product-guide/nas/nas-shares.md",
+  "space": "run",
+  "dest": "product-guide/nas/nas-shares.md",
+  "group": "NAS",
+  "title": "Shares"
+ },
+ {
+  "src": "product-guide/nas/overview.md",
+  "space": "run",
+  "dest": "product-guide/nas/overview.md",
+  "group": "NAS",
+  "title": "NAS Overview"
+ },
+ {
+  "src": "product-guide/nas/volume-snapshots-restores.md",
+  "space": "run",
+  "dest": "product-guide/nas/volume-snapshots-restores.md",
+  "group": "NAS",
+  "title": "NAS Volume Snapshots and Restores"
+ },
+ {
+  "src": "product-guide/nas/volume-syncs.md",
+  "space": "run",
+  "dest": "product-guide/nas/volume-syncs.md",
+  "group": "NAS",
+  "title": "Volume Syncs"
+ },
+ {
+  "src": "product-guide/maintenance-monitoring/diagnostics-overview.md",
+  "space": "run",
+  "dest": "product-guide/maintenance-monitoring/diagnostics-overview.md",
+  "group": "Maintenance and monitoring",
+  "title": "VergeOS Diagnostics Overview"
+ },
+ {
+  "src": "product-guide/operations/alarms.md",
+  "space": "run",
+  "dest": "product-guide/operations/alarms.md",
+  "group": "Operations",
+  "title": "Alarms"
+ },
+ {
+  "src": "product-guide/operations/drive-replacement.md",
+  "space": "run",
+  "dest": "product-guide/operations/drive-replacement.md",
+  "group": "Operations",
+  "title": "Replacing a Defective or End-of-life Drive"
+ },
+ {
+  "src": "product-guide/operations/maintenance-mode.md",
+  "space": "run",
+  "dest": "product-guide/operations/maintenance-mode.md",
+  "group": "Operations",
+  "title": "Maintenance Mode"
+ },
+ {
+  "src": "product-guide/operations/node-replacement.md",
+  "space": "run",
+  "dest": "product-guide/operations/node-replacement.md",
+  "group": "Operations",
+  "title": "Replacing a Node Using the ISO Installer"
+ },
+ {
+  "src": "product-guide/operations/sop-overview.md",
+  "space": "run",
+  "dest": "product-guide/operations/sop-overview.md",
+  "group": "Operations",
+  "title": "Standard Operating Procedures Overview"
+ },
+ {
+  "src": "product-guide/operations/sop-scale-out.md",
+  "space": "run",
+  "dest": "product-guide/operations/sop-scale-out.md",
+  "group": "Operations",
+  "title": "VergeOS vSAN Scale Out Guide"
+ },
+ {
+  "src": "product-guide/operations/sop-update.md",
+  "space": "run",
+  "dest": "product-guide/operations/sop-update.md",
+  "group": "Operations",
+  "title": "VergeOS Version Update Guide"
+ },
+ {
+  "src": "product-guide/operations/sop-verge-install.md",
+  "space": "run",
+  "dest": "product-guide/operations/sop-verge-install.md",
+  "group": "Operations",
+  "title": "VergeOS Installation Guide"
+ },
+ {
+  "src": "product-guide/operations/vsan-scale-up-sop.md",
+  "space": "run",
+  "dest": "product-guide/operations/vsan-scale-up-sop.md",
+  "group": "Operations",
+  "title": "VergeOS vSAN Scale Up Guide"
+ },
+ {
+  "src": "product-guide/tenants/add-tenant-resources.md",
+  "space": "run",
+  "dest": "product-guide/tenants/add-tenant-resources.md",
+  "group": "Tenants",
+  "title": "Increasing a Tenant's Resources"
+ },
+ {
+  "src": "product-guide/tenants/assign-ip-to-tenant.md",
+  "space": "run",
+  "dest": "product-guide/tenants/assign-ip-to-tenant.md",
+  "group": "Tenants",
+  "title": "Assigning External IP Addresses to a Tenant"
+ },
+ {
+  "src": "product-guide/tenants/create-tenants.md",
+  "space": "run",
+  "dest": "product-guide/tenants/create-tenants.md",
+  "group": "Tenants",
+  "title": "Creating Tenants"
+ },
+ {
+  "src": "product-guide/tenants/layer-2-networks.md",
+  "space": "run",
+  "dest": "product-guide/tenants/layer-2-networks.md",
+  "group": "Tenants",
+  "title": "Configure Tenant Layer 2 Networks"
+ },
+ {
+  "src": "product-guide/tenants/overview.md",
+  "space": "run",
+  "dest": "product-guide/tenants/overview.md",
+  "group": "Tenants",
+  "title": "Tenants (Virtual Data Centers)"
+ },
+ {
+  "src": "product-guide/tenants/provide-files-to-tenant.md",
+  "space": "run",
+  "dest": "product-guide/tenants/provide-files-to-tenant.md",
+  "group": "Tenants",
+  "title": "Providing Files to a Tenant"
+ },
+ {
+  "src": "product-guide/tenants/reduce-tenant-resources.md",
+  "space": "run",
+  "dest": "product-guide/tenants/reduce-tenant-resources.md",
+  "group": "Tenants",
+  "title": "Reducing a Tenant's Resources"
+ },
+ {
+  "src": "product-guide/tenants/share-vm-snapshot.md",
+  "space": "run",
+  "dest": "product-guide/tenants/share-vm-snapshot.md",
+  "group": "Tenants",
+  "title": "Share a VM Snapshot between Provider and Tenant"
+ },
+ {
+  "src": "product-guide/tenants/tenant-modifications.md",
+  "space": "run",
+  "dest": "product-guide/tenants/tenant-modifications.md",
+  "group": "Tenants",
+  "title": "Modifying Tenants"
+ },
+ {
+  "src": "product-guide/tenants/tenant-monitoring.md",
+  "space": "run",
+  "dest": "product-guide/tenants/tenant-monitoring.md",
+  "group": "Tenants",
+  "title": "Monitoring Tenants"
+ },
+ {
+  "src": "product-guide/tenants/tenant-restores.md",
+  "space": "run",
+  "dest": "product-guide/tenants/tenant-restores.md",
+  "group": "Tenants",
+  "title": "Tenant Restores"
+ },
+ {
+  "src": "product-guide/tenants/tenant-snapshots.md",
+  "space": "run",
+  "dest": "product-guide/tenants/tenant-snapshots.md",
+  "group": "Tenants",
+  "title": "Tenant Snapshots"
+ },
+ {
+  "src": "product-guide/tenants/tenant-usagereports.md",
+  "space": "run",
+  "dest": "product-guide/tenants/tenant-usagereports.md",
+  "group": "Tenants",
+  "title": "Tenant Usage Reports"
+ },
+ {
+  "src": "product-guide/virtual-machines/creating-vms.md",
+  "space": "run",
+  "dest": "product-guide/virtual-machines/creating-vms.md",
+  "group": "Virtual machines",
+  "title": "Creating Virtual Machines (VMs)"
+ },
+ {
+  "src": "product-guide/virtual-machines/guest-os-compatibility.md",
+  "space": "run",
+  "dest": "product-guide/virtual-machines/guest-os-compatibility.md",
+  "group": "Virtual machines",
+  "title": "VergeOS Guest OS Compatibility"
+ },
+ {
+  "src": "product-guide/virtual-machines/import-from-nas.md",
+  "space": "run",
+  "dest": "product-guide/virtual-machines/import-from-nas.md",
+  "group": "Virtual machines",
+  "title": "Importing VMs from a NAS Volume"
+ },
+ {
+  "src": "product-guide/virtual-machines/import-from-upload.md",
+  "space": "run",
+  "dest": "product-guide/virtual-machines/import-from-upload.md",
+  "group": "Virtual machines",
+  "title": "Importing VMs from Uploaded Media Images"
+ },
+ {
+  "src": "product-guide/virtual-machines/import-from-vmware.md",
+  "space": "run",
+  "dest": "product-guide/virtual-machines/import-from-vmware.md",
+  "group": "Virtual machines",
+  "title": "Importing VMs from VMware Service Backup Jobs"
+ },
+ {
+  "src": "product-guide/virtual-machines/live-migrations.md",
+  "space": "run",
+  "dest": "product-guide/virtual-machines/live-migrations.md",
+  "group": "Virtual machines",
+  "title": "Live Migrations"
+ },
+ {
+  "src": "product-guide/virtual-machines/overview.md",
+  "space": "run",
+  "dest": "product-guide/virtual-machines/overview.md",
+  "group": "Virtual machines",
+  "title": "Virtual Machine Management (VergeHV)"
+ },
+ {
+  "src": "product-guide/virtual-machines/sharing-disks-between-vms.md",
+  "space": "run",
+  "dest": "product-guide/virtual-machines/sharing-disks-between-vms.md",
+  "group": "Virtual machines",
+  "title": "Sharing Disks Between Virtual Machines"
+ },
+ {
+  "src": "product-guide/virtual-machines/vdi-administrator.md",
+  "space": "run",
+  "dest": "product-guide/virtual-machines/vdi-administrator.md",
+  "group": "Virtual machines",
+  "title": "VDI Administrator Instructions"
+ },
+ {
+  "src": "product-guide/virtual-machines/vdi-overview.md",
+  "space": "run",
+  "dest": "product-guide/virtual-machines/vdi-overview.md",
+  "group": "Virtual machines",
+  "title": "Virtual Desktop Infrastructure (VDI)"
+ },
+ {
+  "src": "product-guide/virtual-machines/vdi-user.md",
+  "space": "run",
+  "dest": "product-guide/virtual-machines/vdi-user.md",
+  "group": "Virtual machines",
+  "title": "VDI User Instructions"
+ },
+ {
+  "src": "product-guide/virtual-machines/view-import-jobs.md",
+  "space": "run",
+  "dest": "product-guide/virtual-machines/view-import-jobs.md",
+  "group": "Virtual machines",
+  "title": "Viewing Import Jobs"
+ },
+ {
+  "src": "product-guide/virtual-machines/vm-best-practices.md",
+  "space": "run",
+  "dest": "product-guide/virtual-machines/vm-best-practices.md",
+  "group": "Virtual machines",
+  "title": "Virtual Machine Best Practices"
+ },
+ {
+  "src": "product-guide/virtual-machines/vm-drives.md",
+  "space": "run",
+  "dest": "product-guide/virtual-machines/vm-drives.md",
+  "group": "Virtual machines",
+  "title": "Virtual Machine Drives"
+ },
+ {
+  "src": "product-guide/virtual-machines/vm-export-volume.md",
+  "space": "run",
+  "dest": "product-guide/virtual-machines/vm-export-volume.md",
+  "group": "Virtual machines",
+  "title": "VM Export Volume"
+ },
+ {
+  "src": "product-guide/virtual-machines/vm-field-descriptions.md",
+  "space": "run",
+  "dest": "product-guide/virtual-machines/vm-field-descriptions.md",
+  "group": "Virtual machines",
+  "title": "Virtual Machine Fields"
+ },
+ {
+  "src": "product-guide/virtual-machines/vm-guest-agent.md",
+  "space": "run",
+  "dest": "product-guide/virtual-machines/vm-guest-agent.md",
+  "group": "Virtual machines",
+  "title": "VM Guest Agent"
+ },
+ {
+  "src": "product-guide/virtual-machines/vm-manual-migration.md",
+  "space": "run",
+  "dest": "product-guide/virtual-machines/vm-manual-migration.md",
+  "group": "Virtual machines",
+  "title": "Manual VM Migration"
+ },
+ {
+  "src": "product-guide/virtual-machines/vm-migration-overview.md",
+  "space": "run",
+  "dest": "product-guide/virtual-machines/vm-migration-overview.md",
+  "group": "Virtual machines",
+  "title": "Migrating Workloads into VergeOS"
+ },
+ {
+  "src": "product-guide/virtual-machines/vm-nics.md",
+  "space": "run",
+  "dest": "product-guide/virtual-machines/vm-nics.md",
+  "group": "Virtual machines",
+  "title": "Virtual Machine Network Interfaces (NICs)"
+ },
+ {
+  "src": "product-guide/virtual-machines/vm-remote-console.md",
+  "space": "run",
+  "dest": "product-guide/virtual-machines/vm-remote-console.md",
+  "group": "Virtual machines",
+  "title": "Using the Virtual Machine Remote Console"
+ },
+ {
+  "src": "product-guide/virtual-machines/working-with-vms.md",
+  "space": "run",
+  "dest": "product-guide/virtual-machines/working-with-vms.md",
+  "group": "Virtual machines",
+  "title": "Working With Virtual Machines (VMs)"
+ },
+ {
+  "src": "product-guide/backup-dr/immutable-snapshots.md",
+  "space": "automate",
+  "dest": "product-guide/backup-dr/immutable-snapshots.md",
+  "group": "Backup and DR",
+  "title": "Immutable Snapshots"
+ },
+ {
+  "src": "product-guide/backup-dr/manual-site-syncs.md",
+  "space": "automate",
+  "dest": "product-guide/backup-dr/manual-site-syncs.md",
+  "group": "Backup and DR",
+  "title": "Manual Site Sync"
+ },
+ {
+  "src": "product-guide/backup-dr/monitoring-site-syncs.md",
+  "space": "automate",
+  "dest": "product-guide/backup-dr/monitoring-site-syncs.md",
+  "group": "Backup and DR",
+  "title": "Monitoring Site Syncs"
+ },
+ {
+  "src": "product-guide/backup-dr/overview.md",
+  "space": "automate",
+  "dest": "product-guide/backup-dr/overview.md",
+  "group": "Backup and DR",
+  "title": "Backup & Disaster Recovery (BC/DR)"
+ },
+ {
+  "src": "product-guide/backup-dr/repair-server.md",
+  "space": "automate",
+  "dest": "product-guide/backup-dr/repair-server.md",
+  "group": "Backup and DR",
+  "title": "Repair Server (ioGuardian)"
+ },
+ {
+  "src": "product-guide/backup-dr/snapshot-profiles.md",
+  "space": "automate",
+  "dest": "product-guide/backup-dr/snapshot-profiles.md",
+  "group": "Backup and DR",
+  "title": "Snapshot Profiles (Snapshot Scheduling)"
+ },
+ {
+  "src": "product-guide/backup-dr/snapshots-overview.md",
+  "space": "automate",
+  "dest": "product-guide/backup-dr/snapshots-overview.md",
+  "group": "Backup and DR",
+  "title": "Snapshots"
+ },
+ {
+  "src": "product-guide/backup-dr/sync-back.md",
+  "space": "automate",
+  "dest": "product-guide/backup-dr/sync-back.md",
+  "group": "Backup and DR",
+  "title": "Retrieving a Snapshot back (Sync Back)"
+ },
+ {
+  "src": "product-guide/backup-dr/sync-configuration.md",
+  "space": "automate",
+  "dest": "product-guide/backup-dr/sync-configuration.md",
+  "group": "Backup and DR",
+  "title": "Configuring a Site Sync"
+ },
+ {
+  "src": "product-guide/backup-dr/syncs-overview.md",
+  "space": "automate",
+  "dest": "product-guide/backup-dr/syncs-overview.md",
+  "group": "Backup and DR",
+  "title": "Site Syncs"
+ },
+ {
+  "src": "product-guide/backup-dr/system-snapshot-restores.md",
+  "space": "automate",
+  "dest": "product-guide/backup-dr/system-snapshot-restores.md",
+  "group": "Backup and DR",
+  "title": "Restores from System Snapshots"
+ },
+ {
+  "src": "product-guide/backup-dr/system-snapshots.md",
+  "space": "automate",
+  "dest": "product-guide/backup-dr/system-snapshots.md",
+  "group": "Backup and DR",
+  "title": "System Snapshots"
+ },
+ {
+  "src": "product-guide/backup-dr/vm-snapshots-restores.md",
+  "space": "automate",
+  "dest": "product-guide/backup-dr/vm-snapshots-restores.md",
+  "group": "Backup and DR",
+  "title": "VM Snapshots and Restores"
+ },
+ {
+  "src": "product-guide/automation/create-tasks.md",
+  "space": "automate",
+  "dest": "product-guide/automation/create-tasks.md",
+  "group": "Automation",
+  "title": "Creating Automated Tasks"
+ },
+ {
+  "src": "product-guide/automation/marketplace-vm-recipes.md",
+  "space": "automate",
+  "dest": "product-guide/automation/marketplace-vm-recipes.md",
+  "group": "Automation",
+  "title": "VergeOS Marketplace Catalog: VM Recipes"
+ },
+ {
+  "src": "product-guide/automation/recipes-organization.md",
+  "space": "automate",
+  "dest": "product-guide/automation/recipes-organization.md",
+  "group": "Automation",
+  "title": "Recipe Organization"
+ },
+ {
+  "src": "product-guide/automation/recipes-overview.md",
+  "space": "automate",
+  "dest": "product-guide/automation/recipes-overview.md",
+  "group": "Automation",
+  "title": "Recipes"
+ },
+ {
+  "src": "product-guide/automation/schedules.md",
+  "space": "automate",
+  "dest": "product-guide/automation/schedules.md",
+  "group": "Automation",
+  "title": "Schedules"
+ },
+ {
+  "src": "product-guide/automation/scripts.md",
+  "space": "automate",
+  "dest": "product-guide/automation/scripts.md",
+  "group": "Automation",
+  "title": "Scripts"
+ },
+ {
+  "src": "product-guide/automation/task-engine.md",
+  "space": "automate",
+  "dest": "product-guide/automation/task-engine.md",
+  "group": "Automation",
+  "title": "Task Engine"
+ },
+ {
+  "src": "product-guide/automation/tenant-recipes.md",
+  "space": "automate",
+  "dest": "product-guide/automation/tenant-recipes.md",
+  "group": "Automation",
+  "title": "Tenant Recipes"
+ },
+ {
+  "src": "product-guide/automation/vm-recipes.md",
+  "space": "automate",
+  "dest": "product-guide/automation/vm-recipes.md",
+  "group": "Automation",
+  "title": "VM Recipes"
+ },
+ {
+  "src": "product-guide/automation/webhooks.md",
+  "space": "automate",
+  "dest": "product-guide/automation/webhooks.md",
+  "group": "Automation",
+  "title": "Webhooks"
+ },
+ {
+  "src": "product-guide/tools-integrations/cirrus-data.md",
+  "space": "automate",
+  "dest": "product-guide/tools-integrations/cirrus-data.md",
+  "group": "Integrations and APIs",
+  "title": "Cirrus Data Integration with VergeOS"
+ },
+ {
+  "src": "product-guide/tools-integrations/external-monitoring.md",
+  "space": "automate",
+  "dest": "product-guide/tools-integrations/external-monitoring.md",
+  "group": "Integrations and APIs",
+  "title": "External Monitoring"
+ },
+ {
+  "src": "product-guide/tools-integrations/go-sdk.md",
+  "space": "automate",
+  "dest": "product-guide/tools-integrations/go-sdk.md",
+  "group": "Integrations and APIs",
+  "title": "VergeOS Go SDK (govergeos)"
+ },
+ {
+  "src": "product-guide/tools-integrations/inuvika.md",
+  "space": "automate",
+  "dest": "product-guide/tools-integrations/inuvika.md",
+  "group": "Integrations and APIs",
+  "title": "Inuvika Integration with VergeOS"
+ },
+ {
+  "src": "product-guide/tools-integrations/kubernetes-integration.md",
+  "space": "automate",
+  "dest": "product-guide/tools-integrations/kubernetes-integration.md",
+  "group": "Integrations and APIs",
+  "title": "Kubernetes Integration"
+ },
+ {
+  "src": "product-guide/tools-integrations/leostream.md",
+  "space": "automate",
+  "dest": "product-guide/tools-integrations/leostream.md",
+  "group": "Integrations and APIs",
+  "title": "Leostream Integration with VergeOS"
+ },
+ {
+  "src": "product-guide/tools-integrations/nvidia-gpu-virtualization.md",
+  "space": "automate",
+  "dest": "product-guide/tools-integrations/nvidia-gpu-virtualization.md",
+  "group": "Integrations and APIs",
+  "title": "NVIDIA GPU Virtualization"
+ },
+ {
+  "src": "product-guide/tools-integrations/powershell-module.md",
+  "space": "automate",
+  "dest": "product-guide/tools-integrations/powershell-module.md",
+  "group": "Integrations and APIs",
+  "title": "VergeOS PowerShell Module (PSVergeOS)"
+ },
+ {
+  "src": "product-guide/tools-integrations/prometheus-exporter.md",
+  "space": "automate",
+  "dest": "product-guide/tools-integrations/prometheus-exporter.md",
+  "group": "Integrations and APIs",
+  "title": "VergeOS Prometheus Exporter (ioMetrics)"
+ },
+ {
+  "src": "product-guide/tools-integrations/python-sdk.md",
+  "space": "automate",
+  "dest": "product-guide/tools-integrations/python-sdk.md",
+  "group": "Integrations and APIs",
+  "title": "VergeOS Python SDK (pyvergeos)"
+ },
+ {
+  "src": "product-guide/tools-integrations/rancher-integration.md",
+  "space": "automate",
+  "dest": "product-guide/tools-integrations/rancher-integration.md",
+  "group": "Integrations and APIs",
+  "title": "Rancher Integration"
+ },
+ {
+  "src": "product-guide/tools-integrations/storware-backup-recovery.md",
+  "space": "automate",
+  "dest": "product-guide/tools-integrations/storware-backup-recovery.md",
+  "group": "Integrations and APIs",
+  "title": "Storware Integration with VergeOS"
+ },
+ {
+  "src": "product-guide/tools-integrations/terraform-provider.md",
+  "space": "automate",
+  "dest": "product-guide/tools-integrations/terraform-provider.md",
+  "group": "Integrations and APIs",
+  "title": "VergeOS Terraform Provider"
+ },
+ {
+  "src": "product-guide/tools-integrations/typescript-sdk.md",
+  "space": "automate",
+  "dest": "product-guide/tools-integrations/typescript-sdk.md",
+  "group": "Integrations and APIs",
+  "title": "VergeOS TypeScript SDK (tsvergeos)"
+ },
+ {
+  "src": "product-guide/tools-integrations/vrg-cli.md",
+  "space": "automate",
+  "dest": "product-guide/tools-integrations/vrg-cli.md",
+  "group": "Integrations and APIs",
+  "title": "VergeOS CLI (vrg)"
+ },
+ {
+  "src": "product-guide/private-ai/chat-sessions.md",
+  "space": "automate",
+  "dest": "product-guide/private-ai/chat-sessions.md",
+  "group": "Private AI",
+  "title": "Interactive Chat Sessions"
+ },
+ {
+  "src": "product-guide/private-ai/configuration.md",
+  "space": "automate",
+  "dest": "product-guide/private-ai/configuration.md",
+  "group": "Private AI",
+  "title": "AI Configuration"
+ },
+ {
+  "src": "product-guide/private-ai/open-ai-router.md",
+  "space": "automate",
+  "dest": "product-guide/private-ai/open-ai-router.md",
+  "group": "Private AI",
+  "title": "VergeOS OpenAI-Compatible API"
+ },
+ {
+  "src": "product-guide/private-ai/overview.md",
+  "space": "automate",
+  "dest": "product-guide/private-ai/overview.md",
+  "group": "Private AI",
+  "title": "Private AI Overview"
+ },
+ {
+  "src": "product-guide/system/api-keys.md",
+  "space": "automate",
+  "dest": "product-guide/system/api-keys.md",
+  "group": "Shared admin surfaces",
+  "title": "API Keys"
+ },
+ {
+  "src": "product-guide/ui-overview.md",
+  "space": "run",
+  "dest": "product-guide/ui-overview.md",
+  "group": "Platform overview",
+  "title": "Getting Started with the VergeOS 26 UI"
+ },
+ {
+  "src": "knowledge-base/posts/API-Tables.md",
+  "space": "help-center",
+  "dest": "automation-api/api-tables-description.md",
+  "group": "Automation & API",
+  "title": "API Tables Description"
+ },
+ {
+  "src": "knowledge-base/posts/AllowRootToTenantSite.md",
+  "space": "help-center",
+  "dest": "tenants/allow-root-to-tenant-site-connection.md",
+  "group": "Tenants",
+  "title": "Allow Root to Tenant Site Connection"
+ },
+ {
+  "src": "knowledge-base/posts/Chg-external-vlan-bonded.md",
+  "space": "help-center",
+  "dest": "networking/change-external-vlan-to-bonded.md",
+  "group": "Networking",
+  "title": "Change External Network to VLAN Bonded"
+ },
+ {
+  "src": "knowledge-base/posts/Disk-Discard.md",
+  "space": "help-center",
+  "dest": "virtual-machines/vm-disk-discard.md",
+  "group": "Virtual Machines",
+  "title": "VM Disk Discard"
+ },
+ {
+  "src": "knowledge-base/posts/Importing-vms-from-files.md",
+  "space": "help-center",
+  "dest": "virtual-machines/import-vms-from-files.md",
+  "group": "Virtual Machines",
+  "title": "Importing VMs from Files"
+ },
+ {
+  "src": "knowledge-base/posts/access-ui-from-internal.md",
+  "space": "help-center",
+  "dest": "networking/accessing-the-user-interface-from-an-internal-network.md",
+  "group": "Networking",
+  "title": "Accessing the User Interface from an Internal Network"
+ },
+ {
+  "src": "knowledge-base/posts/accessing-ui-from-a-vm.md",
+  "space": "help-center",
+  "dest": "networking/accessing-the-ui-from-a-vm.md",
+  "group": "Networking",
+  "title": "Accessing the VergeOS UI from a VM"
+ },
+ {
+  "src": "knowledge-base/posts/add-media-to-tenants.md",
+  "space": "help-center",
+  "dest": "tenants/sharing-files-to-tenants.md",
+  "group": "Tenants",
+  "title": "Sharing Files to Tenants"
+ },
+ {
+  "src": "knowledge-base/posts/add-tpm-device-to-vm.md",
+  "space": "help-center",
+  "dest": "virtual-machines/add-tpm-device-to-vm.md",
+  "group": "Virtual Machines",
+  "title": "How to Add a TPM Device to a Virtual Machine"
+ },
+ {
+  "src": "knowledge-base/posts/adding-tier-zero.md",
+  "space": "help-center",
+  "dest": "storage-vsan/adding-tier-zero.md",
+  "group": "Storage & vSAN",
+  "title": "Adding Tier 0 to an Existing System"
+ },
+ {
+  "src": "knowledge-base/posts/airgap-license-request.md",
+  "space": "help-center",
+  "dest": "getting-started/requesting-an-airgap-license.md",
+  "group": "Getting Started & Installation",
+  "title": "Requesting an Airgap License"
+ },
+ {
+  "src": "knowledge-base/posts/airgap-license-system-update.md",
+  "space": "help-center",
+  "dest": "system-administration/updating-vergeos-system-with-airgap-license.md",
+  "group": "System Administration",
+  "title": "Updating a VergeOS System with Airgap License"
+ },
+ {
+  "src": "knowledge-base/posts/api-guide.md",
+  "space": "help-center",
+  "dest": "automation-api/verge-api-guide.md",
+  "group": "Automation & API",
+  "title": "API Guide"
+ },
+ {
+  "src": "knowledge-base/posts/api-helper-script.md",
+  "space": "help-center",
+  "dest": "automation-api/api-helper-script.md",
+  "group": "Automation & API",
+  "title": "API Helper Script"
+ },
+ {
+  "src": "knowledge-base/posts/api-nas-volume-browser.md",
+  "space": "help-center",
+  "dest": "storage-vsan/nas-volume-browser-api.md",
+  "group": "Storage & vSAN",
+  "title": "NAS Volume Browser API Reference"
+ },
+ {
+  "src": "knowledge-base/posts/api-vm-advanced-operations.md",
+  "space": "help-center",
+  "dest": "automation-api/vm-advanced-operations.md",
+  "group": "Automation & API",
+  "title": "VM Advanced Operations API"
+ },
+ {
+  "src": "knowledge-base/posts/api-vm-configuration.md",
+  "space": "help-center",
+  "dest": "automation-api/vm-configuration.md",
+  "group": "Automation & API",
+  "title": "VM Configuration API"
+ },
+ {
+  "src": "knowledge-base/posts/api-vm-creation.md",
+  "space": "help-center",
+  "dest": "automation-api/vm-creation-api.md",
+  "group": "Automation & API",
+  "title": "VM Creation API"
+ },
+ {
+  "src": "knowledge-base/posts/api-vm-lifecycle-management.md",
+  "space": "help-center",
+  "dest": "automation-api/vm-lifecycle-management.md",
+  "group": "Automation & API",
+  "title": "VM Lifecycle Management API Overview"
+ },
+ {
+  "src": "knowledge-base/posts/api-vm-power-management.md",
+  "space": "help-center",
+  "dest": "automation-api/vm-power-management.md",
+  "group": "Automation & API",
+  "title": "VM Power Management API"
+ },
+ {
+  "src": "knowledge-base/posts/automated-task-example-webhook.md",
+  "space": "help-center",
+  "dest": "automation-api/automated-task-example-webhook.md",
+  "group": "Automation & API",
+  "title": "Automated Task Example - Send Slack Channel and Email Alerts Upon a Sync Error"
+ },
+ {
+  "src": "knowledge-base/posts/best-practices-pfsense-firewall.md",
+  "space": "help-center",
+  "dest": "networking/running-a-pfsense-virtual-firewall.md",
+  "group": "Networking",
+  "title": "Best Practices - Running a pfSense Virtual Firewall"
+ },
+ {
+  "src": "knowledge-base/posts/branding.md",
+  "space": "help-center",
+  "dest": "system-administration/customizing-the-user-interface.md",
+  "group": "System Administration",
+  "title": "Customizing the User Interface"
+ },
+ {
+  "src": "knowledge-base/posts/change-resolution-on-uefi.md",
+  "space": "help-center",
+  "dest": "virtual-machines/changing-resolution-on-a-uefi-vm.md",
+  "group": "Virtual Machines",
+  "title": "Changing Resolution on a UEFI VM"
+ },
+ {
+  "src": "knowledge-base/posts/configure-authoritative-dns-vergeos.md",
+  "space": "help-center",
+  "dest": "networking/configure-authoritative-dns-vergeos.md",
+  "group": "Networking",
+  "title": "Configure Authoritative DNS in VergeOS"
+ },
+ {
+  "src": "knowledge-base/posts/configuring-bgp-timers.md",
+  "space": "help-center",
+  "dest": "networking/adjusting-bgp-timers.md",
+  "group": "Networking",
+  "title": "Adjusting BGP Timers"
+ },
+ {
+  "src": "knowledge-base/posts/configuring-vergeos-as-oidc-client.md",
+  "space": "help-center",
+  "dest": "system-administration/configuring-vergeos-as-oidc-client.md",
+  "group": "System Administration",
+  "title": "Configuring VergeOS as an OIDC Client"
+ },
+ {
+  "src": "knowledge-base/posts/configuring-vm-export.md",
+  "space": "help-center",
+  "dest": "backup-dr/configuring-a-vm-export-volume.md",
+  "group": "Backup & DR",
+  "title": "Configuring a Volume for Exporting VMs"
+ },
+ {
+  "src": "knowledge-base/posts/controling-node-where-vm-runs.md",
+  "space": "help-center",
+  "dest": "automation-api/determine-node-where-vm-runs.md",
+  "group": "Automation & API",
+  "title": "Settings that Influence VM Node Selection"
+ },
+ {
+  "src": "knowledge-base/posts/cpu-overprovisioning-guide.md",
+  "space": "help-center",
+  "dest": "system-administration/cpu-overprovisioning-guide.md",
+  "group": "System Administration",
+  "title": "CPU Overprovisioning and Resource Planning"
+ },
+ {
+  "src": "knowledge-base/posts/create-external-network.md",
+  "space": "help-center",
+  "dest": "networking/create-external-network.md",
+  "group": "Networking",
+  "title": "How to Create an External Network"
+ },
+ {
+  "src": "knowledge-base/posts/db-best-practices.md",
+  "space": "help-center",
+  "dest": "system-administration/database-best-practices.md",
+  "group": "System Administration",
+  "title": "Database Best Practices"
+ },
+ {
+  "src": "knowledge-base/posts/devpass-advanced.md",
+  "space": "help-center",
+  "dest": "tenants/dev-passthrough-advanced.md",
+  "group": "Tenants",
+  "title": "Device Passthrough Advanced Configuration"
+ },
+ {
+  "src": "knowledge-base/posts/emulate-usb.md",
+  "space": "help-center",
+  "dest": "virtual-machines/emulate-usb.md",
+  "group": "Virtual Machines",
+  "title": "Emulate a USB Device"
+ },
+ {
+  "src": "knowledge-base/posts/enable-ssh.md",
+  "space": "help-center",
+  "dest": "networking/enabling-system-ssh.md",
+  "group": "Networking",
+  "title": "Enabling System SSH Access"
+ },
+ {
+  "src": "knowledge-base/posts/example-tasks.md",
+  "space": "help-center",
+  "dest": "automation-api/automated-task-example-1.md",
+  "group": "Automation & API",
+  "title": "Automated Task Example - Power on/off VMs Automatically as Needed"
+ },
+ {
+  "src": "knowledge-base/posts/exporting-a-vm.md",
+  "space": "help-center",
+  "dest": "backup-dr/exporting-a-virtual-machine.md",
+  "group": "Backup & DR",
+  "title": "Exporting a Virtual Machine"
+ },
+ {
+  "src": "knowledge-base/posts/external-ip-tenants.md",
+  "space": "help-center",
+  "dest": "networking/how-to-use-external-ips-in-tenants.md",
+  "group": "Networking",
+  "title": "How to Use External IPs in Tenants"
+ },
+ {
+  "src": "knowledge-base/posts/force-power-off-vm-using-api.md",
+  "space": "help-center",
+  "dest": "automation-api/force-power-off-vm-using-api.md",
+  "group": "Automation & API",
+  "title": "Force Power Off a VM Using the API"
+ },
+ {
+  "src": "knowledge-base/posts/generating-system-diags.md",
+  "space": "help-center",
+  "dest": "troubleshooting/generating-system-diagnostics.md",
+  "group": "Troubleshooting",
+  "title": "Generating System Diagnostics"
+ },
+ {
+  "src": "knowledge-base/posts/guest-memory-management.md",
+  "space": "help-center",
+  "dest": "virtual-machines/guest-memory-management.md",
+  "group": "Virtual Machines",
+  "title": "Understanding VergeOS VM Memory Management"
+ },
+ {
+  "src": "knowledge-base/posts/identifying-a-failed-disk.md",
+  "space": "help-center",
+  "dest": "storage-vsan/identifying-a-failed-disk-drive.md",
+  "group": "Storage & vSAN",
+  "title": "Identifying a Failed Disk Drive"
+ },
+ {
+  "src": "knowledge-base/posts/import-centos-redhat.md",
+  "space": "help-center",
+  "dest": "virtual-machines/import-rhel-centos-vm.md",
+  "group": "Virtual Machines",
+  "title": "How to Import a Linux VM (RHEL, CentOS, SUSE, Debian, Ubuntu)"
+ },
+ {
+  "src": "knowledge-base/posts/importing-p2v-or-v2v.md",
+  "space": "help-center",
+  "dest": "virtual-machines/importing-a-physicalvirtual-machine-into-vergeio.md",
+  "group": "Virtual Machines",
+  "title": "Importing Physical Machines and Individual VMs into VergeOS"
+ },
+ {
+  "src": "knowledge-base/posts/importwindowsserveruefi.md",
+  "space": "help-center",
+  "dest": "virtual-machines/importing-windows-server-with-uefi-into-vergeos.md",
+  "group": "Virtual Machines",
+  "title": "Importing Windows Server with UEFI into VergeOS"
+ },
+ {
+  "src": "knowledge-base/posts/increase-max-ram.md",
+  "space": "help-center",
+  "dest": "system-administration/max-ram-per-machine.md",
+  "group": "System Administration",
+  "title": "Max RAM per machine"
+ },
+ {
+  "src": "knowledge-base/posts/intro.md",
+  "space": "help-center",
+  "dest": "getting-started/welcome-to-vergeos-knowledge-base.md",
+  "group": "Getting Started & Installation",
+  "title": "Welcome to the VergeOS Knowledge Base"
+ },
+ {
+  "src": "knowledge-base/posts/ipsec-example-dedicated-ip-bridged.md",
+  "space": "help-center",
+  "dest": "networking/ipsec-example-dedicated-ip.md",
+  "group": "Networking",
+  "title": "IPsec Example - Dedicated Public IP"
+ },
+ {
+  "src": "knowledge-base/posts/ipsec-example-tenant-nat-ui-address.md",
+  "space": "help-center",
+  "dest": "networking/ipsec-example-tenant-nat-ui-ip.md",
+  "group": "Networking",
+  "title": "IPsec Configuration Example - Tenant/NAT"
+ },
+ {
+  "src": "knowledge-base/posts/isolate-a-vm.md",
+  "space": "help-center",
+  "dest": "virtual-machines/isolating-a-vm.md",
+  "group": "Virtual Machines",
+  "title": "Isolating a VM"
+ },
+ {
+  "src": "knowledge-base/posts/journal-walks-vsan-tier-status.md",
+  "space": "help-center",
+  "dest": "storage-vsan/understanding-journal-walks-and-vsan-tier-status.md",
+  "group": "Storage & vSAN",
+  "title": "Understanding vSAN Tier Status/Journal Walks"
+ },
+ {
+  "src": "knowledge-base/posts/loading-virtio-drivers-in-windowsrc.md",
+  "space": "help-center",
+  "dest": "virtual-machines/loading-virtio-drivers-in-windows-recovery-console.md",
+  "group": "Virtual Machines",
+  "title": "Loading Virtio Drivers in Windows Recovery Console"
+ },
+ {
+  "src": "knowledge-base/posts/managing-files.md",
+  "space": "help-center",
+  "dest": "virtual-machines/managing-files.md",
+  "group": "Virtual Machines",
+  "title": "Managing Files"
+ },
+ {
+  "src": "knowledge-base/posts/network-blocks.md",
+  "space": "help-center",
+  "dest": "networking/network-blocks.md",
+  "group": "Networking",
+  "title": "Network Blocks"
+ },
+ {
+  "src": "knowledge-base/posts/network-micro-segmentation.md",
+  "space": "help-center",
+  "dest": "networking/how-to-achieve-network-micro-segmentation-on-vergeos.md",
+  "group": "Networking",
+  "title": "How to Achieve Network Micro-Segmentation on VergeOS"
+ },
+ {
+  "src": "knowledge-base/posts/node-removal.md",
+  "space": "help-center",
+  "dest": "system-administration/removing-a-node-from-cluster.md",
+  "group": "System Administration",
+  "title": "Removing a Node from a VergeOS Cluster"
+ },
+ {
+  "src": "knowledge-base/posts/node-secure-boot.md",
+  "space": "help-center",
+  "dest": "getting-started/node-secure-boot.md",
+  "group": "Getting Started & Installation",
+  "title": "Secure Boot and Boot Integrity for Physical Nodes"
+ },
+ {
+  "src": "knowledge-base/posts/non-persistent-vm.md",
+  "space": "help-center",
+  "dest": "virtual-machines/making-a-nonpersistent-vm.md",
+  "group": "Virtual Machines",
+  "title": "Making a Non-Persistent VM"
+ },
+ {
+  "src": "knowledge-base/posts/preferred-tier-usage.md",
+  "space": "help-center",
+  "dest": "storage-vsan/preferred-tier-usage.md",
+  "group": "Storage & vSAN",
+  "title": "Preferred Tier Usage"
+ },
+ {
+  "src": "knowledge-base/posts/preinstall-checklist.md",
+  "space": "help-center",
+  "dest": "getting-started/preinstallation-checklist.md",
+  "group": "Getting Started & Installation",
+  "title": "Pre-installation Checklist"
+ },
+ {
+  "src": "knowledge-base/posts/proper-power-sequence.md",
+  "space": "help-center",
+  "dest": "system-administration/proper-power-sequence-for-vergeos.md",
+  "group": "System Administration",
+  "title": "Proper Power Sequence"
+ },
+ {
+  "src": "knowledge-base/posts/proper-vergeos-system-shutdown-procedure.md",
+  "space": "help-center",
+  "dest": "system-administration/proper-vergeos-system-shutdown-procedure.md",
+  "group": "System Administration",
+  "title": "Proper VergeOS System Shutdown Procedure"
+ },
+ {
+  "src": "knowledge-base/posts/proxy.md",
+  "space": "help-center",
+  "dest": "tenants/configuring-proxy.md",
+  "group": "Tenants",
+  "title": "Configuring Proxy"
+ },
+ {
+  "src": "knowledge-base/posts/recover-single-vm-from-cloud-snapshot.md",
+  "space": "help-center",
+  "dest": "backup-dr/recovering-a-single-vm-from-a-remote-cloud-snapshot.md",
+  "group": "Backup & DR",
+  "title": "Recovering a Single VM from a Remote System Snapshot"
+ },
+ {
+  "src": "knowledge-base/posts/redhat-v9-clone-restore.md",
+  "space": "help-center",
+  "dest": "backup-dr/rhel9-boot-failure-clone-snapshot-restore.md",
+  "group": "Backup & DR",
+  "title": "RHEL 9 Family VMs Failing to Boot After Clone or Snapshot Restore"
+ },
+ {
+  "src": "knowledge-base/posts/remote-log-forwarding-syslog.md",
+  "space": "help-center",
+  "dest": "troubleshooting/configuring-remote-log-forwarding.md",
+  "group": "Troubleshooting",
+  "title": "Configuring Remote Log Forwarding (Syslog)"
+ },
+ {
+  "src": "knowledge-base/posts/reset-tenant-admin-password.md",
+  "space": "help-center",
+  "dest": "tenants/reset-a-tenants-administrative-password.md",
+  "group": "Tenants",
+  "title": "Reset a Tenant's Administrative Password"
+ },
+ {
+  "src": "knowledge-base/posts/resizing-a-virtual-disk-drive.md",
+  "space": "help-center",
+  "dest": "virtual-machines/resizing-a-virtual-disk-drive.md",
+  "group": "Virtual Machines",
+  "title": "Resizing a Virtual Disk Drive"
+ },
+ {
+  "src": "knowledge-base/posts/reviewing-system-logs.md",
+  "space": "help-center",
+  "dest": "troubleshooting/system-logs.md",
+  "group": "Troubleshooting",
+  "title": "System Logs"
+ },
+ {
+  "src": "knowledge-base/posts/routing-internal-networks.md",
+  "space": "help-center",
+  "dest": "networking/routing-between-internal-vergeio-networks.md",
+  "group": "Networking",
+  "title": "Routing Between Internal VergeOS Networks"
+ },
+ {
+  "src": "knowledge-base/posts/routing-l2-networks.md",
+  "space": "help-center",
+  "dest": "networking/routing-l2-networks.md",
+  "group": "Networking",
+  "title": "Routing Layer 2 Networks with VergeOS"
+ },
+ {
+  "src": "knowledge-base/posts/scaling-down-a-vsan.md",
+  "space": "help-center",
+  "dest": "storage-vsan/scaling-down-a-vsan.md",
+  "group": "Storage & vSAN",
+  "title": "Scaling Down a vSAN (Removing Drives)"
+ },
+ {
+  "src": "knowledge-base/posts/scaling-up-a-vsan.md",
+  "space": "help-center",
+  "dest": "storage-vsan/scaling-up-a-vsan.md",
+  "group": "Storage & vSAN",
+  "title": "Scaling Up a vSAN"
+ },
+ {
+  "src": "knowledge-base/posts/secure-boot-certificate-expiry-2026.md",
+  "space": "help-center",
+  "dest": "virtual-machines/secure-boot-certificate-expiry-2026.md",
+  "group": "Virtual Machines",
+  "title": "Secure Boot Certificate Expiry - Microsoft Guest VMs (June 2026)"
+ },
+ {
+  "src": "knowledge-base/posts/setting-up-vergeos-as-identity-provider-oidc.md",
+  "space": "help-center",
+  "dest": "system-administration/setting-up-vergeos-as-identity-provider-oidc.md",
+  "group": "System Administration",
+  "title": "Setting Up VergeOS as an Identity Provider with OIDC"
+ },
+ {
+  "src": "knowledge-base/posts/share-vm-into-tenant.md",
+  "space": "help-center",
+  "dest": "tenants/sharing-a-vm-into-a-tenant.md",
+  "group": "Tenants",
+  "title": "Sharing a VM into a Tenant"
+ },
+ {
+  "src": "knowledge-base/posts/snapshot-sync-errors.md",
+  "space": "help-center",
+  "dest": "backup-dr/snapshot-synchronization-errors-explained.md",
+  "group": "Backup & DR",
+  "title": "Snapshot Synchronization Errors Explained"
+ },
+ {
+  "src": "knowledge-base/posts/storware-setup.md",
+  "space": "help-center",
+  "dest": "backup-dr/setup-storware-vergeos.md",
+  "group": "Backup & DR",
+  "title": "Setting Up Storware on VergeOS"
+ },
+ {
+  "src": "knowledge-base/posts/tenant-crash-cart.md",
+  "space": "help-center",
+  "dest": "tenants/tenant-crash-cart-guide.md",
+  "group": "Tenants",
+  "title": "Tenant Crash Cart Guide"
+ },
+ {
+  "src": "knowledge-base/posts/tenant-external-ip-quick-start.md",
+  "space": "help-center",
+  "dest": "tenants/configuring-tenant-external-ips.md",
+  "group": "Tenants",
+  "title": "Tenant External IP Quick Start Guide"
+ },
+ {
+  "src": "knowledge-base/posts/tenant-layer2-access.md",
+  "space": "help-center",
+  "dest": "tenants/provide-layer2-to-tenant.md",
+  "group": "Tenants",
+  "title": "Provide Layer 2 Access to a Tenant - LEGACY"
+ },
+ {
+  "src": "knowledge-base/posts/tenant-node-design.md",
+  "space": "help-center",
+  "dest": "tenants/tenant-node-planning-guide.md",
+  "group": "Tenants",
+  "title": "Tenant Node Planning Guide"
+ },
+ {
+  "src": "knowledge-base/posts/tenant-statistics.md",
+  "space": "help-center",
+  "dest": "tenants/viewing-tenant-consumption-statistics.md",
+  "group": "Tenants",
+  "title": "Viewing Tenant Consumption Statistics"
+ },
+ {
+  "src": "knowledge-base/posts/terraform.md",
+  "space": "help-center",
+  "dest": "automation-api/terraform-vergeio-provider.md",
+  "group": "Automation & API",
+  "title": "Terraform VergeIO Provider"
+ },
+ {
+  "src": "knowledge-base/posts/trim.md",
+  "space": "help-center",
+  "dest": "virtual-machines/virtual-drive-trim.md",
+  "group": "Virtual Machines",
+  "title": "Virtual Drive TRIM"
+ },
+ {
+  "src": "knowledge-base/posts/troubleshootingnas.md",
+  "space": "help-center",
+  "dest": "storage-vsan/troubleshooting-nas-shares.md",
+  "group": "Storage & vSAN",
+  "title": "Troubleshooting NAS Shares"
+ },
+ {
+  "src": "knowledge-base/posts/uefi-tweaks-for-imported-vms.md",
+  "space": "help-center",
+  "dest": "virtual-machines/uefi-tweaks-for-imported-vms.md",
+  "group": "Virtual Machines",
+  "title": "UEFI Tweaks for Imported VMs"
+ },
+ {
+  "src": "knowledge-base/posts/understanding-traffic-flow.md",
+  "space": "help-center",
+  "dest": "networking/understanding-traffic-flow.md",
+  "group": "Networking",
+  "title": "Understanding Traffic Flow"
+ },
+ {
+  "src": "knowledge-base/posts/unexpected-vsan-growth.md",
+  "space": "help-center",
+  "dest": "storage-vsan/understanding-and-explaining-unexpected-vsan-growth.md",
+  "group": "Storage & vSAN",
+  "title": "Understanding and Explaining Unexpected vSAN Growth"
+ },
+ {
+  "src": "knowledge-base/posts/updating-vergeos-system.md",
+  "space": "help-center",
+  "dest": "system-administration/updating-vergeos-system.md",
+  "group": "System Administration",
+  "title": "Updating the VergeOS System"
+ },
+ {
+  "src": "knowledge-base/posts/utilize-igpu-ai-acceleration.md",
+  "space": "help-center",
+  "dest": "system-administration/using-igpu-ai-acceleration.md",
+  "group": "System Administration",
+  "title": "Utilizing an iGPU for AI Acceleration"
+ },
+ {
+  "src": "knowledge-base/posts/vergeio-update-instructions.md",
+  "space": "help-center",
+  "dest": "troubleshooting/VergeOS-update-instructions.md",
+  "group": "Troubleshooting",
+  "title": "VergeOS Update Instructions"
+ },
+ {
+  "src": "knowledge-base/posts/virtio-win-mssql-compatibility.md",
+  "space": "help-center",
+  "dest": "virtual-machines/virtio-win-mssql-compatibility.md",
+  "group": "Virtual Machines",
+  "title": "VirtIO-Win Driver Compatibility with MS SQL Server Workloads"
+ },
+ {
+  "src": "knowledge-base/posts/vm-advanced.md",
+  "space": "help-center",
+  "dest": "virtual-machines/vm-advanced-options.md",
+  "group": "Virtual Machines",
+  "title": "VM Advanced Options"
+ },
+ {
+  "src": "knowledge-base/posts/vm-hotplug-capabilities.md",
+  "space": "help-center",
+  "dest": "tenants/vm-hotplug-capabilities.md",
+  "group": "Tenants",
+  "title": "VM and Tenant Hot-Plug Capabilities"
+ },
+ {
+  "src": "knowledge-base/posts/vm-network-connectivity-issues.md",
+  "space": "help-center",
+  "dest": "networking/vm-network-connectivity-issues.md",
+  "group": "Networking",
+  "title": "VM Network Connectivity Issues"
+ },
+ {
+  "src": "knowledge-base/posts/vmware-backup-dr-guide.md",
+  "space": "help-center",
+  "dest": "backup-dr/vmwarebackupdrguide.md",
+  "group": "Backup & DR",
+  "title": "VMware-Backup-DR-Guide"
+ },
+ {
+  "src": "knowledge-base/posts/vmware-service-vm-nic-ipv4-configuration.md",
+  "space": "help-center",
+  "dest": "networking/vmware-service-vm-nic-ipv4-configuration.md",
+  "group": "Networking",
+  "title": "Configuring VMware Service VM NIC IPv4 Settings"
+ },
+ {
+  "src": "knowledge-base/posts/vsan-encryption.md",
+  "space": "help-center",
+  "dest": "storage-vsan/vsan-encryption-information.md",
+  "group": "Storage & vSAN",
+  "title": "vSAN Encryption Information"
+ },
+ {
+  "src": "knowledge-base/posts/vulnerability-scanning-best-practices.md",
+  "space": "help-center",
+  "dest": "system-administration/vulnerability-scanning-best-practices.md",
+  "group": "System Administration",
+  "title": "Vulnerability Scanning Best Practices"
+ },
+ {
+  "src": "knowledge-base/posts/windows-disks-offline-after-restart.md",
+  "space": "help-center",
+  "dest": "virtual-machines/windows-disks-showing-offline-after-restarting.md",
+  "group": "Virtual Machines",
+  "title": "Windows Disks Showing Offline After Restarting"
+ },
+ {
+  "src": "knowledge-base/posts/windows-restored-vm-not-bootable.md",
+  "space": "help-center",
+  "dest": "virtual-machines/windows-restored-vm-not-bootable.md",
+  "group": "Virtual Machines",
+  "title": "Windows Restored VM Not Bootable"
+ },
+ {
+  "src": "knowledge-base/posts/windows-slow-format.md",
+  "space": "help-center",
+  "dest": "virtual-machines/windows--slow-to-format-a-new-disk.md",
+  "group": "Virtual Machines",
+  "title": "Windows - Slow to Format a New Disk"
+ },
+ {
+  "src": "knowledge-base/posts/windows-time-shift.md",
+  "space": "help-center",
+  "dest": "virtual-machines/windows-time-shift.md",
+  "group": "Virtual Machines",
+  "title": "Windows - Time Shift"
+ },
+ {
+  "src": "knowledge-base/posts/windows-unable-to-detect-drive.md",
+  "space": "help-center",
+  "dest": "virtual-machines/windows-is-unable-to-detect-a-virtual-disk-drive.md",
+  "group": "Virtual Machines",
+  "title": "Windows is Unable to Detect a Virtual Disk Drive"
+ },
+ {
+  "src": "knowledge-base/posts/windows-unexpected-restart.md",
+  "space": "help-center",
+  "dest": "virtual-machines/reasons-a-windows-vm-restarted-unexpectedly.md",
+  "group": "Virtual Machines",
+  "title": "Reasons a Windows VM Restarted Unexpectedly"
+ },
+ {
+  "src": "knowledge-base/posts/wireguard-nameservers.md",
+  "space": "help-center",
+  "dest": "networking/wireguard--adding-nameserver-entries-to-client-configs.md",
+  "group": "Networking",
+  "title": "Wireguard - Adding Nameserver entries to Client Configs"
+ },
+ {
+  "src": "knowledge-base/posts/wireguard-setup-remote-access-vpn.md",
+  "space": "help-center",
+  "dest": "networking/wireguard--setup-remote-access-vpn.md",
+  "group": "Networking",
+  "title": "Wireguard - Setup Remote Access VPN"
+ },
+ {
+  "src": "knowledge-base/posts/workloads-failing-to-migrate.md",
+  "space": "help-center",
+  "dest": "virtual-machines/workloads-failing-to-migrate.md",
+  "group": "Virtual Machines",
+  "title": "Workloads Failing to Migrate"
+ },
+ {
+  "src": "release-notes/26-0-release-notes.md",
+  "space": "release-notes",
+  "dest": "2026/26-0-release-notes.md",
+  "group": "2026",
+  "title": "26.0 Release Notes"
+ },
+ {
+  "src": "release-notes/26-1-release-notes.md",
+  "space": "release-notes",
+  "dest": "2026/26-1-release-notes.md",
+  "group": "2026",
+  "title": "26.1 Release Notes"
+ },
+ {
+  "src": "release-notes/4-10-release-notes.md",
+  "space": "release-notes",
+  "dest": "2025/4-10-release-notes.md",
+  "group": "2025",
+  "title": "4.10 Release Notes"
+ },
+ {
+  "src": "release-notes/4-11-release-notes.md",
+  "space": "release-notes",
+  "dest": "2025/4-11-release-notes.md",
+  "group": "2025",
+  "title": "4.11 Release Notes"
+ },
+ {
+  "src": "release-notes/4-12-release-notes.md",
+  "space": "release-notes",
+  "dest": "2025/4-12-release-notes.md",
+  "group": "2025",
+  "title": "4.12 Release Notes"
+ },
+ {
+  "src": "release-notes/4-13-release-notes.md",
+  "space": "release-notes",
+  "dest": "2025/4-13-release-notes.md",
+  "group": "2025",
+  "title": "4.13 Release Notes"
+ },
+ {
+  "src": "release-notes/4-9-release-notes.md",
+  "space": "release-notes",
+  "dest": "2025/4-9-release-notes.md",
+  "group": "2025",
+  "title": "4.9 Release Notes"
+ },
+ {
+  "src": "release-notes/release-notes-overview.md",
+  "space": "release-notes",
+  "dest": "README.md",
+  "group": null,
+  "title": "Changelog"
+ },
+ {
+  "src": "glossary.md",
+  "space": "home",
+  "dest": "glossary.md",
+  "group": null,
+  "title": "Glossary"
+ }
+]

@@ -1,0 +1,78 @@
+---
+title: "Snapshots"
+description: "Overview of VergeOS snapshot capabilities including system, partial, VM, tenant, and NAS volume snapshots with instant recovery, application-consistent capture, and flexible restore options."
+semantic_keywords:
+  - "VergeOS snapshots overview system VM NAS tenant"
+  - "point-in-time backup snapshot restore options"
+  - "application-consistent quiesced snapshot capabilities"
+  - "full partial system snapshot comparison"
+use_cases:
+  - "understand_snapshot_types"
+  - "evaluate_snapshot_capabilities"
+  - "plan_snapshot_strategy"
+  - "compare_snapshot_methods"
+tags:
+  - snapshots
+  - backup
+  - data-protection
+  - system-snapshots
+  - vm-snapshots
+  - nas-snapshots
+categories:
+  - Backup and DR
+---
+
+# Snapshots
+
+Snapshots provide nearly-instant, non-disruptive, point-in-time backups that allow for rollback to a previous instance in the event of a hardware failure, faulty application upgrade, VM bluescreen, etc. Snapshot captures and restores can be done at various levels: full system, partial system (select VMs, tenants, VMware services, and volumes based on custom tagging), individual virtual machine, and individual NAS volume.
+
+## Key Features
+
+- **Instant Recovery** – Snapshots can be restored rapidly, minimizing downtime.
+- **Minimal Storage Impact** – They are branched against initial data blocks, reducing additional storage consumption.
+- **Application-Consistent Snapshots** – VergeOS supports quiescent snapshots, ensuring data integrity by freezing disk activity during capture.
+- **Business Continuity & Disaster Recovery (BC/DR)** – System snapshots can be synchronized to another VergeOS system for offsite protection.
+- **Flexible Restore Options** – Users can recover individual VMs and tenants, clone copies for testing, or revert entire environments.
+
+## Automated Snapshots (Scheduled Snapshots)
+
+Snapshots can be automated to take at regularly-scheduled intervals using **snapshot profiles**. A snapshot profile consists of one or more profile periods. Each period determines a frequency for taking snapshots and the default retention time. More information about snapshot profiles is available here: [**Snapshot Profiles (Snapshot Scheduling)**](snapshot-profiles.md)
+
+## Manual Snapshots
+
+Snapshots can also be taken manually, with settable expiration. Manual snapshots can be useful for backup immediately before a configuration change, upgrade, or maintenance operation.
+
+## System Snapshot/Restore
+
+System snapshots can be:  
+
+* **Full** - captures the entire VergeOS system  
+*or*
+* **Partial** - capture of select VMs, tenants, VMware services, and volumes based on tagging
+
+### What can be restored from a System Snapshot?
+
+A system snapshot can be used to restore:
+
+- Entire VergeOS system (Full snapshots only)
+- Individual VMs
+- Individual tenants
+
+For more information see:  
+- [**System Snapshots**](system-snapshots.md)  
+- [**Restores from System Snapshot**](system-snapshot-restores.md)                      
+
+## VM Snapshot/Restore
+
+VM-level snapshots allow for quiesced capture (requires guest agent) and schedule/retention customizable per individual VM.  Partial system snapshots can include/exclude VMs and provide VM quiescing based on custom tagging. For related instructions, see: [**VM Snapshots and Restores**](vm-snapshots-restores.md).
+
+## Tenant Snapshot/Restore
+
+Individual tenants can be restored from the parent's system snapshot. For related instructions, see: [**Tenant Restores**](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/tenants/tenant-restores)
+
+Additionally, each tenant can utilize [**System Snapshots**](system-snapshot-restores.md), independently within their own environment, to back up their complete system or partial snapshots based on custom tagging.
+
+## NAS Snapshot/Restore
+
+Volume snapshots provide quiesced backup/restore of individual NAS volumes. For related instructions, see:  [**NAS Volume Snapshots and Restores**](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/nas/volume-snapshots-restores)
+

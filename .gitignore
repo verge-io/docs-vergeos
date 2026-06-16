@@ -1,0 +1,21 @@
+# Secrets / local env
+.env
+.env.local
+.env.*.local
+
+# macOS
+.DS_Store
+
+# Python (migration tooling)
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Editors
+.vscode/
+.idea/
+
+# Logs / temp
+*.log
+*.tmp

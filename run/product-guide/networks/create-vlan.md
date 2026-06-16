@@ -1,0 +1,98 @@
+---
+title: "Configuring VLANs"
+description: "Step-by-step instructions for creating VLAN-tagged external networks in VergeOS, including host-level and tenant configurations."
+semantic_keywords:
+  - "configure VLAN network VergeOS"
+  - "create VLAN tagged external network"
+  - "VLAN setup host tenant switchport"
+  - "layer 2 VLAN network segmentation"
+use_cases:
+  - create_vlan_network
+  - segment_network_traffic_by_vlan
+  - configure_tenant_vlan_access
+  - attach_vm_to_vlan
+tags:
+  - networking
+  - vlan
+  - external-network
+  - layer-2
+  - segmentation
+  - configuration
+categories:
+  - Networking
+---
+
+# Configuring VLANs
+
+## Prerequisites
+
+{% hint style="info" %}
+**Host Level Configuration**
+
+Before configuring VLANs, ensure that switchports are configured appropriately so that physical VergeOS nodes have access to the desired VLAN(s).
+{% endhint %}
+
+{% hint style="info" %}
+**Tenant Configuration**
+
+For VLAN configuration within a tenant, [Virtual Switch Ports](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/tenants/provide-layer2-to-tenant) must first be configured to provide external layer 2 access to the tenant.
+{% endhint %}
+
+## Configuration Steps
+
+### Creating a VLAN Network
+
+1. Select **Networks** > **+ New External** from the top menu
+
+2. Configure Basic Settings:
+   - Enter a descriptive **Name** for the network
+     - Use naming that indicates VLAN purpose and/or ID
+   - Select ***vLan*** in the **Layer 2 Type** dropdown
+   - Enter the appropriate **Layer 2 ID**
+
+3. Set Network Interface:
+   - Select the appropriate physical network from **Interface Network** list
+
+    {% hint style="info" %}
+    **Network Selection**
+    
+    **For Host Networks:**
+    - Must select a physical network where the VLAN enters the VergeOS environment
+    - Physical networks typically created during install with "Switch" appended to name
+    - Example: "External1 Switch"
+
+    **For Tenants:**
+    - Select "Physical"
+    {% endhint %}
+
+4. Configure Additional Settings:
+   - Set **IP Address Type** to ***None***
+   - Leave other fields at default settings unless specific configuration needed
+
+5. Complete Configuration:
+   - Click **Submit** to create the VLAN network
+   - Verify network dashboard appears with **Status: Running**
+
+## Using the VLAN Network
+
+{% hint style="success" %}
+**VM Configuration**
+
+The newly created VLAN network can be selected on VM NICs to attach workloads to the associated VLAN(s).
+{% endhint %}
+
+## Best Practices
+
+- Use descriptive names that help identify VLAN purpose
+- Document VLAN IDs and their intended use
+- Verify physical switch configuration matches VergeOS VLAN settings
+- Test connectivity after configuration
+
+## Troubleshooting
+
+If the VLAN network does not show as running:  
+
+1. Verify physical switch configuration  
+2. Check VLAN ID matches physical network configuration  
+3. Confirm Interface Network selection is correct  
+4. Review network logs for any error messages  
