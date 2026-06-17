@@ -1,26 +1,26 @@
 ---
-description: The fastest routes through the VergeOS demo for VMware migration, greenfield deployment, and Private AI conversations.
+description: Pick a starting path through VergeOS — VMware migration, a fresh deployment, or automation and Private AI.
 icon: route
 ---
 
 # Migration and evaluation paths
 
-Use this page to steer a live conversation based on the buyer's dominant motion.
+Choose the path that matches what you're trying to do. Each one moves from the core concepts to the hands-on guides in the order that builds context fastest.
 
-## If the account is replacing VMware
+## Replacing VMware
 
-1. Start with [What is VergeOS](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/intro/what-is-vergeos).
-2. Move to [Transitioning from VMware](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/intro/transition-from-vmware).
-3. Close with [Network design](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/implementation-guide/network-design) and [Installation guide](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/implementation-guide/installation-guide).
+1. Start with [What is VergeOS](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/intro/what-is-vergeos) to see how the platform consolidates compute, storage, and networking into one system.
+2. Read [Transitioning from VMware](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/intro/transition-from-vmware) to map your existing vSphere estate onto VergeOS.
+3. Plan the move with [Network design](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/implementation-guide/network-design) and the [Installation guide](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/implementation-guide/installation-guide).
 
-## If the account is planning a fresh deployment
+## Planning a fresh deployment
 
-1. Open [Implementation guide](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/implementation-guide/intro).
-2. Review [Node sizing](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/implementation-guide/sizing) and [Reference architectures](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/reference-architecture/edge).
-3. Show [Platform capabilities](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/intro/platform-capabilities) to connect deployment choices back to operations.
+1. Open the [Implementation guide](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/implementation-guide/intro) for end-to-end sequencing.
+2. Size your hardware with [Node sizing](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/implementation-guide/sizing) and compare [Reference architectures](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/reference-architecture/edge).
+3. Connect those choices back to day-two operations with [Platform capabilities](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/intro/platform-capabilities).
 
-## If the account cares about automation and AI
+## Automating and running AI
 
-1. Start at [Recipes](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/product-guide/automation/recipes-overview).
-2. Show [API keys](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/system/api-keys) and [VergeOS CLI](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/product-guide/tools-integrations/vrg-cli).
-3. End on [Private AI overview](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/product-guide/private-ai/overview) and [OpenAI-compatible API](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/product-guide/private-ai/open-ai-router).
+1. Start with [Recipes](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/product-guide/automation/recipes-overview) to see what you can automate.
+2. Drive the platform programmatically with [API keys](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/system/api-keys) and the [VergeOS CLI](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/product-guide/tools-integrations/vrg-cli).
+3. Host models locally with the [Private AI overview](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/product-guide/private-ai/overview) and the [OpenAI-compatible API](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/product-guide/private-ai/open-ai-router).

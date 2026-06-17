@@ -10,7 +10,7 @@ layout:
     size: full
 ---
 
-# VergeOS Documentation
+# Welcome to VergeOS Docs
 
 Everything you need to plan, deploy, operate, and automate VergeOS — organized by what you're trying to do. New here? Start with the operator journey below.
 

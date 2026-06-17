@@ -1,6 +1,6 @@
 # Table of contents
 
-* [VergeOS Docs Home](README.md)
+* [VergeOS Docs](README.md)
 
 * [Key terms](glossary.md)
 * [Migration and evaluation paths](migration-and-evaluation-paths.md)
