@@ -1,5 +1,5 @@
 ---
-title: "4.11 Release Notes"
+title: "4.11"
 description: "Release notes for the 4.11 series of VergeOS, featuring Site Manager for global administration, Recipe Marketplace, OIDC authentication, VM Export capability, TPM support, and significant network and vSAN performance improvements."
 semantic_keywords:
   - "VergeOS 4.11 release notes and features"
@@ -28,8 +28,7 @@ categories:
 status: deprecated
 ---
 
-# 4.11 Release Notes
-
+# 4.11
 {% hint style="info" %}
 **Series Information**
 

@@ -1,5 +1,5 @@
 ---
-title: "26.1 Release Notes"
+title: "26.1"
 description: "Release notes for VergeOS 26.1, introducing partial snapshots with tag-based filtering, oVirt API compatibility for third-party backups, N+2 (RF3) vSAN redundancy, and significant disk repair and sync performance improvements."
 semantic_keywords:
   - "VergeOS 26.1 release notes new features"
@@ -29,8 +29,7 @@ categories:
   - Release Notes
 ---
 
-# 26.1 Release Notes
-
+# 26.1
 {% hint style="info" %}
 **Release Information**
 

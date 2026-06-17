@@ -1,5 +1,5 @@
 ---
-title: "26.0 Release Notes"
+title: "26.0"
 description: "Release notes for VergeOS 26.0, featuring AI services integration, new theme engine, immutable snapshots, API key authentication, task automation engine, and numerous storage, networking, and security enhancements."
 semantic_keywords:
   - "VergeOS 26.0 release notes new features"
@@ -29,8 +29,7 @@ categories:
   - Release Notes
 ---
 
-# 26.0 Release Notes
-
+# 26.0
 {% hint style="info" %}
 **Release Information**
 

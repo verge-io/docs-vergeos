@@ -1,5 +1,5 @@
 ---
-title: "4.9 Release Notes"
+title: "4.9"
 description: "Release notes for the 4.9 series of VergeOS, featuring a complete UI revamp, email-based two-factor authentication, GPU pass-through, port mirroring, and enhanced snapshot and NAS management."
 semantic_keywords:
   - "VergeOS 4.9 release notes and features"
@@ -25,8 +25,7 @@ categories:
 status: deprecated
 ---
 
-# 4.9 Release Notes
-
+# 4.9
 {% hint style="info" %}
 **Series Information**
 
