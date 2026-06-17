@@ -6,7 +6,6 @@
   * [Pre-installation Checklist](getting-started/preinstallation-checklist.md)
   * [Requesting an Airgap License](getting-started/requesting-an-airgap-license.md)
   * [Secure Boot and Boot Integrity for Physical Nodes](getting-started/node-secure-boot.md)
-  * [Welcome to the VergeOS Knowledge Base](getting-started/welcome-to-vergeos-knowledge-base.md)
 * [Virtual Machines](virtual-machines/README.md)
   * [Changing Resolution on a UEFI VM](virtual-machines/changing-resolution-on-a-uefi-vm.md)
   * [Emulate a USB Device](virtual-machines/emulate-usb.md)
