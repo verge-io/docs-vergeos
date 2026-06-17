@@ -1,6 +1,6 @@
 # Table of contents
 
-* [VergeOS Knowledge Base](README.md)
+* [Knowledge Base](README.md)
 
 * [Getting Started & Installation](getting-started/README.md)
   * [Pre-installation Checklist](getting-started/preinstallation-checklist.md)
