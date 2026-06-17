@@ -3,7 +3,7 @@ description: The deployment path for VergeOS, from concepts and sizing through i
 icon: compass-drafting
 ---
 
-# Plan and deploy VergeOS
+# Plan and deploy
 
 Everything you need to plan and stand up a VergeOS deployment — from core concepts and sizing through installation and reference architectures — written for solution architects and platform teams.
 

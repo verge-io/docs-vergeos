@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Plan and deploy VergeOS](README.md)
+* [Plan and deploy](README.md)
 
 ## Implementation guide
 
