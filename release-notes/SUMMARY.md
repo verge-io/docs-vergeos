@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Release Notes](README.md)
+* [Release notes](README.md)
 
 ## 2026
 

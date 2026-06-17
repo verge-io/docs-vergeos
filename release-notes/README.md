@@ -1,5 +1,5 @@
 ---
-title: "Release Notes"
+title: "Release notes"
 description: "Overview of all VergeOS release versions, version numbering conventions, update process guidance, and links to detailed release notes for each version."
 semantic_keywords:
   - "VergeOS release notes overview all versions"
@@ -22,7 +22,7 @@ categories:
   - Release Notes
 ---
 
-# Release Notes
+# Release notes
 
 Release notes for every version of VergeOS. Select a version in the table below to see its detailed notes.
 

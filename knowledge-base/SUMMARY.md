@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Knowledge Base](README.md)
+* [Knowledge base](README.md)
 
 * [Getting Started & Installation](getting-started/README.md)
   * [Pre-installation Checklist](getting-started/preinstallation-checklist.md)
