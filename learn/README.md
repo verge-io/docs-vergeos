@@ -5,7 +5,7 @@ icon: graduation-cap
 
 # Learn the platform
 
-This training portal is a hands-on lab workbook for anyone architecting, deploying, and operating VergeOS infrastructure. The program follows a linear progression from foundational concepts through advanced scenario-based labs.
+This is a hands-on lab workbook for anyone architecting, deploying, and operating VergeOS infrastructure. The program follows a linear progression from foundational concepts through advanced scenario-based labs.
 
 {% hint style="info" %}
 New to VergeOS? Start with **Module 1: Architecture Fundamentals** and work through the modules in order — each one builds on the concepts before it.
@@ -23,7 +23,7 @@ New to VergeOS? Start with **Module 1: Architecture Fundamentals** and work thro
 
 - Hands-on experience with server and network infrastructure
 - Familiarity with virtualization concepts (hypervisors, virtual machines, virtual networking)
-- VMware or Nutanix experience is helpful but not required, **VMware Bridge** and **Nutanix Bridge** callouts throughout the modules map VergeOS concepts to their equivalents for anyone coming from either platform
+- VMware or Nutanix experience is helpful but not required — **VMware Bridge** and **Nutanix Bridge** callouts throughout the modules map VergeOS concepts to their equivalents for anyone coming from either platform
 - Access to bare-metal hardware for lab exercises (or a VergeOS lab environment)
 
 ## Modules
@@ -53,4 +53,4 @@ Specific environment requirements are listed at the beginning of each lab exerci
 
 - Deployment planning: [Plan and deploy VergeOS](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/)
 - Day-2 operations: [Run the platform](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/)
-- DR and automation: [Automate, protect, and extend](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/)
+- Disaster recovery and automation: [Automate, protect, and extend](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/)

@@ -5,11 +5,7 @@ icon: server
 
 # Run the platform
 
-This space is the operational core of the demo. It keeps the most important platform, storage, network, and VM topics together so operators can move laterally without bouncing between isolated nav trees.
-
-{% hint style="info" %}
-The current public docs already have the depth. The main improvement here is routing: the highest-signal pages are surfaced first, while the deeper subsystem detail stays intact below them.
-{% endhint %}
+The day-to-day home for operating VergeOS — storage, networking, system administration, and virtual machines, with the highest-signal pages up front and full subsystem detail underneath.
 
 ## Start here
 
@@ -25,4 +21,4 @@ The current public docs already have the depth. The main improvement here is rou
 ## Related spaces
 
 - Deployment planning: [Plan and deploy VergeOS](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/)
-- DR and automation: [Automate, protect, and extend](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/)
+- Disaster recovery and automation: [Automate, protect, and extend](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/)

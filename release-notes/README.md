@@ -24,14 +24,13 @@ categories:
 
 # Release Notes
 
-Welcome to the VergeOS Release Notes. This section provides information about each release version of VergeOS. Click on any version number to view the detailed release notes for that version.
+Release notes for every version of VergeOS. Select a version in the table below to see its detailed notes.
 
 {% hint style="info" %}
 **Recommendations**
 
-- Verge.io recommends always updating to the latest patch and/or hotfix version within your current minor release version
-- Verge.io recommends always updating to the latest minor release version
-- For access to the latest features and functionality documented in this guide, please ensure you are running the latest version of VergeOS
+- Stay on the latest patch/hotfix within your current minor release, and update to the latest minor release when you can
+- For access to the latest features and functionality documented here, please ensure you are running the latest version of VergeOS
 {% endhint %}
 
 ## Release Version Overview
@@ -51,7 +50,7 @@ Welcome to the VergeOS Release Notes. This section provides information about ea
 VergeOS uses semantic versioning with two different formats:
 
 - **Legacy Format**: Major.Minor.Patch.Hotfix (e.g., 4.13.4.2)
-- **New Format** (26.0+): YearQuarter.Minor.Patch (e.g., 26.0.1)
+- **New Format** (26.0+): Year.Quarter.Minor.Patch (e.g., 26.0.1)
     - First two digits represent the year (25 = 2025, 26 = 2026)
     - Third digit represents the quarter development started (0-3)
     - Remaining digits represent minor and patch versions

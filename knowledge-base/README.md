@@ -3,11 +3,11 @@ description: Troubleshooting articles, how-tos, and field guidance for VergeOS o
 icon: book
 ---
 
-# VergeOS Knowledge Base
+# Knowledge Base
 
 <h2 align="center">What can we help you find?</h2>
 
-<p align="center">Search the Knowledge Base, or browse the topics below.</p>
+<p align="center">Search the Knowledge Base or browse the topics below.</p>
 
 <p align="center"><button type="button" class="button primary" data-action="ask" data-icon="magnifying-glass">Search the Knowledge Base</button></p>
 
