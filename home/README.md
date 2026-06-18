@@ -12,7 +12,7 @@ layout:
 
 # Welcome to VergeOS Docs
 
-Everything you need to plan, deploy, operate, and automate VergeOS — organized by what you're trying to do. New here? Start with the operator journey below.
+Everything you need to plan, deploy, operate, and automate VergeOS — organized by what you're trying to do. New here? Find your starting point below.
 
 <table data-view="cards"><thead><tr><th></th><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><h3><i class="fa-compass-drafting" style="color:#C4502D;">:triangular_ruler:</i></h3></td><td><strong>Plan and deploy</strong></td><td>Implementation guidance, network design, sizing, and reference architectures.</td><td><a href="https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/">deploy</a></td></tr><tr><td><h3><i class="fa-server" style="color:#C4502D;">:desktop_computer:</i></h3></td><td><strong>Run the platform</strong></td><td>Storage, networking, system administration, and virtual machine operations.</td><td><a href="https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/">run</a></td></tr><tr><td><h3><i class="fa-robot" style="color:#C4502D;">:robot_face:</i></h3></td><td><strong>Automate, protect, and extend</strong></td><td>Backup and DR, recipes, CLI and SDKs, webhooks, and Private AI.</td><td><a href="https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/">automate</a></td></tr></tbody></table>
 
@@ -20,7 +20,7 @@ Everything you need to plan, deploy, operate, and automate VergeOS — organized
 
 <table data-view="cards"><thead><tr><th></th><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><h3><i class="fa-graduation-cap" style="color:#C4502D;">:mortar_board:</i></h3></td><td><strong>Learn the platform</strong></td><td>Hands-on training — 10 modules from architecture fundamentals to scenario labs.</td><td><a href="https://app.gitbook.com/s/qLUTTK5fxfW4S9FoS9GE/">learn</a></td></tr><tr><td><h3><i class="fa-book" style="color:#C4502D;">:book:</i></h3></td><td><strong>Knowledge base</strong></td><td>Troubleshooting articles, how-tos, and field guidance for operators.</td><td><a href="https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/">knowledge-base</a></td></tr><tr><td><h3><i class="fa-rectangle-list" style="color:#C4502D;">:spiral_notepad:</i></h3></td><td><strong>Release notes</strong></td><td>Version history, supported releases, and the upgrade path.</td><td><a href="https://app.gitbook.com/s/33mA7es4mQYkyUa7dMvu/">release-notes</a></td></tr></tbody></table>
 
-## Start with the operator journey
+## Find your starting point
 
 {% stepper %}
 {% step %}
