@@ -30,7 +30,7 @@ You don't have to choose first. The skills package **includes the docs MCP serve
 | Resolve | `/vergeos:resolve` | Pattern-matches common issues to known solutions |
 | Explain | `/vergeos:explain` | Explains VergeOS concepts using the live docs |
 | Diagnostics | `/vergeos:diag` | Analyzes diagnostic bundles with parallel subagents and PII scrubbing (Claude Code only) |
-| Infrastructure | `/vergeos:vrg` | Manages VergeOS infrastructure through the `vrg` CLI |
+| CLI | `/vergeos:vrg` | Manages VergeOS infrastructure through the `vrg` CLI |
 | Training | `/vergeos:teach-me` | Delivers structured, hands-on training modules |
 | Quizzes | `/vergeos:quiz-me` | Runs interactive knowledge-check quizzes |
 
@@ -73,7 +73,7 @@ Invoke skills by name or in natural language. (The `diag` skill is Claude Code o
 
 ## The `vrg` skill and the VergeOS CLI
 
-The **Infrastructure** skill (`/vergeos:vrg`) drives the official [VergeOS CLI (`vrg`)](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/integrations-and-apis/vrg-cli) — 200+ commands across compute, networking, tenants, NAS, identity, and automation. Your assistant uses it to inspect and manage real infrastructure on your behalf, so it helps to have the CLI installed and authenticated first.
+The **`vrg`** skill (`/vergeos:vrg`) drives the official [VergeOS CLI (`vrg`)](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/integrations-and-apis/vrg-cli) — 200+ commands across compute, networking, tenants, NAS, identity, and automation. Your assistant uses it to inspect and manage real infrastructure on your behalf, so it helps to have the CLI installed and authenticated first.
 
 See [VergeOS CLI (vrg)](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/integrations-and-apis/vrg-cli) for installation, authentication, and the full command reference.
 
