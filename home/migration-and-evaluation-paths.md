@@ -22,5 +22,5 @@ Choose the path that matches what you're trying to do. Each one moves from the c
 ## Automating and running AI
 
 1. Start with [Recipes](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/product-guide/automation/recipes-overview) to see what you can automate.
-2. Drive the platform programmatically with [API keys](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/system/api-keys) and the [VergeOS CLI](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/product-guide/tools-integrations/vrg-cli).
+2. Drive the platform programmatically with [API keys](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/system/api-keys) and the [VergeOS CLI](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/integrations-and-apis/vrg-cli).
 3. Host models locally with the [Private AI overview](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/product-guide/private-ai/overview) and the [OpenAI-compatible API](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/product-guide/private-ai/open-ai-router).

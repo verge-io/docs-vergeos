@@ -45,7 +45,7 @@ Use [Automate, protect, and extend](https://app.gitbook.com/s/sppYQkyIET58BuAo0k
 - VMware migration story: [Transitioning from VMware](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/intro/transition-from-vmware)
 - Core platform concepts: [Platform capabilities](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/intro/platform-capabilities)
 - Built-in resilience: [Backup & disaster recovery](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/product-guide/backup-dr/overview)
-- Automation surface: [VergeOS CLI](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/product-guide/tools-integrations/vrg-cli)
+- Automation surface: [VergeOS CLI](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/integrations-and-apis/vrg-cli)
 - Local model hosting: [Private AI overview](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/product-guide/private-ai/overview)
 
 <a class="button primary" href="https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/">Explore the deployment path</a>

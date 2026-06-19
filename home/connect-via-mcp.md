@@ -108,3 +108,7 @@ Ask your assistant something that should pull from the docs, for example:
 {% endhint %}
 
 If the tools are available and answers cite VergeOS Docs pages, the connection is working.
+
+## Go further with agent skills
+
+The MCP server gives an assistant read access to the docs. If you use **Claude Code** or **Codex**, the [VergeOS agent skills](agent-skills.md) package adds task-focused workflows on top — troubleshooting, diagnostics, training, and infrastructure management through the `vrg` CLI — and bundles this same docs MCP server for you.

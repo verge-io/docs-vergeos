@@ -28,7 +28,7 @@ Reach the VergeOS support team, or use the guides below to lean on before and af
 
 - Work through [post-installation](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/implementation-guide/post-installation) as your initial hardening checklist
 - Stand up [snapshots](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/product-guide/backup-dr/snapshots-overview) and [site syncs](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/product-guide/backup-dr/syncs-overview) to protect your data
-- Standardize day-two operations with [recipes](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/product-guide/automation/recipes-overview) and the [vrg CLI](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/product-guide/tools-integrations/vrg-cli)
+- Standardize day-two operations with [recipes](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/product-guide/automation/recipes-overview) and the [vrg CLI](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/integrations-and-apis/vrg-cli)
 {% endcolumn %}
 {% endcolumns %}
 
