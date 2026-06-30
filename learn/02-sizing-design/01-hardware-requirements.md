@@ -108,6 +108,12 @@ Total RAM per node:              120 GB
 
 At the recommended 1.5 GB/TB ratio, the storage overhead would be 12 GB instead of 8 GB, bringing the total to 124 GB.
 
+{% hint style="info" %}
+**Account for the Target Max RAM % (default 80%)**
+
+VergeOS targets no more than **80% of physical RAM** in use per node under normal conditions (the `Target Max RAM %` cluster setting), leaving headroom that failover and live migration can draw on. Size physical RAM so that overhead **plus** workloads fit within that 80%. In the example above, ~120 GB of normal usage should land on a node with at least ~150 GB of physical RAM (120 ÷ 0.80) to stay within the target.
+{% endhint %}
+
 ## Compute-Only Nodes
 
 Compute-only nodes run workloads but do **not** participate in the vSAN. They have no local storage requirements beyond a boot device (or can PXE boot). This makes them ideal for scaling CPU and RAM independently from storage in UCI and HCI+Compute architectures.
@@ -187,6 +193,17 @@ HDDs larger than **8 TB** are not recommended outside of archive-specific enviro
 - **The rebuild window grows** proportionally with drive size
 
 For primary workload tiers, prefer smaller, faster SSDs. Reserve large HDDs for snapshot retention, archival storage, or file-based service tiers where rebuild time is an acceptable trade-off.
+
+### Fibre Channel LUNs as Storage
+
+VergeOS vSAN can also consume **Fibre Channel (FC) LUNs** as storage devices within its tiers, which is useful for integrating existing SAN investments. VergeOS treats each FC LUN like a local physical disk, so native redundancy and deduplication still apply. Key requirements:
+
+- Present **unique LUNs per node** — never share the same LUN across multiple nodes
+- FC HBAs in at least two nodes; a redundant FC fabric is recommended
+- **Disable RAID and auto-tiering on the SAN** — VergeOS handles redundancy natively
+- Keep **Tier 0 metadata on direct-attached NVMe** — external storage is not recommended for Tier 0
+
+Verge.io still recommends direct-attached disks for best performance and simplicity; use FC LUNs primarily when you have existing SAN infrastructure or specific compliance requirements. See [Using Fibre Channel Storage with vSAN](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/storage/fibre-channel) for setup details.
 
 ## Dedicated vs. Shared Controller Nodes
 

@@ -35,6 +35,12 @@ For fault tolerance, the core fabric runs across **two independent physical netw
 
 Every node connects to **both** fabric networks. If one switch or cable path fails, the other fabric network maintains full inter-node connectivity with no interruption to vSAN replication, live migration, or cluster coordination.
 
+{% hint style="info" %}
+**Layer 2 switches, Layer 3 handled by VergeOS**
+
+You configure the physical core fabric switches for **Layer 2 only** — isolated broadcast domains with no routing. VergeOS handles all Layer 3 addressing and routing (the core network overlay described below) over those Layer 2 networks. There is no Layer 3 configuration to do on the switches themselves.
+{% endhint %}
+
 ```mermaid
 graph TB
     subgraph "Physical Switch Infrastructure"
@@ -103,6 +109,8 @@ The core network abstracts the underlying dual-path redundancy so that VergeOS s
 | **External**      | Static (configured) | Static (configured) | DHCP or static |
 
 > For the **Core Network**, `100.96.0.1` is reserved as the cluster gateway; per-node addresses start at `.2` for Node 1 and increment from there.
+
+> The `172.16.1.0/24` and `172.16.2.0/24` core fabric subnets are the defaults assigned when the core networks are configured **before** the external network during installation. If the external network is assigned first, VergeOS allocates different subnets to the core fabrics.
 
 ```mermaid
 graph TB

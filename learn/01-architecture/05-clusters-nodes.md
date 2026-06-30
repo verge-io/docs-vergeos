@@ -174,7 +174,7 @@ Key rules for node joining:
 
 ## Cluster Numbering and Naming
 
-Clusters are numbered starting from 1 and can be renamed in the VergeOS UI:
+Clusters are numbered starting from 1, but the **name is freeform** — you can call a cluster anything you want and rename it at any time in the VergeOS UI. The names below are just common conventions, not required values:
 
 | Cluster Number | Default Role                                      | Typical Name                       |
 | -------------- | ------------------------------------------------- | ---------------------------------- |

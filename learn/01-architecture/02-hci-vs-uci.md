@@ -13,6 +13,13 @@ VergeOS is unique among infrastructure platforms because it supports **two disti
 
 Most competing platforms (VMware vSAN, Nutanix) only support HCI. VergeOS gives you both options -- and you can even combine them within a single system.
 
+{% hint style="info" %}
+**System vs. Cluster**
+
+- **System** — the entire VergeOS deployment, made up of one or more clusters managed as a single unit.
+- **Cluster** — a group of nodes with matching hardware that share compute and high-availability boundaries. vSAN storage tiers span all clusters in the system, so storage is shared system-wide even though compute and HA are scoped per cluster.
+{% endhint %}
+
 ## HCI: Hyperconverged Infrastructure
 
 In an HCI deployment, every node in the cluster contributes **both** storage capacity and compute resources. When you need more of either, you add another node -- which adds both.

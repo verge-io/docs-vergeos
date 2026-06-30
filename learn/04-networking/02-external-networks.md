@@ -97,7 +97,7 @@ For environments that require double-tagging (e.g., service provider edge), sele
 
 ## Bonded Interfaces
 
-Bonding provides NIC redundancy for external connectivity. Marvin's general recommendation for external networks is **LACP (802.3ad)** when the upstream switch supports it, with **active-backup** as the alternative for 2-NIC bare-metal installations where both NICs carry core fabric traffic and the external connection must share those same physical interfaces via VLANs. LAG/MLAG applies to external networks only — never to the core fabric.
+Bonding provides NIC redundancy for external connectivity. The general recommendation for external networks is **LACP (802.3ad)** when the upstream switch supports it, with **active-backup** as the alternative for 2-NIC bare-metal installations where both NICs carry core fabric traffic and the external connection must share those same physical interfaces via VLANs. LAG/MLAG applies to external networks only — never to the core fabric.
 
 ### Creating a Bonded External Network
 

@@ -59,7 +59,7 @@ While snapshots are initially space-efficient, long-term retention of many snaps
 
 ### Natively Immutable
 
-VergeOS snapshots are **natively immutable** -- once captured, the referenced blocks cannot be modified by any workload. This provides inherent protection against ransomware and accidental data corruption, because malware running inside a VM cannot reach back into the vSAN to alter snapshot data. VergeOS also supports an explicit **Immutable flag** on system snapshots that prevents deletion by any user (including administrators) until the snapshot is unlocked and a mandatory seven-day waiting period expires.
+VergeOS snapshots are **natively immutable** -- once captured, the referenced blocks cannot be modified by any workload. This provides inherent protection against ransomware and accidental data corruption, because malware running inside a VM cannot reach back into the vSAN to alter snapshot data. VergeOS also supports an explicit **Immutable flag** on system snapshots that blocks deletion by any user (including administrators) until the snapshot reaches its retention expiration. The flag cannot simply be toggled off: removing it early requires an unlock request, after which deletion occurs **7 days from the unlock request or at the snapshot's natural expiration, whichever comes first**. So a short-retention immutable snapshot — such as the default hourly snapshots, which are immutable but retained only 3 hours — is protected for those 3 hours and then expires; the 7-day unlock delay only comes into play when you manually unlock a longer-retention snapshot early.
 
 ## Snapshot Scope
 

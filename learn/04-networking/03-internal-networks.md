@@ -29,7 +29,7 @@ To create a new internal network:
 
 | Setting              | Description                                                                                                         |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| **Name**             | Required; spaces are not permitted                                                                                  |
+| **Name**             | Required. Spaces are allowed, but concise names without spaces are recommended for easier scripting and API use     |
 | **Description**      | Optional descriptive text                                                                                           |
 | **HA Group**         | Assigns the network to a high-availability group — the system runs grouped networks across different physical nodes |
 | **Cluster**          | Select the cluster to run the network, or leave at Default                                                          |
@@ -173,7 +173,7 @@ Test DNS resolution from the network's diagnostics interface:
 
 ## Inter-Network Routing via the DMZ
 
-The **DMZ network** is where every internal and external network connects, providing the shared `100.64.0.0/16` address space through which cross-network traffic flows. Under the hood, the **core vnet** is the inter-vnet routing fabric — Marvin's product-guide-level docs frame the DMZ as the Layer 3 routing backbone, while deeper architecture docs identify the core vnet as the routing fabric with the DMZ supplying the shared address space. Both characterizations exist in Marvin.
+The **DMZ network** is where every internal and external network connects, providing the shared `100.64.0.0/16` address space through which cross-network traffic flows. Under the hood, the **core vnet** is the inter-vnet routing fabric: it acts as the Layer 3 routing backbone, while the DMZ supplies the shared address space through which cross-network traffic is routed.
 
 ### Default Gateway Rule
 

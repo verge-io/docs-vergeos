@@ -28,5 +28,5 @@ By the end of this module, you will be able to:
 * [**Storage Tiers**](02-storage-tiers.md) — Configuring Tier 1 (high-performance NVMe), Tier 2 (mixed-workload SSD), Tier 3 (read-optimized SSD), Tier 4 (capacity HDD), and Tier 5 (archive HDD) for different workload profiles.
 * [**NAS Service & Shares**](03-nas-shares.md) — Provisioning CIFS/SMB and NFS shares, remote volumes, VM export volumes, and Active Directory integration.
 * [**Snapshots & Data Protection**](04-snapshots-data-protection.md) — Snapshot architecture, quiesced snapshots, clones, snapshot profiles, site sync replication, and disaster recovery.
-* [**Storage Monitoring & Troubleshooting**](05-storage-monitoring.md) — vSAN diagnostics, vcmd commands, health monitoring, NAS troubleshooting, and Fibre Channel integration.
+* [**Storage Monitoring & Troubleshooting**](05-storage-monitoring.md) — vSAN diagnostics, health monitoring, NAS troubleshooting, and Fibre Channel integration.
 * [**Lab: Storage Configuration**](lab.md) — Configure vSAN tiers, provision NAS shares, and validate storage performance and redundancy.

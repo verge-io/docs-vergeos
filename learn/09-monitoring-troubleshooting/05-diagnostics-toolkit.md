@@ -37,7 +37,7 @@ Every diagnostic interface follows the same pattern:
 {% hint style="success" %}
 **Show Command Toggle**
 
-Enable **"Show Command"** on any diagnostic to see the exact CLI syntax being executed. This is invaluable for scripting, automation, or reproducing commands over SSH.
+Enable **"Show Command"** on any diagnostic to see the exact command being executed. This is the authoritative way to view the underlying syntax for scripting, automation, or reproducing a command over SSH.
 {% endhint %}
 
 ---
@@ -50,45 +50,45 @@ Network diagnostics run **per-network** — you select the specific network you 
 
 ### Connectivity & Discovery
 
-| Command                 | CLI Equivalent                    | Purpose                                            |
-| ----------------------- | --------------------------------- | -------------------------------------------------- |
-| **Ping**                | `ping -c [COUNT] [DEST]`          | Basic ICMP connectivity test                       |
-| **Trace Route**         | `traceroute` / `mtr`              | Map the network path to a destination              |
-| **ARP Scan**            | `nmap -sn [RANGE]`                | Discover active devices on the network             |
-| **ARP Table**           | `arp -a`                          | View current IP-to-MAC mappings                    |
-| **TCP Connection Test** | `telnet` / `nc -zv [HOST] [PORT]` | Verify a specific TCP port is reachable            |
-| **What's My IP**        | `curl ifconfig.me`                | Check the network's external IP (NAT verification) |
+| Command                 | Purpose                                            |
+| ----------------------- | -------------------------------------------------- |
+| **Ping**                | Basic ICMP connectivity test                       |
+| **Trace Route**         | Map the network path to a destination              |
+| **ARP Scan**            | Discover active devices on the network             |
+| **ARP Table**           | View current IP-to-MAC mappings                    |
+| **TCP Connection Test** | Verify a specific TCP port is reachable            |
+| **What's My IP**        | Check the network's external IP (NAT verification) |
 
 ### DNS & Name Resolution
 
-| Command        | CLI Equivalent                   | Purpose                            |
-| -------------- | -------------------------------- | ---------------------------------- |
-| **DNS Lookup** | `nslookup` / `dig [HOST] [TYPE]` | Query A, AAAA, MX, NS, PTR records |
+| Command        | Purpose                            |
+| -------------- | ---------------------------------- |
+| **DNS Lookup** | Query A, AAAA, MX, NS, PTR records |
 
 ### Firewall & Security
 
-| Command                        | CLI Equivalent            | Purpose                               |
-| ------------------------------ | ------------------------- | ------------------------------------- |
-| **Show Firewall Rules**        | `nft list ruleset`        | Display the full nftables ruleset     |
-| **Trace/Debug Firewall Rules** | `nft add rule ... log`    | Enable per-rule logging for debugging |
-| **NMAP**                       | `nmap [OPTIONS] [TARGET]` | Port scanning and service discovery   |
+| Command                        | Purpose                               |
+| ------------------------------ | ------------------------------------- |
+| **Show Firewall Rules**        | Display the full firewall ruleset     |
+| **Trace/Debug Firewall Rules** | Enable per-rule logging for debugging |
+| **NMAP**                       | Port scanning and service discovery   |
 
 ### Traffic Analysis
 
-| Command               | CLI Equivalent                | Purpose                           |
-| --------------------- | ----------------------------- | --------------------------------- |
-| **TCP Dump**          | `tcpdump -i [IFACE] [FILTER]` | Packet capture with BPF filtering |
-| **Top Network Usage** | `iftop` / `nethogs`           | Real-time bandwidth consumers     |
-| **Top CPU Usage**     | `top -o %CPU`                 | Processes consuming the most CPU  |
+| Command               | Purpose                           |
+| --------------------- | --------------------------------- |
+| **TCP Dump**          | Packet capture with BPF filtering |
+| **Top Network Usage** | Real-time bandwidth consumers     |
+| **Top CPU Usage**     | Processes consuming the most CPU  |
 
 ### Service-Specific
 
-| Command                | CLI Equivalent            | Purpose                                         |
-| ---------------------- | ------------------------- | ----------------------------------------------- |
-| **DHCP Release/Renew** | `dhclient -r && dhclient` | Force DHCP lease refresh (DHCP client networks) |
-| **IPsec**              | `ipsec [COMMAND]`         | Monitor and control IPsec VPN tunnels           |
-| **FRRouting BGP/OSPF** | `vtysh -c "show ip bgp"`  | Dynamic routing protocol status                 |
-| **Logs**               | `journalctl -u [SERVICE]` | Network container system logs                   |
+| Command                | Purpose                                         |
+| ---------------------- | ----------------------------------------------- |
+| **DHCP Release/Renew** | Force DHCP lease refresh (DHCP client networks) |
+| **IPsec**              | Monitor and control IPsec VPN tunnels           |
+| **FRRouting BGP/OSPF** | Dynamic routing protocol status                 |
+| **Logs**               | Network container system logs                   |
 
 {% hint style="info" %}
 **Tenant Access**
@@ -106,18 +106,18 @@ Node diagnostics provide **hardware-level** visibility into individual physical 
 
 ### IPMI / BMC Tools
 
-These commands use `ipmitool` to communicate with the server's Baseboard Management Controller — the out-of-band management interface (iDRAC on Dell, iLO on HPE, etc.).
+These commands communicate with the server's Baseboard Management Controller — the out-of-band management interface (iDRAC on Dell, iLO on HPE, etc.).
 
-| Command                         | CLI Equivalent            | Purpose                               |
-| ------------------------------- | ------------------------- | ------------------------------------- |
-| **IPMI BMC Info**               | `ipmitool bmc info`       | BMC firmware and configuration        |
-| **IPMI Chassis Status**         | `ipmitool chassis status` | Power state, intrusion detection      |
-| **IPMI FRU Info**               | `ipmitool fru print`      | Field Replaceable Unit identification |
-| **IPMI LAN Info**               | `ipmitool lan print`      | BMC network configuration             |
-| **IPMI MC Reset**               | `ipmitool mc reset cold`  | Reset a non-responsive BMC            |
-| **IPMI Sensors**                | `ipmitool sensor list`    | Temperature, voltage, fan readings    |
-| **IPMI Sensor Data Repository** | `ipmitool sdr list`       | Full sensor data repository           |
-| **IPMI System Event Logs**      | `ipmitool sel list`       | Hardware event history (SEL)          |
+| Command                         | Purpose                               |
+| ------------------------------- | ------------------------------------- |
+| **IPMI BMC Info**               | BMC firmware and configuration        |
+| **IPMI Chassis Status**         | Power state, intrusion detection      |
+| **IPMI FRU Info**               | Field Replaceable Unit identification |
+| **IPMI LAN Info**               | BMC network configuration             |
+| **IPMI MC Reset**               | Reset a non-responsive BMC            |
+| **IPMI Sensors**                | Temperature, voltage, fan readings    |
+| **IPMI Sensor Data Repository** | Full sensor data repository           |
+| **IPMI System Event Logs**      | Hardware event history (SEL)          |
 
 {% hint style="warning" %}
 **IPMI MC Reset**
@@ -127,33 +127,33 @@ Resetting the BMC temporarily disrupts out-of-band management. The host OS conti
 
 ### Drive & Storage Health
 
-| Command                        | CLI Equivalent                                        | Purpose                                                                |
-| ------------------------------ | ----------------------------------------------------- | ---------------------------------------------------------------------- |
-| **S.M.A.R.T. Information**     | `smartctl -a [DRIVE]`                                 | Drive health attributes, wear, temperature                             |
-| **S.M.A.R.T. Diagnostic Test** | `smartctl -t [TYPE] [DRIVE]`                          | Run short, long, or conveyance tests                                   |
-| **Show Block Devices**         | `lsblk` / `fdisk -l`                                  | List all block devices on the node                                     |
-| **LED Control (Drive)**        | `ledctl locate=[DRIVE]` / `ledctl locate_off=[DRIVE]` | Activate/deactivate the drive's locate LED for physical identification |
-| **RAS Query**                  | `ras-mc-ctl --summary`                                | Memory ECC error reporting                                             |
+| Command                        | Purpose                                                                |
+| ------------------------------ | ---------------------------------------------------------------------- |
+| **S.M.A.R.T. Information**     | Drive health attributes, wear, temperature                             |
+| **S.M.A.R.T. Diagnostic Test** | Run short, long, or conveyance tests                                   |
+| **Show Block Devices**         | List all block devices on the node                                     |
+| **LED Control (Drive)**        | Activate/deactivate the drive's locate LED for physical identification |
+| **RAS Query**                  | Memory ECC error reporting                                             |
 
 ### Network & Fabric
 
-| Command                  | CLI Equivalent                 | Purpose                                |
-| ------------------------ | ------------------------------ | -------------------------------------- |
-| **Ethernet Tool**        | `ethtool [IFACE]`              | Link speed, duplex, driver info        |
-| **Fabric Configuration** | `verge fabric show`            | Core fabric status for this node       |
-| **Network Bonding**      | `cat /proc/net/bonding/[BOND]` | Bond interface health and active slave |
-| **Bridge Addresses**     | `brctl showmacs [BRIDGE]`      | Virtual switch MAC address table       |
-| **ARP Scan / ARP Table** | `nmap -sn` / `arp -a`          | Node-level network discovery           |
-| **Ping / Trace Route**   | `ping` / `traceroute`          | Basic connectivity from node context   |
+| Command                  | Purpose                                |
+| ------------------------ | -------------------------------------- |
+| **Ethernet Tool**        | Link speed, duplex, driver info        |
+| **Fabric Configuration** | Core fabric status for this node       |
+| **Network Bonding**      | Bond interface health and active slave |
+| **Bridge Addresses**     | Virtual switch MAC address table       |
+| **ARP Scan / ARP Table** | Node-level network discovery           |
+| **Ping / Trace Route**   | Basic connectivity from node context   |
 
 ### System
 
-| Command                      | CLI Equivalent                              | Purpose                                            |
-| ---------------------------- | ------------------------------------------- | -------------------------------------------------- |
-| **DMI Table**                | `dmidecode`                                 | Full hardware inventory (CPU, RAM, serial numbers) |
-| **Logs**                     | `journalctl -n 100` / `dmesg`               | System and kernel logs                             |
-| **OpenSSL Speed**            | `openssl speed`                             | CPU crypto performance benchmark                   |
-| **Clear Persistent Storage** | `sync && echo 3 > /proc/sys/vm/drop_caches` | Clear filesystem caches (support use only)         |
+| Command                      | Purpose                                            |
+| ---------------------------- | -------------------------------------------------- |
+| **DMI Table**                | Full hardware inventory (CPU, RAM, serial numbers) |
+| **Logs**                     | System and kernel logs                             |
+| **OpenSSL Speed**            | CPU crypto performance benchmark                   |
+| **Clear Persistent Storage** | Clear filesystem caches (support use only)         |
 
 {% hint style="info" %}
 **Coming from VMware or Nutanix?**
@@ -162,7 +162,7 @@ Resetting the BMC temporarily disrupts out-of-band management. The host OS conti
 | --- | --- |
 | VMware | SSH/DCUI to the ESXi host for `esxcli`/`vsish`; vCenter exposes some SMART/sensors but deep work leaves the vSphere UI |
 | Nutanix | Prism Element Hardware page + `ncli` from the CVM; IPMI/BMC accessed separately for drive LED and detailed sensors |
-| VergeOS | Single node diagnostics panel: IPMI, SMART, drive LED control, fabric health, with no SSH or separate BMC credentials. "Show Command" exports the underlying CLI syntax. |
+| VergeOS | Single node diagnostics panel: IPMI, SMART, drive LED control, fabric health, with no SSH or separate BMC credentials. "Show Command" reveals the underlying syntax. |
 {% endhint %}
 
 ---
@@ -171,7 +171,7 @@ Resetting the BMC temporarily disrupts out-of-band management. The host OS conti
 
 **Access:** System → vSAN Diagnostics
 
-vSAN diagnostics operate at the **system level** using `vcmd` — the VergeOS vSAN command-line interface. These commands provide deep visibility into the distributed storage engine.
+vSAN diagnostics operate at the **system level**, providing deep visibility into the distributed storage engine.
 
 {% hint style="warning" %}
 **Root / Parent Level Only**
@@ -179,27 +179,27 @@ vSAN diagnostics operate at the **system level** using `vcmd` — the VergeOS vS
 vSAN diagnostics are only available at the root/parent level. **Tenants do not have access** to vSAN diagnostic tools — they interact with storage through their allocated virtual disks.
 {% endhint %}
 
-### Key vcmd Commands
+### Key vSAN Diagnostic Commands
 
-| Command                    | CLI Equivalent                 | Purpose                                       |
-| -------------------------- | ------------------------------ | --------------------------------------------- |
-| **Get Tier Status**        | `vcmd tier status`             | Health, redundancy, and capacity per tier     |
-| **Get Cluster Rates**      | `vcmd cluster rates`           | Read/write throughput across the cluster      |
-| **Get Cluster Usage**      | `vcmd cluster usage`           | Overall storage utilization statistics        |
-| **Get Device List**        | `vcmd devices list`            | All storage devices in the vSAN pool          |
-| **Get Device Status**      | `vcmd device status [ID]`      | Individual device health and error counts     |
-| **Get Device Usage**       | `vcmd device usage [ID]`       | Per-device capacity and I/O metrics           |
-| **Get Repair Status**      | `vcmd repair status`           | Active rebuild/repair progress                |
-| **Get Journal Status**     | `vcmd journal status`          | Write-ahead journal health                    |
-| **Get Integ Check Status** | `vcmd integcheck status`       | Data integrity verification progress          |
-| **Get Cache Info**         | `vcmd cache info`              | Cache hit/miss ratios and memory usage        |
-| **Get File Status**        | `vcmd file status [FILE_PATH]` | Replication and integrity for a specific file |
-| **Get Top Usage Rates**    | `vcmd usage top-rates`         | Identify top storage consumers                |
-| **Get Running Conf**       | `vcmd config show`             | Current vSAN configuration parameters         |
-| **Get Sync List**          | `vcmd sync list`               | Active synchronization operations             |
-| **Get Node List**          | `vcmd nodes list`              | All nodes participating in the vSAN           |
-| **Integ Check**            | `vcmd integcheck start`        | Initiate a full integrity check               |
-| **Summarize Disk Usage**   | `vcmd usage summarize`         | Cluster-wide disk usage summary               |
+| Command                    | Purpose                                       |
+| -------------------------- | --------------------------------------------- |
+| **Get Tier Status**        | Health, redundancy, and capacity per tier     |
+| **Get Cluster Rates**      | Read/write throughput across the cluster      |
+| **Get Cluster Usage**      | Overall storage utilization statistics        |
+| **Get Device List**        | All storage devices in the vSAN pool          |
+| **Get Device Status**      | Individual device health and error counts     |
+| **Get Device Usage**       | Per-device capacity and I/O metrics           |
+| **Get Repair Status**      | Active rebuild/repair progress                |
+| **Get Journal Status**     | Write-ahead journal health                    |
+| **Get Integ Check Status** | Data integrity verification progress          |
+| **Get Cache Info**         | Cache hit/miss ratios and memory usage        |
+| **Get File Status**        | Replication and integrity for a specific file |
+| **Get Top Usage Rates**    | Identify top storage consumers                |
+| **Get Running Conf**       | Current vSAN configuration parameters         |
+| **Get Sync List**          | Active synchronization operations             |
+| **Get Node List**          | All nodes participating in the vSAN           |
+| **Integ Check**            | Initiate a full integrity check               |
+| **Summarize Disk Usage**   | Cluster-wide disk usage summary               |
 
 ### vSAN Health Check Workflow
 
@@ -249,29 +249,13 @@ flowchart TD
 
 NAS diagnostics are **per-NAS-service** — each NAS instance has its own diagnostic interface. These tools focus on file-sharing protocols (SMB/CIFS, NFS) and authentication.
 
-### CIFS/SMB Diagnostics
+### File-Sharing & Authentication
 
-| Command   | CLI Equivalent           | Purpose                                 |
-| --------- | ------------------------ | --------------------------------------- |
-| **Samba** | `smbstatus`              | Active SMB connections and locked files |
-|           | `testparm`               | Validate Samba configuration syntax     |
-|           | `smbclient -L localhost` | List available SMB shares               |
-
-### NFS Diagnostics
-
-| Command | CLI Equivalent | Purpose                                 |
-| ------- | -------------- | --------------------------------------- |
-| **NFS** | `exportfs -v`  | Current NFS export configuration        |
-|         | `rpcinfo -p`   | RPC service registration status         |
-|         | `showmount -e` | Exported filesystems visible to clients |
-
-### Active Directory / Winbind
-
-| Command     | CLI Equivalent | Purpose                        |
-| ----------- | -------------- | ------------------------------ |
-| **Winbind** | `wbinfo -t`    | Test domain trust relationship |
-|             | `wbinfo -u`    | List domain users              |
-|             | `wbinfo -g`    | List domain groups             |
+| Command     | Purpose                                                                            |
+| ----------- | ---------------------------------------------------------------------------------- |
+| **Samba**   | SMB/CIFS service status — active connections and locked files, config validation, and share listing |
+| **NFS**     | NFS service status — current exports, RPC registration, and client mount visibility |
+| **Winbind** | Active Directory checks — domain trust relationship, domain users, and domain groups |
 
 ### Standard Network Tools
 
@@ -279,12 +263,12 @@ NAS diagnostics also include the standard connectivity tools: **Ping**, **Trace 
 
 ### User & Group Diagnostics
 
-| Command       | CLI Equivalent                        | Purpose                              |
-| ------------- | ------------------------------------- | ------------------------------------ |
-| **Users**     | `getent passwd` / `who`               | System user accounts                 |
-| **Groups**    | `getent group`                        | System groups and membership         |
-| **Date/Time** | `date` / `timedatectl`                | Time sync (critical for Kerberos/AD) |
-| **Services**  | `systemctl list-units --type=service` | All running services                 |
+| Command       | Purpose                              |
+| ------------- | ------------------------------------ |
+| **Users**     | System user accounts                 |
+| **Groups**    | System groups and membership         |
+| **Date/Time** | Time sync (critical for Kerberos/AD) |
+| **Services**  | All running services                 |
 
 ---
 

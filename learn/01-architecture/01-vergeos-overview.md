@@ -53,7 +53,7 @@ VergeHV is the integrated **Type-1 hypervisor** at the heart of VergeOS, built o
 | **Performance**           | Near bare-metal -- direct hardware access with minimal overhead                    |
 | **Live Migration**        | Move running VMs between nodes without downtime                                    |
 | **Hardware Acceleration** | Intel VT-x / AMD-V, GPU passthrough (NVIDIA vGPU), SR-IOV NICs                     |
-| **Guest OS Support**      | Windows Server 2008 R2 -- 2022, major Linux distributions, FreeBSD, legacy systems |
+| **Guest OS Support**      | Windows Server 2008 R2 -- 2025, major Linux distributions, FreeBSD, legacy systems |
 | **VM Formats**            | Import from VMDK, VHD/VHDX, OVF/OVA, QCOW2, RAW (12+ formats)                      |
 
 ### VergeFS (vSAN) -- Distributed Storage
@@ -188,7 +188,7 @@ VergeOS runs on **commodity x86 hardware** from any major vendor:
 
 - Dell, HPE, Supermicro, Cisco UCS, Lenovo, Intel, and others
 - Any Intel and/or AMD server processors
-- Mix different hardware generations within the same cluster
+- Mix different hardware generations within the same system
 - No proprietary hardware requirements or vendor lock-in
 
 This hardware independence means you can leverage existing server investments, negotiate competitive pricing across vendors, and avoid appliance-based lock-in.
