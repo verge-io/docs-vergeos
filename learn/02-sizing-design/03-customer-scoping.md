@@ -38,7 +38,7 @@ Every scoping engagement should begin by collecting the following information fr
 
 - **RPO (Recovery Point Objective):** How much data loss is acceptable? Drives snapshot frequency and site sync schedule.
 - **RTO (Recovery Time Objective):** How quickly must services be restored? Influences whether tenants need multi-node HA or single-node with automatic failover.
-- **N+1 expectations:** Can the cluster survive a full node failure with all workloads running? This ties directly to the RAM reservation decision.
+- **N+1 expectations:** Can the cluster survive a full node failure with all workloads running? This ties directly to the [RAM reservation decision](#ram-reservation-decision) covered later on this page.
 - **DR site requirements:** Does the customer need site sync replication to a secondary location?
 
 ### Network Topology & Constraints
@@ -84,7 +84,11 @@ VergeOS overhead is minimal but must be accounted for:
 | **Compute-only nodes**              | Only 16 GB for VergeOS; no storage overhead                             |
 
 {% hint style="success" %}
-VergeOS handles memory overhead for tenant nodes automatically. When you assign RAM to a tenant node, the **full amount** is available to the tenant's workloads at the host layer — the tenant's own VergeOS instance consumes its standard overhead (16 GB + 1 GB/TB) from within that allocation before guest VMs run. No additional manual overhead calculation is required at the host layer.
+**Tenant node RAM: no extra host-layer overhead**
+
+When you assign RAM to a tenant node, that **full amount** is what the host reserves — you do **not** add separate host-layer overhead for the tenant. Inside the tenant, however, its own nested VergeOS instance consumes the standard overhead (16 GB + 1 GB per 1 TB of storage) out of that allocation before the tenant's guest VMs get memory.
+
+So there are two distinct layers: at the **host**, size the tenant node = the RAM you want the tenant to have. Inside the **tenant**, plan its guest workloads against (assigned RAM − 16 GB − 1 GB/TB).
 {% endhint %}
 
 ### Step 3: Account for HA Headroom
@@ -95,7 +99,7 @@ If the customer requires N+1 availability (the cluster can survive one node fail
 
 ### Step 4: Calculate Node Count
 
-Divide the total resource requirements (including overhead and HA headroom) by the per-node capacity to determine the minimum number of nodes. Always round up and validate the result against the reference architectures. The node-count bands below are course rules-of-thumb (Marvin documents only the general guidance that HCI fits "smaller deployments, 2--12 nodes typically," and that UCI applies when growth diverges or specialized hardware is needed):
+Divide the total resource requirements (including overhead and HA headroom) by the per-node capacity to determine the minimum number of nodes. Always round up and validate the result against the reference architectures. The node-count bands below are coarse rules-of-thumb — HCI fits smaller deployments (2--12 nodes typically), and UCI applies when compute and storage growth diverge or specialized hardware is needed:
 
 - **2–6 nodes → HCI**
 - **6–10 nodes → HCI + Dedicated Compute**

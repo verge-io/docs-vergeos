@@ -1,5 +1,5 @@
 ---
-description: "Understanding the VergeOS storage tiers — 5 workload tiers (1–5) plus a dedicated metadata tier (Tier 0), tier specifications, drive assignment rules, capacity planning, scaling strategies, and why there is no automatic data tiering."
+description: "The VergeOS storage tier model: 5 workload tiers plus the Tier 0 metadata tier, drive assignment rules, and capacity planning."
 ---
 
 # Storage Tiers
@@ -40,7 +40,7 @@ The following table summarizes each tier's hardware type, purpose, and typical u
 
 Tier 0 deserves special attention because it is fundamentally different from the workload tiers. It stores **only** vSAN metadata — the filesystem index and the per-tier device maps from which block placement is derived. There is no central table tracking block locations or reference counts: placement is computed from each block's content hash against the device maps, and reference counts are rebuilt by the vSAN Walk.
 
-**Sizing guideline:** Allocate approximately **5 GB of Tier 0 capacity per 1 TB of usable storage** (minimum) or **10 GB per 1 TB** (recommended) across your workload tiers. Use enterprise NVMe drives rated for **3 DWPD or equivalent (i.e. TBW)**. Always maintain at least **10% free space** on Tier 0 to avoid metadata pressure.
+**Sizing guideline:** Allocate approximately **5 GB of Tier 0 capacity per 1 TB of usable storage** (minimum) or **10 GB per 1 TB** (recommended) across your workload tiers. Use enterprise NVMe drives rated for **3 DWPD or equivalent (i.e. TBW)**. Always maintain at least **30% free space** on Tier 0 to avoid metadata pressure.
 
 **Hardware requirements:** Use enterprise-grade NVMe drives with a minimum of **3 DWPD** (Drive Writes Per Day) endurance. Consumer NVMe drives are not supported for Tier 0 in production environments.
 
@@ -110,6 +110,8 @@ Properly assigning physical drives to tiers is essential for a healthy vSAN. Fol
 ### Rule 1: Controller Nodes Need Tier 0
 
 Controller nodes must have at least one Tier 0 drive. Tier 0 holds the vSAN filesystem index and per-tier device maps (metadata), which are managed by the controller nodes. Scale-out and storage-only nodes contribute workload tiers (1–5) but do not host Tier 0; Tier 0 lives only on controller nodes (Nodes 1–2 for N+1, Nodes 1–3 for N+2).
+
+Tier 0 is **mandatory** — the vSAN stores its filesystem index and device maps there, so the vSAN cannot mount or operate without it. This is why the controller nodes must have Tier 0 drives in place before any workload tier can be used; a system has no "no Tier 0" running state to cope with.
 
 ### Rule 2: Consistent Drives Within a Tier
 
@@ -210,7 +212,7 @@ Proactive capacity planning prevents performance degradation and ensures the vSA
 
 | Tier          | Minimum Free Space | Rationale                                                       |
 | ------------- | ------------------ | --------------------------------------------------------------- |
-| **Tier 0**    | 10%+               | Metadata pressure impacts all I/O operations system-wide        |
+| **Tier 0**    | 30%+               | Metadata pressure impacts all I/O operations system-wide        |
 | **Tiers 1–3** | 20–30%             | Performance tiers need headroom for dedup operations and writes |
 | **Tiers 4–5** | 15–20%             | Capacity tiers need headroom for snapshot retention             |
 
@@ -254,7 +256,7 @@ VergeOS exposes 5 workload tiers (1–5) plus a dedicated metadata tier (Tier 0)
 | **Preferred tier**       | Set per VM disk; falls back to nearest available tier if requested tier is absent                                              |
 | **Drive rules**          | Similar drives per tier, equal counts across nodes, controller nodes need Tier 0                                               |
 | **Scaling**              | Vertical (add drives) or horizontal (add nodes) — each tier scales independently                                               |
-| **Capacity planning**    | 10%+ free on Tier 0, 20–30% on workload tiers, 1 GB RAM per 1 TB raw storage                                                   |
+| **Capacity planning**    | 30%+ free on Tier 0, 20–30% on workload tiers, 1 GB RAM per 1 TB raw storage                                                   |
 | **Snapshot integration** | Snapshots are tier-aware; dedup operates per tier; replication is bandwidth-optimized                                          |
 
 ## Next Steps

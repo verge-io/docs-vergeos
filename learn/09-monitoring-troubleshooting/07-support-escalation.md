@@ -77,7 +77,7 @@ The diagnostics file captures extensive information organized by host node:
 | **SMART Reports**          | S.M.A.R.T. diagnostic report from each physical drive                              |
 | **vNet Logs**              | Container logs for DMZ, core, external, maintenance, and tenant networks           |
 | **Network Reports**        | Standard network utility outputs (ARP, routing, interface status)                  |
-| **vSAN Diagnostics**       | All `vcmd` command outputs (tier status, device list, cluster rates, etc.)         |
+| **vSAN Diagnostics**       | vSAN diagnostic outputs (tier status, device list, cluster rates, etc.)            |
 | **IPMI/BMC Data**          | Sensor readings, System Event Log, chassis status, FRU information                 |
 | **OS-Level Diagnostics**   | Standard Linux diagnostic command outputs                                          |
 | **Performance Statistics** | `sysstat` performance monitoring reports                                           |
@@ -240,7 +240,7 @@ Certain operations carry inherent risk and should follow **Standard Operating Pr
 
 ### vSAN Scale-Up
 
-- **Adding drives to existing tiers** — Follow the documented procedure for adding physical drives. Escalate if the new drives do not appear in `vcmd device list` or if tier status shows unexpected states
+- **Adding drives to existing tiers** — Follow the documented procedure for adding physical drives. Escalate if the new drives do not appear in the vSAN **Get Device List** diagnostic or if tier status shows unexpected states
 - **Tier health monitoring** — After adding drives, monitor repair status and tier health. Escalate if repairs stall or tier status does not return to healthy within the expected timeframe
 
 ---

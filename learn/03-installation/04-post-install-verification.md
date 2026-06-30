@@ -159,9 +159,17 @@ Navigate to **Infrastructure > Clusters**, double-click your cluster, and select
 ### Target Max RAM %
 
 Default is **80%**. This is the maximum percentage of physical RAM a node
-should use under normal conditions. During failover, this limit may be
-temporarily exceeded. Lower values provide more N+1 HA headroom; higher
-values maximize usable memory.
+should use for workloads under normal conditions; the remaining headroom is
+what lets the cluster absorb workloads displaced from a failed node. During
+failover or live migration the limit may be temporarily exceeded to keep
+services running. Lower values reserve more N+1 HA headroom; higher values
+maximize usable memory.
+
+For example, a node with 252 GB of physical RAM at the default 80% targets
+~200 GB of normal-state usage; after the ~16 GB VergeOS/vSAN overhead, ~184 GB
+is available for workloads, with the remainder held in reserve for failover.
+See [RAM sizing](../02-sizing-design/01-hardware-requirements.md) for how this
+factors into node sizing.
 ### Default CPU Type
 
 Auto-detected during installation. Verify it matches your actual CPU

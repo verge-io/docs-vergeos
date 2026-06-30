@@ -8,7 +8,7 @@ VergeOS supports three deployment architectures from the same software installat
 
 ## Architecture Decision Tree
 
-Use the following framework to guide your recommendation. The node-count bands below are course rules-of-thumb (Marvin documents only the general guidance that HCI fits "smaller deployments, 2--12 nodes typically," and that UCI applies when growth diverges or specialized hardware is needed).
+Use the following framework to guide your recommendation. The node-count bands below are coarse rules-of-thumb: HCI fits smaller deployments (2--12 nodes typically), and UCI applies when compute and storage growth diverge or specialized hardware is needed.
 
 ```mermaid
 flowchart TD
@@ -285,7 +285,7 @@ VergeOS supports three edge management scenarios of increasing sophistication:
 
 1. **Standalone with central management** -- 2-node clusters at each site, managed centrally via the **Sites** dashboard. Catalog Repositories distribute VM recipes from the management cluster to all edge sites.
 
-2. **Centralized backup and DR** -- Same as above, plus a central cluster at the primary data center provides **Site Sync** replication, **ioGuardian** repair servers, and centralized snapshot storage for all branch offices.
+2. **Centralized backup and DR** -- Same as above, plus a central system at the primary data center provides **Site Sync** replication, **ioGuardian** repair servers, and centralized snapshot storage for all branch offices.
 
 3. **Multi-tier with archive** -- Adds a secondary archive cluster at a DR site for long-term retention using high-capacity HDDs, providing a complete 3-2-1 backup strategy.
 
@@ -317,7 +317,7 @@ Cloud Service Providers leverage VergeOS multi-tenancy to deliver IaaS from shar
 | **Phase 1** | 2 primary sites with DR via Site Sync                      | 6 per site                |
 | **Phase 2** | Add 2-node edge clusters in new regions                    | 2 per region              |
 | **Phase 3** | Scale out edge sites by adding clusters (illustrative)     | varies per site           |
-| **Phase 4** | Add dedicated storage clusters for S3-compatible offerings | 2+ storage nodes per site |
+| **Phase 4** | Add dedicated storage clusters for storage-heavy tenants and archive tiers | 2+ storage nodes per site |
 
 ### Key VergeOS Features for CSPs
 
@@ -326,7 +326,6 @@ Cloud Service Providers leverage VergeOS multi-tenancy to deliver IaaS from shar
 - **Catalog Repositories** for centralized VM recipe management.
 - **OpenID Authentication** integration with existing identity providers.
 - **Tenant Recipes** for automated, repeatable customer onboarding.
-- **S3-compatible storage** offerings via dedicated storage clusters and tenant recipes.
 
 ---
 

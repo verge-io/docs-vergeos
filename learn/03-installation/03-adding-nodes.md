@@ -29,7 +29,7 @@ If this is the first storage-only or compute-only node you are adding, you **mus
 
 1. Navigate to **System → Clusters**
 2. Click **New Cluster**
-3. Select the cluster type: **Storage** (for storage-only nodes) or **Compute** (for compute-only nodes)
+3. Set the cluster's role with the independent **Compute** and **Storage** toggles — these are not a single either/or choice. Enable **Storage** only (Compute off) for a storage-only cluster, or **Compute** only (Storage off) for a compute-only cluster. (An HCI cluster has *both* enabled.)
 4. Save the cluster configuration
 
 The installer cannot add a node to a cluster that does not yet exist.
@@ -119,7 +119,7 @@ If this is your **first** storage-only node, create the storage cluster in the U
 
 1. Navigate to **System → Clusters**
 2. Click **New Cluster**
-3. Select **Storage** as the cluster type
+3. Enable the **Storage** toggle and leave **Compute** off
 4. Save the configuration
 
 ### Installation Steps
@@ -149,7 +149,7 @@ If this is your **first** compute-only node, create the compute cluster in the U
 
 1. Navigate to **System → Clusters**
 2. Click **New Cluster**
-3. Select **Compute** as the cluster type
+3. Enable the **Compute** toggle and leave **Storage** off
 4. Save the configuration
 
 ### Installation Steps

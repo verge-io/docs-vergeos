@@ -141,7 +141,7 @@ graph TB
 
 ## Redundancy and Self-Healing
 
-vSAN maintains multiple copies of every data block to protect against hardware failures. The redundancy level is configured at the system level and applies per tier.
+vSAN maintains multiple copies of every data block to protect against hardware failures. The redundancy level — also known as the **Replication Factor (RF)** — is configured at the system level and applies per tier. RF is simply the number of copies kept: **RF2** (N+1) keeps 2 copies, **RF3** (N+2) keeps 3.
 
 ### Redundancy Levels
 
@@ -178,10 +178,16 @@ flowchart LR
     style G fill:#e8f5e9,stroke:#2e7d32
 ```
 
-1. **Detection** — vSAN detects the failure automatically via Journal Walks
+1. **Detection** — vSAN detects the drive or node failure automatically; the topology change triggers a **Full Journal Walk** that re-verifies redundancy across the affected tier
 2. **Failover** — Reads and writes are redirected to redundant copies with no VM downtime
 3. **Reduced redundancy** — The affected tier operates without full redundancy until an operator intervenes
 4. **Rebuild** — An operator either initiates a repair against a designated hot spare, or replaces the failed drive/node. vSAN then re-replicates the affected blocks to restore full redundancy
+
+{% hint style="info" %}
+**What is a Journal Walk?**
+
+A **Journal Walk** is vSAN's background traversal of a storage tier that rebuilds block reference counts (which are never stored persistently), verifies redundancy, and drives any needed repairs. It runs in three forms: a **Full Walk** (triggered by controller startup or a topology change such as a drive/node failure or a node being added or removed), a **Mixed Walk** (when a node other than the active controller reboots), and a routine **Differential Walk**. On the vSAN tier dashboard, the `working` flag indicates a walk is in progress and `Walk Progress` shows its percentage. See [Understanding vSAN Tier Status / Journal Walks](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/storage-vsan/understanding-journal-walks-and-vsan-tier-status) for the full breakdown.
+{% endhint %}
 
 {% hint style="info" %}
 **VMware Bridge**

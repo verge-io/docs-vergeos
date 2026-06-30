@@ -136,7 +136,7 @@ Internal networks connect to the DMZ for inter-network routing and external acce
 
 ### Maintenance Network (Optional)
 
-A special **external network** type intended for IPMI or out-of-band management access to physical nodes and optional PXE boot. A maintenance network can be created during installation or added afterward. It provides a dedicated management path separate from production traffic.
+A **maintenance network** is an optional, special-purpose **external network** dedicated to out-of-band management traffic — reaching node IPMI/iDRAC/iLO interfaces — and optionally serving PXE boot. It keeps that management traffic on a path separate from production workload and tenant traffic. A maintenance network can be created during installation or added afterward, and is not required for a functioning system. It is a special case of an external network rather than a sixth coequal network type.
 
 ## Built-in Network Services
 

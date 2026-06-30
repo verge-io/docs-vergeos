@@ -133,7 +133,7 @@ For vSAN sizing recommendations, see the [Node Sizing Guide](https://app.gitbook
 1. **Metadata Tier (Tier 0)**:
     - Allocate sufficient space for metadata growth
     - Use highest-endurance NVMe drives available
-    - Maintain at least 10% free space
+    - Maintain at least 30% free space
 
 2. **Performance Tiers (Tier 1-3)**:
     - Size according to active dataset

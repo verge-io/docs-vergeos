@@ -1,5 +1,5 @@
 ---
-description: "Master vSAN diagnostics, vcmd commands, Fibre Channel integration, NAS troubleshooting, and preventive maintenance strategies in VergeOS."
+description: "Master vSAN diagnostics, Fibre Channel integration, NAS troubleshooting, and preventive maintenance strategies in VergeOS."
 ---
 
 # Storage Monitoring & Troubleshooting
@@ -35,7 +35,7 @@ graph LR
 
 ## vSAN Diagnostics
 
-The vSAN Diagnostics interface provides real-time access to the VergeFS storage engine's internal state. Every `vcmd` operation can be executed through the UI or via SSH on a controller node.
+The vSAN Diagnostics interface provides real-time access to the VergeFS storage engine's internal state. Each diagnostic is run from the **Query** dropdown in the vSAN Diagnostics UI.
 
 ### Accessing vSAN Diagnostics
 
@@ -43,76 +43,70 @@ The vSAN Diagnostics interface provides real-time access to the VergeFS storage 
 2. Alternatively: from the Main Dashboard, click the **vSAN Tiers** count box → **vSAN Diagnostics** in the left menu
 3. Select a command from the **Query** dropdown, configure parameters on the right, and click **Send →**
 
-{% hint style="success" %}
-**Show Command**
-
-Enable **"Show Command"** to reveal the exact `vcmd` syntax being executed. This is useful for scripting, SSH automation, or including in support tickets.
-{% endhint %}
-
 {% hint style="warning" %}
 **Root-Level Only**
 
 vSAN Diagnostics are only available at the root/parent level. Tenants do not have access to vSAN diagnostic tools -- they must request diagnostics through the provider.
 {% endhint %}
 
-### vcmd Command Reference
+### Diagnostic Command Reference
 
-The `vcmd` utility is the CLI interface to the vSAN engine. Every command available in the UI dropdown maps to a `vcmd` invocation.
+The following diagnostics are available from the **Query** dropdown in the vSAN Diagnostics UI, grouped by focus area.
 
-#### Cluster & Performance Commands
+#### Cluster & Performance
 
-| Command                 | CLI Syntax              | Purpose                                    |
-| ----------------------- | ----------------------- | ------------------------------------------ |
-| **Get Cluster Rates**   | `vcmd cluster rates`    | Cluster-wide throughput and IOPS metrics   |
-| **Get Cluster Usage**   | `vcmd cluster usage`    | Overall storage utilization and capacity   |
-| **Get Top Usage Rates** | `vcmd usage top-rates`  | Identify top consumers of storage I/O      |
-| **Get Usage**           | `vcmd usage show`       | Comprehensive vSAN usage statistics        |
-| **Get Cache Info**      | `vcmd cache info`       | Cache hit/miss ratios and memory usage     |
-| **Get Read Ahead**      | `vcmd readahead status` | Read-ahead caching configuration and stats |
-| **Get Current Master**  | `vcmd master current`   | Identify the current vSAN master node      |
+| Command                 | Purpose                                    |
+| ----------------------- | ------------------------------------------ |
+| **Get Cluster Rates**   | Cluster-wide throughput and IOPS metrics   |
+| **Get Cluster Usage**   | Overall storage utilization and capacity   |
+| **Get Top Usage Rates** | Identify top consumers of storage I/O      |
+| **Get Usage**           | Comprehensive vSAN usage statistics        |
+| **Get Cache Info**      | Cache hit/miss ratios and memory usage     |
+| **Get Read Ahead**      | Read-ahead caching configuration and stats |
+| **Get Current Master**  | Identify the current vSAN master node      |
 
-#### Device & Node Commands
+#### Device & Node
 
-| Command                  | CLI Syntax                | Purpose                               |
-| ------------------------ | ------------------------- | ------------------------------------- |
-| **Get Device List**      | `vcmd devices list`       | All storage devices in the vSAN       |
-| **Get Device Status**    | `vcmd device status [ID]` | Health and state of a specific device |
-| **Get Device Usage**     | `vcmd device usage [ID]`  | Per-device utilization and wear data  |
-| **Get Node List**        | `vcmd nodes list`         | All nodes participating in the vSAN   |
-| **Get Node Info**        | `vcmd node info [ID]`     | Detailed info for a specific node     |
-| **Get Node Device List** | `vcmd node devices [ID]`  | Devices attached to a specific node   |
+| Command                  | Purpose                               |
+| ------------------------ | ------------------------------------- |
+| **Get Device List**      | All storage devices in the vSAN       |
+| **Get Device Status**    | Health and state of a specific device |
+| **Get Device Usage**     | Per-device utilization and wear data  |
+| **Get Node List**        | All nodes participating in the vSAN   |
+| **Get Node Info**        | Detailed info for a specific node     |
+| **Get Node Device List** | Devices attached to a specific node   |
 
-#### Tier & Volume Commands
+#### Tier & Volume
 
-| Command                  | CLI Syntax               | Purpose                              |
-| ------------------------ | ------------------------ | ------------------------------------ |
-| **Get Tier Status**      | `vcmd tier status`       | Health and capacity per storage tier |
-| **Get Tier Device Maps** | `vcmd tier device-maps`  | How devices map across tiers         |
-| **Get Tier Node Maps**   | `vcmd tier node-maps`    | How tiers distribute across nodes    |
-| **Get Volume Usage**     | `vcmd volume usage [ID]` | Per-volume storage consumption       |
-| **Summarize Disk Usage** | `vcmd usage summarize`   | Cluster-wide disk usage summary      |
+| Command                  | Purpose                              |
+| ------------------------ | ------------------------------------ |
+| **Get Tier Status**      | Health and capacity per storage tier |
+| **Get Tier Device Maps** | How devices map across tiers         |
+| **Get Tier Node Maps**   | How tiers distribute across nodes    |
+| **Get Volume Usage**     | Per-volume storage consumption       |
+| **Summarize Disk Usage** | Cluster-wide disk usage summary      |
 
-#### Integrity & Repair Commands
+#### Integrity & Repair
 
-| Command                    | CLI Syntax                    | Purpose                                    |
-| -------------------------- | ----------------------------- | ------------------------------------------ |
-| **Integ Check**            | `vcmd integcheck start`       | Start a full integrity check               |
-| **Integ Check Device**     | `vcmd integcheck device [ID]` | Integrity check on a specific device       |
-| **Get Integ Check Status** | `vcmd integcheck status`      | Progress/results of integrity checks       |
-| **Get Repair Status**      | `vcmd repair status`          | Active repair and rebuild operations       |
-| **Get Sync List**          | `vcmd sync list`              | Active site-sync (replication) connections |
+| Command                    | Purpose                                    |
+| -------------------------- | ------------------------------------------ |
+| **Integ Check**            | Start a full integrity check               |
+| **Integ Check Device**     | Integrity check on a specific device       |
+| **Get Integ Check Status** | Progress/results of integrity checks       |
+| **Get Repair Status**      | Active repair and rebuild operations       |
+| **Get Sync List**          | Active site-sync (replication) connections |
 
-#### File System & Configuration Commands
+#### File System & Configuration
 
-| Command                 | CLI Syntax                   | Purpose                              |
-| ----------------------- | ---------------------------- | ------------------------------------ |
-| **Find Inode**          | `vcmd find --inode=[NUM]`    | Locate a specific inode for analysis |
-| **Get Path from Inode** | `vcmd path from-inode [NUM]` | Resolve an inode number to a path    |
-| **Get File Status**     | `vcmd file status [PATH]`    | Replication and integrity of a file  |
-| **Get Fuse Info**       | `vcmd fuse info`             | FUSE mount and operation details     |
-| **Get Journal Status**  | `vcmd journal status`        | Write-ahead journal state            |
-| **Get Running Conf**    | `vcmd config show`           | Current running vSAN configuration   |
-| **Get Clients**         | `vcmd clients list`          | Active vSAN client connections       |
+| Command                 | Purpose                              |
+| ----------------------- | ------------------------------------ |
+| **Find Inode**          | Locate a specific inode for analysis |
+| **Get Path from Inode** | Resolve an inode number to a path    |
+| **Get File Status**     | Replication and integrity of a file  |
+| **Get Fuse Info**       | FUSE mount and operation details     |
+| **Get Journal Status**  | Write-ahead journal state            |
+| **Get Running Conf**    | Current running vSAN configuration   |
+| **Get Clients**         | Active vSAN client connections       |
 
 ## Health Monitoring Workflow
 
@@ -345,7 +339,7 @@ Coming from VMware? VergeOS exposes the same diagnostic data through the **Syste
 {% hint style="info" %}
 **Nutanix Bridge**
 
-Coming from Nutanix? VergeOS gives you the same kind of storage diagnostic and integrity-scrub coverage through `vcmd` on any controller node, with NAS service health checks living inside the NAS service VM itself rather than a separate file-services console.
+Coming from Nutanix? VergeOS gives you the same kind of storage diagnostic and integrity-scrub coverage through the **vSAN Diagnostics** UI on any controller node, with NAS service health checks living inside the NAS service VM itself rather than a separate file-services console.
 {% endhint %}
 
 ## Getting Started
@@ -353,8 +347,7 @@ Coming from Nutanix? VergeOS gives you the same kind of storage diagnostic and i
 ### Explore vSAN Diagnostics
 
 Navigate to **System → vSAN Diagnostics**, run **Get Cluster Usage** and
-**Get Cluster Rates** to establish your baseline. Enable "Show Command" to
-learn the `vcmd` syntax.
+**Get Cluster Rates** to establish your baseline.
 ### Check NAS Health
 
 Open each NAS service's Diagnostics page. Run **Samba** to see active
