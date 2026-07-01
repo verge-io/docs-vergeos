@@ -20,7 +20,7 @@ flowchart LR
     subgraph deploy["Deployment"]
         direction TB
         Q["Answer Questions<br/>(CPU, RAM, Network, Storage)"]
-        AUTO["Automation<br/>(Sdatabase, Cloud-Init)"]
+        AUTO["Automation<br/>(Database, Cloud-Init)"]
         VM["Running VM Instance"]
     end
 
@@ -52,7 +52,7 @@ The Marketplace includes recipes for a wide range of operating systems:
 | ------------------- | ---------------------------------------------------------------------------------- |
 | **Ubuntu**          | Server 18.04 (Bionic), 20.04 (Focal), 22.04 (Jammy), 24.04 (Noble) -- LTS releases |
 | **RHEL-Compatible** | Rocky Linux 8 & 9, AlmaLinux 8 & 9, CentOS 7, CentOS Stream 8                      |
-| **Debian**          | Debian 10 (Buster), Debian 11 (Bullseye)                                           |
+| **Debian**          | Debian 10 (Buster), 11 (Bullseye), 12 (Bookworm), 13 (Trixie)                      |
 | **Fedora**          | Fedora 35, 36, 37, 38                                                              |
 | **Amazon**          | Amazon Linux 2 LTS                                                                 |
 | **Windows**         | Windows Server 2019 Evaluation, 2022 Evaluation, 2025 Evaluation                   |
@@ -134,11 +134,11 @@ Recipe questions are the building blocks that make recipes customizable. Each qu
 
 When you create a recipe from a base VM, VergeOS automatically generates questions for each of the VM's drives (e.g., `YB_DRIVE_1_SIZE`, `YB_DRIVE_2_SERIAL`, `YB_DRIVE_3_NONPERSISTENT`). Some auto-generated questions are disabled by default -- enable them from the Questions list if needed.
 
-## Sdatabase Automation
+## Database Automation
 
-Behind every Marketplace recipe, a set of **Sdatabase-type questions** perform automated operations during VM provisioning. These questions interact directly with the VergeOS database API to create resources, download images, and configure hardware -- without requiring any manual intervention from the user.
+Behind every Marketplace recipe, a set of **Database-type questions** (Database Create, Database Edit, and Database Find) perform automated operations during VM provisioning. These questions interact directly with the VergeOS database API to create resources, download images, and configure hardware -- without requiring any manual intervention from the user.
 
-### Common Sdatabase Operations
+### Common Database Operations
 
 | Variable                  | Operation                                                    |
 | ------------------------- | ------------------------------------------------------------ |
@@ -150,7 +150,7 @@ Behind every Marketplace recipe, a set of **Sdatabase-type questions** perform a
 | `CHANGE_CLUSTER_CPU`      | Sets the VM's CPU type to match the cluster                  |
 | `EDIT_MACHINE_TYPE`       | Adjusts the VM machine type (e.g., Q35) post-creation        |
 
-These operations use the same REST API that is available to administrators and automation tools. Recipe authors can add custom Sdatabase questions to automate any operation exposed by the VergeOS API -- creating networks, registering DNS entries, setting firewall rules, and more.
+These operations use the same REST API that is available to administrators and automation tools. Recipe authors can add custom Database questions to automate any operation exposed by the VergeOS API -- creating networks, registering DNS entries, setting firewall rules, and more.
 
 {% hint style="info" %}
 **Coming from VMware or Nutanix?**
@@ -170,6 +170,15 @@ VergeOS integrates with **cloud-init**, the industry-standard tool for customizi
    - **`meta_data.json`** -- Instance metadata (hostname, UUID, availability zone)
 3. Recipe question variables are substituted into these files using template syntax.
 4. On first boot, cloud-init reads the Config Drive and applies the configuration.
+
+{% hint style="info" %}
+The **Cloud-init Datasource** field offers more than one option. Marketplace recipes use **Config Drive v2** (the standard cloud-init datasource), but VergeOS also supports:
+
+- **None** — Cloud-init disabled for the VM.
+- **NoCloud** — a standard cloud-init datasource intended for configuring a VM **without a network connection**.
+
+Both **Config Drive v2** and **NoCloud** deliver the same `user_data` / `meta_data` files to the guest; choose **NoCloud** when the guest has no network during first boot.
+{% endhint %}
 
 ### Template Variables
 
@@ -242,7 +251,7 @@ For Windows VMs, VergeOS uses **Cloudbase-init** -- the Windows equivalent of cl
 
 Windows Marketplace recipes automate the entire provisioning chain:
 
-1. Download the Windows evaluation ISO via Sdatabase
+1. Download the Windows evaluation ISO via a Database question
 2. Download the VirtIO driver ISO
 3. Create virtual CD-ROM drives and attach both ISOs
 4. Configure the machine type and UEFI settings

@@ -59,7 +59,7 @@ The **VMware Connector** is the recommended method for production VMware environ
 
 **How it works:**
 
-1. **Create a VMware Service** in VergeOS -- this establishes a connection to vSphere using admin credentials, DNS/IP, and port 443.
+1. **Create a VMware Service** in VergeOS -- this establishes a connection to vCenter (or an ESXi host) using admin credentials, DNS/IP, and port 443.
 2. **Power on the service** and refresh VMs to discover the source inventory.
 3. **Create backup schedules** with tasks for full and differential backups.
 4. **Assign schedules to VMs** -- different schedules can apply to different VMs (e.g., production vs. dev/test).
@@ -82,6 +82,20 @@ The **VMware Connector** is the recommended method for production VMware environ
 - Leave "Automatically enable change tracking per VM" **enabled** (the default) to ensure differential backups work correctly
 - Include both full and differential backup tasks in your schedule -- full backups weekly, differentials on days in between
 - Use full-thick-provisioned backups for long-term retention
+{% endhint %}
+
+{% hint style="warning" %}
+**VMware Connector network requirements**
+
+The connector talks to vCenter over **port 443**, but disk data is pulled directly from the ESXi hosts over the NFC protocol on **port 902**. For migrations to succeed, VergeOS needs:
+
+- **Direct network access to each ESXi host** — not just to vCenter. The VMware Service reaches vCenter on 443 to enumerate inventory, then connects to the individual ESXi host holding each VM on 902 to transfer disk data.
+- **Port 443** open to vCenter (or the standalone ESXi host) and **port 902** open to every ESXi host.
+- **Matching MTU values** end-to-end. Mismatched MTUs (for example, jumbo frames enabled on one side but not the other) cause backups to stall, time out, or fail during data transfer. Confirm the MTU is consistent across VergeOS, the physical switches, and the ESXi vmkernel ports.
+{% endhint %}
+
+{% hint style="info" %}
+The VMware Service stores the VMware VM backups/snapshots it pulls in **vSAN (VergeFS)** storage. Size the target tier for the full and incremental backup data of every VMware VM you plan to migrate — this consumption is in addition to the storage the imported, running VMs will use.
 {% endhint %}
 
 ### Import from Uploaded Files
@@ -281,7 +295,9 @@ Both migration paths are built into the platform — no separate appliance, no t
 | No network connectivity            | NIC driver or network mapping  | Verify VirtIO-net drivers are installed; check NIC is connected to correct internal network |
 | Slow disk performance              | Using IDE/SATA interface       | Install VirtIO drivers and switch to VirtIO-SCSI                                            |
 | EFI boot failure                   | Firmware type mismatch         | Ensure VM is set to UEFI if the source used EFI; check Secure Boot settings                 |
-| VMware Connector shows "Error"     | Connection or credential issue | Verify vSphere IP/DNS, port 443 access, admin credentials, and SSL certificate settings     |
+| VMware Connector shows "Error"     | Connection or credential issue | Verify vCenter IP/DNS, **port 443** access, admin credentials, and SSL certificate settings                                                                        |
+| VMware import/backup fails or stalls during disk transfer | No direct access to the ESXi host(s) on port 902 | Ensure VergeOS has **direct network access to each ESXi host** (not just vCenter) over **port 902** (NFC), in addition to port 443 to vCenter                       |
+| VMware backups slow, time out, or drop | MTU mismatch between VergeOS and ESXi hosts | Match **MTU values** end-to-end (VergeOS, physical switches, and ESXi vmkernel ports); a jumbo-frame mismatch is a common cause                                     |
 
 ## Summary
 

@@ -72,11 +72,14 @@ Tenant network traffic is fully encapsulated and isolated from other tenants and
 Each tenant receives **dedicated storage volumes** allocated from the parent vSAN. Storage isolation ensures that:
 
 - Tenant data is completely segregated at the volume level
-- Encryption can be applied per-tenant
 - Storage performance boundaries prevent noisy-neighbor effects
 - Per-tenant resource tracking — including within-tenant deduplication statistics — supports capacity planning and tenant-level billing. Cross-tenant deduplication savings are not attributed to individual tenants.
 
 Together, network encapsulation and exclusive storage volumes provide **true isolation** -- not just policy-based separation, but architectural boundaries that prevent cross-tenant access by design.
+
+{% hint style="info" %}
+**Encryption is a provider-level setting, not per-tenant.** vSAN at-rest encryption (AES-256) is chosen once during the host system's initial installation and applies to the entire vSAN — and therefore to all tenant data on it. It cannot be enabled, disabled, or scoped per tenant after deployment, and changing it requires a system reinstall.
+{% endhint %}
 
 ## Tenant Hierarchy
 
