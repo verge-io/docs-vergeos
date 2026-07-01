@@ -1,6 +1,6 @@
 ---
 title: "VergeOS Platform Capabilities"
-description: "Comprehensive catalog of all VergeOS platform features including distributed storage, backup/DR, compute virtualization, multi-tenancy, software-defined networking, monitoring, automation, and integrations."
+description: "Catalog of VergeOS platform features including distributed storage, backup/DR, compute virtualization, multi-tenancy, software-defined networking, monitoring, automation, and integrations."
 semantic_keywords:
   - "VergeOS features capabilities overview"
   - "VergeOS compute storage networking multi-tenancy"

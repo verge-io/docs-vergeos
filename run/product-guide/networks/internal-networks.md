@@ -1,6 +1,6 @@
 ---
 title: "Internal Networks (General Instructions)"
-description: "Complete guide to creating and configuring internal virtual networks in VergeOS, including Layer 2/Layer 3 options, DHCP, DNS, clustering, port mirroring, rate limiting, and high availability settings."
+description: "Guide to creating and configuring internal virtual networks in VergeOS, including Layer 2/Layer 3 options, DHCP, DNS, clustering, port mirroring, rate limiting, and high availability."
 semantic_keywords:
   - "create internal network VergeOS configuration"
   - "internal virtual network DHCP DNS settings"

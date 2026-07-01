@@ -1,6 +1,6 @@
 ---
 title: "Kubernetes Integration"
-description: "VergeOS provides native Kubernetes integration through a CSI storage driver and Cloud Controller Manager, connecting any Kubernetes cluster running on VergeOS VMs to the platform for persistent storage, node lifecycle management, and load balancer provisioning."
+description: "VergeOS provides native Kubernetes integration via a CSI storage driver and Cloud Controller Manager, giving clusters on VergeOS VMs persistent storage, node lifecycle management, and load balancers."
 semantic_keywords:
   - "Kubernetes CSI driver VergeOS, persistent volumes vSAN, container storage interface"
   - "Cloud Controller Manager VergeOS, Kubernetes node lifecycle, load balancer provisioning"

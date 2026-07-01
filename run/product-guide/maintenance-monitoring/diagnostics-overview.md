@@ -1,6 +1,6 @@
 ---
 title: "VergeOS Diagnostics Overview"
-description: "Overview of all diagnostic tools available in VergeOS, including component-specific diagnostics for networks, nodes, vSAN, and NAS, as well as system-wide tools like subscriptions and Prometheus integration."
+description: "Overview of diagnostic tools in VergeOS, including component-specific diagnostics for networks, nodes, vSAN, and NAS, plus system-wide tools like subscriptions and Prometheus integration."
 semantic_keywords:
   - "VergeOS diagnostics troubleshooting tools"
   - "network node vSAN NAS diagnostics"

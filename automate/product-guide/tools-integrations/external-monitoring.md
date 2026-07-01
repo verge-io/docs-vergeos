@@ -1,6 +1,6 @@
 ---
 title: "External Monitoring"
-description: "VergeOS does not support SNMP. This guide describes the supported paths for integrating VergeOS with external monitoring and observability platforms — the Prometheus Exporter (ioMetrics), the REST API, and IPMI — and how to approach SNMP-first tools such as SolarWinds and LogicMonitor."
+description: "VergeOS does not support SNMP. This guide covers the supported paths for external monitoring — the Prometheus Exporter (ioMetrics), the REST API, and IPMI — plus SNMP-first tools like SolarWinds."
 semantic_keywords:
   - "VergeOS SNMP support, SNMP not supported, MIB trap agent"
   - "external monitoring integration VergeOS, observability tooling"

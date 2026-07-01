@@ -1,6 +1,6 @@
 ---
 title: "VergeOS Installation Guide"
-description: "Standard operating procedure for performing an initial VergeOS system installation, covering hardware preparation, network configuration, primary and secondary controller setup, and post-installation verification."
+description: "Standard operating procedure for an initial VergeOS installation, covering hardware preparation, network configuration, primary and secondary controller setup, and post-installation verification."
 semantic_keywords:
   - "install VergeOS initial system deployment"
   - "primary secondary controller node installation"

@@ -1,6 +1,6 @@
 ---
 title: "4.10"
-description: "Release notes for the 4.10 series of VergeOS, introducing NVIDIA vGPU support, CPU C-States management, enhanced vSAN performance, CPU pinning, and improved GPU passthrough and live migration capabilities."
+description: "Release notes for the VergeOS 4.10 series: NVIDIA vGPU support, CPU C-States management, enhanced vSAN performance, CPU pinning, and improved GPU passthrough and live migration."
 semantic_keywords:
   - "VergeOS 4.10 release notes and features"
   - "VergeOS NVIDIA vGPU support and GPU passthrough"

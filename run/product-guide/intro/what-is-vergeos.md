@@ -1,6 +1,6 @@
 ---
 title: "What is VergeOS"
-description: "Introduction to VergeOS, an ultraconverged infrastructure operating system that unifies compute, storage, networking, and multi-tenancy into a single platform. Covers core architecture, key features, deployment models, and common use cases."
+description: "Introduction to VergeOS, an ultraconverged infrastructure OS that unifies compute, storage, networking, and multi-tenancy into one platform. Covers core architecture, key features, and use cases."
 semantic_keywords:
   - "what is VergeOS hyperconverged infrastructure"
   - "VergeOS architecture overview VDC virtual data center"
