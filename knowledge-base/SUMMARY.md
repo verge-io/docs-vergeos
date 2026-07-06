@@ -101,6 +101,7 @@
   * [VM Lifecycle Management API Overview](automation-api/vm-lifecycle-management.md)
   * [VM Power Management API](automation-api/vm-power-management.md)
 * [System Administration](system-administration/README.md)
+  * [Cluster Recovery After Full Power Outage](system-administration/cluster-recovery-after-power-outage.md)
   * [Configuring VergeOS as an OIDC Client](system-administration/configuring-vergeos-as-oidc-client.md)
   * [CPU Overprovisioning and Resource Planning](system-administration/cpu-overprovisioning-guide.md)
   * [Customizing the User Interface](system-administration/customizing-the-user-interface.md)
