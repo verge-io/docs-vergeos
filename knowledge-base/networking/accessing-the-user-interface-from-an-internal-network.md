@@ -1,18 +1,24 @@
 ---
 title: Accessing the User Interface from an Internal Network
 slug: accessing-the-user-interface-from-an-internal-network
-description: Learn how to set up an internal UI route to access the VergeOS User Interface from a virtual machine within your environment.
 author: VergeOS Documentation Team
 date: 2023-01-24T14:20:54.833Z
 semantic_keywords:
-  - "access vergeos ui from internal network vm"
-  - "create route rule internal network ui access"
-  - "vergeos dashboard network rule configuration"
-  - "internal network browser ui navigation"
+  - access vergeos ui from internal network vm
+  - create route rule internal network ui access
+  - vergeos dashboard network rule configuration
+  - internal network browser ui navigation
 use_cases:
   - access_ui_from_internal_vm
   - create_internal_network_route_rule
   - configure_vm_ui_access
+categories:
+  - Network Rules
+editor: markdown
+dateCreated: 2022-10-12T14:45:26.462Z
+description: >-
+  Learn how to set up an internal UI route to access the VergeOS User Interface
+  from a virtual machine within your environment.
 tags:
   - internal network
   - ui access
@@ -20,10 +26,6 @@ tags:
   - rule
   - ui
   - routing
-categories:
-  - Network Rules
-editor: markdown
-dateCreated: 2022-10-12T14:45:26.462Z
 ---
 
 # Accessing the User Interface from an Internal Network
@@ -33,42 +35,39 @@ dateCreated: 2022-10-12T14:45:26.462Z
 {% hint style="info" %}
 **Key Points**
 
-- Access the vergeOS UI from a VM within your environment
-- Create a route rule on the internal network
-- Simple process involving dashboard navigation and rule creation
+* Access the vergeOS UI from a VM within your environment
+* Create a route rule on the internal network
+* Simple process involving dashboard navigation and rule creation
 {% endhint %}
 
 This article guides you through the process of setting up access to the vergeOS User Interface (UI) from a virtual machine (VM) within your vergeOS environment. This is accomplished by creating a specific route rule on the network to which your VM is connected, typically an internal network.
 
 ## Prerequisites
 
-- A running vergeOS environment
-- A virtual machine (VM) within your vergeOS environment
-- Access to the vergeOS dashboard
-- Basic understanding of network rules in vergeOS
+* A running vergeOS environment
+* A virtual machine (VM) within your vergeOS environment
+* Access to the vergeOS dashboard
+* Basic understanding of network rules in vergeOS
 
 ## Steps
 
 1. Navigate to the Network Dashboard
-   - Log into your vergeOS environment
-   - Go to the dashboard of the network that your target VM is connected to
+   * Log into your vergeOS environment
+   * Go to the dashboard of the network that your target VM is connected to
+2.  Create a New Rule
 
-2. Create a New Rule
-   - Locate the option to create a new rule
-   - Use the settings shown in the image below:
-   
-   ![ui-access-rule.png](../assets/screenshots/ui-access-rule.png)
+    * Locate the option to create a new rule
+    * Use the settings shown in the image below:
 
+    ![ui-access-rule.png](../.gitbook/assets/ui-access-rule.png)
 3. Submit the Rule
-   - After configuring the rule, submit it
-   - You will be redirected to the list view of rules on the network
-
+   * After configuring the rule, submit it
+   * You will be redirected to the list view of rules on the network
 4. Apply the New Rule
-   - Click "Apply Rules" to activate the newly created rule
-
+   * Click "Apply Rules" to activate the newly created rule
 5. Access the UI from the VM
-   - Open a web browser within your VM
-   - Navigate to the IP address of the Verge UI (e.g., `https://192.168.4.1`)
+   * Open a web browser within your VM
+   * Navigate to the IP address of the Verge UI (e.g., `https://192.168.4.1`)
 
 {% hint style="success" %}
 **Pro Tip**
@@ -81,8 +80,8 @@ Always ensure that your VM's network settings are correctly configured to use th
 {% hint style="warning" %}
 **Common Issues**
 
-- Problem: Unable to access the UI after creating the rule
-  - Solution:
+* Problem: Unable to access the UI after creating the rule
+  * Solution:
     1. Verify that the rule is applied correctly
     2. Check if the VM's network interface is on the correct network
     3. Ensure no firewall rules are blocking the connection
@@ -90,9 +89,9 @@ Always ensure that your VM's network settings are correctly configured to use th
 
 ## Additional Resources
 
-- [Network Overview](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/networks/network-overview)
-- [Network Rules](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/networks/network-rules)
-- [Creating an Internal Network](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/networks/internal-networks)
+* [Network Overview](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/networking/network-overview)
+* [Network Rules](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/networking/network-rules)
+* [Creating an Internal Network](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/networking/internal-networks)
 
 ## Feedback
 
@@ -102,11 +101,11 @@ Always ensure that your VM's network settings are correctly configured to use th
 If you encounter any issues while setting up UI access or have questions about this process, please don't hesitate to contact our support team.
 {% endhint %}
 
----
+***
 
 {% hint style="info" %}
 **Document Information**
 
-- Last Updated: 2024-08-29
-- vergeOS Version: 4.12.6
+* Last Updated: 2024-08-29
+* vergeOS Version: 4.12.6
 {% endhint %}

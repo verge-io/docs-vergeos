@@ -1,32 +1,35 @@
 ---
 title: API Helper Script
 slug: api-helper-script
-description: A guide to using the VergeOS yb-api helper script for simplified API interactions, including listing, creating, cloning, and managing virtual machines from the command line.
 author: VergeOS Documentation Team
 date: 2024-08-03T16:30:00.000Z
 semantic_keywords:
-  - "yb-api helper script, CLI API tool, command-line API access"
-  - "VM management commands, list VMs, create VM, clone VM"
-  - "API script examples, curl alternative, simplified API calls"
-  - "VergeOS automation, server-side scripting, node SSH access"
+  - yb-api helper script, CLI API tool, command-line API access
+  - VM management commands, list VMs, create VM, clone VM
+  - API script examples, curl alternative, simplified API calls
+  - VergeOS automation, server-side scripting, node SSH access
 use_cases:
-  - "cli_based_vm_management"
-  - "api_scripting_automation"
-  - "vm_cloning_via_cli"
-  - "quick_api_queries"
-  - "server_side_administration"
-tags:
-  - api
-  - helper script
-  - development
-  - vergeos
-  - vm management
+  - cli_based_vm_management
+  - api_scripting_automation
+  - vm_cloning_via_cli
+  - quick_api_queries
+  - server_side_administration
 categories:
   - API
   - Development
   - Virtual Machines
 editor: markdown
 dateCreated: 2024-08-03T16:30:00.000Z
+description: >-
+  A guide to using the VergeOS yb-api helper script for simplified API
+  interactions, including listing, creating, cloning, and managing virtual
+  machines from the command line.
+tags:
+  - api
+  - helper script
+  - development
+  - vergeos
+  - vm management
 ---
 
 # API Helper Script
@@ -35,9 +38,9 @@ The `yb-api` helper script provides an easy way for developers to interact with 
 
 ## Prerequisites
 
-- Access to a VergeOS system.
-- Access to the cluster via SSH or direct connection.
-- **wget** and **curl** must be installed on the system for certain operations.
+* Access to a VergeOS system.
+* Access to the cluster via SSH or direct connection.
+* **wget** and **curl** must be installed on the system for certain operations.
 
 ### Running the Helper Script
 
@@ -49,7 +52,7 @@ yb-api --help
 
 Connect to the node and execute this command to begin using the API helper.
 
-![yb-api Example](../assets/screenshots/api-helper.png)
+![yb-api Example](../.gitbook/assets/api-helper.png)
 
 ## Example Commands
 
@@ -137,20 +140,18 @@ yb-api --get --user=admin --server=10.0.0.100 '/v4/vm_actions' \
 
 ## Notes About `yb-api`
 
-- The `yb-api` script relies on **wget**, which may not be installed by default on macOS. Make sure to install it if necessary.
-- **curl** is used for the upload function in certain API calls, such as posting data to create new VMs.
+* The `yb-api` script relies on **wget**, which may not be installed by default on macOS. Make sure to install it if necessary.
+* **curl** is used for the upload function in certain API calls, such as posting data to create new VMs.
 
----
+***
 
 By using the `yb-api` helper script, developers can simplify interaction with the VergeOS API and manage virtual machines more efficiently. Let us know if you need assistance with further commands or options.
 
-
-
----
+***
 
 {% hint style="info" %}
 **Document Information**
 
-- Last Updated: 2024-08-29
-- vergeOS Version: 4.12.6
+* Last Updated: 2024-08-29
+* vergeOS Version: 4.12.6
 {% endhint %}

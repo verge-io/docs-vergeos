@@ -1,30 +1,33 @@
 ---
 title: NAS Volume Browser API Reference
 slug: nas-volume-browser-api
-description: How to use the VergeOS volume_browser API to browse NAS volume contents programmatically, including the asynchronous job workflow, polling for results, and troubleshooting common issues.
 author: VergeOS Documentation Team
-date: 2026-01-23
+date: 2026-01-23T00:00:00.000Z
 semantic_keywords:
-  - "volume_browser API, NAS file browsing, asynchronous API jobs"
-  - "NAS volume listing, directory browsing, file system API"
-  - "API polling workflow, job status, result retrieval"
-  - "NAS automation, programmatic file management, volume integration"
+  - volume_browser API, NAS file browsing, asynchronous API jobs
+  - NAS volume listing, directory browsing, file system API
+  - API polling workflow, job status, result retrieval
+  - NAS automation, programmatic file management, volume integration
 use_cases:
-  - "nas_volume_browsing"
-  - "file_listing_automation"
-  - "custom_file_management_tools"
-  - "nas_api_integration"
-  - "programmatic_directory_traversal"
+  - nas_volume_browsing
+  - file_listing_automation
+  - custom_file_management_tools
+  - nas_api_integration
+  - programmatic_directory_traversal
+categories:
+  - API Reference
+  - NAS
+editor: markdown
+dateCreated: 2026-01-23T00:00:00.000Z
+description: >-
+  How to use the VergeOS volume_browser API to browse NAS volume contents
+  programmatically, including the asynchronous job workflow, polling for
+  results, and troubleshooting common issues.
 tags:
   - api
   - nas
   - volumes
   - automation
-categories:
-  - API Reference
-  - NAS
-editor: markdown
-dateCreated: 2026-01-23
 ---
 
 # NAS Volume Browser API Reference
@@ -34,19 +37,19 @@ dateCreated: 2026-01-23
 {% hint style="info" %}
 **Key Points**
 
-- The volume_browser API is **asynchronous** - create a job, then poll for results
-- You **must** include `?fields=id,status,result` when polling or the result won't be returned
-- Use empty string `""` for the root directory path (not `/`)
-- The NAS service VM must be running to browse volumes
+* The volume\_browser API is **asynchronous** - create a job, then poll for results
+* You **must** include `?fields=id,status,result` when polling or the result won't be returned
+* Use empty string `""` for the root directory path (not `/`)
+* The NAS service VM must be running to browse volumes
 {% endhint %}
 
 The `volume_browser` API provides file system browsing capabilities for NAS volumes. This is useful for automation, integrations, and building custom file management tools.
 
 ## Prerequisites
 
-- A running NAS service with at least one online volume
-- API access with appropriate permissions
-- The volume's SHA1 key identifier (found in the volume dashboard URL or API)
+* A running NAS service with at least one online volume
+* API access with appropriate permissions
+* The volume's SHA1 key identifier (found in the volume dashboard URL or API)
 
 ## How It Works
 
@@ -84,22 +87,22 @@ POST /api/v4/volume_browser
 
 ### Field Reference
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `volume` | string | Yes | Volume key (SHA1 hash identifier) |
-| `query` | string | Yes | Operation type: `get-dir`, `rename`, `delete`, `paste` |
-| `params` | object | Yes | Query parameters (see below) |
+| Field    | Type   | Required | Description                                            |
+| -------- | ------ | -------- | ------------------------------------------------------ |
+| `volume` | string | Yes      | Volume key (SHA1 hash identifier)                      |
+| `query`  | string | Yes      | Operation type: `get-dir`, `rename`, `delete`, `paste` |
+| `params` | object | Yes      | Query parameters (see below)                           |
 
 ### Params Object
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `dir` | string | Directory path to browse. Use `""` for root. |
-| `limit` | integer | Maximum number of entries to return (e.g., 1000) |
-| `offset` | integer/null | Pagination offset, `null` for first page |
-| `filter.extensions` | string | Filter by file extensions (empty string for all) |
-| `volume` | string | Volume key (must match top-level `volume`) |
-| `sort` | string | Sort field (empty string for default) |
+| Field               | Type         | Description                                      |
+| ------------------- | ------------ | ------------------------------------------------ |
+| `dir`               | string       | Directory path to browse. Use `""` for root.     |
+| `limit`             | integer      | Maximum number of entries to return (e.g., 1000) |
+| `offset`            | integer/null | Pagination offset, `null` for first page         |
+| `filter.extensions` | string       | Filter by file extensions (empty string for all) |
+| `volume`            | string       | Volume key (must match top-level `volume`)       |
+| `sort`              | string       | Sort field (empty string for default)            |
 
 ### Response
 
@@ -129,6 +132,7 @@ The `result` field is **NOT returned by default**. You must explicitly request i
 {% endhint %}
 
 **Without `?fields=id,status,result`:**
+
 ```json
 {
   "id": "9a00434b882b9933512cc9d3abfd557a182d8fd3",
@@ -139,6 +143,7 @@ The `result` field is **NOT returned by default**. You must explicitly request i
 ```
 
 **With `?fields=id,status,result`:**
+
 ```json
 {
   "id": "9a00434b882b9933512cc9d3abfd557a182d8fd3",
@@ -152,11 +157,11 @@ The `result` field is **NOT returned by default**. You must explicitly request i
 
 ### Status Values
 
-| Status | Description |
-|--------|-------------|
-| `running` | Job is still processing |
-| `complete` | Job finished successfully |
-| `error` | Job failed (check `result` for error message) |
+| Status     | Description                                   |
+| ---------- | --------------------------------------------- |
+| `running`  | Job is still processing                       |
+| `complete` | Job finished successfully                     |
+| `error`    | Job failed (check `result` for error message) |
 
 ### Polling Strategy
 
@@ -194,13 +199,13 @@ When `status` is `complete`, the `result` field contains an array of file/direct
 
 ### Entry Fields
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `name` | string | File or directory name |
-| `n_name` | string | Normalized name (lowercase) |
-| `size` | integer | Size in bytes |
-| `date` | integer | Modification time (Unix timestamp) |
-| `type` | string | `"file"` or `"directory"` |
+| Field    | Type    | Description                        |
+| -------- | ------- | ---------------------------------- |
+| `name`   | string  | File or directory name             |
+| `n_name` | string  | Normalized name (lowercase)        |
+| `size`   | integer | Size in bytes                      |
+| `date`   | integer | Modification time (Unix timestamp) |
+| `type`   | string  | `"file"` or `"directory"`          |
 
 ### Empty Directories
 
@@ -303,23 +308,23 @@ def browse_volume(base_url, token, volume_key, path=""):
 
 **Result field is empty or missing**
 
-- You must include `?fields=id,status,result` in your GET request
-- Without this parameter, only status information is returned
+* You must include `?fields=id,status,result` in your GET request
+* Without this parameter, only status information is returned
 
 **"VM must be in running state to issue a query"**
 
-- The NAS service VM is not running
-- Navigate to NAS > NAS Services and start the service
+* The NAS service VM is not running
+* Navigate to NAS > NAS Services and start the service
 
 **"Error getting volumes VM service: No such file or directory"**
 
-- The volume's NAS service doesn't exist or was deleted
-- Verify the volume is associated with a valid NAS service
+* The volume's NAS service doesn't exist or was deleted
+* Verify the volume is associated with a valid NAS service
 
-**"Resource '/v4/volume_browser/' not found"**
+**"Resource '/v4/volume\_browser/' not found"**
 
-- Empty job ID in poll request
-- Ensure you extract `$key` correctly from the POST response
+* Empty job ID in poll request
+* Ensure you extract `$key` correctly from the POST response
 {% endhint %}
 
 ### Common Mistakes
@@ -331,15 +336,15 @@ def browse_volume(base_url, token, volume_key, path=""):
 
 ## Requirements
 
-- The NAS service VM must be running to browse volumes
-- The volume must be online (mounted)
-- User must have read permissions on the volume
+* The NAS service VM must be running to browse volumes
+* The volume must be online (mounted)
+* User must have read permissions on the volume
 
 ## Additional Resources
 
-- [NAS Overview](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/nas/overview)
-- [NAS Local Volumes](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/nas/nas-local-volumes)
-- [API Keys](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/system/api-keys)
+* [NAS Overview](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/nas/overview)
+* [NAS Local Volumes](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/nas/nas-local-volumes)
+* [API Keys](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/system-administration/api-keys)
 
 ## Feedback
 

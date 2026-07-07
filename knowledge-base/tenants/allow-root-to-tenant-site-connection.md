@@ -1,18 +1,26 @@
 ---
 title: Allow Root to Tenant Site Connection
 slug: allow-root-to-tenant-site-connection
-description: How to configure a network rule on the root system's external network to allow site-to-site connectivity between the root system and a tenant.
 author: VergeOS Documentation Team
 date: 2023-09-12T15:19:47.449Z
 semantic_keywords:
-  - "root to tenant site connection rule"
-  - "DMZ translate rule external network"
-  - "tenant site connectivity root system"
-  - "allow tenant root network rule"
+  - root to tenant site connection rule
+  - DMZ translate rule external network
+  - tenant site connectivity root system
+  - allow tenant root network rule
 use_cases:
   - connect_root_system_to_tenant_site
   - enable_dmz_tenant_connectivity
   - configure_translate_rule_for_tenant_access
+categories:
+  - Network Rules
+  - Network
+  - Tenant
+editor: markdown
+dateCreated: 2023-09-12T14:48:12.332Z
+description: >-
+  How to configure a network rule on the root system's external network to allow
+  site-to-site connectivity between the root system and a tenant.
 tags:
   - routing
   - network
@@ -22,12 +30,6 @@ tags:
   - rules
   - root
   - translate
-categories:
-  - Network Rules
-  - Network
-  - Tenant
-editor: markdown
-dateCreated: 2023-09-12T14:48:12.332Z
 ---
 
 # Allow Root to Tenant Site Connection
@@ -44,35 +46,33 @@ This guide provides instructions on how to connect a root system to a tenant sit
 
 ## Prerequisites
 
-- Access to the **Root** system with administrative privileges.
-- A basic understanding of network rules and DMZ interfaces in VergeOS.
+* Access to the **Root** system with administrative privileges.
+* A basic understanding of network rules and DMZ interfaces in VergeOS.
 
 ## Steps
 
 1. **Access External Networks**
-   - In the **Root** system, navigate to the **Networks Dashboard** and then **Externals**.
-   - Double-click on the **External** network.
+   * In the **Root** system, navigate to the **Networks Dashboard** and then **Externals**.
+   * Double-click on the **External** network.
+2.  **Add the Rule**
 
-2. **Add the Rule**
-   - In the left menu, click on **Rules**.
-   - Before adding a new rule, ensure it doesn’t already exist.
-   - Click **New** in the left menu.
-   - Enter the following details:
-   
-     - **Name**: Enter a descriptive name such as "Allow Tenant to Root".
-     - **Action**: Translate.
-     - **Protocol**: ANY.
-     - **Direction**: Outgoing.
-     - **Interface**: DMZ.
-     - **Source**: Other Network Address (DMZ).
-     - **Destination**: Any/None.
-     - **Target**: My Router IP.
+    * In the left menu, click on **Rules**.
+    * Before adding a new rule, ensure it doesn’t already exist.
+    * Click **New** in the left menu.
+    * Enter the following details:
+      * **Name**: Enter a descriptive name such as "Allow Tenant to Root".
+      * **Action**: Translate.
+      * **Protocol**: ANY.
+      * **Direction**: Outgoing.
+      * **Interface**: DMZ.
+      * **Source**: Other Network Address (DMZ).
+      * **Destination**: Any/None.
+      * **Target**: My Router IP.
 
-   ![Rule Configuration](../assets/screenshots/allow-tenant-root-rule.png)
-
+    ![Rule Configuration](../.gitbook/assets/allow-tenant-root-rule.png)
 3. **Submit and Apply**
-   - Click **Submit**.
-   - In the left menu or at the top, click **Apply Rules** to activate the new rule.
+   * Click **Submit**.
+   * In the left menu or at the top, click **Apply Rules** to activate the new rule.
 
 After the rule is applied, the root system should now be able to connect to the tenant site.
 
@@ -80,13 +80,13 @@ After the rule is applied, the root system should now be able to connect to the 
 
 To verify that the rule works, follow these steps:
 
-1. From the top menu, navigate to: **Infrastructure** > **Nodes**. 
-3. **Double-click** on **Node1** or select **Node1** and click **View**.
-4. In the left menu, click on **Diagnostics**.
-5. Change the **Query** to **TCP Connection Test**.
-6. Set **Host** to the **UI IP/Host** of the tenant system.
-7. Set **Port** to **443**.
-8. Click **Send**.
+1. From the top menu, navigate to: **Infrastructure** > **Nodes**.
+2. **Double-click** on **Node1** or select **Node1** and click **View**.
+3. In the left menu, click on **Diagnostics**.
+4. Change the **Query** to **TCP Connection Test**.
+5. Set **Host** to the **UI IP/Host** of the tenant system.
+6. Set **Port** to **443**.
+7. Click **Send**.
 
 The **Response** should say **Connection successful**. If the connection fails, review the rule to ensure accuracy, particularly ensuring that the **Interface** is set to **DMZ** rather than **Auto**.
 
@@ -95,14 +95,14 @@ The **Response** should say **Connection successful**. If the connection fails, 
 {% hint style="warning" %}
 **Common Issues**
 
-- **Issue:** Connection test fails.
-  - **Solution:** Double-check that the rule is configured correctly, especially the interface settings. Also, ensure there are no blocking rules that could prevent the connection.
+* **Issue:** Connection test fails.
+  * **Solution:** Double-check that the rule is configured correctly, especially the interface settings. Also, ensure there are no blocking rules that could prevent the connection.
 {% endhint %}
 
 ## Additional Resources
 
-- [Network Overview](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/networks/network-overview)
-- [Tenant Management](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/tenants/create-tenants)
+* [Network Overview](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/networking/network-overview)
+* [Tenant Management](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/tenants/create-tenants)
 
 ## Feedback
 
@@ -112,11 +112,11 @@ The **Response** should say **Connection successful**. If the connection fails, 
 If you encounter any issues while setting up the root-to-tenant site connection, or have any questions, feel free to contact our support team.
 {% endhint %}
 
----
+***
 
 {% hint style="info" %}
 **Document Information**
 
-- Last Updated: 2023-09-12
-- VergeOS Version: 4.12.6
+* Last Updated: 2023-09-12
+* VergeOS Version: 4.12.6
 {% endhint %}

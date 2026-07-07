@@ -1,19 +1,28 @@
 ---
 title: Understanding VergeOS VM Memory Management
 slug: guest-memory-management
-description: Explains why VergeOS shows allocated memory rather than active usage, the benefits of no memory ballooning, and best practices for memory monitoring and capacity planning.
 author: VergeOS Documentation Team
 date: 2025-08-15T18:30:00.000Z
 semantic_keywords:
-  - "vm memory allocation vs usage reporting"
-  - "memory ballooning elimination predictable performance"
-  - "capacity planning memory monitoring best practices"
-  - "workload migration guaranteed memory availability"
+  - vm memory allocation vs usage reporting
+  - memory ballooning elimination predictable performance
+  - capacity planning memory monitoring best practices
+  - workload migration guaranteed memory availability
 use_cases:
   - vm_memory_capacity_planning
   - memory_allocation_monitoring
   - vm_right_sizing_optimization
   - migration_reliability_assessment
+categories:
+  - Virtual Machines
+  - System Administration
+  - Performance
+editor: markdown
+dateCreated: 2025-08-15T18:30:00.000Z
+description: >-
+  Explains why VergeOS shows allocated memory rather than active usage, the
+  benefits of no memory ballooning, and best practices for memory monitoring and
+  capacity planning.
 tags:
   - memory management
   - vm
@@ -23,12 +32,6 @@ tags:
   - performance
   - monitoring
   - hypervisor
-categories:
-  - Virtual Machines
-  - System Administration
-  - Performance
-editor: markdown
-dateCreated: 2025-08-15T18:30:00.000Z
 ---
 
 # Understanding VergeOS VM Memory Management
@@ -39,11 +42,11 @@ VergeOS takes a different approach to virtual machine memory management compared
 
 ## What You'll Learn
 
-- Why VergeOS shows allocated memory rather than active memory usage
-- How VergeOS memory management differs from memory ballooning platforms
-- The performance and reliability benefits of VergeOS's approach
-- Best practices for monitoring memory across host and guest levels
-- How this design improves capacity planning and workload migration reliability
+* Why VergeOS shows allocated memory rather than active memory usage
+* How VergeOS memory management differs from memory ballooning platforms
+* The performance and reliability benefits of VergeOS's approach
+* Best practices for monitoring memory across host and guest levels
+* How this design improves capacity planning and workload migration reliability
 
 ## Key Concepts
 
@@ -67,18 +70,18 @@ VergeOS displays this reserved/allocated memory because it represents the actual
 
 VergeOS intentionally avoids memory ballooning techniques used by other virtualization platforms. Key characteristics include:
 
-- **Allocated vs. Used**: VergeOS shows what's allocated to each VM, which typically isn't the same as guest-level usage
-- **Performance First**: This eliminates ballooning overhead and complexity
-- **Predictable Resource Allocation**: What you see is exactly what's reserved on the physical host
+* **Allocated vs. Used**: VergeOS shows what's allocated to each VM, which typically isn't the same as guest-level usage
+* **Performance First**: This eliminates ballooning overhead and complexity
+* **Predictable Resource Allocation**: What you see is exactly what's reserved on the physical host
 
 ### Traditional Ballooning Approach
 
 Many virtualization platforms use memory ballooning drivers that:
 
-- Dynamically report memory usage to the hypervisor
-- Allow memory "overcommitment" by sharing unused memory between VMs
-- Require special drivers (balloon drivers) within each guest OS
-- Create complexity in memory management and potential performance impacts
+* Dynamically report memory usage to the hypervisor
+* Allow memory "overcommitment" by sharing unused memory between VMs
+* Require special drivers (balloon drivers) within each guest OS
+* Create complexity in memory management and potential performance impacts
 
 ## Benefits of VergeOS's Memory Management Design
 
@@ -89,16 +92,18 @@ By eliminating balloon driver overhead, VergeOS provides more predictable VM per
 ### 2. Simplified Capacity Planning
 
 With clear allocation visibility, administrators can easily calculate:
-- Total memory committed across all VMs
-- Available memory capacity for new workloads
-- Resource utilization without complex ballooning calculations
+
+* Total memory committed across all VMs
+* Available memory capacity for new workloads
+* Resource utilization without complex ballooning calculations
 
 ### 3. Enhanced Reliability
 
 VergeOS avoids dynamic memory management issues that can occur with ballooning, such as:
-- Memory reclamation delays
-- Guest OS memory pressure during balloon inflation
-- Potential application instability during memory operations
+
+* Memory reclamation delays
+* Guest OS memory pressure during balloon inflation
+* Potential application instability during memory operations
 
 ### 4. Guaranteed Migration Success
 
@@ -117,18 +122,20 @@ Memory ballooning can create unpredictable migration scenarios. When VMs that ap
 ### Host-Level Monitoring (VergeOS Dashboard)
 
 Use VergeOS dashboards to monitor:
-- **Total allocated memory** across all VMs on each node
-- **Available physical memory** for new VM deployments  
-- **Memory utilization trends** for capacity planning
-- **Node memory status** during maintenance and migration operations
+
+* **Total allocated memory** across all VMs on each node
+* **Available physical memory** for new VM deployments
+* **Memory utilization trends** for capacity planning
+* **Node memory status** during maintenance and migration operations
 
 ### Guest-Level Monitoring
 
 Within each VM, use appropriate tools to monitor:
-- **Application memory consumption** for performance tuning
-- **Operating system memory usage** for optimization
-- **Memory leaks or excessive usage** by specific processes
-- **Guest-level performance metrics** for troubleshooting
+
+* **Application memory consumption** for performance tuning
+* **Operating system memory usage** for optimization
+* **Memory leaks or excessive usage** by specific processes
+* **Guest-level performance metrics** for troubleshooting
 
 ### Combined Monitoring Strategy
 
@@ -143,9 +150,9 @@ For comprehensive memory management:
 
 Consider this scenario:
 
-- **VM Allocated Memory**: 8GB (shown in VergeOS)
-- **Windows Task Manager**: Shows 3GB used
-- **Physical Host**: Has 8GB reserved for this VM
+* **VM Allocated Memory**: 8GB (shown in VergeOS)
+* **Windows Task Manager**: Shows 3GB used
+* **Physical Host**: Has 8GB reserved for this VM
 
 This is normal and expected behavior. The VergeOS dashboard correctly shows that 8GB of physical memory is committed to this VM, while the guest OS shows its internal usage of that allocated memory.
 
@@ -179,32 +186,31 @@ For memory-related performance problems:
 
 ### Right-Sizing Virtual Machines
 
-- Start with manufacturer-recommended memory allocations
-- Monitor guest-level usage over time to identify optimization opportunities  
-- Avoid significant over-allocation that wastes physical resources
-- Leave adequate buffer for memory spikes and growth
+* Start with manufacturer-recommended memory allocations
+* Monitor guest-level usage over time to identify optimization opportunities
+* Avoid significant over-allocation that wastes physical resources
+* Leave adequate buffer for memory spikes and growth
 
 ### Capacity Planning
 
-- Plan physical memory capacity based on total VM allocations, not guest usage
-- Account for hypervisor overhead and system memory requirements
-- Maintain 10-15% free capacity for maintenance and unexpected demand
-- Consider future growth when sizing new nodes
+* Plan physical memory capacity based on total VM allocations, not guest usage
+* Account for hypervisor overhead and system memory requirements
+* Maintain 10-15% free capacity for maintenance and unexpected demand
+* Consider future growth when sizing new nodes
 
 ### Performance Optimization
 
-- Allocate sufficient memory to avoid guest OS memory pressure
-- Use memory monitoring tools within VMs to identify optimization opportunities
-- Consider workload patterns when planning memory allocation
-- Test application performance with different memory allocations
+* Allocate sufficient memory to avoid guest OS memory pressure
+* Use memory monitoring tools within VMs to identify optimization opportunities
+* Consider workload patterns when planning memory allocation
+* Test application performance with different memory allocations
 
 ## Next Steps
 
 To deepen your understanding of VergeOS memory management:
 
-- **[Node Resource Monitoring](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/system/nodes-overview)**: Learn to monitor physical node resources
-- **[VM Performance Optimization](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/virtual-machines/vm-best-practices)**: Discover techniques for optimizing VM performance
-<!--- **[Capacity Planning Guide](../storage-vsan/understanding-and-explaining-unexpected-vsan-growth.md)**: Understand resource planning across compute and storage -->
+* [**Node Resource Monitoring**](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/system-administration/nodes-overview): Learn to monitor physical node resources
+* [**VM Performance Optimization**](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/virtual-machines/vm-best-practices): Discover techniques for optimizing VM performance
 
 {% hint style="info" %}
 **Additional Resources**
@@ -212,11 +218,11 @@ To deepen your understanding of VergeOS memory management:
 For specific questions about memory allocation in your environment, consult the VergeOS support team at support@verge.io or review the performance monitoring sections in the product documentation.
 {% endhint %}
 
----
+***
 
 {% hint style="info" %}
 **Document Information**
 
-- Last Updated: 2024-08-15
-- VergeOS Version: 4.12.6+
+* Last Updated: 2024-08-15
+* VergeOS Version: 4.12.6+
 {% endhint %}

@@ -1,29 +1,31 @@
 ---
 title: Adding Tier 0 to an Existing System
 slug: adding-tier-zero
-description: Step-by-step guide for adding Tier 0 metadata storage to an existing VergeOS system that was not configured with Tier 0 during initial installation.
 author: VergeOS Documentation Team
 date: 2024-11-25T18:16:54.516Z
 semantic_keywords:
-  - "tier 0 metadata storage post-installation"
-  - "add vsan tier after install"
-  - "vsan diagnostics add drive"
-  - "controller node storage configuration"
+  - tier 0 metadata storage post-installation
+  - add vsan tier after install
+  - vsan diagnostics add drive
+  - controller node storage configuration
 use_cases:
   - add_tier_0_to_existing_system
   - post_installation_storage_configuration
   - vsan_metadata_tier_setup
+categories:
+  - Storage
+  - vSAN
+editor: markdown
+dateCreated: 2024-11-25T18:16:54.516Z
+description: >-
+  Step-by-step guide for adding Tier 0 metadata storage to an existing VergeOS
+  system that was not configured with Tier 0 during initial installation.
 tags:
   - tier
   - storage
   - configuration
   - meta
   - metadata
-categories:
-  - Storage
-  - vSAN
-editor: markdown
-dateCreated: 2024-11-25T18:16:54.516Z
 ---
 
 # Adding Tier 0 to an Existing System
@@ -33,9 +35,9 @@ dateCreated: 2024-11-25T18:16:54.516Z
 {% hint style="info" %}
 **Key Points**
 
-- Tier 0 is normally configured during initial installation
-- This procedure is for special cases requiring post-installation configuration
-- Requires careful attention to device paths and hardware compatibility
+* Tier 0 is normally configured during initial installation
+* This procedure is for special cases requiring post-installation configuration
+* Requires careful attention to device paths and hardware compatibility
 {% endhint %}
 
 This guide outlines the process for adding Tier 0 storage to an existing VergeOS system. While Tier 0 is typically configured during installation, these steps provide a method for adding it to production systems that cannot be reinstalled.
@@ -43,18 +45,18 @@ This guide outlines the process for adding Tier 0 storage to an existing VergeOS
 {% hint style="danger" %}
 **Critical Warning**
 
-- This procedure should only be performed by qualified VergeOS engineers or under direct support guidance
-- Selected devices will be formatted and all existing data will be destroyed
-- Incorrect device path selection can seriously damage your system
+* This procedure should only be performed by qualified VergeOS engineers or under direct support guidance
+* Selected devices will be formatted and all existing data will be destroyed
+* Incorrect device path selection can seriously damage your system
 {% endhint %}
 
 ## Prerequisites
 
 Before beginning this procedure, ensure:
 
-- Storage devices are physically installed in the system
-- Tier 0 devices are consistent across controller nodes
-- Hardware meets specifications from the [Node Sizing Guide](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/implementation-guide/sizing)
+* Storage devices are physically installed in the system
+* Tier 0 devices are consistent across controller nodes
+* Hardware meets specifications from the [Node Sizing Guide](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/implementation-guide/sizing)
 
 ## Steps
 
@@ -64,10 +66,10 @@ Before beginning this procedure, ensure:
 2. Select **Get Node Device List** from the Query dropdown
 3. Click **Send**
 4. Identify unused devices (marked as "vsan = false")
-5. Note the device paths (/dev/sd*) for each controller node
+5. Note the device paths (/dev/sd\*) for each controller node
 
 {% hint style="success" %}
-Verify current vSAN drive assignments by checking **vSAN Tiers > [select tier] > Drives** to avoid selecting drives already in use.
+Verify current vSAN drive assignments by checking **vSAN Tiers > \[select tier] > Drives** to avoid selecting drives already in use.
 {% endhint %}
 
 ### 2. Add Drives to Tier 0
@@ -75,30 +77,30 @@ Verify current vSAN drive assignments by checking **vSAN Tiers > [select tier] >
 For each drive:
 
 1. In vSAN Diagnostics:
-    - Set Query to **Add Drive to vSAN**
-    - Select the appropriate **Node** (node0 or node1)
-    - Enter the correct **Path** for the device
-    - Set **Tier** to **Tier 0**
-    - Configure **Swap** setting
+   * Set Query to **Add Drive to vSAN**
+   * Select the appropriate **Node** (node0 or node1)
+   * Enter the correct **Path** for the device
+   * Set **Tier** to **Tier 0**
+   * Configure **Swap** setting
 
 {% hint style="warning" %}
 **Swap Configuration**
 
-- Enable swap on only ONE storage tier
-- If swap is enabled on another tier, disable it for Tier 0
-- Contact VergeOS Support for guidance on swap configuration if needed
+* Enable swap on only ONE storage tier
+* If swap is enabled on another tier, disable it for Tier 0
+* Contact VergeOS Support for guidance on swap configuration if needed
 {% endhint %}
 
-2. Enter the verification phrase: *Yes I know what I'm doing*
+2. Enter the verification phrase: _Yes I know what I'm doing_
 3. Click **Send** to execute
 
 ### 3. Verify Configuration
 
 1. Monitor the system dashboard for tier status
-   - Status will show "online-no redundancy" during meta migration
+   * Status will show "online-no redundancy" during meta migration
 2. Refresh node information:
-   - Navigate to each controller node's dashboard
-   - Select **Refresh > Drives & NICs**
+   * Navigate to each controller node's dashboard
+   * Select **Refresh > Drives & NICs**
 
 ## Post-Configuration
 
@@ -106,15 +108,14 @@ Monitor the vSAN tier status in the system dashboard. The tier should transition
 
 ## Additional Resources
 
-- [vSAN Architecture Overview](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/storage/vsan-architecture)
-<!--- [Storage Management](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/) -->
-- [Node Sizing Guide](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/implementation-guide/sizing)
+* [vSAN Architecture Overview](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/storage/vsan-architecture)
+* [Node Sizing Guide](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/implementation-guide/sizing)
 
----
+***
 
 {% hint style="info" %}
 **Document Information**
 
-- Last Updated: 2024-11-25
-- VergeOS Version: 4.13
+* Last Updated: 2024-11-25
+* VergeOS Version: 4.13
 {% endhint %}

@@ -1,28 +1,30 @@
 ---
 title: Scaling Down a vSAN (Removing Drives)
 slug: scaling-down-a-vsan
-description: How to request a vSAN scale-down (drive removal) through VergeOS Support, including what to prepare before opening a ticket.
 author: VergeOS Documentation Team
-date: 2026-04-20
+date: 2026-04-20T00:00:00.000Z
 semantic_keywords:
-  - "vsan scale down remove drives"
-  - "reduce vsan storage capacity"
-  - "remove drives from vsan tier"
-  - "shrink vsan storage support ticket"
+  - vsan scale down remove drives
+  - reduce vsan storage capacity
+  - remove drives from vsan tier
+  - shrink vsan storage support ticket
 use_cases:
   - scale_down_vsan_storage
   - remove_drives_from_vsan
   - reduce_storage_capacity
+categories:
+  - vSAN
+editor: markdown
+dateCreated: 2026-04-20T00:00:00.000Z
+description: >-
+  How to request a vSAN scale-down (drive removal) through VergeOS Support,
+  including what to prepare before opening a ticket.
 tags:
   - vsan
   - storage
   - scale down
   - drives
   - support
-categories:
-  - vSAN
-editor: markdown
-dateCreated: 2026-04-20
 ---
 
 # Scaling Down a vSAN (Removing Drives)
@@ -32,9 +34,9 @@ dateCreated: 2026-04-20
 {% hint style="info" %}
 **Key Points**
 
-- Removing drives from a vSAN tier is **not a self-service operation**
-- Drive removal must be coordinated with VergeOS Support
-- The process requires data redistribution across the remaining drives before any drives can be safely removed
+* Removing drives from a vSAN tier is **not a self-service operation**
+* Drive removal must be coordinated with VergeOS Support
+* The process requires data redistribution across the remaining drives before any drives can be safely removed
 {% endhint %}
 
 Scaling down a vSAN (removing physical drives to reduce storage capacity) is fundamentally different from [scaling up](scaling-up-a-vsan.md). Adding drives is an additive, low-risk operation. Removing them requires the system to first safely redistribute all data off the target drives, which involves careful coordination to avoid disruption or data loss.
@@ -55,12 +57,12 @@ If any of these steps are rushed or sequenced incorrectly, the vSAN tier can ent
 
 Gathering the following information in advance will help Support scope the request and schedule the work:
 
-- **Why you need to scale down** — repurposing drives, tier restructuring, etc.
-- **Which tier** the drives belong to (Tier 0, Tier 1, Tier 2, etc.)
-- **Number and size of drives** to be removed per node
-- **Current tier capacity and usage** — available in the VergeOS UI under **Infrastructure > vSAN Tiers**
-- **Current vSAN tier status** — confirm the tier is green/healthy before the call
-- **Preferred maintenance window** — drive removal and data redistribution may take hours to complete depending on data volume
+* **Why you need to scale down** — repurposing drives, tier restructuring, etc.
+* **Which tier** the drives belong to (Tier 0, Tier 1, Tier 2, etc.)
+* **Number and size of drives** to be removed per node
+* **Current tier capacity and usage** — available in the VergeOS UI under **Infrastructure > vSAN Tiers**
+* **Current vSAN tier status** — confirm the tier is green/healthy before the call
+* **Preferred maintenance window** — drive removal and data redistribution may take hours to complete depending on data volume
 
 ## Initiating the Request
 
@@ -78,15 +80,15 @@ Once the request is scheduled, Support will:
 
 ## Related Documentation
 
-- [vSAN Scale Up Guide](scaling-up-a-vsan.md) — the inverse operation, which is self-service
-- [vSAN Scale Up SOP](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/operations/vsan-scale-up-sop) — preparation and verification best practices for storage operations
-- [vSAN Architecture Overview](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/storage/vsan-architecture)
+* [vSAN Scale Up Guide](scaling-up-a-vsan.md) — the inverse operation, which is self-service
+* [vSAN Scale Up SOP](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/operations/vsan-scale-up-sop) — preparation and verification best practices for storage operations
+* [vSAN Architecture Overview](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/storage/vsan-architecture)
 
----
+***
 
 {% hint style="info" %}
 **Document Information**
 
-- Last Updated: 2026-04-20
-- VergeOS Version: 4.13
+* Last Updated: 2026-04-20
+* VergeOS Version: 4.13
 {% endhint %}
