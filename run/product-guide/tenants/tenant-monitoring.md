@@ -1,16 +1,20 @@
 ---
-title: "Monitoring Tenants"
-description: "Guide to monitoring tenants using dashboards, usage statistics, logs, and email subscriptions for alerts and scheduled reports."
+title: Monitoring Tenants
 semantic_keywords:
-  - "monitor tenant dashboard usage statistics VergeOS"
-  - "tenant CPU RAM storage network usage tracking"
-  - "tenant subscription alerts reports notifications"
-  - "tenant storage provisioned used allocated monitoring"
+  - monitor tenant dashboard usage statistics VergeOS
+  - tenant CPU RAM storage network usage tracking
+  - tenant subscription alerts reports notifications
+  - tenant storage provisioned used allocated monitoring
 use_cases:
-  - "monitor_tenant_resource_usage"
-  - "configure_tenant_alert_subscriptions"
-  - "review_tenant_dashboard_statistics"
-  - "track_tenant_storage_utilization"
+  - monitor_tenant_resource_usage
+  - configure_tenant_alert_subscriptions
+  - review_tenant_dashboard_statistics
+  - track_tenant_storage_utilization
+categories:
+  - Tenants
+description: >-
+  Guide to monitoring tenants using dashboards, usage statistics, logs, and
+  email subscriptions for alerts and scheduled reports.
 tags:
   - tenants
   - monitoring
@@ -18,25 +22,23 @@ tags:
   - subscriptions
   - usage-statistics
   - alerts
-categories:
-  - Tenants
 ---
 
 # Monitoring Tenants
 
 This page discusses the use of dashboards and subscriptions to oversee tenants. Dashboards provide a lot of helpful information about tenants. Subscriptions allow for sending reports and on-demand alerts based upon various events.
 
-## The *All-Tenants Dashboard* (summary info)
+## The _All-Tenants Dashboard_ (summary info)
 
-The *All-Tenants Dashboard* provides an overview of tenants with links to drill down to more detailed information.
+The _All-Tenants Dashboard_ provides an overview of tenants with links to drill down to more detailed information.
 
-**To access the *All-Tenants Dashboard*:**
+**To access the&#x20;**_**All-Tenants Dashboard**_**:**
 
 Click **Tenants** on the top menu and select **Dashboard** **-OR-** click the Tenants card on the Main Dashboard Page.
 
 ### Counts/Status Indicators
 
-In the top left of the *All-Tenants Dashboard*, counts and status indicators will show the number of tenants powered on/total number of tenants; and the number of tenant nodes powered on/total number of tenant nodes. These count boxes are clickable to access the list of tenants or list of tenant nodes, respectively.
+In the top left of the _All-Tenants Dashboard_, counts and status indicators will show the number of tenants powered on/total number of tenants; and the number of tenant nodes powered on/total number of tenant nodes. These count boxes are clickable to access the list of tenants or list of tenant nodes, respectively.
 
 ### Usage
 
@@ -48,16 +50,15 @@ Each tenant has its own dashboard to show configuration and summary information 
 
 **To access a particular tenant's dashboard:**
 
-1. From the *All-Tenants Dashboard*, click **Tenants**.
+1. From the _All-Tenants Dashboard_, click **Tenants**.
 2. **Double-click** on the **desired tenant** in the list.
 
 ### Understanding Storage Used/Provisioned/Allocated
 
-* **Provisioned** - the amount of (post-deduplication) storage that has been specified as available to the tenant. A tenant's provisioned storage is not a hard limit. However, log alerts are triggered based on this threshold; monitor the *All-Tenants Dashboard* and Logs for warnings and alerts.
-
+* **Provisioned** - the amount of (post-deduplication) storage that has been specified as available to the tenant. A tenant's provisioned storage is not a hard limit. However, log alerts are triggered based on this threshold; monitor the _All-Tenants Dashboard_ and Logs for warnings and alerts.
 * **Used** - reflects the tenant's actual consumed storage, after deduplication.
-
 * **Allocated** - identifies the top amount of storage that would be utilized should all the tenant's disk devices be filled to capacity. The amount of allocated storage can often show a much larger number than used or provisioned because device files are thin provisioned; the amount of storage allocated to a VM drive/NAS volume is not consumed by the vSAN until actually used, e.g. a 4TB VM drive that only contains 200GB of data has 4TB allocated, but only uses 200GB (minus any deduplication) of vSAN space
+
 {% hint style="info" %}
 **Tenant Storage and Deduplication**
 
@@ -86,14 +87,14 @@ The Subscription engine allows you to customize how and when you receive reports
 
 ### I. Example configuration - receive alerts for any status errors or warnings related to tenants:
 
-![tenantssubscription-alert](../../assets/screenshots/tenantssubscription-alert.png)
+![tenantssubscription-alert](../../.gitbook/assets/tenantssubscription-alert.png)
 
 ### II. Example configuration - 7:15 am daily report of the All-Tenants Dashboard (overview information):
 
-![tenantssubscription-report](../../assets/screenshots/tenantssubscription-report.png)
+![tenantssubscription-report](../../.gitbook/assets/tenantssubscription-report.png)
 
 ### III. Example configuration - weekly report (to the Administrators Group) showing summary information for a specific tenant:
 
-![singletenantsubscription-report](../../assets/screenshots/singletenantsubscription-report.png)
+![singletenantsubscription-report](../../.gitbook/assets/singletenantsubscription-report.png)
 
 There are many options available when creating subscriptions. For more information see: [**Subscriptions-Overview**](../system/subscriptions-overview.md)

@@ -1,18 +1,27 @@
 ---
 title: Understanding vSAN Redundancy Levels
-description: Learn about VergeOS vSAN N+1 and N+2 redundancy levels, their requirements, use cases, and considerations
 semantic_keywords:
-  - "vSAN N+1 N+2 redundancy replication factor"
-  - "RF2 RF3 fault tolerance node failure"
-  - "data block copies redundancy configuration"
-  - "storage redundancy level comparison VergeOS"
+  - vSAN N+1 N+2 redundancy replication factor
+  - RF2 RF3 fault tolerance node failure
+  - data block copies redundancy configuration
+  - storage redundancy level comparison VergeOS
 use_cases:
   - redundancy_level_selection
   - fault_tolerance_planning
   - n_plus_2_upgrade_evaluation
   - tier_redundancy_status_monitoring
-tags: [vsan, storage, redundancy, fault tolerance, data-protection]
-categories: [Storage, vSAN]
+categories:
+  - Storage
+  - vSAN
+description: >-
+  Learn about VergeOS vSAN N+1 and N+2 redundancy levels, their requirements,
+  use cases, and considerations
+tags:
+  - vsan
+  - storage
+  - redundancy
+  - fault tolerance
+  - data-protection
 ---
 
 # Understanding vSAN Redundancy Levels
@@ -22,9 +31,9 @@ categories: [Storage, vSAN]
 {% hint style="info" %}
 **Key Points**
 
-- **N+1 / RF2** (default) maintains 2 copies of every data block and can survive one simultaneous node failure. N+1 provides robust protection suitable for most production environments.
-- **N+2 / RF3** maintains 3 copies of every data block and can survive two simultaneous failures.
-- Redundancy is configured per system and applies per vSAN tier.
+* **N+1 / RF2** (default) maintains 2 copies of every data block and can survive one simultaneous node failure. N+1 provides robust protection suitable for most production environments.
+* **N+2 / RF3** maintains 3 copies of every data block and can survive two simultaneous failures.
+* Redundancy is configured per system and applies per vSAN tier.
 {% endhint %}
 
 VergeOS vSAN supports configurable redundancy levels — also known as **Replication Factors (RF)** — that determine how many copies of each data block are maintained across the system. Choosing the right level is a balance between fault tolerance, storage overhead, and infrastructure cost.
@@ -33,30 +42,30 @@ VergeOS vSAN supports configurable redundancy levels — also known as **Replica
 
 N+1 redundancy maintains **2 copies** of every data block in the vSAN. This allows a cluster to survive **one simultaneous failure** — either a node failure or drive failures within a single node.
 
-| Requirement | Detail |
-|---|---|
-| **Minimum Nodes** | 2 controller nodes |
-| **Copies of Data** | 2 |
-| **Storage Overhead** | ~2x (before deduplication) |
+| Requirement          | Detail                      |
+| -------------------- | --------------------------- |
+| **Minimum Nodes**    | 2 controller nodes          |
+| **Copies of Data**   | 2                           |
+| **Storage Overhead** | \~2x (before deduplication) |
 
 ### When to Use N+1
 
 VergeOS N+1 is the default configuration and well suited for most scenarios. It provides a strong balance between capacity efficiency and fault tolerance and is appropriate for many production environments when combined with best practices for data protection such as regular snapshots and off-site data replication.
 
 {% hint style="success" %}
-For additional protection, a [Repair Server](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/product-guide/backup-dr/repair-server) can be configured to automatically attempt to retrieve missing data blocks from a sync destination if failures exceed the configured redundancy level, potentially avoiding a full snapshot rollback.
+For additional protection, a [Repair Server](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/backup-and-dr/repair-server) can be configured to automatically attempt to retrieve missing data blocks from a sync destination if failures exceed the configured redundancy level, potentially avoiding a full snapshot rollback.
 {% endhint %}
 
 ## N+2 Redundancy (RF3)
 
 N+2 vSAN redundancy is available for environments that have a specific requirement to maintain **3 copies** of every data block and/or for a system to survive **two simultaneous failures**. N+2 can survive two simultaneous node failures, disk failures across two nodes, or a combination of both.
 
-| Requirement | Detail |
-|---|---|
-| **Minimum Nodes** | 3 (all controller nodes) |
+| Requirement           | Detail                                                                |
+| --------------------- | --------------------------------------------------------------------- |
+| **Minimum Nodes**     | 3 (all controller nodes)                                              |
 | **Recommended Nodes** | 5 (provides a witness node to completely avoid split-brain scenarios) |
-| **Copies of Data** | 3 |
-| **Storage Overhead** | ~3x (before deduplication) |
+| **Copies of Data**    | 3                                                                     |
+| **Storage Overhead**  | \~3x (before deduplication)                                           |
 
 ### When to Use N+2
 
@@ -85,25 +94,25 @@ To check the current redundancy configuration and status of a vSAN tier:
 1. Navigate to **Infrastructure** > **vSAN Tiers** from the top menu.
 2. Double-click the desired tier to open its dashboard.
 3. Locate the **Status** card:
-      - **Redundancy** — Displays the configured redundancy level (e.g., N+1 with 2 copies, N+2 with 3 copies).
-      - **Redundant** checkbox — Indicates whether the tier is currently meeting its configured redundancy level. This will be unchecked if any nodes or tier drives are down.
+   * **Redundancy** — Displays the configured redundancy level (e.g., N+1 with 2 copies, N+2 with 3 copies).
+   * **Redundant** checkbox — Indicates whether the tier is currently meeting its configured redundancy level. This will be unchecked if any nodes or tier drives are down.
 
 ## Quick Comparison
 
-| Feature | N+1 (RF2) | N+2 (RF3) |
-|---|---|---|
-| Copies of data | 2 | 3 |
-| Simultaneous failures tolerated | 1 | 2 |
-| Minimum controller nodes | 2 | 3 |
-| Recommended nodes | 3 | 5 |
-| Storage overhead (before dedup) | ~2x | ~3x |
-| Default  | Yes | No |
+| Feature                         | N+1 (RF2) | N+2 (RF3) |
+| ------------------------------- | --------- | --------- |
+| Copies of data                  | 2         | 3         |
+| Simultaneous failures tolerated | 1         | 2         |
+| Minimum controller nodes        | 2         | 3         |
+| Recommended nodes               | 3         | 5         |
+| Storage overhead (before dedup) | \~2x      | \~3x      |
+| Default                         | Yes       | No        |
 
----
+***
 
 {% hint style="info" %}
 **Document Information**
 
-- Last Updated: 2026-03-03
-- VergeOS Version: 26.1.2
+* Last Updated: 2026-03-03
+* VergeOS Version: 26.1.2
 {% endhint %}

@@ -1,17 +1,22 @@
 ---
-title: "Using the Virtual Machine Remote Console"
-description: "Guide to using the VergeOS VM remote console for direct keyboard and mouse interaction, including toolbar features, clipboard, power controls, and extra keys."
+title: Using the Virtual Machine Remote Console
 semantic_keywords:
-  - "VM remote console keyboard mouse access"
-  - "virtual machine console toolbar controls"
-  - "clipboard paste text into VM console"
-  - "power reset ACPI kill VM from console"
-  - "full screen virtual keyboard mobile console"
+  - VM remote console keyboard mouse access
+  - virtual machine console toolbar controls
+  - clipboard paste text into VM console
+  - power reset ACPI kill VM from console
+  - full screen virtual keyboard mobile console
 use_cases:
   - access_vm_remote_console
   - use_console_clipboard
   - control_vm_power_from_console
   - use_console_on_mobile_device
+categories:
+  - Virtual Machines
+description: >-
+  Guide to using the VergeOS VM remote console for direct keyboard and mouse
+  interaction, including toolbar features, clipboard, power controls, and extra
+  keys.
 tags:
   - virtual-machines
   - remote-console
@@ -20,66 +25,78 @@ tags:
   - clipboard
   - power-controls
   - toolbar
-categories:
-  - Virtual Machines
 ---
 
 # Using the Virtual Machine Remote Console
 
 The remote console provides direct interaction (mouse/keyboard) with Virtual Machines.
 
-![vdi-console.png](../../assets/screenshots/vdi-console.png)
+![vdi-console.png](../../.gitbook/assets/vdi-console.png)
 
 ## Console Toolbar
-All toolbar options, except the *Exit* button, work as a toggle, switching between on/open or off/closed. For example: clicking the chat button opens the chat window, and clicking the button again closes the chat window. A button is orange when on/open; white when off/closed.
 
-#### ![exiticon.png](../../assets/screenshots/exiticon.png) Exit
+All toolbar options, except the _Exit_ button, work as a toggle, switching between on/open or off/closed. For example: clicking the chat button opens the chat window, and clicking the button again closes the chat window. A button is orange when on/open; white when off/closed.
+
+#### ![exiticon.png](../../.gitbook/assets/exiticon.png) Exit
+
 Exits the console and returns to the previous screen.
 
-####  ![expandconsole-icon.png](../../assets/screenshots/expandconsole-icon.png) Expand console
+#### ![expandconsole-icon.png](../../.gitbook/assets/expandconsole-icon.png) Expand console
+
 Activates/deactivates the console's full-screen option (expand to entire browser tab)
 
-#### ![virtkeyboard-icon.png](../../assets/screenshots/virtkeyboard-icon.png) Virtual Keyboard
+#### ![virtkeyboard-icon.png](../../.gitbook/assets/virtkeyboard-icon.png) Virtual Keyboard
+
 Provides a virtual keyboard on devices that do not have a physical keyboard (cellphones, tablets, etc.)
 
-#### ![dragview-icon.png](../../assets/screenshots/dragview-icon.png) Drag view port
+#### ![dragview-icon.png](../../.gitbook/assets/dragview-icon.png) Drag view port
+
 Alows moving the viewable portion of the console when the guest system screen exceeds the viewable area.
 
-#### ![browserfullscreen-icon.png](../../assets/screenshots/browserfullscreen-icon.png) Toggle Browser Full Screen
+#### ![browserfullscreen-icon.png](../../.gitbook/assets/browserfullscreen-icon.png) Toggle Browser Full Screen
+
 Activates/deactivates the browser's full-screen option.
 
-#### ![eject-icon.png](../../assets/screenshots/eject-icon.png) Change/Eject CD-ROM
+#### ![eject-icon.png](../../.gitbook/assets/eject-icon.png) Change/Eject CD-ROM
+
 Toggles the view of the CD-ROM selection form, where an \*.iso file is selected.
 
-#### ![clipboard-icon.png](../../assets/screenshots/clipboard-icon.png) Clipboard
+#### ![clipboard-icon.png](../../.gitbook/assets/clipboard-icon.png) Clipboard
+
 Opens the clipboard window where text can be placed to insert into the Virtual Machine.
-   - The **Close** button will close the Clipboard window (can also be closed by clicking the Clipboard button again).
-   - The **Clear** button clears current contents from the Clipboard.
-   - The **Paste in Console** button pastes the Clipboard contents into the console at the current cursor position. 
+
+* The **Close** button will close the Clipboard window (can also be closed by clicking the Clipboard button again).
+* The **Clear** button clears current contents from the Clipboard.
+* The **Paste in Console** button pastes the Clipboard contents into the console at the current cursor position.
 
 {% hint style="info" %}
 Wait until all contents have successfully pasted into the console before performing any other clipboard operations, typing, or moving cursor within the VM.
 {% endhint %}
 
-#### ![power-icon.png](../../assets/screenshots/power-icon.png) Power
+#### ![power-icon.png](../../.gitbook/assets/power-icon.png) Power
+
 Opens/closes the power buttons window:
-   - **\[Reset\]** - restarts the VM operating system; does not power down the virtual hardware.
-   - **\[ACPI\]** - Power down (graceful)
-   - **\[Kill\]** - Power down (ungraceful) - use as a last resort when guest OS is locked and graceful shutdown is not an option.
-    
-#### ![extrakeys-icon.png](../../assets/screenshots/extrakeys-icon.png) Extra Keys
+
+* **\[Reset]** - restarts the VM operating system; does not power down the virtual hardware.
+* **\[ACPI]** - Power down (graceful)
+* **\[Kill]** - Power down (ungraceful) - use as a last resort when guest OS is locked and graceful shutdown is not an option.
+
+#### ![extrakeys-icon.png](../../.gitbook/assets/extrakeys-icon.png) Extra Keys
+
 opens/closes the extra keys window, which allows simulating keyboard operations to the machine, such as:
- - **\[Ctrl-Alt-Del\]**
- - **\[Ctrl\]\***
- - **\[Alt\]\***
- - **\[Tab\]\***
- - **\[Esc\]\***
- 
+
+* **\[Ctrl-Alt-Del]**
+* **\[Ctrl]\***
+* **\[Alt]\***
+* **\[Tab]\***
+* **\[Esc]\***
+
 \* **Toggles on/off** (When the button is orange simulates holding down the key.)
 
 {% hint style="success" %}
 A full virtual keyboard option is also visible when using a mobile device, such as a cell phone or tablet
 {% endhint %}
 
-#### ![chat-icon.png](../../assets/screenshots/chat-icon.png) Chat
+#### ![chat-icon.png](../../.gitbook/assets/chat-icon.png) Chat
+
 opens/closes the chat window where all users that are consoled into the virtual machine can share messages with each other.

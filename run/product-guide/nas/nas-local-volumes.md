@@ -1,17 +1,22 @@
 ---
-title: "Local Volumes"
-description: "How to create and configure local NAS volumes in VergeOS, including encryption, storage tiering, snapshot profiles, and size management on the vSAN."
+title: Local Volumes
 semantic_keywords:
-  - "create local NAS volumes in VergeOS vSAN"
-  - "NAS volume encryption tiering and snapshot settings"
-  - "local file system volume configuration and management"
-  - "EXT4 volume creation with storage tier preferences"
+  - create local NAS volumes in VergeOS vSAN
+  - NAS volume encryption tiering and snapshot settings
+  - local file system volume configuration and management
+  - EXT4 volume creation with storage tier preferences
 use_cases:
   - create_local_nas_volumes
   - configure_volume_encryption
   - set_storage_tier_preferences
   - assign_snapshot_profiles
   - manage_volume_size_limits
+categories:
+  - NAS
+description: >-
+  How to create and configure local NAS volumes in VergeOS, including
+  encryption, storage tiering, snapshot profiles, and size management on the
+  vSAN.
 tags:
   - nas
   - volume
@@ -22,8 +27,6 @@ tags:
   - snapshot
   - ext4
   - file storage
-categories:
-  - NAS
 ---
 
 # Local Volumes
@@ -31,9 +34,7 @@ categories:
 Local volumes are file systems stored within VergeOS, consuming storage in the VergeOS vSAN. Each local volume can have different sharing, syncing, tiering, and permission settings.
 
 {% hint style="success" %}
-**A NAS service must be in place before creating volumes. See the [**NAS Service**](nas-service.md) page for instructions.**
-
-
+**A NAS service must be in place before creating volumes. See the** [**NAS Service**](nas-service.md) **page for instructions.**
 {% endhint %}
 
 ## Create a Local Volume
@@ -43,20 +44,20 @@ Local volumes are file systems stored within VergeOS, consuming storage in the V
 3. Select the appropriate **NAS Service** from the dropdown list.
 4. Enter a **Name** for the volume (required). Note: spaces are not permitted.
 5. Enter a **Description** for the volume (optional).
-6. In the **Filesystem Type** dropdown list, select ***Local Volume (EXT4)***.
+6. In the **Filesystem Type** dropdown list, select _**Local Volume (EXT4)**_.
 7. The **Encrypt Volume** option can be selected to encrypt the entire volume (AES-XTS).
+
 {% hint style="info" %}
 **Encryption Considerations:**
 
-- Encryption selection is only available during creation; a volume cannot be changed from encrypted to unencrypted or vice-versa after creation.
-- Minor to moderate performance implications are involved with enabling volume encryption.
+* Encryption selection is only available during creation; a volume cannot be changed from encrypted to unencrypted or vice-versa after creation.
+* Minor to moderate performance implications are involved with enabling volume encryption.
 {% endhint %}
 
-8. When encryption is selected, **Encryption Key** is also required.  
+8. When encryption is selected, **Encryption Key** is also required.
+
 {% hint style="warning" %}
 **The encryption key is needed for the lifetime of the volume. This encryption key must be entered each time the volume is brought online (e.g. after disabling/enabling a volume or after its NAS service is rebooted, etc.) Without the encryption key, it will not be possible to bring the volume back online!**
-
-
 {% endhint %}
 
 9. Specify a **Max Size** for the volume, by entering an integer and selecting the unit (B/KB/MB/GB/TB). (When max size is reached, the volume will show out of space and will continue to be readable, but will not allow further writes.)
@@ -65,7 +66,7 @@ Local volumes are file systems stored within VergeOS, consuming storage in the V
 12. The **Automatically Mount Snapshots** option can be selected to make snapshots readily available for browsing/file restores.
 13. Specify **Owner** for the volume directory (optional).
 14. Specify a **Group** for volume directory (optional).
-15. Select a **Snapshot Profile** for the volume (optional). See [**Snapshot Profiles**](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/product-guide/backup-dr/snapshot-profiles) for information regarding snapshot profiles.
+15. Select a **Snapshot Profile** for the volume (optional). See [**Snapshot Profiles**](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/backup-and-dr/snapshot-profiles) for information regarding snapshot profiles.
 16. Select **Preferred Tier** for storing this volume. Preferred tier is the tier first attempted. See [**Preferred Tiers**](../storage/preferred-tiers.md) for more information.
 17. Click **Submit** to save the settings and create the local volume.
 18. The dashboard for the new local volume is displayed. It may take a few minutes for the new volume to come online. If the volume status does not become online, refer to the logs section (bottom of dashboard) to view error messages for troubleshooting.

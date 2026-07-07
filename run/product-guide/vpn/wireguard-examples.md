@@ -1,18 +1,23 @@
 ---
-title: "WireGuard Configuration Examples"
-description: "Example WireGuard VPN configurations for VergeOS, including site-to-site tunnels between two VergeOS systems and remote access setup for Windows clients."
+title: WireGuard Configuration Examples
 semantic_keywords:
-  - "WireGuard site-to-site VPN example two VergeOS systems"
-  - "remote access Windows client WireGuard configuration"
-  - "WireGuard public key peer exchange setup"
-  - "download WireGuard config file activate tunnel"
-  - "ping test VPN connection diagnostics"
+  - WireGuard site-to-site VPN example two VergeOS systems
+  - remote access Windows client WireGuard configuration
+  - WireGuard public key peer exchange setup
+  - download WireGuard config file activate tunnel
+  - ping test VPN connection diagnostics
 use_cases:
   - configure_site_to_site_vpn
   - setup_windows_remote_access
   - exchange_wireguard_keys
   - download_peer_configuration
   - test_vpn_connection
+categories:
+  - VPN
+description: >-
+  Example WireGuard VPN configurations for VergeOS, including site-to-site
+  tunnels between two VergeOS systems and remote access setup for Windows
+  clients.
 tags:
   - vpn
   - wireguard
@@ -22,8 +27,6 @@ tags:
   - examples
   - configuration
   - networking
-categories:
-  - VPN
 ---
 
 # WireGuard Configuration Examples
@@ -34,45 +37,33 @@ The following are provided as example WireGuard implementations. Refer to the ge
 
 For this example, "SystemA" and "SystemB" will be used to denote the 2 VergeOS systems to be connected via VPN.
 
-**On SystemA:**  
+**On SystemA:**
 
 1. **Create a WireGuard Interface.**
 2. **Copy** the generated Public key (for the Interface) to the clipboard, using the copy icon.
 
-**On SystemB:**  
-3. **Create a WireGuard Interface.**  
-4. **Create a Peer** definition (to allow SystemA to connect to this system.)
-    - In the ***Public*** key field, paste in the key already copied from SystemA.
-    - In the ***Allowed IPs*** section:
-        - add an entry for the address of the **WireGuard interface on SystemA**.
-        - add an entry for the **connected network on SystemA** (e.g. the network to which WireGuard is connected.
+**On SystemB:**\
+3\. **Create a WireGuard Interface.**\
+4\. **Create a Peer** definition (to allow SystemA to connect to this system.) - In the _**Public**_ key field, paste in the key already copied from SystemA. - In the _**Allowed IPs**_ section: - add an entry for the address of the **WireGuard interface on SystemA**. - add an entry for the **connected network on SystemA** (e.g. the network to which WireGuard is connected.
 
-![guard-b-peer.png](../../assets/screenshots/guard-b-peer.png)
-![guard-b-peer2.png](../../assets/screenshots/guard-b-peer2.png)
-5. **While still on SystemB**, copy the generated public key, using the copy icon.
+![guard-b-peer.png](../../.gitbook/assets/guard-b-peer.png) ![guard-b-peer2.png](../../.gitbook/assets/guard-b-peer2.png) 5. **While still on SystemB**, copy the generated public key, using the copy icon.
 
-**On SystemA:**  
-6. Create a new Peer definition (for SystemB to connect here.)
-    - In the ***Public key*** field, paste in the key **copied from SystemB**.
-    - In the ***Allowed IPs*** section:
-        - add an entry for the address of the WireGuard interface on **SystemB**.
-        - add an entry for the **connected network on SystemB** (e.g. the network to which WireGuard is connected.)
-   ![guard-a-peer.png](../../assets/screenshots/guard-a-peer.png)
-   ![guard-a-peer2.png](../../assets/screenshots/guard-a-peer2.png)        
+**On SystemA:**\
+6\. Create a new Peer definition (for SystemB to connect here.) - In the _**Public key**_ field, paste in the key **copied from SystemB**. - In the _**Allowed IPs**_ section: - add an entry for the address of the WireGuard interface on **SystemB**. - add an entry for the **connected network on SystemB** (e.g. the network to which WireGuard is connected.) ![guard-a-peer.png](../../.gitbook/assets/guard-a-peer.png) ![guard-a-peer2.png](../../.gitbook/assets/guard-a-peer2.png)
 
-**On SystemA AND SystemB:**  
-7. **Apply Rules** (on the networks where Wireguard interfaces were created) to put system-generated network rules into effect.
+**On SystemA AND SystemB:**\
+7\. **Apply Rules** (on the networks where Wireguard interfaces were created) to put system-generated network rules into effect.
 
 ### Testing the site-to-site VPN Connection
 
 A simple ping test can be done using the Diagnostics Tool on each system as an initial test of the connection.
 
-**On SystemA:** navigate to the Network Dashboard (the network to which WireGuard is attached) ![guard-a-pingtest.png](../../assets/screenshots/guard-a-pingtest.png)
+**On SystemA:** navigate to the Network Dashboard (the network to which WireGuard is attached) ![guard-a-pingtest.png](../../.gitbook/assets/guard-a-pingtest.png)
 
-- **Select ping** from the Query list dropdown.
-- **Ping the interface address on SystemB**(from our example: 192.68.1.2)
-- Similarly, other IP addresses from SystemB (e.g. VMs on the attached Network) can also be ping-tested here.
-- **Perform the same tests from SystemB to ping addresses on SystemA**
+* **Select ping** from the Query list dropdown.
+* **Ping the interface address on SystemB**(from our example: 192.68.1.2)
+* Similarly, other IP addresses from SystemB (e.g. VMs on the attached Network) can also be ping-tested here.
+* **Perform the same tests from SystemB to ping addresses on SystemA**
 
 ## Example: Configuring for Remote Access - Windows Client
 
@@ -82,29 +73,24 @@ This example covers setup for a single, remote access peer (a Windows client), a
 
 1. On the VergeOS system, navigate to the **WireGuard(VPN) dashboard**.
 2. Click **New Peer** on the left menu.
-3. Select the appropriate WireGuard ***Interface*** from the dropdown list.
-4. Assign a ***Name*** to the peer, such as the remote user's name.
-5. Optionally, a ***Description*** can be entered to store additional information about this peer.
-6. Check the ***Auto-Generate Peer Configuration*** checkbox to automate settings and create a configuration file that can be used on the client.
-7. Enter the ***Endpoint*** for the Peer (the external-facing IP address, hostname, or URL this system will use to communicate with the peer.)
-8. In the ***Configure Firewall*** dropdown, select **Remote user**
-9. Click **Submit** to save the new peer entry.
-    ![client-peer-form.png](../../assets/screenshots/client-peer-form.png)
+3. Select the appropriate WireGuard _**Interface**_ from the dropdown list.
+4. Assign a _**Name**_ to the peer, such as the remote user's name.
+5. Optionally, a _**Description**_ can be entered to store additional information about this peer.
+6. Check the _**Auto-Generate Peer Configuration**_ checkbox to automate settings and create a configuration file that can be used on the client.
+7. Enter the _**Endpoint**_ for the Peer (the external-facing IP address, hostname, or URL this system will use to communicate with the peer.)
+8. In the _**Configure Firewall**_ dropdown, select **Remote user**
+9. Click **Submit** to save the new peer entry. ![client-peer-form.png](../../.gitbook/assets/client-peer-form.png)
 
 ### Download the Configuration File
 
 Click the Download Config button on the peer record and select a location for the file; download to a location that will be accessible to the client computer or from which can otherwise be transferred to the client.
 
-![download-link.png](../../assets/screenshots/download-link.png)
-![configuration-file.png](../../assets/screenshots/configuration-file.png)
+![download-link.png](../../.gitbook/assets/download-link.png) ![configuration-file.png](../../.gitbook/assets/configuration-file.png)
 
 ### Install WireGuard Software on Client
 
-WireGuard Client software can be downloaded from: https://wireguard.com/install.
-(In this example, we download and install WireGuard for Windows-64bit to use on a Windows 10 Pro machine.)
-    ![add-tunnel.png](../../assets/screenshots/add-tunnel.png)
+WireGuard Client software can be downloaded from: https://wireguard.com/install. (In this example, we download and install WireGuard for Windows-64bit to use on a Windows 10 Pro machine.) ![add-tunnel.png](../../.gitbook/assets/add-tunnel.png)
 
 1. Click **Add Tunnel**.
 2. Navigate to and **select the generated configuration file**.
-3. The configuration file is used to automatically create an interface and peer on the client machine. Click the **Activate** button to open the tunnel, if it was not automatically activated.
-   ![tunnel-active.png](../../assets/screenshots/tunnel-active.png)
+3. The configuration file is used to automatically create an interface and peer on the client machine. Click the **Activate** button to open the tunnel, if it was not automatically activated. ![tunnel-active.png](../../.gitbook/assets/tunnel-active.png)

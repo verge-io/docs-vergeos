@@ -1,18 +1,24 @@
 ---
-title: "Core Fabric Status Guide"
-description: "How to read, interpret, and troubleshoot core fabric status in VergeOS, including score values, healthy vs. unhealthy fabric examples, and pre-maintenance verification."
+title: Core Fabric Status Guide
 semantic_keywords:
-  - "core fabric status troubleshooting VergeOS"
-  - "node-to-node connectivity score degraded path"
-  - "fabric confirmed no path network health check"
-  - "pre-maintenance fabric verification vSAN"
-  - "core network redundancy switch hops MTU"
+  - core fabric status troubleshooting VergeOS
+  - node-to-node connectivity score degraded path
+  - fabric confirmed no path network health check
+  - pre-maintenance fabric verification vSAN
+  - core network redundancy switch hops MTU
 use_cases:
   - verify_fabric_health_before_maintenance
   - troubleshoot_degraded_core_network_path
   - interpret_fabric_score_values
   - diagnose_missing_node_in_fabric
   - monitor_core_network_alarms
+categories:
+  - System Administration
+  - Networking
+description: >-
+  How to read, interpret, and troubleshoot core fabric status in VergeOS,
+  including score values, healthy vs. unhealthy fabric examples, and
+  pre-maintenance verification.
 tags:
   - networking
   - monitoring
@@ -22,19 +28,16 @@ tags:
   - vsan
   - diagnostics
   - redundancy
-categories:
-  - System Administration
-  - Networking
 ---
 
 # Core Fabric Status Guide
 
 ## Prerequisites
 
-- Access to the VergeOS interface with node management privileges
-- Basic understanding of [VergeOS core network architecture](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/implementation-guide/concepts#core-fabric-network)
-- Physical console or IPMI access to nodes (for troubleshooting)
-- Knowledge of your core VLAN assignments (Core 1 and Core 2) and expected NIC link speed
+* Access to the VergeOS interface with node management privileges
+* Basic understanding of [VergeOS core network architecture](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/implementation-guide/concepts#core-fabric-network)
+* Physical console or IPMI access to nodes (for troubleshooting)
+* Knowledge of your core VLAN assignments (Core 1 and Core 2) and expected NIC link speed
 
 ## What is the Core Fabric?
 
@@ -52,11 +55,11 @@ This core fabric redundancy is vital to maintain system resiliency and uninterru
 
 **Core Fabric MTU Requirements:**
 
-| Component | MTU |
-|-----------|-----|
-| Physical switch port | >= 9216 |
-| Physical NIC | 9192 (typical) |
-| VXLAN overlay | NIC MTU minus 50 bytes overhead |
+| Component            | MTU                             |
+| -------------------- | ------------------------------- |
+| Physical switch port | >= 9216                         |
+| Physical NIC         | 9192 (typical)                  |
+| VXLAN overlay        | NIC MTU minus 50 bytes overhead |
 
 {% hint style="info" %}
 **How Core Fabric Redundancy Works**
@@ -70,12 +73,12 @@ The VergeOS core fabric provides more comprehensive detection and resiliency tha
 
 Fabric status is available in the VergeOS UI at multiple levels of detail.
 
-| Method | Detail Level | Use Case |
-|--------|-------------|----------|
-| **Alarms** | Summary | Day-to-day monitoring — alerts when paths are degraded or lost |
-| **Node NICs List** | Per-NIC | Quick status check of all Node NICs |
-| **Node Dashboard** | Per-NIC (selected node) | Quick status check of individual NICs and their connections to other nodes |
-| **Node Diagnostics** | Full JSON report | Advanced troubleshooting — complete path, score, and peer details |
+| Method               | Detail Level            | Use Case                                                                   |
+| -------------------- | ----------------------- | -------------------------------------------------------------------------- |
+| **Alarms**           | Summary                 | Day-to-day monitoring — alerts when paths are degraded or lost             |
+| **Node NICs List**   | Per-NIC                 | Quick status check of all Node NICs                                        |
+| **Node Dashboard**   | Per-NIC (selected node) | Quick status check of individual NICs and their connections to other nodes |
+| **Node Diagnostics** | Full JSON report        | Advanced troubleshooting — complete path, score, and peer details          |
 
 ### Alarms
 
@@ -87,12 +90,10 @@ Clicking an alarm in the list will navigate directly to the affected Node Dashbo
 
 For more information on viewing and managing alarms, see the [Alarms Guide](../operations/alarms.md).
 
-
 {% hint style="warning" %}
 **Address Core Network Alarms Immediately**
 
-Core network alarms indicate that your system may not have full fabric redundancy. Resolve these promptly to ensure your cluster can tolerate a failure without disruption.
-Event triggers can be configured to send notifications via email, text alerting systems, monitored Slack channels, and more, ensuring administrators are notified immediately. See the [Task Engine Product Guide](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/product-guide/automation/task-engine) for more information about creating automated tasks; this [Automation Example](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/automation-api/automated-task-example-webhook) KB article provides an example of setting up event-driven notifications.
+Core network alarms indicate that your system may not have full fabric redundancy. Resolve these promptly to ensure your cluster can tolerate a failure without disruption. Event triggers can be configured to send notifications via email, text alerting systems, monitored Slack channels, and more, ensuring administrators are notified immediately. See the [Task Engine Product Guide](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/automation/task-engine) for more information about creating automated tasks; this [Automation Example](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/automation-api/automated-task-example-webhook) KB article provides an example of setting up event-driven notifications.
 {% endhint %}
 
 ### Node NICs List
@@ -101,8 +102,7 @@ This is a quick way to view fabric status on all core network NICs from a single
 
 1. Navigate to **Infrastructure** > **Nodes**.
 2. Click **NICs** on the left menu.
-3. A list of all NICs from all nodes is displayed. The **Fabric Status** column shows the status for core network NICs (e.g. 'Confirmed', 'No Path', 'Degraded'). A *Fabric Status* of 'None' is shown for NICs that do not participate in the core fabric (e.g. external networks).
-
+3. A list of all NICs from all nodes is displayed. The **Fabric Status** column shows the status for core network NICs (e.g. 'Confirmed', 'No Path', 'Degraded'). A _Fabric Status_ of 'None' is shown for NICs that do not participate in the core fabric (e.g. external networks).
 
 ### Node Dashboards
 
@@ -110,15 +110,14 @@ Status information is available per NIC from each Node Dashboard.
 
 1. Navigate to **Infrastructure** > **Nodes**.
 2. Double-click the desired **node** from the list.
-3. Scroll down to the **NICs** section on the Node Dashboard.
-   Each core fabric NIC displays either a **Confirmed** status indicator or a problem status message (e.g. No Path, Degraded).
-4. For more detailed information, click the globe icon <i class="bi bi-globe"></i> on the right. This provides a popup showing NIC details:
-    - Vendor, Model, Interface, and Driver
-    - **Confirmed** / **No Path** / **Degraded** status per connection to each other node in the system
-    - **Score** per connection to each other node (see [Score Values](#score-values) below)
+3. Scroll down to the **NICs** section on the Node Dashboard. Each core fabric NIC displays either a **Confirmed** status indicator or a problem status message (e.g. No Path, Degraded).
+4. For more detailed information, click the globe icon on the right. This provides a popup showing NIC details:
+   * Vendor, Model, Interface, and Driver
+   * **Confirmed** / **No Path** / **Degraded** status per connection to each other node in the system
+   * **Score** per connection to each other node (see [Score Values](core-fabric-status.md#score-values) below)
 5. Each path should show **Confirmed** status. Any path showing **No Path** or **Degraded** indicates a connectivity issue that should be investigated and resolved.
 
-### Node Diagnostics 
+### Node Diagnostics
 
 More extensive fabric status details (useful for advanced troubleshooting) are available through Node Diagnostics. This returns a full JSON report of fabric status as seen by the selected node, including all discovered peers, their paths, scores, and confirmation status.
 
@@ -133,24 +132,23 @@ More extensive fabric status details (useful for advanced troubleshooting) are a
 
 The following fields appear in the fabric status JSON output.
 
-| Field | Description |
-|-------|-------------|
-| `$sysid` | SHA-1 hash identifying this VergeOS system (sourced from `/.system_id`) |
-| `$last_update` | Timestamp of the most recent fabric status refresh |
-| `syncing_time` | Top-level field indicating whether the node is currently synchronizing its clock with the cluster. This must be `false` before the node fully joins. During initial node join, it is normal for the value to be `true`. |
-| `paths` | Array of network paths to this peer node |
-| `paths[].ip` | IP address of the remote node on the core network |
-| `paths[].iface` | Local network interface used to reach this path |
-| `paths[].score` | Numeric connectivity quality score (higher is better). The maximum depends on NIC link speed — see [Score Values](#score-values) below. |
-| `paths[].confirmed` | Whether this path has been verified as active and reachable (`true` / `false`) |
-| `vxlans` | VXLAN tunnel endpoints programmed for this peer. These are the overlay tunnels used for cross-node virtual network traffic. |
-
+| Field               | Description                                                                                                                                                                                                             |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `$sysid`            | SHA-1 hash identifying this VergeOS system (sourced from `/.system_id`)                                                                                                                                                 |
+| `$last_update`      | Timestamp of the most recent fabric status refresh                                                                                                                                                                      |
+| `syncing_time`      | Top-level field indicating whether the node is currently synchronizing its clock with the cluster. This must be `false` before the node fully joins. During initial node join, it is normal for the value to be `true`. |
+| `paths`             | Array of network paths to this peer node                                                                                                                                                                                |
+| `paths[].ip`        | IP address of the remote node on the core network                                                                                                                                                                       |
+| `paths[].iface`     | Local network interface used to reach this path                                                                                                                                                                         |
+| `paths[].score`     | Numeric connectivity quality score (higher is better). The maximum depends on NIC link speed — see [Score Values](core-fabric-status.md#score-values) below.                                                            |
+| `paths[].confirmed` | Whether this path has been verified as active and reachable (`true` / `false`)                                                                                                                                          |
+| `vxlans`            | VXLAN tunnel endpoints programmed for this peer. These are the overlay tunnels used for cross-node virtual network traffic.                                                                                             |
 
 #### Confirmed Status
 
-| Value | Meaning |
-|-------|---------|
-| `true` | The path has been verified — bidirectional communication is working |
+| Value   | Meaning                                                                    |
+| ------- | -------------------------------------------------------------------------- |
+| `true`  | The path has been verified — bidirectional communication is working        |
 | `false` | The path could not be verified — connectivity is lost or never established |
 
 ### Score Values
@@ -158,11 +156,11 @@ The following fields appear in the fabric status JSON output.
 The `score` field represents the quality of the connection to a peer node through a specific path. The maximum score corresponds to the link speed of the core NIC — a higher score indicates a faster, healthier connection.
 
 | NIC Link Speed | Maximum Score |
-|----------------|---------------|
-| 100 Gbps | 200 |
-| 50 Gbps | 100 |
-| 25 Gbps | 50 |
-| 10 Gbps | 20 |
+| -------------- | ------------- |
+| 100 Gbps       | 200           |
+| 50 Gbps        | 100           |
+| 25 Gbps        | 50            |
+| 10 Gbps        | 20            |
 
 {% hint style="info" %}
 **Interpreting Scores**
@@ -172,11 +170,10 @@ A "perfect" score means the value matches the expected maximum for your NIC spee
 
 A score significantly **below** the expected maximum indicates degradation - possible causes include network latency, packet loss, or suboptimal routing. A score of **0** indicates a complete loss of bidirectional communication.
 
-
 {% hint style="success" %}
 **Confirmed vs Score**
 
-*confirmed* indicates whether the path is reachable, while *score* reflects the quality of that path.
+_confirmed_ indicates whether the path is reachable, while _score_ reflects the quality of that path.
 {% endhint %}
 
 ## Healthy vs. Unhealthy Fabric Examples
@@ -210,11 +207,11 @@ All nodes visible, two paths each, scores at maximum for NIC speed, all confirme
 {% hint style="success" %}
 **What to Look For**
 
-- Every node in the cluster appears in the output (in a 4-node cluster, you should see all 4 node entries)
-- Each node has **two paths** (one per core network)
-- All paths show `"confirmed": true`
-- `"syncing_time": false` at the top level
-- Scores match the expected maximum for your NIC speed (e.g., 200 for 100Gbps, 50 for 25Gbps)
+* Every node in the cluster appears in the output (in a 4-node cluster, you should see all 4 node entries)
+* Each node has **two paths** (one per core network)
+* All paths show `"confirmed": true`
+* `"syncing_time": false` at the top level
+* Scores match the expected maximum for your NIC speed (e.g., 200 for 100Gbps, 50 for 25Gbps)
 {% endhint %}
 
 ### Degraded Fabric — Lost Redundancy
@@ -291,15 +288,15 @@ The missing node is completely unreachable. It may be powered off, have both cor
 
 ## Pre-Maintenance Fabric Verification
 
-VergeOS maintenance operations — including [system updates](../operations/sop-update.md), [vSAN scale-ups](../operations/vsan-scale-up-sop.md), and [scale-outs](../operations/sop-scale-out.md) — require a healthy fabric as a prerequisite. **Do not proceed with maintenance if the fabric is unhealthy.** Resolve any issues first using the [Troubleshooting](#troubleshooting-fabric-issues) section below.
+VergeOS maintenance operations — including [system updates](../operations/sop-update.md), [vSAN scale-ups](../operations/vsan-scale-up-sop.md), and [scale-outs](../operations/sop-scale-out.md) — require a healthy fabric as a prerequisite. **Do not proceed with maintenance if the fabric is unhealthy.** Resolve any issues first using the [Troubleshooting](core-fabric-status.md#troubleshooting-fabric-issues) section below.
 
 A healthy fabric means:
 
-- All peer nodes are visible in the output
-- Each peer has **two paths** (one per core network)
-- All paths show `"confirmed": true`
-- Scores match the expected maximum for your NIC link speed
-- `"syncing_time": false` at the top level
+* All peer nodes are visible in the output
+* Each peer has **two paths** (one per core network)
+* All paths show `"confirmed": true`
+* Scores match the expected maximum for your NIC link speed
+* `"syncing_time": false` at the top level
 
 {% hint style="success" %}
 **Quick Verification**
@@ -318,9 +315,9 @@ From any node, run **Node Diagnostics** > **Fabric Configuration** and confirm e
 1. **Physical cabling** — Verify the cable is seated properly on both the node NIC and the switch port. Try a known-good cable.
 2. **Switch VLAN configuration** — Confirm the switch port is assigned to the correct core VLAN. Core ports should be configured as **access ports** on a dedicated VLAN.
 3. **MTU mismatch** — Core fabric requires jumbo frames (minimum MTU 9216 on the physical switch). Verify end-to-end MTU consistency:
-    - Switch port MTU >= 9216
-    - Physical NIC MTU (e.g., 9192)
-    - VXLAN MTU = NIC MTU minus 50 bytes overhead
+   * Switch port MTU >= 9216
+   * Physical NIC MTU (e.g., 9192)
+   * VXLAN MTU = NIC MTU minus 50 bytes overhead
 4. **NIC down** — Check the NIC status on the node dashboard. If the NIC shows "Down", it may indicate a hardware failure or driver issue.
 
 ### Score Degradation
@@ -365,19 +362,19 @@ From any node, run **Node Diagnostics** > **Fabric Configuration** and confirm e
 
 ## Best Practices
 
-- **Address core network alarms immediately** — Resolve issues quickly to maintain full fabric redundancy
-- **Verify fabric before every maintenance operation** — Make it a habit to check fabric status before updates, scale-ups, scale-outs, and node maintenance
-- **Maintain two core networks** — Always keep both Core1 and Core2 paths healthy for redundancy
-- **Test after physical changes** — After any cabling, switch, or NIC changes, re-verify fabric status
-- **Use the Refresh Fabric action** — After resolving a connectivity issue, use the **Refresh Fabric** button on the node dashboard (or batch action from the nodes list) to force a status update
-- **Include fabric status in diagnostics** — When working with VergeOS support, the `ybfabric.txt` file in system diagnostics contains fabric state at the time the diagnostic was generated
+* **Address core network alarms immediately** — Resolve issues quickly to maintain full fabric redundancy
+* **Verify fabric before every maintenance operation** — Make it a habit to check fabric status before updates, scale-ups, scale-outs, and node maintenance
+* **Maintain two core networks** — Always keep both Core1 and Core2 paths healthy for redundancy
+* **Test after physical changes** — After any cabling, switch, or NIC changes, re-verify fabric status
+* **Use the Refresh Fabric action** — After resolving a connectivity issue, use the **Refresh Fabric** button on the node dashboard (or batch action from the nodes list) to force a status update
+* **Include fabric status in diagnostics** — When working with VergeOS support, the `ybfabric.txt` file in system diagnostics contains fabric state at the time the diagnostic was generated
 
 ## Related Resources
 
-- [Core Concepts — Core Fabric Network](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/implementation-guide/concepts#core-fabric-network)
-- [Nodes Overview](nodes-overview.md)
-- [Node Diagnostics Guide](node-diagnostics.md)
-- [System Update SOP](../operations/sop-update.md)
-- [vSAN Scale-Up SOP](../operations/vsan-scale-up-sop.md)
-- [Scale-Out SOP](../operations/sop-scale-out.md)
-- [Switch Configuration Guide](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/implementation-guide/switch-configuration)
+* [Core Concepts — Core Fabric Network](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/implementation-guide/concepts#core-fabric-network)
+* [Nodes Overview](nodes-overview.md)
+* [Node Diagnostics Guide](node-diagnostics.md)
+* [System Update SOP](../operations/sop-update.md)
+* [vSAN Scale-Up SOP](../operations/vsan-scale-up-sop.md)
+* [Scale-Out SOP](../operations/sop-scale-out.md)
+* [Switch Configuration Guide](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/implementation-guide/switch-configuration)

@@ -1,16 +1,21 @@
 ---
-title: "Tracking Network Statistics"
-description: "Enable and view per-rule traffic statistics tracking for network rules in VergeOS, including packets and bytes counters for firewall, NAT, and translate rules."
+title: Tracking Network Statistics
 semantic_keywords:
-  - "track network rule statistics packets bytes"
-  - "enable per-rule traffic statistics VergeOS"
-  - "network rule counters monitoring"
-  - "view reset clear rule statistics"
+  - track network rule statistics packets bytes
+  - enable per-rule traffic statistics VergeOS
+  - network rule counters monitoring
+  - view reset clear rule statistics
 use_cases:
   - enable_statistics_tracking_for_all_rules
   - track_individual_rule_traffic
   - view_packets_and_bytes_per_rule
   - reset_rule_statistics_counters
+categories:
+  - Networking
+description: >-
+  Enable and view per-rule traffic statistics tracking for network rules in
+  VergeOS, including packets and bytes counters for firewall, NAT, and translate
+  rules.
 tags:
   - networking
   - statistics
@@ -18,20 +23,16 @@ tags:
   - network-rules
   - traffic-analysis
   - firewall
-categories:
-  - Networking
 ---
 
 # Tracking Network Statistics
 
-Statistics tracking can be enabled for *Accept, Drop, Reject* and *Translate* rules. This allows viewing the total number of packets/bytes processed by a rule. Currently, statistics cannot be tracked for *Route* rules.
+Statistics tracking can be enabled for _Accept, Drop, Reject_ and _Translate_ rules. This allows viewing the total number of packets/bytes processed by a rule. Currently, statistics cannot be tracked for _Route_ rules.
 
 ## Enable Statistics Tracking for All Non-routing Rules of a Network
 
 {% hint style="info" %}
 **Requires a restart of the network.**
-
-
 {% endhint %}
 
 1. From the network dashboard, click **Edit** on the left menu.
@@ -64,10 +65,8 @@ See directions below for viewing the tracked statistics.
 2. Right-click on the columns heading section at the top.
 3. Check the boxes for **Packets** and/or **Bytes** to display these columns.
 
-![Show Statistics](../../assets/screenshots/trackstats-cols.png)
+![Show Statistics](../../.gitbook/assets/trackstats-cols.png)
 
 {% hint style="success" %}
 **Enabling the Statistics column will show if statistics tracking is enabled for each rule.**
-
-
 {% endhint %}
