@@ -1,17 +1,22 @@
 ---
-title: "VergeOS CLI (vrg)"
-description: "vrg is the official command-line interface for VergeOS, providing 200+ commands for managing virtual machines, networks, tenants, NAS, and more from a terminal or automation pipeline."
+title: VergeOS CLI (vrg)
 semantic_keywords:
-  - "VergeOS CLI command line tool vrg"
-  - "automate VergeOS from the terminal"
-  - "declarative VM templates with vrg.yaml"
-  - "scripting VergeOS with shell and JSON output"
+  - VergeOS CLI command line tool vrg
+  - automate VergeOS from the terminal
+  - declarative VM templates with vrg.yaml
+  - scripting VergeOS with shell and JSON output
 use_cases:
   - terminal_management
   - declarative_vm_provisioning
   - shell_scripting_automation
   - ci_cd_pipelines
   - bulk_resource_operations
+categories:
+  - Automation
+description: >-
+  vrg is the official command-line interface for VergeOS, providing 200+
+  commands for managing virtual machines, networks, tenants, NAS, and more from
+  a terminal or automation pipeline.
 tags:
   - cli
   - vrg
@@ -20,8 +25,6 @@ tags:
   - templates
   - shell
   - python
-categories:
-  - Automation
 ---
 
 # VergeOS CLI (vrg)
@@ -32,8 +35,8 @@ categories:
 
 ## Requirements
 
-- Python 3.10 or later (when installing via `pip`, `pipx`, or `uv`)
-- A user account or API key with appropriate permissions on the VergeOS instance
+* Python 3.10 or later (when installing via `pip`, `pipx`, or `uv`)
+* A user account or API key with appropriate permissions on the VergeOS instance
 
 ## Installation
 
@@ -65,7 +68,7 @@ brew install verge-io/tap/vrg
 
 ### Standalone Binary
 
-Download a pre-built binary from the [latest release](https://github.com/verge-io/vrg/releases/latest){target="_blank"}, then place it on your `PATH`. Binaries are available for Linux (x86_64), macOS (ARM64), and Windows (x86_64).
+Download a pre-built binary from the [latest release](https://github.com/verge-io/vrg/releases/latest){target="\_blank"}, then place it on your `PATH`. Binaries are available for Linux (x86\_64), macOS (ARM64), and Windows (x86\_64).
 
 {% hint style="warning" %}
 **macOS Quarantine**
@@ -85,13 +88,13 @@ vrg --version
 
 ### Upgrading
 
-| Install Method | Upgrade Command |
-|----------------|-----------------|
-| `pipx` | `pipx upgrade vrg` |
-| `pip` | `pip install --upgrade vrg` |
-| `uv` | `uv tool upgrade vrg` |
-| Homebrew | `brew upgrade vrg` |
-| Standalone | Re-download from the [releases page](https://github.com/verge-io/vrg/releases/latest){target="_blank"} |
+| Install Method | Upgrade Command                                                                                         |
+| -------------- | ------------------------------------------------------------------------------------------------------- |
+| `pipx`         | `pipx upgrade vrg`                                                                                      |
+| `pip`          | `pip install --upgrade vrg`                                                                             |
+| `uv`           | `uv tool upgrade vrg`                                                                                   |
+| Homebrew       | `brew upgrade vrg`                                                                                      |
+| Standalone     | Re-download from the [releases page](https://github.com/verge-io/vrg/releases/latest){target="\_blank"} |
 
 ## Quick Start
 
@@ -110,18 +113,18 @@ vrg vm --help
 vrg vm list
 ```
 
-`vrg configure setup` is an interactive wizard that prompts for the host URL, authentication method, and default output format. It saves the result to `~/.vrg/config.toml`. See [Authentication](#authentication) for the details on each method and how to script credentials.
+`vrg configure setup` is an interactive wizard that prompts for the host URL, authentication method, and default output format. It saves the result to `~/.vrg/config.toml`. See [Authentication](vrg-cli.md#authentication) for the details on each method and how to script credentials.
 
 ## Authentication
 
 `vrg` accepts four authentication methods. All four can be supplied through the interactive wizard, environment variables, command-line flags, or a profile in `~/.vrg/config.toml`.
 
-| Method | Best For | How to Provide |
-|--------|----------|----------------|
-| **Bearer token** | CI pipelines, scripts | `--token` flag or `VERGE_TOKEN` env var |
-| **API key** | Long-lived service automation | `--api-key` flag |
-| **Username + password** | Interactive sessions, one-offs | `--username` / `--password` or wizard prompts |
-| **Profile** | Multiple instances | `--profile <name>` after running `vrg configure setup` |
+| Method                  | Best For                       | How to Provide                                         |
+| ----------------------- | ------------------------------ | ------------------------------------------------------ |
+| **Bearer token**        | CI pipelines, scripts          | `--token` flag or `VERGE_TOKEN` env var                |
+| **API key**             | Long-lived service automation  | `--api-key` flag                                       |
+| **Username + password** | Interactive sessions, one-offs | `--username` / `--password` or wizard prompts          |
+| **Profile**             | Multiple instances             | `--profile <name>` after running `vrg configure setup` |
 
 ### Generating an API Key
 
@@ -175,26 +178,26 @@ Most resources implement standard CRUD actions: `list`, `get`, `create`, `update
 
 ### Command Domains
 
-| Domain | Sub-domains |
-|--------|-------------|
-| **Compute** | `vm`, `vm drive`, `vm nic`, `vm device`, `vm snapshot`, `vm export`, `vm import` |
-| **Networking** | `network`, `network rule`, `network dns`, `network host`, `network alias`, `network diag`, `network query` |
-| **Tenants** | `tenant`, `tenant node`, `tenant storage`, `tenant net`, `tenant snapshot`, `tenant stats`, `tenant share`, `tenant logs` |
-| **NAS** | `nas service`, `nas volume`, `nas cifs`, `nas nfs`, `nas user`, `nas sync`, `nas files` |
-| **Infrastructure** | `cluster`, `node`, `storage` |
-| **Snapshots** | `snapshot`, `snapshot profile` |
-| **Sites & Replication** | `site`, `site sync outgoing`, `site sync incoming` |
-| **Identity & Access** | `user`, `group`, `permission`, `api-key`, `auth-source` |
-| **Certificates & SSO** | `certificate`, `oidc` |
-| **Automation** | `task`, `task schedule`, `task trigger`, `task event`, `task script` |
-| **Recipes** | `recipe`, `recipe section`, `recipe question`, `recipe instance`, `recipe log` |
-| **Catalog** | `catalog`, `catalog repo` |
-| **Updates** | `update`, `update source`, `update branch`, `update package`, `update available` |
-| **Monitoring** | `alarm`, `alarm history`, `log` |
-| **Tagging** | `tag`, `tag category`, `resource-group` |
-| **System** | `system`, `system settings`, `system license`, `system diag`, `doctor`, `configure`, `file`, `completion` |
+| Domain                  | Sub-domains                                                                                                               |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| **Compute**             | `vm`, `vm drive`, `vm nic`, `vm device`, `vm snapshot`, `vm export`, `vm import`                                          |
+| **Networking**          | `network`, `network rule`, `network dns`, `network host`, `network alias`, `network diag`, `network query`                |
+| **Tenants**             | `tenant`, `tenant node`, `tenant storage`, `tenant net`, `tenant snapshot`, `tenant stats`, `tenant share`, `tenant logs` |
+| **NAS**                 | `nas service`, `nas volume`, `nas cifs`, `nas nfs`, `nas user`, `nas sync`, `nas files`                                   |
+| **Infrastructure**      | `cluster`, `node`, `storage`                                                                                              |
+| **Snapshots**           | `snapshot`, `snapshot profile`                                                                                            |
+| **Sites & Replication** | `site`, `site sync outgoing`, `site sync incoming`                                                                        |
+| **Identity & Access**   | `user`, `group`, `permission`, `api-key`, `auth-source`                                                                   |
+| **Certificates & SSO**  | `certificate`, `oidc`                                                                                                     |
+| **Automation**          | `task`, `task schedule`, `task trigger`, `task event`, `task script`                                                      |
+| **Recipes**             | `recipe`, `recipe section`, `recipe question`, `recipe instance`, `recipe log`                                            |
+| **Catalog**             | `catalog`, `catalog repo`                                                                                                 |
+| **Updates**             | `update`, `update source`, `update branch`, `update package`, `update available`                                          |
+| **Monitoring**          | `alarm`, `alarm history`, `log`                                                                                           |
+| **Tagging**             | `tag`, `tag category`, `resource-group`                                                                                   |
+| **System**              | `system`, `system settings`, `system license`, `system diag`, `doctor`, `configure`, `file`, `completion`                 |
 
-The complete reference is maintained in the [Command Reference](https://github.com/verge-io/vrg/blob/main/docs/COMMANDS.md){target="_blank"}.
+The complete reference is maintained in the [Command Reference](https://github.com/verge-io/vrg/blob/main/docs/COMMANDS.md){target="\_blank"}.
 
 ## Usage Examples
 
@@ -215,7 +218,7 @@ vrg vm restart web-server
 
 ### Building a VM from Shell Flags
 
-The shell-flag approach is good for quick experiments. For repeatable provisioning, see [VM Templates](#vm-templates).
+The shell-flag approach is good for quick experiments. For repeatable provisioning, see [VM Templates](vrg-cli.md#vm-templates).
 
 ```bash
 # Create a VM (--ram is in MB)
@@ -349,18 +352,18 @@ vrg vm create -f web-server.vrg.yaml \
 Templates support `${VAR}` substitution from environment variables or a `vars:` block, plus default-value syntax (`${VM_RAM:-4GB}`). This is useful for parameterizing a single template across environments.
 {% endhint %}
 
-For the complete template field reference, see the [Template Guide](https://github.com/verge-io/vrg/blob/main/docs/TEMPLATES.md){target="_blank"}.
+For the complete template field reference, see the [Template Guide](https://github.com/verge-io/vrg/blob/main/docs/TEMPLATES.md){target="\_blank"}.
 
 ## Output Formats
 
 All commands support `--output` (or `-o`) for changing the output format and `--query` for extracting a field with dot notation.
 
-| Format | Use Case |
-|--------|----------|
-| `table` | Default human-readable output |
-| `wide` | All available columns, including those hidden from the default view |
-| `json` | Machine-readable output for piping to `jq` or other tools |
-| `csv` | Spreadsheet-friendly export |
+| Format  | Use Case                                                            |
+| ------- | ------------------------------------------------------------------- |
+| `table` | Default human-readable output                                       |
+| `wide`  | All available columns, including those hidden from the default view |
+| `json`  | Machine-readable output for piping to `jq` or other tools           |
+| `csv`   | Spreadsheet-friendly export                                         |
 
 ```bash
 # All columns
@@ -397,72 +400,72 @@ chmod 755 /opt/homebrew/share/zsh /opt/homebrew/share/zsh/site-functions
 
 ## Global Options
 
-| Option | Short | Description |
-|--------|-------|-------------|
-| `--profile` | `-p` | Configuration profile to use |
-| `--host` | `-H` | VergeOS host URL (override) |
-| `--token` | | Bearer token for authentication |
-| `--api-key` | | API key for authentication |
-| `--username` | `-u` | Username for basic auth |
-| `--password` | | Password for basic auth |
-| `--output` | `-o` | Output format (`table`, `wide`, `json`, `csv`) |
-| `--query` | | Extract field using dot notation |
-| `--all-profiles` | | Run list commands across every configured profile |
-| `--verbose` | `-v` | Increase verbosity (`-v`, `-vv`, `-vvv`) |
-| `--quiet` | `-q` | Suppress non-essential output |
-| `--no-color` | | Disable colored output |
-| `--yes` | | Skip confirmation prompts on destructive actions |
-| `--version` | `-V` | Show version |
-| `--help` | | Show help |
+| Option           | Short | Description                                       |
+| ---------------- | ----- | ------------------------------------------------- |
+| `--profile`      | `-p`  | Configuration profile to use                      |
+| `--host`         | `-H`  | VergeOS host URL (override)                       |
+| `--token`        |       | Bearer token for authentication                   |
+| `--api-key`      |       | API key for authentication                        |
+| `--username`     | `-u`  | Username for basic auth                           |
+| `--password`     |       | Password for basic auth                           |
+| `--output`       | `-o`  | Output format (`table`, `wide`, `json`, `csv`)    |
+| `--query`        |       | Extract field using dot notation                  |
+| `--all-profiles` |       | Run list commands across every configured profile |
+| `--verbose`      | `-v`  | Increase verbosity (`-v`, `-vv`, `-vvv`)          |
+| `--quiet`        | `-q`  | Suppress non-essential output                     |
+| `--no-color`     |       | Disable colored output                            |
+| `--yes`          |       | Skip confirmation prompts on destructive actions  |
+| `--version`      | `-V`  | Show version                                      |
+| `--help`         |       | Show help                                         |
 
 ## Exit Codes
 
 `vrg` uses meaningful exit codes for scripting and CI integration:
 
-| Code | Meaning |
-|------|---------|
-| 0 | Success |
-| 1 | General error |
-| 2 | Invalid arguments |
-| 3 | Configuration error |
-| 4 | Authentication error |
-| 5 | Permission denied |
-| 6 | Resource not found |
-| 7 | Conflict (e.g., duplicate name) |
-| 8 | Validation error |
-| 9 | Timeout |
-| 10 | Connection error |
+| Code | Meaning                         |
+| ---- | ------------------------------- |
+| 0    | Success                         |
+| 1    | General error                   |
+| 2    | Invalid arguments               |
+| 3    | Configuration error             |
+| 4    | Authentication error            |
+| 5    | Permission denied               |
+| 6    | Resource not found              |
+| 7    | Conflict (e.g., duplicate name) |
+| 8    | Validation error                |
+| 9    | Timeout                         |
+| 10   | Connection error                |
 
 ## Troubleshooting
 
-| Symptom | Likely Cause | Fix |
-|---------|-------------|-----|
-| Exit code 4 | Authentication failure | Run `vrg configure setup` and verify the token, API key, or credentials |
-| Exit code 3 | Configuration error | Inspect `~/.vrg/config.toml` or run `vrg configure show` |
-| Exit code 10 | Connection error | Verify `VERGE_HOST` is reachable and the URL is correct |
-| `compinit: insecure directories` (macOS) | Homebrew permissions | `chmod 755 /opt/homebrew/share/zsh /opt/homebrew/share/zsh/site-functions` |
-| `vrg` blocked on macOS | Gatekeeper quarantine | `xattr -d com.apple.quarantine ./vrg` |
+| Symptom                                  | Likely Cause           | Fix                                                                        |
+| ---------------------------------------- | ---------------------- | -------------------------------------------------------------------------- |
+| Exit code 4                              | Authentication failure | Run `vrg configure setup` and verify the token, API key, or credentials    |
+| Exit code 3                              | Configuration error    | Inspect `~/.vrg/config.toml` or run `vrg configure show`                   |
+| Exit code 10                             | Connection error       | Verify `VERGE_HOST` is reachable and the URL is correct                    |
+| `compinit: insecure directories` (macOS) | Homebrew permissions   | `chmod 755 /opt/homebrew/share/zsh /opt/homebrew/share/zsh/site-functions` |
+| `vrg` blocked on macOS                   | Gatekeeper quarantine  | `xattr -d com.apple.quarantine ./vrg`                                      |
 
 ## Choosing the Right Tool
 
 `vrg` is one of several VergeOS automation interfaces. Pick based on how you work:
 
-| Tool | Use When |
-|------|----------|
-| **vrg CLI** | You live in a terminal, want declarative VM templates, or need a one-shot script |
-| [Python SDK](python-sdk.md) | You're writing Python applications, complex automation, or integrating with other Python tooling |
-| [PowerShell Module](powershell-module.md) | You're a Windows-first shop or already automate with PowerShell |
-| [Terraform Provider](terraform-provider.md) | You manage VergeOS alongside other Terraform-managed infrastructure |
-| [Go SDK](go-sdk.md) | You're embedding VergeOS management into a Go application |
+| Tool                                        | Use When                                                                                         |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| **vrg CLI**                                 | You live in a terminal, want declarative VM templates, or need a one-shot script                 |
+| [Python SDK](python-sdk.md)                 | You're writing Python applications, complex automation, or integrating with other Python tooling |
+| [PowerShell Module](powershell-module.md)   | You're a Windows-first shop or already automate with PowerShell                                  |
+| [Terraform Provider](terraform-provider.md) | You manage VergeOS alongside other Terraform-managed infrastructure                              |
+| [Go SDK](go-sdk.md)                         | You're embedding VergeOS management into a Go application                                        |
 
 ## Resources & Support
 
-- [GitHub Repository](https://github.com/verge-io/vrg){target="_blank"} — source, issues, and releases
-- [Command Reference](https://github.com/verge-io/vrg/blob/main/docs/COMMANDS.md){target="_blank"} — every command and flag
-- [Template Guide](https://github.com/verge-io/vrg/blob/main/docs/TEMPLATES.md){target="_blank"} — full `.vrg.yaml` field reference
-- [Cookbook](https://github.com/verge-io/vrg/blob/main/docs/COOKBOOK.md){target="_blank"} — task-oriented recipes
-- [Architecture](https://github.com/verge-io/vrg/blob/main/docs/ARCHITECTURE.md){target="_blank"} — design and internals
-- [Known Issues](https://github.com/verge-io/vrg/blob/main/docs/KNOWN_ISSUES.md){target="_blank"} — current limitations and workarounds
-- [PyPI Package](https://pypi.org/project/vrg/){target="_blank"}
-- [Report an Issue](https://github.com/verge-io/vrg/issues){target="_blank"}
-- [VergeOS API Documentation](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/)
+* [GitHub Repository](https://github.com/verge-io/vrg){target="\_blank"} — source, issues, and releases
+* [Command Reference](https://github.com/verge-io/vrg/blob/main/docs/COMMANDS.md){target="\_blank"} — every command and flag
+* [Template Guide](https://github.com/verge-io/vrg/blob/main/docs/TEMPLATES.md){target="\_blank"} — full `.vrg.yaml` field reference
+* [Cookbook](https://github.com/verge-io/vrg/blob/main/docs/COOKBOOK.md){target="\_blank"} — task-oriented recipes
+* [Architecture](https://github.com/verge-io/vrg/blob/main/docs/ARCHITECTURE.md){target="\_blank"} — design and internals
+* [Known Issues](https://github.com/verge-io/vrg/blob/main/docs/KNOWN_ISSUES.md){target="\_blank"} — current limitations and workarounds
+* [PyPI Package](https://pypi.org/project/vrg/){target="\_blank"}
+* [Report an Issue](https://github.com/verge-io/vrg/issues){target="\_blank"}
+* [VergeOS API Documentation](https://app.gitbook.com/o/FpusSnrkRHyZiVEsXf9X/s/QZBMFpokMv2vWTIRbFzA/)

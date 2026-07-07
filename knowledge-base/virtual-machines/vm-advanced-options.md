@@ -1,7 +1,7 @@
 ---
 title: VM Advanced Options
 slug: vm-advanced-options
-description: Guide to configuring advanced VM options for fine-tuning performance, hardware emulation, and device behavior in VergeOS, including CPU threading, SMBIOS customization, NIC tuning, and QEMU machine parameters.
+description: Guide to configuring advanced VM options for fine-tuning performance, hardware emulation, and device behavior in VergeOS, including CPU threading, SMBIOS, NIC tuning, and QEMU machine parameters.
 author: VergeOS Documentation Team
 date: 2025-07-07T10:30:00.000Z
 semantic_keywords:

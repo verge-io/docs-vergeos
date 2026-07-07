@@ -1,18 +1,22 @@
 ---
-title: "Maintenance Mode"
-description: "How to put a VergeOS node into and out of maintenance mode, including workload migration, monitoring progress, and handling non-migratable VMs."
+title: Maintenance Mode
 semantic_keywords:
-  - "VergeOS node maintenance mode enable disable"
-  - "migrate workloads before node reboot power off"
-  - "graceful VM migration maintenance operations"
-  - "node status migrating leaving maintenance running"
-  - "non-migratable VM GPU passthrough maintenance"
+  - VergeOS node maintenance mode enable disable
+  - migrate workloads before node reboot power off
+  - graceful VM migration maintenance operations
+  - node status migrating leaving maintenance running
+  - non-migratable VM GPU passthrough maintenance
 use_cases:
   - enable_node_maintenance_mode
   - disable_node_maintenance_mode
   - migrate_workloads_for_maintenance
   - monitor_maintenance_progress
   - handle_non_migratable_vms
+categories:
+  - System Administration
+description: >-
+  How to put a VergeOS node into and out of maintenance mode, including workload
+  migration, monitoring progress, and handling non-migratable VMs.
 tags:
   - maintenance
   - nodes
@@ -21,8 +25,6 @@ tags:
   - cluster
   - operations
   - reboot
-categories:
-  - System Administration
 ---
 
 # Maintenance Mode
@@ -48,30 +50,23 @@ Before starting any maintenance, verify node servers can be reached via a backup
 3. Click **Enable Maintenance** on the left menu.
 4. A Confirmation message will appear. Click **Yes** to continue with placing the node into Maintenance Mode.
 5. **Monitor Progress.** The node dashboard will provide information about the Maintenance Mode progress:
+   *   **Node Logs**\
+       Scroll to the bottom of the node dashboard to view node logs. A log entry will appear for each machine the system attempts to migrate. A log entry indicating the status is now _'Maintenance Mode'_ indicates when the maintenance process completes successfully.
 
-    - **Node Logs**  
-        Scroll to the bottom of the node dashboard to view node logs. A log entry will appear for each machine the system attempts to migrate. A log entry indicating the status is now *'Maintenance Mode'* indicates when the maintenance process completes successfully.
+       ![Node log complete](../../.gitbook/assets/nodelogcomplete.png)
 
-        ![Node log complete](../../assets/screenshots/nodelogcomplete.png)
+       If any machines could not be migrated, an error entry will appear in the node logs; those machines will need to be powered off manually; see note above regarding Non-Migratable workloads.
+   *   **Running Machines** The _Running Machines_ section indicates workloads currently on the node, both running and migrating. To successfully move into maintenance mode, all running machines need to be migrated or powered off; the Running Machines section will be empty when this has occurred.
 
-        If any machines could not be migrated, an error entry will appear in the node logs; those machines will need to be powered off manually; see note above regarding Non-Migratable workloads.
+       ![Running machines - one migrating](../../.gitbook/assets/runningmachines-onemigrating.png)
+   *   **Node Status** Node Status is displayed at the top of the node dashboard. While a node is in the process of migrating workloads, a status of _**"Migrating"**_ is displayed.
 
-    - **Running Machines**
-        The *Running Machines* section indicates workloads currently on the node, both running and migrating. To successfully move into maintenance mode, all running machines need to be migrated or powered off; the Running Machines section will be empty when this has occurred.
+       ![Node status migrating](../../.gitbook/assets/nodestatusmigrating.png)
 
-        ![Running machines - one migrating](../../assets/screenshots/runningmachines-onemigrating.png)
+       A status of _**"Maintenance Mode"**_ indicates that all workloads have been successfully migrated/powered off.
 
-    - **Node Status**
-        Node Status is displayed at the top of the node dashboard. While a node is in the process of migrating workloads, a status of ***"Migrating"*** is displayed.
-
-        ![Node status migrating](../../assets/screenshots/nodestatusmigrating.png)
-
-        A status of ***"Maintenance Mode"*** indicates that all workloads have been successfully migrated/powered off.
-
-        ![Node status maintenance mode](../../assets/screenshots/nodestatusmaintenancemode.png)
-
-6. After verifying the ***Node Status*** displays **Maintenance Mode**, perform maintenance operations, using the **Reboot** **-And/Or-** **Power Off** options (on the left menu of the node dashboard) as needed.
-
+       ![Node status maintenance mode](../../.gitbook/assets/nodestatusmaintenancemode.png)
+6. After verifying the _**Node Status**_ displays **Maintenance Mode**, perform maintenance operations, using the **Reboot** **-And/Or-** **Power Off** options (on the left menu of the node dashboard) as needed.
 7. **After all service is completed** and the node is ready to be utilized again, **take the node out of Maintenance Mode** so it can service workloads again.
 
 ## Take a Node out of Maintenance Mode
@@ -82,12 +77,10 @@ Take a node out of maintenance **when all powercycle/reboot operations are compl
 
 1. From the **node dashboard**, click **Disable Maintenance** on the left menu.
 2. A Confirmation message will appear. Click **Yes** to continue taking the node out of Maintenance Mode.
-3. The ***Node Status*** displays "Leaving Maintenance" while in the process of coming out of Maintenance Mode.
+3.  The _**Node Status**_ displays "Leaving Maintenance" while in the process of coming out of Maintenance Mode.
 
-    ![Node status leaving maintenance](../../assets/screenshots/nodestatusleavingmaint.png)
+    ![Node status leaving maintenance](../../.gitbook/assets/nodestatusleavingmaint.png)
+4.  The _**Node Status**_ field will display "Running" when it has fully come out of Maintenance Mode and workloads have been migrated back to the node.
 
-4. The ***Node Status*** field will display "Running" when it has fully come out of Maintenance Mode and workloads have been migrated back to the node.
-
-    ![Node status running](../../assets/screenshots/nodestatusrunning.png)
-
+    ![Node status running](../../.gitbook/assets/nodestatusrunning.png)
 5. If necessary, **power on any non-migratable VMs or tenant nodes that were shutdown for maintenance**.

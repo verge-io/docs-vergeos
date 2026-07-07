@@ -1,29 +1,31 @@
 ---
 title: Removing a Node from a VergeOS Cluster
 slug: removing-a-node-from-cluster
-description: How to safely remove a physical node from a VergeOS system, including maintenance mode, drive removal, and vSAN repair procedures.
 author: VergeOS Documentation Team
-date: 2026-01-23
+date: 2026-01-23T00:00:00.000Z
 semantic_keywords:
-  - "node removal decommission cluster downsizing"
-  - "maintenance mode drive offline delete vsan"
-  - "vsan repair data redistribution node removal"
-  - "hardware decommission node replacement procedure"
+  - node removal decommission cluster downsizing
+  - maintenance mode drive offline delete vsan
+  - vsan repair data redistribution node removal
+  - hardware decommission node replacement procedure
 use_cases:
   - node_decommissioning
   - cluster_downsizing
   - hardware_replacement_removal
   - vsan_drive_removal_repair
+categories:
+  - System Administration
+  - Maintenance
+editor: markdown
+dateCreated: 2026-01-23T00:00:00.000Z
+description: >-
+  How to safely remove a physical node from a VergeOS system, including
+  maintenance mode, drive removal, and vSAN repair procedures.
 tags:
   - nodes
   - cluster
   - maintenance
   - decommission
-categories:
-  - System Administration
-  - Maintenance
-editor: markdown
-dateCreated: 2026-01-23
 ---
 
 # Removing a Node from a VergeOS Cluster
@@ -42,10 +44,10 @@ Node removal can only be performed on the **last node** in the system. Nodes mus
 
 Before removing a node, ensure the following:
 
-- **vSAN Health**: All vSAN tiers must be healthy (green status)
-- **Cluster Size**: At least two nodes must remain in the cluster after removal
-- **Recent Snapshot**: A current system snapshot is recommended before proceeding
-- **Backup Access**: Verify IPMI or console access is available for troubleshooting
+* **vSAN Health**: All vSAN tiers must be healthy (green status)
+* **Cluster Size**: At least two nodes must remain in the cluster after removal
+* **Recent Snapshot**: A current system snapshot is recommended before proceeding
+* **Backup Access**: Verify IPMI or console access is available for troubleshooting
 
 ## Removal Process
 
@@ -115,12 +117,12 @@ Do not power off, restart, or remove additional nodes while vSAN repairs are in 
 
 After repairs complete:
 
-- Verify all vSAN tiers show green status
-- Confirm cluster resources are balanced across remaining nodes
-- Check system logs for any warnings or errors
+* Verify all vSAN tiers show green status
+* Confirm cluster resources are balanced across remaining nodes
+* Check system logs for any warnings or errors
 
 ## Additional Resources
 
-- [Maintenance Mode](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/operations/maintenance-mode)
-- [Nodes Overview](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/system/nodes-overview)
-- [Clusters Overview](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/system/clusters-overview)
+* [Maintenance Mode](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/operations/maintenance-mode)
+* [Nodes Overview](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/system-administration/nodes-overview)
+* [Clusters Overview](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/system-administration/clusters-overview)

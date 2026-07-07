@@ -1,42 +1,47 @@
 ---
-title: "VergeOS Homelab Reference Architecture"
-description: "Reference architecture for deploying VergeOS in homelab environments, covering single-node, two-node cluster, and production-grade configurations with multi-tiered storage."
+title: VergeOS Homelab Reference Architecture
 semantic_keywords:
-  - "VergeOS homelab single-node two-node cluster setup"
-  - "home virtualization lab environment hardware recommendations"
-  - "multi-tiered storage NVMe SSD homelab configuration"
-  - "homelab reference architecture VergeOS deployment"
+  - VergeOS homelab single-node two-node cluster setup
+  - home virtualization lab environment hardware recommendations
+  - multi-tiered storage NVMe SSD homelab configuration
+  - homelab reference architecture VergeOS deployment
 use_cases:
   - homelab_deployment_planning
   - single_node_setup
   - two_node_cluster_design
   - homelab_storage_configuration
+categories:
+  - Getting Started
+description: >-
+  Reference architecture for deploying VergeOS in homelab environments, covering
+  single-node, two-node cluster, and production-grade configurations with
+  multi-tiered storage.
 tags:
   - reference-architecture
   - homelab
   - single-node
   - clustering
   - storage-tiers
-categories:
-  - Getting Started
 ---
 
-# VergeOS Homelab Reference Architecture
+# VergeOS homelab reference architecture
 
 ## Overview
+
 VergeOS is an ideal solution for homelab enthusiasts, providing a robust and flexible virtualization platform. This reference architecture covers three configurations suitable for various homelab setups: a single-node VM host, a two-node cluster, and a production-grade homelab cluster with multi-tiered storage.
 
 ### Hardware Recommendations
+
 Homelab users have a variety of options for VergeOS hardware. Many opt for older-generation enterprise servers (e.g., Dell, HP, Supermicro) due to their reliability and expandability.
 
 Compact devices like Intel NUCs or similar mini PCs are also popular choices, particularly those offering dual 2.5GbE networking, NVMe slots, and 2.5” SSD bays.
 
 **Key Considerations:**
 
-- **RAID Configuration:** VergeOS requires direct access to disks, so if using a RAID controller, ensure it supports JBOD/IT mode or use an HBA instead.
-- **IPMI Requirements:** While VergeOS recommends IPMI, homelab setups can often skip this. However, some NVIDIA GPUs or GPU passthrough setups may disable console access, so IPMI can be beneficial for managing these configurations.
+* **RAID Configuration:** VergeOS requires direct access to disks, so if using a RAID controller, ensure it supports JBOD/IT mode or use an HBA instead.
+* **IPMI Requirements:** While VergeOS recommends IPMI, homelab setups can often skip this. However, some NVIDIA GPUs or GPU passthrough setups may disable console access, so IPMI can be beneficial for managing these configurations.
 
----
+***
 
 ## Scenarios
 
@@ -50,17 +55,17 @@ A straightforward configuration ideal for test environments, a single-node VM ho
 VergeOS's vSAN is configured as N+1, providing redundancy. This setup reduces available storage to 50% of raw capacity, so storage requirements should be planned accordingly.
 {% endhint %}
 
-**Network Configuration:**  
+**Network Configuration:**
 
 Since this setup does not involve additional VergeOS nodes, use the same network for both core and external communication to simplify configuration.
 
 **Use Cases:**
 
-- Hosting test VMs
-- Testing VergeOS recipes and configurations
-- General homelab experimentation
+* Hosting test VMs
+* Testing VergeOS recipes and configurations
+* General homelab experimentation
 
----
+***
 
 ### 2. Two-Node Cluster
 
@@ -74,11 +79,11 @@ Two network interfaces per server are required, with a core network speed of at 
 
 **Use Cases:**
 
-- Running VM environments with increased uptime
-- Development and testing in a clustered environment
-- Enhanced storage and network redundancy
+* Running VM environments with increased uptime
+* Development and testing in a clustered environment
+* Enhanced storage and network redundancy
 
----
+***
 
 ### 3. Home Production Cluster
 
@@ -88,17 +93,16 @@ This setup allows VergeOS to serve as a powerful central hub, managing network t
 
 **Storage Tiers:**
 
-- **Tier 1 (NVMe):** Fast storage for VM workloads requiring high I/O performance.
-- **Tier 3 (SSD):** Mid-speed storage for NAS use, high-demand data, or shared VM storage.
-- **Tier 5 (HDD):** High-capacity storage for NAS and backup server VMs.
+* **Tier 1 (NVMe):** Fast storage for VM workloads requiring high I/O performance.
+* **Tier 3 (SSD):** Mid-speed storage for NAS use, high-demand data, or shared VM storage.
+* **Tier 5 (HDD):** High-capacity storage for NAS and backup server VMs.
 
-**Network and VLAN Configuration:**  
+**Network and VLAN Configuration:**
 
 Utilize VergeOS as the main router and network manager for your lab and home LAN. This setup requires a VLAN-capable switch where you can assign your ISP network a VLAN (e.g., VLAN 50) and configure your LAN as the default VLAN or as additional VLANs as needed.
 
-
-   - **External WAN:** Connects to the ISP, assigned as a VLAN.
-   - **External (LAN):** Serves as the homelab and personal network, allowing devices within the home network to access resources within the VergeOS environment.
+* **External WAN:** Connects to the ISP, assigned as a VLAN.
+* **External (LAN):** Serves as the homelab and personal network, allowing devices within the home network to access resources within the VergeOS environment.
 
 {% hint style="success" %}
 **Installation Note**
@@ -106,35 +110,35 @@ Utilize VergeOS as the main router and network manager for your lab and home LAN
 During installation, use your **LAN** network as the initial external network. Once installation is complete, add the WAN network for internet connectivity. For detailed instructions, refer to the [Knowledge Base article on creating an external network](https://docs.verge.io/knowledge-base/create-external-network/).
 {% endhint %}
 
-**NAS Service:**  
+**NAS Service:**
 
 To set up a robust NAS for your home environment, VergeOS offers a built-in NAS service, perfect for managing shared storage with high capacity and redundancy.
 
-For step-by-step instructions on configuring and deploying the NAS service, see the [NAS Service Product Guide](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/nas/nas-service). Additional configuration options and troubleshooting steps are covered in the [Knowledge Base](https://docs.verge.io/knowledge-base/category/nas/#troubleshooting-nas-cifs-shares).
+For step-by-step instructions on configuring and deploying the NAS service, see the [NAS Service Product Guide](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/nas/nas-service). Additional configuration options and troubleshooting steps are covered in the [Knowledge Base](https://docs.verge.io/knowledge-base/category/nas/#troubleshooting-nas-cifs-shares).
 
-**GPU Support:**  
+**GPU Support:**
 
 For users who need enhanced graphics capabilities, VergeOS supports both GPU Passthrough and NVIDIA vGPU. These options allow virtual machines to utilize either dedicated or shared GPU resources:
 
-   - **GPU Passthrough:** Provides a direct GPU connection to a VM for high-performance applications. See the [PCI Passthrough Product Guide](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/system/generic-pci-passthrough).
-   - **NVIDIA vGPU:** Allows shared GPU access for multiple VMs, enabling efficient use of GPU resources for less-intensive tasks. Refer to the [NVIDIA vGPU Product Guide](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/system/nvidia-vgpu-configuration).
+* **GPU Passthrough:** Provides a direct GPU connection to a VM for high-performance applications. See the [PCI Passthrough Product Guide](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/system-administration/generic-pci-passthrough).
+* **NVIDIA vGPU:** Allows shared GPU access for multiple VMs, enabling efficient use of GPU resources for less-intensive tasks. Refer to the [NVIDIA vGPU Product Guide](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/system-administration/nvidia-vgpu-configuration).
 
 **Use Cases:**
 
-- Hosting multi-tiered VM environments
-- **Redundant, high-capacity NAS setup** for centralized, reliable file storage
-- Serving as a home network router and firewall, providing security and centralized management for all connected devices
-- High-performance VM applications with dedicated GPU resources or shared vGPU for scalable graphics processing
+* Hosting multi-tiered VM environments
+* **Redundant, high-capacity NAS setup** for centralized, reliable file storage
+* Serving as a home network router and firewall, providing security and centralized management for all connected devices
+* High-performance VM applications with dedicated GPU resources or shared vGPU for scalable graphics processing
 
----
+***
 
 ## Useful Links
 
-- [VM Recipes](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/product-guide/automation/vm-recipes)
-- [System Snapshots](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/product-guide/backup-dr/system-snapshots)
-- [vSAN Preferred Tiers](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/storage/preferred-tiers)
-- [VPN](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/vpn/vpn-overview)
-- [Network Overview](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/networks/network-overview)
-- [Licensing](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/system/licensing-and-updates)
+* [VM Recipes](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/automation/vm-recipes)
+* [System Snapshots](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/backup-and-dr/system-snapshots)
+* [vSAN Preferred Tiers](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/storage/preferred-tiers)
+* [VPN](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/vpn/vpn-overview)
+* [Network Overview](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/networking/network-overview)
+* [Licensing](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/system-administration/licensing-and-updates)
 
 Each of these configurations is adaptable to specific homelab needs, allowing flexibility based on available hardware and individual use cases.

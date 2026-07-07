@@ -1,18 +1,23 @@
 ---
-title: "Replacing a Defective or End-of-life Drive"
-description: "Procedures for replacing failed, degraded, or end-of-life vSAN drives in VergeOS, including identifying defective drives, LED activation, and both reactive and proactive replacement scenarios."
+title: Replacing a Defective or End-of-life Drive
 semantic_keywords:
-  - "replace failed defective drive vSAN VergeOS"
-  - "drive error warning missing status replacement procedure"
-  - "LED activation identify physical drive for replacement"
-  - "proactive drive replacement wear level reallocated sectors"
-  - "vSAN drive repair process format initialize"
+  - replace failed defective drive vSAN VergeOS
+  - drive error warning missing status replacement procedure
+  - LED activation identify physical drive for replacement
+  - proactive drive replacement wear level reallocated sectors
+  - vSAN drive repair process format initialize
 use_cases:
   - replace_failed_missing_drive
   - proactively_replace_degraded_drive
   - identify_physical_drive_with_led
   - monitor_drive_repair_progress
   - diagnose_drive_warning_errors
+categories:
+  - System Administration
+description: >-
+  Procedures for replacing failed, degraded, or end-of-life vSAN drives in
+  VergeOS, including identifying defective drives, LED activation, and both
+  reactive and proactive replacement scenarios.
 tags:
   - drives
   - vsan
@@ -22,8 +27,6 @@ tags:
   - repair
   - troubleshooting
   - replacement
-categories:
-  - System Administration
 ---
 
 # Replacing a Defective or End-of-life Drive
@@ -34,36 +37,36 @@ This page covers replacing a drive (participating in the vSAN) due to defect or 
 
 The VergeOS interface will provide warnings or alerts to indicate when there is a problem with a physical drive. When a drive has a warning or error status, an indicator will "bubble up" to the System Dashboard page (Navigate to **System** > **Dashboard** from the top menu.)
 
-![Drive Count Box](../../assets/screenshots/drivecountbox.png)
+![Drive Count Box](../../.gitbook/assets/drivecountbox.png)
 
-- Click anywhere within the drive count box to access the full list of drives.
-- Double-click a drive with an error/warning to view its dashboard that displays more detail.
+* Click anywhere within the drive count box to access the full list of drives.
+* Double-click a drive with an error/warning to view its dashboard that displays more detail.
 
-![Drive listing warning](../../assets/screenshots/drivelisting-warning.png)
+![Drive listing warning](../../.gitbook/assets/drivelisting-warning.png)
 
-![Drive Dashboard](../../assets/screenshots/drivedashboard.png)
+![Drive Dashboard](../../.gitbook/assets/drivedashboard.png)
 
 ### Example Warning/Error Statuses
 
-- **Warning** - Wear level exceeded maximum threshold(s)
-- **Warning** - Reallocated sectors exceeded maximum threshold(s)
-- **Error** - Drive is unresponsive; read or write error threshold reached
-- **Missing** - Drive is no longer detected by the system (failed or physically removed)
+* **Warning** - Wear level exceeded maximum threshold(s)
+* **Warning** - Reallocated sectors exceeded maximum threshold(s)
+* **Error** - Drive is unresponsive; read or write error threshold reached
+* **Missing** - Drive is no longer detected by the system (failed or physically removed)
 
 {% hint style="warning" %}
 **Important**
 
-**It is highly recommended to configure on-demand and scheduled subscriptions (with *target type=system Dashboard*) to ensure timely awareness of drive issues.** The [Creating Subscriptions Guide](../system/subscriptions-overview.md) provides information about setting up subscriptions.
+**It is highly recommended to configure on-demand and scheduled subscriptions (with&#x20;**_**target type=system Dashboard**_**) to ensure timely awareness of drive issues.** The [Creating Subscriptions Guide](../system/subscriptions-overview.md) provides information about setting up subscriptions.
 {% endhint %}
 
 ## Which Replacement Procedure Should I Use?
 
 The replacement procedure depends on the current state of the drive:
 
-| Drive Status | Condition | Procedure |
-|--------------|-----------|-----------|
-| **Missing** or **Error** (unresponsive) | Drive has already failed and is not responding | [Scenario 1: Replace a Failed/Missing Drive](#scenario-1-replace-a-failedmissing-drive) |
-| **Warning** or **Degraded** | Drive is still operational but showing signs of failure | [Scenario 2: Proactively Replace a Working Drive](#scenario-2-proactively-replace-a-working-drive) |
+| Drive Status                            | Condition                                               | Procedure                                                                                                              |
+| --------------------------------------- | ------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| **Missing** or **Error** (unresponsive) | Drive has already failed and is not responding          | [Scenario 1: Replace a Failed/Missing Drive](drive-replacement.md#scenario-1-replace-a-failedmissing-drive)            |
+| **Warning** or **Degraded**             | Drive is still operational but showing signs of failure | [Scenario 2: Proactively Replace a Working Drive](drive-replacement.md#scenario-2-proactively-replace-a-working-drive) |
 
 {% hint style="success" %}
 **How to Tell if a Drive is Missing**
@@ -74,36 +77,35 @@ A missing drive will show a status of **Missing** in the drive list. This occurs
 ## Determine Correct Physical Drive for Replacement
 
 1. Navigate to the **node dashboard**.
-2. **Activate** the drive **LED**
-    - If ***LED Status*** indicates **Off**, click **Turn on LED** on the left menu.
+2.  **Activate** the drive **LED**
 
-    ![ledoff.png](../../assets/screenshots/ledoff.png)
+    * If _**LED Status**_ indicates **Off**, click **Turn on LED** on the left menu.
 
-    - If ***LED Status*** field indicates **Unsupported**, click **Locate LED** on the left menu.
+    ![ledoff.png](../../.gitbook/assets/ledoff.png)
 
-   ![ledunsupported.png](../../assets/screenshots/ledunsupported.png)
+    * If _**LED Status**_ field indicates **Unsupported**, click **Locate LED** on the left menu.
 
-3. The Diagnostics window will appear with settings pre-filled.  Click **Send ->** to activate the drive LED.
+    ![ledunsupported.png](../../.gitbook/assets/ledunsupported.png)
+3.  The Diagnostics window will appear with settings pre-filled. Click **Send ->** to activate the drive LED.
 
-    ![diag-ledon.png](../../assets/screenshots/diag-ledon.png)
-
+    ![diag-ledon.png](../../.gitbook/assets/diag-ledon.png)
 4. Once the LED is activated, the physical drive can be located by identifying the one with a solid light. After identifying the drive, **deactivate the LED**:
 
-![diag-ledoff.png](../../assets/screenshots/diag-ledoff.png)
+![diag-ledoff.png](../../.gitbook/assets/diag-ledoff.png)
 
 ## Scenario 1: Replace a Failed/Missing Drive
 
 Use this procedure when a drive has already failed and is no longer responding, or when the drive shows a **Missing** status in the UI.
 
 {% hint style="danger" %}
-****CAUTION: Before** initiating a drive repair operation, **verify**:**
+**CAUTION: Before initiating a drive repair operation, verify:**
 
 1. The node that contains the failed drive will need to be placed into maintenance mode. All other nodes should be online and fully operational (i.e. not in maintenance mode or offline).
-2. No other drive repairs are running on different nodes within the same storage tier *(Drive repairs on the same physical node are acceptable)*
+2. No other drive repairs are running on different nodes within the same storage tier _(Drive repairs on the same physical node are acceptable)_
 {% endhint %}
 
 1. **Place the node** that has the failed drive **into Maintenance Mode**.
-2. If the failed drive is still physically present, **remove it** from the node. Use the [LED activation process](#determine-correct-physical-drive-for-replacement) if needed to identify the correct drive.
+2. If the failed drive is still physically present, **remove it** from the node. Use the [LED activation process](drive-replacement.md#determine-correct-physical-drive-for-replacement) if needed to identify the correct drive.
 3. **Insert the replacement drive** into the same slot (or any available slot).
 4. **Wait** for the new drive to be detected by the system.
 5. From the node dashboard, click **Drives**.
@@ -116,17 +118,17 @@ Use this procedure when a drive has already failed and is no longer responding, 
 The system will automatically format and initialize the new drive, then begin the repair process. The drive status will change to "Repairing" and the dashboard will show an **Estimated Repair Completion date and time.**
 {% endhint %}
 
----
+***
 
 ## Scenario 2: Proactively Replace a Working Drive
 
 Use this procedure when a drive is still operational but showing warning signs (such as wear level warnings or reallocated sectors) and you want to replace it before it fails completely.
 
 {% hint style="danger" %}
-****CAUTION: Before** initiating a drive repair operation, **verify**:**
+**CAUTION: Before initiating a drive repair operation, verify:**
 
 1. The node that the drive to be replaced resides on will need to be placed into maintenance mode. All other nodes should be online and fully operational (i.e. not in maintenance mode or offline).
-2. No other drive repairs are running on different nodes within the same storage tier *(Drive repairs on the same physical node are acceptable)*
+2. No other drive repairs are running on different nodes within the same storage tier _(Drive repairs on the same physical node are acceptable)_
 3. You have positively identified the correct physical drive using the LED activation process above
 {% endhint %}
 
@@ -146,7 +148,7 @@ Use this procedure when a drive is still operational but showing warning signs (
 After the vSAN has completed a full walk, the repair process will begin, and the drive status will change to "Repairing"; at this point the drive dashboard will indicate an **Estimated Repair Completion date and time.**
 {% endhint %}
 
----
+***
 
 ## During the Repair Process
 
@@ -155,8 +157,8 @@ After the vSAN has completed a full walk, the repair process will begin, and the
 
 The following applies to **both** replacement scenarios:
 
-- **Do NOT restart, reset or power off any nodes** until the drive shows a status of "Online"; it is important that all other nodes remain fully operational during the repair process.
-- **Additional drive replace/repair operations should NOT be initiated until this repair operation has fully completed** unless the additional drive resides: within the same node - OR - on another storage tier.
+* **Do NOT restart, reset or power off any nodes** until the drive shows a status of "Online"; it is important that all other nodes remain fully operational during the repair process.
+* **Additional drive replace/repair operations should NOT be initiated until this repair operation has fully completed** unless the additional drive resides: within the same node - OR - on another storage tier.
 {% endhint %}
 
 ## Troubleshooting

@@ -1,38 +1,39 @@
 ---
 title: Requesting an Airgap License
 slug: requesting-an-airgap-license
-description: Guide on how to request and obtain an airgap license for VergeOS systems with no outbound Internet access, including generating the license request file and emailing it to Verge.
 author: VergeOS Documentation Team
 date: 2024-08-19T15:41:14.296Z
 semantic_keywords:
-  - "airgap license request air-gapped environment"
-  - "offline licensing no internet access"
-  - "license request file download email"
-  - "VergeOS system licensing activation"
+  - airgap license request air-gapped environment
+  - offline licensing no internet access
+  - license request file download email
+  - VergeOS system licensing activation
 use_cases:
   - request_airgap_license
   - license_air_gapped_system
   - generate_license_request_file
   - offline_system_activation
+categories:
+  - Licensing
+  - System Administration
+editor: markdown
+dateCreated: 2024-08-19T19:08:58.594Z
+description: >-
+  Guide on how to request and obtain an airgap license for VergeOS systems with
+  no outbound Internet access, including generating the license request file and
+  emailing it to Verge.
 tags:
   - airgap
   - license
   - verge
   - vergeos
   - air-gapped
-categories:
-  - Licensing
-  - System Administration
-editor: markdown
-dateCreated: 2024-08-19T19:08:58.594Z
 ---
 
-# Requesting an Airgap License for VergeOS
+# Requesting an Airgap License
 
 {% hint style="warning" %}
-**Air-gap licensing is not common and requires justification. Please see [Licensing and Software Updates](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/system/licensing-and-updates) for more information.**
-
-
+**Air-gap licensing is not common and requires justification. Please see** [**Licensing and Software Updates**](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/system-administration/licensing-and-updates) **for more information.**
 {% endhint %}
 
 ## Overview
@@ -40,50 +41,39 @@ dateCreated: 2024-08-19T19:08:58.594Z
 {% hint style="info" %}
 **Key Points**
 
-- VergeOS requires a valid license for operation
-- Air-gapped environments need a special airgap license
-- The process involves generating a license request file and emailing it to Verge
+* VergeOS requires a valid license for operation
+* Air-gapped environments need a special airgap license
+* The process involves generating a license request file and emailing it to Verge
 {% endhint %}
 
 This guide walks you through the process of requesting an airgap license for VergeOS systems in environments without outbound Internet access.
 
 ## Prerequisites
 
-- Access to the VergeOS Cloud Dashboard
-- A working email client on a machine that can send external emails
-- Understanding of your system's airgapped status
+* Access to the VergeOS Cloud Dashboard
+* A working email client on a machine that can send external emails
+* Understanding of your system's airgapped status
 
 ## Steps
 
 1. Navigate to System Settings
-
-     - From the System Dashboard, click **System** on the left menu
-     - Click **Settings** on the left menu
-
-3. Initiate License Request
-   
-     - In the **License** section, click the **Request License** button
-
-5. Generate License Request File
-   
-     - A popup window titled "Request Generated" will appear
-     - This window displays information about the license request file
-   
-7. Download Request File
-   
-     - Click the **Download Request File** button
-     - Save the license request file to your local machine
-
-9. Prepare Email to Verge
-    
-     - Click the **Email license@Verge.io** button
-     - This opens your default email client with a pre-addressed email
-
-11. Send License Request
-    
-     - Attach the downloaded license request file to the email
-     - Provide additional information in the email body (e.g., company name, purpose of license)
-     - Send the email to Verge's licensing team
+   * From the System Dashboard, click **System** on the left menu
+   * Click **Settings** on the left menu
+2. Initiate License Request
+   * In the **License** section, click the **Request License** button
+3. Generate License Request File
+   * A popup window titled "Request Generated" will appear
+   * This window displays information about the license request file
+4. Download Request File
+   * Click the **Download Request File** button
+   * Save the license request file to your local machine
+5. Prepare Email to Verge
+   * Click the **Email license@Verge.io** button
+   * This opens your default email client with a pre-addressed email
+6. Send License Request
+   * Attach the downloaded license request file to the email
+   * Provide additional information in the email body (e.g., company name, purpose of license)
+   * Send the email to Verge's licensing team
 
 ## What Happens Next
 
@@ -99,20 +89,19 @@ If you haven't received a response within 2 business days, please follow up with
 
 ## Important Considerations
 
-- Ensure the system requesting the license is the one you intend to license
-- Keep the license request file secure
-- For multiple systems, repeat this process for each system individually
+* Ensure the system requesting the license is the one you intend to license
+* Keep the license request file secure
+* For multiple systems, repeat this process for each system individually
 
 ## Troubleshooting
 
 {% hint style="warning" %}
 **Common Issues**
 
-- Problem: Unable to generate license request file
-  - Solution: Verify your access permissions in the VergeOS Cloud Dashboard
-
-- Problem: Email client doesn't open automatically
-  - Solution: Manually compose an email to license@Verge.io and attach the downloaded request file
+* Problem: Unable to generate license request file
+  * Solution: Verify your access permissions in the VergeOS Cloud Dashboard
+* Problem: Email client doesn't open automatically
+  * Solution: Manually compose an email to license@Verge.io and attach the downloaded request file
 {% endhint %}
 
 ## Feedback
@@ -123,5 +112,4 @@ If you haven't received a response within 2 business days, please follow up with
 If you encounter any issues while requesting an airgap license or have questions about this process, please don't hesitate to contact our support team.
 {% endhint %}
 
----
-
+***

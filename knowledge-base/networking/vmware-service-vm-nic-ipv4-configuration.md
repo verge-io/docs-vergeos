@@ -1,30 +1,32 @@
 ---
 title: Configuring VMware Service VM NIC IPv4 Settings
 slug: vmware-service-vm-nic-ipv4-configuration
-description: How to configure static IPv4 settings for VMware service VM NICs in VergeOS, including IP address, DNS, and routing.
 author: VergeOS Documentation Team
-date: 2026-03-13
+date: 2026-03-13T00:00:00.000Z
 semantic_keywords:
-  - "VMware service VM static IP configuration"
-  - "NIC IPv4 settings DNS gateway routes"
-  - "VMware backup service network setup"
-  - "CIDR notation static IP assignment"
+  - VMware service VM static IP configuration
+  - NIC IPv4 settings DNS gateway routes
+  - VMware backup service network setup
+  - CIDR notation static IP assignment
 use_cases:
-  - "configure_static_ip_vmware_service"
-  - "set_dns_servers_vmware_nic"
-  - "add_default_gateway_route_vmware_vm"
-  - "troubleshoot_vmware_service_network"
+  - configure_static_ip_vmware_service
+  - set_dns_servers_vmware_nic
+  - add_default_gateway_route_vmware_vm
+  - troubleshoot_vmware_service_network
+categories:
+  - VMware
+  - Network Rules
+editor: markdown
+dateCreated: 2026-03-13T00:00:00.000Z
+description: >-
+  How to configure static IPv4 settings for VMware service VM NICs in VergeOS,
+  including IP address, DNS, and routing.
 tags:
   - vmware
   - networking
   - nics
   - ipv4
   - static ip
-categories:
-  - VMware
-  - Network Rules
-editor: markdown
-dateCreated: 2026-03-13
 ---
 
 # Configuring VMware Service VM NIC IPv4 Settings
@@ -34,18 +36,18 @@ dateCreated: 2026-03-13
 {% hint style="info" %}
 **Key Points**
 
-- VMware service VMs have a unique NIC configuration panel not found on standard VM NICs
-- The IPv4 panel allows static IP assignment with DNS, search domains, and custom routes
-- All address fields use CIDR notation for IP addresses and plain IPs for gateways and DNS servers
+* VMware service VMs have a unique NIC configuration panel not found on standard VM NICs
+* The IPv4 panel allows static IP assignment with DNS, search domains, and custom routes
+* All address fields use CIDR notation for IP addresses and plain IPs for gateways and DNS servers
 {% endhint %}
 
 VMware service VMs in VergeOS use a specialized NIC type (**VMware Backup**) that includes an IPv4 configuration panel for assigning static network settings. This article covers each field in the NIC settings and IPv4 configuration panels, along with an example for setting up a default gateway route.
 
 ## Prerequisites
 
-- A VMware service already created and accessible in VergeOS (see [VMware Backup/DR Guide](../backup-dr/vmwarebackupdrguide.md) for setup instructions)
-- A VergeOS network available for the service VM to connect to
-- The static IP address, subnet, gateway, and DNS information for your environment
+* A VMware service already created and accessible in VergeOS (see [VMware Backup/DR Guide](../backup-dr/vmwarebackupdrguide.md) for setup instructions)
+* A VergeOS network available for the service VM to connect to
+* The static IP address, subnet, gateway, and DNS information for your environment
 
 ## Navigating to the NIC Settings
 
@@ -59,14 +61,14 @@ VMware service VMs in VergeOS use a specialized NIC type (**VMware Backup**) tha
 
 The left panel contains the general NIC configuration fields:
 
-| Field | Description |
-|-------|-------------|
-| **Enabled** | Toggle to enable or disable this NIC. |
-| **Name** | Interface name as it appears in the VM (e.g., `eth0`). |
-| **Order ID** | Boot order for this NIC. `0` loads first. |
-| **Network** | VergeOS network to attach this NIC to. |
+| Field           | Description                                                         |
+| --------------- | ------------------------------------------------------------------- |
+| **Enabled**     | Toggle to enable or disable this NIC.                               |
+| **Name**        | Interface name as it appears in the VM (e.g., `eth0`).              |
+| **Order ID**    | Boot order for this NIC. `0` loads first.                           |
+| **Network**     | VergeOS network to attach this NIC to.                              |
 | **MAC Address** | Automatically assigned. Can be changed if a specific MAC is needed. |
-| **Description** | Optional field for notes or identifying information. |
+| **Description** | Optional field for notes or identifying information.                |
 
 ## IPv4 Configuration (Right Panel)
 
@@ -74,8 +76,8 @@ The right panel provides static IPv4 configuration. Set the **Type** dropdown to
 
 ### IP Address
 
-| Field | Format | Example |
-|-------|--------|---------|
+| Field          | Format        | Example           |
+| -------------- | ------------- | ----------------- |
 | **IP Address** | CIDR notation | `192.168.1.10/24` |
 
 {% hint style="success" %}
@@ -86,27 +88,27 @@ Always include the subnet prefix length after the IP address. For example, `/24`
 
 ### DNS Servers
 
-| Field | Format | Example |
-|-------|--------|---------|
+| Field       | Format           | Example        |
+| ----------- | ---------------- | -------------- |
 | **Address** | Plain IP address | `192.168.1.53` |
 
 Use the **+** button to add entries. Each section also provides up/down arrows to reorder entries, a trash icon to delete, and a pencil icon to edit.
 
 ### Search Domains
 
-| Field | Format | Example |
-|-------|--------|---------|
+| Field      | Format          | Example         |
+| ---------- | --------------- | --------------- |
 | **Domain** | DNS domain name | `company.local` |
 
 Use the **+** button to add entries. Each section also provides up/down arrows to reorder entries, a trash icon to delete, and a pencil icon to edit.
 
 ### Routes
 
-| Field | Format | Example |
-|-------|--------|---------|
-| **Address** (required) | Network in CIDR notation | `0.0.0.0/0` |
-| **Gateway** (required) | Plain IP address (next hop) | `192.168.1.1` |
-| **Metric** | Integer (lower = higher priority) | `100` |
+| Field                  | Format                            | Example       |
+| ---------------------- | --------------------------------- | ------------- |
+| **Address** (required) | Network in CIDR notation          | `0.0.0.0/0`   |
+| **Gateway** (required) | Plain IP address (next hop)       | `192.168.1.1` |
+| **Metric**             | Integer (lower = higher priority) | `100`         |
 
 Use the **+** button to add entries. Each section also provides up/down arrows to reorder entries, a trash icon to delete, and a pencil icon to edit.
 
@@ -123,14 +125,13 @@ To configure a standard default gateway route for a VMware service VM NIC:
 1. Set **Type** to **Static**.
 2. Enter the **IP Address** in CIDR notation (e.g., `192.168.1.10/24`).
 3. Under **DNS Servers**, click **+** and enter the DNS server address (e.g., `192.168.1.53`).
-4. Under **Routes**, click **+** and enter the following:
+4.  Under **Routes**, click **+** and enter the following:
 
-    | Field | Value |
-    |-------|-------|
-    | **Address** | `0.0.0.0/0` |
+    | Field       | Value         |
+    | ----------- | ------------- |
+    | **Address** | `0.0.0.0/0`   |
     | **Gateway** | `192.168.1.1` |
-    | **Metric** | `100` |
-
+    | **Metric**  | `100`         |
 5. Click **Submit** to save the configuration.
 
 ## Troubleshooting
@@ -138,15 +139,15 @@ To configure a standard default gateway route for a VMware service VM NIC:
 {% hint style="warning" %}
 **Common Issues**
 
-- **Service cannot reach external networks**: Verify that a default gateway route (`0.0.0.0/0`) is configured and that the gateway IP is correct for the selected VergeOS network.
-- **DNS resolution not working**: Confirm that the DNS server address is reachable from the selected network and entered as a plain IP (not CIDR notation).
-- **IP Address rejected**: Ensure the IP address includes the CIDR prefix length (e.g., `192.168.1.10/24`, not `192.168.1.10`).
+* **Service cannot reach external networks**: Verify that a default gateway route (`0.0.0.0/0`) is configured and that the gateway IP is correct for the selected VergeOS network.
+* **DNS resolution not working**: Confirm that the DNS server address is reachable from the selected network and entered as a plain IP (not CIDR notation).
+* **IP Address rejected**: Ensure the IP address includes the CIDR prefix length (e.g., `192.168.1.10/24`, not `192.168.1.10`).
 {% endhint %}
 
 ## Additional Resources
 
-- [VMware Backup/DR Guide](../backup-dr/vmwarebackupdrguide.md)
-- [Virtual Machine NICs](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/virtual-machines/vm-nics)
+* [VMware Backup/DR Guide](../backup-dr/vmwarebackupdrguide.md)
+* [Virtual Machine NICs](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/virtual-machines/vm-nics)
 
 ## Feedback
 

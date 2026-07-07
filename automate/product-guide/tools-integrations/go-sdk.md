@@ -1,11 +1,10 @@
 ---
-title: "VergeOS Go SDK (govergeos)"
-description: "govergeos is a Go client library for managing VergeOS infrastructure through the REST API, providing type-safe interfaces for automating VMs, networking, storage, tenants, and disaster recovery."
+title: VergeOS Go SDK (govergeos)
 semantic_keywords:
-  - "VergeOS Go SDK API client library"
-  - "automate VergeOS infrastructure with Go"
-  - "govergeos VM networking storage automation"
-  - "programmatic VergeOS management Go lang"
+  - VergeOS Go SDK API client library
+  - automate VergeOS infrastructure with Go
+  - govergeos VM networking storage automation
+  - programmatic VergeOS management Go lang
 use_cases:
   - infrastructure_automation
   - kubernetes_operator_development
@@ -13,6 +12,12 @@ use_cases:
   - custom_monitoring_tooling
   - backup_automation
   - multi_tenant_provisioning
+categories:
+  - Automation
+description: >-
+  govergeos is a Go client library for managing VergeOS infrastructure through
+  the REST API, providing type-safe interfaces for automating VMs, networking,
+  storage, tenants, and disaster recovery.
 tags:
   - go
   - sdk
@@ -21,8 +26,6 @@ tags:
   - infrastructure-as-code
   - development
   - govergeos
-categories:
-  - Automation
 ---
 
 # VergeOS Go SDK (govergeos)
@@ -33,19 +36,19 @@ govergeos is a Go client library for managing VergeOS infrastructure through the
 
 ## Key Features
 
-- **VM Management**: Creation, configuration, power control, cloning, and snapshots
-- **Advanced Networking**: Virtual networks, firewall rules, DHCP, DNS, IPSec VPN, and WireGuard
-- **NAS & Storage**: Volume management, CIFS/NFS shares, async volume browsing, and synchronization
-- **Multi-Tenancy**: Tenant provisioning with resource isolation and node management
-- **Disaster Recovery**: Cloud snapshots, site synchronization, and recovery workflows
-- **Type-Safe API**: Full Go interfaces for mocking, context support, and thread-safe concurrent operations
-- **Zero Dependencies**: Standard library only—no external dependencies
-- **Cross-Platform**: Windows, macOS, and Linux support
+* **VM Management**: Creation, configuration, power control, cloning, and snapshots
+* **Advanced Networking**: Virtual networks, firewall rules, DHCP, DNS, IPSec VPN, and WireGuard
+* **NAS & Storage**: Volume management, CIFS/NFS shares, async volume browsing, and synchronization
+* **Multi-Tenancy**: Tenant provisioning with resource isolation and node management
+* **Disaster Recovery**: Cloud snapshots, site synchronization, and recovery workflows
+* **Type-Safe API**: Full Go interfaces for mocking, context support, and thread-safe concurrent operations
+* **Zero Dependencies**: Standard library only—no external dependencies
+* **Cross-Platform**: Windows, macOS, and Linux support
 
 ## Requirements
 
-- Go 1.21 or later
-- VergeOS 26.0 or later
+* Go 1.21 or later
+* VergeOS 26.0 or later
 
 ## Installation
 
@@ -108,16 +111,16 @@ export VERGEOS_VERIFY_SSL=false
 client, err := vergeos.NewClient(vergeos.WithEnvConfig())
 ```
 
-| Variable | Required | Default | Description |
-|----------|----------|---------|-------------|
-| `VERGEOS_HOST` | Yes | — | Base URL (e.g., `https://vergeos.example.com`) |
-| `VERGEOS_USERNAME` | No* | — | Username for basic auth |
-| `VERGEOS_PASSWORD` | No* | — | Password for basic auth |
-| `VERGEOS_API_KEY` | No* | — | API key for bearer auth |
-| `VERGEOS_VERIFY_SSL` | No | `true` | Verify TLS certificates |
-| `VERGEOS_TIMEOUT` | No | `30` | Request timeout in seconds |
+| Variable             | Required | Default | Description                                    |
+| -------------------- | -------- | ------- | ---------------------------------------------- |
+| `VERGEOS_HOST`       | Yes      | —       | Base URL (e.g., `https://vergeos.example.com`) |
+| `VERGEOS_USERNAME`   | No\*     | —       | Username for basic auth                        |
+| `VERGEOS_PASSWORD`   | No\*     | —       | Password for basic auth                        |
+| `VERGEOS_API_KEY`    | No\*     | —       | API key for bearer auth                        |
+| `VERGEOS_VERIFY_SSL` | No       | `true`  | Verify TLS certificates                        |
+| `VERGEOS_TIMEOUT`    | No       | `30`    | Request timeout in seconds                     |
 
-*One of (USERNAME+PASSWORD) or API_KEY is required.
+\*One of (USERNAME+PASSWORD) or API\_KEY is required.
 
 {% hint style="success" %}
 **Recommended for Production**
@@ -143,19 +146,19 @@ client, err := vergeos.NewClient(
 
 The SDK provides access to the following VergeOS resources:
 
-| Category | Services |
-|----------|----------|
-| Virtual Machines | VMs, VMDrives, VMNICs, VMSnapshots, VMDevices |
-| Networking | Networks, VNetRules, VNetAddresses, VNetHosts, VNetDNSViews/Zones/Records |
-| VPN | VNetIPSecs, VNetIPSecPhase1s/Phase2s, VNetWireGuards, VNetWireGuardPeers |
-| NAS/Storage | NASServices, Volumes, VolumeSnapshots, VolumeCIFSShares, VolumeNFSShares, VolumeSyncs |
-| Tenants | Tenants, TenantNodes, TenantStorage, TenantSnapshots, TenantLayer2Networks |
-| Users & Groups | Users, Groups, Members, Permissions, UserAPIKeys |
-| System | Clusters, Nodes, Settings, System, Certificates |
-| Monitoring | Alarms, Logs, Tasks, StorageTiers, ClusterTiers |
-| Backup & DR | SnapshotProfiles, CloudSnapshots, Sites, SiteSyncs |
-| Automation | Files, CloudInitFiles, WebhookURLs, Webhooks |
-| Organization | Tags, TagCategories, TagMembers, ResourceGroups |
+| Category         | Services                                                                              |
+| ---------------- | ------------------------------------------------------------------------------------- |
+| Virtual Machines | VMs, VMDrives, VMNICs, VMSnapshots, VMDevices                                         |
+| Networking       | Networks, VNetRules, VNetAddresses, VNetHosts, VNetDNSViews/Zones/Records             |
+| VPN              | VNetIPSecs, VNetIPSecPhase1s/Phase2s, VNetWireGuards, VNetWireGuardPeers              |
+| NAS/Storage      | NASServices, Volumes, VolumeSnapshots, VolumeCIFSShares, VolumeNFSShares, VolumeSyncs |
+| Tenants          | Tenants, TenantNodes, TenantStorage, TenantSnapshots, TenantLayer2Networks            |
+| Users & Groups   | Users, Groups, Members, Permissions, UserAPIKeys                                      |
+| System           | Clusters, Nodes, Settings, System, Certificates                                       |
+| Monitoring       | Alarms, Logs, Tasks, StorageTiers, ClusterTiers                                       |
+| Backup & DR      | SnapshotProfiles, CloudSnapshots, Sites, SiteSyncs                                    |
+| Automation       | Files, CloudInitFiles, WebhookURLs, Webhooks                                          |
+| Organization     | Tags, TagCategories, TagMembers, ResourceGroups                                       |
 
 ## Usage Examples
 
@@ -298,7 +301,6 @@ vms, err := client.VMs.List(ctx,
 )
 ```
 {% endtab %}
-
 {% endtabs %}
 
 ### Concurrent Operations
@@ -359,41 +361,41 @@ if err != nil {
 
 {% hint style="info" %}
 **Available Error Types**
-
-| Error Type | Helper Function | Description |
-|-----------|-----------------|-------------|
-| `APIError` | — | Base error for all API errors |
-| `AuthError` | `IsAuthError(err)` | Invalid credentials or expired token |
-| `NotFoundError` | `IsNotFoundError(err)` | Requested resource does not exist |
-| `ValidationError` | `IsValidationError(err)` | Invalid parameter values |
-| `UnsupportedVersionError` | `IsUnsupportedVersionError(err)` | VergeOS version not supported |
 {% endhint %}
+
+| Error Type                | Helper Function                  | Description                          |
+| ------------------------- | -------------------------------- | ------------------------------------ |
+| `APIError`                | —                                | Base error for all API errors        |
+| `AuthError`               | `IsAuthError(err)`               | Invalid credentials or expired token |
+| `NotFoundError`           | `IsNotFoundError(err)`           | Requested resource does not exist    |
+| `ValidationError`         | `IsValidationError(err)`         | Invalid parameter values             |
+| `UnsupportedVersionError` | `IsUnsupportedVersionError(err)` | VergeOS version not supported        |
 
 ## Common Use Cases
 
-- **Infrastructure automation**: Provision VMs, networks, and storage programmatically
-- **Kubernetes operators**: Build custom controllers for VergeOS resources
-- **CI/CD integration**: Create and destroy test environments in pipelines
-- **Monitoring tools**: Query resource status and build custom dashboards
-- **Backup automation**: Schedule and manage snapshots and cloud backups
-- **Multi-tenant provisioning**: Automate tenant creation and resource allocation
+* **Infrastructure automation**: Provision VMs, networks, and storage programmatically
+* **Kubernetes operators**: Build custom controllers for VergeOS resources
+* **CI/CD integration**: Create and destroy test environments in pipelines
+* **Monitoring tools**: Query resource status and build custom dashboards
+* **Backup automation**: Schedule and manage snapshots and cloud backups
+* **Multi-tenant provisioning**: Automate tenant creation and resource allocation
 
 ## Documentation and Resources
 
 For complete documentation, including all available methods and detailed usage examples, visit the official repository:
 
-- [GitHub Repository](https://github.com/verge-io/govergeos){target="_blank"}
-- [Go Package Documentation](https://pkg.go.dev/github.com/verge-io/govergeos){target="_blank"}
+* [GitHub Repository](https://github.com/verge-io/govergeos){target="\_blank"}
+* [Go Package Documentation](https://pkg.go.dev/github.com/verge-io/govergeos){target="\_blank"}
 
 ## Support
 
 If you encounter issues or have feature requests, please open an issue on the GitHub repository:
 
-[https://github.com/verge-io/govergeos/issues](https://github.com/verge-io/govergeos/issues){target="_blank"}
+[https://github.com/verge-io/govergeos/issues](https://github.com/verge-io/govergeos/issues){target="\_blank"}
 
 ## Additional Resources
 
-- [Go Documentation](https://go.dev/doc/){target="_blank"}
-- [VergeOS API Documentation](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/)
-- [Python SDK (pyvergeos)](python-sdk.md) - Python alternative
-- [Terraform Provider](terraform-provider.md) - Infrastructure as code
+* [Go Documentation](https://go.dev/doc/){target="\_blank"}
+* [VergeOS API Documentation](https://app.gitbook.com/o/FpusSnrkRHyZiVEsXf9X/s/QZBMFpokMv2vWTIRbFzA/)
+* [Python SDK (pyvergeos)](python-sdk.md) - Python alternative
+* [Terraform Provider](terraform-provider.md) - Infrastructure as code

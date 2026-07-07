@@ -1,22 +1,29 @@
 ---
 title: API Guide
 slug: verge-api-guide
-description: A comprehensive guide to using the VergeOS API, covering authentication, HTTP methods, endpoint conventions, filtering, sorting, error handling, and example requests for VMs and virtual networks.
 author: VergeOS Documentation Team
 date: 2024-09-02T16:54:06.293Z
 semantic_keywords:
-  - "VergeOS REST API, API authentication, token-based auth"
-  - "API GET POST PUT DELETE, HTTP methods, CRUD operations"
-  - "API filtering, sorting, pagination, query parameters"
-  - "Swagger documentation, API schema, table definitions"
-  - "virtual machine API, virtual network API, vnet management"
+  - VergeOS REST API, API authentication, token-based auth
+  - API GET POST PUT DELETE, HTTP methods, CRUD operations
+  - API filtering, sorting, pagination, query parameters
+  - Swagger documentation, API schema, table definitions
+  - virtual machine API, virtual network API, vnet management
 use_cases:
-  - "api_getting_started"
-  - "rest_api_authentication"
-  - "vm_management_via_api"
-  - "network_management_via_api"
-  - "api_query_filtering_sorting"
-  - "swagger_documentation_reference"
+  - api_getting_started
+  - rest_api_authentication
+  - vm_management_via_api
+  - network_management_via_api
+  - api_query_filtering_sorting
+  - swagger_documentation_reference
+categories:
+  - API Reference
+editor: markdown
+dateCreated: 2024-09-02T16:54:06.293Z
+description: >-
+  A comprehensive guide to using the VergeOS API, covering authentication, HTTP
+  methods, endpoint conventions, filtering, sorting, error handling, and example
+  requests for VMs and virtual networks.
 tags:
   - api
   - tables
@@ -27,10 +34,6 @@ tags:
   - development
   - dev
   - devops
-categories:
-  - API Reference
-editor: markdown
-dateCreated: 2024-09-02T16:54:06.293Z
 ---
 
 # API Guide
@@ -48,15 +51,11 @@ To access the Swagger documentation in the VergeOS UI:
 1. **Login** to the VergeOS system with valid credentials.
 2. Select **System** from the top menu.
 3. Select **API Documentation**.
-4. The Swagger documentation page will open. This page provides detailed examples for each API operation, including the ability to test the API directly.
-   
-   ![Swagger Documentation Example](../assets/screenshots/api1.png)
-   
+4.  The Swagger documentation page will open. This page provides detailed examples for each API operation, including the ability to test the API directly.
+
+    ![Swagger Documentation Example](../.gitbook/assets/api1.png)
 5. Select an individual table and choose one of the available **GET/POST/DELETE/PUT** options to view and test API actions.
-
-   
 6. Specify the parameters and click the **Execute Button** to run the API command. This will return the response, which includes the response body, header, and a curl example.
-
 
 ## API Basics
 
@@ -66,10 +65,10 @@ The VergeOS API uses standard HTTP methods like GET, POST, PUT, and DELETE for r
 
 ### GET Parameters
 
-- **fields**: Specify which fields to return in the result set.
-- **filter**: Filter the result set based on certain criteria.
-- **sort**: Sort the results by a specified field.
-- **limit**: Limit the number of returned results.
+* **fields**: Specify which fields to return in the result set.
+* **filter**: Filter the result set based on certain criteria.
+* **sort**: Sort the results by a specified field.
+* **limit**: Limit the number of returned results.
 
 ### Authentication
 
@@ -77,30 +76,31 @@ All API requests must be made over HTTPS and require authentication using basic 
 
 ## Additional Notes
 
-- **Rate Limits**: The API supports a maximum of 1000 requests per hour per API key.
-- **Data Formats**: All responses are returned in JSON format.
-- **Pagination**: Endpoints that return large sets of data support pagination using `offset` and `limit` query parameters.
+* **Rate Limits**: The API supports a maximum of 1000 requests per hour per API key.
+* **Data Formats**: All responses are returned in JSON format.
+* **Pagination**: Endpoints that return large sets of data support pagination using `offset` and `limit` query parameters.
 
----
+***
 
 ## Authentication
 
 VergeOS supports two methods of authentication:
 
-1. **Basic HTTP Authentication**  
+1. **Basic HTTP Authentication**\
    The API is available only through SSL.
-
-2. **Token-based Authentication**  
+2. **Token-based Authentication**\
    Developers must request a token from the API by posting to the `/sys/tokens` endpoint. The token is then passed in subsequent API requests in the `x-yottabyte-token` header.
 
 ### Example Authentication Request
 
 To obtain a token:
+
 ```bash
 curl --header "X-JSON-Non-Compact: 1" --basic --data-ascii '{"login": "USERNAME", "password": "PASSWORD"}' --insecure --request "POST" --header 'Content-Type: application/json' 'https://your-verge-instance.com/api/sys/tokens'
 ```
 
 Example response:
+
 ```json
 {
    "location":"\\/sys\\/tokens\\/3a334563456378845634563b7b82d2efcadce9",
@@ -123,7 +123,8 @@ To log out, send a DELETE request to the `/sys/tokens/{token}` endpoint.
 ```bash
 DELETE /sys/tokens/3a334563456378845634563b7b82d2efcadce9
 ```
----
+
+***
 
 ### Example Virtual Machines
 
@@ -131,13 +132,14 @@ The **VMs** section of the VergeOS API allows users to manage virtual machines p
 
 ### Retrieve a List of Virtual Machines
 
-**Endpoint**:  
+**Endpoint**:\
 `GET /v4/vms?fields=most`
 
-**Description**:  
+**Description**:\
 Retrieves a list of all VMs in the system with details such as CPU cores, RAM, machine type, and configuration details.
 
 **Example Request**:
+
 ```bash
 curl -X 'GET' \
   'https://your-verge-instance.com/api/v4/vms?fields=most' \
@@ -146,6 +148,7 @@ curl -X 'GET' \
 ```
 
 **Example Response**:
+
 ```json
 [
   {
@@ -172,27 +175,28 @@ curl -X 'GET' \
 
 **Overview of the Data Returned**:
 
-- **$key**: The unique identifier for the VM.
-- **name**: The name of the virtual machine.
-- **machine**: Machine ID associated with the VM.
-- **cpu_cores**: Number of CPU cores allocated to the VM.
-- **ram**: Amount of RAM allocated (in MB).
-- **os_family**: Operating system type.
-- **uuid**: Universally unique identifier (UUID) for the VM.
-- **created**: The creation timestamp.
-- **modified**: The last modified timestamp.
+* **$key**: The unique identifier for the VM.
+* **name**: The name of the virtual machine.
+* **machine**: Machine ID associated with the VM.
+* **cpu\_cores**: Number of CPU cores allocated to the VM.
+* **ram**: Amount of RAM allocated (in MB).
+* **os\_family**: Operating system type.
+* **uuid**: Universally unique identifier (UUID) for the VM.
+* **created**: The creation timestamp.
+* **modified**: The last modified timestamp.
 
----
+***
 
 ### Create a New Virtual Machine
 
-**Endpoint**:  
+**Endpoint**:\
 `POST /v4/vms`
 
-**Description**:  
+**Description**:\
 Creates a new virtual machine with specific configuration details, such as CPU cores, RAM, machine type, boot order, etc.
 
 **Example Request**:
+
 ```bash
 curl -X 'POST' \
   'https://your-verge-instance.com/api/v4/vms' \
@@ -215,6 +219,7 @@ curl -X 'POST' \
 ```
 
 **Example Response**:
+
 ```json
 {
   "location": "/v4/vms/36",
@@ -226,12 +231,12 @@ curl -X 'POST' \
 
 **Overview of the Data Returned**:
 
-- **location**: The location of the newly created VM resource.
-- **dbpath**: Database path of the new VM.
-- **$row**: Row ID of the VM.
-- **$key**: Unique key for the VM.
+* **location**: The location of the newly created VM resource.
+* **dbpath**: Database path of the new VM.
+* **$row**: Row ID of the VM.
+* **$key**: Unique key for the VM.
 
----
+***
 
 ### Example Virtual Networks (Vnets)
 
@@ -239,13 +244,14 @@ The **Vnets** section of the VergeOS API allows users to manage virtual networks
 
 ### Retrieve Vnet Details
 
-**Endpoint**:  
+**Endpoint**:\
 `GET /v4/vnets?fields=most`
 
-**Description**:  
+**Description**:\
 Retrieves a list of all Vnets in the system with details such as network type, MTU, DHCP settings, and DNS configuration.
 
 **Example Request**:
+
 ```bash
 curl -X 'GET' \
   'https://your-verge-instance.com/api/v4/vnets?fields=most' \
@@ -254,6 +260,7 @@ curl -X 'GET' \
 ```
 
 **Example Response**:
+
 ```json
 [
   {
@@ -286,30 +293,31 @@ curl -X 'GET' \
 
 **Overview of the Data Returned**:
 
-- **$key**: The unique identifier for the Vnet.
-- **name**: Name of the virtual network.
-- **advanced_options**: Advanced options to be passed to services running inside the network, in this example netboot flags for dnsmasq
-- **type**: Network type (e.g., "internal").
-- **layer2_type**: The type of Layer 2 networking, such as VXLAN.
-- **network**: Network CIDR block.
-- **mtu**: Maximum Transmission Unit (MTU) size.
-- **dhcp_enabled**: Indicates whether DHCP is enabled for this network.
-- **dhcp_start**: Starting IP address for the DHCP pool.
-- **dhcp_stop**: Ending IP address for the DHCP pool.
-- **rate_limit**: Rate limit for the network (in mbytes/second).
-- **gateway**: The default gateway for the network.
+* **$key**: The unique identifier for the Vnet.
+* **name**: Name of the virtual network.
+* **advanced\_options**: Advanced options to be passed to services running inside the network, in this example netboot flags for dnsmasq
+* **type**: Network type (e.g., "internal").
+* **layer2\_type**: The type of Layer 2 networking, such as VXLAN.
+* **network**: Network CIDR block.
+* **mtu**: Maximum Transmission Unit (MTU) size.
+* **dhcp\_enabled**: Indicates whether DHCP is enabled for this network.
+* **dhcp\_start**: Starting IP address for the DHCP pool.
+* **dhcp\_stop**: Ending IP address for the DHCP pool.
+* **rate\_limit**: Rate limit for the network (in mbytes/second).
+* **gateway**: The default gateway for the network.
 
----
+***
 
 ### Create an Internal Network with Rate Limiting
 
-**Endpoint**:  
+**Endpoint**:\
 `POST /v4/vnets`
 
-**Description**:  
+**Description**:\
 Creates a new internal virtual network with rate limiting and DHCP settings.
 
 **Example Request**:
+
 ```bash
 curl -X 'POST' \
   'https://your-verge-instance.com/api/v4/vnets' \
@@ -333,6 +341,7 @@ curl -X 'POST' \
 ```
 
 **Example Response**:
+
 ```json
 {
   "location": "/v4/vnets/8",
@@ -343,146 +352,148 @@ curl -X 'POST' \
 ```
 
 **Overview of the Data Returned**:
-- **location**: The location of the newly created Vnet resource.
-- **dbpath**: Database path of the new Vnet.
-- **$row**: Row ID of the Vnet.
-- **$key**: Unique key for the Vnet.
 
----
+* **location**: The location of the newly created Vnet resource.
+* **dbpath**: Database path of the new Vnet.
+* **$row**: Row ID of the Vnet.
+* **$key**: Unique key for the Vnet.
+
+***
 
 ## Resources
 
 Below is an example URL used to query a list of machines.
 
-*Example: https://user1:xxxxxx@server1.verge.io/api/v4/machines?fields=all*
+_Example: https://user1:xxxxxx@server1.verge.io/api/v4/machines?fields=all_
 
-|     |     |     |     |     |     |     |     |     |     |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| https:// | user | :   | password | @   | server | /api | /v4/machines | ?   | filter=&fields=all&sort=&limit= |
-|     | User name |     | User Password |     | Server host name or IP |     | Resource location (URI) |     | These options are described below |
+|          |           |   |               |   |                        |      |                         |   |                                    |
+| -------- | --------- | - | ------------- | - | ---------------------- | ---- | ----------------------- | - | ---------------------------------- |
+| https:// | user      | : | password      | @ | server                 | /api | /v4/machines            | ? | filter=\&fields=all\&sort=\&limit= |
+|          | User name |   | User Password |   | Server host name or IP |      | Resource location (URI) |   | These options are described below  |
 
 ### GET Options
 
 #### Fields
 
-- **Specify which fields to return in the result set (may also be a view if there is one defined for the table schema)**.
-- **all** returns every field.
-- **most** returns most fields except for argument fields and rows.
-- **summary** returns fields marked as 'summary' in their schema.
-- Example: `fields=name,email,enabled,groups[all] as all_groups,collapse(groups[name]) as first_groups_name`
+* **Specify which fields to return in the result set (may also be a view if there is one defined for the table schema)**.
+* **all** returns every field.
+* **most** returns most fields except for argument fields and rows.
+* **summary** returns fields marked as 'summary' in their schema.
+* Example: `fields=name,email,enabled,groups[all] as all_groups,collapse(groups[name]) as first_groups_name`
 
 Field functions:
-- **collapse**
-- **datetime**
-- **upper**
-- **lower**
-- **count**
-- **diskspace**
-- **display**
-- **hex**
-- **sha1**
-- **sum**
-- **avg**
-- **min**
-- **max**
+
+* **collapse**
+* **datetime**
+* **upper**
+* **lower**
+* **count**
+* **diskspace**
+* **display**
+* **hex**
+* **sha1**
+* **sum**
+* **avg**
+* **min**
+* **max**
 
 #### Filter
 
-- Filter result sets by specified criteria.
-- Similar to [OData](https://msdn.microsoft.com/en-us/library/gg309461%28v=crm.7%29.aspx#BKMK_filter).
-- Example: `filter=enabled eq true and size gt 1048576`.
-- Example: `filter=cputype eq 'qemu' or cputype eq 'kvm'`.
+* Filter result sets by specified criteria.
+* Similar to [OData](https://msdn.microsoft.com/en-us/library/gg309461\(v=crm.7\).aspx#BKMK_filter).
+* Example: `filter=enabled eq true and size gt 1048576`.
+* Example: `filter=cputype eq 'qemu' or cputype eq 'kvm'`.
 
-| Operator | Description          |
-| -------- | -------------------- |
-| *eq*     | Equal                |
-| *ne*     | Not equal            |
-| *gt*     | Greater than         |
-| *ge*     | Greater than or equal|
-| *lt*     | Less than            |
-| *le*     | Less than or equal   |
-| *bw*     | Begins with          |
-| *ew*     | Ends with            |
-| *and*    | Logical and          |
-| *or*     | Logical or           |
-| *cs*     | Contains string (case sensitive)|
-| *ct*     | Contains text (case insensitive)|
-| *rx*     | Regex match          |
+| Operator | Description                      |
+| -------- | -------------------------------- |
+| _eq_     | Equal                            |
+| _ne_     | Not equal                        |
+| _gt_     | Greater than                     |
+| _ge_     | Greater than or equal            |
+| _lt_     | Less than                        |
+| _le_     | Less than or equal               |
+| _bw_     | Begins with                      |
+| _ew_     | Ends with                        |
+| _and_    | Logical and                      |
+| _or_     | Logical or                       |
+| _cs_     | Contains string (case sensitive) |
+| _ct_     | Contains text (case insensitive) |
+| _rx_     | Regex match                      |
 
 #### Sort
 
-- Sort results by the specified field.
-- Example: `sort=+name`.
-- Example: `sort=-id`.
+* Sort results by the specified field.
+* Example: `sort=+name`.
+* Example: `sort=-id`.
 
 #### Limit
 
-- **limit** (integer) limits the result set to a specified number of entries. A value of 0 means unlimited.
-- Example: `limit=1`.
+* **limit** (integer) limits the result set to a specified number of entries. A value of 0 means unlimited.
+* Example: `limit=1`.
 
 ### Generic HTTP Response Codes
 
-- **400 - Bad Request**: The request was invalid.
-- **401 - Failed Login / Login Required**: Authentication failed or is required.
-- **403 - Permission Denied**: You lack the required permissions.
-- **404 - Resource Not Found**: The requested row or API does not exist.
-- **405 - Not Permitted**: The operation is not allowed.
-- **409 - Row Exists**: The resource already exists.
-- **422 - Failed Validation / Invalid Parameter**: Validation failed.
-- **500 - Internal Server Error**: An unhandled error occurred.
+* **400 - Bad Request**: The request was invalid.
+* **401 - Failed Login / Login Required**: Authentication failed or is required.
+* **403 - Permission Denied**: You lack the required permissions.
+* **404 - Resource Not Found**: The requested row or API does not exist.
+* **405 - Not Permitted**: The operation is not allowed.
+* **409 - Row Exists**: The resource already exists.
+* **422 - Failed Validation / Invalid Parameter**: Validation failed.
+* **500 - Internal Server Error**: An unhandled error occurred.
 
 #### POST-Specific
 
-- **201 - Created**: A new row/resource was successfully created.
+* **201 - Created**: A new row/resource was successfully created.
 
 #### Websocket-Specific (Used for VNC/SPICE)
 
-- **101 - Switching Protocols**: The protocol was successfully switched.
+* **101 - Switching Protocols**: The protocol was successfully switched.
 
 #### PUT/GET/DELETE
 
-- **200 - Success**: The operation completed successfully.
+* **200 - Success**: The operation completed successfully.
 
----
+***
 
-### Schema Table Definitions 
+### Schema Table Definitions&#x20;
 
 #### Field Types
 
-- **bool**
-- **text**
-- **string**
-- **num**
-- **uint8**
-- **uint16**
-- **uint32**
-- **uint64**
-- **int8**
-- **int16**
-- **int32**
-- **int64**
-- **enabled**
-- **created**
-- **created_ms**
-- **created_us**
-- **modified**
-- **modified_ms**
-- **modified_us**
-- **filename**
-- **filesize**
-- **fileused**
-- **fileallocated**
-- **filemodified**
-- **json**
-- **row**
-- **rows**
+* **bool**
+* **text**
+* **string**
+* **num**
+* **uint8**
+* **uint16**
+* **uint32**
+* **uint64**
+* **int8**
+* **int16**
+* **int32**
+* **int64**
+* **enabled**
+* **created**
+* **created\_ms**
+* **created\_us**
+* **modified**
+* **modified\_ms**
+* **modified\_us**
+* **filename**
+* **filesize**
+* **fileused**
+* **fileallocated**
+* **filemodified**
+* **json**
+* **row**
+* **rows**
 
 #### Schema Owner / Parent Field
 
-- **Owner Field**: If the owner field is null, normal permissions apply. If the owner field has a value, permissions are replaced by a permission check to the owner.
-- **Parent Field**: The permission check is applied to the row itself, and if permissions fail, permissions are also checked on the parent row.
+* **Owner Field**: If the owner field is null, normal permissions apply. If the owner field has a value, permissions are replaced by a permission check to the owner.
+* **Parent Field**: The permission check is applied to the row itself, and if permissions fail, permissions are also checked on the parent row.
 
----
+***
 
 ### Full Table Schema
 
@@ -492,7 +503,7 @@ To retrieve a table’s schema, append **$table** to the URI:
 
 You will be prompted for your credentials; this requires VergeOS admin credentials. The output will be in JSON format. Firefox displays this in a readable format by default, but other browsers may require exporting the JSON to an external program for better readability.
 
----
+***
 
 ### Example Errors
 
@@ -504,22 +515,19 @@ You will be prompted for your credentials; this requires VergeOS admin credentia
 }
 ```
 
-
 VergeOS uses standard HTTP status codes to indicate the result of an API request.
 
-- **400 Bad Request**: The request is invalid or cannot be processed.
-- **401 Unauthorized**: The API key is missing or invalid.
-- **403 Forbidden**: The API key lacks the required permissions.
-- **404 Not Found**: The resource does not exist.
-- **500 Internal Server Error**: A server error occurred.
+* **400 Bad Request**: The request is invalid or cannot be processed.
+* **401 Unauthorized**: The API key is missing or invalid.
+* **403 Forbidden**: The API key lacks the required permissions.
+* **404 Not Found**: The resource does not exist.
+* **500 Internal Server Error**: A server error occurred.
 
-
-
----
+***
 
 {% hint style="info" %}
 **Document Information**
 
-- Last Updated: 2024-11-14
-- vergeOS Version: 4.12.6
+* Last Updated: 2024-11-14
+* vergeOS Version: 4.12.6
 {% endhint %}

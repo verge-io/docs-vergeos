@@ -1,5 +1,7 @@
 ---
-description: "Minimum and recommended hardware specifications for VergeOS controller nodes, storage nodes, and compute-only nodes, plus maximum supported limits."
+description: >-
+  Minimum and recommended hardware specifications for VergeOS controller nodes,
+  storage nodes, and compute-only nodes, plus maximum supported limits.
 ---
 
 # Hardware Requirements
@@ -37,12 +39,12 @@ VergeOS manages data redundancy through its built-in vSAN (VergeFS). Hardware RA
 
 Before installation, verify these BIOS settings on every node:
 
-- **Boot mode:** UEFI (required if all drives are NVMe)
-- **Hardware-assisted virtualization:** Enabled (VT-x / AMD-V)
-- **Hyper-threading / SMT:** Enabled
-- **All processor cores:** Enabled
-- **System clocks:** Synchronized across all nodes (within seconds)
-- **Secure Boot:** Disabled
+* **Boot mode:** UEFI (required if all drives are NVMe)
+* **Hardware-assisted virtualization:** Enabled (VT-x / AMD-V)
+* **Hyper-threading / SMT:** Enabled
+* **All processor cores:** Enabled
+* **System clocks:** Synchronized across all nodes (within seconds)
+* **Secure Boot:** Disabled
 
 ## Controller Nodes (Node 1 and Node 2)
 
@@ -111,7 +113,7 @@ At the recommended 1.5 GB/TB ratio, the storage overhead would be 12 GB instead 
 {% hint style="info" %}
 **Account for the Target Max RAM % (default 80%)**
 
-VergeOS targets no more than **80% of physical RAM** in use per node under normal conditions (the `Target Max RAM %` cluster setting), leaving headroom that failover and live migration can draw on. Size physical RAM so that overhead **plus** workloads fit within that 80%. In the example above, ~120 GB of normal usage should land on a node with at least ~150 GB of physical RAM (120 ÷ 0.80) to stay within the target.
+VergeOS targets no more than **80% of physical RAM** in use per node under normal conditions (the `Target Max RAM %` cluster setting), leaving headroom that failover and live migration can draw on. Size physical RAM so that overhead **plus** workloads fit within that 80%. In the example above, \~120 GB of normal usage should land on a node with at least \~150 GB of physical RAM (120 ÷ 0.80) to stay within the target.
 {% endhint %}
 
 ## Compute-Only Nodes
@@ -133,25 +135,19 @@ The minimum networking configuration (1 GbE external + 1 x 10 GbE core) is suita
 
 ### Core Fabric NICs
 
-**2 x 25/40/100 GbE** (Intel, NVIDIA Mellanox, or Broadcom). Dual NICs
-provide redundancy for the core fabric -- the high-speed mesh that carries
-vSAN replication, VM migration, and inter-node traffic. Jumbo frames are
-required on the core fabric: VergeOS sets node NICs to ~9192, and the switch
-ports they connect to must be configured for ≥9216 so those frames pass
-without fragmentation.
+**2 x 25/40/100 GbE** (Intel, NVIDIA Mellanox, or Broadcom). Dual NICs provide redundancy for the core fabric -- the high-speed mesh that carries vSAN replication, VM migration, and inter-node traffic. Jumbo frames are required on the core fabric: VergeOS sets node NICs to \~9192, and the switch ports they connect to must be configured for ≥9216 so those frames pass without fragmentation.
+
 ### External NICs
 
-**2 x 10/25/40/100 GbE** (Intel, NVIDIA Mellanox, or Broadcom). Dual
-external NICs support bonding for redundancy and bandwidth to the upstream
-network. These carry management UI access and tenant external traffic.
+**2 x 10/25/40/100 GbE** (Intel, NVIDIA Mellanox, or Broadcom). Dual external NICs support bonding for redundancy and bandwidth to the upstream network. These carry management UI access and tenant external traffic.
 
 ### Supported NIC Vendors
 
 VergeOS supports network adapters from three vendors:
 
-- **Intel** -- Broad compatibility across different series
-- **NVIDIA Mellanox** -- High-performance ConnectX series
-- **Broadcom** -- Enterprise-grade NICs
+* **Intel** -- Broad compatibility across different series
+* **NVIDIA Mellanox** -- High-performance ConnectX series
+* **Broadcom** -- Enterprise-grade NICs
 
 {% hint style="warning" %}
 Consumer-grade or off-brand NICs are not supported. Using unsupported NICs may result in driver compatibility issues, poor performance, or system instability.
@@ -188,9 +184,9 @@ VergeOS does **not** officially support consumer-grade disks. Only enterprise-gr
 
 HDDs larger than **8 TB** are not recommended outside of archive-specific environments. The concern is **rebuild time**. vSAN does not rebuild automatically when a drive fails — an operator kicks off a repair that rebuilds the lost data onto a hot spare or replacement drive. With an 8 TB+ drive, that rebuild can take many hours — often days — during which:
 
-- **System performance is degraded** as rebuild I/O competes with production workloads
-- **Availability risk increases** because a second drive failure during rebuild could cause data loss
-- **The rebuild window grows** proportionally with drive size
+* **System performance is degraded** as rebuild I/O competes with production workloads
+* **Availability risk increases** because a second drive failure during rebuild could cause data loss
+* **The rebuild window grows** proportionally with drive size
 
 For primary workload tiers, prefer smaller, faster SSDs. Reserve large HDDs for snapshot retention, archival storage, or file-based service tiers where rebuild time is an acceptable trade-off.
 
@@ -198,12 +194,12 @@ For primary workload tiers, prefer smaller, faster SSDs. Reserve large HDDs for 
 
 VergeOS vSAN can also consume **Fibre Channel (FC) LUNs** as storage devices within its tiers, which is useful for integrating existing SAN investments. VergeOS treats each FC LUN like a local physical disk, so native redundancy and deduplication still apply. Key requirements:
 
-- Present **unique LUNs per node** — never share the same LUN across multiple nodes
-- FC HBAs in at least two nodes; a redundant FC fabric is recommended
-- **Disable RAID and auto-tiering on the SAN** — VergeOS handles redundancy natively
-- Keep **Tier 0 metadata on direct-attached NVMe** — external storage is not recommended for Tier 0
+* Present **unique LUNs per node** — never share the same LUN across multiple nodes
+* FC HBAs in at least two nodes; a redundant FC fabric is recommended
+* **Disable RAID and auto-tiering on the SAN** — VergeOS handles redundancy natively
+* Keep **Tier 0 metadata on direct-attached NVMe** — external storage is not recommended for Tier 0
 
-Verge.io still recommends direct-attached disks for best performance and simplicity; use FC LUNs primarily when you have existing SAN infrastructure or specific compliance requirements. See [Using Fibre Channel Storage with vSAN](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/storage/fibre-channel) for setup details.
+Verge.io still recommends direct-attached disks for best performance and simplicity; use FC LUNs primarily when you have existing SAN infrastructure or specific compliance requirements. See [Using Fibre Channel Storage with vSAN](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/storage/fibre-channel) for setup details.
 
 ## Dedicated vs. Shared Controller Nodes
 
@@ -251,5 +247,5 @@ Use this quick-reference card when scoping a new deployment:
 
 Now that you understand the hardware requirements for each node role, continue to:
 
-- **[Reference Architectures](02-reference-architectures.md)** -- See how these requirements map to real-world deployment topologies (HCI, HCI+Compute, UCI)
-- **[Customer Scoping](03-customer-scoping.md)** -- Learn the methodology for translating customer workloads into hardware specifications
+* [**Reference Architectures**](02-reference-architectures.md) -- See how these requirements map to real-world deployment topologies (HCI, HCI+Compute, UCI)
+* [**Customer Scoping**](03-customer-scoping.md) -- Learn the methodology for translating customer workloads into hardware specifications

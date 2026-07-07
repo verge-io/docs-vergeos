@@ -1,29 +1,31 @@
 ---
 title: Utilizing an iGPU for AI Acceleration
 slug: using-igpu-ai-acceleration
-description: Instructions for configuring an iGPU (integrated GPU) for AI acceleration in VergeOS, including resource group setup and model assignment.
 author: VergeOS Documentation Team
 date: 2025-12-04T12:39:06.743Z
 semantic_keywords:
-  - "igpu integrated gpu ai acceleration inference"
-  - "resource group host gpu pci passthrough"
-  - "private ai model gpu assignment"
-  - "igpu configuration maintenance mode driver reload"
+  - igpu integrated gpu ai acceleration inference
+  - resource group host gpu pci passthrough
+  - private ai model gpu assignment
+  - igpu configuration maintenance mode driver reload
 use_cases:
   - igpu_ai_acceleration_setup
   - resource_group_gpu_configuration
   - private_ai_model_gpu_assignment
   - multi_node_igpu_pooling
-tags:
-  - ai
-  - private ai
-  - resource groups
-  - performance
 categories:
   - Advanced Configuration
   - Performance
 editor: markdown
 dateCreated: 2025-12-01T16:29:03.267Z
+description: >-
+  Instructions for configuring an iGPU (integrated GPU) for AI acceleration in
+  VergeOS, including resource group setup and model assignment.
+tags:
+  - ai
+  - private ai
+  - resource groups
+  - performance
 ---
 
 # Utilizing an iGPU for AI Acceleration
@@ -47,12 +49,12 @@ For lightweight inference tasks (e.g., small language models), iGPUs are often m
 
 On personal servers running modest AI models, iGPU inference offers a sweet spot: less heat, lower power draw, and decent throughput.
 
-**Benefits of Using an iGPU**  
+**Benefits of Using an iGPU**
 
-  - Lower power consumption and reduced cooling requirements compared to CPU‑only execution  
-  - Leverages hardware already included in CPUs, avoiding additional purchase costs  
-  - Better throughput per watt than CPU cores  
-  - Offloads compute burden from CPU cores, improving overall system responsiveness  
+* Lower power consumption and reduced cooling requirements compared to CPU‑only execution
+* Leverages hardware already included in CPUs, avoiding additional purchase costs
+* Better throughput per watt than CPU cores
+* Offloads compute burden from CPU cores, improving overall system responsiveness
 
 Modern servers often include capable iGPUs. Even older or less powerful servers can provide meaningful acceleration by utilizing this built‑in hardware.
 {% endhint %}
@@ -65,7 +67,7 @@ Modern servers often include capable iGPUs. Even older or less powerful servers 
 * IOMMU/VT-d (Intel) or AMD-Vi (AMD) may need to be enabled for passthrough
 {% endhint %}
 
----
+***
 
 ## High-Level Steps
 
@@ -77,43 +79,47 @@ To use iGPU for private AI models, the following high-level steps are necessary:
 
 ## Configuring a Resource Group with an iGPU
 
-1. Navigate to **Infrastructure** > **Nodes** and **double‑click the node** containing the iGPU.  
-2. Select the **PCI Devices** card or left‑menu option.  
-3. From the device list, set the **Type** filter (top of the Type column) to ***Display Controller*** to show only display devices.  
-4. Select the iGPU device from the filtered list. ⚠️ *Be careful when selecting devices for resource groups. Choosing the wrong device can cause issues.*    
-5. Click **Make Resource** in the left menu.  
-6. Create a **new Resource Group:**      
-* If no groups exist, the entry form will appear automatically.  
-* Otherwise, select **Attach to**: ***--New Group--*** and click **Next**  
-7. Configure Resource Group fields:    
-  * **Name**: Provide a descriptive name, e.g. "iGPU"  
-  * **Type**: Select ***Host GPU***  
-  * **Max vRAM**: Limit the amount of system RAM available to the iGPU (default = 0; no limit).   
-    - On systems running other workloads, set a max vRAM to prevent contention between workloads and iGPU usage.  
-    - If max vRAM is set too low, models may fail to load and produce errors.  
-8. Click **Submit** to save the new Resource Group with the selected iGPU.  
-9. Follow the prompts at the top of the dashboard to **View the node**, place the node into **Maintenance Mode** (see message at top of node dashboard), and **Reload the driver** (prompted at the top of the dashboard once the node is in maintenance mode).  
+1. Navigate to **Infrastructure** > **Nodes** and **double‑click the node** containing the iGPU.
+2. Select the **PCI Devices** card or left‑menu option.
+3. From the device list, set the **Type** filter (top of the Type column) to _**Display Controller**_ to show only display devices.
+4. Select the iGPU device from the filtered list. ⚠️ _Be careful when selecting devices for resource groups. Choosing the wrong device can cause issues._
+5. Click **Make Resource** in the left menu.
+6. Create a **new Resource Group:**
+
+* If no groups exist, the entry form will appear automatically.
+* Otherwise, select **Attach to**: _**--New Group--**_ and click **Next**
+
+7. Configure Resource Group fields:
+
+* **Name**: Provide a descriptive name, e.g. "iGPU"
+* **Type**: Select _**Host GPU**_
+* **Max vRAM**: Limit the amount of system RAM available to the iGPU (default = 0; no limit).
+  * On systems running other workloads, set a max vRAM to prevent contention between workloads and iGPU usage.
+  * If max vRAM is set too low, models may fail to load and produce errors.
+
+8. Click **Submit** to save the new Resource Group with the selected iGPU.
+9. Follow the prompts at the top of the dashboard to **View the node**, place the node into **Maintenance Mode** (see message at top of node dashboard), and **Reload the driver** (prompted at the top of the dashboard once the node is in maintenance mode).
 10. **Exit Maintenance Mode** on the node once the driver reload completes.
 11. Navigate to **Infrastructure** > **Resources** > **Groups** and verify your new resource group appears with **Enabled** checked. Double-click the group to confirm the **Node Resources** section lists your iGPU device.
 
----
+***
 
 ### Adding Additional Node iGPUs to the Same Resource Group
 
 {% hint style="success" %}
 **Pooling iGPUs Across Nodes**
 
-By adding iGPUs from multiple nodes into the same resource group, you create a shared pool of acceleration resources that AI models can draw from. For more details, see [Resource Groups](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/system/device-pass-overview#resource-groups)
+By adding iGPUs from multiple nodes into the same resource group, you create a shared pool of acceleration resources that AI models can draw from. For more details, see [Resource Groups](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/system-administration/device-pass-overview#resource-groups)
 {% endhint %}
 
 To add more iGPUs:
 
-* Repeat steps 1–5 above.  
-* When prompted for a resource group to ***Attach to***, **select the existing Host GPU resource group**.  
-* Follow dashboard prompts to place the node into **maintenance mode** and **reload the driver**.  
-* **Exit maintenance mode** after the reload completes.  
+* Repeat steps 1–5 above.
+* When prompted for a resource group to _**Attach to**_, **select the existing Host GPU resource group**.
+* Follow dashboard prompts to place the node into **maintenance mode** and **reload the driver**.
+* **Exit maintenance mode** after the reload completes.
 
----
+***
 
 ## Assigning the iGPU Resource Group to a Model
 
@@ -125,4 +131,4 @@ Once configured, assign the Host GPU resource group to your AI model:
 4. In the **GPU Resource Group Allocation** field, select your iGPU resource group.
 5. Click **Submit** to save.
 
-The model will now draw from any available iGPUs in the resource group. For more information on Private AI configuration, see [Private AI Configuration](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/product-guide/private-ai/configuration).
+The model will now draw from any available iGPUs in the resource group. For more information on Private AI configuration, see [Private AI Configuration](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/private-ai/configuration).

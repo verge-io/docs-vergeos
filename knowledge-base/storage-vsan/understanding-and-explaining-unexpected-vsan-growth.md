@@ -1,21 +1,30 @@
 ---
 title: Understanding and Explaining Unexpected vSAN Growth
 slug: understanding-and-explaining-unexpected-vsan-growth
-description: Troubleshooting guide for diagnosing unexpected vSAN storage growth, including how to review tier history and identify common causes like snapshots, backups, and tenant storage.
 author: VergeOS Documentation Team
 date: 2023-01-24T19:17:41.331Z
 semantic_keywords:
-  - "unexpected vsan storage growth troubleshooting"
-  - "vsan tier history growth analysis"
-  - "snapshot retention storage consumption"
-  - "tenant storage usage investigation"
-  - "vmware backup job storage impact"
+  - unexpected vsan storage growth troubleshooting
+  - vsan tier history growth analysis
+  - snapshot retention storage consumption
+  - tenant storage usage investigation
+  - vmware backup job storage impact
 use_cases:
   - diagnose_unexpected_storage_growth
   - review_vsan_tier_growth_history
   - identify_snapshot_retention_issues
   - investigate_tenant_storage_usage
   - plan_storage_capacity_expansion
+categories:
+  - VM
+  - Troubleshooting
+  - vSAN
+editor: markdown
+dateCreated: 2022-08-26T14:57:49.753Z
+description: >-
+  Troubleshooting guide for diagnosing unexpected vSAN storage growth, including
+  how to review tier history and identify common causes like snapshots, backups,
+  and tenant storage.
 tags:
   - unexpected
   - unexplained
@@ -23,15 +32,9 @@ tags:
   - disk growth
   - malware
   - vsan
-categories:
-  - VM
-  - Troubleshooting
-  - vSAN
-editor: markdown
-dateCreated: 2022-08-26T14:57:49.753Z
 ---
 
-# Reasons for Unexpected / Unexplained vSAN Growth
+# Understanding and Explaining Unexpected vSAN Growth
 
 There are several reasons for the vSAN to start growing at a rate faster than anticipated. Administrators should first determine when the unexplained growth occurred by reviewing the vSAN Tiers' growth history, and then assess potential areas for unexpected growth.
 
@@ -43,51 +46,46 @@ To isolate unexplained growth, it is important to narrow down when the growth in
 2. Open the vSAN Tier with unexpected growth (for example, vSAN Tier 0).
 3. On the left navigation menu, click on **History**.
 4. A new menu will appear showing history in various graphs. Modify the filter period to isolate any growth on this tier.
-   - It is recommended to start with a custom filter of 1 day and review the **Storage Usage** graph.
+   * It is recommended to start with a custom filter of 1 day and review the **Storage Usage** graph.
 
 ### Things to Note:
 
-- If you see dips and spikes every hour or once a day, this is likely the result of snapshots falling out of retention (old ones expiring, new ones being created). Note whether the total storage consumed at the start of the day is nearly equivalent to the end of the day. If so, expand the custom filter to a week.
-- When reviewing by week, check if the total storage consumed at the start of the week is similar to the end. If, for example, the growth is roughly 10%, repeat for the previous week. If the weekly growth percentage is consistent, this represents your average weekly growth rate, which can help plan for hardware expansion.
-- Filter the current month and check for any sudden spikes in storage consumption on the **Storage Usage** graph. Click and drag over the time in question to zoom in on the data, and hover over the graph for specific date/time information.
+* If you see dips and spikes every hour or once a day, this is likely the result of snapshots falling out of retention (old ones expiring, new ones being created). Note whether the total storage consumed at the start of the day is nearly equivalent to the end of the day. If so, expand the custom filter to a week.
+* When reviewing by week, check if the total storage consumed at the start of the week is similar to the end. If, for example, the growth is roughly 10%, repeat for the previous week. If the weekly growth percentage is consistent, this represents your average weekly growth rate, which can help plan for hardware expansion.
+* Filter the current month and check for any sudden spikes in storage consumption on the **Storage Usage** graph. Click and drag over the time in question to zoom in on the data, and hover over the graph for specific date/time information.
 
-![vsan_unexpected_growth.png](../assets/screenshots/vsan_unexpected_growth.png)
+![vsan\_unexpected\_growth.png](../.gitbook/assets/vsan_unexpected_growth.png)
 
 ## Possible Reasons for Storage Increase
 
 Several areas in the VergeOS platform may contribute to unexpected storage growth. Common areas to check include:
 
-- **System Snapshots**:
-  - Navigate to **System > System Snapshots**.
-  - Are any being held past their expected expiration time?
-  - Are there snapshots without a Snapshot Profile? These may have been taken manually. Investigate when and why they were taken.
-  - Are any snapshots set to "Never Expire"? This can lead to large data consumption over time.
-  
-- **Virtual Machines (VMs) Snapshots**:
-  - Navigate to the **Machines Dashboard**. The **Snapshots** count box shows the number of machine-level snapshots present. Click this box to list all VM snapshots and their creation date/time. Review if any can be removed.
-  - Navigate to **Virtual Machines > List**. Sort by the **Snapshot Profile** column to identify VMs with machine-level snapshots. Virtual Machines can be restored from system snapshots, so review whether individual snapshots are necessary or if they can be removed.
+* **System Snapshots**:
+  * Navigate to **System > System Snapshots**.
+  * Are any being held past their expected expiration time?
+  * Are there snapshots without a Snapshot Profile? These may have been taken manually. Investigate when and why they were taken.
+  * Are any snapshots set to "Never Expire"? This can lead to large data consumption over time.
+* **Virtual Machines (VMs) Snapshots**:
+  * Navigate to the **Machines Dashboard**. The **Snapshots** count box shows the number of machine-level snapshots present. Click this box to list all VM snapshots and their creation date/time. Review if any can be removed.
+  * Navigate to **Virtual Machines > List**. Sort by the **Snapshot Profile** column to identify VMs with machine-level snapshots. Virtual Machines can be restored from system snapshots, so review whether individual snapshots are necessary or if they can be removed.
+* **VMWare Backup Jobs**:
+  * Navigate to **Backup/DR > VMware Services** and review each VMware Service instance for Backup Job history.
+  * On the left menu, click **Backup Jobs** to review each specific instance. Check the **Expires** column for each backup and review if it can be removed.
+* **Files**:
+  * Navigate to **Files** and sort by **Modified**. Check if any upload dates/times match the unexplained growth period.
+  * Review whether any files, especially other hypervisor formats (e.g., .ova or .vhdx), can be removed.
+* **Incoming Site Syncs**:
+  * Navigate to **Backup/DR > Incoming Syncs**. Open each Incoming Sync dashboard and check the **Received Snapshots** count. Investigate the source (origin) site for increased storage matching the timeframe.
+* **Tenant Storage**:
+  * Navigate to **Tenants > Each Tenant Dashboard**.
+  * Review **Total Storage Used** by clicking on **History** in the left menu. Follow the same process listed above to review growth history.
+  * If unexpected growth is found, investigate within the tenant for the possible causes of storage increase (as listed above), and within any sub-tenants if applicable.
 
-- **VMWare Backup Jobs**:
-  - Navigate to **Backup/DR > VMware Services** and review each VMware Service instance for Backup Job history.
-  - On the left menu, click **Backup Jobs** to review each specific instance. Check the **Expires** column for each backup and review if it can be removed.
-
-- **Files**:
-  - Navigate to **Files** and sort by **Modified**. Check if any upload dates/times match the unexplained growth period.
-  - Review whether any files, especially other hypervisor formats (e.g., .ova or .vhdx), can be removed.
-
-- **Incoming Site Syncs**:
-  - Navigate to **Backup/DR > Incoming Syncs**. Open each Incoming Sync dashboard and check the **Received Snapshots** count. Investigate the source (origin) site for increased storage matching the timeframe.
-
-- **Tenant Storage**:
-  - Navigate to **Tenants > Each Tenant Dashboard**.
-  - Review **Total Storage Used** by clicking on **History** in the left menu. Follow the same process listed above to review growth history.
-  - If unexpected growth is found, investigate within the tenant for the possible causes of storage increase (as listed above), and within any sub-tenants if applicable.
-
----
+***
 
 {% hint style="info" %}
 **Document Information**
 
-- Last Updated: 2024-09-03
-- VergeOS Version: 4.12.6
+* Last Updated: 2024-09-03
+* VergeOS Version: 4.12.6
 {% endhint %}

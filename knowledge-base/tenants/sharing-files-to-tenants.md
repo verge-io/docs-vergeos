@@ -1,29 +1,31 @@
 ---
 title: Sharing Files to Tenants
 slug: sharing-files-to-tenants
-description: How to share files such as media images from a Service Provider to Tenants using the VergeOS branch command feature.
 author: VergeOS Documentation Team
 date: 2023-01-24T19:20:42.724Z
 semantic_keywords:
-  - "share files media images tenants"
-  - "service provider tenant file sharing"
-  - "vsan branch command file distribution"
-  - "tenant media image upload"
+  - share files media images tenants
+  - service provider tenant file sharing
+  - vsan branch command file distribution
+  - tenant media image upload
 use_cases:
   - share_media_images_with_tenants
   - distribute_files_to_tenant_environments
   - provide_vm_disk_images_to_tenants
+categories:
+  - Tenant
+  - Media Images
+editor: markdown
+dateCreated: 2022-08-01T20:59:20.590Z
+description: >-
+  How to share files such as media images from a Service Provider to Tenants
+  using the VergeOS branch command feature.
 tags:
   - media
   - tenant
   - media images
   - files
   - tenants
-categories:
-  - Tenant
-  - Media Images
-editor: markdown
-dateCreated: 2022-08-01T20:59:20.590Z
 ---
 
 # Sharing Files to Tenants
@@ -33,36 +35,32 @@ dateCreated: 2022-08-01T20:59:20.590Z
 {% hint style="info" %}
 **Key Points**
 
-- Service Providers can share files with Tenants
-- Files must already be uploaded to the vSAN
-- Process is quick and uses a branch command
+* Service Providers can share files with Tenants
+* Files must already be uploaded to the vSAN
+* Process is quick and uses a branch command
 {% endhint %}
 
-This article guides Service Providers through the process of sharing files, such as media images, with their Tenants in the VergeOS system. This feature allows Tenants to access specific files within their own *Files* section.
+This article guides Service Providers through the process of sharing files, such as media images, with their Tenants in the VergeOS system. This feature allows Tenants to access specific files within their own _Files_ section.
 
 ## Prerequisites
 
-- Access to the VergeOS system as a Service Provider
-- Files already uploaded to the vSAN
-- Existing Tenants in the system
+* Access to the VergeOS system as a Service Provider
+* Files already uploaded to the vSAN
+* Existing Tenants in the system
 
 ## Steps
 
 1. Navigate to the Tenants Dashboard
-   - Select "Tenants" on the top menu 
-
+   * Select "Tenants" on the top menu
 2. Access Tenant List
-   - Select "List" to view a listing of all your Tenants
-
+   * Select "List" to view a listing of all your Tenants
 3. Select the Desired Tenant
-   - Double click on the Tenant you want to share files with
-
+   * Double click on the Tenant you want to share files with
 4. Access the Add File Feature
-   - Select "Add File" in the left menu
-
+   * Select "Add File" in the left menu
 5. Choose File Type
-   - Select File Type from the dropdown list
-   
+   * Select File Type from the dropdown list
+
 {% hint style="info" %}
 **Tip**
 
@@ -70,37 +68,34 @@ Select "ALL" to get a listing of all files available, regardless of type. This w
 {% endhint %}
 
 6. Select Specific File
-   - Choose the specific file you want to share from the dropdown list
-
+   * Choose the specific file you want to share from the dropdown list
 7. Submit Changes
-   - Click the submit button at the bottom of the page
-
+   * Click the submit button at the bottom of the page
 8. Confirmation
-   - The process is near-instant as it is done with a branch command
-   - The file is now available to the Tenant within their own *Files* section
+   * The process is near-instant as it is done with a branch command
+   * The file is now available to the Tenant within their own _Files_ section
 
 ## Troubleshooting
 
 {% hint style="warning" %}
 **Common Issues**
 
-- Problem: File not appearing in Tenant's *Files* section
-  - Solution: 
+* Problem: File not appearing in Tenant's _Files_ section
+  * Solution:
     1. Verify that the file was successfully uploaded
     2. Check if the correct file type was selected
     3. Ensure that the changes were submitted properly
-
-- Problem: Unable to select a specific file
-  - Solution: 
-    1. Confirm that the file exists in the *Files* section
+* Problem: Unable to select a specific file
+  * Solution:
+    1. Confirm that the file exists in the _Files_ section
     2. Try selecting "ALL" in the File Type dropdown to see if the file appears
 {% endhint %}
 
 ## Additional Resources
 
-- [Understanding vSAN in VergeOS](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/storage/vsan-architecture)
-- [Managing Tenants](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/tenants/create-tenants)
-- [Uploading Files](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/storage/uploading-files-to-vsan)
+* [Understanding vSAN in VergeOS](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/storage/vsan-architecture)
+* [Managing Tenants](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/tenants/create-tenants)
+* [Uploading Files](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/storage/uploading-files-to-vsan)
 
 ## Feedback
 
@@ -110,11 +105,11 @@ Select "ALL" to get a listing of all files available, regardless of type. This w
 If you encounter any issues while sharing files to tenants or have questions about this process, please don't hesitate to contact our support team.
 {% endhint %}
 
----
+***
 
 {% hint style="info" %}
 **Document Information**
 
-- Last Updated: 2023-08-24
-- VergeOS Version: 4.12.6
+* Last Updated: 2023-08-24
+* VergeOS Version: 4.12.6
 {% endhint %}

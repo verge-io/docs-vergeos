@@ -1,18 +1,25 @@
 ---
 title: Accessing the VergeOS UI from a VM
 slug: accessing-the-ui-from-a-vm
-description: Learn how to set up hair-pinning to access the VergeOS UI from a virtual machine within your environment using a translate network rule.
 author: VergeOS Documentation Team
 date: 2023-01-24T19:21:32.815Z
 semantic_keywords:
-  - "hairpin network rule vergeos ui vm access"
-  - "translate rule internal network ui browser"
-  - "access vergeos dashboard from virtual machine"
-  - "hair-pinning network configuration vm"
+  - hairpin network rule vergeos ui vm access
+  - translate rule internal network ui browser
+  - access vergeos dashboard from virtual machine
+  - hair-pinning network configuration vm
 use_cases:
   - access_ui_from_vm_hairpin
   - create_translate_rule_for_ui
   - configure_internal_network_hairpin
+categories:
+  - Network Rules
+  - Network
+editor: markdown
+dateCreated: 2022-09-07T17:52:09.082Z
+description: >-
+  Learn how to set up hair-pinning to access the VergeOS UI from a virtual
+  machine within your environment using a translate network rule.
 tags:
   - vm
   - access
@@ -21,74 +28,69 @@ tags:
   - hair-pin
   - hairpinning
   - hair-pinning
-categories:
-  - Network Rules
-  - Network
-editor: markdown
-dateCreated: 2022-09-07T17:52:09.082Z
 ---
 
-# Accessing the Verge.io UI from a VM
+# Accessing the VergeOS UI from a VM
 
 ## Overview
 
 {% hint style="info" %}
 **Key Points**
 
-- Access the VergeOS UI from a VM within your environment
-- Utilize hair-pinning network technique
-- Create a specific network rule on the internal network
+* Access the VergeOS UI from a VM within your environment
+* Utilize hair-pinning network technique
+* Create a specific network rule on the internal network
 {% endhint %}
 
 This article guides you through the process of setting up access to the VergeOS User Interface (UI) from a virtual machine (VM) running inside the VergeOS system. This is accomplished using a networking technique known as hair-pinning, where a packet travels to an interface, goes out towards the Internet, but instead of continuing, it makes a "hairpin turn" and comes back in on the same interface.
 
 ## Prerequisites
 
-- A running VergeOS environment
-- A virtual machine (VM) within your VergeOS environment
-- Access to the VergeOS UI
-- Basic understanding of network rules in VergeOS
+* A running VergeOS environment
+* A virtual machine (VM) within your VergeOS environment
+* Access to the VergeOS UI
+* Basic understanding of network rules in VergeOS
 
 ## Steps
 
 1. Navigate to the Internal Network
-   - Log into your VergeOS environment
-   - Go to the internal network that your target VM is connected to
-
+   * Log into your VergeOS environment
+   * Go to the internal network that your target VM is connected to
 2. Create a New Rule
-   - Locate the option to create a new rule
-   - Configure the rule with the following settings:
-     
-     **Rule:**
-     - Name: Use a reference name, such as "Allow UI"
-     - Action: Translate
-     - Protocol: TCP
-     - Direction: Incoming
-     - Interface: Auto
-     - Pin: No
+   * Locate the option to create a new rule
+   *   Configure the rule with the following settings:
 
-     **Source:**
-     - Type: Any / None
-     - Source Ports/Ranges: Leave blank
+       **Rule:**
 
-     **Destination:**
-     - Type: My Network Address
-     - Destination Ports/Ranges: 80, 443
+       * Name: Use a reference name, such as "Allow UI"
+       * Action: Translate
+       * Protocol: TCP
+       * Direction: Incoming
+       * Interface: Auto
+       * Pin: No
 
-     **Target:**
-     - Type: Other Network DMZ IP
-     - Target Network: Core
-     - Target Ports/Ranges: Leave blank
+       **Source:**
 
+       * Type: Any / None
+       * Source Ports/Ranges: Leave blank
+
+       **Destination:**
+
+       * Type: My Network Address
+       * Destination Ports/Ranges: 80, 443
+
+       **Target:**
+
+       * Type: Other Network DMZ IP
+       * Target Network: Core
+       * Target Ports/Ranges: Leave blank
 3. Submit the Rule
-   - Click "Submit" to save the rule
-
+   * Click "Submit" to save the rule
 4. Apply the New Rule
-   - Click "Apply Rules" to activate the newly created rule
-
+   * Click "Apply Rules" to activate the newly created rule
 5. Access the UI from the VM
-   - Open a web browser within your VM
-   - Navigate to the IP address of the internal network (e.g., if the internal network IP is 192.168.0.1, use this address)
+   * Open a web browser within your VM
+   * Navigate to the IP address of the internal network (e.g., if the internal network IP is 192.168.0.1, use this address)
 
 {% hint style="success" %}
 **Pro Tip**
@@ -100,15 +102,15 @@ Always ensure that your VM's network settings are correctly configured to use th
 
 Here's a visual representation of the rule configuration:
 
-![hairpin.png](../assets/screenshots/hairpin.png)
+![hairpin.png](../.gitbook/assets/hairpin.png)
 
 ## Troubleshooting
 
 {% hint style="warning" %}
 **Common Issues**
 
-- Problem: Unable to access the UI after creating the rule
-  - Solution: 
+* Problem: Unable to access the UI after creating the rule
+  * Solution:
     1. Verify that the rule is applied correctly
     2. Check if the VM's network interface is on the correct internal network
     3. Ensure no firewall rules are blocking the connection
@@ -116,9 +118,9 @@ Here's a visual representation of the rule configuration:
 
 ## Additional Resources
 
-- [Network Overview](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/networks/network-overview)
-- [Network Rules](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/networks/network-rules)
-- [Creating an Internal Network](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/networks/internal-networks)
+* [Network Overview](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/networking/network-overview)
+* [Network Rules](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/networking/network-rules)
+* [Creating an Internal Network](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/networking/internal-networks)
 
 ## Feedback
 
@@ -128,11 +130,11 @@ Here's a visual representation of the rule configuration:
 If you encounter any issues while setting up UI access or have questions about this process, please don't hesitate to contact our support team.
 {% endhint %}
 
----
+***
 
 {% hint style="info" %}
 **Document Information**
 
-- Last Updated: 2024-08-29
-- VergeOS Version: 4.13.3
+* Last Updated: 2024-08-29
+* VergeOS Version: 4.13.3
 {% endhint %}

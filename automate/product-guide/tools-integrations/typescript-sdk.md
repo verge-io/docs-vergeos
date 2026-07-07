@@ -1,11 +1,10 @@
 ---
-title: "VergeOS TypeScript SDK (tsvergeos)"
-description: "tsvergeos is a TypeScript SDK for managing VergeOS infrastructure through the REST API, providing a zero-dependency, tree-shakeable, fully typed interface for automating VMs, networking, storage, tenants, and multi-site management."
+title: VergeOS TypeScript SDK (tsvergeos)
 semantic_keywords:
-  - "VergeOS TypeScript SDK API client library"
-  - "automate VergeOS infrastructure with TypeScript"
-  - "tsvergeos VM networking storage automation"
-  - "programmatic VergeOS management Node.js scripting"
+  - VergeOS TypeScript SDK API client library
+  - automate VergeOS infrastructure with TypeScript
+  - tsvergeos VM networking storage automation
+  - programmatic VergeOS management Node.js scripting
 use_cases:
   - infrastructure_automation
   - ci_cd_environment_provisioning
@@ -13,6 +12,12 @@ use_cases:
   - backup_automation
   - multi_tenant_provisioning
   - multi_site_management
+categories:
+  - Automation
+description: >-
+  tsvergeos is a TypeScript SDK for managing VergeOS through the REST API,
+  offering a zero-dependency, tree-shakeable, typed interface for automating
+  VMs, networking, storage, tenants, and multi-site.
 tags:
   - typescript
   - sdk
@@ -22,8 +27,6 @@ tags:
   - scripting
   - development
   - nodejs
-categories:
-  - Automation
 ---
 
 # VergeOS TypeScript SDK (tsvergeos)
@@ -34,18 +37,18 @@ tsvergeos is a TypeScript SDK for managing VergeOS infrastructure through the RE
 
 ## Key Features
 
-- **Zero Dependencies**: Nothing to audit, nothing to break
-- **Tree-Shakeable**: Import only the services you use; unused services are dead-code eliminated
-- **Full Type Coverage**: Every resource, parameter, and response is typed with TSDoc documentation
-- **93 Services**: Complete coverage of every VergeOS API endpoint
-- **Multi-Site Built In**: Query and manage multiple VergeOS deployments from a single `SiteManager`
-- **Cross-Platform**: Works in Node.js 20+, Deno, Bun, and modern browsers
-- **Filtering**: OData filter support with both a fluent `Filter` builder and a functional `buildFilter` shorthand
+* **Zero Dependencies**: Nothing to audit, nothing to break
+* **Tree-Shakeable**: Import only the services you use; unused services are dead-code eliminated
+* **Full Type Coverage**: Every resource, parameter, and response is typed with TSDoc documentation
+* **93 Services**: Complete coverage of every VergeOS API endpoint
+* **Multi-Site Built In**: Query and manage multiple VergeOS deployments from a single `SiteManager`
+* **Cross-Platform**: Works in Node.js 20+, Deno, Bun, and modern browsers
+* **Filtering**: OData filter support with both a fluent `Filter` builder and a functional `buildFilter` shorthand
 
 ## Requirements
 
-- Node.js 20+ (also supports Deno and Bun)
-- VergeOS 6.x (API v4)
+* Node.js 20+ (also supports Deno and Bun)
+* VergeOS 6.x (API v4)
 
 ## Installation
 
@@ -83,8 +86,6 @@ const client = await VergeClient.connect({
 
 {% hint style="info" %}
 **SSL Certificate Verification**
-
-
 {% endhint %}
 
 Set `verifySsl: false` only for environments with self-signed certificates. For production environments with valid certificates, omit this parameter or set it to `true`.
@@ -115,8 +116,6 @@ const client = await VergeClient.connectFromEnv();
 
 {% hint style="success" %}
 **Recommended for Production**
-
-
 {% endhint %}
 
 Using environment variables keeps credentials out of your source code and makes it easy to use different credentials across environments.
@@ -143,8 +142,6 @@ import "@vergeio/tsvergeos/services/storage-tier";
 
 {% hint style="warning" %}
 **Unregistered Services**
-
-
 {% endhint %}
 
 The default import does not include every service. If you access a service that isn't registered (e.g., `client.alarms` without importing it), you'll get `undefined`. For dashboards, admin tools, or backend scripts where bundle size doesn't matter, use `import '@vergeio/tsvergeos/full'` to register everything.
@@ -230,12 +227,9 @@ await client.vms.delete(newVm.$key);
 
 {% hint style="info" %}
 **Reliable Power State**
-
-
 {% endhint %}
 
-The `powerstate` field on a VM resource is often omitted by the API. For
-authoritative live power state, query the machine status service:
+The `powerstate` field on a VM resource is often omitted by the API. For authoritative live power state, query the machine status service:
 
 ```typescript
 import "@vergeio/tsvergeos/services/machine-status";
@@ -246,9 +240,7 @@ console.log(status.running, status.status);
 
 ### Console Access
 
-`getConsoleInfo()` returns connection details for opening a direct WebSocket
-console to a VM. Three auth methods are supported — pick based on where the
-console is rendered:
+`getConsoleInfo()` returns connection details for opening a direct WebSocket console to a VM. Three auth methods are supported — pick based on where the console is rendered:
 
 ```typescript
 // Browser-compatible: token embedded in WebSocket URL
@@ -267,9 +259,7 @@ const ws = new WebSocket(info.websocketUrl, {
 });
 ```
 
-The browser `WebSocket` API does not support custom headers — use
-username/password or a pre-existing token in browsers. For a no-API-call
-shortcut to the web UI console, use `client.vms.getConsoleURL(42)`.
+The browser `WebSocket` API does not support custom headers — use username/password or a pre-existing token in browsers. For a no-API-call shortcut to the web UI console, use `client.vms.getConsoleURL(42)`.
 
 ### Filtering Resources
 
@@ -319,7 +309,6 @@ for await (const vm of client.vms.listAll()) {
 }
 ```
 {% endtab %}
-
 {% endtabs %}
 
 ### Multi-Site Management
@@ -367,8 +356,6 @@ manager.addSite("edge-01", existing, ["edge"]);
 
 {% hint style="success" %}
 **Multi-Site Queries**
-
-
 {% endhint %}
 
 The `SiteManager` fans out read queries across all registered sites in parallel and returns aggregated results along with any per-site errors. Use `manager.tagged(tag)` to scope the fan-out to a subset of sites. Mutations always go through a named site (`manager.site("dc-east").vms.create(...)`); the cross-site proxy exposes only `list()`.
@@ -400,22 +387,20 @@ try {
 
 {% hint style="info" %}
 **Available Error Types**
-
-
 {% endhint %}
 
-| Error Class | Description |
-|-------------|-------------|
-| `VergeError` | Base error for all SDK errors |
-| `ApiError` | Any HTTP error from the API |
-| `NotFoundError` | Resource not found (404) |
-| `AuthError` | Authentication failure (401/403) |
-| `ConflictError` | Resource state conflict (409) |
-| `ValidationError` | Invalid client-side input |
-| `UnsupportedVersionError` | Server version too old |
-| `TaskError` | Async task failed |
-| `TaskTimeoutError` | Task exceeded wait timeout |
-| `SiteError` | Multi-site operation failure |
+| Error Class               | Description                      |
+| ------------------------- | -------------------------------- |
+| `VergeError`              | Base error for all SDK errors    |
+| `ApiError`                | Any HTTP error from the API      |
+| `NotFoundError`           | Resource not found (404)         |
+| `AuthError`               | Authentication failure (401/403) |
+| `ConflictError`           | Resource state conflict (409)    |
+| `ValidationError`         | Invalid client-side input        |
+| `UnsupportedVersionError` | Server version too old           |
+| `TaskError`               | Async task failed                |
+| `TaskTimeoutError`        | Task exceeded wait timeout       |
+| `SiteError`               | Multi-site operation failure     |
 
 ## Client Configuration
 
@@ -438,19 +423,19 @@ interface ClientConfig {
 
 ## Common Use Cases
 
-- **Infrastructure automation**: Provision VMs, networks, and storage programmatically
-- **CI/CD integration**: Create and destroy test environments in pipelines
-- **Monitoring and reporting**: Query resource status and generate inventory reports
-- **Backup automation**: Schedule and manage snapshots and cloud backups
-- **Multi-tenant provisioning**: Automate tenant creation and resource allocation
-- **Multi-site orchestration**: Manage and query across multiple VergeOS deployments
+* **Infrastructure automation**: Provision VMs, networks, and storage programmatically
+* **CI/CD integration**: Create and destroy test environments in pipelines
+* **Monitoring and reporting**: Query resource status and generate inventory reports
+* **Backup automation**: Schedule and manage snapshots and cloud backups
+* **Multi-tenant provisioning**: Automate tenant creation and resource allocation
+* **Multi-site orchestration**: Manage and query across multiple VergeOS deployments
 
 ## Documentation and Resources
 
 For complete documentation, including the full API reference and detailed usage examples, visit the official repository:
 
-- [GitHub Repository](https://github.com/verge-io/tsvergeos){target="\_blank"}
-- [npm Package](https://www.npmjs.com/package/@vergeio/tsvergeos){target="\_blank"}
+* [GitHub Repository](https://github.com/verge-io/tsvergeos){target="\_blank"}
+* [npm Package](https://www.npmjs.com/package/@vergeio/tsvergeos){target="\_blank"}
 
 ## Support
 
@@ -460,9 +445,9 @@ If you encounter issues or have feature requests, please open an issue on the Gi
 
 ## Additional Resources
 
-- [TypeScript Documentation](https://www.typescriptlang.org/docs/){target="\_blank"}
-- [VergeOS API Documentation](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/)
-- [Python SDK](python-sdk.md) - Python alternative
-- [Go SDK](go-sdk.md) - Go alternative
-- [PowerShell Module](powershell-module.md) - PowerShell alternative
-- [Terraform Provider](terraform-provider.md) - Infrastructure as code
+* [TypeScript Documentation](https://www.typescriptlang.org/docs/){target="\_blank"}
+* [VergeOS API Documentation](https://app.gitbook.com/o/FpusSnrkRHyZiVEsXf9X/s/QZBMFpokMv2vWTIRbFzA/)
+* [Python SDK](python-sdk.md) - Python alternative
+* [Go SDK](go-sdk.md) - Go alternative
+* [PowerShell Module](powershell-module.md) - PowerShell alternative
+* [Terraform Provider](terraform-provider.md) - Infrastructure as code

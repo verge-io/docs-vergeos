@@ -1,18 +1,23 @@
 ---
-title: "Creating Subscriptions"
-description: "How to create on-demand alert and scheduled report subscriptions in VergeOS, including subscription types, configuration options, throttling, reminders, and practical examples."
+title: Creating Subscriptions
 semantic_keywords:
-  - "VergeOS create subscription alert notification"
-  - "on-demand triggered alert threshold warning error"
-  - "scheduled subscription report daily weekly"
-  - "subscription profile target type owner"
-  - "subscription throttle reminder interval"
+  - VergeOS create subscription alert notification
+  - on-demand triggered alert threshold warning error
+  - scheduled subscription report daily weekly
+  - subscription profile target type owner
+  - subscription throttle reminder interval
 use_cases:
   - create_on_demand_alert_subscription
   - create_scheduled_report_subscription
   - configure_subscription_throttle_and_reminders
   - set_up_storage_usage_alerts
   - monitor_system_warnings_and_errors
+categories:
+  - System Administration
+description: >-
+  How to create on-demand alert and scheduled report subscriptions in VergeOS,
+  including subscription types, configuration options, throttling, reminders,
+  and practical examples.
 tags:
   - subscriptions
   - alerts
@@ -22,8 +27,6 @@ tags:
   - email
   - smtp
   - automation
-categories:
-  - System Administration
 ---
 
 # Creating Subscriptions
@@ -31,9 +34,7 @@ categories:
 Subscriptions deliver emails for scheduled reporting and triggered alerting.
 
 {% hint style="info" %}
-**Effective SMTP configuration must be in place for delivery of subscriptions.  The [SMTP Product Guide](smtp.md) provides instructions for configuring and managing SMTP.**
-
-
+**Effective SMTP configuration must be in place for delivery of subscriptions. The** [**SMTP Product Guide**](smtp.md) **provides instructions for configuring and managing SMTP.**
 {% endhint %}
 
 ## Subscription Types
@@ -49,7 +50,7 @@ Triggered alerts are based on threshold settings, warnings, or errors. These are
 
 ### Scheduled
 
-Dashboard or listing information is sent based on configured times/intervals. These are intended to provide summaries of current system information and can assist administrators in everyday supervision of systems, tracking trends, etc.  
+Dashboard or listing information is sent based on configured times/intervals. These are intended to provide summaries of current system information and can assist administrators in everyday supervision of systems, tracking trends, etc.
 
 **Examples of scheduled subscriptions include:**
 
@@ -59,7 +60,7 @@ Dashboard or listing information is sent based on configured times/intervals. Th
 {% hint style="success" %}
 **Efficient Monitoring**
 
-Efficiently monitoring a VergeOS Cloud will involve creating **multiple *On-Demand* and *Scheduled* subscriptions**.
+Efficiently monitoring a VergeOS Cloud will involve creating **multiple&#x20;**_**On-Demand**_**&#x20;and&#x20;**_**Scheduled**_**&#x20;subscriptions**.
 {% endhint %}
 
 ## Create a New Subscription
@@ -67,23 +68,23 @@ Efficiently monitoring a VergeOS Cloud will involve creating **multiple *On-Dema
 1. From the Cloud Dashboard, select **System** from the left menu.
 2. Select **Subscriptions** from the left menu.
 3. Select **New** from the left menu.
-4. Select ***Owner Type***:
+4. Select _**Owner Type**_:
    * **User** (individual user)
    * **Group** (group of users)
-5. Select ***Owner*** from the dropdown list. (Choose from the list of users or list of groups depending on selection in the *Owner Type* field.)
-6. Select ***Target Type*** from the dropdown list. This defines the area of the system to report on.
-7. Select ***Target*** from the dropdown list. This defines the specific instance, where applicable (for example, a particular storage tier when *Storage Tiers* is selected as Target Type; a single virtual network when *Network* is selected as the Target Type.).
-8. Enter a ***Name*** for the subscription. This name displays in the subscriptions listing and in the email messages sent by this subscription.
+5. Select _**Owner**_ from the dropdown list. (Choose from the list of users or list of groups depending on selection in the _Owner Type_ field.)
+6. Select _**Target Type**_ from the dropdown list. This defines the area of the system to report on.
+7. Select _**Target**_ from the dropdown list. This defines the specific instance, where applicable (for example, a particular storage tier when _Storage Tiers_ is selected as Target Type; a single virtual network when _Network_ is selected as the Target Type.).
+8. Enter a _**Name**_ for the subscription. This name displays in the subscriptions listing and in the email messages sent by this subscription.
 9. Select the desired **Suspend** setting:
    * **Never** (default) - subscription continues perpetually until deleted or disabled.
    * **Set Date** - subscription does not execute again until the specified date/time.
-10. Select the ***Type*** of notification:
+10. Select the _**Type**_ of notification:
     * **On-Demand** - alerts triggered by particular events or specific thresholds; these notifications only occur when specified criteria occurs.
     * **Scheduled** - reports that send at particular intervals/times (e.g. daily, weekly, monthly)
-11. Select ***Subscription Profile*** from the dropdown list. (The options available will depend on the option selected in the ***Target*** field.) This defines the information to receive in the notification. A wide array of subscription profiles exist by default, providing the means to oversee all the different parts of your VergeOS Cloud, such as: physical hardware (host tenant only), storage utilization per tier, import jobs, system warnings and errors, and more. Additional [**Subscription Profiles**](subscription-profiles.md) can be defined if further notification/alert scenarios are needed.
-12. **For On Demand Subscriptions** (alerts): Select a ***Reminder while active*** interval to define how often reminder alerts should be received until a resolved state (at which point, a resolved alert is sent.) This setting pertains to alerts based on error/warning statuses or thresholds. Applies to ***On-Demand* subscriptions only**.
-13. **For On Demand Subscriptions**: specify a ***Throttle*** for the subscription alerts to define a limiting interval (in minutes) for how often this subscription will send alerts. For example: if a subscription is created for Main Dashboard Log Errors, and an error starts continually occurring in the log, the throttle will limit the rate that subscription alerts are sent (rather than sending a new alert for each time the error appears in the log.) *Applies to **On-Demand subscriptions only.***
-14. **For Scheduled Subscriptions**: Specify ***Frequency*** and **scheduling options**, (such as time, day of week, etc. options will vary based on the frequency selected.)
+11. Select _**Subscription Profile**_ from the dropdown list. (The options available will depend on the option selected in the _**Target**_ field.) This defines the information to receive in the notification. A wide array of subscription profiles exist by default, providing the means to oversee all the different parts of your VergeOS Cloud, such as: physical hardware (host tenant only), storage utilization per tier, import jobs, system warnings and errors, and more. Additional [**Subscription Profiles**](subscription-profiles.md) can be defined if further notification/alert scenarios are needed.
+12. **For On Demand Subscriptions** (alerts): Select a _**Reminder while active**_ interval to define how often reminder alerts should be received until a resolved state (at which point, a resolved alert is sent.) This setting pertains to alerts based on error/warning statuses or thresholds. Applies to _**On-Demand**_**&#x20;subscriptions only**.
+13. **For On Demand Subscriptions**: specify a _**Throttle**_ for the subscription alerts to define a limiting interval (in minutes) for how often this subscription will send alerts. For example: if a subscription is created for Main Dashboard Log Errors, and an error starts continually occurring in the log, the throttle will limit the rate that subscription alerts are sent (rather than sending a new alert for each time the error appears in the log.) _Applies to **On-Demand subscriptions only.**_
+14. **For Scheduled Subscriptions**: Specify _**Frequency**_ and **scheduling options**, (such as time, day of week, etc. options will vary based on the frequency selected.)
 15. Click **Submit** to save the subscription.
 
 {% hint style="info" %}
@@ -102,34 +103,28 @@ Multiple Scheduled subscriptions (to the same owner) set for the same time will 
 
 ### **Example 1 - vSAN Tier Dashboard**
 
-Receive a weekly summary for a particular vSAN Tier, including tier status, usage, read / write stats, etc.
-![subscription-vsantierdash.png](../../assets/screenshots/subscription-vsantierdash.png)
+Receive a weekly summary for a particular vSAN Tier, including tier status, usage, read / write stats, etc. ![subscription-vsantierdash.png](../../.gitbook/assets/subscription-vsantierdash.png)
 
 ### **Example 2 - System Snapshots Recent**
 
-Receive a daily report with an inventory of all your Current System Snapshots.
-![subscription-cloudsnaps-recent.png](../../assets/screenshots/subscription-cloudsnaps-recent.png)
+Receive a daily report with an inventory of all your Current System Snapshots. ![subscription-cloudsnaps-recent.png](../../.gitbook/assets/subscription-cloudsnaps-recent.png)
 
 ## **Examples - On-demand Subscriptions**
 
 ### **Example 3 - High Usage Alert for a Storage Tier**
 
-Receive an alert if Storage Tier 2 usage reaches the High Usage percentage (**The High Usage Percentage is set to 80% by default**); Send a reminder every 12 hours while the high usage is still in place.  **Throttle alerts to only send 2 per minute**.
-![subscription-highusagealert.png](../../assets/screenshots/subscription-highusagealert.png)
+Receive an alert if Storage Tier 2 usage reaches the High Usage percentage (**The High Usage Percentage is set to 80% by default**); Send a reminder every 12 hours while the high usage is still in place.  **Throttle alerts to only send 2 per minute**. ![subscription-highusagealert.png](../../.gitbook/assets/subscription-highusagealert.png)
 
 {% hint style="success" %}
-**A Separate Subscription could also be created for a Critical High Usage alert when a storage tier hits **90%**.  Typically, **you would have more frequent reminders** for a Critical High Usage alert.**
-
-
+**A Separate Subscription could also be created for a Critical High Usage alert when a storage tier hits 90%.  Typically, you would have more frequent reminders for a Critical High Usage alert.**
 {% endhint %}
 
 ### **Example 4 - Main Dashboard Status Warnings or Errors**
 
 Send an alert email to all members of the "SrvAdmin" group if any warning or error status changes occur on the Main Dashboard; send a Reminder email every **6 hours** while the Warning/Error condition is still in place; throttle the error messages to send only **1 per minute**.
 
-**Configuration:**
-![subscription-maindashwarnserrors.png](../../assets/screenshots/subscription-maindashwarnserrors.png)
+**Configuration:** ![subscription-maindashwarnserrors.png](../../.gitbook/assets/subscription-maindashwarnserrors.png)
 
- A vSAN tiers warning is an example of something that would appear in the Main Dashboard and trigger this subscription alert. Full Dashboard Data would be sent within the alert email message.
+&#x20;A vSAN tiers warning is an example of something that would appear in the Main Dashboard and trigger this subscription alert. Full Dashboard Data would be sent within the alert email message.
 
 Subscriptions based on Status errors and warnings will also automatically send a Resolved Message when the status error/warning is no longer in place.

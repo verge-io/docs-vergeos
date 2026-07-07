@@ -1,34 +1,37 @@
 ---
 title: System Logs
 slug: system-logs
-description: Guide to reviewing system logs, sync logs, and the System Event Log (SEL) in VergeOS, including log retention, third-party log forwarding, and best practices.
 author: VergeOS Documentation Team
 date: 2023-08-30T18:05:00.332Z
 semantic_keywords:
-  - "system logs review monitoring troubleshooting"
-  - "sync logs snapshot synchronization statistics"
-  - "SEL system event log IPMI hardware"
-  - "third-party syslog forwarding retention"
+  - system logs review monitoring troubleshooting
+  - sync logs snapshot synchronization statistics
+  - SEL system event log IPMI hardware
+  - third-party syslog forwarding retention
 use_cases:
   - review_system_logs
   - monitor_sync_log_activity
   - clear_sel_capacity
   - configure_third_party_log_forwarding
   - troubleshoot_system_events
+categories:
+  - Troubleshooting
+editor: markdown
+dateCreated: 2022-08-23T19:19:56.461Z
+description: >-
+  Guide to reviewing system logs, sync logs, and the System Event Log (SEL) in
+  VergeOS, including log retention, third-party log forwarding, and best
+  practices.
 tags:
   - logs
   - cluster
   - troubleshooting
   - support
-categories:
-  - Troubleshooting
-editor: markdown
-dateCreated: 2022-08-23T19:19:56.461Z
 ---
 
 # System Logs
 
----
+***
 
 ## Overview
 
@@ -37,15 +40,13 @@ System logs are essential for monitoring and troubleshooting the performance and
 ## Types of Logs
 
 1. **System Logs**:
-   - System logs capture activities related to vSAN, VM activities, and other system-related operations. These logs are essential for understanding the detailed operations and performance of the entire system
-
+   * System logs capture activities related to vSAN, VM activities, and other system-related operations. These logs are essential for understanding the detailed operations and performance of the entire system
 2. **Sync Logs**:
-   - Sync logs are available on both incoming and outgoing sync dashboards. These logs display entries for the start and completion of each Snapshot sync. Each entry includes statistics for the amount checked, scanned, sent, net sent, and the count of directories and files.
-
+   * Sync logs are available on both incoming and outgoing sync dashboards. These logs display entries for the start and completion of each Snapshot sync. Each entry includes statistics for the amount checked, scanned, sent, net sent, and the count of directories and files.
 3. **System Event Log (SEL)**:
-   - The SEL contains events from the hardware IPMI interface. Since this log is stored on hardware, it has limited capacity. The node dashboard displays a percentage bar indicating the amount of SEL capacity currently used.
+   * The SEL contains events from the hardware IPMI interface. Since this log is stored on hardware, it has limited capacity. The node dashboard displays a percentage bar indicating the amount of SEL capacity currently used.
 
----
+***
 
 ## Reviewing System Logs
 
@@ -53,70 +54,66 @@ System logs are essential for monitoring and troubleshooting the performance and
 
 The log in the following screenshot shows several specific events as examples of logged activity.
 
-![system_logs.png](../assets/screenshots/system_logs.png)
+![system\_logs.png](../.gitbook/assets/system_logs.png)
 
-- From the entry time-stamped on March 28th, 2022 at 9:21:35, there is a record of the IP address from where the admin user logged in, along with the date and time of the login.
-- The entry at 9:21:55 shows that the user named 'admin' had the password changed from the root environment.
-- The entry at 9:22:53 records the admin user changing their own password in this environment.
+* From the entry time-stamped on March 28th, 2022 at 9:21:35, there is a record of the IP address from where the admin user logged in, along with the date and time of the login.
+* The entry at 9:21:55 shows that the user named 'admin' had the password changed from the root environment.
+* The entry at 9:22:53 records the admin user changing their own password in this environment.
 
 ### Log Retention Period
 
-- VergeOS retains logs for **45 days**. After this period, logs are automatically deleted. For compliance and troubleshooting, consider this retention period and enable third-party logging for long-term storage.
+* VergeOS retains logs for **45 days**. After this period, logs are automatically deleted. For compliance and troubleshooting, consider this retention period and enable third-party logging for long-term storage.
 
 ### Viewing Context-Specific Logs
 
-- In many areas of the platform, such as a specific VM dashboard, there is a **Logs** button to view logs specific to that context. This helps filter out unrelated logged events.
+* In many areas of the platform, such as a specific VM dashboard, there is a **Logs** button to view logs specific to that context. This helps filter out unrelated logged events.
 
----
-
+***
 
 ## Reviewing Sync Logs
 
-- Sync logs can be accessed directly from the sync dashboard.
-- Each log entry provides detailed information about the sync process, including:
-  - Start and stop times
-  - Amount of data checked
-  - Amount of data scanned
-  - Amount of data sent
-  - Net data sent
-  - Directory and file counts
+* Sync logs can be accessed directly from the sync dashboard.
+* Each log entry provides detailed information about the sync process, including:
+  * Start and stop times
+  * Amount of data checked
+  * Amount of data scanned
+  * Amount of data sent
+  * Net data sent
+  * Directory and file counts
 
----
+***
 
 ## Reviewing SEL
 
 1. **Check SEL Capacity**:
-   - The node dashboard displays a percentage bar showing the current usage of SEL capacity. Monitor this to ensure that the SEL does not become full, which would prevent new events from being recorded.
-
+   * The node dashboard displays a percentage bar showing the current usage of SEL capacity. Monitor this to ensure that the SEL does not become full, which would prevent new events from being recorded.
 2. **Clear SEL**:
-   - If the SEL is nearing full capacity, clear it by following these steps:
+   * If the SEL is nearing full capacity, clear it by following these steps:
      1. Navigate to **Infrastructure** > **Nodes**.
      2. Double-click the desired node to access the **Node dashboard**.
      3. Click **Clear SEL** on the left menu.
      4. Click **Yes** to confirm.
 
----
+***
 
 ## Third-party Log Collection
 
-VergeOS records user-initiated and automated activity in *System logs*, accessible at the bottom of the Main Dashboard page or by selecting *Logs* from the top menu. Logged activity is typically available within the VergeOS user interface for a maximum of 45 days. To retain logs beyond this period, configure a third-party Syslog collection service.  Instructions for configuring VergeOS log forwarding to an external service are available at: **[KB Enabling Third-party Log Collection](configuring-remote-log-forwarding.md)**
+VergeOS records user-initiated and automated activity in _System logs_, accessible at the bottom of the Main Dashboard page or by selecting _Logs_ from the top menu. Logged activity is typically available within the VergeOS user interface for a maximum of 45 days. To retain logs beyond this period, configure a third-party Syslog collection service. Instructions for configuring VergeOS log forwarding to an external service are available at: [**KB Enabling Third-party Log Collection**](configuring-remote-log-forwarding.md)
 
----
+***
 
 ## Best Practices
 
-- **Regular Monitoring**: Regularly monitor system logs to stay informed about system health and performance.
-- **Clear SEL as Needed**: Ensure the SEL is cleared periodically to avoid the loss of new event data.
-- **Review Sync Logs**: Regularly review sync logs to ensure synchronization processes are running smoothly and to diagnose any potential issues.
-- **Utilize 3rd Party Tools**: Use third-party logging tools for enhanced log analysis, long-term storage, and better integration with your overall monitoring setup.
+* **Regular Monitoring**: Regularly monitor system logs to stay informed about system health and performance.
+* **Clear SEL as Needed**: Ensure the SEL is cleared periodically to avoid the loss of new event data.
+* **Review Sync Logs**: Regularly review sync logs to ensure synchronization processes are running smoothly and to diagnose any potential issues.
+* **Utilize 3rd Party Tools**: Use third-party logging tools for enhanced log analysis, long-term storage, and better integration with your overall monitoring setup.
 
-
-
----
+***
 
 {% hint style="info" %}
 **Document Information**
 
-- Last Updated: 2024-08-29
-- vergeOS Version: 4.12.6
+* Last Updated: 2024-08-29
+* vergeOS Version: 4.12.6
 {% endhint %}

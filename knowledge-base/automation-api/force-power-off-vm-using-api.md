@@ -1,7 +1,7 @@
 ---
 title: Force Power Off a VM Using the API
 slug: force-power-off-vm-using-api
-description: Step-by-step instructions for force powering off a non-responsive virtual machine using the VergeOS API and Swagger interface, including how to locate the VM ID, verify machine status, and issue the power-off command.
+description: Step-by-step instructions for force powering off a non-responsive VM using the VergeOS API and Swagger interface, including how to locate the VM ID, verify status, and issue the power-off command.
 author: VergeOS Documentation Team
 date: 2025-01-28T00:00:00.000Z
 semantic_keywords:

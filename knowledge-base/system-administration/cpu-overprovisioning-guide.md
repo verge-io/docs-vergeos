@@ -1,20 +1,28 @@
 ---
 title: CPU Overprovisioning and Resource Planning
 slug: cpu-overprovisioning-guide
-description: Understanding CPU allocation, overcommit ratios, and performance implications in VergeOS, including recommended ratios by workload type and capacity planning calculations.
 author: VergeOS Documentation Team
-date: 2026-01-24
+date: 2026-01-24T00:00:00.000Z
 semantic_keywords:
-  - "CPU overprovisioning overcommit ratio vCPU"
-  - "capacity planning cluster resource allocation"
-  - "max cores per machine NUMA performance"
-  - "VM CPU sizing scheduling migration"
+  - CPU overprovisioning overcommit ratio vCPU
+  - capacity planning cluster resource allocation
+  - max cores per machine NUMA performance
+  - VM CPU sizing scheduling migration
 use_cases:
   - plan_cpu_capacity
   - configure_overcommit_ratios
   - set_max_cores_per_machine
   - right_size_vm_cpu_allocation
   - monitor_cpu_health
+categories:
+  - System Administration
+  - Best Practices
+editor: markdown
+dateCreated: 2026-01-24T00:00:00.000Z
+description: >-
+  Understanding CPU allocation, overcommit ratios, and performance implications
+  in VergeOS, including recommended ratios by workload type and capacity
+  planning calculations.
 tags:
   - cpu
   - performance
@@ -22,11 +30,6 @@ tags:
   - cluster
   - resources
   - overcommit
-categories:
-  - System Administration
-  - Best Practices
-editor: markdown
-dateCreated: 2026-01-24
 ---
 
 # CPU Overprovisioning and Resource Planning
@@ -42,22 +45,23 @@ CPU overprovisioning (also called overcommit) allows you to allocate more virtua
 When you assign vCPUs to a VM, you're allocating **virtual cores** that are scheduled onto physical CPU cores. VergeOS does not reserve physical cores exclusively for VMs—instead, it uses time-slicing to share physical resources.
 
 **Key points:**
-- vCPUs are not pinned to physical cores by default
-- Multiple vCPUs from different VMs can share the same physical core
-- The hypervisor scheduler manages CPU time allocation
+
+* vCPUs are not pinned to physical cores by default
+* Multiple vCPUs from different VMs can share the same physical core
+* The hypervisor scheduler manages CPU time allocation
 
 ### The "Max cores per machine" Setting
 
 This cluster setting controls the maximum number of CPU cores that can be allocated to a single workload (VM, tenant node, or NAS service).
 
-**Location:** Infrastructure > Clusters > [Cluster Name] > Edit
+**Location:** Infrastructure > Clusters > \[Cluster Name] > Edit
 
 {% hint style="warning" %}
 **Critical Constraints**
 
-- This value should **never exceed** the total physical cores on your smallest node
-- In most cases, keep it **within a single CPU socket** for optimal NUMA performance
-- VMs exceeding this limit after a change **cannot migrate** until cores are reduced
+* This value should **never exceed** the total physical cores on your smallest node
+* In most cases, keep it **within a single CPU socket** for optimal NUMA performance
+* VMs exceeding this limit after a change **cannot migrate** until cores are reduced
 {% endhint %}
 
 ## CPU Overcommit Ratios
@@ -74,12 +78,12 @@ Overcommit Ratio = Total Allocated vCPUs / Total Physical Cores
 
 ### Recommended Ratios by Workload Type
 
-| Workload Type | Ratio | Notes |
-|---------------|-------|-------|
-| Light/Office workloads | 4:1 to 6:1 | Desktop VMs, file servers |
-| Mixed general purpose | 2:1 to 4:1 | Typical enterprise mix |
-| Database/Application servers | 1:1 to 2:1 | Performance-sensitive |
-| High-performance computing | 1:1 or less | CPU-bound workloads |
+| Workload Type                | Ratio       | Notes                     |
+| ---------------------------- | ----------- | ------------------------- |
+| Light/Office workloads       | 4:1 to 6:1  | Desktop VMs, file servers |
+| Mixed general purpose        | 2:1 to 4:1  | Typical enterprise mix    |
+| Database/Application servers | 1:1 to 2:1  | Performance-sensitive     |
+| High-performance computing   | 1:1 or less | CPU-bound workloads       |
 
 {% hint style="success" %}
 **Start Conservative**
@@ -91,15 +95,15 @@ Begin with lower ratios and increase based on monitoring. It's easier to add cap
 
 ### When Overcommit Works Well
 
-- **Bursty workloads:** VMs that have occasional CPU spikes but are mostly idle
-- **Diverse timing:** Workloads that peak at different times
-- **I/O-bound applications:** VMs waiting on disk or network more than CPU
+* **Bursty workloads:** VMs that have occasional CPU spikes but are mostly idle
+* **Diverse timing:** Workloads that peak at different times
+* **I/O-bound applications:** VMs waiting on disk or network more than CPU
 
 ### When Overcommit Causes Problems
 
-- **CPU-bound workloads:** Applications constantly using 100% CPU
-- **Latency-sensitive applications:** Real-time systems, VoIP, trading
-- **Simultaneous demand:** All VMs needing CPU at the same time
+* **CPU-bound workloads:** Applications constantly using 100% CPU
+* **Latency-sensitive applications:** Real-time systems, VoIP, trading
+* **Simultaneous demand:** All VMs needing CPU at the same time
 
 ### Signs of Over-Overcommitment
 
@@ -119,15 +123,17 @@ Usable vCPUs = Available Cores × Target Overcommit Ratio
 ```
 
 **Example:** 4-node cluster, 32 cores each, 2:1 target ratio
-- Available: (4-1) × 32 = 96 cores
-- Usable vCPUs: 96 × 2 = 192 vCPUs
+
+* Available: (4-1) × 32 = 96 cores
+* Usable vCPUs: 96 × 2 = 192 vCPUs
 
 ### Migration Considerations
 
 When a node fails or enters maintenance:
-- All VMs must fit on remaining nodes
-- Each VM must fit within the "Max cores per machine" setting
-- VMs with many vCPUs may become stranded if no single node can host them
+
+* All VMs must fit on remaining nodes
+* Each VM must fit within the "Max cores per machine" setting
+* VMs with many vCPUs may become stranded if no single node can host them
 
 {% hint style="warning" %}
 **Migration Readiness**
@@ -160,11 +166,11 @@ If a VM has 64 vCPUs but your nodes only have 32 cores, that VM **cannot migrate
 
 ### Key Metrics to Watch
 
-| Metric | Healthy Range | Action if Exceeded |
-|--------|---------------|-------------------|
-| Cluster CPU utilization | < 70% average | Add nodes or reduce VMs |
-| Node CPU utilization | < 80% sustained | Check VM distribution |
-| Individual VM CPU | Varies by workload | Right-size or investigate |
+| Metric                  | Healthy Range      | Action if Exceeded        |
+| ----------------------- | ------------------ | ------------------------- |
+| Cluster CPU utilization | < 70% average      | Add nodes or reduce VMs   |
+| Node CPU utilization    | < 80% sustained    | Check VM distribution     |
+| Individual VM CPU       | Varies by workload | Right-size or investigate |
 
 ### Using the VergeOS Dashboard
 
@@ -173,7 +179,7 @@ If a VM has 64 vCPUs but your nodes only have 32 cores, that VM **cannot migrate
 3. Click individual nodes to see per-node metrics
 4. Check VM CPU statistics under each VM's dashboard
 
-For more details on cluster monitoring, see [Clusters Overview](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/system/clusters-overview).
+For more details on cluster monitoring, see [Clusters Overview](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/system-administration/clusters-overview).
 
 ## FAQ
 
@@ -197,8 +203,8 @@ For VMs with many vCPUs, VergeOS attempts to keep memory and CPU allocations wit
 
 ## Related Topics
 
-- [Clusters Overview](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/system/clusters-overview) - Understanding cluster architecture
-- [Cluster Configuration Options](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/system/cluster-settings) - All cluster settings explained
-- [VM Best Practices](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/virtual-machines/vm-best-practices) - Recommendations for VM configuration
-- [Creating Virtual Machines](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/virtual-machines/creating-vms) - VM creation guide
-- [Live Migrations](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/virtual-machines/live-migrations) - Moving VMs between nodes
+* [Clusters Overview](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/system-administration/clusters-overview) - Understanding cluster architecture
+* [Cluster Configuration Options](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/system-administration/cluster-settings) - All cluster settings explained
+* [VM Best Practices](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/virtual-machines/vm-best-practices) - Recommendations for VM configuration
+* [Creating Virtual Machines](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/virtual-machines/creating-vms) - VM creation guide
+* [Live Migrations](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/virtual-machines/live-migrations) - Moving VMs between nodes
