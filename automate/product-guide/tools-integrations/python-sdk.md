@@ -1,17 +1,22 @@
 ---
-title: "VergeOS Python SDK (pyvergeos)"
-description: "pyvergeos is a Python SDK for managing VergeOS through the REST API, providing a Pythonic, type-annotated interface for automating VMs, networking, storage, tenants, and disaster recovery."
+title: VergeOS Python SDK (pyvergeos)
 semantic_keywords:
-  - "VergeOS Python SDK API client library"
-  - "automate VergeOS infrastructure with Python"
-  - "pyvergeos VM networking storage automation"
-  - "programmatic VergeOS management Python scripting"
+  - VergeOS Python SDK API client library
+  - automate VergeOS infrastructure with Python
+  - pyvergeos VM networking storage automation
+  - programmatic VergeOS management Python scripting
 use_cases:
   - infrastructure_automation
   - ci_cd_environment_provisioning
   - monitoring_and_reporting
   - backup_automation
   - multi_tenant_provisioning
+categories:
+  - Automation
+description: >-
+  pyvergeos is a Python SDK for managing VergeOS through the REST API, providing
+  a Pythonic, type-annotated interface for automating VMs, networking, storage,
+  tenants, and disaster recovery.
 tags:
   - python
   - sdk
@@ -20,8 +25,6 @@ tags:
   - pyvergeos
   - scripting
   - development
-categories:
-  - Automation
 ---
 
 # VergeOS Python SDK (pyvergeos)
@@ -32,19 +35,19 @@ pyvergeos is a Python SDK for managing VergeOS infrastructure through the REST A
 
 ## Key Features
 
-- **VM Management**: Creation, configuration, power control, cloning, and snapshots
-- **Advanced Networking**: Virtual networks, firewall rules, DHCP, DNS, IPSec VPN, and WireGuard
-- **NAS & Storage**: Volume management, CIFS/NFS shares, and synchronization
-- **Multi-Tenancy**: Tenant provisioning with resource isolation
-- **Disaster Recovery**: Cloud snapshots, site synchronization, and recovery workflows
-- **Filtering**: OData filter support with a fluent filter builder API
-- **Type Annotations**: Full type hints for IDE autocompletion and static analysis
-- **Cross-Platform**: Windows, macOS, and Linux support
+* **VM Management**: Creation, configuration, power control, cloning, and snapshots
+* **Advanced Networking**: Virtual networks, firewall rules, DHCP, DNS, IPSec VPN, and WireGuard
+* **NAS & Storage**: Volume management, CIFS/NFS shares, and synchronization
+* **Multi-Tenancy**: Tenant provisioning with resource isolation
+* **Disaster Recovery**: Cloud snapshots, site synchronization, and recovery workflows
+* **Filtering**: OData filter support with a fluent filter builder API
+* **Type Annotations**: Full type hints for IDE autocompletion and static analysis
+* **Cross-Platform**: Windows, macOS, and Linux support
 
 ## Requirements
 
-- Python 3.9 or later
-- VergeOS 26.0 or later
+* Python 3.9 or later
+* VergeOS 26.0 or later
 
 ## Installation
 
@@ -135,17 +138,17 @@ Using the context manager (`with` statement) ensures the connection is properly 
 
 The SDK provides access to the following VergeOS resources:
 
-| Category | Resources |
-|----------|-----------|
-| Virtual Machines | VMs, drives, NICs, snapshots |
-| Networking | Networks, rules, DNS, DHCP, aliases, hosts |
-| VPN | IPSec connections, WireGuard interfaces and peers |
-| NAS/Storage | Services, volumes, CIFS/NFS shares, volume syncs |
-| Tenants | Tenant management, snapshots, storage, network blocks |
-| Users & Groups | Users, groups, permissions, API keys |
-| System | Clusters, nodes, storage tiers, certificates |
-| Monitoring | Alarms, logs, tasks |
-| Backup & DR | Snapshot profiles, cloud snapshots, sites, site syncs |
+| Category         | Resources                                             |
+| ---------------- | ----------------------------------------------------- |
+| Virtual Machines | VMs, drives, NICs, snapshots                          |
+| Networking       | Networks, rules, DNS, DHCP, aliases, hosts            |
+| VPN              | IPSec connections, WireGuard interfaces and peers     |
+| NAS/Storage      | Services, volumes, CIFS/NFS shares, volume syncs      |
+| Tenants          | Tenant management, snapshots, storage, network blocks |
+| Users & Groups   | Users, groups, permissions, API keys                  |
+| System           | Clusters, nodes, storage tiers, certificates          |
+| Monitoring       | Alarms, logs, tasks                                   |
+| Backup & DR      | Snapshot profiles, cloud snapshots, sites, site syncs |
 
 ## Usage Examples
 
@@ -240,7 +243,6 @@ f = Filter().eq("os_family", "linux").and_().gt("ram", 2048)
 vms = client.vms.list(filter=str(f))
 ```
 {% endtab %}
-
 {% endtabs %}
 
 ### Task Waiting
@@ -278,42 +280,42 @@ except TaskTimeoutError as e:
 
 {% hint style="info" %}
 **Available Exception Types**
-
-| Exception | Description |
-|-----------|-------------|
-| `VergeError` | Base exception for all SDK errors |
-| `AuthenticationError` | Invalid credentials or expired token |
-| `NotFoundError` | Requested resource does not exist |
-| `ConflictError` | Resource state conflict (e.g., VM already running) |
-| `ValidationError` | Invalid parameter values |
-| `TaskTimeoutError` | Task did not complete within timeout |
-| `TaskError` | Task failed during execution |
 {% endhint %}
+
+| Exception             | Description                                        |
+| --------------------- | -------------------------------------------------- |
+| `VergeError`          | Base exception for all SDK errors                  |
+| `AuthenticationError` | Invalid credentials or expired token               |
+| `NotFoundError`       | Requested resource does not exist                  |
+| `ConflictError`       | Resource state conflict (e.g., VM already running) |
+| `ValidationError`     | Invalid parameter values                           |
+| `TaskTimeoutError`    | Task did not complete within timeout               |
+| `TaskError`           | Task failed during execution                       |
 
 ## Common Use Cases
 
-- **Infrastructure automation**: Provision VMs, networks, and storage programmatically
-- **CI/CD integration**: Create and destroy test environments in pipelines
-- **Monitoring and reporting**: Query resource status and generate inventory reports
-- **Backup automation**: Schedule and manage snapshots and cloud backups
-- **Multi-tenant provisioning**: Automate tenant creation and resource allocation
+* **Infrastructure automation**: Provision VMs, networks, and storage programmatically
+* **CI/CD integration**: Create and destroy test environments in pipelines
+* **Monitoring and reporting**: Query resource status and generate inventory reports
+* **Backup automation**: Schedule and manage snapshots and cloud backups
+* **Multi-tenant provisioning**: Automate tenant creation and resource allocation
 
 ## Documentation and Resources
 
 For complete documentation, including all available methods and detailed usage examples, visit the official repository:
 
-- [GitHub Repository](https://github.com/verge-io/pyvergeos){target="_blank"}
-- [PyPI Package](https://pypi.org/project/pyvergeos/){target="_blank"}
+* [GitHub Repository](https://github.com/verge-io/pyvergeos){target="\_blank"}
+* [PyPI Package](https://pypi.org/project/pyvergeos/){target="\_blank"}
 
 ## Support
 
 If you encounter issues or have feature requests, please open an issue on the GitHub repository:
 
-[https://github.com/verge-io/pyvergeos/issues](https://github.com/verge-io/pyvergeos/issues){target="_blank"}
+[https://github.com/verge-io/pyvergeos/issues](https://github.com/verge-io/pyvergeos/issues){target="\_blank"}
 
 ## Additional Resources
 
-- [Python Documentation](https://docs.python.org/3/){target="_blank"}
-- [VergeOS API Documentation](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/)
-- [PSVergeOS PowerShell Module](powershell-module.md) - PowerShell alternative
-- [Terraform Provider](terraform-provider.md) - Infrastructure as code
+* [Python Documentation](https://docs.python.org/3/){target="\_blank"}
+* [VergeOS API Documentation](https://app.gitbook.com/o/FpusSnrkRHyZiVEsXf9X/s/QZBMFpokMv2vWTIRbFzA/)
+* [PSVergeOS PowerShell Module](powershell-module.md) - PowerShell alternative
+* [Terraform Provider](terraform-provider.md) - Infrastructure as code

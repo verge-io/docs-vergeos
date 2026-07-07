@@ -1,5 +1,7 @@
 ---
-description: The built-in automation, resilience, integration, and Private AI surface of VergeOS.
+description: >-
+  The built-in automation, resilience, integration, and Private AI surface of
+  VergeOS.
 icon: robot
 ---
 
@@ -7,7 +9,7 @@ icon: robot
 
 What you reach for once VergeOS is running: business continuity, repeatable provisioning, terminal-first automation, and local AI models — all built into the platform.
 
-<table data-view="cards"><thead><tr><th></th><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><h3><i class="fa-shield-halved" style="color:#C4502D;">:shield:</i></h3></td><td><strong>Backup and disaster recovery</strong></td><td>Snapshots, site syncs, repair server flows, and recovery operations.</td><td><a href="product-guide/backup-dr/overview.md">backup-dr</a></td></tr><tr><td><h3><i class="fa-gears" style="color:#C4502D;">:gear:</i></h3></td><td><strong>Automation</strong></td><td>Recipes, task engine, schedules, scripts, and webhooks.</td><td><a href="product-guide/automation/recipes-overview.md">automation</a></td></tr><tr><td><h3><i class="fa-terminal" style="color:#C4502D;">:keyboard:</i></h3></td><td><strong>Integrations and APIs</strong></td><td>CLI, SDKs, Terraform, Prometheus, and Kubernetes-facing tooling.</td><td><a href="product-guide/tools-integrations/vrg-cli.md">tools-integrations</a></td></tr><tr><td><h3><i class="fa-brain" style="color:#C4502D;">:brain:</i></h3></td><td><strong>Private AI</strong></td><td>Run models locally through VergeOS with an OpenAI-compatible API.</td><td><a href="product-guide/private-ai/overview.md">private-ai</a></td></tr></tbody></table>
+<table data-view="cards"><thead><tr><th></th><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><h3><i class="fa-shield-halved">:shield-halved:</i></h3></td><td><strong>Backup and disaster recovery</strong></td><td>Snapshots, site syncs, repair server flows, and recovery operations.</td><td><a href="product-guide/backup-dr/overview.md">overview.md</a></td></tr><tr><td><h3><i class="fa-gears">:gears:</i></h3></td><td><strong>Automation</strong></td><td>Recipes, task engine, schedules, scripts, and webhooks.</td><td><a href="product-guide/automation/recipes-overview.md">recipes-overview.md</a></td></tr><tr><td><h3><i class="fa-terminal">:terminal:</i></h3></td><td><strong>Integrations and APIs</strong></td><td>CLI, SDKs, Terraform, Prometheus, and Kubernetes-facing tooling.</td><td><a href="product-guide/tools-integrations/vrg-cli.md">vrg-cli.md</a></td></tr><tr><td><h3><i class="fa-brain">:brain:</i></h3></td><td><strong>Private AI</strong></td><td>Run models locally through VergeOS with an OpenAI-compatible API.</td><td><a href="product-guide/private-ai/overview.md">overview.md</a></td></tr></tbody></table>
 
 ## Suggested walkthrough
 
@@ -19,5 +21,5 @@ What you reach for once VergeOS is running: business continuity, repeatable prov
 
 ## Related spaces
 
-- Core platform context: [Run the platform](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/)
-- Early deployment design: [Plan and deploy](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/)
+* Core platform context: [Run the platform](https://app.gitbook.com/o/FpusSnrkRHyZiVEsXf9X/s/pODKGSQETqL1gSqyxIq3/)
+* Early deployment design: [Plan and deploy](https://app.gitbook.com/o/FpusSnrkRHyZiVEsXf9X/s/Q2bN3ctQdjv01GivTI08/)

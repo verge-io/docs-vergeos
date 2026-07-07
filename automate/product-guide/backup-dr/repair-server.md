@@ -1,16 +1,21 @@
 ---
-title: "Repair Server (ioGuardian)"
-description: "How to create and configure a repair server (ioGuardian) that automatically recovers corrupted or missing data blocks from a synchronized remote VergeOS system."
+title: Repair Server (ioGuardian)
 semantic_keywords:
-  - "repair server ioGuardian VergeOS data recovery"
-  - "automatic data block repair sync destination"
-  - "create repair server from outgoing sync"
-  - "vSAN data integrity hardware failure recovery"
+  - repair server ioGuardian VergeOS data recovery
+  - automatic data block repair sync destination
+  - create repair server from outgoing sync
+  - vSAN data integrity hardware failure recovery
 use_cases:
-  - "create_repair_server_from_sync"
-  - "configure_automatic_data_repair"
-  - "recover_from_multi_drive_failure"
-  - "setup_ioguardian_data_healing"
+  - create_repair_server_from_sync
+  - configure_automatic_data_repair
+  - recover_from_multi_drive_failure
+  - setup_ioguardian_data_healing
+categories:
+  - Backup and DR
+description: >-
+  How to create and configure a repair server (ioGuardian) that automatically
+  recovers corrupted or missing data blocks from a synchronized remote VergeOS
+  system.
 tags:
   - repair-server
   - ioguardian
@@ -18,8 +23,6 @@ tags:
   - site-syncs
   - vsan
   - redundancy
-categories:
-  - Backup and DR
 ---
 
 # Repair Server (ioGuardian)
@@ -28,8 +31,6 @@ A repair server provides a potential repair mechanism after a system experiences
 
 {% hint style="success" %}
 **There is a higher chance of repair success when there is a good network connection, with relatively low latency, between the system and its repair server.**
-
-
 {% endhint %}
 
 A repair server is created using the existing outgoing sync configuration: vSAN Host (address of the remote destination), vSAN Port, system-generated authorized username/password, and encryption setting enabled or disabled based on the associated sync configuration.
@@ -37,9 +38,7 @@ A repair server is created using the existing outgoing sync configuration: vSAN 
 ## Create a Repair Server from an Outgoing Sync (common method)
 
 {% hint style="info" %}
-**Repair servers may be auto-generated when [**Adding Sites to the Dashboard**](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/system/site-dashboard-add-sites).**
-
-
+**Repair servers may be auto-generated when** [**Adding Sites to the Dashboard**](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/system-administration/site-dashboard-add-sites)**.**
 {% endhint %}
 
 Typically, a repair server is created from an outgoing sync because the sync destination would contain a recent copy of the data. This is the recommended method in most cases.
@@ -47,8 +46,7 @@ Typically, a repair server is created from an outgoing sync because the sync des
 1. From the outgoing sync dashboard, click **Create Repair Server** on the left menu.
 2. Enter a **Name** for the repair server. Use a name that will be helpful for future administration, for example a name that includes that of the remote system.
 3. Optionally, a **Description** can be entered to store additional information.
-4. Click **Submit** to complete the creation.
-A repair server is created using the outgoing sync configuration details, including: vSAN Host (address of the remote destination), vSAN Port, system-generated authorized username/password, and encryption setting.
+4. Click **Submit** to complete the creation. A repair server is created using the outgoing sync configuration details, including: vSAN Host (address of the remote destination), vSAN Port, system-generated authorized username/password, and encryption setting.
 
 ## Create a Repair Server from the Repair Servers List Page
 
@@ -63,20 +61,19 @@ In instances where there is no current outgoing sync from which to configure the
 
 Credentials can be copied from an existing outgoing sync:
 
-- Select ***Copy*** in the **Credentialling** dropdown list
-- Select **desired sync** in the **Copy Credentials from** dropdown list
+* Select _**Copy**_ in the **Credentialling** dropdown list
+* Select **desired sync** in the **Copy Credentials from** dropdown list
 
 ### Manual Credentialling
 
-To manually enter credential information:
-select ***Manual*** in the **Credentialling** dropdown list.
+To manually enter credential information: select _**Manual**_ in the **Credentialling** dropdown list.
 
 ### Credential Fields
 
-- **vSAN Host** - url to the root level of the remote system
-- **vSAN Port** - default 14201, a different port can be used but must also be configured on the remote side with ports open on intermediate firewall(s)
-- **User**
-- **Password** and **Confirm Password** for the specified VergeOS user
-- **Encryption**
+* **vSAN Host** - url to the root level of the remote system
+* **vSAN Port** - default 14201, a different port can be used but must also be configured on the remote side with ports open on intermediate firewall(s)
+* **User**
+* **Password** and **Confirm Password** for the specified VergeOS user
+* **Encryption**
 
 5. Click **Submit** to complete the creation.

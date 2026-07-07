@@ -1,18 +1,23 @@
 ---
-title: "API Keys"
-description: "How to create, manage, and use API keys for programmatic access to the VergeOS REST API, including authentication, IP access controls, expiration settings, and security best practices."
+title: API Keys
 semantic_keywords:
-  - "VergeOS API key creation management"
-  - "REST API authentication bearer token programmatic access"
-  - "API key IP allow deny list access control"
-  - "automate VergeOS scripts third-party integration"
-  - "API key expiration rotation security"
+  - VergeOS API key creation management
+  - REST API authentication bearer token programmatic access
+  - API key IP allow deny list access control
+  - automate VergeOS scripts third-party integration
+  - API key expiration rotation security
 use_cases:
   - create_api_key_for_automation
   - configure_ip_access_restrictions
   - authenticate_rest_api_requests
   - manage_api_key_lifecycle
   - integrate_third_party_tools
+categories:
+  - System Administration
+description: >-
+  How to create, manage, and use API keys for programmatic access to the VergeOS
+  REST API, including authentication, IP access controls, expiration settings,
+  and security best practices.
 tags:
   - api
   - api-keys
@@ -21,8 +26,6 @@ tags:
   - automation
   - rest-api
   - integration
-categories:
-  - System Administration
 ---
 
 # API Keys
@@ -33,10 +36,10 @@ API keys provide authentication for programmatic access to the VergeOS REST API 
 
 **Common uses for API keys:**
 
-- REST API authentication for automation and integration
-- OpenAI-compatible AI router access
-- Third-party tool integration (monitoring, orchestration, IaC tools)
-- CI/CD pipeline authentication
+* REST API authentication for automation and integration
+* OpenAI-compatible AI router access
+* Third-party tool integration (monitoring, orchestration, IaC tools)
+* CI/CD pipeline authentication
 
 ## Understanding API Key Authentication
 
@@ -60,11 +63,11 @@ Session tokens are temporary credentials that expire after inactivity. API keys 
 
 The API Keys section displays a table with:
 
-- **Name**: Descriptive identifier for each key
-- **Last Logged In**: Most recent authentication timestamp
-- **Last Logged In IP**: Source IP of last authentication
-- **Expires**: Days remaining until expiration
-- **Created**: Key generation timestamp
+* **Name**: Descriptive identifier for each key
+* **Last Logged In**: Most recent authentication timestamp
+* **Last Logged In IP**: Source IP of last authentication
+* **Expires**: Days remaining until expiration
+* **Created**: Key generation timestamp
 
 ### Create New API Key
 
@@ -73,33 +76,27 @@ The API Keys section displays a table with:
 
 ### Configure API Key Settings
 
-**Name** (Required)
-Enter a descriptive identifier for the API key. Clear naming helps with tracking and key management.
+**Name** (Required) Enter a descriptive identifier for the API key. Clear naming helps with tracking and key management.
 
-**Description** (Optional)
-Add additional context about the key's purpose, requester, or related systems.
+**Description** (Optional) Add additional context about the key's purpose, requester, or related systems.
 
-**Expiration Type**
-Choose how the key's validity period is managed:
+**Expiration Type** Choose how the key's validity period is managed:
 
-- **Set Date**: Define a specific expiration date (recommended for security)
-- **Never Expire**: Create a perpetual key (use with caution)
+* **Set Date**: Define a specific expiration date (recommended for security)
+* **Never Expire**: Create a perpetual key (use with caution)
 
-**Expires** (When "Set Date" is selected)
-Use the date/time picker to set when the key should expire. Common expiration periods are 30, 60, or 90 days.
+**Expires** (When "Set Date" is selected) Use the date/time picker to set when the key should expire. Common expiration periods are 30, 60, or 90 days.
 
 ### Configure Access Controls
 
-**IP Allow List**
-Restrict the API key to specific IP addresses or CIDR ranges. Only listed addresses can authenticate with this key.
+**IP Allow List** Restrict the API key to specific IP addresses or CIDR ranges. Only listed addresses can authenticate with this key.
 
 1. Click the **+ (plus)** icon to add an entry
 2. Enter an IP address (e.g., `192.168.1.100`) or CIDR range (e.g., `192.168.1.0/24`)
 3. Check the checkbox to enable the entry
 4. Add additional entries as needed
 
-**IP Deny List**
-Block specific IP addresses or ranges from using this key while allowing all others.
+**IP Deny List** Block specific IP addresses or ranges from using this key while allowing all others.
 
 1. Click the **+ (plus)** icon to add an entry
 2. Enter the IP address or CIDR range to block
@@ -118,8 +115,8 @@ When both lists are configured, the IP Allow List takes precedence. If an addres
 
 A popup displays the generated API key with two options:
 
-- **Copy**: Click to copy the full key string to your clipboard
-- **Save**: Click to download the key as a `.PAK` (Protected API Key) file
+* **Copy**: Click to copy the full key string to your clipboard
+* **Save**: Click to download the key as a `.PAK` (Protected API Key) file
 
 {% hint style="danger" %}
 **One-Time Display**
@@ -189,20 +186,15 @@ curl -X GET "https://your-vergeos-instance/api/v4/system" \
 
 ## Security Considerations
 
-**Treat API Keys Like Passwords**
-API keys provide full authentication as the associated user. Protect them with the same care as passwords.
+**Treat API Keys Like Passwords** API keys provide full authentication as the associated user. Protect them with the same care as passwords.
 
-**Use IP Restrictions**
-Configure IP Allow Lists whenever possible to limit where the key can be used. This significantly reduces risk if a key is compromised.
+**Use IP Restrictions** Configure IP Allow Lists whenever possible to limit where the key can be used. This significantly reduces risk if a key is compromised.
 
-**Set Expiration Dates**
-Avoid perpetual keys when possible. Regular expiration forces key rotation and limits exposure windows.
+**Set Expiration Dates** Avoid perpetual keys when possible. Regular expiration forces key rotation and limits exposure windows.
 
-**Monitor Key Usage**
-Review the "Last Logged In" and "Last Logged In IP" fields regularly to identify unexpected access patterns.
+**Monitor Key Usage** Review the "Last Logged In" and "Last Logged In IP" fields regularly to identify unexpected access patterns.
 
-**Delete Unused Keys**
-Remove API keys that are no longer needed to minimize your attack surface.
+**Delete Unused Keys** Remove API keys that are no longer needed to minimize your attack surface.
 
 ## Troubleshooting
 
@@ -224,4 +216,4 @@ API keys cannot be recovered after the initial creation popup is closed. Delete 
 
 ## Related Resources
 
-- [VergeOS REST API Documentation](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/) - Complete API reference and endpoints
+* [VergeOS REST API Documentation](https://app.gitbook.com/o/FpusSnrkRHyZiVEsXf9X/s/QZBMFpokMv2vWTIRbFzA/) - Complete API reference and endpoints

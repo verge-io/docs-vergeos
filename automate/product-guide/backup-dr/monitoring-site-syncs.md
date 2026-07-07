@@ -1,16 +1,21 @@
 ---
-title: "Monitoring Site Syncs"
-description: "How to monitor site sync operations using outgoing and incoming sync dashboards, sync statistics, logs, and email subscriptions for ongoing replication oversight."
+title: Monitoring Site Syncs
 semantic_keywords:
-  - "monitor site sync dashboard status VergeOS"
-  - "sync statistics checked scanned sent net"
-  - "site sync subscription alerts reports"
-  - "incoming outgoing sync monitoring logs"
+  - monitor site sync dashboard status VergeOS
+  - sync statistics checked scanned sent net
+  - site sync subscription alerts reports
+  - incoming outgoing sync monitoring logs
 use_cases:
-  - "monitor_outgoing_sync_status"
-  - "monitor_incoming_sync_progress"
-  - "configure_sync_monitoring_subscriptions"
-  - "review_sync_statistics_logs"
+  - monitor_outgoing_sync_status
+  - monitor_incoming_sync_progress
+  - configure_sync_monitoring_subscriptions
+  - review_sync_statistics_logs
+categories:
+  - Backup and DR
+description: >-
+  How to monitor site sync operations using outgoing and incoming sync
+  dashboards, sync statistics, logs, and email subscriptions for ongoing
+  replication oversight.
 tags:
   - site-syncs
   - monitoring
@@ -18,8 +23,6 @@ tags:
   - subscriptions
   - replication
   - logs
-categories:
-  - Backup and DR
 ---
 
 # Monitoring Site Syncs
@@ -30,7 +33,7 @@ Ongoing tracking of sync activity can be done from the sending system or the rec
 
 ## Outgoing Sync Dashboard (Sending System)
 
-![outgoingsync-dash.png](../../assets/screenshots/outgoingsync-dash.png)
+![outgoingsync-dash.png](../../.gitbook/assets/outgoingsync-dash.png)
 
 ### Sync Status
 
@@ -40,9 +43,9 @@ The top left area of the dashboard displays the current status of the sync (e.g.
 
 The snapshot queue section displays:
 
-- The most recently synchronized snapshots
-- Currently synching snapshot (if applicable)
-- Snapshots in the waiting list to sync
+* The most recently synchronized snapshots
+* Currently synching snapshot (if applicable)
+* Snapshots in the waiting list to sync
 
 ### Remote Snapshots
 
@@ -54,7 +57,7 @@ The most recent synchronized snapshots are displayed in the destination snapshot
 
 ## Incoming Sync Dashboard (Receiving System)
 
-![incomingsync-dash.png](../../assets/screenshots/incomingsync-dash.png)
+![incomingsync-dash.png](../../.gitbook/assets/incomingsync-dash.png)
 
 ### Sync Status
 
@@ -72,21 +75,19 @@ On both incoming sync and outgoing sync dashboards, logs are displayed at the bo
 
 Statistics shown in sync dashboard listings and log entries. These numbers update to show the progress of the sync, with final numbers displayed at the end of the sync process.
 
-- **Checked** - total size of all files that have been determined need to be compared (file level, pre-deduplication)
-- **Scanned** - total size of data blocks compared
-- **Sent** - amount of data determined as needed to be sent - e.g. changed data (pre-compression)
-- **Net Sent** - actual amount of data transferred on the wire (post-compression)
-- **Dirs Checked** - total number of files within the source
-- **Files Checked** - total number of files within the source
+* **Checked** - total size of all files that have been determined need to be compared (file level, pre-deduplication)
+* **Scanned** - total size of data blocks compared
+* **Sent** - amount of data determined as needed to be sent - e.g. changed data (pre-compression)
+* **Net Sent** - actual amount of data transferred on the wire (post-compression)
+* **Dirs Checked** - total number of files within the source
+* **Files Checked** - total number of files within the source
 
 ## Use Subscriptions to Monitor Syncs
 
 Subscriptions are available from both the sending system and the receiving system to oversee sync activity.
 
 {% hint style="info" %}
-**Reference the [**Subscriptions**](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/system/subscriptions-overview) page for more information about creating and using subscriptions.**
-
-
+**Reference the** [**Subscriptions**](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/system-administration/subscriptions-overview) **page for more information about creating and using subscriptions.**
 {% endhint %}
 
 ### Example Subscriptions
@@ -97,11 +98,11 @@ Subscriptions are available from both the sending system and the receiving syste
 2. Click **Subscriptions** on the left menu.
 3. Click **New** on the left menu.
 4. Provide a **Name** for the subscription (the name will appear in the subject of the received email notification.)
-5. Set the **Type** = ***Scheduled***
-6. Set the **Subscription profile** = ***Site Sync Dashboard***.
+5. Set the **Type** = _**Scheduled**_
+6. Set the **Subscription profile** = _**Site Sync Dashboard**_.
 7. Click **Submit** to save the subscription.
 
-![subscription-syncdash.png](../../assets/screenshots/subscription-syncdash.png)
+![subscription-syncdash.png](../../.gitbook/assets/subscription-syncdash.png)
 
 ### Receive a Notification each Time a New Sync is Completed (Receiving Site)
 
@@ -109,8 +110,8 @@ Subscriptions are available from both the sending system and the receiving syste
 2. Click **Subscriptions** on the left menu.
 3. Click **New** on the left menu.
 4. Provide a **Name** for the subscription (the name will appear in the subject of the received email notification.)
-5. The **Type** field should be left at the default setting of ***On-demand***
-6. Set **Subscription profile** = ***Site Sync Received***
+5. The **Type** field should be left at the default setting of _**On-demand**_
+6. Set **Subscription profile** = _**Site Sync Received**_
 7. Click **Submit** to save the subscription.
 
-![subscription-syncreceived.png](../../assets/screenshots/subscription-syncreceived.png)
+![subscription-syncreceived.png](../../.gitbook/assets/subscription-syncreceived.png)

@@ -1,16 +1,21 @@
 ---
-title: "Site Syncs"
-description: "Overview of VergeOS site sync capabilities for offsite backup, disaster recovery, and system migration through block-level snapshot replication with encryption and compression."
+title: Site Syncs
 semantic_keywords:
-  - "VergeOS site syncs overview offsite backup replication"
-  - "block-level sync deduplication compression encryption"
-  - "disaster recovery migration offsite archival"
-  - "site sync repair server ioGuardian features"
+  - VergeOS site syncs overview offsite backup replication
+  - block-level sync deduplication compression encryption
+  - disaster recovery migration offsite archival
+  - site sync repair server ioGuardian features
 use_cases:
-  - "evaluate_site_sync_capabilities"
-  - "plan_offsite_backup_strategy"
-  - "understand_sync_features"
-  - "plan_system_migration"
+  - evaluate_site_sync_capabilities
+  - plan_offsite_backup_strategy
+  - understand_sync_features
+  - plan_system_migration
+categories:
+  - Backup and DR
+description: >-
+  Overview of VergeOS site sync capabilities for offsite backup, disaster
+  recovery, and system migration through block-level snapshot replication with
+  encryption and compression.
 tags:
   - site-syncs
   - replication
@@ -18,29 +23,27 @@ tags:
   - disaster-recovery
   - migration
   - encryption
-categories:
-  - Backup and DR
 ---
 
 # Site Syncs
 
-Site Syncs replicate system snapshots to another VergeOS system, simplifying and streamlining:   
+Site Syncs replicate system snapshots to another VergeOS system, simplifying and streamlining:
 
-* **Offsite Backup and Archival** - recover data in a granular level at the remote site or on the source system after syncing back 
-* **Emergency Preparedness** - ensure your entire system can be ready for quick and complete recovery at a remote site to minimize downtime and ensure operational continuity  
-* **Migrations** - easily move and spin up a complete system, individual tenants, or select workloads at a new location 
+* **Offsite Backup and Archival** - recover data in a granular level at the remote site or on the source system after syncing back
+* **Emergency Preparedness** - ensure your entire system can be ready for quick and complete recovery at a remote site to minimize downtime and ensure operational continuity
+* **Migrations** - easily move and spin up a complete system, individual tenants, or select workloads at a new location
 
 ## Key Features
-* **Complete-system, Off-site Backup** - replicates system snapshots that include your networking, VMs, tenants, NAS, and system configuration
-* **Minimized Bandwidth Usage/Shorter Transfer Times** - block-level synchronization (only transferring changed data), in-flight deduplication and compression 
-* **In-flight Encryption** - automatic AES 256-bit encryption 
-* **Flexible Operations** - scheduling, queuing, and manual sync options 
-* **Repair Server (ioGuardian)** - sync sites can be used for automatic inline healing (e.g. after multiple concurrent drive failures or power issues)
 
+* **Complete-system, Off-site Backup** - replicates system snapshots that include your networking, VMs, tenants, NAS, and system configuration
+* **Minimized Bandwidth Usage/Shorter Transfer Times** - block-level synchronization (only transferring changed data), in-flight deduplication and compression
+* **In-flight Encryption** - automatic AES 256-bit encryption
+* **Flexible Operations** - scheduling, queuing, and manual sync options
+* **Repair Server (ioGuardian)** - sync sites can be used for automatic inline healing (e.g. after multiple concurrent drive failures or power issues)
 
 ## Related Links
 
-* [**Sites Dashboard**](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/system/sites-overview)
+* [**Sites Dashboard**](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/system-administration/sites-overview)
 * [**Configuring a Site Sync**](sync-configuration.md)
 * [**Monitoring Site Syncs**](monitoring-site-syncs.md)
 * [**Manual Site Syncs**](manual-site-syncs.md)
