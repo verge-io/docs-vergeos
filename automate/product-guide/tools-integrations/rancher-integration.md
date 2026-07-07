@@ -1,6 +1,6 @@
 ---
 title: "Rancher Integration"
-description: "VergeOS integrates with Rancher through a Docker Machine node driver and UI extension, enabling provisioning and management of RKE2/K3s clusters on VergeOS infrastructure directly from the Rancher interface."
+description: "VergeOS integrates with Rancher through a Docker Machine node driver and UI extension, enabling provisioning and management of RKE2/K3s clusters on VergeOS from the Rancher interface."
 semantic_keywords:
   - "Rancher VergeOS node driver, Docker Machine driver vergeos, Rancher cluster provisioning"
   - "RKE2 K3s clusters on VergeOS, downstream cluster Rancher, Rancher cloud credentials"

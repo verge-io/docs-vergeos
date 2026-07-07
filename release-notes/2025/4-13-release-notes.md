@@ -1,6 +1,6 @@
 ---
 title: "4.13"
-description: "Release notes for the 4.13 series of VergeOS, featuring hardware passthrough (USB/PCI/SRIOV), experimental vGPU live migration, enhanced bonding with split brain detection, parallel update support, multipath/multichannel vSAN, and comprehensive HA improvements."
+description: "Release notes for the VergeOS 4.13 series: hardware passthrough (USB/PCI/SRIOV), experimental vGPU live migration, enhanced bonding with split brain detection, multipath vSAN, and HA improvements."
 semantic_keywords:
   - "VergeOS 4.13 release notes and features"
   - "VergeOS hardware passthrough USB PCI SRIOV"

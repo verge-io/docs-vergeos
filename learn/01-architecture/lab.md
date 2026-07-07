@@ -1,5 +1,5 @@
 ---
-description: "Hands-on exploration of VergeOS deployment topologies using the Terraform playground. Trace infrastructure-as-code patterns, compare deployment scenarios, and design a topology for a customer use case."
+description: "Hands-on exploration of VergeOS deployment topologies using the Terraform playground. Trace infrastructure-as-code patterns, compare scenarios, and design a topology for a customer use case."
 ---
 
 # Lab: Explore the Architecture

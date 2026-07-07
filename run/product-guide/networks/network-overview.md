@@ -1,6 +1,6 @@
 ---
 title: "Networking (VergeFabric)"
-description: "Overview of VergeFabric software-defined networking in VergeOS, covering SDN features, network types, security, automation, multi-cloud support, and use cases for service providers, enterprises, and developers."
+description: "Overview of VergeFabric software-defined networking in VergeOS, covering SDN features, network types, security, automation, multi-cloud support, and use cases for providers and enterprises."
 semantic_keywords:
   - "VergeFabric software-defined networking SDN overview"
   - "VergeOS networking features capabilities"

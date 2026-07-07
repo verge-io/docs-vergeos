@@ -1,6 +1,6 @@
 ---
 title: "NVIDIA GPU Virtualization"
-description: "NVIDIA integration with VergeOS enables GPU acceleration for virtual machines through vGPU and Multi-Instance GPU (MIG) technologies, allowing multiple VMs to share physical GPU resources with performance isolation."
+description: "NVIDIA integration with VergeOS enables GPU acceleration for VMs through vGPU and Multi-Instance GPU (MIG) technologies, letting multiple VMs share physical GPU resources with performance isolation."
 semantic_keywords:
   - "NVIDIA vGPU virtualization VergeOS"
   - "GPU passthrough shared GPU virtual machines"

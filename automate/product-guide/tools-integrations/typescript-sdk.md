@@ -1,6 +1,6 @@
 ---
 title: "VergeOS TypeScript SDK (tsvergeos)"
-description: "tsvergeos is a TypeScript SDK for managing VergeOS infrastructure through the REST API, providing a zero-dependency, tree-shakeable, fully typed interface for automating VMs, networking, storage, tenants, and multi-site management."
+description: "tsvergeos is a TypeScript SDK for managing VergeOS through the REST API, offering a zero-dependency, tree-shakeable, typed interface for automating VMs, networking, storage, tenants, and multi-site."
 semantic_keywords:
   - "VergeOS TypeScript SDK API client library"
   - "automate VergeOS infrastructure with TypeScript"

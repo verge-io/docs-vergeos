@@ -1,6 +1,6 @@
 ---
 title: "Getting Started with the VergeOS 26 UI"
-description: "An introduction to the VergeOS 26 user interface, covering dashboard navigation, menus, themes, auto-refresh, and help access to help new and transitioning administrators navigate the platform confidently."
+description: "An introduction to the VergeOS 26 user interface, covering dashboard navigation, menus, themes, auto-refresh, and help access for new and transitioning administrators."
 semantic_keywords:
   - "VergeOS UI navigation, interface overview, getting started with VergeOS"
   - "dashboard navigation model, module dashboards, object dashboards"
