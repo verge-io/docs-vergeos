@@ -149,7 +149,7 @@ The Networks Dashboard provides:
 * Network-specific logs and recent activity
 *   Links to individual network dashboards for detailed management
 
-    ![Light mode Networks Dashboard](../.gitbook/assets/networks-dashboard-light.png) ![Dark mode Networks Dashboard](../.gitbook/assets/networks-dashboard-dark.png)
+    ![Networks Dashboard](../.gitbook/assets/networks-dashboard-light.png)
 
 **Common Use Cases**:
 
@@ -190,7 +190,7 @@ A virtual machine's dashboard displays:
 * Network assignments and connectivity
 * Storage tier and volume information
 
-![Light mode VM Dashboard](../.gitbook/assets/vm-dashboard-light.png) ![Dark mode VM Dashboard](../.gitbook/assets/vm-dashboard-dark.png)
+![VM Dashboard](../.gitbook/assets/vm-dashboard-light.png)
 
 **Common Actions from VM Dashboard**:
 

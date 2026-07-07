@@ -169,9 +169,7 @@ Starting in version 26.1.3, VergeOS supports heterogeneous vGPU profiles. This e
 
 * **Physical device**: The RTX Pro 6000 Blackwell DC provides 96 GB of framebuffer memory
 
-<img src="../../.gitbook/assets/mig-vgpu-light.png" alt="MIG-vGPU- Light Mode" data-size="original">
-
-<img src="../../.gitbook/assets/mig-vgpu-dark.png" alt="MIG-vGPU - Dark Mode" data-size="original">
+<img src="../../.gitbook/assets/mig-vgpu-light.png" alt="MIG-vGPU" data-size="original">
 
 * **MIG profile added**: Selecting the profile _NVIDIA RTX Pro 6000 Blackwell DC‑2‑12Q‑MIG (2g.48gb+gfx)_ and specifying _MIG GPU Instances_:1 creates one MIG slice with 48 GB of dedicated framebuffer. This MIG slice supports **four vGPU instances**, each using **12 GB** (the “12Q” profile)
 * **Remaining capacity**: After allocating this 48 GB MIG slice, **48 GB of framebuffer** remains available for additional MIG profiles
