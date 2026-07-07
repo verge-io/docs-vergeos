@@ -1,5 +1,8 @@
 ---
-description: "Deep dive into VergeOS vSAN block-level architecture, hash-based data distribution, inline deduplication, encryption, self-healing redundancy, and space-efficient snapshots."
+description: >-
+  Deep dive into VergeOS vSAN block-level architecture, hash-based data
+  distribution, inline deduplication, encryption, self-healing redundancy, and
+  space-efficient snapshots.
 ---
 
 # vSAN Architecture & VergeFS
@@ -14,19 +17,19 @@ At the heart of VergeFS is a **block-level storage engine**. Every piece of data
 
 This hash is the foundation for nearly every vSAN feature:
 
-- **Distribution** — The hash determines which nodes store the block's primary and redundant copies
-- **Deduplication** — Identical blocks produce identical hashes, so only one copy is stored
-- **Integrity** — The hash validates block contents, enabling continuous bit-rot detection
-- **Location derivation** — The hash, combined with the per-tier device maps on Tier 0, deterministically derives each block's physical location
+* **Distribution** — The hash determines which nodes store the block's primary and redundant copies
+* **Deduplication** — Identical blocks produce identical hashes, so only one copy is stored
+* **Integrity** — The hash validates block contents, enabling continuous bit-rot detection
+* **Location derivation** — The hash, combined with the per-tier device maps on Tier 0, deterministically derives each block's physical location
 
 ### The Hash Map and Tier 0
 
 Block placement in vSAN is **derived from the SHA-1 content hash** combined with per-tier device maps stored on **Tier 0** drives (high-endurance NVMe SSDs):
 
-- Each tier maintains a `0.map` (primary copy device map) and `1.map` (secondary copy device map)
-- The SHA-1 hash is used as input to deterministic placement math against those maps — there is no central table recording "block X lives on node Y, drive Z"
-- Reference counts are **not** stored persistently in a hash map — they are rebuilt by the differential **vSAN Walk** as it traverses live hashes
-- The Tier 0 filesystem index and per-tier device maps are what Tier 0 actually holds, along with vSAN metadata
+* Each tier maintains a `0.map` (primary copy device map) and `1.map` (secondary copy device map)
+* The SHA-1 hash is used as input to deterministic placement math against those maps — there is no central table recording "block X lives on node Y, drive Z"
+* Reference counts are **not** stored persistently in a hash map — they are rebuilt by the differential **vSAN Walk** as it traverses live hashes
+* The Tier 0 filesystem index and per-tier device maps are what Tier 0 actually holds, along with vSAN metadata
 
 **Tier 0 is exclusively a metadata tier.** It stores the vSAN filesystem index and per-tier device maps. It is **not** a performance cache, and it does **not** store workload data. Because vSAN metadata operations depend on Tier 0, the performance of your Tier 0 drives directly impacts overall system responsiveness.
 
@@ -40,7 +43,7 @@ Tier 0 does **not** function as a performance cache or hot-data tier. It stores 
 
 The following diagram illustrates how VM data flows through the vSAN block-level architecture:
 
-![vSAN Hash Map Architecture](../assets/vsan-hash-map.png)
+![vSAN Hash Map Architecture](../.gitbook/assets/vsan-hash-map.png)
 
 The process works as follows:
 
@@ -96,10 +99,10 @@ flowchart TB
 
 Data blocks are distributed across **all storage-participating nodes** within each tier. This design provides:
 
-- **Balanced performance** — I/O load is spread across all nodes, preventing hot spots
-- **Fault tolerance** — No single node holds all copies of any dataset
-- **Efficient scaling** — Adding a node automatically expands the storage pool and triggers rebalancing
-- **Parallel I/O** — Multiple nodes serve data simultaneously, increasing aggregate throughput
+* **Balanced performance** — I/O load is spread across all nodes, preventing hot spots
+* **Fault tolerance** — No single node holds all copies of any dataset
+* **Efficient scaling** — Adding a node automatically expands the storage pool and triggers rebalancing
+* **Parallel I/O** — Multiple nodes serve data simultaneously, increasing aggregate throughput
 
 ## Inline Global Deduplication
 
@@ -112,10 +115,10 @@ VergeOS vSAN performs **inline, global deduplication** that is always on and req
 
 Deduplication works **across all VMs, all tiers, and all data types** in the system. Common scenarios where deduplication delivers significant space savings include:
 
-- Multiple VMs running the same operating system (shared OS blocks)
-- Template-based VM deployments (cloned base images)
-- Development environments with similar configurations
-- Backup snapshots with minimal data change between iterations
+* Multiple VMs running the same operating system (shared OS blocks)
+* Template-based VM deployments (cloned base images)
+* Development environments with similar configurations
+* Backup snapshots with minimal data change between iterations
 
 Deduplication ratios are visible in the VergeOS storage dashboard, typically showing the effective capacity savings across each tier.
 
@@ -160,7 +163,7 @@ vSAN maintains multiple copies of every data block to protect against hardware f
 | **Simultaneous failures tolerated** | 1 node              | 2 nodes   |
 | **Minimum controller nodes**        | 2                   | 3         |
 | **Recommended nodes**               | 3                   | 5         |
-| **Storage overhead** (before dedup) | ~2x                 | ~3x       |
+| **Storage overhead** (before dedup) | \~2x                | \~3x      |
 
 **N+1 (RF2)** is the default and suits most production environments. It maintains two copies of every block across different nodes, tolerating one simultaneous node failure.
 
@@ -206,10 +209,10 @@ Beyond failure recovery, vSAN performs **continuous bit-rot detection** using ha
 
 vSAN's block-level architecture enables **space-efficient snapshots** that consume minimal additional storage:
 
-- A snapshot records the **filesystem-index state at a point in time** — it does not copy data blocks
-- Blocks referenced by a snapshot are retained even if the original VM deletes them (reference counting)
-- Clones work similarly — they reference the same underlying blocks, only consuming additional space when data diverges (copy-on-write)
-- Snapshots can be made **immutable via an opt-in flag** with Unlocked/Locked/Unlocking states and a seven-day unlock delay once locked; default snapshots are deletable. Lock snapshots when ransomware protection or retention guarantees are required.
+* A snapshot records the **filesystem-index state at a point in time** — it does not copy data blocks
+* Blocks referenced by a snapshot are retained even if the original VM deletes them (reference counting)
+* Clones work similarly — they reference the same underlying blocks, only consuming additional space when data diverges (copy-on-write)
+* Snapshots can be made **immutable via an opt-in flag** with Unlocked/Locked/Unlocking states and a seven-day unlock delay once locked; default snapshots are deletable. Lock snapshots when ransomware protection or retention guarantees are required.
 
 ### Deletion and Garbage Collection
 
@@ -217,7 +220,7 @@ When a VM, drive, or snapshot is deleted:
 
 1. The file's hashes are removed from the vSAN directory tree
 2. The **vSAN Walk** differential walk re-derives reference counts from the remaining live hashes — counts are not stored, they are rebuilt as the walk traverses
-3. Blocks that reach zero references wait roughly **10 walks (~70 seconds)** before becoming eligible for reclamation, providing a safety window against rapid churn
+3. Blocks that reach zero references wait roughly **10 walks (\~70 seconds)** before becoming eligible for reclamation, providing a safety window against rapid churn
 4. Physical storage space is freed asynchronously as the walk reclaims those blocks
 
 This is why storage space may not decrease immediately after a deletion — reclamation happens asynchronously during background vSAN Walk operations.
@@ -239,4 +242,4 @@ This is why storage space may not decrease immediately after a deletion — recl
 
 ## Next Steps
 
-Now that you understand the internal architecture of vSAN, the next topic covers how the tier system works in practice — configuring tiers, assigning drives, planning capacity, and scaling storage: **[Storage Tiers](02-storage-tiers.md)**
+Now that you understand the internal architecture of vSAN, the next topic covers how the tier system works in practice — configuring tiers, assigning drives, planning capacity, and scaling storage: [**Storage Tiers**](02-storage-tiers.md)
