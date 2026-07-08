@@ -60,8 +60,8 @@ This guide covers powering a VergeOS cluster back on after an **ungraceful shutd
 ### What to Expect
 
 - VergeFS includes multiple built-in protections to help preserve data integrity during power events -- including write journaling, peer replication, repair servers (ioGuardian), and on-startup verification. On controller startup, VergeFS triggers a **Full Journal Walk** to verify each block and reconcile against peers. These protections are effective in most cases, but no distributed storage system can fully guarantee against corruption from abrupt power loss; verification after startup is important, especially after an ungraceful shutdown.
-- vSAN requires **N-1 vSAN nodes** online before it will mount. Until that threshold is reached, storage stays offline and VMs will not start.
-- Node1 will boot but halt before mounting the vSAN until enough peers join to satisfy N-1.
+- vSAN requires **Minimum node count** online before it will mount (e.g. In a 4‑node cluster with N+1 protection, the vSAN mounts as long as 3 nodes are online)  Until that threshold is reached, storage stays offline and VMs will not start.
+- Node1 will boot but halt before mounting the vSAN until enough peers join to satisfy the minimum.
 - A non-zero **Repairs** count after recovery is normal and should decrease as the Walk progresses.
 
 ### Pre-Power-On Checks
@@ -85,7 +85,7 @@ Before powering on any cluster nodes, confirm two critical conditions are met. T
 Once power and network infrastructure are confirmed ready:
 
 1. **Power on Node1.**
-   - Watch the console/IPMI. Node1 will boot the OS but **halt before mounting the vSAN** until enough peers join to reach N-1.
+   - Watch the console/IPMI. Node1 will boot the OS but **halt before mounting the vSAN** until enough peers join.
 2. **Wait 30 seconds to a minute.**
    - This brief pause lets Node1 begin initializing before the rest of the cluster arrives. There is no need to wait for Node1 to fully reach its halt state before proceeding.
 3. **Power on the remaining nodes.**
@@ -175,7 +175,7 @@ If the overall system or individual VMs show signs of damage from the ungraceful
 
 Open a support case **before** rebooting nodes, or making any other significant changes, if any of the following are true:
 
-- vSAN won't mount after N nodes are online (e.g. N-1 nodes in a default N+1 redundancy)
+- vSAN won't mount after N nodes are online (e.g. full node count minus one in a default N+1 redundancy)
 - A tier shows **Redundant: false** for an extended period after Full Walks complete
 - The **Repairs** count is stuck or growing
 - A stuck-repairs alert is present (VergeOS v26+)
