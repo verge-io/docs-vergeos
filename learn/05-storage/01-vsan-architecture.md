@@ -43,7 +43,7 @@ Tier 0 does **not** function as a performance cache or hot-data tier. It stores 
 
 The following diagram illustrates how VM data flows through the vSAN block-level architecture:
 
-![vSAN Hash Map Architecture](../.gitbook/assets/vsan-hash-map.png)
+![vSAN Hash Map Architecture](<../.gitbook/assets/vsan-hash-map (1).png>)
 
 The process works as follows:
 
