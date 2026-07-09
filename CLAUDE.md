@@ -47,8 +47,14 @@ Every space dir contains:
   what GitBook shows in the sidebar.
 - Content `.md` files, which **preserve the original MkDocs source paths** (e.g.
   `run/product-guide/storage/overview.md`, `deploy/implementation-guide/intro.md`).
-- `assets/` — images for that space only (GitBook does not share assets across spaces).
-  Screenshots live under `assets/screenshots/`.
+- `.gitbook/assets/` — images for that space, stored **flat** in GitBook's canonical
+  per-space asset directory (GitBook does not share assets across spaces). This is where
+  GitBook's Git Sync write-back copies every referenced image and the path it rewrites all
+  `![…](…)` / `<img src="…">` references to point at — so **new images must go in
+  `<space>/.gitbook/assets/` and be referenced as `../.gitbook/assets/<name>`** (relative to
+  the page), or the next sync will re-home them and produce churn. The migration-era
+  `assets/screenshots/` layout has been pruned (its files were byte-identical duplicates of
+  the `.gitbook/assets/` copies); do not reintroduce it.
 
 When adding/moving a page, update that space's `SUMMARY.md` too, or it won't appear.
 
@@ -83,7 +89,10 @@ SUMMARYs; other `product-guide/*` route by subdirectory; KB posts route by front
 - Links: same-space → relative `.md`; cross-space → `app.gitbook.com/s/<id>/…`;
   `/knowledge-base/<slug>` resolves via the slug map; folded targets (`/support`, etc.)
   use the `REDIRECT` table.
-- Images: copied into the space `assets/`, parens/spaces stripped from filenames.
+- Images: `convert.py` copies them into the space `assets/` with parens/spaces stripped.
+  Note this is migration-era behavior — on sync GitBook re-homes images to
+  `<space>/.gitbook/assets/` (see the per-space layout section); a fresh rebuild would need
+  its output re-homed there to match the current convention.
 
 ## Validating a rebuild
 
