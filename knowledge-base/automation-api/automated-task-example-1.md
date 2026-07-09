@@ -55,13 +55,12 @@ The automation consists of creating tags, defining tasks, and attaching event an
 
 _**System > Tags > New**_
 
-<img src="../.gitbook/assets/new-tag-category-vms-light.png" alt="Create tag category - Light Mode" data-size="original"><img src="../.gitbook/assets/new-tag-category-vms-dark.png" alt="Create tag category - Dark Mode" data-size="original">
+<img src="../.gitbook/assets/new-tag-category-vms-light.png" alt="Create tag category" data-size="original">
 
 **Double-click category created above >** _**New**_
 
-<img src="../.gitbook/assets/create-vm-tag-light.png" alt="New tag - Light Mode" data-size="original">
+<img src="../.gitbook/assets/create-vm-tag-light.png" alt="New tag" data-size="original">
 
-<img src="../.gitbook/assets/create-vm-tag-dark.png" alt="New tag - Dark Mode" data-size="original">
 {% endhint %}
 
 {% hint style="info" %}
@@ -71,15 +70,12 @@ _**System > Tags > New**_
 
 _**Virtual Machines > List >**_ **select VMs >** _**Assign Tags**_ **> select the tag from above**
 
-<img src="../.gitbook/assets/assign-tag-vms-light.png" alt="Assign tag to VMs - Light Mode" data-size="original">
-
-<img src="../.gitbook/assets/assign-tag-vms-dark.png" alt="Assign tag to VMs - Dark Mode" data-size="original">
+<img src="../.gitbook/assets/assign-tag-vms-light.png" alt="Assign tag to VMs" data-size="original">
 
 The VMs will now show the assigned tag in the _**Tags**_ column.
 
-<img src="../.gitbook/assets/vms-tags-column-light.png" alt="VMs with tag - Light Mode" data-size="original">
+<img src="../.gitbook/assets/vms-tags-column-light.png" alt="VMs with tag" data-size="original">
 
-<img src="../.gitbook/assets/vms-tags-column-dark.png" alt="VMs with tag - Dark Mode" data-size="original">
 {% endhint %}
 
 {% hint style="info" %}
@@ -89,9 +85,8 @@ The VMs will now show the assigned tag in the _**Tags**_ column.
 
 _**System > Tasks Dashboard > New Task**_
 
-<img src="../.gitbook/assets/task-poweron-jthompson-light.png" alt="Task to power on tagged VMs - Light Mode" data-size="original">
+<img src="../.gitbook/assets/task-poweron-jthompson-light.png" alt="Task to power on tagged VMs" data-size="original">
 
-<img src="../.gitbook/assets/task-poweron-jthompson-dark.png" alt="Task to power on tagged VMs  - Dark Mode" data-size="original">
 {% endhint %}
 
 {% hint style="info" %}
@@ -101,9 +96,8 @@ _**System > Tasks Dashboard > New Task**_
 
 From the new task dashboard: _**Event Triggers > New**_
 
-<img src="../.gitbook/assets/jthompson-event-login-light.png" alt="Event trigger user login - Light Mode" data-size="original">
+<img src="../.gitbook/assets/jthompson-event-login-light.png" alt="Event trigger user login" data-size="original">
 
-<img src="../.gitbook/assets/jthompson-event-login-dark.png" alt="Event trigger user login - Dark Mode" data-size="original">
 {% endhint %}
 
 {% hint style="info" %}
@@ -113,9 +107,8 @@ From the new task dashboard: _**Event Triggers > New**_
 
 _**System > Tasks Dashboard > New Task**_
 
-<img src="../.gitbook/assets/task-poweroff-jthompson-light.png" alt="Task to power off tagged VMs - Light Mode" data-size="original">
+<img src="../.gitbook/assets/task-poweroff-jthompson-light.png" alt="Task to power off tagged VMs" data-size="original">
 
-<img src="../.gitbook/assets/task-poweroff-jthompson-dark.png" alt="Task to power off tagged VMs - Dark Mode" data-size="original">
 {% endhint %}
 
 {% hint style="info" %}
@@ -126,9 +119,8 @@ _**System > Tasks Dashboard > New Task**_
 From the new task dashboard:\
 &#xNAN;_**Event Triggers > New**_
 
-<img src="../.gitbook/assets/jthompson-event-logoff-light.png" alt="Event trigger user logout - Light Mode" data-size="original">
+<img src="../.gitbook/assets/jthompson-event-logoff-light.png" alt="Event trigger user logout" data-size="original">
 
-<img src="../.gitbook/assets/jthompson-event-logoff-dark.png" alt="Event trigger user logout - Dark Mode" data-size="original">
 {% endhint %}
 
 {% hint style="info" %}
@@ -138,9 +130,8 @@ From the new task dashboard:\
 
 _**System > Tasks Dashboard > New Schedule**_
 
-<img src="../.gitbook/assets/schedule-eob-friday-light.png" alt="Schedule COB - Light Mode" data-size="original">
+<img src="../.gitbook/assets/schedule-eob-friday-light.png" alt="Schedule COB" data-size="original">
 
-<img src="../.gitbook/assets/schedule-eob-friday-dark.png" alt="Schedule COB - Dark Mode" data-size="original">
 {% endhint %}
 
 {% hint style="info" %}
@@ -151,9 +142,8 @@ _**System > Tasks Dashboard > New Schedule**_
 From the dashboard of the new task:\
 &#xNAN;_**Schedule Triggers > New**_
 
-<img src="../.gitbook/assets/jthompson-schedule-poweroff-light.png" alt="Schedule trigger - Light Mode" data-size="original">
+<img src="../.gitbook/assets/jthompson-schedule-poweroff-light.png" alt="Schedule trigger" data-size="original">
 
-<img src="../.gitbook/assets/jthompson-schedule-poweroff-dark.png" alt="Schedule trigger - Dark Mode" data-size="original">
 {% endhint %}
 
 ### Verification

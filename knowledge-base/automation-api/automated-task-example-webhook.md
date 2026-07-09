@@ -53,7 +53,7 @@ The webhook defines the target URL and authentication method required by the ext
 
 _**System > Tasks Dashboard > New Webhook**_
 
-<img src="../.gitbook/assets/webhook-slack-light.png" alt="Create webhook - Light Mode" data-size="original"><img src="../.gitbook/assets/webhook-slack-dark.png" alt="Create webhook - Dark Mode" data-size="original">
+<img src="../.gitbook/assets/webhook-slack-light.png" alt="Create webhook" data-size="original">
 {% endhint %}
 
 {% hint style="info" %}
@@ -63,7 +63,7 @@ This task defines the email alert that will be sent.
 
 _**System > Tasks Dashboard > New Task**_
 
-<img src="../.gitbook/assets/task-email-light.png" alt="Create webhook - Light Mode" data-size="original"><img src="../.gitbook/assets/task-email-dark.png" alt="Create webhook - Dark Mode" data-size="original">
+<img src="../.gitbook/assets/task-email-light.png" alt="Create webhook" data-size="original">
 {% endhint %}
 
 {% hint style="info" %}
@@ -73,7 +73,7 @@ This task defines the message payload that will be sent to Slack via the webhook
 
 _**System > Tasks Dashboard > New Task**_
 
-<img src="../.gitbook/assets/task-webhook-light.png" alt="Create Slack webhook task - Light Mode" data-size="original"><img src="../.gitbook/assets/task-webhook-dark.png" alt="Create Slack webhook task - Dark Mode" data-size="original">
+<img src="../.gitbook/assets/task-webhook-light.png" alt="Create Slack webhook task" data-size="original">
 {% endhint %}
 
 {% hint style="info" %}
@@ -83,7 +83,7 @@ Assigning an event trigger allows us to specify the condition (a sync error) tha
 
 From the _Send-slack-payload_ task dashboard: _**Event Triggers > New**_
 
-<img src="../.gitbook/assets/slack-send-event-trigger-light.png" alt="Assign Event Trigger to Slack Task- Light Mode" data-size="original"><img src="../.gitbook/assets/slack-send-event-trigger-dark.png" alt="Assign Event Trigger to Slack Task- Dark Mode" data-size="original">
+<img src="../.gitbook/assets/slack-send-event-trigger-light.png" alt="Assign Event Trigger to Slack Task" data-size="original">
 {% endhint %}
 
 {% hint style="info" %}
@@ -93,7 +93,7 @@ We apply the same event trigger to this task so that the email alert is also sen
 
 _**System > Tasks Dashboard > Tasks >**_ select the _send-email-alert_ task _**> Event Triggers > New**_
 
-<img src="../.gitbook/assets/send-email-event-trigger-light.png" alt="Assign Event Trigger to Email Task - Light Mode" data-size="original"><img src="../.gitbook/assets/send-email-event-trigger-dark.png" alt="Assign Event Trigger to Email Task - Dark Mode" data-size="original">
+<img src="../.gitbook/assets/send-email-event-trigger-light.png" alt="Assign Event Trigger to Email Task" data-size="original">
 {% endhint %}
 
 This automation ensures that administrators are notified immediately when a sync job encounters an error, allowing them to act promptly, providing the best chance to resolve the issue before the synchronization window closes.
