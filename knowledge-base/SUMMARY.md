@@ -82,6 +82,7 @@
   * [Configuring a Volume for Exporting VMs](backup-dr/configuring-a-vm-export-volume.md)
   * [Exporting a Virtual Machine](backup-dr/exporting-a-virtual-machine.md)
   * [Recovering a Single VM from a Remote System Snapshot](backup-dr/recovering-a-single-vm-from-a-remote-cloud-snapshot.md)
+  * [Restoring a VergeOS System from the Boot Menu](backup-dr/restore-system-from-boot-menu.md)
   * [RHEL 9 Family VMs Failing to Boot After Clone or Snapshot Restore](backup-dr/rhel9-boot-failure-clone-snapshot-restore.md)
   * [Setting Up Storware on VergeOS](backup-dr/setup-storware-vergeos.md)
   * [Snapshot Synchronization Errors Explained](backup-dr/snapshot-synchronization-errors-explained.md)
