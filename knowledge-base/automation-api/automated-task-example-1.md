@@ -116,8 +116,8 @@ _**System > Tasks Dashboard > New Task**_
 
 **This configures the task to launch when JThompson logs out.**
 
-From the new task dashboard:\
-&#xNAN;_**Event Triggers > New**_
+From the new task dashboard: 
+_**Event Triggers > New**_
 
 <img src="../.gitbook/assets/jthompson-event-logoff-light.png" alt="Event trigger user logout" data-size="original">
 
@@ -139,8 +139,8 @@ _**System > Tasks Dashboard > New Schedule**_
 
 **We apply the schedule (Fridays at 6pm) to the task to automatically power off the VMs every Friday evening.**
 
-From the dashboard of the new task:\
-&#xNAN;_**Schedule Triggers > New**_
+From the dashboard of the new task:
+_**Schedule Triggers > New**_
 
 <img src="../.gitbook/assets/jthompson-schedule-poweroff-light.png" alt="Schedule trigger" data-size="original">
 
