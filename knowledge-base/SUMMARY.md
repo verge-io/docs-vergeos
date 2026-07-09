@@ -41,6 +41,7 @@
   * [Change External Network to VLAN Bonded](networking/change-external-vlan-to-bonded.md)
   * [Configure Authoritative DNS in VergeOS](networking/configure-authoritative-dns-vergeos.md)
   * [Configuring VMware Service VM NIC IPv4 Settings](networking/vmware-service-vm-nic-ipv4-configuration.md)
+  * [Egress Firewall Requirements for VergeOS](networking/egress-firewall-requirements.md)
   * [Enabling System SSH Access](networking/enabling-system-ssh.md)
   * [How to Achieve Network Micro-Segmentation on VergeOS](networking/how-to-achieve-network-micro-segmentation-on-vergeos.md)
   * [How to Create an External Network](networking/create-external-network.md)
