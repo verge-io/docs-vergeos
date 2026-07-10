@@ -231,9 +231,8 @@ If *Maximum Core Temperature (Celsius)* is set to 80 degrees and *Maximum Core T
 {% endhint %}
 
 3. **Critical Core Temperature (Celsius):** Defines temperature at which to trigger an error state in VergeOS.  
-When reported hardware temperatures reach this temperature, the node status will turn to red and an error entry will appear in the system log. 
+When reported hardware temperatures reach this temperature, the node status will turn to red and an error entry will appear in the system log.
     - ***query from hardware* (default)** - retrieves the hardware-defined critical temperature from the CPU  
-   
     {% hint style="info" %}
     **Non-server hardware and some legacy servers may not support this query; in such cases, the *custom* setting can be selected to establish a max temperature in which to base VergeOS warnings.**
     
