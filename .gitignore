@@ -20,3 +20,6 @@ venv/
 # Logs / temp
 *.log
 *.tmp
+
+# Claude
+.claude/

@@ -47,6 +47,7 @@
 * [Storware Integration with VergeOS](product-guide/tools-integrations/storware-backup-recovery.md)
 * [VergeOS Terraform Provider](product-guide/tools-integrations/terraform-provider.md)
 * [VergeOS TypeScript SDK (tsvergeos)](product-guide/tools-integrations/typescript-sdk.md)
+* [Veeam Integration with VergeOS](product-guide/tools-integrations/veeam.md)
 * [VergeOS CLI (vrg)](product-guide/tools-integrations/vrg-cli.md)
 
 ## Private AI
