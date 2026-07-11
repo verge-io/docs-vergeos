@@ -80,6 +80,7 @@
   * [VM and Tenant Hot-Plug Capabilities](tenants/vm-hotplug-capabilities.md)
 * [Backup & DR](backup-dr/README.md)
   * [Configuring a Volume for Exporting VMs](backup-dr/configuring-a-vm-export-volume.md)
+  * [Configuring Network Access for Veeam Backup & Replication Workers](backup-dr/veeam-worker-networking.md)
   * [Exporting a Virtual Machine](backup-dr/exporting-a-virtual-machine.md)
   * [Recovering a Single VM from a Remote System Snapshot](backup-dr/recovering-a-single-vm-from-a-remote-cloud-snapshot.md)
   * [RHEL 9 Family VMs Failing to Boot After Clone or Snapshot Restore](backup-dr/rhel9-boot-failure-clone-snapshot-restore.md)
