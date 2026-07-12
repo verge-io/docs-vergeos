@@ -60,11 +60,11 @@ Storware integrates with VergeOS through the VergeOS API, allowing the backup pl
 For detailed implementation instructions and configuration guidance, please refer to:
 
 - [Setup Storware for VergeOS](https://docs.verge.io/knowledge-base/setup-storware-vergeos) - Step-by-step configuration guide in the VergeOS Knowledge Base
-- [Storware Documentation Portal](https://docs.storware.eu/){target="_blank"} - Complete documentation for all Storware products
+- [Storware Documentation Portal](https://docs.storware.eu/)  - Complete documentation for all Storware products
 
 ## Support
 
 If you encounter issues with the Storware integration or have questions about implementation:
 
-- [Storware Support](https://storware.eu/support/){target="_blank"} - Official support from Storware
+- [Storware Support](https://storware.eu/support/)  - Official support from Storware
 - [VergeOS Support](https://app.gitbook.com/s/uJc5d3O7cwI7qD8muSyG/support-and-services) - Technical assistance for VergeOS environments

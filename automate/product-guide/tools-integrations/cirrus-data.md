@@ -60,12 +60,12 @@ Cirrus Data solutions support migration to and from VergeOS environments includi
 
 For detailed implementation instructions and configuration guidance, please refer to:
 
-- [Cirrus Data MigrateOps Overview](https://cirrusdata.com/migrateops){target="_blank"} - Complete overview of Cirrus Data MigrateOps solution
-- [Request a Demo](https://action.cirrusdata.com/data-migration-demo){target="_blank"} - Get a demonstration of Cirrus Data mobility solutions
-- [Cirrus Data Cloud](https://cloud.cirrusdata.com){target="_blank"} - Sign up for cloud-based data mobility services
+- [Cirrus Data MigrateOps Overview](https://cirrusdata.com/migrateops)  - Complete overview of Cirrus Data MigrateOps solution
+- [Request a Demo](https://action.cirrusdata.com/data-migration-demo)  - Get a demonstration of Cirrus Data mobility solutions
+- [Cirrus Data Cloud](https://cloud.cirrusdata.com)  - Sign up for cloud-based data mobility services
 
 ## Additional Resources
 
-- [Cirrus Data Documentation](https://customer.cirrusdata.com){target="_blank"} - Technical documentation and best practices
-- [Customer Success Stories](https://cirrusdata.com/success-stories){target="_blank"} - Detailed information on specific use cases
-- [Cirrus Data YouTube Channel](https://www.youtube.com/@CirrusData){target="_blank"} - Educational resources for data mobility planning
+- [Cirrus Data Documentation](https://customer.cirrusdata.com)  - Technical documentation and best practices
+- [Customer Success Stories](https://cirrusdata.com/success-stories)  - Detailed information on specific use cases
+- [Cirrus Data YouTube Channel](https://www.youtube.com/@CirrusData)  - Educational resources for data mobility planning

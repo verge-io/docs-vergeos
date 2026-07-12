@@ -69,17 +69,17 @@ The oVirt-engine package is an optional VergeOS package (listed as "oVirt API co
 
 - **VergeOS 26.1.7 or later** — the first release whose oVirt-engine package is supported by Veeam — with the **oVirt-engine** package enabled
 - **Veeam Backup & Replication 13.1 or later** — the first release with the VergeOS integration
-- Review Veeam's [Considerations and Limitations](https://helpcenter.veeam.com/docs/vbr/userguide/ovirt_limitations_rhv.html?ver=13){target="_blank"} for what the integration does and doesn't support
+- Review Veeam's [Considerations and Limitations](https://helpcenter.veeam.com/docs/vbr/userguide/ovirt_limitations_rhv.html?ver=13)  for what the integration does and doesn't support
 
 ## Documentation and Resources
 
 - [Configuring Network Access for Veeam Backup & Replication Workers](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/backup-dr/veeam-worker-networking) - Step-by-step networking guide in the VergeOS Knowledge Base, covering provider-only and tenant deployments
-- [Veeam Backup & Replication User Guide — oVirt KVM Integration](https://helpcenter.veeam.com/docs/vbr/userguide/ovirt_overview.html?ver=13){target="_blank"} - Veeam's integration overview
-- [Veeam Backup & Replication User Guide — Infrastructure Components](https://helpcenter.veeam.com/docs/vbr/userguide/ovirt_infrastructure_components.html?ver=13){target="_blank"} - Veeam's component reference
+- [Veeam Backup & Replication User Guide — oVirt KVM Integration](https://helpcenter.veeam.com/docs/vbr/userguide/ovirt_overview.html?ver=13)  - Veeam's integration overview
+- [Veeam Backup & Replication User Guide — Infrastructure Components](https://helpcenter.veeam.com/docs/vbr/userguide/ovirt_infrastructure_components.html?ver=13)  - Veeam's component reference
 
 ## Support
 
 If you encounter issues with the Veeam integration or have questions about implementation:
 
-- [Veeam Support](https://www.veeam.com/support.html){target="_blank"} - Official support from Veeam
+- [Veeam Support](https://www.veeam.com/support.html)  - Official support from Veeam
 - [VergeOS Support](https://app.gitbook.com/s/uJc5d3O7cwI7qD8muSyG/support-and-services) - Technical assistance for VergeOS environments

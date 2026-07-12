@@ -60,11 +60,11 @@ The integration architecture consists of:
 
 For detailed implementation instructions and configuration guidance, please refer to:
 
-- [Inuvika Documentation Portal](https://docs.inuvika.com/){target="_blank"} - Complete documentation for Inuvika OVD Enterprise
+- [Inuvika Documentation Portal](https://docs.inuvika.com/)  - Complete documentation for Inuvika OVD Enterprise
 
 ## Support
 
 If you encounter issues with the Inuvika integration or have questions about implementation:
 
-- [Inuvika Support](https://www.inuvika.com/support/){target="_blank"} - Official support from Inuvika
+- [Inuvika Support](https://www.inuvika.com/support/)  - Official support from Inuvika
 - [VergeOS Support](https://app.gitbook.com/s/uJc5d3O7cwI7qD8muSyG/support-and-services) - Technical assistance for VergeOS environments
