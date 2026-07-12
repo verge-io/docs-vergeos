@@ -31,6 +31,7 @@ categories:
 VergeOS supports various types of device passthrough, allowing virtual machines to access physical devices connected to their host servers 
 
 {% hint style="success" %}
+**BIOS Settings**
 To enable PCI passthrough (exclusive, SR-IOV NIC, or vGPU), correct passthrough/virtualization features must be configured in your server BIOS; Intel hosts will require ***VT-d and VT-x*** enabled, while AMD will require ***AMD-vi/AMD-V***, ***IOMMU*** enabled.  Names of settings will vary across BIOS vendors; other common names to look for include terms similar to ***virtualization***, ***PCI Passthrough***, ***PCIe ***, etc. Consult your hardware vendor documentation if uncertain.
 
 
