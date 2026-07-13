@@ -42,10 +42,10 @@ NVIDIA vGPU functionality requires a valid **NVIDIA vGPU software license** that
 
 ## Supported Hardware
 
-* Only select data center and professional GPUs support vGPU. Verify hardware and driver compatibility in the [NVIDIA vGPU Supported GPUs](https://docs.nvidia.com/vgpu/gpus-supported-by-vgpu.html){target="\_blank"} list.
-* NVIDIA vGPU supports Windows and Linux guest operating systems. Feature availability varies by OS — see the [NVIDIA vGPU Product Support Matrix](https://docs.nvidia.com/vgpu/latest/product-support-matrix/index.html){target="\_blank"} for details.
+* Only select data center and professional GPUs support vGPU. Verify hardware and driver compatibility in the [NVIDIA vGPU Supported GPUs](https://docs.nvidia.com/vgpu/gpus-supported-by-vgpu.html) list.
+* NVIDIA vGPU supports Windows and Linux guest operating systems. Feature availability varies by OS — see the [NVIDIA vGPU Product Support Matrix](https://docs.nvidia.com/vgpu/latest/product-support-matrix/index.html) for details.
 * IOMMU (VT-d) and SR-IOV must be enabled in the host BIOS.
-* For an overview of licensing options, refer to the [NVIDIA Licensing Guide](https://www.nvidia.com/en-us/data-center/virtual-solutions/){target="\_blank"}.
+* For an overview of licensing options, refer to the [NVIDIA Licensing Guide](https://www.nvidia.com/en-us/data-center/virtual-solutions/) .
 
 ## Architecture
 
@@ -94,7 +94,7 @@ C-series profiles require an **NVIDIA AI Enterprise** license (not standard vGPU
 * **C-Series** — Dedicated GPU compute for AI/ML training and inference workloads with no display requirements
 * **A-Series** — Lightweight application streaming (e.g., RDSH/Citrix) where a single display is sufficient
 
-Frame buffer sizes and maximum display counts vary by specific profile within each series. For full profile specifications, see the [NVIDIA vGPU User Guide](https://docs.nvidia.com/vgpu/latest/grid-vgpu-user-guide/index.html){target="\_blank"}.
+Frame buffer sizes and maximum display counts vary by specific profile within each series. For full profile specifications, see the [NVIDIA vGPU User Guide](https://docs.nvidia.com/vgpu/latest/grid-vgpu-user-guide/index.html) .
 
 ### Multi-Instance GPU (MIG)
 
@@ -102,7 +102,7 @@ Supported GPUs (such as the A100, H100, and RTX PRO 6000 Blackwell) can be parti
 
 MIG instances can each run their own vGPU profile (A/B/Q), and when combined with time-sliced vGPU sharing within each instance, high-end GPUs like the RTX PRO 6000 Blackwell can support up to 48 concurrent VMs from a single physical GPU.
 
-MIG profiles appear in the VergeOS resource group profile dropdown with a `MIG` prefix. For details on available MIG configurations, see the [NVIDIA MIG User Guide](https://docs.nvidia.com/datacenter/tesla/mig-user-guide/index.html){target="\_blank"}.
+MIG profiles appear in the VergeOS resource group profile dropdown with a `MIG` prefix. For details on available MIG configurations, see the [NVIDIA MIG User Guide](https://docs.nvidia.com/datacenter/tesla/mig-user-guide/index.html) .
 
 ## Key Capabilities
 
@@ -131,6 +131,6 @@ If your workload requires exclusive access to an entire physical GPU (e.g., for 
 
 ### External Documentation
 
-* [NVIDIA vGPU Documentation](https://docs.nvidia.com/vgpu/){target="\_blank"} — Official NVIDIA vGPU documentation
-* [NVIDIA Developer Portal](https://developer.nvidia.com/){target="\_blank"} — CUDA development resources and tools
-* [NVIDIA Enterprise Support](https://www.nvidia.com/en-us/support/enterprise/){target="\_blank"} — Professional support services
+* [NVIDIA vGPU Documentation](https://docs.nvidia.com/vgpu/) — Official NVIDIA vGPU documentation
+* [NVIDIA Developer Portal](https://developer.nvidia.com/) — CUDA development resources and tools
+* [NVIDIA Enterprise Support](https://www.nvidia.com/en-us/support/enterprise/) — Professional support services

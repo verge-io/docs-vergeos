@@ -96,22 +96,22 @@ The module contains over 200 cmdlets organized by category:
 * **Scheduled maintenance**: Integrate with Task Scheduler or cron for automated operations
 * **CI/CD integration**: Provision test environments as part of deployment pipelines
 
-For code samples, see the [Examples directory](https://github.com/verge-io/PSVergeOS/tree/main/Examples){target="\_blank"} in the GitHub repository.
+For code samples, see the [Examples directory](https://github.com/verge-io/PSVergeOS/tree/main/Examples) in the GitHub repository.
 
 ## Documentation and Resources
 
 For complete documentation, including all cmdlets, parameters, and detailed usage examples, visit the official repository:
 
-* [GitHub Repository](https://github.com/verge-io/PSVergeOS){target="\_blank"}
-* [PowerShell Gallery](https://www.powershellgallery.com/packages/PSVergeOS){target="\_blank"}
+* [GitHub Repository](https://github.com/verge-io/PSVergeOS) 
+* [PowerShell Gallery](https://www.powershellgallery.com/packages/PSVergeOS) 
 
 ## Support
 
 If you encounter issues or have feature requests, please open an issue on the GitHub repository:
 
-[https://github.com/verge-io/PSVergeOS/issues](https://github.com/verge-io/PSVergeOS/issues){target="\_blank"}
+[https://github.com/verge-io/PSVergeOS/issues](https://github.com/verge-io/PSVergeOS/issues) 
 
 ## Additional Resources
 
-* [PowerShell Documentation](https://learn.microsoft.com/en-us/powershell/){target="\_blank"}
+* [PowerShell Documentation](https://learn.microsoft.com/en-us/powershell/) 
 * [VergeOS API Documentation](https://app.gitbook.com/o/FpusSnrkRHyZiVEsXf9X/s/QZBMFpokMv2vWTIRbFzA/)

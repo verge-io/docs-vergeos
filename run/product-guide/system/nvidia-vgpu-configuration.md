@@ -68,9 +68,9 @@ The following sections provide step-by-step instructions to enable and assign NV
 
 Before starting, ensure the following are in place:
 
-* **NVIDIA vGPU-capable GPU** installed in one or more VergeOS nodes (see [NVIDIA Supported GPUs](https://docs.nvidia.com/vgpu/gpus-supported-by-vgpu.html){target="\_blank"})
+* **NVIDIA vGPU-capable GPU** installed in one or more VergeOS nodes (see [NVIDIA Supported GPUs](https://docs.nvidia.com/vgpu/gpus-supported-by-vgpu.html) )
 * **IOMMU / VT-d / SR-IOV enabled** in the host BIOS — if not yet enabled, plan for a node reboot during this process (follow proper [**Maintenance Mode**](../operations/maintenance-mode.md) procedures).
-* **NVIDIA vGPU software license** — access to the [NVIDIA licensing portal](https://nvidia.com/en-us/data-center/resources/vgpu-evaluation){target="\_blank"} to obtain drivers
+* **NVIDIA vGPU software license** — access to the [NVIDIA licensing portal](https://nvidia.com/en-us/data-center/resources/vgpu-evaluation) to obtain drivers
 * **VergeOS admin access** to the Resource Manager and node configuration
 * Familiarity with [**PCI Passthrough Risks and Precautions**](device-pass-overview.md#pci-passthrough-risksprecautions)
 

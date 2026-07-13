@@ -434,18 +434,18 @@ interface ClientConfig {
 
 For complete documentation, including the full API reference and detailed usage examples, visit the official repository:
 
-* [GitHub Repository](https://github.com/verge-io/tsvergeos){target="\_blank"}
-* [npm Package](https://www.npmjs.com/package/@vergeio/tsvergeos){target="\_blank"}
+* [GitHub Repository](https://github.com/verge-io/tsvergeos) 
+* [npm Package](https://www.npmjs.com/package/@vergeio/tsvergeos) 
 
 ## Support
 
 If you encounter issues or have feature requests, please open an issue on the GitHub repository:
 
-[https://github.com/verge-io/tsvergeos/issues](https://github.com/verge-io/tsvergeos/issues){target="\_blank"}
+[https://github.com/verge-io/tsvergeos/issues](https://github.com/verge-io/tsvergeos/issues) 
 
 ## Additional Resources
 
-* [TypeScript Documentation](https://www.typescriptlang.org/docs/){target="\_blank"}
+* [TypeScript Documentation](https://www.typescriptlang.org/docs/) 
 * [VergeOS API Documentation](https://app.gitbook.com/o/FpusSnrkRHyZiVEsXf9X/s/QZBMFpokMv2vWTIRbFzA/)
 * [Python SDK](python-sdk.md) - Python alternative
 * [Go SDK](go-sdk.md) - Go alternative
