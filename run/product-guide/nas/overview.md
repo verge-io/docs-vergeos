@@ -42,7 +42,7 @@ file systems.
 
 1. [**Add a NAS Service**](nas-service.md)
 
-2. **Optional - **[**Integrate with Active Directory**](nas-join-ad-domain.md)
+2. **Optional** - [**Integrate with Active Directory**](nas-join-ad-domain.md)
 
 3. **Create Volumes** (Each volume is its own directory tree that can be customized for security, snapshot, access, antivirus, max size, and sharing settings.)
 
@@ -50,4 +50,4 @@ file systems.
     * [**Remote Volumes**](nas-remote-volumes.md) are external file systems that are mounted to the VergeOS system and presented as if local.
 
 4. [**Create Shares**](nas-shares.md) to provide NFS and/or CIFS access to NAS volumes.
-5. **Optional - **[**Configure Volume Snapshots**](volume-snapshots-restores.md) for customized volume retention and/or quiesced snapshots (Non-quiesced NAS volumes can be restored from system snapshots to be used for restore.)
+5. **Optional** - [**Configure Volume Snapshots**](volume-snapshots-restores.md) for customized volume retention and/or quiesced snapshots (Non-quiesced NAS volumes can be restored from system snapshots to be used for restore.)
