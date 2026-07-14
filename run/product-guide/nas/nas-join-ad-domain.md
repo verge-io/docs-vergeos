@@ -63,8 +63,10 @@ A NAS service can be joined to an existing Active Directory domain to provide AD
 8. **Wait** while the NAS VM joins the domain; it may take a few minutes.
 9. If the NAS service successfully joins the domain, the CIFS settings on the NAS Service dashboard will display an AD Status of '**Joined**'.
 
-{% hint style="success" %}
-**Windows AD administrators can confirm the NAS has joined by reviewing *Computer objects* in their Windows *Active Directory - Users and Computers*.  Note: The computer object will have the NAS hostname rather than the NAS VM Name.**
+{% hint style="success" %} 
+**Confirming NAS Join**
+
+Windows AD administrators can confirm the NAS has joined by reviewing *Computer objects* in their Windows *Active Directory - Users and Computers*.  Note: The computer object will have the NAS hostname rather than the NAS VM Name.
 
 
 {% endhint %}
