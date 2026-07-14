@@ -28,7 +28,6 @@ categories:
   - System Administration
 ---
 
-hide: - toc
 
 # Advanced System Settings
 
