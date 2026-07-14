@@ -114,4 +114,4 @@ If you encounter issues or have feature requests, please open an issue on the Gi
 ## Additional Resources
 
 * [PowerShell Documentation](https://learn.microsoft.com/en-us/powershell/) 
-* [VergeOS API Documentation](https://app.gitbook.com/o/FpusSnrkRHyZiVEsXf9X/s/QZBMFpokMv2vWTIRbFzA/)
+* [VergeOS API Documentation](https://app.gitbook.com/o/FpusSnrkRHyZiVEsXf9X/s/QZBMFpokMv2vWTIRbFzA/automation-api/verge-api-guide)
