@@ -37,7 +37,14 @@ If Redhat virtIO drivers are required due to signed driver needs within Windows,
 During a Windows installation, users can use the console interface tools to change the CD-ROM image to the newly downloaded virtIO drivers iso. Information on using the console interface tools can be found in the inline help within the category titled **VDI** under the section **Using the Console**.
 
 Alternatively, you can choose to change the virtual disk drive **Interface type** to **SATA** and Windows will find the virtual disk and continue with the installation.
-!! info "This will come with a performance impact due to SATA drivers being software emulated."
+
+{% hint style="warning" %}
+
+**Performance Consideration**
+
+This will come with a performance impact due to SATA drivers being software emulated.
+
+{% endhint %}
 
 
 ---
