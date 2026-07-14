@@ -69,7 +69,7 @@ Both Full and Partial system snapshots can be used in VergeOS Site syncs to repl
 * Allow more frequent backup and sync replication of select workloads
 * Support longer retention for specific workloads _without increasing system‑wide retention_
 * VergeOS Site Sync support
-* Select: \*_Snapshot Type=Partial - Exclude Tags_ or _**Partial - Include Tags**_
+* Select **Snapshot Type**: _Partial - Exclude Tags_ or _Partial - Include Tags_
 
 ***
 
