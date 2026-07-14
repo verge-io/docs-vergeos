@@ -37,58 +37,58 @@ VergeOS provides comprehensive diagnostic tools integrated throughout the platfo
 
 ## Component-Specific Diagnostics
 
-*   :fontawesome-solid-network-wired: **Network Diagnostics**
+*   **Network Diagnostics**
 
     Network infrastructure troubleshooting and performance analysis
 
     **Access:** Networks → \[Select Network] → Diagnostics
 
-    [:octicons-arrow-right-24: Network Diagnostics Guide](../networks/network-diagnostics.md)
-*   :fontawesome-solid-server: **Node Diagnostics**
+    [Network Diagnostics Guide](../networks/network-diagnostics.md)
+*   **Node Diagnostics**
 
     Hardware and system-level troubleshooting
 
     **Access:** Nodes → \[Select Node] → Diagnostics
 
-    [:octicons-arrow-right-24: Node Diagnostics Guide](../system/node-diagnostics.md)
-*   :fontawesome-solid-database: **vSAN Diagnostics**
+    [Node Diagnostics Guide](../system/node-diagnostics.md)
+*   **vSAN Diagnostics**
 
     Storage system analysis and troubleshooting
 
     **Access:** System → vSAN Diagnostics
 
-    [:octicons-arrow-right-24: vSAN Diagnostics Guide](../storage/vsan-diagnostics.md)
-*   :fontawesome-solid-folder-open: **NAS Diagnostics**
+    [vSAN Diagnostics Guide](../storage/vsan-diagnostics.md)
+*   **NAS Diagnostics**
 
     Network Attached Storage service troubleshooting
 
     **Access:** NAS → \[Select NAS Service] → Diagnostics
 
-    [:octicons-arrow-right-24: NAS Diagnostics Guide](../nas/nas-diagnostics.md)
+    [NAS Diagnostics Guide](../nas/nas-diagnostics.md)
 
 ## System-Wide Tools
 
-*   :fontawesome-solid-stethoscope: **System Diagnostics**
+*   **System Diagnostics**
 
     Comprehensive system-wide diagnostic data collection with direct support integration
 
     **Access:** System → System Diagnostics
 
-    [:octicons-arrow-right-24: System Diagnostics Documentation](../system/diagnostics.md)
-*   :fontawesome-solid-bell: **Subscriptions & Alerts**
+    [System Diagnostics Documentation](../system/diagnostics.md)
+*   **Subscriptions & Alerts**
 
     Proactive monitoring and automated notifications
 
     **Access:** System → Subscriptions
 
-    [:octicons-arrow-right-24: Subscriptions Overview](../system/subscriptions-overview.md)
-*   :fontawesome-solid-chart-line: **Prometheus Exporter**
+    [Subscriptions Overview](../system/subscriptions-overview.md)
+*   **Prometheus Exporter**
 
     Integration with external monitoring systems (Grafana, AlertManager)
 
     **Access:** System → Prometheus Exporter
 
-    [:octicons-arrow-right-24: Prometheus Exporter](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/integrations-and-apis/prometheus-exporter)
+    [Prometheus Exporter](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/integrations-and-apis/prometheus-exporter)
 
 ## Best Practices
 
