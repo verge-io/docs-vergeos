@@ -65,6 +65,7 @@ The following are default snapshot profiles automatically created at system inst
 **Volume Antivirus Scan**
 * Default profile for volume antivirus scan scheduling
 
+{% endhint %}
 
 ## Creating a Custom Snapshot Schedule (New Snapshot Profile)
 
