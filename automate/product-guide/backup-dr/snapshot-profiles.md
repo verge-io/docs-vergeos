@@ -37,7 +37,8 @@ A **snapshot profile** defines a schedule for taking snapshots and automatically
 Multiple, default snapshot profiles are created by the VergeOS installation. These profiles can be modified, and you can create additional profiles to provide custom scheduling.
 
 {% hint style="info" %}
-**Snapshot Profiles Included with Installation** 
+**Snapshot Profiles Included with Installation**  
+
 The following are default snapshot profiles automatically created at system installation:
 
 **SOX (Sarbanes-Oxley)**
