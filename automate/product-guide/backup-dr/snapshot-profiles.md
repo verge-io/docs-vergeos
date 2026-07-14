@@ -36,34 +36,35 @@ A **snapshot profile** defines a schedule for taking snapshots and automatically
 
 Multiple, default snapshot profiles are created by the VergeOS installation. These profiles can be modified, and you can create additional profiles to provide custom scheduling.
 
-??? "Snapshot Profiles Included with Installation" The following are default snapshot profiles automatically created at system installation.
+{% hint style="info" %}
+**Snapshot Profiles Included with Installation** 
+The following are default snapshot profiles automatically created at system installation:
 
-```
-### SOX (Sarbanes-Oxley)
+**SOX (Sarbanes-Oxley)**
 * Yearly snapshots retained for 7 years
 * Monthly snapshots retained for 1 year
 * Weekly snapshots retained for 31 days
 * Daily snapshots retained for 7 days
 
-### HIPAA (Health Insurance Portability & Accountability Act)
+**HIPAA (Health Insurance Portability & Accountability Act)**
 * Yearly snapshots retained indefinitely (no expiration)
 * Monthly snapshots retained for 1 year
 * Weekly snapshots retained for 31 days
 * Daily snapshots retained for 7 days
 
-### NAS Volume Syncs
+**NAS Volume Syncs**
 * Daily (at 6pm) snapshots retained for 3 days
 
-### System Snapshots (Default Profile for entire-system snapshots)
+**System Snapshots (Default Profile for entire-system snapshots)**
 * Hourly snapshots retained for 3 hours
 * Daily at midnight snapshots retained for 3 days
 * Daily at noon snapshots retained for 1 day
 * Profile assigned at installation to take full snapshots of the entire system according to this schedule.
 * More detail about system snapshots can be found at: [System Snapshots](system-snapshots.md)
 
-### Volume Antivirus Scan
+**Volume Antivirus Scan**
 * Default profile for volume antivirus scan scheduling
-```
+
 
 ## Creating a Custom Snapshot Schedule (New Snapshot Profile)
 
