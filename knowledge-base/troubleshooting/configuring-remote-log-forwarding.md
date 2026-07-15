@@ -85,7 +85,7 @@ Replace `your-hostname-here` with your actual hostname, or leave as `.HOSTNAME_H
 
 ## Additional Resources
 
-For more information on syslog templates and formatting options, visit the [Rsyslog Documentation](https://www.rsyslog.com/doc/master/configuration/examples.html){target=_blank}.
+For more information on syslog templates and formatting options, visit the [Rsyslog Documentation](https://www.rsyslog.com/doc/master/configuration/examples.html).
 
 ## Verification
 
