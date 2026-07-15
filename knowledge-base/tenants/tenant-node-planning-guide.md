@@ -113,7 +113,7 @@ For larger tenant deployments or those requiring varied hardware specifications,
 
 **1. Compute resource needs exceeding workload maximums**
 
-Multiple tenant nodes are needed when a tenant requires more compute resources than the cluster will allow within a single machine. The amount of memory and number of cores that can be allocated to a single tenant node is limited by cluster settings: [_**Max RAM per machine**_ and _Max cores per machine_\*\*](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/system-administration/cluster-settings).
+Multiple tenant nodes are needed when a tenant requires more compute resources than the cluster will allow within a single machine. The amount of memory and number of cores that can be allocated to a single tenant node is limited by cluster settings: [**_Max RAM per machine_**_ and _**_Max cores per machine_**](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/system-administration/cluster-settings).
 
 **2. Tenant workload requirements**
 
