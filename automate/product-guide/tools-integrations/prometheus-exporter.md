@@ -39,15 +39,15 @@ The VergeOS Exporter is a monitoring tool that collects metrics from your VergeO
 
 For installation instructions, usage examples, configuration options, and a complete list of available metrics, or to open up issues you're experiencing with the Exporter please visit the official GitHub repository:
 
-[https://github.com/verge-io/vergeos-exporter](https://github.com/verge-io/vergeos-exporter){target="_blank"}
+[https://github.com/verge-io/vergeos-exporter](https://github.com/verge-io/vergeos-exporter) 
 
 ## Support
 
 If you encounter issues or have feature requests, please open an issue on the GitHub repository
 
-[https://github.com/verge-io/vergeos-exporter/issues](https://github.com/verge-io/vergeos-exporter/issues){target="_blank"}
+[https://github.com/verge-io/vergeos-exporter/issues](https://github.com/verge-io/vergeos-exporter/issues) 
 
 ## Additional Resources
 
-- [Prometheus Documentation](https://prometheus.io/docs/introduction/overview/){target="_blank"}
-- [Grafana Documentation](https://grafana.com/docs/){target="_blank"}
+- [Prometheus Documentation](https://prometheus.io/docs/introduction/overview/) 
+- [Grafana Documentation](https://grafana.com/docs/) 

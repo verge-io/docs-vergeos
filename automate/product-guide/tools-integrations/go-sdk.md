@@ -384,18 +384,18 @@ if err != nil {
 
 For complete documentation, including all available methods and detailed usage examples, visit the official repository:
 
-* [GitHub Repository](https://github.com/verge-io/govergeos){target="\_blank"}
-* [Go Package Documentation](https://pkg.go.dev/github.com/verge-io/govergeos){target="\_blank"}
+* [GitHub Repository](https://github.com/verge-io/govergeos) 
+* [Go Package Documentation](https://pkg.go.dev/github.com/verge-io/govergeos) 
 
 ## Support
 
 If you encounter issues or have feature requests, please open an issue on the GitHub repository:
 
-[https://github.com/verge-io/govergeos/issues](https://github.com/verge-io/govergeos/issues){target="\_blank"}
+[https://github.com/verge-io/govergeos/issues](https://github.com/verge-io/govergeos/issues) 
 
 ## Additional Resources
 
-* [Go Documentation](https://go.dev/doc/){target="\_blank"}
-* [VergeOS API Documentation](https://app.gitbook.com/o/FpusSnrkRHyZiVEsXf9X/s/QZBMFpokMv2vWTIRbFzA/)
+* [Go Documentation](https://go.dev/doc/) 
+* [VergeOS API Documentation](https://app.gitbook.com/o/FpusSnrkRHyZiVEsXf9X/s/QZBMFpokMv2vWTIRbFzA/automation-api/verge-api-guide)
 * [Python SDK (pyvergeos)](python-sdk.md) - Python alternative
 * [Terraform Provider](terraform-provider.md) - Infrastructure as code

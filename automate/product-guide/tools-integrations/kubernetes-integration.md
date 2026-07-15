@@ -170,15 +170,15 @@ All components are distributed as Helm charts from the `verge-io` repository and
 
 | Repository | Description |
 |------------|-------------|
-| [csi-vergeos](https://github.com/verge-io/csi-vergeos){target="_blank"} | Container Storage Interface driver |
-| [vergeos-cloud-controller-manager](https://github.com/verge-io/vergeos-cloud-controller-manager){target="_blank"} | Cloud Controller Manager |
-| [helm-charts](https://github.com/verge-io/helm-charts){target="_blank"} | Helm chart repository |
-| [Kubernetes Cluster Autoscaler](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler){target="_blank"} | Upstream cluster autoscaler |
+| [csi-vergeos](https://github.com/verge-io/csi-vergeos)  | Container Storage Interface driver |
+| [vergeos-cloud-controller-manager](https://github.com/verge-io/vergeos-cloud-controller-manager)  | Cloud Controller Manager |
+| [helm-charts](https://github.com/verge-io/helm-charts)  | Helm chart repository |
+| [Kubernetes Cluster Autoscaler](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler)  | Upstream cluster autoscaler |
 
 ## Support
 
 If you encounter issues or have feature requests, please open an issue on the relevant GitHub repository:
 
-- [CSI Driver Issues](https://github.com/verge-io/csi-vergeos/issues){target="_blank"}
-- [CCM Issues](https://github.com/verge-io/vergeos-cloud-controller-manager/issues){target="_blank"}
-- [Helm Charts Issues](https://github.com/verge-io/helm-charts/issues){target="_blank"}
+- [CSI Driver Issues](https://github.com/verge-io/csi-vergeos/issues) 
+- [CCM Issues](https://github.com/verge-io/vergeos-cloud-controller-manager/issues) 
+- [Helm Charts Issues](https://github.com/verge-io/helm-charts/issues) 

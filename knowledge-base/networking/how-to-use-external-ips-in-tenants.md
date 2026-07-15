@@ -97,7 +97,7 @@ Con - Virtual Switch Ports only function when both networks they connect are run
 Con - May make troubleshooting and diagnostic more difficult by removing VergeOS WebUI and native routing visibility.   
 {% endhint %}
 
-For instructions on creating a Virtual Switch Port, see [Creating a Virtual Switch Port](https://docs.verge.io/knowledge-base/provide-layer2-to-tenant/).
+For instructions on creating a Virtual Switch Port, see [Creating a Virtual Switch Port](../tenants/provide-layer2-to-tenant.md).
 
 Once your Virtual Switch Port is in place, virtual machines and other workloads with NICs connected to the Internal network the vwire is attached to will have a Layer 2 connection out of VergeOS and will function similarly to a VLAN in a traditional switch with regards to addressing and routing.
 

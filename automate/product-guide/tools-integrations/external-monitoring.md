@@ -169,6 +169,6 @@ Prometheus-to-SNMP bridges are community projects and are not built, tested, or 
 
 | Resource                                                                                        | Description                                 |
 | ----------------------------------------------------------------------------------------------- | ------------------------------------------- |
-| [vergeos-exporter](https://github.com/verge-io/vergeos-exporter){target="\_blank"}              | Open-source Prometheus exporter for VergeOS |
-| [Prometheus Documentation](https://prometheus.io/docs/introduction/overview/){target="\_blank"} | Upstream Prometheus docs                    |
-| [Grafana Documentation](https://grafana.com/docs/){target="\_blank"}                            | Building dashboards on Prometheus metrics   |
+| [vergeos-exporter](https://github.com/verge-io/vergeos-exporter)              | Open-source Prometheus exporter for VergeOS |
+| [Prometheus Documentation](https://prometheus.io/docs/introduction/overview/) | Upstream Prometheus docs                    |
+| [Grafana Documentation](https://grafana.com/docs/)                            | Building dashboards on Prometheus metrics   |

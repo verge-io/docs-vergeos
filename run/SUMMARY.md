@@ -59,7 +59,6 @@
 ## Authentication
 
 * [Authorization Sources - Overview](product-guide/auth/auth-sources-general.md)
-* [Authorization Sources - Overview](product-guide/auth/auth-sources-overview.md)
 * [Using Entra ID (Azure AD) for Authentication](product-guide/auth/azure-auth.md)
 * [Using Google for Authentication](product-guide/auth/google-auth.md)
 * [Two-Factor Authentication (MFA)](product-guide/auth/multifactor-auth.md)

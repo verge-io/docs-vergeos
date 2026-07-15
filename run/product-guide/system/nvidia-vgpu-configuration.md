@@ -68,9 +68,9 @@ The following sections provide step-by-step instructions to enable and assign NV
 
 Before starting, ensure the following are in place:
 
-* **NVIDIA vGPU-capable GPU** installed in one or more VergeOS nodes (see [NVIDIA Supported GPUs](https://docs.nvidia.com/vgpu/gpus-supported-by-vgpu.html){target="\_blank"})
+* **NVIDIA vGPU-capable GPU** installed in one or more VergeOS nodes (see [NVIDIA Supported GPUs](https://docs.nvidia.com/vgpu/gpus-supported-by-vgpu.html) )
 * **IOMMU / VT-d / SR-IOV enabled** in the host BIOS — if not yet enabled, plan for a node reboot during this process (follow proper [**Maintenance Mode**](../operations/maintenance-mode.md) procedures).
-* **NVIDIA vGPU software license** — access to the [NVIDIA licensing portal](https://nvidia.com/en-us/data-center/resources/vgpu-evaluation){target="\_blank"} to obtain drivers
+* **NVIDIA vGPU software license** — access to the [NVIDIA licensing portal](https://nvidia.com/en-us/data-center/resources/vgpu-evaluation) to obtain drivers
 * **VergeOS admin access** to the Resource Manager and node configuration
 * Familiarity with [**PCI Passthrough Risks and Precautions**](device-pass-overview.md#pci-passthrough-risksprecautions)
 
@@ -169,9 +169,7 @@ Starting in version 26.1.3, VergeOS supports heterogeneous vGPU profiles. This e
 
 * **Physical device**: The RTX Pro 6000 Blackwell DC provides 96 GB of framebuffer memory
 
-<img src="../../.gitbook/assets/mig-vgpu-light.png" alt="MIG-vGPU- Light Mode" data-size="original">
-
-<img src="../../.gitbook/assets/mig-vgpu-dark.png" alt="MIG-vGPU - Dark Mode" data-size="original">
+<img src="../../.gitbook/assets/mig-vgpu-light.png" alt="MIG-vGPU" data-size="original">
 
 * **MIG profile added**: Selecting the profile _NVIDIA RTX Pro 6000 Blackwell DC‑2‑12Q‑MIG (2g.48gb+gfx)_ and specifying _MIG GPU Instances_:1 creates one MIG slice with 48 GB of dedicated framebuffer. This MIG slice supports **four vGPU instances**, each using **12 GB** (the “12Q” profile)
 * **Remaining capacity**: After allocating this 48 GB MIG slice, **48 GB of framebuffer** remains available for additional MIG profiles

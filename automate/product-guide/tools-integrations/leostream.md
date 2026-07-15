@@ -31,7 +31,7 @@ categories:
 
 Leostream is a vendor-neutral connection broker for remote desktop and VDI environments. VergeOS works with Leostream as a supported desktop source, allowing the Leostream Connection Broker to provision, assign, and broker VergeOS-hosted virtual desktops from a single console, alongside any other platform Leostream supports, including physical workstations, public cloud, and other hypervisors.
 
-The integration is the result of a [strategic partnership](https://www.verge.io/press-release/leostream-integrates-with-verge-io-for-highly-compliant-remote-desktops/){target="_blank"} announced in May 2022 and is positioned for organizations running compliant workloads (HIPAA, CUI) and for those consolidating mixed VDI estates onto a single broker.
+The integration is the result of a [strategic partnership](https://www.verge.io/press-release/leostream-integrates-with-verge-io-for-highly-compliant-remote-desktops/)  announced in May 2022 and is positioned for organizations running compliant workloads (HIPAA, CUI) and for those consolidating mixed VDI estates onto a single broker.
 
 ## Key Capabilities
 
@@ -58,7 +58,7 @@ A Leostream + VergeOS deployment uses Leostream's standard components, all hoste
 
 ## Configuration
 
-Configuration is performed in the Leostream Connection Broker. VergeOS is registered as a desktop source, pools are defined against VergeOS recipes or existing VMs, and policies determine assignment and session behavior. Step-by-step setup is maintained by Leostream and may change between Connection Broker releases, see the [Leostream Platform Quick Starts and Guides](https://support.leostream.com/support/solutions/articles/66000513448-leostream-platform-quick-starts-and-guides){target="_blank"} for the current procedure.
+Configuration is performed in the Leostream Connection Broker. VergeOS is registered as a desktop source, pools are defined against VergeOS recipes or existing VMs, and policies determine assignment and session behavior. Step-by-step setup is maintained by Leostream and may change between Connection Broker releases, see the [Leostream Platform Quick Starts and Guides](https://support.leostream.com/support/solutions/articles/66000513448-leostream-platform-quick-starts-and-guides)  for the current procedure.
 
 The Connection Broker authenticates against VergeOS with a VergeOS username and password. Create a dedicated VergeOS user for the broker, scoped to the tenant or system where broker-managed VMs will live, and use those credentials when registering VergeOS in Leostream.
 
@@ -66,12 +66,12 @@ The Connection Broker authenticates against VergeOS with a VergeOS username and 
 
 | Resource | Description |
 |----------|-------------|
-| [Leostream Platform Quick Starts and Guides](https://support.leostream.com/support/solutions/articles/66000513448-leostream-platform-quick-starts-and-guides){target="_blank"} | Connection Broker setup, hypervisor registration, Pools, Policies |
-| [Leostream + VergeIO partner page](https://leostream.com/leostream-vergeio/){target="_blank"} | Joint solution overview |
-| [Verge.io press release](https://www.verge.io/press-release/leostream-integrates-with-verge-io-for-highly-compliant-remote-desktops/){target="_blank"} | Partnership announcement (May 2022) |
+| [Leostream Platform Quick Starts and Guides](https://support.leostream.com/support/solutions/articles/66000513448-leostream-platform-quick-starts-and-guides)  | Connection Broker setup, hypervisor registration, Pools, Policies |
+| [Leostream + VergeIO partner page](https://leostream.com/leostream-vergeio/)  | Joint solution overview |
+| [Verge.io press release](https://www.verge.io/press-release/leostream-integrates-with-verge-io-for-highly-compliant-remote-desktops/)  | Partnership announcement (May 2022) |
 | [NVIDIA GPU Virtualization](nvidia-gpu-virtualization.md) | vGPU and MIG options for VergeOS desktops |
 
 ## Support
 
-- [Leostream Support](https://support.leostream.com/){target="_blank"}: Connection Broker, Gateway, and Agent issues
+- [Leostream Support](https://support.leostream.com/) : Connection Broker, Gateway, and Agent issues
 - [VergeOS Support](https://app.gitbook.com/s/uJc5d3O7cwI7qD8muSyG/support-and-services): VergeOS infrastructure issues

@@ -68,7 +68,7 @@ brew install verge-io/tap/vrg
 
 ### Standalone Binary
 
-Download a pre-built binary from the [latest release](https://github.com/verge-io/vrg/releases/latest){target="\_blank"}, then place it on your `PATH`. Binaries are available for Linux (x86\_64), macOS (ARM64), and Windows (x86\_64).
+Download a pre-built binary from the [latest release](https://github.com/verge-io/vrg/releases/latest) , then place it on your `PATH`. Binaries are available for Linux (x86\_64), macOS (ARM64), and Windows (x86\_64).
 
 {% hint style="warning" %}
 **macOS Quarantine**
@@ -94,7 +94,7 @@ vrg --version
 | `pip`          | `pip install --upgrade vrg`                                                                             |
 | `uv`           | `uv tool upgrade vrg`                                                                                   |
 | Homebrew       | `brew upgrade vrg`                                                                                      |
-| Standalone     | Re-download from the [releases page](https://github.com/verge-io/vrg/releases/latest){target="\_blank"} |
+| Standalone     | Re-download from the [releases page](https://github.com/verge-io/vrg/releases/latest) |
 
 ## Quick Start
 
@@ -197,7 +197,7 @@ Most resources implement standard CRUD actions: `list`, `get`, `create`, `update
 | **Tagging**             | `tag`, `tag category`, `resource-group`                                                                                   |
 | **System**              | `system`, `system settings`, `system license`, `system diag`, `doctor`, `configure`, `file`, `completion`                 |
 
-The complete reference is maintained in the [Command Reference](https://github.com/verge-io/vrg/blob/main/docs/COMMANDS.md){target="\_blank"}.
+The complete reference is maintained in the [Command Reference](https://github.com/verge-io/vrg/blob/main/docs/COMMANDS.md) .
 
 ## Usage Examples
 
@@ -352,7 +352,7 @@ vrg vm create -f web-server.vrg.yaml \
 Templates support `${VAR}` substitution from environment variables or a `vars:` block, plus default-value syntax (`${VM_RAM:-4GB}`). This is useful for parameterizing a single template across environments.
 {% endhint %}
 
-For the complete template field reference, see the [Template Guide](https://github.com/verge-io/vrg/blob/main/docs/TEMPLATES.md){target="\_blank"}.
+For the complete template field reference, see the [Template Guide](https://github.com/verge-io/vrg/blob/main/docs/TEMPLATES.md) .
 
 ## Output Formats
 
@@ -460,12 +460,12 @@ chmod 755 /opt/homebrew/share/zsh /opt/homebrew/share/zsh/site-functions
 
 ## Resources & Support
 
-* [GitHub Repository](https://github.com/verge-io/vrg){target="\_blank"} — source, issues, and releases
-* [Command Reference](https://github.com/verge-io/vrg/blob/main/docs/COMMANDS.md){target="\_blank"} — every command and flag
-* [Template Guide](https://github.com/verge-io/vrg/blob/main/docs/TEMPLATES.md){target="\_blank"} — full `.vrg.yaml` field reference
-* [Cookbook](https://github.com/verge-io/vrg/blob/main/docs/COOKBOOK.md){target="\_blank"} — task-oriented recipes
-* [Architecture](https://github.com/verge-io/vrg/blob/main/docs/ARCHITECTURE.md){target="\_blank"} — design and internals
-* [Known Issues](https://github.com/verge-io/vrg/blob/main/docs/KNOWN_ISSUES.md){target="\_blank"} — current limitations and workarounds
-* [PyPI Package](https://pypi.org/project/vrg/){target="\_blank"}
-* [Report an Issue](https://github.com/verge-io/vrg/issues){target="\_blank"}
-* [VergeOS API Documentation](https://app.gitbook.com/o/FpusSnrkRHyZiVEsXf9X/s/QZBMFpokMv2vWTIRbFzA/)
+* [GitHub Repository](https://github.com/verge-io/vrg) — source, issues, and releases
+* [Command Reference](https://github.com/verge-io/vrg/blob/main/docs/COMMANDS.md) — every command and flag
+* [Template Guide](https://github.com/verge-io/vrg/blob/main/docs/TEMPLATES.md) — full `.vrg.yaml` field reference
+* [Cookbook](https://github.com/verge-io/vrg/blob/main/docs/COOKBOOK.md) — task-oriented recipes
+* [Architecture](https://github.com/verge-io/vrg/blob/main/docs/ARCHITECTURE.md) — design and internals
+* [Known Issues](https://github.com/verge-io/vrg/blob/main/docs/KNOWN_ISSUES.md) — current limitations and workarounds
+* [PyPI Package](https://pypi.org/project/vrg/) 
+* [Report an Issue](https://github.com/verge-io/vrg/issues) 
+* [VergeOS API Documentation](https://app.gitbook.com/o/FpusSnrkRHyZiVEsXf9X/s/QZBMFpokMv2vWTIRbFzA/automation-api/verge-api-guide)

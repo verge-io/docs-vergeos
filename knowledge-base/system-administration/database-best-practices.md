@@ -51,11 +51,12 @@ Running databases on VergeOS can deliver excellent performance when properly con
 
     {% hint style="warning" %}
     **Important**
-    
+
+    Disabling Fsync can lead to data loss in case of a crash. Ensure this aligns with your database's tolerance for I/O performance versus reliability trade-offs.
 
     {% endhint %}
 
-    Disabling Fsync can lead to data loss in case of a crash. Ensure this aligns with your database's tolerance for I/O performance versus reliability trade-offs.
+    
 
 - **Core Allocation Limits**: Limit the number of cores allocated to a database VM so that it does not exceed the **physical cores available on a single CPU socket**. Do not count hyperthreaded cores in this calculation.
 

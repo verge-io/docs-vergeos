@@ -73,7 +73,7 @@ The **Public Link** can be shared with other systems, for general file sharing, 
 - **Download** files  
 - **Edit** file names and storage tiers  
 - **View and Remove References** to files  
-- **Delete** files."
+- **Delete** files
 {% endhint %}
 
 ---

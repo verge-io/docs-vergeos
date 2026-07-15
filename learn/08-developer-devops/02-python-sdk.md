@@ -386,4 +386,5 @@ pyvergeos exposes three patterns worth knowing up front:
 
 - [GitHub Repository](https://github.com/verge-io/pyvergeos) — Source code, issues, and contributions
 - [PyPI Package](https://pypi.org/project/pyvergeos/) — Latest release and version history
-- [VergeOS API Documentation](https://docs.verge.io/product-guide/tools-integrations/python-sdk/) — Official SDK reference
+- [VergeOS API Documentation](https://app.gitbook.com/o/FpusSnrkRHyZiVEsXf9X/s/QZBMFpokMv2vWTIRbFzA/automation-api/verge-api-guide)
+

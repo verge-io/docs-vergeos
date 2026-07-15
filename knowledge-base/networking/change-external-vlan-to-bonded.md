@@ -43,11 +43,13 @@ This guide outlines the process to create a bonded external network across vlann
 
 ## Prerequisites
 
-!!! warning annotate
+{% hint style="warning" %}
+**Warning**
     - This process should be performed with local server access because external network changes can affect remote UI access. This will also allow you to test the bond configuration by removing one of the network cables to verify expected bond failover.
-    - Before making any significant system changes confirm you have the name/password for the "admin" user (user ID #1 (1)), in case command-line operations become needed.
-
-1. Hint: "Key=1" parameter is in the URL of the user's dashboard
+    - Before making any significant system changes confirm you have the name/password for the "admin" user (user ID #1), in case command-line operations become needed.
+    (Hint: "Key=1" parameter is in the URL of the user's dashboard.)
+    
+{% endhint %}
 
 ## Steps
 

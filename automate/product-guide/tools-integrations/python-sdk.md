@@ -304,18 +304,18 @@ except TaskTimeoutError as e:
 
 For complete documentation, including all available methods and detailed usage examples, visit the official repository:
 
-* [GitHub Repository](https://github.com/verge-io/pyvergeos){target="\_blank"}
-* [PyPI Package](https://pypi.org/project/pyvergeos/){target="\_blank"}
+* [GitHub Repository](https://github.com/verge-io/pyvergeos) 
+* [PyPI Package](https://pypi.org/project/pyvergeos/) 
 
 ## Support
 
 If you encounter issues or have feature requests, please open an issue on the GitHub repository:
 
-[https://github.com/verge-io/pyvergeos/issues](https://github.com/verge-io/pyvergeos/issues){target="\_blank"}
+[https://github.com/verge-io/pyvergeos/issues](https://github.com/verge-io/pyvergeos/issues) 
 
 ## Additional Resources
 
-* [Python Documentation](https://docs.python.org/3/){target="\_blank"}
-* [VergeOS API Documentation](https://app.gitbook.com/o/FpusSnrkRHyZiVEsXf9X/s/QZBMFpokMv2vWTIRbFzA/)
+* [Python Documentation](https://docs.python.org/3/) 
+* [VergeOS API Documentation](https://app.gitbook.com/o/FpusSnrkRHyZiVEsXf9X/s/QZBMFpokMv2vWTIRbFzA/automation-api/verge-api-guide)
 * [PSVergeOS PowerShell Module](powershell-module.md) - PowerShell alternative
 * [Terraform Provider](terraform-provider.md) - Infrastructure as code

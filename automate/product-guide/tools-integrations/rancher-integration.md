@@ -32,7 +32,7 @@ categories:
 
 ## Overview
 
-VergeOS integrates with [Rancher](https://www.rancher.com/){target="_blank"} through a Docker Machine node driver and a UI extension. Together, these components let us provision and manage RKE2/K3s clusters on VergeOS infrastructure directly from the Rancher interface.
+VergeOS integrates with [Rancher](https://www.rancher.com/)  through a Docker Machine node driver and a UI extension. Together, these components let us provision and manage RKE2/K3s clusters on VergeOS infrastructure directly from the Rancher interface.
 
 | Component | Purpose |
 |-----------|---------|
@@ -139,7 +139,7 @@ Nodes must be able to reach the Rancher server, and Rancher must be able to reac
 | Rancher → Node | 6443 | TCP | Kubernetes API server |
 | Node → Internet | 443 | TCP | Pull container images from registries |
 
-For the full port matrix including node-to-node requirements (which vary by CNI), see the [Rancher RKE2 port requirements](https://docs.rke2.io/install/requirements#networking){target="_blank"}.
+For the full port matrix including node-to-node requirements (which vary by CNI), see the [Rancher RKE2 port requirements](https://docs.rke2.io/install/requirements#networking) .
 {% endhint %}
 
 ### Installing in Rancher
@@ -264,12 +264,12 @@ For detailed configuration, driver flags, chart values, and release notes, see t
 
 | Repository | Description |
 |------------|-------------|
-| [docker-machine-driver-vergeos](https://github.com/verge-io/docker-machine-driver-vergeos){target="_blank"} | Docker Machine / Rancher node driver |
-| [ui-extension-vergeos](https://github.com/verge-io/ui-extension-vergeos){target="_blank"} | Rancher UI extension |
-| [helm-charts](https://github.com/verge-io/helm-charts){target="_blank"} | Helm chart repository |
+| [docker-machine-driver-vergeos](https://github.com/verge-io/docker-machine-driver-vergeos)  | Docker Machine / Rancher node driver |
+| [ui-extension-vergeos](https://github.com/verge-io/ui-extension-vergeos)  | Rancher UI extension |
+| [helm-charts](https://github.com/verge-io/helm-charts)  | Helm chart repository |
 
 ## Support
 
 If you encounter issues or have feature requests, please open an issue on the relevant GitHub repository:
 
-[https://github.com/verge-io/docker-machine-driver-vergeos/issues](https://github.com/verge-io/docker-machine-driver-vergeos/issues){target="_blank"}
+[https://github.com/verge-io/docker-machine-driver-vergeos/issues](https://github.com/verge-io/docker-machine-driver-vergeos/issues) 
