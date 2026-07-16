@@ -63,7 +63,7 @@ The oVirt-engine package is an optional VergeOS package (listed as "oVirt API co
 1. From the top menu, navigate to **System** > **Updates**.
 2. In the **Packages** list, locate the **ovirt-engine** package. Optional packages that aren't yet installed show *-- Optional --* in the Branch column.
 3. Click the cloud download icon next to **ovirt-engine**. Once queued, its Version column reads `Not Installed→<version>`.
-4. Run the update from the left menu — **Download** (if needed), then **Install**. After the install, a **Reboot** is required, just like a normal VergeOS update: nodes update one at a time with workloads migrated automatically, so there's no system downtime when adequate resources are available. See [Updating VergeOS](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/system/running-updates) for the full update flow.
+4. Run the update from the left menu — **Download** (if needed), then **Install**. After the install, a **Reboot** is required, just like a normal VergeOS update: nodes update one at a time with workloads migrated automatically, so there's no system downtime when adequate resources are available. See [Updating VergeOS](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/system-administration/running-updates) for the full update flow.
 
 ## Requirements
 
