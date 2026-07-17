@@ -25,7 +25,7 @@ Everything you need to plan, deploy, operate, and automate VergeOS — organized
 {% stepper %}
 {% step %}
 ### Evaluating VergeOS against VMware
-Start with [Run the platform: What is VergeOS](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/intro/what-is-vergeos) and [Transitioning from VMware](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/intro/transition-from-vmware).
+Start with [Run the platform: What is VergeOS](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/platform-overview/what-is-vergeos) and [Transitioning from VMware](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/platform-overview/transition-from-vmware).
 {% endstep %}
 
 {% step %}
@@ -42,11 +42,11 @@ Use [Automate, protect, and extend](https://app.gitbook.com/s/sppYQkyIET58BuAo0k
 ## Popular starting points
 
 - New deployment blueprint: [Implementation guide](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/implementation-guide/intro)
-- VMware migration story: [Transitioning from VMware](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/intro/transition-from-vmware)
-- Core platform concepts: [Platform capabilities](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/intro/platform-capabilities)
-- Built-in resilience: [Backup & disaster recovery](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/product-guide/backup-dr/overview)
+- VMware migration story: [Transitioning from VMware](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/platform-overview/transition-from-vmware)
+- Core platform concepts: [Platform capabilities](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/platform-overview/platform-capabilities)
+- Built-in resilience: [Backup & disaster recovery](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/backup-and-dr/overview)
 - Automation surface: [VergeOS CLI](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/integrations-and-apis/vrg-cli)
-- Local model hosting: [Private AI overview](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/product-guide/private-ai/overview)
+- Local model hosting: [Private AI overview](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/private-ai/overview)
 
 <a class="button primary" href="https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/">Explore the deployment path</a>
 <a class="button" href="support-and-services.md">See support and service paths</a>

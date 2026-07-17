@@ -125,7 +125,7 @@ You can use wildcards in redirect URIs:
 ## Additional Resources
 
 * [Configuring VergeOS as an OIDC Client](configuring-vergeos-as-oidc-client.md)
-* [Third-Party Authorization Sources](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/authentication/auth-sources-overview)
+* [Third-Party Authorization Sources](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/authentication/auth-sources-general)
 * [SSL Certificate Management](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/system-administration/certificates)
 
 ## Feedback

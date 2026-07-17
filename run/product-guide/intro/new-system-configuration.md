@@ -77,7 +77,7 @@ The [**Cluster Settings Guide**](../system/cluster-settings.md) provides detaile
 2. [**Update your System**](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/system-administration/updating-vergeos-system): Perform an update if your system is not running the most up-to-date version. Running the newest version of VergeOS will guarantee you have all the latest features and improvements.
 
 {% hint style="success" %}
-[**VergeOS Release Notes**](https://app.gitbook.com/o/FpusSnrkRHyZiVEsXf9X/s/33mA7es4mQYkyUa7dMvu/) **provides information about the current latest version.**
+[**VergeOS Release Notes**](https://app.gitbook.com/s/33mA7es4mQYkyUa7dMvu/) **provides information about the current latest version.**
 {% endhint %}
 
 ## SMTP

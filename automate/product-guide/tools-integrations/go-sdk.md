@@ -396,6 +396,6 @@ If you encounter issues or have feature requests, please open an issue on the Gi
 ## Additional Resources
 
 * [Go Documentation](https://go.dev/doc/) 
-* [VergeOS API Documentation](https://app.gitbook.com/o/FpusSnrkRHyZiVEsXf9X/s/QZBMFpokMv2vWTIRbFzA/automation-api/verge-api-guide)
+* [VergeOS API Documentation](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/automation-api/verge-api-guide)
 * [Python SDK (pyvergeos)](python-sdk.md) - Python alternative
 * [Terraform Provider](terraform-provider.md) - Infrastructure as code

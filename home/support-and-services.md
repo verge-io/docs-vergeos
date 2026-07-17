@@ -18,7 +18,7 @@ Reach the VergeOS support team, or use the guides below to lean on before and af
 {% column %}
 ### Before you deploy
 
-- Validate your topology against the [reference architectures](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/reference-architecture/edge)
+- Validate your topology against the [reference architectures](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/reference-architectures/edge)
 - Check your hardware and sizing assumptions before you order or rack nodes
 - Scope your VMware migration before the first install
 {% endcolumn %}
@@ -27,8 +27,8 @@ Reach the VergeOS support team, or use the guides below to lean on before and af
 ### After you install
 
 - Work through [post-installation](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/implementation-guide/post-installation) as your initial hardening checklist
-- Stand up [snapshots](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/product-guide/backup-dr/snapshots-overview) and [site syncs](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/product-guide/backup-dr/syncs-overview) to protect your data
-- Standardize day-two operations with [recipes](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/product-guide/automation/recipes-overview) and the [vrg CLI](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/integrations-and-apis/vrg-cli)
+- Stand up [snapshots](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/backup-and-dr/snapshots-overview) and [site syncs](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/backup-and-dr/syncs-overview) to protect your data
+- Standardize day-two operations with [recipes](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/automation/recipes-overview) and the [vrg CLI](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/integrations-and-apis/vrg-cli)
 {% endcolumn %}
 {% endcolumns %}
 

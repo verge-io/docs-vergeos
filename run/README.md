@@ -22,5 +22,5 @@ The day-to-day home for operating VergeOS — storage, networking, system admini
 
 ## Related spaces
 
-* Deployment planning: [Plan and deploy](https://app.gitbook.com/o/FpusSnrkRHyZiVEsXf9X/s/Q2bN3ctQdjv01GivTI08/)
-* Disaster recovery and automation: [Automate, protect, and extend](https://app.gitbook.com/o/FpusSnrkRHyZiVEsXf9X/s/sppYQkyIET58BuAo0kqm/)
+* Deployment planning: [Plan and deploy](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/)
+* Disaster recovery and automation: [Automate, protect, and extend](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/)

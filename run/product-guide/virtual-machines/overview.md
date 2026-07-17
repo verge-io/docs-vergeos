@@ -157,7 +157,7 @@ Provide isolated virtual environments for different customers or departments usi
 ### **Support**
 
 * [**Support** ](https://app.gitbook.com/s/uJc5d3O7cwI7qD8muSyG/support-and-services)- Access professional support and documentation
-* [**Knowledge Base**](https://app.gitbook.com/o/FpusSnrkRHyZiVEsXf9X/s/QZBMFpokMv2vWTIRbFzA/) - Searchable database of solutions and best practices
+* [**Knowledge Base**](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/) - Searchable database of solutions and best practices
 
 ***
 
