@@ -316,6 +316,6 @@ If you encounter issues or have feature requests, please open an issue on the Gi
 ## Additional Resources
 
 * [Python Documentation](https://docs.python.org/3/) 
-* [VergeOS API Documentation](https://app.gitbook.com/o/FpusSnrkRHyZiVEsXf9X/s/QZBMFpokMv2vWTIRbFzA/automation-api/verge-api-guide)
+* [VergeOS API Documentation](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/automation-api/verge-api-guide)
 * [PSVergeOS PowerShell Module](powershell-module.md) - PowerShell alternative
 * [Terraform Provider](terraform-provider.md) - Infrastructure as code

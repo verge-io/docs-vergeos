@@ -52,7 +52,7 @@ This section provides instructions for restoring an entire system from within th
 {% hint style="success" %}
 **Restore from Boot Menu**
 
-To restore a host system where the user interface is inaccessible, see the KB article [Restoring a VergeOS System from the Boot Menu](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/backup-dr/restore-system-from-boot-menu).
+To restore a host system where the user interface is inaccessible, see the Knowledge Base article [Restoring a VergeOS System from the Boot Menu](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/backup-dr/restore-system-from-boot-menu).
 {% endhint %}
 
 ### System Requirements
