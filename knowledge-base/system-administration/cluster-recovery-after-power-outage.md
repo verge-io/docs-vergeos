@@ -114,7 +114,7 @@ Once all nodes are online and the cluster has had time to settle, verify that ev
 
    - Open the **Main Dashboard** -- all status lights should be **Green**.
    - Navigate to **System → vSAN → Tiers** and double-click each tier.
-   - Review the **Status** tile on each tier's dashboard. The KB article [Understanding vSAN Tier Status/Journal Walks](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/storage/vsan-diagnostics) provides a guide for reading vSAN tier status fields.
+   - Review the **Status** tile on each tier's dashboard. The KB article [Understanding vSAN Tier Status/Journal Walks](../storage-vsan/understanding-journal-walks-and-vsan-tier-status.md) provides a guide for reading vSAN tier status fields.
 
 3. **Verify drive health**
 
