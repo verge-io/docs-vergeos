@@ -468,4 +468,4 @@ chmod 755 /opt/homebrew/share/zsh /opt/homebrew/share/zsh/site-functions
 * [Known Issues](https://github.com/verge-io/vrg/blob/main/docs/KNOWN_ISSUES.md) — current limitations and workarounds
 * [PyPI Package](https://pypi.org/project/vrg/) 
 * [Report an Issue](https://github.com/verge-io/vrg/issues) 
-* [VergeOS API Documentation](https://app.gitbook.com/o/FpusSnrkRHyZiVEsXf9X/s/QZBMFpokMv2vWTIRbFzA/automation-api/verge-api-guide)
+* [VergeOS API Documentation](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/automation-api/verge-api-guide)

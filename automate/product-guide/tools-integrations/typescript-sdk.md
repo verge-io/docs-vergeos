@@ -446,7 +446,7 @@ If you encounter issues or have feature requests, please open an issue on the Gi
 ## Additional Resources
 
 * [TypeScript Documentation](https://www.typescriptlang.org/docs/) 
-* [VergeOS API Documentation](https://app.gitbook.com/o/FpusSnrkRHyZiVEsXf9X/s/QZBMFpokMv2vWTIRbFzA/automation-api/verge-api-guide/)
+* [VergeOS API Documentation](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/automation-api/verge-api-guide)
 * [Python SDK](python-sdk.md) - Python alternative
 * [Go SDK](go-sdk.md) - Go alternative
 * [PowerShell Module](powershell-module.md) - PowerShell alternative

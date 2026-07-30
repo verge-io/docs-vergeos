@@ -216,4 +216,4 @@ API keys cannot be recovered after the initial creation popup is closed. Delete 
 
 ## Related Resources
 
-* [VergeOS REST API Documentation](https://app.gitbook.com/o/FpusSnrkRHyZiVEsXf9X/s/QZBMFpokMv2vWTIRbFzA/automation-api/verge-api-guide) - Complete API reference and endpoints
+* [VergeOS REST API Documentation](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/automation-api/verge-api-guide) - Complete API reference and endpoints

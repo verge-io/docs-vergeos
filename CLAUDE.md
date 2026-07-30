@@ -16,8 +16,15 @@ GitBook target: org **Verge.io** (`FpusSnrkRHyZiVEsXf9X`), site **VergeOS Docs**
 ## Space directories and IDs
 
 Each dir below git-syncs to one space. The **space IDs are load-bearing**: cross-space
-links are written as `https://app.gitbook.com/s/<spaceId>/<dest-path-without-.md>`, so
-any new cross-space link must use the correct ID.
+links are written as `https://app.gitbook.com/s/<spaceId>/<page-path>`, where
+`<page-path>` is the page's **GitBook page path** (from the space's SUMMARY group slug +
+page slug, e.g. `system-administration/running-updates`), NOT the repo file path. GitBook
+resolves these to published-site URLs **at import time**; a path that doesn't match a real
+page in the target space is silently left as a literal `app.gitbook.com` URL, which sends
+readers to the GitBook login. Verify paths against the content API
+(`/v1/spaces/{spaceId}/content`, the `path` field). If a link's target page didn't exist
+yet when the linking page last synced, the linking file must be touched (any content
+change) to force re-import and re-resolution.
 
 | Dir              | GitBook space                                      | Space ID               |
 | ---------------- | -------------------------------------------------- | ---------------------- |

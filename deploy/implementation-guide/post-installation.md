@@ -85,5 +85,5 @@ The Core Fabric Network at the heart of VergeOS is designed with redundancy and 
 If issues arise during post-installation configuration:
 
 * Check the system logs for any errors
-* Review the [Knowledge Base](https://app.gitbook.com/o/FpusSnrkRHyZiVEsXf9X/s/QZBMFpokMv2vWTIRbFzA/) for common solutions
+* Review the [Knowledge Base](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/) for common solutions
 * Contact [VergeOS Support](https://app.gitbook.com/s/uJc5d3O7cwI7qD8muSyG/support-and-services) for assistance

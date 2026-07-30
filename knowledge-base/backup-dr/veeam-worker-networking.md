@@ -43,7 +43,7 @@ dateCreated: 2026-07-09T00:00:00.000Z
 
 Veeam Backup & Replication (VBR) deploys **workers** — auxiliary Linux-based VMs that process backup workloads and move backup data — on demand. In this guide the **provider** is the root system — the top-level VergeOS system (itself the root tenant) that hosts your tenants and runs VBR. The **VBR server** (`veeamHost`) is a single VM hosting both of Veeam's core components: the **backup server** (the management core of the backup infrastructure) and a **backup repository** (the storage location where backups land). When VBR is protecting workloads both in the provider and inside a tenant, the workers it deploys on each side need to reach each other — and the VBR server, where the backup repository lives — directly, without being blocked by tenant NAT or routed through extra hops.
 
-The integration itself — the VergeOS oVirt-engine package, adding systems and tenants to Veeam as **VergeOS Managers**, and version requirements — is covered in [Veeam Integration with VergeOS](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/tools-integrations/veeam). This guide covers only the *networking* the workers need: the **data path** shown in the [Example Topology](#example-topology) below — the flat External network the workers use to move backup traffic once they're deployed.
+The integration itself — the VergeOS oVirt-engine package, adding systems and tenants to Veeam as **VergeOS Managers**, and version requirements — is covered in [Veeam Integration with VergeOS](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/integrations-and-apis/veeam). This guide covers only the *networking* the workers need: the **data path** shown in the [Example Topology](#example-topology) below — the flat External network the workers use to move backup traffic once they're deployed.
 
 The underlying model is simple:
 
@@ -114,7 +114,7 @@ Because everything sits on the same subnet, the VBR server and both workers can 
 
 **Always:**
 
-- The [Veeam integration with VergeOS](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/tools-integrations/veeam) in place — version requirements met, the oVirt-engine package enabled, and the system added to the Veeam inventory as a **VergeOS Manager**
+- The [Veeam integration with VergeOS](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/integrations-and-apis/veeam) in place — version requirements met, the oVirt-engine package enabled, and the system added to the Veeam inventory as a **VergeOS Manager**
 - Cluster Admin access at the provider level
 - The provider's `External` network already configured and running
 - Veeam Backup & Replication deployed as a VM on the provider — in this guide a single **VBR server** hosting both the backup server and a backup repository
@@ -184,7 +184,7 @@ If your tenant already has its own default network named `External` (used for no
 {% hint style="info" %}
 **Why IP Address Type: None**
 
-Veeam assigns and manages the worker's IP address itself when it deploys the worker VM. Leaving IP Address Type at `None` keeps VergeOS out of the way of that addressing — it's a pure Layer 2 passthrough, matching how [internal Layer 2 networks](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/networks/internal-layer2) work when a third party manages IP addressing.
+Veeam assigns and manages the worker's IP address itself when it deploys the worker VM. Leaving IP Address Type at `None` keeps VergeOS out of the way of that addressing — it's a pure Layer 2 passthrough, matching how [internal Layer 2 networks](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/networking/internal-layer2) work when a third party manages IP addressing.
 {% endhint %}
 
 7. Click **Submit**, then **Power On** the network.
@@ -234,11 +234,11 @@ The topology in this guide is intended to get Veeam up and running quickly — o
 
 ## Related Documentation
 
-- [Veeam Integration with VergeOS](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/tools-integrations/veeam)
+- [Veeam Integration with VergeOS](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/integrations-and-apis/veeam)
 - [Configure Tenant Layer 2 Networks](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/tenants/layer-2-networks)
 - [Assigning External IP Addresses to a Tenant](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/tenants/assign-ip-to-tenant)
 - [How to Create an External Network](../networking/create-external-network.md)
-- [Creating an Internal Layer 2 Network](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/networks/internal-layer2)
+- [Creating an Internal Layer 2 Network](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/networking/internal-layer2)
 - [Tenant Overview](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/tenants/overview)
 - [Veeam Backup & Replication User Guide — oVirt KVM Integration](https://helpcenter.veeam.com/docs/vbr/userguide/ovirt_overview.html?ver=13)
 - [Veeam Backup & Replication User Guide — Considerations and Limitations](https://helpcenter.veeam.com/docs/vbr/userguide/ovirt_limitations_rhv.html?ver=13)

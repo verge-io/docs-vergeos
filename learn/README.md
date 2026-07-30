@@ -53,6 +53,6 @@ Specific environment requirements are listed at the beginning of each lab exerci
 
 ## Related spaces
 
-* Deployment planning: [Plan and deploy](https://app.gitbook.com/o/FpusSnrkRHyZiVEsXf9X/s/Q2bN3ctQdjv01GivTI08/)
-* Day-2 operations: [Run the platform](https://app.gitbook.com/o/FpusSnrkRHyZiVEsXf9X/s/pODKGSQETqL1gSqyxIq3/)
-* Disaster recovery and automation: [Automate, protect, and extend](https://app.gitbook.com/o/FpusSnrkRHyZiVEsXf9X/s/sppYQkyIET58BuAo0kqm/)
+* Deployment planning: [Plan and deploy](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/)
+* Day-2 operations: [Run the platform](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/)
+* Disaster recovery and automation: [Automate, protect, and extend](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/)

@@ -107,14 +107,14 @@ Once all nodes are online and the cluster has had time to settle, verify that ev
 
    Abrupt power loss increases the risk of hardware problems. It is important to check for any issues:
 
-   - Review the [Alarms](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/operations/alarms) dashboard. Confirm no new alarms have been triggered.
+   - Review the [Alarms](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/operations/alarms) dashboard. Confirm no new alarms have been triggered.
    - Review **system logs (Main Dashboard)** for errors during boot or initial mount.
 
 2. **Verify vSAN health**
 
    - Open the **Main Dashboard** -- all status lights should be **Green**.
    - Navigate to **System → vSAN → Tiers** and double-click each tier.
-   - Review the **Status** tile on each tier's dashboard. The KB article [Understanding vSAN Tier Status/Journal Walks](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/storage/vsan-diagnostics) provides a guide for reading vSAN tier status fields.
+   - Review the **Status** tile on each tier's dashboard. The KB article [Understanding vSAN Tier Status/Journal Walks](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/storage/vsan-diagnostics) provides a guide for reading vSAN tier status fields.
 
 3. **Verify drive health**
 
@@ -168,7 +168,7 @@ If the overall system or individual VMs show signs of damage from the ungraceful
     - _**Last State**_ -- VM powers on only if it was on at the time of power loss
     - _**Leave Off**_ -- VM stays off when power is restored, regardless of prior state
     - _**Power On**_ -- VM powers on when power is restored, regardless of prior state
-- **Repair server (ioGuardian)** -- a configured [repair server](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/product-guide/backup-dr/repair-server) gives VergeFS a fallback source for missing blocks if peer nodes can't supply them after an outage. It is built from an existing outgoing site sync configuration and pulls needed blocks from a synchronized remote VergeOS system. Repair servers are strongly recommended for any production deployment.
+- **Repair server (ioGuardian)** -- a configured [repair server](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/backup-and-dr/repair-server) gives VergeFS a fallback source for missing blocks if peer nodes can't supply them after an outage. It is built from an existing outgoing site sync configuration and pulls needed blocks from a synchronized remote VergeOS system. Repair servers are strongly recommended for any production deployment.
 - **Adequate snapshot rotation** -- maintain a snapshot retention schedule that keeps recent, pre-event snapshots available for rollback when needed. Replicating snapshots to a remote site is also recommended as part of a comprehensive data protection strategy.
 
 ## When to Engage Support
@@ -187,7 +187,7 @@ Open a support case **before** rebooting nodes, or making any other significant 
 
 Before opening the case, capture a sysdiag and attach it (or send it directly to support):
 
-See [Generating System Diagnostics](../troubleshooting/generating-system-diagnostics.md) and the full [System Diagnostics](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/system/diagnostics) reference.
+See [Generating System Diagnostics](../troubleshooting/generating-system-diagnostics.md) and the full [System Diagnostics](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/system-administration/diagnostics) reference.
 
 ## Additional Resources
 
@@ -195,8 +195,8 @@ See [Generating System Diagnostics](../troubleshooting/generating-system-diagnos
 - [Proper VergeOS System Shutdown Procedure](proper-vergeos-system-shutdown-procedure.md)
 - [Understanding Journal Walks and vSAN Tier Status](../storage-vsan/understanding-journal-walks-and-vsan-tier-status.md)
 - [Generating System Diagnostics](../troubleshooting/generating-system-diagnostics.md)
-- [Repair Server (ioGuardian)](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/product-guide/backup-dr/repair-server)
-- [vSAN Diagnostics Guide](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/product-guide/storage/vsan-diagnostics)
+- [Repair Server (ioGuardian)](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/backup-and-dr/repair-server)
+- [vSAN Diagnostics Guide](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/storage/vsan-diagnostics)
 
 ## Feedback
 

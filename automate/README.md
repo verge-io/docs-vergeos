@@ -21,5 +21,5 @@ What you reach for once VergeOS is running: business continuity, repeatable prov
 
 ## Related spaces
 
-* Core platform context: [Run the platform](https://app.gitbook.com/o/FpusSnrkRHyZiVEsXf9X/s/pODKGSQETqL1gSqyxIq3/)
-* Early deployment design: [Plan and deploy](https://app.gitbook.com/o/FpusSnrkRHyZiVEsXf9X/s/Q2bN3ctQdjv01GivTI08/)
+* Core platform context: [Run the platform](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/)
+* Early deployment design: [Plan and deploy](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/)
