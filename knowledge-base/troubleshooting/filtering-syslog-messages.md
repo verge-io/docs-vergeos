@@ -177,12 +177,3 @@ The raw syslog inside a system diagnostics file still contains the message by de
 
 If you are not sure whether a repeating log line is cosmetic or a real fault, contact the VergeOS support team before you suppress it.
 {% endhint %}
-
-***
-
-{% hint style="info" %}
-**Document Information**
-
-- Last Updated: 2026-07-31
-- VergeOS Version: 4.13
-{% endhint %}
