@@ -19,9 +19,9 @@ categories:
 editor: markdown
 dateCreated: 2026-07-31T00:00:00.000Z
 description: >-
-  SonicWall NSv firewalls on SonicOS 7.1.1 and later fail to boot after import
-  into VergeOS because the appliance requires SonicWall's signed OVMF firmware.
-  Support is planned for Q3 2026.
+  SonicWall NSv firewalls on SonicOS 7.1.1+ fail to boot after import into
+  VergeOS because the appliance requires SonicWall's signed OVMF firmware.
+  Custom EFI firmware support is coming in Q3 2026.
 tags:
   - vm
   - import
@@ -42,12 +42,12 @@ tags:
 
 # SonicWall NSv 7.1.1+ Will Not Boot on VergeOS
 
-SonicWall NSv virtual firewalls on SonicOS 7.1.1 and later do not currently boot after import into VergeOS. This article explains why the appliance fails to start and what to run in its place.
+SonicWall NSv virtual firewalls on SonicOS 7.1.1 and later do not currently boot after import into VergeOS. This article explains why the appliance fails to start and what your options are in the meantime.
 
 {% hint style="info" %}
-**Support planned for Q3 2026**
+**Support coming in Q3 2026**
 
-VergeOS will add support for custom EFI firmware in Q3 2026. This will allow the SonicWall NSv appliance to boot on VergeOS. Until then, use one of the alternatives below.
+VergeOS will add support for custom EFI firmware in Q3 2026. This will allow the SonicWall NSv appliance to boot on VergeOS. Until that support ships, use one of the alternatives described below.
 {% endhint %}
 
 ## Symptoms
@@ -74,15 +74,11 @@ The block is in the appliance's firmware validation, not in any one disk format.
 Earlier SonicOS builds that did not enforce the signed-firmware check are not affected in the same way. The behavior described here is specific to NSv on 7.1.1+.
 {% endhint %}
 
-## What to Run Instead
+## Options in the Meantime
 
-Until custom EFI firmware support arrives, use **pfSense** or **OPNsense** for a virtual firewall on VergeOS. Both boot on VergeOS's standard UEFI firmware and are well suited to run as a VM or inside a tenant.
+Any virtual firewall that boots on standard UEFI firmware runs well on VergeOS, as a VM or inside a tenant. It can fill the role until NSv support arrives.
 
-If you require SonicWall specifically, run it on physical SonicWall hardware and connect it to your VergeOS environment over the network.
-
-## Additional Resources
-
-- [Best Practices - Running a pfSense Virtual Firewall](../networking/running-a-pfsense-virtual-firewall.md)
+If you want to stay on SonicWall today, run the firewall on physical SonicWall hardware and connect it to your VergeOS environment over the network.
 
 {% hint style="info" %}
 **Need Help?**
