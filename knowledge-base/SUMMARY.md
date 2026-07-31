@@ -21,6 +21,7 @@
   * [Reasons a Windows VM Restarted Unexpectedly](virtual-machines/reasons-a-windows-vm-restarted-unexpectedly.md)
   * [Resizing a Virtual Disk Drive](virtual-machines/resizing-a-virtual-disk-drive.md)
   * [Secure Boot Certificate Expiry - Microsoft Guest VMs (June 2026)](virtual-machines/secure-boot-certificate-expiry-2026.md)
+  * [SonicWall NSv 7.1.1+ Will Not Boot on VergeOS](virtual-machines/sonicwall-nsv-boot-failure-signed-firmware.md)
   * [UEFI Tweaks for Imported VMs](virtual-machines/uefi-tweaks-for-imported-vms.md)
   * [Understanding VergeOS VM Memory Management](virtual-machines/guest-memory-management.md)
   * [VirtIO-Win Driver Compatibility with MS SQL Server Workloads](virtual-machines/virtio-win-mssql-compatibility.md)
