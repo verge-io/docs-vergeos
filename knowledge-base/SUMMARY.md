@@ -88,6 +88,7 @@
   * [RHEL 9 Family VMs Failing to Boot After Clone or Snapshot Restore](backup-dr/rhel9-boot-failure-clone-snapshot-restore.md)
   * [Setting Up Storware on VergeOS](backup-dr/setup-storware-vergeos.md)
   * [Snapshot Synchronization Errors Explained](backup-dr/snapshot-synchronization-errors-explained.md)
+  * [VMware Import Scans Succeed but File Downloads Fail](backup-dr/vmware-import-downloads-fail-server-refused.md)
   * [VMware-Backup-DR-Guide](backup-dr/vmwarebackupdrguide.md)
 * [Automation & API](automation-api/README.md)
   * [API Guide](automation-api/verge-api-guide.md)
