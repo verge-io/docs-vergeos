@@ -58,7 +58,6 @@
   * [Wireguard - Setup Remote Access VPN](networking/wireguard--setup-remote-access-vpn.md)
 * [Storage & vSAN](storage-vsan/README.md)
   * [Adding Tier 0 to an Existing System](storage-vsan/adding-tier-zero.md)
-  * [Identifying a Failed Disk Drive](storage-vsan/identifying-a-failed-disk-drive.md)
   * [NAS Volume Browser API Reference](storage-vsan/nas-volume-browser-api.md)
   * [Preferred Tier Usage](storage-vsan/preferred-tier-usage.md)
   * [Scaling Down a vSAN (Removing Drives)](storage-vsan/scaling-down-a-vsan.md)
