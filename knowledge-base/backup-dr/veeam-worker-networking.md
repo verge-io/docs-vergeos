@@ -118,7 +118,7 @@ Because everything sits on the same subnet, the VBR server and both workers can 
 - Cluster Admin access at the provider level
 - The provider's `External` network already configured and running
 - Veeam Backup & Replication deployed as a VM on the provider — in this guide a single **VBR server** hosting both the backup server and a backup repository
-- Review Veeam's [Considerations and Limitations](https://helpcenter.veeam.com/docs/vbr/userguide/ovirt_limitations_rhv.html?ver=13) for what the integration does and doesn't support before planning your deployment
+- Review Veeam's [Considerations and Limitations](https://helpcenter.veeam.com/docs/vbr/userguide/uh_limitations.html?ver=13) for what the integration does and doesn't support before planning your deployment
 
 **Tenant path only:**
 
@@ -193,7 +193,7 @@ For the full field reference on external network creation (VLAN options, static 
 
 ## Step 5: Deploy the Workers
 
-Deploy the workers from within Veeam using its VergeOS integration — VergeOS needs no extra configuration here beyond the networks created above. Refer to [Veeam's documentation](https://helpcenter.veeam.com/docs/vbr/userguide/ovirt_overview.html?ver=13) for the exact worker deployment steps for your Veeam version.
+Deploy the workers from within Veeam using its VergeOS integration — VergeOS needs no extra configuration here beyond the networks created above. Refer to [Veeam's documentation](https://helpcenter.veeam.com/docs/vbr/userguide/uh_workers_add.html?ver=13) for the exact worker deployment steps for your Veeam version.
 
 - **Provider-side worker**: attach to the provider's `External` network. Give it a static IP outside your External network's DHCP range (in this example, the External network hands out `10.1.2.200`–`10.1.2.201` via DHCP, so `10.1.2.30` is a safe static choice).
 - **Tenant-side worker**: attach to the tenant's `ExternalL2` network. Again, use a static IP outside the provider's DHCP range (e.g. `10.1.2.13`).
@@ -229,8 +229,8 @@ Once both workers are up, they and the VBR server should all be able to reach ea
 The topology in this guide is intended to get Veeam up and running quickly — one flat Layer 2 domain, no firewall rules — and works well for labs, proofs of concept, and smaller production environments. Larger or more security-sensitive environments may call for:
 
 - **A dedicated backup network.** Instead of extending the primary `External` network, create a separate VLAN for backup traffic and pass it into each tenant as a VLAN-tagged [Tenant Layer 2 Network](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/tenants/layer-2-networks). This keeps backup data off your production network and lets you shape or limit that traffic independently.
-- **Routed access with explicit firewall rules.** If extending a shared Layer 2 domain into tenants isn't acceptable — for example, strict tenant isolation requirements — keep each tenant behind its own routed/NATed networks and create firewall rules for the specific ports Veeam needs between the VBR server, workers, and repositories. See [Ports](https://helpcenter.veeam.com/docs/vbr/userguide/used_ports.html?ver=13) in the Veeam User Guide for the full list. This gives you the tightest control at the cost of more rule maintenance per tenant.
-- **Scaled-out Veeam infrastructure.** As backup volume grows, Veeam supports moving beyond the all-in-one VBR server — dedicated backup repositories, gateway servers, and additional workers. That sizing is a Veeam-side design decision; see the [Veeam Backup & Replication User Guide](https://helpcenter.veeam.com/docs/vbr/userguide/ovirt_overview.html?ver=13). The networking principle from this guide still applies: every worker needs direct reachability to the components it moves data between.
+- **Routed access with explicit firewall rules.** If extending a shared Layer 2 domain into tenants isn't acceptable — for example, strict tenant isolation requirements — keep each tenant behind its own routed/NATed networks and create firewall rules for the specific ports Veeam needs between the VBR server, workers, and repositories. See [Ports](https://helpcenter.veeam.com/docs/vbr/userguide/uh_used_ports.html?ver=13) in the Veeam User Guide for the full list. This gives you the tightest control at the cost of more rule maintenance per tenant.
+- **Scaled-out Veeam infrastructure.** As backup volume grows, Veeam supports moving beyond the all-in-one VBR server — dedicated backup repositories, gateway servers, and additional workers. That sizing is a Veeam-side design decision; see the [Veeam Backup & Replication User Guide](https://helpcenter.veeam.com/docs/vbr/userguide/universal_hypervisors.html?ver=13). The networking principle from this guide still applies: every worker needs direct reachability to the components it moves data between.
 
 ## Related Documentation
 
@@ -240,5 +240,5 @@ The topology in this guide is intended to get Veeam up and running quickly — o
 - [How to Create an External Network](../networking/create-external-network.md)
 - [Creating an Internal Layer 2 Network](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/networking/internal-layer2)
 - [Tenant Overview](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/tenants/overview)
-- [Veeam Backup & Replication User Guide — oVirt KVM Integration](https://helpcenter.veeam.com/docs/vbr/userguide/ovirt_overview.html?ver=13)
-- [Veeam Backup & Replication User Guide — Considerations and Limitations](https://helpcenter.veeam.com/docs/vbr/userguide/ovirt_limitations_rhv.html?ver=13)
+- [Veeam Backup & Replication User Guide — Universal Hypervisors](https://helpcenter.veeam.com/docs/vbr/userguide/universal_hypervisors.html?ver=13)
+- [Veeam Backup & Replication User Guide — Considerations and Limitations](https://helpcenter.veeam.com/docs/vbr/userguide/uh_limitations.html?ver=13)
