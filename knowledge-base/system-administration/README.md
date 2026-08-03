@@ -1,6 +1,8 @@
-# System Administration
+---
+description: Platform administration topics — updates, security, authentication, branding, and performance.
+---
 
-Platform administration topics — updates, security, authentication, branding, and performance.
+# System Administration
 
 * [Configuring VergeOS as an OIDC Client](configuring-vergeos-as-oidc-client.md) — Step-by-step guide on setting up a VergeOS system or tenant to use OIDC authentication with another VergeOS identity provider.
 * [CPU Overprovisioning and Resource Planning](cpu-overprovisioning-guide.md) — Understanding CPU allocation, overcommit ratios, and performance implications in VergeOS, including recommended ratios by workload type and…

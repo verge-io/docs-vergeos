@@ -1,6 +1,8 @@
-# Automation & API
+---
+description: Working with the VergeOS API, automation tasks, Terraform, and integration tooling.
+---
 
-Working with the VergeOS API, automation tasks, Terraform, and integration tooling.
+# Automation & API
 
 * [API Guide](verge-api-guide.md) — A comprehensive guide to using the VergeOS API, covering authentication, HTTP methods, endpoint conventions, filtering, sorting, error…
 * [API Helper Script](api-helper-script.md) — A guide to using the VergeOS yb-api helper script for simplified API interactions, including listing, creating, cloning, and managing…

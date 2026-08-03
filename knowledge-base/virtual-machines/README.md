@@ -1,6 +1,8 @@
-# Virtual Machines
+---
+description: How-to guides for creating, importing, configuring, and managing virtual machines.
+---
 
-How-to guides for creating, importing, configuring, and managing virtual machines.
+# Virtual Machines
 
 * [Changing Resolution on a UEFI VM](changing-resolution-on-a-uefi-vm.md) — Steps to change the screen resolution on a UEFI-based VM by modifying the OVMF Platform Configuration display settings.
 * [Emulate a USB Device](emulate-usb.md) — Instructions for creating and attaching an emulated USB device to a VM in VergeOS, including hotplug configuration and VirtIO driver…

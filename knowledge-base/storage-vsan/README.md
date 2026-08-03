@@ -1,6 +1,8 @@
-# Storage & vSAN
+---
+description: Articles covering vSAN architecture, storage tiers, scaling, encryption, and NAS.
+---
 
-Articles covering vSAN architecture, storage tiers, scaling, encryption, and NAS.
+# Storage & vSAN
 
 * [Adding Tier 0 to an Existing System](adding-tier-zero.md) — Step-by-step guide for adding Tier 0 metadata storage to an existing VergeOS system that was not configured with Tier 0 during initial…
 * [NAS Volume Browser API Reference](nas-volume-browser-api.md) — How to use the VergeOS volume_browser API to browse NAS volume contents programmatically, including the asynchronous job workflow, polling…
