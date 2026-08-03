@@ -1,6 +1,8 @@
-# Tenants
+---
+description: Guides for creating and operating tenants in multi-tenant VergeOS environments.
+---
 
-Guides for creating and operating tenants in multi-tenant VergeOS environments.
+# Tenants
 
 * [Allow Root to Tenant Site Connection](allow-root-to-tenant-site-connection.md) — How to configure a network rule on the root system's external network to allow site-to-site connectivity between the root system and a…
 * [Configuring Proxy](configuring-proxy.md) — How to configure a proxy connection to serve multiple tenant environments using a single IP address mapped to FQDN hostnames.

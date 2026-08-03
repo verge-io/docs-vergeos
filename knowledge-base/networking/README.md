@@ -1,6 +1,8 @@
-# Networking
+---
+description: Guides for VergeOS networking — networks, rules, routing, VPNs, and firewalls.
+---
 
-Guides for VergeOS networking — networks, rules, routing, VPNs, and firewalls.
+# Networking
 
 * [Accessing the User Interface from an Internal Network](accessing-the-user-interface-from-an-internal-network.md) — Learn how to set up an internal UI route to access the VergeOS User Interface from a virtual machine within your environment.
 * [Accessing the VergeOS UI from a VM](accessing-the-ui-from-a-vm.md) — Learn how to set up hair-pinning to access the VergeOS UI from a virtual machine within your environment using a translate network rule.
