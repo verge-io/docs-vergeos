@@ -130,3 +130,27 @@ USB devices can be passed to a tenant for the tenant to pass to its own VMs.  Wh
 9. **USB Settings**: see above.
 10. When fields are completed, click **Submit** to finish passing to the tenant.
 11. The device(s) will now be available as a resource group to attach to tenant VMs.  Follow [**VM/Guest Configuration**](#vmguest-configuration) instructions above.  In order to use the passthrough device, the VM must run on the tenant node where the device is attached.
+
+## Troubleshooting
+
+### VM Fails to Start After a Node Reboot
+
+**Symptom:** A VM with a USB passthrough device fails to start after its host node reboots (for example, after a VergeOS update). The VM repeatedly attempts to start but cannot open the USB device.
+
+**Cause:** The auto-generated resource rule matches the device by its physical bus address (the `path` filter field). That address is assigned when the device enumerates and can change when the node reboots or the device is re-seated. When the device re-enumerates at a different address, the rule no longer matches a live device, and the VM cannot start.
+
+**Fix:** Edit the resource rule to match the device by its stable hardware IDs instead of the physical address:
+
+1. Navigate to **Infrastructure > Resources**.
+2. **Double-click the USB resource group** for the device.
+3. **Double-click the resource rule** to edit it.
+4. Enable the **vendor ID** (`vendor_id`) and **model ID** (`model_id`) filter fields. The model ID is the USB product ID.
+5. Disable the physical location filter fields (`path` and `device`).
+6. Click **Submit** to save the rule.
+7. Start the VM.
+
+The vendor and model IDs are stable across reboots, so the rule matches the device regardless of how it re-enumerates.
+
+{% hint style="info" %}
+A serial number is not an available USB filter field, even though other device types support it. Match USB devices by the vendor and model IDs only.
+{% endhint %}

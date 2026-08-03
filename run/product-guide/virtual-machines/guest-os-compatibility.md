@@ -64,16 +64,16 @@ Virtual appliances packaged for KVM environments are fully compatible with Verge
 
 | Distribution | Versions | Recommended Interface | Minimum RAM | Notes |
 |-------------|----------|---------------------|-------------|--------|
-| RHEL | 7, 8, 9 | VirtIO | 2 GB | Native VirtIO support |
-| SUSE Enterprise | 11, 12, 15 | VirtIO | 2 GB | Built-in driver support |
-| Oracle Linux | 6, 7, 8, 9 | VirtIO | 2 GB | UEK kernel recommended |
+| RHEL | 7, 8, 9, 10 | VirtIO | 2 GB | Native VirtIO support |
+| SUSE Enterprise | 11, 12, 15, 16 | VirtIO | 2 GB | Built-in driver support |
+| Oracle Linux | 6, 7, 8, 9, 10 | VirtIO | 2 GB | UEK kernel recommended |
 
 ### Community Enterprise Linux
 
 | Distribution | Versions | Recommended Interface | Minimum RAM | Notes |
 |-------------|----------|---------------------|-------------|--------|
-| AlmaLinux | 8, 9 | VirtIO | 2 GB | RHEL binary compatible |
-| Rocky Linux | 8, 9 | VirtIO | 2 GB | Native driver support |
+| AlmaLinux | 8, 9, 10 | VirtIO | 2 GB | RHEL binary compatible |
+| Rocky Linux | 8, 9, 10 | VirtIO | 2 GB | Native driver support |
 | CentOS | 7, 8 | VirtIO | 2 GB | Built-in VirtIO support |
 | CentOS Stream | 8 | VirtIO | 2 GB | Rolling release model |
 
@@ -81,15 +81,16 @@ Virtual appliances packaged for KVM environments are fully compatible with Verge
 
 | Distribution | Versions | Recommended Interface | Minimum RAM | Notes |
 |-------------|----------|---------------------|-------------|--------|
-| Debian | 8, 9, 10, 11, 12 | VirtIO | 1 GB | Native driver support |
-| Ubuntu LTS | 20.04, 22.04, 24.04 | VirtIO | 2 GB | Recommended for production |
+| Debian | 8, 9, 10, 11, 12, 13 | VirtIO | 1 GB | Native driver support |
+| Ubuntu LTS | 20.04, 22.04, 24.04, 26.04 | VirtIO | 2 GB | Recommended for production |
 | Ubuntu | 12.04 - 19.04 | VirtIO | 1 GB | Older releases - limited support |
 
 ## FreeBSD Support
 
 | Version | Support Status | Recommended Interface | Minimum RAM | Notes |
 |---------|---------------|---------------------|-------------|--------|
-| FreeBSD 13 | Full | VirtIO | 1 GB | Best performance with VirtIO |
+| FreeBSD 14 | Full | VirtIO | 1 GB | Best performance with VirtIO |
+| FreeBSD 13 | Full | VirtIO | 1 GB | Production ready |
 | FreeBSD 12 | Full | VirtIO | 1 GB | Production ready |
 | FreeBSD 11 | Limited | VirtIO/SATA | 1 GB | Legacy support |
 | FreeBSD 10 | Limited | SATA | 1 GB | Basic compatibility |
