@@ -1,6 +1,8 @@
-# Backup & DR
+---
+description: Snapshots, sync jobs, restores, and disaster recovery guidance.
+---
 
-Snapshots, sync jobs, restores, and disaster recovery guidance.
+# Backup & DR
 
 * [Configuring a Volume for Exporting VMs](configuring-a-vm-export-volume.md) — How to configure the VergeOS NAS VM Export Volume for backup purposes, including CIFS/NFS sharing, scheduled exports, and synchronization…
 * [Exporting a Virtual Machine](exporting-a-virtual-machine.md) — Learn how to export a virtual machine from VergeOS and download its disk as a .raw file for use in other hypervisor environments.
