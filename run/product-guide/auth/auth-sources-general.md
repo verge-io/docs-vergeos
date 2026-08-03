@@ -54,7 +54,7 @@ These features are independent. Joining a NAS domain does **not** enable AD-back
 
 ### Authenticating UI Logins Against Windows Active Directory
 
-VergeOS UI and tenant login auth sources are OAuth2/OIDC based. VergeOS does **not** provide a native LDAP auth-source driver — there is no direct LDAP/AD bind option for UI login.
+VergeOS UI and tenant login auth sources are OAuth2/OIDC based rather than a native LDAP auth-source driver — there is no direct LDAP/AD bind option for UI login.
 
 To let Windows domain users log in to the VergeOS UI with their AD credentials, federate on-premises AD through **Microsoft Entra ID** (Azure AD) or another OIDC-compatible identity provider, and configure the matching auth source in VergeOS. Group membership from the identity provider can be mapped to VergeOS groups so permissions follow the directory.
 
