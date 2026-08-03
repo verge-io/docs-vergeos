@@ -19,8 +19,8 @@ editor: markdown
 dateCreated: 2026-07-31T12:00:00.000Z
 description: >-
   Filter confirmed-cosmetic hardware and driver messages out of the System Logs
-  view with syslog_regex_list. The filter hides lines from the UI only — the
-  kernel still writes them to the raw syslog.
+  view with the System Log Filter cluster setting. The filter hides lines from
+  the UI only — the kernel still writes them to the raw syslog.
 tags:
   - logs
   - syslog
@@ -31,29 +31,37 @@ tags:
   - driver
   - regex
 ---
-
 # Filtering Syslog Messages from the System Logs View
 
 ## Overview
 
 {% hint style="info" %}
 **Key Points**
-
-- The `syslog_regex_list` setting hides matching lines from the **System > Logs** view.
+- The **System Log Filter** cluster setting hides matching lines from the **System > Logs** view.
 - The filter hides messages from the UI only — the kernel still writes them to the raw syslog.
-- Patterns use POSIX Extended Regular Expression (ERE) syntax, not PCRE.
+-Systems are installed with a default set of System Log Filter entries that should be kept intact; additional entries can be appended to the comma-delimited list to suppress messages that have been confirmed as non-fault conditions.
+- Patterns use POSIX Extended Regular Expression (ERE) syntax.
 {% endhint %}
 
-Some hardware and driver messages repeat constantly in **System > Logs** without indicating a real fault. A storage HBA driver that logs a failed ioctl on every poll is a common example. These messages bury the log entries you care about. This article shows how to hide them with the `syslog_regex_list` setting.
+Some hardware and driver messages repeat constantly in **System > Logs** without indicating a real fault. A storage HBA driver that logs a failed ioctl on every poll is a common example. These messages bury the log entries you care about. This article shows how to hide them with the **System Log Filter** cluster setting.
 
-{% hint style="warning" %}
-Use this filter only for messages you have confirmed are cosmetic. The filter quiets the log — it does not fix the underlying condition. Note anything worth monitoring, such as HBA firmware, before you suppress its output.
+{% hint style="danger" %}
+**Confirm the message is cosmetic before suppressing it.**
+
+Suppressing a log entry hides it from the Logs view permanently until the filter is removed. If the message later changes character — for example, an HBA firmware bug that begins returning a different error code — you will not see it.
+
+Before adding a filter:
+- Verify with the hardware vendor or VergeOS support that the specific message is a known non-fault condition.
+- Record the full original message text, the reason it was deemed cosmetic, and notify other administrators so they are aware the filter exists and why it was added.
+- Note the firmware version, driver version, and hardware model so you can re-evaluate if any of those change.
+
+**When in doubt, do not suppress.** Contact the VergeOS support team before filtering any message you are not fully certain is harmless.
 {% endhint %}
 
 ## Prerequisites
 
-- A repeating log message that you have confirmed is not a real fault.
-- A user with administrator access to the system API.
+- A repeating log message that you have **confirmed is not a real fault**.
+- A user with administrator access to the cluster settings.
 
 ## Step 1: Get the Exact Message Text
 
@@ -80,50 +88,39 @@ Do not include the `kernel:` prefix in your pattern. The Logs view prepends this
 
 ## Step 2: Build the Pattern
 
-Patterns use POSIX Extended Regular Expression (ERE) syntax, not PCRE. The simplest reliable pattern is a plain substring with no anchors and no capture groups:
+Patterns use POSIX Extended Regular Expression (ERE) syntax, not PCRE. Start with a plain substring and then **make it as specific as possible**:
 
 ```
 Issue IOUCTL time_stamp: Failed ioc_status
 ```
 
-This pattern matches every controller instance and every status code because the variable parts are not in it. If you must match variable text, use ERE character classes and escape literal parentheses:
+This minimal substring matches every controller instance and every status code. In most cases, you should add specificity to reduce the risk of accidentally suppressing a different message that happens to share part of the same text. A more specific pattern that anchors on the driver prefix and escapes literal parentheses is safer:
 
 ```
 mpi3mr[0-9]*: Issue IOUCTL time_stamp: Failed ioc_status\(0x[0-9a-f]+\) Loginfo\(0x[0-9a-f]+\)
 ```
 
-{% hint style="success" %}
-**Prefer the Shorter Substring**
+{% hint style="warning" %}
+**Prefer the More Specific Pattern**
 
-Broader matching is usually fine here. The goal is to quiet a known-cosmetic line, so use the shorter substring.
+Avoid overly short or broad substrings. A pattern that is too general can inadvertently suppress a related but distinct message that *does* indicate a real fault. Use the most specific string that reliably matches the known-cosmetic message and nothing else. If variable fields like status codes are meaningful — for example, only one particular code is cosmetic — include them in the pattern.
 {% endhint %}
 
-## Step 3: Add the Pattern to syslog_regex_list
+Step 3: Add the Pattern via the Cluster Settings UI
 
-The `syslog_regex_list` setting is not exposed in **System > Settings > Advanced Settings** by default, so set it through the API.
+{% hint style="warning" %} Do not clear or replace the installed default System Log Filter value.
 
-1. Navigate to **System > API Documentation**.
-2. Find the settings endpoint.
-3. POST a new entry. If `syslog_regex_list` already exists, use PUT instead.
+VergeOS populates the System Log Filter field with a default set of entries at installation. These defaults suppress a large volume of routine kernel and service messages that would otherwise make the Logs view unreadable. Deleting or overwriting them will cause that noise to flood back into the Logs view. Always append your new pattern to the end of the existing value. {% endhint %}
 
-The value is a JSON array of pattern strings:
+Navigate to Clusters in the main menu.
+Click on the cluster name to select it, then click Edit.
+Scroll down to the System Log Filter field. You will see the default entries already populated — for example:
+   *:3,ipmievd:5,rasdaemon,!ntpd,!postfix
+Place your cursor at the end of the existing value, add a comma, then append your new pattern:
+   *:3,jpmievd:5,rasdaemon,!ntpd,!postfix,mpi3mr[0-9]*: Issue IOUCTL time_stamp: Failed ioc_status\(0x[0-9a-f]+\) Loginfo\(0x[0-9a-f]+\)
+Click Submit to save.
 
-```json
-{
-  "key": "syslog_regex_list",
-  "value": "[\"Issue IOUCTL time_stamp: Failed ioc_status\"]",
-  "description": "syslog message filter"
-}
-```
-
-To filter more than one message, add more elements to the array:
-
-```json
-{
-  "key": "syslog_regex_list",
-  "value": "[\"Issue IOUCTL time_stamp: Failed ioc_status\",\"another pattern here\"]"
-}
-```
+{% hint style="info" %} If you need to filter multiple distinct messages, add each pattern as its own comma-delimited entry, all appended to the end of the existing value. {% endhint %}
 
 ## Step 4: Reload the Filter on Each Node
 
@@ -142,7 +139,6 @@ Wait until the message would normally recur, then check **System > Logs**. The l
 
 {% hint style="info" %}
 **Verify in the Logs View, Not the Raw Syslog**
-
 The raw syslog inside a system diagnostics file still contains the message by design. Only the Logs view reflects the filter.
 {% endhint %}
 
@@ -153,11 +149,10 @@ The raw syslog inside a system diagnostics file still contains the message by de
 **Cause**: The pattern does not match, or a node has not reloaded the filter.
 
 **Solution**:
-
 1. Make sure the pattern does not include the `kernel:` prefix.
 2. Make sure the pattern uses ERE syntax — escape literal parentheses as `\(` and `\)`.
 3. Toggle **Capture System Logs** on the node again.
-4. If the message still appears, reboot the node.
+4. The node may need to be rebooted. Always **Follow proper** [**Maintenance Mode**](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/operations/maintenance-mode) **procedures when rebooting a node to avoid workload disruptions.**
 
 ### The message still appears in a system diagnostics file
 
@@ -167,13 +162,12 @@ The raw syslog inside a system diagnostics file still contains the message by de
 
 ## Additional Resources
 
-- [Advanced System Settings](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/system-administration/advanced-system-settings)
+- [Cluster Settings](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/system-administration/cluster-settings)
 - [Node Diagnostics](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/system-administration/node-diagnostics)
 - [System Logs](system-logs.md)
 - [Generating System Diagnostics](generating-system-diagnostics.md)
 
-{% hint style="info" %}
+{% hint style="danger" %}
 **Need Help?**
-
-If you are not sure whether a repeating log line is cosmetic or a real fault, contact the VergeOS support team before you suppress it.
+If you are not certain whether a repeating log line is cosmetic or a real fault, contact the VergeOS support team **before** suppressing it. Suppressing an active fault message can delay diagnosis of a serious hardware problem.
 {% endhint %}
