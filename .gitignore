@@ -21,5 +21,6 @@ venv/
 *.log
 *.tmp
 
-# Claude
-.claude/
+# Claude — ignore local session/config files, but track shared repo tooling
+.claude/*
+!.claude/scripts/

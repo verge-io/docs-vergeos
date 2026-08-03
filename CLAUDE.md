@@ -11,7 +11,8 @@ content was ported from the MkDocs source site at `/Users/jasonyaeger/Workspaces
 by the scripts in `migration/`.
 
 GitBook target: org **Verge.io** (`FpusSnrkRHyZiVEsXf9X`), site **VergeOS Docs**
-(`site_1U4gk`, published at `https://verge-io.gitbook.io/vergeos-docs/`).
+(`site_1U4gk`, published at `https://docs.verge.io/` — the old
+`verge-io.gitbook.io/vergeos-docs` URL redirects there).
 
 ## Space directories and IDs
 
@@ -26,21 +27,28 @@ readers to the GitBook login. Verify paths against the content API
 yet when the linking page last synced, the linking file must be touched (any content
 change) to force re-import and re-resolution.
 
-| Dir              | GitBook space                                      | Space ID               |
-| ---------------- | -------------------------------------------------- | ---------------------- |
-| `home/`          | Home                                               | `uJc5d3O7cwI7qD8muSyG` |
-| `deploy/`        | Plan and deploy                                    | `Q2bN3ctQdjv01GivTI08` |
-| `run/`           | Run the platform                                   | `pODKGSQETqL1gSqyxIq3` |
-| `automate/`      | Automate, protect, and extend                      | `sppYQkyIET58BuAo0kqm` |
-| `learn/`         | Learn the platform (space still titled "Training") | `qLUTTK5fxfW4S9FoS9GE` |
-| `knowledge-base/` | Knowledge Base                                    | `QZBMFpokMv2vWTIRbFzA` |
-| `release-notes/` | Release notes                                      | `33mA7es4mQYkyUa7dMvu` |
+`.claude/scripts/check-cross-space-links.sh` validates every cross-space link in the repo
+against the live content API; `--published` additionally scans the published pages for
+unresolved `app.gitbook.com` anchors. Run it after renaming pages or SUMMARY groups
+(page paths drift) and before merging link-heavy changes.
+
+| Dir               | GitBook space                 | Space ID               | Published under                        |
+| ----------------- | ----------------------------- | ---------------------- | -------------------------------------- |
+| `home/`           | Home                          | `uJc5d3O7cwI7qD8muSyG` | `docs.verge.io/`                       |
+| `deploy/`         | Plan and deploy               | `Q2bN3ctQdjv01GivTI08` | `docs.verge.io/plan-and-deploy/`       |
+| `run/`            | Run the platform              | `pODKGSQETqL1gSqyxIq3` | `docs.verge.io/run-the-platform/`      |
+| `automate/`       | Automate, protect, and extend | `sppYQkyIET58BuAo0kqm` | `docs.verge.io/automate-protect-and-extend/` |
+| `learn/`          | Learn the platform            | `qLUTTK5fxfW4S9FoS9GE` | `docs.verge.io/learn-the-platform/`    |
+| `knowledge-base/` | Knowledge Base                | `QZBMFpokMv2vWTIRbFzA` | `docs.verge.io/knowledge-base/`        |
+| `release-notes/`  | Release notes                 | `33mA7es4mQYkyUa7dMvu` | `docs.verge.io/release-notes/`         |
+
+A page's published URL is its "Published under" base + its GitBook page path
+(e.g. `run/product-guide/system/running-updates.md` →
+`docs.verge.io/run-the-platform/system-administration/running-updates`).
 
 The site also has an **API Reference** space that is intentionally NOT in this repo — it
-has no source equivalent and is edited directly in GitBook. (**Training** previously had no
-source equivalent; it now lives here as `learn/`, ported from the `vergeos-technical-training`
-repo. Its **Learn the platform** section — `sitesc_pD33P` — already exists on the site; the
-remaining step is repointing that space's Git Sync at this repo's `learn/` directory.)
+has no source equivalent and is edited directly in GitBook. (`learn/` was ported from the
+`vergeos-technical-training` repo; its space's Git Sync is active against this repo.)
 
 ## Per-space layout (GitBook conventions)
 
@@ -106,7 +114,7 @@ SUMMARYs; other `product-guide/*` route by subdirectory; KB posts route by front
 After re-running the converter, these must all come back clean:
 
 ```bash
-SPACES="home deploy run automate knowledge-base release-notes"
+SPACES="home deploy run automate learn knowledge-base release-notes"
 grep -rEl '^[[:space:]]*([!]{3}|[?]{3})' $SPACES   # leftover admonitions (expect none)
 grep -rEl '^[[:space:]]*=== "' $SPACES             # leftover content tabs (expect none)
 grep -rhoE '\]\((/assets/|/product-guide/|\.\./assets/)[^)]*\)' $SPACES  # unrewritten asset paths (expect none)
@@ -126,8 +134,9 @@ curl -s -H "Authorization: Bearer $GITBOOK_API_TOKEN" "https://api.gitbook.com/v
 Useful endpoints: `/v1/orgs/{org}/sites/{site}/structure` (sections + spaces),
 `/v1/spaces/{spaceId}/content` (page tree).
 
-## Important: Git Sync direction
+## Git Sync status and direction
 
-Connecting Git Sync makes this repo the source of truth and the **first sync overwrites
-the existing space content**. Pilot one space (`deploy/`, smallest) and verify the GitBook
-preview before wiring the rest.
+All seven spaces have **active Git Sync** against this repo (`main` branch). Sync is
+one-way GitHub → GitBook: this repo is the source of truth, and GitBook does not push
+back. If a new space is ever connected, note the **first sync overwrites the existing
+space content** — verify the GitBook preview before wiring it.
