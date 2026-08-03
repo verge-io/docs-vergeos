@@ -93,7 +93,7 @@ Many resource list views (for example, **Virtual Machines > List** and **Network
 3. Click **Add User**.
 4. Select the desired user from the ***User Name*** dropdown.
 5. Check the boxes for ***list***, ***read***, ***create***, ***modify***, and ***delete***.
-6. In the ***Type*** dropdown field, select **"Your Cloud" (default)**.
+6. In the ***Type*** dropdown field, select **"Your System" (default)**.
 7. ***--All sections--*** will be selected by default
 8. Click the **Submit** button.
 
