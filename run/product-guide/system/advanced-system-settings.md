@@ -94,7 +94,7 @@ For detailed information on these settings and their effects, please contact Ver
 | ***Override physical network for new tenants (172.17.0.0/24)*** | **Do not modify this setting unless expressly directed by VergeIO support** | |
 | ***Password Complexity Requirement*** | Options include lower case, upper case, number and symbol requirements; minimum length; force password resets(all users); any combination of options can be selected.  | length:8 |
 | ***Remote syslog server (tcp: @@ name/ip:port, udp: @ name/ip:port)*** | specify syslog server for log export | |
-| ***SMART max hours a drive can reach before a warning is set*** | Sets the maximum operational hours for a drive before triggering a warning. This helps identify aging drives. | 43800 |
+| ***SMART max hours a drive can reach before a warning is set*** | Sets the maximum operational (power-on) hours for a drive before triggering an **"HD Warning - hours exceeded maximum threshold(s)"** alert. Default is 43800 hours (5 years); maximum value is 87600 hours (10 years). | 43800 |
 | ***SMART max number of current pending sectors a drive can have before a warning is set*** | Defines the threshold for pending sectors (sectors waiting to be remapped) before issuing a warning. Indicates potential drive issues. | 1 |
 | ***SMART max number of offline uncorrectable sectors a drive can have before a warning is set*** | Specifies the maximum number of sectors that couldn't be read during offline tests before triggering a warning. Suggests serious drive problems. | 1 |
 | ***SMART max number of reallocated sectors a drive can have before a warning is set*** | Sets the limit for reallocated sectors (bad sectors that have been replaced) before warning. Indicates drive degradation. | 1 |
@@ -117,3 +117,18 @@ For detailed information on these settings and their effects, please contact Ver
 | ***Webserver max session API rate limit*** | Restricts the number of API requests a single session can make within a short time frame. | 50 |
 | ***vSAN host/ip override*** | Specifies an alternative host or IP address for vSAN operations, particularly for incoming site synchronizations. | |
 | ***vSAN max usage percentage*** | Sets the maximum allowed usage percentage for vSAN storage during incoming site synchronizations. | 90 |
+
+{% hint style="info" %}
+**SMART max hours — an age warning, not a failure**
+
+The **"HD Warning - hours exceeded maximum threshold(s)"** alert means a drive's accumulated power-on hours have crossed the *SMART max hours* threshold. It is an age indicator, not a SMART health fault — a drive can have zero reallocated or pending sectors and still trip this warning.
+
+A common trigger is pre-owned or redeployed drives: power-on hours belong to the drive itself, not the cluster, so drives with prior service life carry that history into a new deployment.
+
+**To resolve:**
+
+- **If the drives are healthy** (SMART status OK, no grown defects): raise *SMART max hours* above the drives' current reading to silence the alert. The field is capped at 87600 hours (10 years); a higher value returns a validation error.
+- **If the drives are genuinely aged**: plan a drive refresh. Replace one drive at a time and allow the vSAN to fully rebuild before pulling the next drive, to keep redundancy intact.
+
+Confirm SMART health independently before dismissing the alert.
+{% endhint %}

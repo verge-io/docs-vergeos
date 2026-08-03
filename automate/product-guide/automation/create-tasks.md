@@ -95,6 +95,10 @@ Event triggers allow tasks to run in response to specific system occurrences.
 
 Schedule triggers allow tasks to run at a specific time or on a recurring basis.
 
+{% hint style="info" %}
+Schedule times are evaluated in cluster/system time, not the local time of your browser. A schedule set for 18:00 runs at 18:00 cluster time, regardless of your browser time zone.
+{% endhint %}
+
 1. Click the **Schedule Triggers** card on the task dashboard.  
 {% hint style="success" %}
 **The card displays the number of schedules currently associated with the task.**

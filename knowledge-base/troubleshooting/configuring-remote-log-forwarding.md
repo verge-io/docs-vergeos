@@ -73,8 +73,12 @@ Navigate to **System > Settings > Advanced Settings**.
 **Template Example**
 
 ```plaintext
-   GRAYLOGRFC5424,"<%PRI%>%PROTOCOL-VERSION% %TIMESTAMP:::date-rfc3339% %HOSTNAME%.your-hostname-here %APP-NAME% %PROCID% %MSGID% %STRUCTURED-DATA% %msg%\n"
+   RFC5424,"<%PRI%>1 %TIMESTAMP:::date-rfc3339% %HOSTNAME%.your-hostname-here %APP-NAME% %PROCID% %MSGID% %STRUCTURED-DATA% %msg%\n"
 ```
+{% endhint %}
+
+{% hint style="warning" %}
+Use the literal `1` after `<%PRI%>` — it is the RFC 5424 version field. Do not use `%PROTOCOL-VERSION%`: it renders as `0` on the wire, and strict RFC 5424 collectors (Promtail/Loki, Fluent Bit, modern Graylog) reject version 0 with parse errors.
 {% endhint %}
 
 {% hint style="info" %}

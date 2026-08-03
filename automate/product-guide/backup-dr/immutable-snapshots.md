@@ -1,6 +1,6 @@
 ---
 title: "Immutable Snapshots"
-description: "How to enable, manage, and understand immutable snapshots in VergeOS, which prevent deletion of system snapshots for ransomware protection with a mandatory seven-day unlock delay."
+description: "How to enable and manage immutable snapshots in VergeOS, which block early deletion of system snapshots for ransomware protection for their retention period, up to 7 days."
 semantic_keywords:
   - "immutable snapshots ransomware protection VergeOS"
   - "prevent snapshot deletion lock unlock"
@@ -27,23 +27,22 @@ categories:
 ## Overview
 
 {% hint style="danger" %}
-****Critical: Understand Risks Before Enabling****
+****Critical: Understand the Deletion Lock Before Enabling****
 
-**Immutable snapshots CANNOT be deleted for 7 days - even in emergencies.**
+**An immutable snapshot cannot be deleted by anyone — including administrators and VergeOS Support — until its lock expires.** The lock is set at snapshot creation and lasts for the snapshot's retention period or 7 days, whichever is shorter.
 
-**This means:**
+**Key facts:**
 
-- If storage fills up, you CANNOT immediately free space by deleting these snapshots
-- There is NO emergency override for administrators or VergeOS support
-- Storage emergencies require 7-day advance planning or adding physical capacity
+- Immutability does **not** extend retention. The snapshot still expires on its normal schedule; the flag only blocks early deletion.
+- There is no emergency override. Snapshots with long retention or no expiration cannot be deleted to free space for up to 7 days.
+- The 7-day figure applies only to snapshots with a retention of 7 days or more, or with no expiration. The default *Hourly for 3 hours* immutable snapshots unlock after 3 hours.
 
-**Before enabling, ensure:**
+**Before you enable immutable snapshots with long retention or no expiration:**
 
-- Storage utilization is below 70%
-- You have capacity monitoring and alerting configured
-- You understand your snapshot retention will consume X GB over 7 days
+- Keep storage utilization below 70%
+- Configure capacity monitoring and alerting
 
-**VergeOS recommends:** Use immutable snapshots only for short retention (3 hours default) in production systems, or use them in dedicated backup systems with ample capacity.
+**VergeOS recommends:** Use short retention (the 3-hour default) for immutable snapshots on production systems; reserve long-retention immutable snapshots for dedicated backup systems with ample capacity.
 {% endhint %}
 
 An immutable snapshot is a powerful safeguard feature designed to prevent tampering or deletion of saved data, even by administrators or automated processes. The immutable option provides a safety net against accidental or malicious erasure, ensuring that a snapshot remains available when needed for data recovery.
@@ -54,7 +53,8 @@ When a snapshot is marked as immutable, deletion is blocked for all users, inclu
 ****Key Features****
 
 - Complete deletion protection, even from privileged accounts
-- Seven-day unlock delay for enhanced security
+- Unlock delay of up to 7 days, capped by the snapshot's retention
+- Immutability blocks early deletion but does not extend retention — snapshots still expire on schedule
 - Applies to system snapshots only
 - Built-in ransomware protection
 {% endhint %}
@@ -75,7 +75,7 @@ Ransomware actors commonly delete all available snapshots to eliminate recovery 
 **Critical Considerations:**
 
 - Plan for storage capacity carefully, as immutable snapshots cannot be deleted immediately to reclaim space
-- Ensure you have an adequate storage buffer to account for the seven-day unlock delay
+- Ensure you have an adequate storage buffer to account for the unlock delay (up to seven days)
 - If approaching storage limits, remember that clearing space through snapshot deletion requires advance planning
 
 ### Access Control
@@ -91,7 +91,7 @@ Ransomware actors commonly delete all available snapshots to eliminate recovery 
 **Best Practices:**
 
 - Avoid operating too close to storage capacity limits where undeletable snapshots could cause issues
-- Plan snapshot retention policies with the seven-day unlock delay in mind
+- Plan snapshot retention policies with the unlock delay (up to seven days) in mind
 - Consider storage growth and capacity planning as part of your backup strategy
 
 ## VergeOS Implementation
@@ -181,7 +181,7 @@ The 7-day unlock period only matters if you need to manually delete a snapshot b
 
 **Immediate actions:**
 
-1. Request unlock for all immutable snapshots (begins 7-day countdown)
+1. Request unlock for all immutable snapshots (begins the unlock countdown — the remaining retention, up to 7 days)
 2. Stop all snapshot creation temporarily
 3. Add physical storage capacity (only immediate solution)
 4. Delete any non-immutable snapshots or VMs
