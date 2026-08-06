@@ -34,7 +34,7 @@ categories:
 **Release Information**
 
 - **Release Date**: January 2026
-- **Latest Version**: 26.1.8 (August 2026)
+- **Latest Version**: 26.1.7 (July 2026)
 - **Status**: Latest Production Release
 - **End-of-Life**: TBD
 {% endhint %}
@@ -81,23 +81,6 @@ categories:
 - Added support for N+2 (RF3) vSAN redundancy, also known as Replication Factor 3
 - Provides additional fault tolerance beyond standard N+1 configurations
 {% endhint %}
-
-## 26.1.8 (August 2026)
-
-VergeOS 26.1.8 is a maintenance release that resolves three customer-impacting bugs: a virtual machine migration loop that could occur when a node exited maintenance mode, vGPU profiles failing to populate on dual-socket hosts, and a VMware service that could not start with a static IP configuration.
-
-### Bug Fixes
-
-#### High Availability
-- Fixed a VM migration loop when exiting maintenance mode. If more virtual machines than there were nodes shared the same HA group, a VM could get stuck migrating back and forth indefinitely when a node came back out of maintenance. VMs now return directly to their home node when maintenance ends, and the cluster settles reliably.
-
-#### Virtual GPU (vGPU)
-- Fixed vGPU profile discovery on dual-socket hosts. On systems where an NVIDIA GPU was installed on the second CPU socket (a non-zero PCI domain, e.g. `0001`), the vGPU profile list would never populate and no vGPU could be used. The system now correctly detects available vGPU profiles regardless of the PCI domain the GPU is on, so vGPU resource groups populate and work as expected on any socket.
-
-#### VMware
-- Fixed a failure to start a VMware service (container) with a static IP. A newly created VMware service that had no network attached could fail to start and continuously loop after its NIC was placed on an external network with a static IPv4 configuration. VMware services using static IPs now start cleanly.
-
----
 
 ## 26.1.7 (July 2026)
 

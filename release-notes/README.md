@@ -37,7 +37,7 @@ Release notes for every version of VergeOS. Select a version in the table below 
 
 | Release | Initial Release | Latest Version | Status | End-of-Life |
 |--------|----------------|----------------|---------|-------------|
-| [26.1](2026/26-1-release-notes.md) | January 2026 | 26.1.8 (August 2026) | Latest | TBD |
+| [26.1](2026/26-1-release-notes.md) | January 2026 | 26.1.7 (July 2026) | Latest | TBD |
 | [26.0](2026/26-0-release-notes.md) | October 2025 | 26.0.2.2 (December 2025) | Supported | TBD |
 | [4.13](2025/4-13-release-notes.md) | November 2024 | 4.13.4.2 (August 2025) | Supported | TBD |
 | [4.12](2025/4-12-release-notes.md) | February 2024 | 4.12.6 (July 2024) | Deprecated | January 2026 |
