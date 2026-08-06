@@ -137,20 +137,18 @@ USB devices can be passed to a tenant for the tenant to pass to its own VMs.  Wh
 
 **Symptom:** A VM with a USB passthrough device fails to start after its host node reboots (for example, after a VergeOS update). The VM repeatedly attempts to start but cannot open the USB device.
 
-**Cause:** The auto-generated resource rule matches the device by its physical bus address (the `path` filter field). That address is assigned when the device enumerates and can change when the node reboots or the device is re-seated. When the device re-enumerates at a different address, the rule no longer matches a live device, and the VM cannot start.
+**Cause:** The auto‑generated resource rule identifies the device using its physical bus address (the path filter). That address is assigned each time the USB device enumerates. Changes in server hardware topology—such as adding or removing PCI devices—can alter how the USB controller presents its ports, resulting in a different path. On a small minority of systems, the motherboard firmware may re‑enumerate USB ports differently after a controller reset, causing the path to change even without any hardware modifications. When the device appears at a new address, the rule no longer matches a live device, preventing the VM from starting.
 
 **Fix:** Edit the resource rule to match the device by its stable hardware IDs instead of the physical address:
-
+ 
 1. Navigate to **Infrastructure > Resources**.
 2. **Double-click the USB resource group** for the device.
 3. **Double-click the resource rule** to edit it.
 4. Enable the **vendor ID** (`vendor_id`) and **model ID** (`model_id`) filter fields. The model ID is the USB product ID.
-5. Disable the physical location filter fields (`path` and `device`).
-6. Click **Submit** to save the rule.
-7. Start the VM.
+5. Select the **Serial** field to filter to the particular device.  Most reputable-brand USB flash drives, external HDD/SSD, webcams, printers/scanners, etc. include a unique, factory-programmed serial. 
+6. Disable the physical location filter fields (path and device) if your server does not assign a consistent PCI path across boots. You may also disable these fields if you want the rule to match the device regardless of which USB port it is plugged into.  
+7. Click **Submit** to save the rule.
+8. Start the VM.
 
-The vendor and model IDs are stable across reboots, so the rule matches the device regardless of how it re-enumerates.
+Vendor, model ID, and serial number are stable across reboots, so the rule matches the device regardless of how it re-enumerates.
 
-{% hint style="info" %}
-A serial number is not an available USB filter field, even though other device types support it. Match USB devices by the vendor and model IDs only.
-{% endhint %}
