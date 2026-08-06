@@ -84,12 +84,15 @@ categories:
 
 ## 26.1.8 (August 2026)
 
-VergeOS 26.1.8 is a maintenance release delivering targeted bug fixes for high availability, vGPU, and VMware integration. Highlights include a fix for a VM migration loop when exiting maintenance mode, vGPU profile discovery on dual-socket hosts, and VMware services failing to start with a static IP.
+VergeOS 26.1.8 is a maintenance release delivering targeted bug fixes for tenant networking, high availability, vGPU, and VMware integration. Highlights include fixes for a silent cross-VLAN leak when removing a tenant's Layer 2 network attachment, a VM migration loop when exiting maintenance mode, vGPU profiles that failed to populate on dual-socket hosts, and VMware services that could not start with a static IP.
 
 ### Bug Fixes
 
+#### Networking
+- Fixed a silent cross-VLAN leak when removing a tenant's Layer 2 network attachment: deleting one attachment while the tenant was running re-enumerated the remaining attachments and moved their host-side interfaces onto different bridges, so traffic could be carried on the wrong VLAN; the remaining attachments now keep their assigned networks
+
 #### High Availability
-- Fixed a VM migration loop when exiting maintenance mode: if more VMs than nodes shared the same HA group, a VM could get stuck migrating back and forth indefinitely when a node came back out of maintenance; VMs now return directly to their home node when maintenance ends
+- Fixed a VM migration loop when exiting maintenance mode: if more VMs than nodes shared the same HA group, a VM could get stuck migrating back and forth indefinitely when a node came out of maintenance; VMs now return directly to their home node when maintenance ends
 
 #### vGPU
 - Fixed vGPU profile discovery on dual-socket hosts: when an NVIDIA GPU was installed on the second CPU socket (a non-zero PCI domain, e.g. `0001`), the vGPU profile list would never populate; profiles are now detected regardless of the PCI domain, so vGPU resource groups work as expected on any socket
