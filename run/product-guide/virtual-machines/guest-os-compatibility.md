@@ -33,7 +33,7 @@ VergeOS, built on Linux KVM technology, provides extensive compatibility for x86
 {% hint style="info" %}
 **OS Support**
 
-While this list represents commonly tested configurations, VergeOS's KVM foundation enables support for virtually any x86_64 operating system or KVM-compatible virtual appliance. Contact support for guidance on specific operating systems or virtual appliances not listed here.
+While this list represents commonly tested configurations, VergeOS's KVM foundation enables **support for virtually any x86_64 operating system or KVM-compatible virtual appliance**. Contact support for guidance on specific operating systems or virtual appliances not listed here.
 {% endhint %}
 
 
