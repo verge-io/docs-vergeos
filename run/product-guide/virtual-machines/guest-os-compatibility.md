@@ -30,13 +30,21 @@ categories:
 
 VergeOS, built on Linux KVM technology, provides extensive compatibility for x86_64 guest operating systems. This includes Windows, Linux distributions, FreeBSD, and virtual appliances designed for KVM environments. While any x86_64-compatible operating system should work without issues, this guide outlines commonly tested configurations.
 
+{% hint style="info" %}
+**OS Support**
+
+While this list represents commonly tested configurations, VergeOS's KVM foundation enables support for virtually any x86_64 operating system or KVM-compatible virtual appliance. Contact support for guidance on specific operating systems or virtual appliances not listed here.
+{% endhint %}
+
+
 {% hint style="success" %}
 **Virtual Appliances**
 
 Virtual appliances packaged for KVM environments are fully compatible with VergeOS. This includes OVA/OVF formats from vendors who support KVM-based deployments.
 {% endhint %}
 
-## Microsoft Windows Support
+## Microsoft Windows 
+## Frequently Deployed Guest Operating Systems (Examples)
 
 ### Windows Desktop Versions
 
@@ -58,7 +66,8 @@ Virtual appliances packaged for KVM environments are fully compatible with Verge
 | Server 2012 R2 | VirtIO/IDE | 2 GB | Extended support ends 2023 |
 | Server 2008 R2 | IDE/SATA | 2 GB | Legacy support only |
 
-## Linux Support
+## Linux
+## Frequently Deployed Guest Operating Systems (Examples)
 
 ### Enterprise Linux Distributions
 
@@ -85,7 +94,8 @@ Virtual appliances packaged for KVM environments are fully compatible with Verge
 | Ubuntu LTS | 20.04, 22.04, 24.04, 26.04 | VirtIO | 2 GB | Recommended for production |
 | Ubuntu | 12.04 - 19.04 | VirtIO | 1 GB | Older releases - limited support |
 
-## FreeBSD Support
+## FreeBSD
+## Frequently Deployed Guest Operating Systems (Examples)
 
 | Version | Support Status | Recommended Interface | Minimum RAM | Notes |
 |---------|---------------|---------------------|-------------|--------|
@@ -101,11 +111,6 @@ Virtual appliances packaged for KVM environments are fully compatible with Verge
 For optimal performance, VirtIO drivers are recommended where supported. Windows guests may require additional driver installation, while most modern Linux distributions include native VirtIO support.
 {% endhint %}
 
-{% hint style="info" %}
-**Additional OS Support**
-
-While this list represents commonly tested configurations, VergeOS's KVM foundation enables support for virtually any x86_64 operating system or KVM-compatible virtual appliance. Contact support for guidance on specific operating systems or virtual appliances not listed here.
-{% endhint %}
 
 ## Technical Considerations
 
