@@ -145,7 +145,7 @@ USB devices can be passed to a tenant for the tenant to pass to its own VMs.  Wh
 2. **Double-click the USB resource group** for the device.
 3. **Double-click the resource rule** to edit it.
 4. Enable the **vendor ID** (`vendor_id`) and **model ID** (`model_id`) filter fields. The model ID is the USB product ID.
-5. Select the **Serial** field to filter to the particular device.  Most reputable-brand USB flash drives, external HDD/SSD, webcams, printers/scanners, etc. include a unique, factory-programmed serial. 
+5. The **Serial** field  (supported devices only) can be selected for filtering to the particular device.  Most reputable-brand USB flash drives, external HDD/SSD, webcams, printers/scanners, etc. include a unique, factory-programmed serial.  
 6. Disable the physical location filter fields (path and device) if your server does not assign a consistent PCI path across boots. You may also disable these fields if you want the rule to match the device regardless of which USB port it is plugged into.  
 7. Click **Submit** to save the rule.
 8. Start the VM.
