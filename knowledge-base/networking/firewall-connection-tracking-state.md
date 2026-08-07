@@ -80,10 +80,9 @@ Removing the drop lets the established replies through, but it also re-opens uns
 
 1. From the network's dashboard, click **Rules** on the left menu.
 2. Select the **Drop** rule and click **Edit** on the left menu.
-3. Expand the **Advanced** section.
-4. In the **Connection Tracking State** field, enter `new`.
-5. Click **Submit**.
-6. Click **Apply Rules** on the left menu to put the change into effect.
+3. In the **Connection Tracking State** field, enter `new`.
+4. Click **Submit**.
+5. Click **Apply Rules** on the left menu to put the change into effect.
 
 The drop now matches only new, unsolicited inbound connections. Return traffic for outbound connections is in state `established`, no longer matches the drop, and falls through to the chain's trailing `ct state established,related accept`.
 
