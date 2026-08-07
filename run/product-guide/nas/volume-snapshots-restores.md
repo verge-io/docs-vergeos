@@ -9,6 +9,7 @@ use_cases:
   - take_manual_volume_snapshots
   - schedule_automated_snapshots
   - restore_volume_from_snapshot
+  - import_snapshots_from_system_snapshots
   - create_quiesced_snapshots
 categories:
   - NAS
@@ -29,7 +30,7 @@ tags:
 
 # NAS Volume Snapshots and Restores
 
-Volume-level snapshots allow for customizing snapshot schedule and retention rules per individual NAS volume and provide the option for a quiesced snapshot.
+Volume-level snapshots allow for customizing snapshot schedule and retention rules per individual NAS volume and provide the option for a quiesced snapshot.  Non-quiesced NAS volumes can be imported from full system snapshots and used for restore.
 
 ## Quiesced Snapshots
 
@@ -73,10 +74,22 @@ When selecting expiration for a snapshot it is important to consider vSAN space 
 ## Restore a Volume from Snapshot
 
 {% hint style="info" %}
+**To restore a volume from a system snapshot, the volume must first be imported from the system snapshot as detailed below. To restore from an individual volume snapshot, skip the import section of instructions and continue to Restore to overwrite -OR- Restore to create new instructions**
+
+Individual volume snapshots can only be imported from a full system snapshot or a partial system snapshot that included the intended volume. 
+{% endhint %}
+
+### _Import Volume Snapshot from a System Snapshot (to make it available for a volume restore)_
 **Restoring from a system snapshot**
 
-Individual volume snapshots cannot be imported from a full system snapshot. To recover NAS data from a system snapshot, restore the NAS service VM from that snapshot; see *Restore Select VMs from a System Snapshot* in [Restores from System Snapshots](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/backup-and-dr/system-snapshot-restores). The restore creates a new instance of the NAS service with all of its volumes attached, which can be managed like any other NAS service.
-{% endhint %}
+1. From the **volume dashboard**, click **System Snapshots** (left menu or UI tile).
+2. Click to **select desired system snapshot**.
+3. Click **Import Snapshot** on the left menu.
+4. \***Name, Description and Expiration fields** will default to the values from the system snapshot; make changes if desired; changes made will only apply to the import and will not affect the underlying system snapshot.
+5. Click **Submit** to continue.
+6. (If the process was continued) a message should appear stating the import process has begun. Click the **Ok** button to acknowledge.
+7. When the import is complete, the snapshot will be available for restore using instructions below.
+
 
 ### _Restore a Volume (to overwrite existing current version of volume)_
 
