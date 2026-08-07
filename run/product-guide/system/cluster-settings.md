@@ -196,7 +196,7 @@ The virtual machine setting: *Migration Method* allows defining migration behavi
 
 ### Enabling Nested Virtualization
 
-Nested virtualization requires two settings; the cluster setting alone has no effect:
+Nested virtualization requires two settings; it must be enabled for the cluster and at the VM level:
 
 1. **Cluster level:** Enable **Nested Virtualization** in the cluster settings (item 5 above). If a restart message appears at the top of the cluster dashboard, reboot the cluster nodes using proper [Maintenance Mode procedures](../operations/maintenance-mode.md).
 2. **VM level:** From the VM dashboard, click **Edit** and enable **Nested Virtualization** in the VM settings.
