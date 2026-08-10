@@ -22,11 +22,6 @@ categories:
   - Backup and DR
 ---
 
-Here’s a clean, GitBook‑ready Markdown version of your Google Doc.  
-I preserved structure, hierarchy, tables, and hint blocks using GitBook‑compatible syntax.
-
----
-
 # Immutable Snapshots
 
 ## Overview
