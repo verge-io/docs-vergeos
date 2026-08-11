@@ -96,9 +96,19 @@ If the authorization source has been configured to auto create users, do not cre
 
 13. Click **Submit** to save the new user.
 
-{% hint style="info" %}
-Group membership is assigned after the user is created. To add the new user to one or more groups, use the **Add Members** instructions below.
+### Group Membership
+
+Group membership is assigned after the user is created. 
+To add the new user to one or more groups:
+1. Select **Modify Membership** on the left menu.
+2. Click to select each intended group.
+3. Click **Submit** after all group selections are made.
+
+{% hint style="success" %}
+Users can also be added to individual groups using the **Add Members** instructions below.
+
 {% endhint %}
+
 
 ## Create a New Group
 
