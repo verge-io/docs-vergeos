@@ -194,6 +194,25 @@ This section configures compute resource policies for your cluster.  These setti
 The virtual machine setting: *Migration Method* allows defining migration behavior per VM (e.g. require manual shutdown, attempt live migration) 
 {% endhint %}
 
+### Enabling Nested Virtualization
+
+Nested virtualization requires two settings; it must be enabled for the cluster and at the VM level:
+
+1. **Cluster level:** Enable **Nested Virtualization** in the cluster settings (item 5 above). If a restart message appears at the top of the cluster dashboard, reboot the cluster nodes using proper [Maintenance Mode procedures](../operations/maintenance-mode.md).
+2. **VM level:** From the VM dashboard, click **Edit** and enable **Nested Virtualization** in the VM settings.
+
+Restart the VM after you enable both settings. The CPU feature is applied when the VM starts.
+
+{% hint style="info" %}
+The **Allow Nested Virtualization Live Migration** setting (item 6 above) is separate. It only controls whether VMs with nested virtualization can live migrate between nodes; it is not required to run nested virtualization.
+{% endhint %}
+
+{% hint style="success" %}
+**Hyper-V Use Case**
+
+Running Hyper-V inside a Windows guest is a common reason to enable nested virtualization. When nested virtualization is not enabled at both levels, the Hyper-V role can cause the guest to enter a boot loop shortly after the Windows logo appears. If the Hyper-V role still fails after a restart, power the VM fully off and back on. Running Hyper-V as a nested guest is suitable for lab and testing scenarios; it is not a production-certified configuration.
+{% endhint %}
+
 ## Storage (Swap Settings)
 
 {% hint style="warning" %}
