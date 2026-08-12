@@ -26,7 +26,7 @@ categories:
 Valid licensing configuration is required to run workloads and NAS services and to perform system updates.  Normal licensing and updates will require connection and authentication to a VergeOS Update Server. 
 
 {% hint style="info" %}
-**For Air-gap licensing/updates see: KB articles: [Requesting an Airgap License for VergeOS](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/getting-started/requesting-an-airgap-license) and [Updating a VergeOS System with Airgap License](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/system-administration/updating-vergeos-system-with-airgap-license).**
+**For Air-gap licensing/updates see: KB articles: [Requesting an Airgap License for VergeOS](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/system-administration/requesting-an-airgap-license) and [Updating a VergeOS System with Airgap License](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/system-administration/updating-vergeos-system-with-airgap-license).**
 
 
 {% endhint %}

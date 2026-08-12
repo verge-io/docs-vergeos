@@ -93,7 +93,7 @@ For environments without outbound internet access, VergeOS supports air-gap lice
 
 For detailed instructions, see:
 
-- [Requesting an Airgap License](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/getting-started/requesting-an-airgap-license)
+- [Requesting an Airgap License](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/system-administration/requesting-an-airgap-license)
 - [Updating a VergeOS System with Airgap License](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/system-administration/updating-vergeos-system-with-airgap-license)
 
 ## Additional Resources

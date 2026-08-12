@@ -191,7 +191,7 @@ Systems with air-gap licensing can be updated using ISO files. See [Updating a V
 ## Additional Resources
 
 * [Updating the VergeOS System](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/system-administration/updating-vergeos-system)
-* [Requesting an Airgap License](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/getting-started/requesting-an-airgap-license)
+* [Requesting an Airgap License](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/system-administration/requesting-an-airgap-license)
 * [Updating a VergeOS System with Airgap License](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/system-administration/updating-vergeos-system-with-airgap-license)
 * [System Snapshots](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/backup-and-dr/system-snapshots)
 * [Restores from System Snapshots](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/backup-and-dr/system-snapshot-restores)
