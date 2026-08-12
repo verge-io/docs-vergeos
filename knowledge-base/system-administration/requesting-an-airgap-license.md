@@ -2,32 +2,34 @@
 title: Requesting an Airgap License
 slug: requesting-an-airgap-license
 author: VergeOS Documentation Team
-date: 2024-08-19T15:41:14.296Z
+date: 2026-08-12T12:00:00.000Z
 semantic_keywords:
   - airgap license request air-gapped environment
   - offline licensing no internet access
   - license request file download email
   - VergeOS system licensing activation
+  - upload airgap license file apply install
 use_cases:
   - request_airgap_license
   - license_air_gapped_system
   - generate_license_request_file
   - offline_system_activation
+  - upload_airgap_license
 categories:
   - Licensing
   - System Administration
 editor: markdown
 dateCreated: 2024-08-19T19:08:58.594Z
 description: >-
-  Guide on how to request and obtain an airgap license for VergeOS systems with
-  no outbound Internet access, including generating the license request file and
-  emailing it to Verge.
+  How to request an airgap license for VergeOS systems with no outbound
+  Internet access, and how to upload the license file you receive from Verge.
 tags:
   - airgap
   - license
   - verge
   - vergeos
   - air-gapped
+  - upload
 ---
 
 # Requesting an Airgap License
@@ -44,9 +46,10 @@ tags:
 * VergeOS requires a valid license for operation
 * Air-gapped environments need a special airgap license
 * The process involves generating a license request file and emailing it to Verge
+* Verge returns a license file, which you upload on the **System > Settings** page
 {% endhint %}
 
-This guide walks you through the process of requesting an airgap license for VergeOS systems in environments without outbound Internet access.
+This guide shows how to request an airgap license for VergeOS systems without outbound Internet access, and how to upload the license file you receive.
 
 ## Prerequisites
 
@@ -54,23 +57,21 @@ This guide walks you through the process of requesting an airgap license for Ver
 * A working email client on a machine that can send external emails
 * Understanding of your system's airgapped status
 
-## Steps
+## Requesting the License
 
 1. Navigate to System Settings
    * From the System Dashboard, click **System** on the left menu
    * Click **Settings** on the left menu
 2. Initiate License Request
-   * In the **License** section, click the **Request License** button
-3. Generate License Request File
-   * A popup window titled "Request Generated" will appear
-   * This window displays information about the license request file
-4. Download Request File
+   * On the left menu, click **Request Offline License**
+   * The **Request Generated** dialog opens and shows the name and size of the license request file
+3. Download Request File
    * Click the **Download Request File** button
    * Save the license request file to your local machine
-5. Prepare Email to Verge
-   * Click the **Email license@Verge.io** button
+4. Prepare Email to Verge
+   * Click the **license@verge.io** link in the dialog
    * This opens your default email client with a pre-addressed email
-6. Send License Request
+5. Send License Request
    * Attach the downloaded license request file to the email
    * Provide additional information in the email body (e.g., company name, purpose of license)
    * Send the email to Verge's licensing team
@@ -79,13 +80,28 @@ This guide walks you through the process of requesting an airgap license for Ver
 
 1. Verge processes your request and generates an airgap license file
 2. You receive a reply email with the airgap license file attached
-3. Upload the received license file to your VergeOS system (covered in a separate guide)
+3. Upload the license file to your VergeOS system (see [Uploading the License](#uploading-the-license))
 
 {% hint style="info" %}
 **Processing Time**
 
 If you haven't received a response within 2 business days, please follow up with Verge's support team.
 {% endhint %}
+
+## Uploading the License
+
+When you receive the license file from Verge, upload it to the system:
+
+1. Navigate to **System > Settings**.
+2. On the left menu, click **Add License**. The **New License** form opens.
+   * If the system already has a license, **Add License** is disabled. Click **Edit License** instead.
+3. Below the **License Key** field, click **Choose File** and select the license file you received.
+   * The file contents fill the **License Key** field.
+   * You can also open the license file in a text editor and paste its contents into the **License Key** field.
+4. (Optional) Enter a **Note**, such as the request date or ticket number.
+5. Click **Submit**.
+
+The **License** section of the Settings page shows the new license and its validity dates.
 
 ## Important Considerations
 
@@ -102,7 +118,14 @@ If you haven't received a response within 2 business days, please follow up with
   * Solution: Verify your access permissions in the VergeOS Cloud Dashboard
 * Problem: Email client doesn't open automatically
   * Solution: Manually compose an email to license@Verge.io and attach the downloaded request file
+* Problem: The license key is rejected when you submit the form
+  * Solution: Make sure the **License Key** field contains the complete, unmodified contents of the license file
 {% endhint %}
+
+## Additional Resources
+
+* [Updating a VergeOS System with Airgap License](updating-vergeos-system-with-airgap-license.md)
+* [Licensing and Software Updates](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/system-administration/licensing-and-updates)
 
 ## Feedback
 
