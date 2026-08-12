@@ -51,7 +51,7 @@ VergeOS firewall rules are stateful. The **Connection Tracking State** field on 
 
 ## The Connection Tracking State Field
 
-The field is in the **Advanced** section of a network rule's edit form. Leave it blank to match any state.
+The field is available in the network rule's edit form. Leave it blank to match any state.
 
 **Allowed values:** `new`, `established`, `related`, `untracked`.
 
