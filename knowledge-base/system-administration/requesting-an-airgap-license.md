@@ -94,7 +94,7 @@ When you receive the license file from Verge, upload it to the system:
 
 1. Navigate to **System > Settings**.
 2. On the left menu, click **Add License**. The **New License** form opens.
-   * If the system already has a license, **Add License** is disabled. Click **Edit License** instead.
+   * If the system already has a license, the menu shows **Edit License** instead. Click it to replace the installed key.
 3. Below the **License Key** field, click **Choose File** and select the license file you received.
    * The file contents fill the **License Key** field.
    * You can also open the license file in a text editor and paste its contents into the **License Key** field.
