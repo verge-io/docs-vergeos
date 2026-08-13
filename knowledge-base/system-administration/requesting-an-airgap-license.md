@@ -22,7 +22,7 @@ editor: markdown
 dateCreated: 2024-08-19T19:08:58.594Z
 description: >-
   How to request an airgap license for VergeOS systems with no outbound
-  Internet access, and how to upload the license file you receive from Verge.
+  Internet access, and how to upload the license file you receive from Verge.io.
 tags:
   - airgap
   - license
@@ -45,8 +45,8 @@ tags:
 
 * VergeOS requires a valid license for operation
 * Air-gapped environments need a special airgap license
-* The process involves generating a license request file and emailing it to Verge
-* Verge returns a license file, which you upload on the **System > Settings** page
+* The process involves generating a license request file and emailing it to Verge.io
+* Verge.io returns a license file, which you upload on the **System > Settings** page
 {% endhint %}
 
 This guide shows how to request an airgap license for VergeOS systems without outbound Internet access, and how to upload the license file you receive.
@@ -67,7 +67,7 @@ This guide shows how to request an airgap license for VergeOS systems without ou
 3. Download Request File
    * Click the **Download Request File** button
    * Save the license request file to your local machine
-4. Prepare Email to Verge
+4. Prepare Email to Verge.io
    * Click the **license@verge.io** link in the dialog
    * This opens your default email client with a pre-addressed email
 5. Send License Request
@@ -77,19 +77,19 @@ This guide shows how to request an airgap license for VergeOS systems without ou
 
 ## What Happens Next
 
-1. Verge processes your request and generates an airgap license file
+1. Verge.io processes your request and generates an airgap license file
 2. You receive a reply email with the airgap license file attached
 3. Upload the license file to your VergeOS system (see [Uploading the License](#uploading-the-license))
 
 {% hint style="info" %}
 **Processing Time**
 
-If you haven't received a response within 2 business days, please follow up with Verge's support team.
+If you haven't received a response within 2 business days, please follow up with VergeOS support team.
 {% endhint %}
 
 ## Uploading the License
 
-When you receive the license file from Verge, upload it to the system:
+When you receive the license file from Verge.io, upload it to the system:
 
 1. Navigate to **System > Settings**.
 2. On the left menu, click **Add License**. The **New License** form opens.
