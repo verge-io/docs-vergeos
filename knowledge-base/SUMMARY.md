@@ -4,7 +4,6 @@
 
 * [Getting Started & Installation](getting-started/README.md)
   * [Pre-installation Checklist](getting-started/preinstallation-checklist.md)
-  * [Requesting an Airgap License](getting-started/requesting-an-airgap-license.md)
   * [Secure Boot and Boot Integrity for Physical Nodes](getting-started/node-secure-boot.md)
 * [Virtual Machines](virtual-machines/README.md)
   * [Changing Resolution on a UEFI VM](virtual-machines/changing-resolution-on-a-uefi-vm.md)
@@ -115,6 +114,7 @@
   * [Proper Power Sequence](system-administration/proper-power-sequence-for-vergeos.md)
   * [Proper VergeOS System Shutdown Procedure](system-administration/proper-vergeos-system-shutdown-procedure.md)
   * [Removing a Node from a VergeOS Cluster](system-administration/removing-a-node-from-cluster.md)
+  * [Requesting an Airgap License](system-administration/requesting-an-airgap-license.md)
   * [Setting Up VergeOS as an Identity Provider with OIDC](system-administration/setting-up-vergeos-as-identity-provider-oidc.md)
   * [Updating a VergeOS System with Airgap License](system-administration/updating-vergeos-system-with-airgap-license.md)
   * [Updating the VergeOS System](system-administration/updating-vergeos-system.md)
