@@ -44,7 +44,6 @@ Virtual appliances packaged for KVM environments are fully compatible with Verge
 {% endhint %}
 
 ## Microsoft Windows 
-## Frequently Deployed Guest Operating Systems (Examples)
 
 ### Windows Desktop Versions
 
@@ -67,7 +66,6 @@ Virtual appliances packaged for KVM environments are fully compatible with Verge
 | Server 2008 R2 | IDE/SATA | 2 GB | Legacy support only |
 
 ## Linux
-## Frequently Deployed Guest Operating Systems (Examples)
 
 ### Enterprise Linux Distributions
 
@@ -95,7 +93,6 @@ Virtual appliances packaged for KVM environments are fully compatible with Verge
 | Ubuntu | 12.04 - 19.04 | VirtIO | 1 GB | Older releases - limited support |
 
 ## FreeBSD
-## Frequently Deployed Guest Operating Systems (Examples)
 
 | Version | Support Status | Recommended Interface | Minimum RAM | Notes |
 |---------|---------------|---------------------|-------------|--------|
