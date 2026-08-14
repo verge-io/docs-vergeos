@@ -58,9 +58,11 @@ This guide shows how to request an airgap license for VergeOS systems without ou
 * Understanding of your system's airgapped status
 
 ## Requesting the License
+
 **From the system you intend to license:**
+
 1. Navigate to System Settings
-  Select **System** from the top menu and then select **Settings**.
+   * Select **System** from the top menu and then select **Settings**.
 2. Initiate License Request
    * On the left menu, click **Request Offline License**
    * The **Request Generated** dialog opens and shows the name and size of the license request file

@@ -141,9 +141,9 @@ USB devices can be passed to a tenant for the tenant to pass to its own VMs.  Wh
 
 **Fix:** Edit the resource rule to match the device by its stable hardware IDs instead of the physical address:
  
-1. Navigate to **Infrastructure > Resources**.
-2. **Double-click the USB resource group** for the device.
-3. **Double-click the resource rule** to edit it.
+1. Navigate to **Infrastructure > Resources > Groups**.
+2. **Double-click the USB resource group** for the device to open its dashboard.
+3. In the ***Rules*** section, click the resource rule, then click **Edit** on the left menu.
 4. Enable the **vendor ID** (`vendor_id`) and **model ID** (`model_id`) filter fields. The model ID is the USB product ID.
 5. The **Serial** field  (supported devices only) can be selected for filtering to the particular device.  Most reputable-brand USB flash drives, external HDD/SSD, webcams, printers/scanners, etc. include a unique, factory-programmed serial.  
 6. Disable the physical location filter fields (path and device) if your server does not assign a consistent PCI path across boots. You may also disable these fields if you want the rule to match the device regardless of which USB port it is plugged into.  

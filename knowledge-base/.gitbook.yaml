@@ -2,3 +2,5 @@ root: ./
 structure:
   readme: README.md
   summary: SUMMARY.md
+redirects:
+  getting-started/requesting-an-airgap-license: system-administration/requesting-an-airgap-license.md

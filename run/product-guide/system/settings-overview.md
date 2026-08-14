@@ -94,8 +94,8 @@ To change system-wide settings:
 
 ## Requesting or Modifying Licenses
 
-- To request a new license, click **Request License** on the left menu.
-- To modify an existing license, click **Edit License** on the left menu.
+- To generate an offline (air-gap) license request, click **Request Offline License** on the left menu. See [Requesting an Airgap License for VergeOS](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/system-administration/requesting-an-airgap-license) for the full procedure.
+- To install a license, click **Add License** on the left menu. If a license is already installed, the menu shows **Edit License** instead — click it to replace the installed key.
 - To remove a license, use the **Delete License** option.
 
 Remember to review any changes carefully before submitting, as these settings can impact your entire VergeOS environment.

@@ -80,7 +80,6 @@ Individual volume snapshots can only be imported from a full system snapshot or 
 {% endhint %}
 
 ### _Import Volume Snapshot from a System Snapshot (to make it available for a volume restore)_
-**Restoring from a system snapshot**
 
 1. From the **volume dashboard**, click **System Snapshots** (left menu or UI tile).
 2. Click to **select desired system snapshot**.

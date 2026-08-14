@@ -1,7 +1,7 @@
 {
  "slug2group": {
   "preinstallation-checklist": "Getting Started & Installation",
-  "requesting-an-airgap-license": "Getting Started & Installation",
+  "requesting-an-airgap-license": "System Administration",
   "node-secure-boot": "Getting Started & Installation",
   "welcome-to-vergeos-knowledge-base": "Getting Started & Installation",
   "changing-resolution-on-a-uefi-vm": "Virtual Machines",
