@@ -48,7 +48,7 @@ Some hardware and driver messages repeat constantly in **System > Logs** without
 {% hint style="danger" %}
 **Confirm the message is cosmetic before suppressing it.**
 
-Suppressing a log entry hides it from the Logs view permanently until the filter is removed. If the message later changes character — for example, an HBA firmware bug that begins returning a different error code — you will not see it.
+Suppressing a log entry hides it from the Logs view permanently until the filter is removed.  If the message later changes character — for example, an HBA firmware bug that begins returning a different error code — you will not see it.
 
 Before adding a filter:
 - Verify with the hardware vendor or VergeOS support that the specific message is a known non-fault condition.
@@ -68,18 +68,13 @@ Before adding a filter:
 1. Navigate to **System > Logs**.
 2. Copy the repeating line.
 3. Keep the part of the message that stays the same each time it fires.
-4. Remove the parts that vary — controller instance numbers, hex status codes, and timestamps.
+4. Remove the parts that vary — instance numbers, hex status codes, and timestamps.
+5. Carefully use ERE syntax expressions to include relevant variations of the message. 
 
 Example message:
 
 ```
 kernel: mpi3mr1: Issue IOUCTL time_stamp: Failed ioc_status(0x000d) Loginfo(0x00000000)
-```
-
-The stable, matchable part is:
-
-```
-Issue IOUCTL time_stamp: Failed ioc_status
 ```
 
 {% hint style="warning" %}
@@ -97,28 +92,42 @@ Issue IOUCTL time_stamp: Failed ioc_status
 This minimal substring matches every controller instance and every status code. In most cases, you should add specificity to reduce the risk of accidentally suppressing a different message that happens to share part of the same text. A more specific pattern that anchors on the driver prefix and escapes literal parentheses is safer:
 
 ```
-mpi3mr[0-9]*: Issue IOUCTL time_stamp: Failed ioc_status\(0x[0-9a-f]+\) Loginfo\(0x[0-9a-f]+\)
+mpi3mr[0-9]*: Issue IOU?CTL time_stamp: Failed ioc_status\(0x000[124d]\)
 ```
+
+- mpi3mr[0-9]*:  
+Matches: mpi3mr/mpi3mr0/mpi3mr1/mpi3mr12/etc.
+
+- Issue IOU?CTL time_stamp:  
+Anchors specifically on IOCTL failures (U? means the U is optional)
+
+- ioc_status\(0x000[124d]\)  
+Matches only these benign codes: 0x0001/0x0002/0x0004/0x000d
+(The bracket expression [124d] is POSIX ERE shorthand.)
+Parentheses escaped because ERE treats them as grouping operators.
+
 
 {% hint style="warning" %}
 **Prefer the More Specific Pattern**
 
-Avoid overly short or broad substrings. A pattern that is too general can inadvertently suppress a related but distinct message that *does* indicate a real fault. Use the most specific string that reliably matches the known-cosmetic message and nothing else. If variable fields like status codes are meaningful — for example, only one particular code is cosmetic — include them in the pattern.
+Avoid overly short or broad substrings. A pattern that is too general can inadvertently suppress a related but distinct message that *does* indicate a real fault. Use the most specific string that reliably matches the known-cosmetic message and nothing else. If variable fields like Loginfo codes are meaningful — for example, only one particular code is cosmetic — include them in the pattern.
 {% endhint %}
 
-Step 3: Add the Pattern via the Cluster Settings UI
+## Step 3: Add the Pattern to the System Log Filter (via Cluster Settings) 
 
 {% hint style="warning" %} Do not clear or replace the installed default System Log Filter value.
 
-VergeOS populates the System Log Filter field with a default set of entries at installation. These defaults suppress a large volume of routine kernel and service messages that would otherwise make the Logs view unreadable. Deleting or overwriting them will cause that noise to flood back into the Logs view. Always append your new pattern to the end of the existing value. {% endhint %}
+VergeOS populates the System Log Filter field with a default set of entries at installation. These defaults suppress a large volume of routine kernel and service messages that would otherwise make the Logs view unreadable. Deleting or overwriting them will cause that noise to flood back into the Logs view. Always append your new pattern to the end of the existing value. 
+{% endhint %}
 
-Navigate to Clusters in the main menu.
-Click on the cluster name to select it, then click Edit.
-Scroll down to the System Log Filter field. You will see the default entries already populated — for example:
-   *:3,ipmievd:5,rasdaemon,!ntpd,!postfix
-Place your cursor at the end of the existing value, add a comma, then append your new pattern:
-   *:3,jpmievd:5,rasdaemon,!ntpd,!postfix,mpi3mr[0-9]*: Issue IOUCTL time_stamp: Failed ioc_status\(0x[0-9a-f]+\) Loginfo\(0x[0-9a-f]+\)
-Click Submit to save.
+
+1. Navigate to **Clusters** in the main menu.
+2. Click on the cluster name to select it, then click **Edit**.
+3. Scroll down to the **System Log Filter** field. You will see the default entries already populated — for example:
+   `*:3,ipmievd:5,rasdaemon,!ntpd,!postfix`
+4. Place your cursor at the end of the existing value, **add a comma**, then append your new pattern:
+   e.g. `*:3,jpmievd:5,rasdaemon,!ntpd,!postfix,mpi3mr[0-9]*: Issue IOU?CTL time_stamp: Failed ioc_status\(0x000[124d]\)`
+6. Click **Submit** to save.
 
 {% hint style="info" %} If you need to filter multiple distinct messages, add each pattern as its own comma-delimited entry, all appended to the end of the existing value. {% endhint %}
 
