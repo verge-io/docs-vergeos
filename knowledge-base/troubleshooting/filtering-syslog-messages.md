@@ -38,8 +38,8 @@ tags:
 {% hint style="info" %}
 **Key Points**
 - The **System Log Filter** cluster setting hides matching lines from the **System > Logs** view.
-- The filter hides messages from the UI only — the kernel still writes them to the raw syslog.
--Systems are installed with a default set of System Log Filter entries that should be kept intact; additional entries can be appended to the comma-delimited list to suppress messages that have been confirmed as non-fault conditions.
+- The filter hides messages from the UI only — the kernel still writes them to the raw syslog.  
+- Systems are installed with a default set of System Log Filter entries that should be kept intact; additional entries can be appended to the comma-delimited list to suppress messages that have been confirmed as non-fault conditions.
 - Patterns use POSIX Extended Regular Expression (ERE) syntax.
 {% endhint %}
 
