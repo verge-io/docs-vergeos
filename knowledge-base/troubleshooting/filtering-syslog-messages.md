@@ -136,9 +136,9 @@ VergeOS populates the System Log Filter field with a default set of entries at i
 Log capture reads the filter when you toggle it. Do this one node at a time:
 
 1. Edit the node.
-2. Clear the **Capture System Logs** checkbox and click **Submit**.
+2. Disable the **Capture System Logs** option and click **Submit**.
 3. Wait 15 to 30 seconds.
-4. Select the **Capture System Logs** checkbox and click **Submit**.
+4. Edit the node again, enable the **Capture System Logs** option, and click **Submit**.
 
 If a node still shows the message after you toggle log capture, reboot that node to force the reload.
 
