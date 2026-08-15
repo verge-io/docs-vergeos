@@ -99,7 +99,7 @@ mpi3mr[0-9]*: Issue IOU?CTL time_stamp: Failed ioc_status\(0x000[124d]\)
   Matches: mpi3mr/mpi3mr0/mpi3mr1/mpi3mr12/etc.
 
 - `Issue IOU?CTL time_stamp`  
-  Anchors specifically on IOCTL failures (U? means the U is optional)
+  Anchors specifically on IOCTL failures (U? means the U is optional, to match both 'IOCTL' and 'IOUCTL')
 
 - `ioc_status\(0x000[124d]\)`
   Matches only these benign codes: 0x0001/0x0002/0x0004/0x000d
