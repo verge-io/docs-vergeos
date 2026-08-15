@@ -78,12 +78,14 @@ kernel: mpi3mr1: Issue IOUCTL time_stamp: Failed ioc_status(0x000d) Loginfo(0x00
 ```
 
 {% hint style="warning" %}
-Do not include the `kernel:` prefix in your pattern. The Logs view prepends this identifier for display — it is not part of the message the filter sees. A pattern anchored on `kernel:` never matches.
+- Do not include the `kernel:` prefix in your pattern. The Logs view prepends this identifier for display — it is not part of the message the filter sees. A pattern anchored on `kernel:` never matches.
+- Do not include unescaped commas in your pattern.  The System Log Filter is a comma-delimited field - literal commas within a pattern will break parsing.
+- Patterns use POSIX Extended Regular Expression (ERE) syntax, not PCRE - Common PCRE constructs — \d, \w, \b, and non-capturing groups (?:...) — are not available in ERE; use character classes ([0-9], [A-Za-z0-9_]) and standard grouping (...) instead.
 {% endhint %}
 
 ## Step 2: Build the Pattern
 
-Patterns use POSIX Extended Regular Expression (ERE) syntax, not PCRE. Start with a plain substring and then **make it as specific as possible**:
+ Start with a plain substring and then **make it as specific as possible**:
 
 ```
 Issue IOUCTL time_stamp: Failed ioc_status
@@ -126,7 +128,7 @@ VergeOS populates the System Log Filter field with a default set of entries at i
 3. Scroll down to the **System Log Filter** field. You will see the default entries already populated — for example:
    `*:3,ipmievd:5,rasdaemon,!ntpd,!postfix`
 4. Place your cursor at the end of the existing value, **add a comma**, then append your new pattern:
-   e.g. `*:3,jpmievd:5,rasdaemon,!ntpd,!postfix,mpi3mr[0-9]*: Issue IOU?CTL time_stamp: Failed ioc_status\(0x000[124d]\)`
+   e.g. `*:3,ipmievd:5,rasdaemon,!ntpd,!postfix,mpi3mr[0-9]*: Issue IOU?CTL time_stamp: Failed ioc_status\(0x000[124d]\)`
 6. Click **Submit** to save.
 
 {% hint style="info" %} If you need to filter multiple distinct messages, add each pattern as its own comma-delimited entry, all appended to the end of the existing value. {% endhint %}
@@ -135,12 +137,12 @@ VergeOS populates the System Log Filter field with a default set of entries at i
 
 Log capture reads the filter when you toggle it. Do this one node at a time:
 
-1. Edit the node.
+1. Edit the node. (**Infrastructure** > select node > select **Edit** on left menu).
 2. Disable the **Capture System Logs** option and click **Submit**.
 3. Wait 15 to 30 seconds.
 4. Edit the node again, enable the **Capture System Logs** option, and click **Submit**.
 
-If a node still shows the message after you toggle log capture, reboot that node to force the reload.
+If a node still shows the message after you toggle log capture, reboot that node to force the reload. Always **Follow proper** [**Maintenance Mode**](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/operations/maintenance-mode) **procedures when rebooting a node to avoid workload disruptions.** 
 
 ## Step 5: Verify the Filter
 
@@ -178,5 +180,5 @@ The raw syslog inside a system diagnostics file still contains the message by de
 
 {% hint style="danger" %}
 **Need Help?**
-If you are not certain whether a repeating log line is cosmetic or a real fault, contact the VergeOS support team **before** suppressing it. Suppressing an active fault message can delay diagnosis of a serious hardware problem.
+If you are not certain whether a repeating log line is cosmetic or a real fault, contact the VergeOS support team **before** suppressing it. Suppressing an active fault message can delay diagnosis of a serious problem.
 {% endhint %}
