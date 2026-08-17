@@ -43,7 +43,7 @@ While this list represents commonly tested configurations, VergeOS's KVM foundat
 Virtual appliances packaged for KVM environments are fully compatible with VergeOS. This includes OVA/OVF formats from vendors who support KVM-based deployments.
 {% endhint %}
 
-## Microsoft Windows 
+## Microsoft Windows
 
 ### Windows Desktop Versions
 

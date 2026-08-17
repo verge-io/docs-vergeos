@@ -75,7 +75,7 @@ This guide shows how to request an airgap license for VergeOS systems without ou
 5. Send License Request
    * Attach the downloaded license request file to the email
    * Provide additional information in the email body (e.g., company name, purpose of license)
-   * Send the email to Verge's licensing team
+   * Send the email to the Verge.io licensing team
 
 ## What Happens Next
 
@@ -86,7 +86,7 @@ This guide shows how to request an airgap license for VergeOS systems without ou
 {% hint style="info" %}
 **Processing Time**
 
-If you haven't received a response within 2 business days, please follow up with VergeOS support team.
+If you haven't received a response within 2 business days, please follow up with the VergeOS support team.
 {% endhint %}
 
 ## Uploading the License
@@ -118,7 +118,7 @@ The **License** section of the Settings page shows the new license and its valid
 * Problem: Unable to generate license request file
   * Solution: Verify your access permissions in the VergeOS Cloud Dashboard
 * Problem: Email client doesn't open automatically
-  * Solution: Manually compose an email to license@Verge.io and attach the downloaded request file
+  * Solution: Manually compose an email to license@verge.io and attach the downloaded request file
 * Problem: The license key is rejected when you submit the form
   * Solution: Make sure the **License Key** field contains the complete, unmodified contents of the license file
 {% endhint %}
