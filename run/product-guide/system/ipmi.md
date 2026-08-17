@@ -66,3 +66,79 @@ Successfully connecting to the IPMI web interface through the VergeOS user inter
 2. **Double-click the desired node** to access the node dashboard.
 3. Under the **IPMI** submenu on the left menu, click **Connect**.
 4. A new browser tab is opened to the IPMI web interface login page.
+
+## Manage IPMI Credentials via the REST API
+
+IPMI credentials can also be read and updated through the VergeOS REST API. This is useful for managing credentials across many nodes or from automation scripts.
+
+### Find the Node Key
+
+API calls that target a node use the node's row key (`$key`). List the nodes to find the key:
+
+```http
+GET /api/v4/nodes
+```
+
+To locate a specific node by name:
+
+```http
+GET /api/v4/nodes?filter=name eq 'node1'
+```
+
+The response includes the `$key` value along with fields such as `name`, `ipmi_address`, and `ipmi_status`.
+
+### Read IPMI Information
+
+Retrieve a single node record:
+
+```http
+GET /api/v4/nodes/{key}
+```
+
+IPMI-related fields in the response:
+
+| Field | Description |
+|-------|-------------|
+| `ipmi_address` | The BMC IP address or hostname. |
+| `ipmi_user` | The BMC username. |
+| `ipmi_password` | Write-only; not included in read responses. |
+| `ipmi_status` | The connection status: `ready`, `connecting`, `offline`, or `error`. |
+| `ipmi_sel_free` / `ipmi_sel_used` | System Event Log capacity counters. |
+
+### Set IPMI Credentials
+
+Update the stored credentials with a `PUT` request:
+
+```http
+PUT /api/v4/nodes/{key}
+```
+
+```json
+{
+  "ipmi_user": "admin",
+  "ipmi_password": "newpassword"
+}
+```
+
+Saving credentials automatically runs a connectivity test; a separate test action is not required. If the test cannot run — for example, the node has no IPMI address — the API returns an error and the update is not saved. To verify the update, read the node record again and confirm `ipmi_status` is `ready`.
+
+### Trigger IPMI Actions
+
+To run a connectivity test or clear the System Event Log without changing credentials, post a node action:
+
+```http
+POST /api/v4/node_actions
+```
+
+```json
+{
+  "$row": "/v4/nodes/{key}",
+  "action": "ipmi_test"
+}
+```
+
+The available IPMI actions are `ipmi_test` and `clear_sel`.
+
+{% hint style="info" %}
+IPMI applies to host-level nodes only, and `ipmi_password` cannot be read back through the API.
+{% endhint %}

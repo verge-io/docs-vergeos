@@ -406,8 +406,8 @@
   title: 'Pre-installation Checklist'
 - src: knowledge-base/posts/airgap-license-request.md
   space: knowledge-base
-  dest: getting-started/requesting-an-airgap-license.md
-  group: 'Getting Started & Installation'
+  dest: system-administration/requesting-an-airgap-license.md
+  group: 'System Administration'
   title: 'Requesting an Airgap License'
 - src: knowledge-base/posts/intro.md
   space: knowledge-base
