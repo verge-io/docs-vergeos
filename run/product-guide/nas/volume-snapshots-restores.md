@@ -30,7 +30,7 @@ tags:
 
 # NAS Volume Snapshots and Restores
 
-Volume-level snapshots allow for customizing snapshot schedule and retention rules per individual NAS volume and provide the option for a quiesced snapshot.  Non-quiesced NAS volumes can be imported from full system snapshots and used for restore.
+Volume-level snapshots allow for customizing snapshot schedule and retention rules per individual NAS volume and provide the option for a quiesced snapshot. Non-quiesced NAS volumes can be imported from system snapshots (full, or partial if the snapshot included the volume) and used for restore.
 
 ## Quiesced Snapshots
 
