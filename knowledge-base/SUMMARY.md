@@ -122,6 +122,7 @@
   * [Vulnerability Scanning Best Practices](system-administration/vulnerability-scanning-best-practices.md)
 * [Troubleshooting](troubleshooting/README.md)
   * [Configuring Remote Log Forwarding (Syslog)](troubleshooting/configuring-remote-log-forwarding.md)
+  * [Filtering Syslog Messages from the System Logs View](troubleshooting/filtering-syslog-messages.md)
   * [Generating System Diagnostics](troubleshooting/generating-system-diagnostics.md)
   * [System Logs](troubleshooting/system-logs.md)
   * [VergeOS Update Instructions](troubleshooting/VergeOS-update-instructions.md)
