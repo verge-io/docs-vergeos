@@ -198,13 +198,13 @@ The virtual machine setting: *Migration Method* allows defining migration behavi
 
 Nested virtualization requires two settings; it must be enabled for the cluster and at the VM level:
 
-1. **Cluster level:** Enable **Nested Virtualization** in the cluster settings (item 5 above). If a restart message appears at the top of the cluster dashboard, reboot the cluster nodes using proper [Maintenance Mode procedures](../operations/maintenance-mode.md).
+1. **Cluster level:** Enable the **Nested Virtualization** setting in the list above. If a restart message appears at the top of the cluster dashboard, reboot the cluster nodes using proper [Maintenance Mode procedures](../operations/maintenance-mode.md).
 2. **VM level:** From the VM dashboard, click **Edit** and enable **Nested Virtualization** in the VM settings.
 
 Restart the VM after you enable both settings. The CPU feature is applied when the VM starts.
 
 {% hint style="info" %}
-The **Allow Nested Virtualization Live Migration** setting (item 6 above) is separate. It only controls whether VMs with nested virtualization can live migrate between nodes; it is not required to run nested virtualization.
+The **Allow Nested Virtualization Live Migration** setting is separate. It only controls whether VMs with nested virtualization can live migrate between nodes; it is not required to run nested virtualization.
 {% endhint %}
 
 {% hint style="success" %}

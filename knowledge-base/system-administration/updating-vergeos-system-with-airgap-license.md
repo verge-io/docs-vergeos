@@ -99,6 +99,7 @@ This guide provides a step-by-step process to manually update your air-gapped Ve
 
 ## Additional Resources
 
+* [Requesting an Airgap License](requesting-an-airgap-license.md)
 * [VergeOS ISO Download](https://updates.verge.io/download)
 * [Snapshots](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/backup-and-dr/snapshots-overview)
 

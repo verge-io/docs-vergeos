@@ -134,7 +134,7 @@ After you save the configuration, VergeOS begins forwarding logs to the specifie
 
 If logs do not arrive:
 
-1. On the collector host, capture traffic on the configured syslog port to confirm packets arrive:
+1. On the collector host, capture traffic on the configured syslog port to confirm packets arrive (replace `514` with the port you configured):
 
     ```bash
     tcpdump -i any -A port 514
