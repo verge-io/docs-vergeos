@@ -41,23 +41,16 @@ Site Syncs replicate system snapshots to another VergeOS system, simplifying and
 * **Flexible Operations** - scheduling, queuing, and manual sync options
 * **Repair Server (ioGuardian)** - sync sites can be used for automatic inline healing (e.g. after multiple concurrent drive failures or power issues)
 
-## Choosing the Right Sync Scope for DR Granularity
+## Recovery Granularity
 
-The sync source you choose — whole-system or tenant-level — determines how you recover workloads at the DR site. Decide the scope before you configure replication.
+System-level site syncs replicate system snapshots to the remote site — either full-system snapshots that capture everything, or partial snapshots limited to tagged objects such as specific tenants, VMs, or NAS services. Full-system snapshots support complete environment failover, enabling you to bring your entire environment online at the DR site after a catastrophic failure. In either case, any VMs and tenants captured at the top system level can be selectively restored directly from the replicated snapshots.
 
-| Sync source | What replicates | What you can recover at the DR site |
-|---|---|---|
-| **Whole-system site sync** | The entire system, including tenants, as one object | The full system; individual system-level VMs from a received system snapshot; tenants only as whole objects |
-| **Tenant-to-tenant sync** | The tenant as one object | Individual VMs within that tenant |
+Tenants within a system snapshot are recoverable as single objects. Individual objects inside a tenant — such as VMs, sub-tenants, and NAS volumes — are not directly restorable from the system-level snapshot. Recovering a specific item within a tenant requires first restoring the tenant as a whole to the DR site, then logging into that restored tenant with valid tenant credentials to access and restore individual objects.
 
-**Whole-system site sync** replicates your entire production system to the DR site. This is ideal for full-system failover — spinning up your entire environment at the DR site after a catastrophic failure. Individual VMs that run at the system level can be recovered from a received system snapshot; see [Recovering a Single VM from a Remote System Snapshot](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/backup-dr/recovering-a-single-vm-from-a-remote-cloud-snapshot). Tenants inside the snapshot replicate as single objects — recovering an individual VM from inside a tenant requires recovering the tenant first.
-
-**Tenant-to-tenant sync** (syncing a production tenant into a DR tenant) preserves per-VM recovery granularity for that tenant. At the DR site you can browse the tenant's snapshots, recover a specific VM, and leave everything else untouched.
-
-**If your DR plan includes per-VM recovery for tenant workloads** — for example, failing over a single database VM without affecting the rest of the tenant — configure a tenant-to-tenant sync for that tenant.
+If direct, granular recovery of individual tenant objects at the remote site is required — for example, failing over a single VM without restoring the entire tenant first — site syncs can be configured from within the tenant itself. A site sync originated at the tenant level replicates that tenant to a pre-configured tenant on the remote site. Users with tenant credentials can then browse the replicated tenant's snapshots and restore specific VMs, sub-tenants, or NAS volumes directly, without any prior host-level restore step.
 
 {% hint style="success" %}
-**You can run both.** A whole-system sync for full-system failover and a tenant-to-tenant sync for per-VM granularity can coexist. Replicating the same tenant both ways doubles sync overhead with no additional benefit — use a tenant-to-tenant sync for that tenant and rely on the whole-system sync for everything else.
+**You can run both.** A system level sync for full-system failover and a tenant-to-tenant sync for per-VM recovery granularity can coexist. Replicating the same tenant at both levels increases sync overhead.
 {% endhint %}
 
 ## Related Links
