@@ -23,5 +23,5 @@ icon: book
 <tr><td><h3><i class="fa-robot" style="color:$primary;">:robot_face:</i></h3></td><td><h4><strong>Automation &#x26; API</strong></h4></td><td>The VergeOS API, automation tasks, Terraform, and tooling.</td><td><a href="automation-api/README.md">automation-api</a></td></tr>
 <tr><td><h3><i class="fa-gears" style="color:$primary;">:gear:</i></h3></td><td><h4><strong>System Administration</strong></h4></td><td>Updates, security, authentication, branding, and performance.</td><td><a href="system-administration/README.md">system-administration</a></td></tr>
 <tr><td><h3><i class="fa-bug" style="color:$primary;">:beetle:</i></h3></td><td><h4><strong>Troubleshooting</strong></h4></td><td>Diagnostic procedures and fixes for common VergeOS issues.</td><td><a href="troubleshooting/README.md">troubleshooting</a></td></tr>
-<tr><td><h3><i class="fa-users" style="color:$primary;">:users:</i></h3></td><td><h4><strong>VergeOS User Community - peer insights, discussions, live and on-demand webinars </strong></h4></td><td></td><td><a href="community.md">Community</a></td></tr>
+<tr><td><h3><i class="fa-users" style="color:$primary;">:users:</i></h3></td><td><h4><strong>VergeOS User Community</strong></h4></td><td>Peer insights, Discussions, Live and on-demand webinars</td><td><a href="community.md">Community</a></td></tr>
 </tbody></table>
