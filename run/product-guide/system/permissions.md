@@ -76,6 +76,16 @@ The effective permissions of a user is cumulative of all permissions assigned to
 - Effective permissions for RJohnson for all tenants: list/read/modify
 - Effective permissions for RJohnson for the "Zcorp" tenant: list/read/modify/delete.
 
+{% hint style="warning" %}
+**Resource list views require List permission on *Your System***
+
+Many resource list views (for example, **Virtual Machines > List** and **Networks > List**) populate only when the user or group has at least **List** permission on the **Your System** object. This applies even when permissions on the individual objects or object types are correctly assigned.
+
+**Symptom:** The user sees correct counts on the main dashboard, but resource list pages are empty or incomplete.
+
+**Fix:** Add a permission for the user or group with the ***Type*** dropdown set to **Your System** and the ***list*** box checked.
+{% endhint %}
+
 ## Give a User Full Permissions to Entire VergeOS Cloud
 
 1. From the Cloud Dashboard, select **system**.
@@ -83,7 +93,7 @@ The effective permissions of a user is cumulative of all permissions assigned to
 3. Click **Add User**.
 4. Select the desired user from the ***User Name*** dropdown.
 5. Check the boxes for ***list***, ***read***, ***create***, ***modify***, and ***delete***.
-6. In the ***Type*** dropdown field, select **"Your Cloud" (default)**.
+6. In the ***Type*** dropdown field, select **"Your System" (default)**.
 7. ***--All sections--*** will be selected by default
 8. Click the **Submit** button.
 

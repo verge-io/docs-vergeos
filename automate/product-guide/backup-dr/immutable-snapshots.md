@@ -1,6 +1,6 @@
 ---
 title: "Immutable Snapshots"
-description: "How to enable, manage, and understand immutable snapshots in VergeOS, which prevent deletion of system snapshots for ransomware protection with a mandatory seven-day unlock delay."
+description: "How to enable and manage immutable snapshots in VergeOS, which block early deletion of system snapshots for ransomware protection for their retention period, up to 7 days."
 semantic_keywords:
   - "immutable snapshots ransomware protection VergeOS"
   - "prevent snapshot deletion lock unlock"
@@ -26,166 +26,215 @@ categories:
 
 ## Overview
 
-{% hint style="danger" %}
-****Critical: Understand Risks Before Enabling****
+{% hint style="info" %}
+**Key Points: Immutable Snapshot Protection**
 
-**Immutable snapshots CANNOT be deleted for 7 days - even in emergencies.**
-
-**This means:**
-
-- If storage fills up, you CANNOT immediately free space by deleting these snapshots
-- There is NO emergency override for administrators or VergeOS support
-- Storage emergencies require 7-day advance planning or adding physical capacity
-
-**Before enabling, ensure:**
-
-- Storage utilization is below 70%
-- You have capacity monitoring and alerting configured
-- You understand your snapshot retention will consume X GB over 7 days
-
-**VergeOS recommends:** Use immutable snapshots only for short retention (3 hours default) in production systems, or use them in dedicated backup systems with ample capacity.
+- A system snapshot with an active immutable flag cannot be deleted — not by administrators, not by automated processes, and not by VergeOS Support.
+- Removing the immutable flag triggers a mandatory unlock delay (up to 7 days), creating a critical response window if a rogue actor attempts to unlock snapshots.
+- Expiration always takes precedence — snapshots auto‑purge at their natural expiration; otherwise, they become manually deletable after the unlock delay.
+- Adequate free space is essential  — capacity planning must account for immutable snapshots that cannot be deleted until expiration or unlock delay.
+ 
 {% endhint %}
 
-An immutable snapshot is a powerful safeguard feature designed to prevent tampering or deletion of saved data, even by administrators or automated processes. The immutable option provides a safety net against accidental or malicious erasure, ensuring that a snapshot remains available when needed for data recovery.
+Immutable snapshots provide a safeguard against accidental or malicious deletion of system snapshots. When a snapshot is marked **immutable**, no user — including administrators or VergeOS Support — can delete it early. The snapshot remains protected until it naturally expires or until the immutable flag is removed and the mandatory unlock delay completes.
 
-When a snapshot is marked as immutable, deletion is blocked for all users, including administrators and root users. This effectively locks the snapshot until it expires, or the immutable flag is removed with a mandatory waiting period.
+A key purpose of immutability is to provide a **response window during security incidents**. If a rogue actor attempts to remove immutable protection, VergeOS generates alerts and enforces a mandatory unlock delay of up to **7 days**. This delay ensures administrators have time to detect the activity, investigate the account involved, and take corrective action before any protected snapshots can be deleted.
 
-{% hint style="success" %}
-****Key Features****
+This design protects against sophisticated ransomware attacks that attempt to delete all recovery points, including those accessible to compromised admin accounts.
 
-- Complete deletion protection, even from privileged accounts
-- Seven-day unlock delay for enhanced security
-- Applies to system snapshots only
-- Built-in ransomware protection
-{% endhint %}
+**Immutable protection applies to system snapshots only.**
 
-## How Immutable Snapshots Protect Against Ransomware
+---
 
-Ransomware actors commonly delete all available snapshots to eliminate recovery options, forcing victims to pay the ransom. Immutable snapshots provide critical protection by:
+## How Immutable Snapshots Work
 
-- Preventing immediate deletion of secured snapshots
-- Giving system administrators time to detect malicious activity
-- Ensuring recovery options remain available during an attack
-- Maintaining data protection even with compromised administrator accounts
+When immutability is enabled:
+
+- Early deletion is fully blocked for all users  
+- Retention is not extended — snapshots expire normally  
+- Removing the immutable flag starts a mandatory unlock delay of up to 7 days  
+- Snapshots remain undeletable during the unlock delay  
+- Expiration always takes precedence over the unlock delay  
+- The unlock delay provides a critical detection and response window  
+
+---
+
+## Expiration vs. Unlock Delay
+
+The snapshot’s original expiration date determines when it can be deleted:
+
+- **If expiration occurs first:** VergeOS automatically purges the snapshot at expiration.  
+- **If the unlock delay occurs first:** The snapshot becomes eligible for *manual* deletion at the end of the unlock delay. VergeOS does not automatically delete it unless expiration also arrives.
+
+### Examples
+
+| Snapshot Expiration | Unlock Requested | When Snapshot Is Deletable | Why |
+|---------------------|------------------|-----------------------------|-----|
+| 12 hours | Now | 12 hours (auto‑purge) | Expiration arrives first → system deletes automatically |
+| 3 days | Now | 3 days (auto‑purge) | Expiration arrives first → system deletes automatically |
+| 10 days | Now | 7 days (manual deletion allowed) | Unlock delay arrives first → snapshot becomes deletable but is not auto‑purged |
+| Never | Now | 7 days (manual deletion allowed) | No expiration → unlock delay determines earliest manual deletion time |
+
+**Auto‑purge:** VergeOS deletes the snapshot automatically at expiration.  
+**Manual deletion allowed:** Snapshot is no longer protected and can be deleted by an admin, but VergeOS does not delete it automatically.
+
+The unlock delay is the critical protection window that allows administrators to respond to unauthorized unlock attempts.
+
+---
+
+## Why Immutable Snapshots Protect Against Ransomware
+
+Ransomware actors frequently attempt to delete all snapshots to eliminate recovery options. VergeOS’s immutable snapshot model prevents this by:
+
+- Blocking deletion even from compromised admin accounts  
+- Enforcing a mandatory unlock delay  
+- Preserving recovery points long enough for administrators to detect and respond  
+- Ensuring attackers cannot immediately erase protected snapshots  
+- Providing a time buffer for administrators to react to unauthorized unlock attempts  
+
+This design specifically addresses modern attacks that target privileged credentials.
+
+---
+
+## Default Behavior
+
+The default **System Snapshots** profile marks **Hourly for 3 hours** snapshots as immutable. This provides a rapid‑cycle baseline protection layer.
+
+This baseline assumes:
+
+- Administrators monitor alerts consistently  
+- Immutable‑flag removal alerts are acted on immediately  
+- The organization has a short detection‑and‑response window  
+
+Organizations with slower response windows may need longer‑retention immutable snapshots to ensure they have adequate time to react if a rogue actor attempts to unlock snapshots.
+
+---
 
 ## Best Practices and Recommendations
 
-### Storage Capacity Planning
+### Choosing an Immutable Strategy Based on Response Window
 
-**Critical Considerations:**
+#### Baseline (Default) Protection
 
-- Plan for storage capacity carefully, as immutable snapshots cannot be deleted immediately to reclaim space
-- Ensure you have an adequate storage buffer to account for the seven-day unlock delay
-- If approaching storage limits, remember that clearing space through snapshot deletion requires advance planning
+- Hourly snapshots  
+- 3‑hour retention  
+- Immutable enabled  
 
-### Access Control
+Best for environments with fast response times (active SOC, 24/7 monitoring). Short‑retention immutable snapshots involve a short unlock delay - hourly snapshots are not deletable during their natural 3-hour retention.
 
-**Security Recommendations:**
+#### Extended Protection
 
-- Restrict snapshot access to only users who need it and understand the implications
-- Ensure users with snapshot access are trusted and properly trained
-- Implement proper role-based access controls
+If your team cannot guarantee immediate response:
 
-### Operational Guidelines
+- Mark a **daily snapshot (24‑hour retention)** as immutable  
+- Provides a full‑day reaction window  
+- Ensures protected rollback points even during off‑hours  
+- Gives administrators more time to respond to unauthorized unlock attempts  
 
-**Best Practices:**
+Important: Daily immutable snapshots provide a longer response window but require more storage runway — they cannot be manually deleted during their full 24‑hour retention. 
 
-- Avoid operating too close to storage capacity limits where undeletable snapshots could cause issues
-- Plan snapshot retention policies with the seven-day unlock delay in mind
-- Consider storage growth and capacity planning as part of your backup strategy
+#### Long‑Retention Immutable Snapshots
 
-## VergeOS Implementation
+Use only when:
 
-VergeOS implements immutable snapshots differently from many other solutions to provide enhanced security:
+- Change rate is low  
+- Ample free space is available  
+- Multi‑day protected rollback points are required  
+- You understand the operational impact of the unlock delay  
+- You want a longer response window  
 
-- **No immediate unlock capability**: Unlike other systems, VergeOS does not allow anyone (regardless of permission level) to remove an immutable flag from a snapshot immediately
-- **Mandatory waiting period**: This prevents attacks using compromised administrator-level accounts to remove immutable attributes in order to immediately erase all snapshots
-- **Enhanced threat protection**: The design specifically addresses sophisticated attacks that target administrative privileges
+Generally suitable only for systems operating below ~70% storage capacity and non‑production environments.
 
-{% hint style="info" %}
-****Default Behavior****
+**Critical:** Long‑retention immutable snapshots can hold space significantly longer. If expiration is 7 days or more, the unlock delay must fully elapse before deletion is possible.
 
-The default profile: *System Snapshots* is configured to set *Hourly for 3 hours* snapshots to *Immutable*, providing preconfigured baseline protection. 
+---
+
+## Storage Capacity Planning
+
+Immutable snapshots delay deletion, so capacity planning must consider:
+
+- Change rate  
+- Retention  
+- Free space  
+
+### Critical Considerations
+
+- Ensure free space can accommodate natural expirations or at least **7 days** of expected data change  
+- Long‑retention immutable snapshots require capacity runway  
+- Integrate capacity alerts with centralized monitoring or SIEM systems to ensure rapid response to an unauthorized unlock.
+  
+{% hint style="warning" %}
+**Need Help Planning Your Immutable Snapshot Strategy?**
+
+Immutable snapshots introduce strict deletion controls, and choosing the right retention and protection strategy requires confirming adequate free space. Contact VergeOS Support for guidance.
 {% endhint %}
+
+---
+
+## Alerting and Monitoring Expectations
+
+When an immutable flag is removed, VergeOS generates an alert. Administrators must treat this as a **high‑severity security event**.
+
+Recommended actions:
+
+- Investigate the user account and context  
+- Verify whether the change was authorized  
+- Consider pausing snapshot creation  
+- Ensure alerts integrate with SIEM or centralized monitoring  
+
+This ensures immutable‑flag removal cannot go unnoticed during an attack.
+
+---
 
 ## Managing Immutable Snapshots
 
-### Enabling Immutable Protection ("Lock" a Snapshot)
+### Enable Immutable Protection (“Lock” a Snapshot)
 
-1. Navigate to **System** > **System Snapshots**.
-2. **Double-click** the **desired snapshot** from the listing.
-3. Toggle the **Immutable** option to enabled (the button will move to the right).
-4. Click **Submit** at the bottom of the page to save the change.
-5. You are returned to the System Snapshots Listing. The snapshot will display a lock icon to indicate immutable protection is active.
+1. Navigate to **System → System Snapshots**  
+2. Double‑click the desired snapshot  
+3. Toggle **Immutable** to enabled  
+4. Click **Submit**  
+5. Snapshot displays a lock icon  
 
+### Automate Immutable Protection
 
-### Automating Immutable Protection
+1. Navigate to **System → Snapshot Profiles**  
+2. Open the desired profile  
+3. Select **Profile Periods**  
+4. Edit a period and enable **Immutable**  
+5. Click **Submit**  
 
-To automatically enable immutable protection:
-You can configure the profile used for taking system snapshots to automatically enable the immutable flag as snapshots are created.
+Snapshots created under these periods will automatically be immutable.
 
-1. Start at the snapshot profile's dashboard page: navigate to System > Snapshot Profiles > double-click the appropriate profile.
-2. Click Profile Periods on the left menu
-3. Double-click a period, toggle the Immutable option to enabled (the button will move to the right), and click Submit at the bottom of the page to save changes
-4. The modified profile period will now display a checkmark in the Immutable column and snapshots created with this profile period will automatically be marked immutable
-5. Repeat this process for each profile period where automatic immutable snapshots are desired
+### Disable Immutable Protection (“Unlock” a Snapshot)
 
+1. Navigate to **System → System Snapshots**  
+2. Double‑click the snapshot  
+3. Toggle **Immutable** to disabled  
+4. Click **Submit**  
 
-### Disabling Immutable Protection ("Unlock" a Snapshot)
+Snapshot displays **Unlocking** and the scheduled unlock date.  
+It remains undeletable until the unlock delay completes or expiration arrives.
 
-**To disable immutable protection:**
-
-1. Navigate to **System** > **System Snapshots**.
-2. Double-click the desired snapshot from the listing.
-3. Toggle the **Immutable** option to disabled (the button will move to the left). 
-4. Click **Submit** at the bottom of the page to save changes.
-5. Return to the System Snapshots listing — the snapshot will display *Unlocking* status and the scheduled unlock date.
-
-The snapshot remains protected and undeletable until the displayed date (seven days from the unlock request or the snapshot's natural expiration date, whichever comes first).
-
-### Understanding Unlock Behavior and Expiration
-
-**Critical concept:** The snapshot's original expiration date always takes precedence over the 7-day unlock period.
-
-When you request an unlock:
-
-- **If expiration < 7 days**: Snapshot deletes at expiration (e.g., 3-day expiration = deletes in 3 days)
-- **If expiration > 7 days**: Snapshot deletes after 7-day unlock period
-- **If expiration = never**: Snapshot deletes after 7-day unlock period
-
-**Examples:**
-
-| Snapshot Expiration | Unlock Requested | Actual Deletion Time | Why |
-|---------------------|------------------|---------------------|-----|
-| 12 hours | Now | 12 hours from creation | Expiration happens first |
-| 3 days | Now | 3 days from creation | Expiration happens first |
-| 10 days | Now | 7 days from unlock request | Unlock period happens first |
-| Never | Now | 7 days from unlock request | No expiration to compete with |
-
-{% hint style="info" %}
-****How Expiration Affects Protection****
-
-Immutable snapshots provide protection for their entire expiration period - whether that's 3 hours or 30 days. An attacker cannot delete them immediately, even with admin access.
-
-- **Short expirations (3 hours)**: Provide rapid protection against recent attacks while minimizing storage impact
-- **Long expirations (7+ days)**: Provide extended protection but consume more storage
-
-The 7-day unlock period only matters if you need to manually delete a snapshot before its natural expiration.
-{% endhint %}
+---
 
 ## Troubleshooting
 
 ### Storage Emergency with Immutable Snapshots
 
-**Symptom:** Storage at 90%+, cannot delete immutable snapshots
+**Symptom:** Storage at 90%+, cannot delete immutable snapshots.
 
-**Immediate actions:**
+#### Immediate Actions
 
-1. Request unlock for all immutable snapshots (begins 7-day countdown)
-2. Stop all snapshot creation temporarily
-3. Add physical storage capacity (only immediate solution)
-4. Delete any non-immutable snapshots or VMs
+- Request unlock for all immutable snapshots  
+- Temporarily stop snapshot creation  
+- Add physical storage capacity (only immediate solution)  
+- Delete non‑immutable snapshots or VMs  
 
-**Prevention:** This is avoidable - maintain <70% storage utilization when using immutable snapshots.
+#### Prevention
+
+Avoid emergencies by ensuring free space can comfortably accommodate natural expirations or **7 days of expected data change** for long‑retention immutable snapshots.
 
 **Contact [VergeOS support](https://app.gitbook.com/s/uJc5d3O7cwI7qD8muSyG/support-and-services)** if you need emergency capacity planning assistance.
+
+---

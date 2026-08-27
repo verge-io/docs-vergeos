@@ -94,8 +94,21 @@ If the authorization source has been configured to auto create users, do not cre
   - Click to select the desired key for deletion.
   - Click the delete [ ] button.
 
-13. Optionally, under ***Member of Groups***, groups can be selected in which to add the user. Hint: Multiple groups can be selected by holding down the Shift or Ctrl key.
-14. Click **Submit** to save the new user.
+13. Click **Submit** to save the new user.
+
+### Group Membership
+
+Group membership is assigned after the user is created. 
+To add the new user to one or more groups:
+1. Select **Modify Membership** on the left menu.
+2. Click to select each intended group.
+3. Click **Submit** after all group selections are made.
+
+{% hint style="success" %}
+Users can also be added to individual groups using the **Add Members** instructions below.
+
+{% endhint %}
+
 
 ## Create a New Group
 

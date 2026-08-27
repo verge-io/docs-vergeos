@@ -81,11 +81,14 @@ Several areas in the VergeOS platform may contribute to unexpected storage growt
   * Review **Total Storage Used** by clicking on **History** in the left menu. Follow the same process listed above to review growth history.
   * If unexpected growth is found, investigate within the tenant for the possible causes of storage increase (as listed above), and within any sub-tenants if applicable.
 
-***
+## Why the Tier Total Exceeds the Sum of Drive Usage
 
-{% hint style="info" %}
-**Document Information**
+If you compare the used space shown in the **vSAN Tiers** view against the sum of per-drive usage reported via the API's `cluster_tiers` and `machine_drives` endpoints, you may notice the tier total is consistently higher than the drive-by-drive sum. This is expected — three things account for the gap:
 
-* Last Updated: 2024-09-03
-* VergeOS Version: 4.12.6
-{% endhint %}
+1. **Logical vs. raw accounting.** The `cluster_tiers` endpoint reports *logical* used space, not raw bytes on disk. On a two-way redundant cluster, every block is stored twice across devices, but `cluster_tiers.used` hides that multiplier — it shows the logical (single-copy) figure. The `machine_drives` endpoint, by contrast, reflects actual block counts on each physical device. Dividing the raw device totals by `cluster_tiers.used` will yield a number close to your replication factor (≈2.0 for RF2, ≈3.0 for RF3).
+
+2. **`machine_drives` counts only live, in-use blocks.** The `used_bytes` values per drive include only blocks currently referenced by a live VM disk. Blocks that exist solely to back a snapshot — and are no longer referenced by any current drive — are not reflected in `machine_drives`.
+
+3. **Cloud snapshots hold blocks at the vSAN layer.** Cloud snapshots — the system-level snapshots shown under **System > System Snapshots** — are distinct from per-VM snapshots. A VM's individual Snapshot tab can appear empty while cloud snapshots still hold point-in-time blocks for that VM. Cloud snapshots cover all VMs, volumes, and tenants at once, and the space they occupy shows up in `cluster_tiers` but not in `machine_drives`.
+
+The delta between `cluster_tiers` and the sum of `machine_drives` represents logical space held exclusively by cloud snapshots. If that space is larger than expected, review your system snapshot retention under **System > System Snapshots**. Before deleting older snapshots, check **Backup/DR > Outgoing Syncs** — cloud snapshots are the unit of transport for site sync, and removing one locally before the target has received it will drop that point-in-time from the replication pipeline.

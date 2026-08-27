@@ -41,6 +41,23 @@ The following links provide source-specific instructions:
 * [Azure](azure-auth.md)
 * [VergeOS OIDC](oidc-apps-overview.md)
 
+## UI Login Authentication vs. NAS Domain Join
+
+VergeOS has two separate features that both involve Active Directory, and they are frequently confused:
+
+| Feature | Purpose | Where configured |
+|---|---|---|
+| **Auth source (UI login)** | Allows VergeOS UI users and tenant users to log in with external identity provider credentials | **System > Auth Sources** |
+| **NAS domain join** | Joins the VergeOS NAS service to an AD domain for CIFS/SMB file-share access control | NAS service settings — see [Join a NAS to a Domain](../nas/nas-join-ad-domain.md) |
+
+These features are independent. Joining a NAS domain does **not** enable AD-backed UI login, and configuring a UI auth source does **not** affect NAS file-share permissions.
+
+### Authenticating UI Logins Against Windows Active Directory
+
+VergeOS UI and tenant login auth sources are OAuth2/OIDC based rather than a native LDAP auth-source driver — there is no direct LDAP/AD bind option for UI login.
+
+To let Windows domain users log in to the VergeOS UI with their AD credentials, federate on-premises AD through **Microsoft Entra ID** (Azure AD) or another OIDC-compatible identity provider, and configure the matching auth source in VergeOS. Group membership from the identity provider can be mapped to VergeOS groups so permissions follow the directory.
+
 ## Creating an Authorization Source - General Instructions
 
 1. Obtain **Client ID** and **Client Secret** from the third-party system; these credentials must be created **based on the URL of the VergeOS system**.  These values will be needed in a later step.
