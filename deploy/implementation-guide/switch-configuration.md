@@ -187,7 +187,7 @@ VergeOS requires MTU 9216 on switch ports to accommodate the 9000-byte payload p
 {% endhint %}
 
 {% hint style="warning" %}
-When the physical NIC cannot exceed 9000, set the installer **MTU** to **8950**. Do not use 8976. Keep switch port MTU at **9216** when the switch allows it. See [Core fabric MTU when the NIC cannot exceed 9000](core-fabric-mtu.md).
+This does not change switch MTU. If the server NIC cannot exceed 9000, set installer **MTU** to 8950. See [Core fabric MTU when the NIC cannot exceed 9000](core-fabric-mtu.md).
 {% endhint %}
 
 ### 2. Configure Core Fabric Ports

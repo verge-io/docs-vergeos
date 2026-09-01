@@ -49,11 +49,9 @@ Please review the [core concepts](concepts.md) first to learn more about VergeOS
 * Jumbo Frames configured on all Core Fabric Network switchports
   * Minimum MTU size 9000
   * Recommended MTU size of **9216** and above
-
-{% hint style="warning" %}
-When the physical NIC cannot exceed 9000, set the installer **MTU** to **8950**. Do not use 8976. Keep switch port MTU at **9216** when the switch allows it. See [Core fabric MTU when the NIC cannot exceed 9000](core-fabric-mtu.md).
-{% endhint %}
-
+    {% hint style="warning" %}
+    If the server NIC cannot exceed 9000, see [Core fabric MTU when the NIC cannot exceed 9000](core-fabric-mtu.md).
+    {% endhint %}
 * Broadcast traffic allowed between nodes
 * Core Fabric Networks 1 and 2 on their **own** dedicated layer 2 networks
 * The Core Fabric Networks for VergeOS Systems located in the same site need to be completely isolated from eachother

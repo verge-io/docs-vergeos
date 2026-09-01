@@ -61,8 +61,8 @@ This core fabric redundancy is vital to maintain system resiliency and uninterru
 | Physical NIC         | 9192 (typical)                  |
 | VXLAN overlay        | NIC MTU minus 50 bytes overhead |
 
-{% hint style="info" %}
-When the physical NIC cannot exceed 9000, set the installer **MTU** to **8950**. Do not use 8976. Keep switch port MTU at **9216** when the switch allows it. See [Core fabric MTU when the NIC cannot exceed 9000](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/implementation-guide/core-fabric-mtu).
+{% hint style="warning" %}
+If the server NIC cannot exceed 9000, see [Core fabric MTU when the NIC cannot exceed 9000](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/implementation-guide/core-fabric-mtu).
 {% endhint %}
 
 {% hint style="info" %}
