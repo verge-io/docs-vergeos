@@ -62,6 +62,10 @@ This core fabric redundancy is vital to maintain system resiliency and uninterru
 | VXLAN overlay        | NIC MTU minus 50 bytes overhead |
 
 {% hint style="info" %}
+When the physical NIC cannot exceed 9000, set the installer **MTU** to **8950**. Do not use 8976. Keep switch port MTU at **9216** when the switch allows it. See [Core fabric MTU when the NIC cannot exceed 9000](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/implementation-guide/core-fabric-mtu).
+{% endhint %}
+
+{% hint style="info" %}
 **How Core Fabric Redundancy Works**
 
 The core fabric handles redundancy at a low level, creating a mesh where every node maintains redundant paths to every other node in the system. Because of this built-in redundancy, physical LAG or port bonding should **not** be used on core fabric networks — doing so will interfere with the fabric's own mechanisms.

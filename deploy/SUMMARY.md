@@ -11,6 +11,7 @@
 * [Pre-installation checklist](implementation-guide/pre-installation.md)
 * [Creating bootable installation media](implementation-guide/install-media.md)
 * [Installation guide](implementation-guide/installation-guide.md)
+* [Core fabric MTU when the NIC cannot exceed 9000](implementation-guide/core-fabric-mtu.md)
 * [Post-installation configuration](implementation-guide/post-installation.md)
 * [Scale-out node installation guide](implementation-guide/scale-out-nodes.md)
 * [Compute only node installation guide](implementation-guide/compute-nodes.md)
