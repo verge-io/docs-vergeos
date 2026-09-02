@@ -50,7 +50,7 @@ Please review the [core concepts](concepts.md) first to learn more about VergeOS
   * Minimum MTU size 9000
   * Recommended MTU size of **9216** and above
     {% hint style="warning" %}
-    If the core fabric switch port cannot exceed 9000, see [Core fabric MTU when switch MTU is 9000](core-fabric-mtu.md).
+    If the core fabric switch port cannot exceed 9000, see [Core fabric MTU when switch MTU is 9000](core-fabric-mtu-switch-9000.md).
     {% endhint %}
 * Broadcast traffic allowed between nodes
 * Core Fabric Networks 1 and 2 on their **own** dedicated layer 2 networks

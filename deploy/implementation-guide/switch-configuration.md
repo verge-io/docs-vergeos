@@ -187,7 +187,7 @@ VergeOS requires MTU 9216 on switch ports to accommodate the 9000-byte payload p
 {% endhint %}
 
 {% hint style="warning" %}
-When a core switch port cannot exceed 9000, set installer **MTU** to 8950. See [Core fabric MTU when switch MTU is 9000](core-fabric-mtu.md).
+When a core switch port cannot exceed 9000, set installer **MTU** to 8950. See [Core fabric MTU when switch MTU is 9000](core-fabric-mtu-switch-9000.md).
 {% endhint %}
 
 ### 2. Configure Core Fabric Ports

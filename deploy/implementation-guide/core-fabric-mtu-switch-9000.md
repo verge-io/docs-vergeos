@@ -28,10 +28,6 @@ When the core fabric switch port cannot exceed 9000, set the installer **MTU** t
 - Read [Network design](network-design.md) and [Switch configuration](switch-configuration.md).
 - Confirm the switch port maximum MTU.
 
-## Installer MTU and overlay
-
-The installer **MTU** is the core NIC and switch-facing MTU. The default is 9192. VXLAN overlay equals NIC MTU minus 50. With installer **MTU** 8950, overlay is 8900.
-
 ## Set the installer value
 
 1. Open the installer physical network settings for a core fabric NIC.
@@ -39,6 +35,8 @@ The installer **MTU** is the core NIC and switch-facing MTU. The default is 9192
 3. Set **MTU** to `8950`.
 4. Repeat for each core fabric network on the node.
 5. Set the same installer **MTU** on every node in the system.
+
+Do not subtract 50 again. Type **8950** once.
 
 {% hint style="danger" %}
 Do not enter 8976. 8976 is 9000 minus 24. Encapsulation overhead is 50. 9000 minus 50 equals 8950. Use 8950 so the frame fits a 9000-capped switch port.
