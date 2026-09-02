@@ -1,14 +1,13 @@
 ---
-title: Core fabric MTU when the NIC cannot exceed 9000
-description: Set the installer physical MTU to 9000 when the server NIC cannot exceed 9000. Overlay is then 8950. Keep switch MTU at 9216.
+title: Core fabric MTU when the switch port cannot exceed 9000
+description: Set the installer MTU to 8950 when the core fabric switch port cannot exceed 9000. Do not leave 9192.
 semantic_keywords:
-  - VergeOS core fabric installer MTU 9000
-  - NIC MTU cap 9000 UCS vNIC
+  - VergeOS core fabric installer MTU 8950
+  - switch port MTU cap 9000
   - jumbo frames encapsulation overhead 50 bytes
-  - switch MTU 9216 core fabric
+  - core NIC MTU 8950
 use_cases:
-  - install_core_mtu_nic_capped_9000
-  - ucs_vnic_core_fabric_mtu
+  - install_core_mtu_switch_capped_9000
   - avoid_incorrect_core_mtu_8976
 tags:
   - networking
@@ -20,37 +19,30 @@ categories:
   - Installation
 ---
 
-# Core fabric MTU when the NIC cannot exceed 9000
+# Core fabric MTU when the switch port cannot exceed 9000
 
-Set the installer **MTU** to **9000** when the physical NIC cannot exceed 9000 (for example some UCS vNICs). Do not leave the installer at 9192.
+When the core fabric switch port cannot exceed 9000, set the installer **MTU** to **8950**. Do not leave 9192.
 
 ## Prerequisites
 
 - Read [Network design](network-design.md) and [Switch configuration](switch-configuration.md).
-- Set switch MTU on core fabric ports. VergeOS requires **9216** on switch ports.
-- Confirm the server NIC maximum MTU.
+- Confirm the switch port maximum MTU.
 
 ## Installer MTU and overlay
 
-The installer **MTU** is the physical NIC and switch-facing MTU. Enter a value the NIC and switching hardware support. The default is 9192. This field is not the post-encapsulation overlay payload. The overlay is derived. VXLAN overlay equals physical NIC MTU minus 50.
+The installer **MTU** is the core NIC and switch-facing MTU. The default is 9192. VXLAN overlay equals NIC MTU minus 50. With installer **MTU** 8950, overlay is 8900.
 
 ## Set the installer value
 
 1. Open the installer physical network settings for a core fabric NIC.
 2. Set **Core-Network** to yes.
-3. Set **MTU** to `9000`.
+3. Set **MTU** to `8950`.
 4. Repeat for each core fabric network on the node.
 5. Set the same installer **MTU** on every node in the system.
 
 {% hint style="danger" %}
-Do not enter 8950 in the installer **MTU** field. Overlay then becomes 8900. Do not enter 8976.
+Do not enter 8976. 8976 is 9000 minus 24. Encapsulation overhead is 50. 9000 minus 50 equals 8950. Use 8950 so the frame fits a 9000-capped switch port.
 {% endhint %}
-
-When installer **MTU** is 9000, overlay is 8950. Switch port MTU stays 9216. A capped NIC does not change the switch requirement.
-
-## Why not 8976
-
-8976 is 9000 minus 24, not 9000 minus 50. VXLAN overhead is 50, not 24. If 8976 is used as overlay, 8976 plus 50 equals 9026. That value overruns a 9000-capped NIC.
 
 ## After install
 

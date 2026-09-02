@@ -77,7 +77,7 @@ This is where your pre-installation NIC documentation pays off. You will configu
 15. **Configure Core2 settings** -- Same pattern as Core1 but using the Core2 VLAN ID.
 
 {% hint style="warning" %}
-If the server NIC cannot exceed 9000, see [Core fabric MTU when the NIC cannot exceed 9000](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/implementation-guide/core-fabric-mtu).
+If the core fabric switch port cannot exceed 9000, see [Core fabric MTU when switch MTU is 9000](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/implementation-guide/core-fabric-mtu).
 {% endhint %}
 
 {% hint style="success" %}
