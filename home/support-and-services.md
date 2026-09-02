@@ -12,6 +12,10 @@ Reach the VergeOS support team, or use the guides below to lean on before and af
 - **Email:** [support@verge.io](mailto:support@verge.io)
 - **Phone:** [855-855-8300](tel:+18558558300)
 
+## Community
+
+- For peer discussion, see [VergeOS community](community.md). The Discord is not a support channel.
+
 ## Documentation paths
 
 {% columns %}
