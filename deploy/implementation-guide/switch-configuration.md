@@ -186,9 +186,6 @@ max-frame-size 9216
 VergeOS requires MTU 9216 on switch ports to accommodate the 9000-byte payload plus VLAN tags, headers, and overhead for Tenants. Setting MTU below 9216 will cause packet fragmentation and degrade storage performance.
 {% endhint %}
 
-{% hint style="warning" %}
-When a core switch port cannot exceed 9000, set installer **MTU** to 8950. See [Core fabric MTU when switch MTU is 9000](core-fabric-mtu-switch-9000.md).
-{% endhint %}
 
 ### 2. Configure Core Fabric Ports
 
