@@ -61,9 +61,6 @@ This core fabric redundancy is vital to maintain system resiliency and uninterru
 | Physical NIC         | 9192 (typical)                  |
 | VXLAN overlay        | NIC MTU minus 50 bytes overhead |
 
-{% hint style="warning" %}
-If the core fabric switch port cannot exceed 9000, see [Core fabric MTU when switch MTU is 9000](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/implementation-guide/core-fabric-mtu-switch-9000).
-{% endhint %}
 
 {% hint style="info" %}
 **How Core Fabric Redundancy Works**
