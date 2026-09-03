@@ -61,7 +61,6 @@ This core fabric redundancy is vital to maintain system resiliency and uninterru
 | Physical NIC         | 9192 (typical)                  |
 | VXLAN overlay        | NIC MTU minus 50 bytes overhead |
 
-
 {% hint style="info" %}
 **How Core Fabric Redundancy Works**
 
