@@ -1,3 +1,4 @@
+---
 title: Core fabric MTU for physical networks supporting less than 9050 bytes
 description: Set installer MTU to correspond to the physical network constraints. Do not leave at default (9192) if the switch/NIC does not support it. 
 
@@ -17,7 +18,7 @@ mtu
 installation
 jumbo-frames categories:
 Installation
-
+---
 
 # Core fabric MTU when the physical network cannot support 9050 bytes
 
