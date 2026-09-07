@@ -98,7 +98,7 @@ When other consumers (VMware services, AI models, and Files) have been ruled out
 **Exercise Caution Before Deleting System Snapshots**
 Before manually removing system snapshots to reclaim local storage, verify whether any pending snapshots are queued or actively synchronizing offsite to a disaster recovery target:
 
-- If offsite sync is essential: Verify that the snapshot has completed synchronization to the remote target before deleting it locally. Deleting a snapshot mid-sync will abort the transfer
+- If offsite sync is essential: Verify that the snapshot has completed synchronization to the remote target before deleting it locally. Deleting a snapshot mid-sync will abort the transfer; the snapshot is not made available on the remote site until its full synchronization has finished. 
 - If local storage is critically low: Immediate capacity recovery may take priority over pending sync jobs to keep workloads running. Evaluate your current local tier headroom against offsite recovery requirements before making a bulk deletion.
 
 {% endhint %}
