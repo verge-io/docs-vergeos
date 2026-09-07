@@ -26,6 +26,12 @@ categories:
 
 ## Overview
 
+{% hint style="warning" %}
+**Critical:**
+**An immutable snapshot cannot be deleted by anyone — including administrators and VergeOS Support — until its lock expires.** The lock lasts for the snapshot's retention period or 7 days after unlock or expiration, whichever is shorter.
+
+{% endhint %}
+
 {% hint style="info" %}
 **Key Points: Immutable Snapshot Protection**
 
