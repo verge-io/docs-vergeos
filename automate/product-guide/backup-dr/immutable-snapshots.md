@@ -28,7 +28,7 @@ categories:
 
 {% hint style="warning" %}
 **Critical:**
-**An immutable snapshot cannot be deleted by anyone — including administrators and VergeOS Support — until its lock expires.**  When you remove the immutable flag from a snapshot, it remains locked for 7 days or until expiration, whichever is shorter.
+**An immutable snapshot cannot be deleted by anyone — including administrators and VergeOS Support — until its lock expires.**  When you remove the immutable flag from a snapshot, it remains **locked for 7 days or until expiration**, whichever is shorter.
 
 {% endhint %}
 
