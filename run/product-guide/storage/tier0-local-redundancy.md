@@ -1,6 +1,7 @@
 ---
 title: "Local Node Tier 0 Metadata Redundancy (D+x)"
 description: "How tier 0 mirrors metadata across a node's local drives (D+x) following the system redundancy level" 
+semantic_keywords:
   - "Metadata local resiliency"
   - "Metadata protection"
   - "Understanding Tier 0 scaling"
