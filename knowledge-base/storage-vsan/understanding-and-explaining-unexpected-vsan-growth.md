@@ -94,7 +94,7 @@ This variance occurs because the reported used capacity of each machine drive re
 ### Snapshot Retention
 When other consumers (VMware services, AI models, and Files) have been ruled out, snapshot retention is almost always the primary contributor to unexpected tier usage. Because snapshots preserve modified or deleted blocks that are no longer referenced by active machine drives, aggressive snapshot schedules or long retention policies can dramatically expand tier consumption.
 
-{% hint style="warning"}
+{% hint style="warning" %}
 **Exercise Caution Before Deleting System Snapshots**
 Before manually removing system snapshots to reclaim local storage, verify whether any pending snapshots are queued or actively synchronizing offsite to a disaster recovery target:
 
