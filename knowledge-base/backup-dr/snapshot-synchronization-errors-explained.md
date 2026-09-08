@@ -72,13 +72,6 @@ Occasionally, the system may generate a system alert from a new Message Log entr
 
 * The sync task was unable to start because the connection timed out. Typically, this error occurs when requesting a snapshot back from the destination side to the original sending side. In most cases, this is caused by a firewall blocking the traffic or missing traffic rules on the destination side. Refer to the [Guide on Sync Configuration](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/backup-and-dr/sync-configuration) for the required traffic rules.
 
-***
+### Error notifying client with 'notify\_start' / 'notify\_complete' Error (500) while communicating with server
 
-***
-
-{% hint style="info" %}
-**Document Information**
-
-* Last Updated: 2024-08-29
-* vergeOS Version: 4.12.6
-{% endhint %}
+* The bulk data transfer still completes — snapshots appear Normal on both ends and data keeps flowing — but the start and finish notification calls return HTTP 500 on every sync cycle. This typically indicates a major version mismatch between the source and destination systems (for example, a pre-26.x system syncing with a 26.x system). The underlying data path is more version-tolerant than the notification API, so snapshots land on both sides while the notifications error out. To resolve, upgrade the lagging side to a release compatible with the other end. For a large version gap, you may need to step through intermediate release branches rather than jumping straight to the target version. Once the versions align, the errors stop on the next sync cycle.
