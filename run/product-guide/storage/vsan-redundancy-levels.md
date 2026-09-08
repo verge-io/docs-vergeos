@@ -108,7 +108,7 @@ To check the current redundancy configuration and status of a vSAN tier:
 | Storage overhead (before dedup) | \~2x      | \~3x      |
 | Default                         | Yes       | No        |
 
-***
+
 
 ## Additional Tier 0 Redundancy (D+x) 
 
