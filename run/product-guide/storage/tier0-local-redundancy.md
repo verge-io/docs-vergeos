@@ -1,4 +1,4 @@
-# Local Node Tier 0 Redundancy
+# Local Node Tier 0 Metadata Redundancy
 
 
 ## Overview
@@ -7,26 +7,29 @@
 **Key Points**
 
 - **Automatic** — local tier 0 mirroring is automatically applied whenever more than one tier 0 drive is present in a node - it requires no configuration.
-- **Additive** — D+1 does not replace N+1; both operate simultaneously.
-- **Capacity cost is fixed** — regardless of how many tier 0 drives are in the node, usable capacity is always 50% of raw once D+1 is active (i.e. more than one local tier 0 drive).
+- **Additive** — D+x does not replace N+x; both operate simultaneously.
 - **Designed for the most critical data** — tier 0 holds metadata, making its protection the highest priority in the storage stack.
 {% endhint %}
 
 Tier 0 is the most critical storage tier in a VergeOS cluster — it holds metadata, and **without metadata, your data is inaccessible**. For this reason, VergeOS applies an additional layer of local redundancy to tier 0 whenever a node has more than one tier 0 drive: a disk-level mirror (D+1) within the node itself.
 
-This local mirroring works *on top of* the node-to-node redundancy (N+1) that already protects data across the cluster, giving tier 0 a double layer of protection that no other tier receives by default.
+This local mirroring works *on top of* the node-to-node redundancy (N+1, N+2) that already protects data across the cluster, giving tier 0 an additional layer of protection that no other tier receives by default.
 
 ## How It Works
 
-### Node-to-node redundancy (N+1)
+### Node-to-node redundancy (N+1/N+2)
 
-All storage tiers benefit from VergeOS's built-in node-to-node redundancy. Each piece of data is written to at least two nodes in the cluster, so the failure of any single node does not result in data loss or downtime.
+All storage tiers benefit from VergeOS's built-in node-to-node redundancy. Each piece of data is written to at least two nodes in the cluster, so the failure of any single node does not result in data loss or downtime.  For more information about node-level redundancy, see: [Understanding vSAN Redundancy Levels]((https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/storage/vsan-redundancy-levels).)
 
-### Local disk mirroring (D+1)
+### Local Tier 0 redundancy (D+1/D+2)
 
-When a node contains more than one tier 0 drive, VergeOS automatically mirrors those drives within the node. This is a 1:1 mirror — every write to one drive is simultaneously written to the other. If a drive fails, the surviving drive continues serving reads and writes without interruption, and the node remains fully operational.
+When a node contains more than one tier 0 drive, VergeOS automatically employs local redundancy. If a drive fails, the surviving drive continues serving reads and writes without interruption, and the node remains fully operational.  
 
-The result is **two independent failure domains for tier 0**: a drive can fail *and* a node can fail simultaneously, and the cluster continues without data loss.
+Local redundancy matches system node-to-node redundancy: 
+
+- N+1 (2-cross-node copies) -> D+1 (2 local-node copies) 
+- N+2 (3-cross-node copies) -> D=2 (3 local-node copies)
+
 
 > **Why only tier 0?**  
 > Tier 0 stores metadata — the index that maps every block of every volume to its physical location on disk. Losing metadata means losing access to all data those volumes contain, even if the data blocks themselves are intact. Local mirroring of tier 0 reflects how critical that metadata is, and is applied automatically by design whenever the hardware allows it.
