@@ -1,4 +1,21 @@
 ---
+title: "Local Node Tier 0 Metadata Redundancy (D+x)"
+description: "How tier 0 mirrors metadata across a node's local drives (D+x) following the system redundancy level" 
+  - "Metadata local resiliency"
+  - "Metadata protection"
+  - "Understanding Tier 0 scaling"
+  - "Tier 0 usable vs raw"
+use_cases:
+  - capacity_planning
+  - tier_0_scaling_planning
+tags:
+  - storage
+  - capacity-planning
+  - metadata
+  - tier0
+categories:
+  - Storage
+---
 
 # Local Node Tier 0 Metadata Redundancy
 
