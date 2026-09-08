@@ -1,57 +1,110 @@
-# Local Node Tier 0 Metadata Redundancy
+Absolutely — and good catch.  
+This is an important nuance: **local Tier 0 redundancy is *bounded* by the number of Tier 0 drives physically present in the node**, even if the system‑wide redundancy level (N+2) calls for three copies.
 
+I’ll revise the documentation so it expresses this clearly, consistently, and without implying that D+2 is always achievable in an N+2 system.
+
+Below is the updated version with that constraint fully integrated.
+
+---
+
+# Local Node Tier 0 Metadata Redundancy
 
 ## Overview
 
 {% hint style="info" %}
 **Key Points**
 
-- **Automatic** — local tier 0 mirroring is automatically applied whenever more than one tier 0 drive is present in a node - it requires no configuration.
-- **Additive** — D+x does not replace N+x; both operate simultaneously.
-- **Designed for the most critical data** — tier 0 holds metadata, making its protection the highest priority in the storage stack.
+- **Automatic** — Tier 0 local mirroring is automatically applied whenever a node contains more than one Tier 0 drive.
+- **Additive** — Local disk redundancy (D+x) operates *in addition to* node‑to‑node redundancy (N+x).
+- **Drive‑limited** — Local redundancy is capped by the number of Tier 0 drives physically present in the node.
+- **Highest priority** — Tier 0 stores metadata, making its protection the most critical part of the storage stack.
 {% endhint %}
 
-Tier 0 is the most critical storage tier in a VergeOS cluster — it holds metadata, and **without metadata, your data is inaccessible**. For this reason, VergeOS applies an additional layer of local redundancy to tier 0 whenever a node has more than one tier 0 drive: a disk-level mirror (D+1) within the node itself.
+Tier 0 is the most critical storage tier in a VergeOS cluster — it holds metadata, and **without metadata, data on all tiers becomes inaccessible**. To protect this metadata, VergeOS applies an additional layer of *local* redundancy whenever a node has multiple Tier 0 drives: a disk‑level mirror (D+1 or D+2) inside the node.
 
-This local mirroring works *on top of* the node-to-node redundancy (N+1, N+2) that already protects data across the cluster, giving tier 0 an additional layer of protection that no other tier receives by default.
+This local protection is **independent of and additive to** the cluster’s node‑to‑node redundancy (N+1 or N+2).  
+However, **local redundancy cannot exceed the number of Tier 0 drives available**.  
+For example, an N+2 system requires three local copies (D+2), but a node with only two Tier 0 drives can only provide two local copies.
+
+---
 
 ## How It Works
 
-### Node-to-node redundancy (N+1/N+2)
+### Node‑to‑node redundancy (N+1 / N+2)
 
-All storage tiers benefit from VergeOS's built-in node-to-node redundancy. Each piece of data is written to at least two nodes in the cluster, so the failure of any single node does not result in data loss or downtime.  For more information about node-level redundancy, see: [Understanding vSAN Redundancy Levels]((https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/storage/vsan-redundancy-levels).)
+All storage tiers, including Tier 0, benefit from VergeOS’s node‑to‑node redundancy:
 
-### Local Tier 0 redundancy (D+1/D+2)
+- **N+1** — two cross‑node copies  
+- **N+2** — three cross‑node copies  
 
-When a node contains more than one tier 0 drive, VergeOS automatically employs local redundancy. If a drive fails, the surviving drive continues serving reads and writes without interruption, and the node remains fully operational.  
+If a node fails, metadata and data remain available from surviving nodes.
 
-Local redundancy matches system node-to-node redundancy: 
+---
 
-- N+1 (2-cross-node copies) -> D+1 (2 local-node copies) 
-- N+2 (3-cross-node copies) -> D=2 (3 local-node copies)
+### Local Tier 0 redundancy (D+1 / D+2), capped by drive count
 
+When a node contains more than one Tier 0 drive, VergeOS automatically applies local redundancy:
 
-> **Why only tier 0?**  
-> Tier 0 stores metadata — the index that maps every block of every volume to its physical location on disk. Losing metadata means losing access to all data those volumes contain, even if the data blocks themselves are intact. Local mirroring of tier 0 reflects how critical that metadata is, and is applied automatically by design whenever the hardware allows it.
+- **D+1** — two local copies  
+- **D+2** — three local copies  
+
+But **local redundancy is limited by the number of drives**:
+
+| System Redundancy | Desired Local Copies | Required Drives | Actual Local Copies (if drives < required) |
+|-------------------|----------------------|-----------------|--------------------------------------------|
+| N+1               | 2 (D+1)              | ≥2              | min(drives, 2)                             |
+| N+2               | 3 (D+2)              | ≥3              | min(drives, 3)                             |
+
+Examples:
+
+- N+2 system with **2 Tier 0 drives** → only **2 local copies** (D+1 behavior)  
+- N+2 system with **3+ Tier 0 drives** → full **3 local copies** (D+2)  
+- N+1 system with **2+ drives** → full **2 local copies** (D+1)
+
+If a Tier 0 drive fails, the remaining drive(s) continue serving metadata without interruption.
+
+> **Why only Tier 0?**  
+> Tier 0 stores metadata — the index that maps every block of every volume to its physical location. Losing metadata means losing access to all data, even if the underlying blocks are intact.
+
+---
 
 ## Drive Count, Usable Capacity, and Redundancy
 
-The table below shows how local redundancy scales with the number of tier 0 drives in a single node. Usable capacity figures assume 1 TB raw drives.
+Local redundancy depends on both **drive count** and **system redundancy level**, but is **capped by available drives**.
 
-| Tier 0 Drives | Raw Capacity | Usable Capacity | Local Redundancy |
-|:---:|---:|---:|:---:|
-| 1 | 1 TB | 1 TB (100%) | None |
-| 2 | 2 TB | 1 TB (50%) | ✓ Redundant (D+1) |
-| 3 | 3 TB | 1.5 TB (50%) | ✓ Redundant (D+1) |
-| 4 | 4 TB | 2 TB (50%) | ✓ Redundant (D+1) |
+### N+1 System (D+1 Target)
 
-With two or more tier 0 drives, usable capacity is always 50% of raw — the cost of the mirror — but the tradeoff is a drive failure that would otherwise take the node offline becomes a non-event.
+| Tier 0 Drives | Raw Capacity | Local Copies | Usable Capacity | Local Redundancy |
+|:-------------:|-------------:|-------------:|----------------:|:----------------:|
+| 1             | 1 TB         | 1            | 1 TB (100%)     | None             |
+| 2             | 2 TB         | 2            | 1 TB (50%)      | ✓ D+1            |
+| 3             | 3 TB         | 2            | 1.5 TB (50%)    | ✓ D+1            |
+| 4             | 4 TB         | 2            | 2 TB (50%)      | ✓ D+1            |
 
-> **Single-drive nodes:** A node with only one tier 0 drive still benefits from N+1 redundancy across nodes, but there is no local disk mirror. This is an acceptable configuration, though adding a second tier 0 drive is recommended wherever the hardware supports it.
+### N+2 System (D+2 Target)
 
-## Double Redundancy: N+1 and D+1 Together
+| Tier 0 Drives | Raw Capacity | Local Copies | Usable Capacity | Local Redundancy |
+|:-------------:|-------------:|-------------:|----------------:|:----------------:|
+| 1             | 1 TB         | 1            | 1 TB (100%)     | None             |
+| 2             | 2 TB         | 2            | 1 TB (50%)      | ✓ Partial (D+1) |
+| 3             | 3 TB         | 3            | 1 TB (33%)      | ✓ Full (D+2)    |
+| 4             | 4 TB         | 3            | 1.33 TB (33%)   | ✓ Full (D+2)    |
 
-The diagram below illustrates how the two redundancy layers work together across a typical three-node cluster. Each node has two tier 0 drives (mirrored locally), and each write is replicated to at least one other node.
+**Key behavior:**
+
+- N+2 requires **three drives** for full local redundancy.  
+- With fewer than three drives, the node provides **the maximum possible local copies**, even if that is fewer than the system redundancy level.  
+- Usable capacity = raw ÷ local copies.
+
+> **Single‑drive nodes:**  
+> A node with only one Tier 0 drive still benefits from N+1 or N+2 redundancy across nodes, but has **no local protection**.
+
+---
+
+## Combined Redundancy: N+x and D+x Together
+
+The diagram below illustrates an N+1 cluster with D+1 local mirrors.  
+In an N+2 cluster, the same structure applies — except each node attempts to maintain **three local copies**, falling back to **two** if only two drives are present.
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
@@ -71,12 +124,9 @@ The diagram below illustrates how the two redundancy layers work together across
 │           └──────────────────────┴─────────────────────┘           │
 │                     Node-to-node replication (N+1)                 │
 └─────────────────────────────────────────────────────────────────────┘
-
-Failure scenario examples:
-
-  Drive fails on Node A  →  Node A's mirror absorbs it.  No impact.
-  Node A fails entirely  →  N+1 replication covers it.   No impact.
-  Drive fails on Node A
-    + Node B fails        →  Both layers absorb each.    No impact.
 ```
+
+Failure scenarios remain identical — local failures are absorbed by D+x, node failures by N+x.
+
+---
 
