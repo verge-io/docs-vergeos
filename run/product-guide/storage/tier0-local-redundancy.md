@@ -1,10 +1,3 @@
-Absolutely — and good catch.  
-This is an important nuance: **local Tier 0 redundancy is *bounded* by the number of Tier 0 drives physically present in the node**, even if the system‑wide redundancy level (N+2) calls for three copies.
-
-I’ll revise the documentation so it expresses this clearly, consistently, and without implying that D+2 is always achievable in an N+2 system.
-
-Below is the updated version with that constraint fully integrated.
-
 ---
 
 # Local Node Tier 0 Metadata Redundancy
@@ -100,33 +93,3 @@ Local redundancy depends on both **drive count** and **system redundancy level**
 > A node with only one Tier 0 drive still benefits from N+1 or N+2 redundancy across nodes, but has **no local protection**.
 
 ---
-
-## Combined Redundancy: N+x and D+x Together
-
-The diagram below illustrates an N+1 cluster with D+1 local mirrors.  
-In an N+2 cluster, the same structure applies — except each node attempts to maintain **three local copies**, falling back to **two** if only two drives are present.
-
-```
-┌─────────────────────────────────────────────────────────────────────┐
-│                        VergeOS Cluster                              │
-│                                                                     │
-│  ┌──────────────────┐   ┌──────────────────┐   ┌────────────────┐  │
-│  │      Node A      │   │      Node B      │   │     Node C     │  │
-│  │                  │   │                  │   │                │  │
-│  │  Tier 0 (D+1)   │   │  Tier 0 (D+1)   │   │  Tier 0 (D+1) │  │
-│  │  ┌────┐ ┌────┐  │   │  ┌────┐ ┌────┐  │   │  ┌────┐┌────┐ │  │
-│  │  │Drv1│↔│Drv2│  │   │  │Drv1│↔│Drv2│  │   │  │Drv1││Drv2│ │  │
-│  │  └────┘ └────┘  │   │  └────┘ └────┘  │   │  └────┘└────┘ │  │
-│  │   Local mirror  │   │   Local mirror  │   │  Local mirror  │  │
-│  │   (D+1)         │   │   (D+1)         │   │  (D+1)         │  │
-│  └────────┬─────────┘   └────────┬────────┘   └───────┬────────┘  │
-│           │                      │                     │           │
-│           └──────────────────────┴─────────────────────┘           │
-│                     Node-to-node replication (N+1)                 │
-└─────────────────────────────────────────────────────────────────────┘
-```
-
-Failure scenarios remain identical — local failures are absorbed by D+x, node failures by N+x.
-
----
-
