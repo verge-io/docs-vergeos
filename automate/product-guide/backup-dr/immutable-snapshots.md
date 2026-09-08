@@ -137,7 +137,7 @@ If your team cannot guarantee immediate response:
 - Ensures protected rollback points even during off‑hours  
 - Gives administrators more time to respond to unauthorized unlock attempts  
 
-Important: Daily immutable snapshots provide a longer response window but require more storage runway — they cannot be manually deleted during their full 24‑hour retention. 
+**Important:** Daily immutable snapshots provide a longer response window but require more storage runway — they cannot be manually deleted during their full 24‑hour retention. 
 
 #### Long‑Retention Immutable Snapshots
 
@@ -151,7 +151,7 @@ Use only when:
 
 Generally suitable only for systems operating below ~70% storage capacity and non‑production environments.
 
-**Critical:** Long‑retention immutable snapshots can hold space significantly longer. If expiration is 7 days or more, the unlock delay must fully elapse before deletion is possible.
+**Critical: Long‑retention immutable snapshots can hold space significantly longer. If expiration is 7 days or more, the unlock delay must fully elapse before deletion is possible.**
 
 ---
 
