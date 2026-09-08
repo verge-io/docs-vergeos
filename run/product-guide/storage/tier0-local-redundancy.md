@@ -103,7 +103,7 @@ Local redundancy depends on both **drive count** and **system redundancy level**
 
 **Key behavior:**
 
-- N+2 requires **three drives** for full local redundancy.  
+- N+2 requires **three drives** for full local redundancy to match the system level.  
 - With fewer than three drives, the node provides **the maximum possible local copies**, even if that is fewer than the system redundancy level.  
 - Usable capacity = raw ÷ local copies.
 
