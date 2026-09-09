@@ -28,7 +28,7 @@ Set the installer **MTU** to **9000** when the physical NIC cannot exceed 9000 (
 
 - Read [Network design](network-design.md) and [Switch configuration](switch-configuration.md).
 - Set switch MTU on core fabric ports. VergeOS requires **9216** on switch ports.
-- Confirm the server NIC maximum MTU.
+- **Confirm the NIC maximum MTU** (e.g., In UCS Manager configure the vNIC Adapter Policy - MTU=9000, verify the NIC driver reports MTU 9000 after boot.)
 
 ## Installer MTU
 
