@@ -43,7 +43,7 @@ The installation will automatically account for necessary overhead and create th
 4. Repeat for each core fabric network on the node.
 5. Set the same installer **MTU** on every node in the system.
 
-When installer core network **MTU** is set to 9000, the created 'Core' network MTU is set to 8950.  Switch port MTU stays 9216. A capped NIC does not change the switch requirement.
+When installer core network **MTU** is set to 9000, the 'Core' virtual network MTU is automatically configured at 8950.  
 
 
 ## After install
