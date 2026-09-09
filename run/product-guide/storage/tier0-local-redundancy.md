@@ -61,10 +61,10 @@ When a node contains more than one Tier 0 drive, VergeOS automatically applies l
 
 But **local redundancy is limited by the number of drives**:
 
-| System Redundancy | Desired Local Copies | Required Drives | Actual Local Copies (if drives < required) |
-|-------------------|----------------------|-----------------|--------------------------------------------|
-| N+1               | 2 (D+1)              | ≥2              | min(drives, 2)                             |
-| N+2               | 3 (D+2)              | ≥3              | min(drives, 3)                             |
+| System Redundancy | Desired Local Copies | Required Drives | 
+|-------------------|----------------------|-----------------|
+| N+1               | 2 (D+1)              | ≥2              |
+| N+2               | 3 (D+2)              | ≥3              |
 
 Examples:
 
