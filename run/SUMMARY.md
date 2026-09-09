@@ -24,6 +24,7 @@
 * [VergeOS vSAN Deletion Process](product-guide/storage/vsan-deletion-process.md)
 * [vSAN Diagnostics Guide](product-guide/storage/vsan-diagnostics.md)
 * [Understanding vSAN Redundancy Levels](product-guide/storage/vsan-redundancy-levels.md)
+* [Local Node Tier 0 Metadata Redundancy (D+x)](tier0-local-redundancy.md)
 
 ## Networking
 
