@@ -19,12 +19,12 @@
 * [Removing ISO Files with References](product-guide/storage/removing-iso-refs.md)
 * [Storage Tiers in VergeOS vSAN](product-guide/storage/storage-tiers.md)
 * [Storage Units and Capacity Reporting](product-guide/storage/storage-units.md)
+* [Local Node Tier 0 Metadata Redundancy (D+x)](product-guide/storage/tier0-local-redundancy.md)
 * [Uploading Files to the vSAN](product-guide/storage/uploading-files-to-vsan.md)
 * [VergeOS vSAN Block-Level Architecture and Data Distribution](product-guide/storage/vsan-architecture.md)
 * [VergeOS vSAN Deletion Process](product-guide/storage/vsan-deletion-process.md)
 * [vSAN Diagnostics Guide](product-guide/storage/vsan-diagnostics.md)
 * [Understanding vSAN Redundancy Levels](product-guide/storage/vsan-redundancy-levels.md)
-* [Local Node Tier 0 Metadata Redundancy (D+x)](tier0-local-redundancy.md)
 
 ## Networking
 
