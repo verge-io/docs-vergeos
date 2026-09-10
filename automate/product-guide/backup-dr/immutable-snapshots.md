@@ -137,7 +137,7 @@ If your team cannot guarantee immediate response:
 - Ensures protected rollback points even during off‑hours  
 - Gives administrators more time to respond to unauthorized unlock attempts  
 
-Important: Daily immutable snapshots provide a longer response window but require more storage runway — they cannot be manually deleted during their full 24‑hour retention. 
+**Important:** Daily immutable snapshots provide a longer response window but require more storage runway — they cannot be manually deleted during their full 24‑hour retention. 
 
 #### Long‑Retention Immutable Snapshots
 
