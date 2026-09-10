@@ -92,7 +92,7 @@ Before you proceed with the installation please make sure you've reviewed the fo
 *   **MTU** - The MTU setting must always be a value supported by the switching hardware (physical switch/NIC). For Core Fabric networks, the MTU should be large enough to support the levels of tenancy that will be provided. The default setting is 9192.
 
     {% hint style="warning" %}
-    Setting a physical core network MTU beyond supported limits may result in an unreliable or non‑functional system.  For more information about setting core fabric MTU, see: [Core fabric MTU when switch MTU is 9000](core-fabric-mtu-switch-9000.md).
+    Setting a physical core network MTU beyond supported limits may result in an unreliable or non‑functional system.  For more information about MTU settings for core networks, see: [Core Network MTU Basics](core-network-mtu-basics.md).
     {% endhint %}
 
     <div data-gb-custom-block data-tag="hint" data-style="success" class="hint hint-success"><p><strong>When configuring an external network MTU: The Internet standard MTU for most Ethernet networks is 1500. The standard for VPN connections is 1400 bytes (will vary depending on the service).</strong></p></div>
