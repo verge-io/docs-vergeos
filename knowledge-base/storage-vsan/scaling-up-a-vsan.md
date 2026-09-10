@@ -49,6 +49,9 @@ To scale up a vSAN, follow the steps below. However, before proceeding, ensure t
 **Related Documentation**
 
 **Required Reading:** The [vSAN Scale Up Standard Operating Procedure](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/operations/vsan-scale-up-sop) contains essential preparation, verification, and troubleshooting steps that must be completed before and after this scale up process.
+
+**Scaling Tier 0:** When more than one tier 0 drive is installed in a node, the tier is automatically mirrored locally to provide additional metadata resiliency. See: [Local Node Tier 0 Metadata Redundancy (D+x)](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/storage/tier0-local-redundancy.md) for additional information.
+
 {% endhint %}
 
 ### Steps to Scale Up
