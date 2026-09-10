@@ -151,7 +151,7 @@ Use only when:
 
 Generally suitable only for systems operating below ~70% storage capacity and non‑production environments.
 
-**Critical: Long‑retention immutable snapshots can hold space significantly longer. If expiration is 7 days or more, the unlock delay must fully elapse before deletion is possible.**
+**Critical:** Long‑retention immutable snapshots can hold space significantly longer. If expiration is 7 days or more, the unlock delay must fully elapse before deletion is possible.
 
 ---
 
