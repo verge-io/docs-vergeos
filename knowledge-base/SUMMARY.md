@@ -52,6 +52,7 @@
   * [Network Blocks](networking/network-blocks.md)
   * [Routing Between Internal VergeOS Networks](networking/routing-between-internal-vergeio-networks.md)
   * [Routing Layer 2 Networks with VergeOS](networking/routing-l2-networks.md)
+  * [UCS vNIC Core fabric MTU (NIC cannot exceed 9000)](networking/ucs-vnic-core-nic-cannot-exceed-9000mtu.md)
   * [Understanding Traffic Flow](networking/understanding-traffic-flow.md)
   * [VM Network Connectivity Issues](networking/vm-network-connectivity-issues.md)
   * [Wireguard - Adding Nameserver entries to Client Configs](networking/wireguard--adding-nameserver-entries-to-client-configs.md)
