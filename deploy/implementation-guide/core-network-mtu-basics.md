@@ -47,6 +47,6 @@ A physical MTU of **9216**—common on many NICs and switches—supports three t
 ## Key Takeaways
 
 * VergeOS targets **9000 MTU** for Core and tenant networks.
-* Physical MTU must include **9000 bytes + overhead**.
+* Physical MTU must include 'core' network MTU plus overhead.
 * Higher physical MTU values allow deeper tenant nesting without MTU reduction.
 * If physical MTU is too low, VergeOS automatically adjusts Core and tenant MTUs downward.
