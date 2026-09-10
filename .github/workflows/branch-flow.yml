@@ -3,17 +3,22 @@ name: Branch flow
 on:
   pull_request:
     types: [opened, reopened, synchronize, edited]
-    branches: [main]
+    branches: [main, dev]
 
 jobs:
   require-dev-source:
     name: Require dev as merge source
     runs-on: ubuntu-latest
     steps:
-      - name: Fail unless the PR comes from dev
+      - name: Fail unless a PR into main comes from dev
         env:
+          BASE_REF: ${{ github.base_ref }}
           HEAD_REF: ${{ github.head_ref }}
         run: |
+          if [ "$BASE_REF" != "main" ]; then
+            echo "OK: PR targets '$BASE_REF', not main — nothing to enforce."
+            exit 0
+          fi
           if [ "$HEAD_REF" != "dev" ]; then
             echo "::error::Pull requests into main must come from dev (this PR is from '$HEAD_REF'). Merge your branch into dev first, then promote dev to main."
             exit 1
