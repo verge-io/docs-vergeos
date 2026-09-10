@@ -2,13 +2,23 @@
 
 ## Overview
 
-The **Core (virtual fabric) network** carries vSAN traffic and node‑to‑node communication. VergeOS automatically creates this network during installation and attempts to use a **9000‑byte MTU** to support jumbo frames for all guest‑to‑guest and inter‑system traffic.
+{% hint style="info" %}
+**Key Points**
+
+{% endhint %}
+
+
+
+**Core (virtual) network**
+
+A **'Core'** network carries vSAN traffic and node‑to‑node communication. VergeOS automatically creates this virtual network during installation.  The installer targets a **9000‑byte MTU** for this network to support jumbo frames for all guest‑to‑guest and inter‑system traffic.
 
 A 9000‑byte MTU can only be used when the underlying physical networks support it *plus required overhead*. If the physical MTU is too small, VergeOS automatically lowers the Core MTU.
 
----
+Multiple physical networks serve as the foundation for the 'Core' network, operating concurrently and providing redundancy. 
 
-## Physical Network MTU
+
+## Physical Network MTU 
 
 During installation, you specify MTU values for the physical networks that back the Core network.
 
