@@ -47,7 +47,7 @@ Please review the [core concepts](concepts.md) first to learn more about VergeOS
 ### Core Fabric Network Requirements
 
 * Jumbo Frames configured on all Core Fabric Network switchports
-  * Recommended MTU size of **9216** and above on core network switchports to support 9000-byte jumbo frames within the VergeOS Core Fabric (the virtual network used for all node‑to‑node and intrasystem communication) -  the physical switch ports carrying the core networks must be configured with an MTU large enough to accommodate all encapsulation overhead - including VergeOS system encapsulation, cumulative overhead for tenancy/nested tenancy, and external vlan tagging, where applicable. 
+  * Recommended MTU size of **9216** and above on core network switchports to support 9000-byte jumbo frames within the VergeOS Core -  the physical switch ports carrying the core networks must be configured with an MTU large enough to accommodate all encapsulation overhead - including VergeOS system encapsulation, cumulative overhead for tenancy/nested tenancy, and external vlan tagging, where applicable. 
     {% hint style="info" %}
     See [Core Network MTU Basics](core-network-mtu-basics.md) for more information about MTU settings for core networks.
     {% endhint %}
