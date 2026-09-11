@@ -5,26 +5,27 @@
 {% hint style="info" %}
 **Key Points**
 
+- * VergeOS targets **9000 MTU** for core and tenant core networks.
+- * Physical MTU must provide for overhead 
+-  Higher physical MTU values allow deeper tenant nesting without MTU reduction.
+- If physical MTU is too low, VergeOS automatically adjusts Core and tenant MTUs downward.
+
 {% endhint %}
-
-
 
 **Core (virtual) network**
 
-A **'Core'** network carries vSAN traffic and node‑to‑node communication. VergeOS automatically creates this virtual network during installation.  The installer targets a **9000‑byte MTU** for this network to support jumbo frames for all guest‑to‑guest and inter‑system traffic.
+In a VergeOS system, the **'Core'** network carries vSAN traffic and node‑to‑node communication. VergeOS automatically creates this virtual network during installation.  The installer targets a **9000‑byte MTU** for this network to support jumbo frames for all guest‑to‑guest and inter‑system traffic.
 
-A 9000‑byte MTU can only be used when the underlying physical networks support it *plus required overhead*. If the physical MTU is too small, VergeOS automatically lowers the Core MTU.
-
-Multiple physical networks serve as the foundation for the 'Core' network, operating concurrently and providing redundancy. 
+A 9000‑byte MTU can only be used when the underlying physical networks support it *plus required overhead*. If the physical MTU is too small, the VergeOS installer automatically lowers the Core network MTU. 
 
 
 ## Physical Network MTU 
 
-During installation, you specify MTU values for the physical networks that back the Core network.
+Multiple physical networks serve as the foundation for the 'Core' network, operating concurrently and providing redundancy.  During installation, you define MTU values for the physical networks that back the Core network.
 
 * Enter the **maximum MTU your physical hardware supports**.
 * Every component in the path (NICs, switches, ports) must support this value.
-* The installer default is **9192**, which is sufficient for a Core MTU of 9000.
+* The installer default is **9192**, which is sufficient for a Core MTU of 9000, multiple layers of tenancy with MTU 9000, plus additional headroom.
 
 To support a **9000‑byte Core MTU**, the physical network must support **at least 9050 bytes**.
 
@@ -44,9 +45,5 @@ A physical MTU of **9216**—common on many NICs and switches—supports three t
 
 ---
 
-## Key Takeaways
 
-* VergeOS targets **9000 MTU** for Core and tenant networks.
-* Physical MTU must include 'core' network MTU plus overhead.
-* Higher physical MTU values allow deeper tenant nesting without MTU reduction.
-* If physical MTU is too low, VergeOS automatically adjusts Core and tenant MTUs downward.
+
