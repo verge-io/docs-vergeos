@@ -89,7 +89,7 @@ Before you proceed with the installation please make sure you've reviewed the fo
 
 * **Name** - This name will be used in the User interface to identify this network. Enter a name that will help to identify where the NIC(s) is plugged in, such as the switch hostname or organizational naming convention. This can be changed after installation.
 * **Description** (optional) - Text can be entered here to provide any additional administrative information.
-*   **MTU** - The MTU setting must always be a value supported by the switching hardware (physical switch/NIC). **For Core Fabric networks, specify the maximum MTU the physical network provides.** The default setting is 9192.   For more information about MTU settings for core networks, see: [Core Network MTU Basics](core-network-mtu-basics.md)
+*   **MTU** - The MTU setting must always be a value supported by the switching hardware (physical switch/NIC). **For Core Fabric networks, specify the maximum MTU to allow** The default setting is 9192.   For more information about MTU settings for core networks, see: [Core Network MTU Basics](core-network-mtu-basics.md)
 
     {% hint style="warning" %}
     Setting a physical core network MTU beyond supported limits may result in an unreliable or non‑functional system.
