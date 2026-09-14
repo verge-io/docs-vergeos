@@ -108,7 +108,15 @@ To check the current redundancy configuration and status of a vSAN tier:
 | Storage overhead (before dedup) | \~2x      | \~3x      |
 | Default                         | Yes       | No        |
 
-***
+
+
+## Additional Tier 0 Redundancy (D+x) 
+
+Expanded metadata resiliency is provided through automatic Tier 0 local mirroring—up to the number of drives available—supplementing the cluster’s node‑to‑node vSAN redundancy.
+For detailed information about tier 0 local redundancy, see: [Local Node Tier 0 Metadata Redundancy (D+x)](tier0-local-redundancy.md).
+
+
+
 
 {% hint style="info" %}
 **Document Information**
