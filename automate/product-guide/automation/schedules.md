@@ -54,6 +54,10 @@ VergeOS includes a set of commonly-used default schedules. You can also create y
     - **End Date (optional)**:  
      By default, a new recurring schedule is configured to be perpetual. To set an end date, unselect **Never Ends** and choose the desired end date and time.
 
+{% hint style="info" %}
+Schedule times are evaluated in cluster/system time, not the local time of your browser. A schedule set for 18:00 runs at 18:00 cluster time, regardless of your browser time zone.
+{% endhint %}
+
 4. Click **Submit** to save the schedule.  
    Once saved, it will be available to assign as a **schedule trigger** for any task.
 

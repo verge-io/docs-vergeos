@@ -43,6 +43,14 @@ Upon installation, VergeOS automatically generates a self-signed certificate:
 - Assigned to the **Verge-API** interface (used for local console access)
 - This certificate should be kept in place for local access and recovery or fallback scenarios.
 
+{% hint style="info" %}
+**Self-signed certificates renew themselves**
+
+VergeOS automatically renews the default self-signed certificate before it expires. No administrator action is required, even as the listed expiration date approaches. The **Renew** flag on the certificate form applies only to Let's Encrypt (ACME) certificates.
+
+Sites without a publicly trusted CA — for example, air-gapped environments — can rely on the default self-signed certificate long-term.
+{% endhint %}
+
 
 ## Request and Apply a Let’s Encrypt (or Other ACME-Based) Certificate
 

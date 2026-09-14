@@ -81,11 +81,24 @@ Several areas in the VergeOS platform may contribute to unexpected storage growt
   * Review **Total Storage Used** by clicking on **History** in the left menu. Follow the same process listed above to review growth history.
   * If unexpected growth is found, investigate within the tenant for the possible causes of storage increase (as listed above), and within any sub-tenants if applicable.
 
-***
+## Tier Storage Used vs. Sum of Machine Drives
+A vSAN tier’s total storage used metric will typically be higher than the sum of the used space reported across its individual machine_drives.
+This variance occurs because the reported used capacity of each machine drive reflects only currently referenced active blocks on those drives. In contrast, total tier usage accounts for all underlying data blocks across the platform, including:
 
-{% hint style="info" %}
-**Document Information**
+* **Snapshots:** Blocks retained solely to preserve historical point-in-time states.
+* **VMware Services:** Data retained by VMware backup instances.
+* **Files:** Shared file system storage, uploaded media, or hypervisor images (e.g., .ova, .vhdx).
+* **AI Models:** Localized model files and weights residing on the tier.
 
-* Last Updated: 2024-09-03
-* VergeOS Version: 4.12.6
+
+### Snapshot Retention
+When other consumers (VMware services, AI models, and Files) have been ruled out, snapshot retention is almost always the primary contributor to unexpected tier usage. Because snapshots preserve modified or deleted blocks that are no longer referenced by active machine drives, aggressive snapshot schedules or long retention policies can dramatically expand tier consumption.
+
+{% hint style="warning" %}
+**Exercise Caution Before Deleting System Snapshots**
+Before manually removing system snapshots to reclaim local storage, verify whether any pending snapshots are queued or actively synchronizing offsite to a disaster recovery target:
+
+- If offsite sync is essential: Verify that the snapshot has completed synchronization to the remote target before deleting it locally. Deleting a snapshot mid-sync will abort the transfer; the snapshot is not made available on the remote site until its full synchronization has finished. 
+- If local storage is critically low: Immediate capacity recovery may take priority over pending sync jobs to keep workloads running. Evaluate your current local tier headroom against offsite recovery requirements before making a bulk deletion.
+
 {% endhint %}
