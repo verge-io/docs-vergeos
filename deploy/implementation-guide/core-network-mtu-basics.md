@@ -48,6 +48,7 @@ Starting with the default physical core MTU 9192 (set during installation) allow
 All MTU values shown in the table assume that the physical network components (switches, NICs, and ports) fully support the required MTU and associated overhead.
 
 {% endhint %}
+
 ---
 
 
