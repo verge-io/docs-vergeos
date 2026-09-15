@@ -5,9 +5,9 @@
 {% hint style="info" %}
 **Key Points**
 
-- * VergeOS targets **9000 MTU** for core and tenant core networks.
-- * Physical MTU must provide for overhead 
--  Higher physical MTU values allow deeper tenant nesting without MTU reduction.
+- VergeOS targets **9000 MTU** for core and tenant core networks.
+- Physical MTU must provide for overhead 
+- Higher physical MTU values allow deeper tenant nesting without MTU reduction.
 - If physical MTU is too low, VergeOS automatically adjusts Core and tenant MTUs downward.
 
 {% endhint %}
