@@ -96,7 +96,7 @@ Before you proceed with the installation please make sure you've reviewed the fo
     {% endhint %}
 
     <div data-gb-custom-block data-tag="hint" data-style="success" class="hint hint-success"><p><strong>When configuring an external network MTU: The Internet standard MTU for most Ethernet networks is 1500. The standard for VPN connections is 1400 bytes (will vary depending on the service).</strong></p></div>
-* **Core-Network:** -If a core network will reside here, the value needs to be "yes". Otherwise, change the value to blank or "no".
+* **Core-Network** -If a core network will reside here, the value needs to be "yes". Otherwise, change the value to blank or "no".
 * **VLAN** - PVID port is always preferred (0 or blank for none), but a VLAN tag can be accommodated by entering the correct VLAN ID here.
 
 12. **Repeat the above steps to configure all of your physical networks** until every NIC has been assigned. If there is a NIC that is not plugged in, it should still be configured here during installation; it can be given a name such as "unplugged" or "unused".
