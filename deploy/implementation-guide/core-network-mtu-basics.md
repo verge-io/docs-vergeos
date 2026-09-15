@@ -41,8 +41,13 @@ Each layer of tenancy adds encapsulation overhead. VergeOS will target a 9000‑
 | Tenant — level 2 | 150 | 9000
 | Tenant — level 3 | 200 | 8992
 
-Starting with the default physical core MTU 9192 (set during installation) allows the host and 2 tenant layers to operate with a full 9000-byte MTU. 
+Starting with the default physical core MTU 9192 (set during installation) allows the host and 2 tenant layers to operate with a full 9000-byte MTU.   
 
+{% hint style="info" %}
+
+All MTU values shown in the table assume that the physical network components (switches, NICs, and ports) fully support the required MTU and associated overhead.
+
+{% endhint %}
 ---
 
 
