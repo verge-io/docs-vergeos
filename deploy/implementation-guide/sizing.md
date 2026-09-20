@@ -9,7 +9,6 @@ semantic_keywords:
   - "VergeOS hardware baseline Standard Production HCI"
   - "Tier 0 metadata capacity snapshot retention"
   - "enterprise disk endurance DWPD boot-only Dell BOSS"
-  - "maximum supported hardware specifications VergeOS"
 use_cases:
   - hardware_procurement
   - capacity_planning
@@ -245,22 +244,3 @@ When you plan controller capacity:
 - As VM density grows, controller and HCI nodes may need more CPU.
 
 As the environment grows, review the hardware profile again. A design that fit the first deployment can be wrong after large capacity or workload increases.
-
-## Maximum supported hardware specifications
-
-The following table outlines the maximum supported hardware specifications for various resources in the VergeOS system as of version 4.12:
-
-| Resource                        | Maximum | Resource Type |
-|---------------------------------|---------|---------------|
-| Nodes per system                | 200     | node          |
-| Individual physical disk size   | 64      | terabyte      |
-| RAM per node [^2]               | 5       | terabyte      |
-| vDisk size                      | 256     | terabyte      |
-| Disks per VM [^3]               | 2000    | vdisk         |
-| Clusters per system             | 100     | cluster       |
-| Tiers of storage per system     | 5       | tiers         |
-| vSAN Fault domains per system   | 2       | vSAN          |
-
-[^1]: Graphics cards are supported for VM usage and may not function for console access.
-[^2]: vSAN nodes require a minimum 1GB of RAM per 1TB of Storage
-[^3]: Virtio-SCSI Interface required
