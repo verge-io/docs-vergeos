@@ -60,7 +60,7 @@ For HCI and UCI models, node types, and when to separate roles, see [HCI vs UCI:
 Most Standard Production systems run as one HCI cluster. Controller, storage, and compute roles can share the same nodes. Dedicated controller, storage-only, or compute-only nodes are optional design choices, not a requirement for every deployment.
 {% endhint %}
 
-VergeOS Sales, Support, and authorized resellers can help with workload review and hardware selection. See [Support and services](https://app.gitbook.com/s/uJc5d3O7cwI7qD8muSyG/support-and-services).
+VergeOS Sales, Support, and authorized resellers can help with workload review and hardware selection. See [Contact Verge.io](https://www.verge.io/contact/).
 
 ## Generic node requirements
 
