@@ -154,7 +154,7 @@ At least two nodes with matching disk layouts (except [single-node systems](#sin
 
 #### Compute-only nodes (optional)
 
-Follow the generic requirements. Size CPU and RAM for the workloads that run on these nodes. CPU base clock affects storage performance when the node also participates in storage.
+Follow the [generic requirements](#generic-node-requirements). Size CPU and RAM for the workloads that run on these nodes. CPU base clock also affects disk performance on compute nodes.
 
 ---
 
