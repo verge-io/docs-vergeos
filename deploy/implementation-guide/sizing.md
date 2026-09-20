@@ -220,6 +220,7 @@ Storage-focused nodes for backup or archive retention.
 - **Processor:** see [generic node requirements](#generic-node-requirements)
 - **RAM:** 1 GB RAM per 1 TB raw storage
 - **CPU:** about 1 core per storage disk
+- **Tier 0:** Plan Tier 0 for VergeOS metadata when these nodes are controllers or form a backup cluster. Tier 0 does not have to be NVMe. Use enterprise SAS or NVMe SSD. Use a **minimum of 1 DWPD** (or an equivalent endurance profile). Do not use read-intensive or consumer NVMe. See [Tier 0 capacity and snapshots](#tier-0-capacity-and-snapshots).
 - **Network:** see [generic node requirements](#generic-node-requirements)
 - **Storage:**
   - Lower-performance, lower-endurance enterprise devices are acceptable
