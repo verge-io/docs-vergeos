@@ -69,7 +69,7 @@ Optional but recommended when multiple drives exist.
 
 ---
 
-## Media Type
+## Media
 
 * **Disk** (default option)  
 Standard virtual disk, creates a new empty raw file as source 
@@ -103,26 +103,26 @@ Requires selecting an existing VergeOS `.raw` file.
 
 ## Interface
 
-* **Virtio‑SCSI**  
+* ***Virtio‑SCSI***  
 Recommended option. High performance, para‑virtualized SCSI.  
 Linux supports it natively; Windows requires Virtio drivers.  
 
 
-* **Virtio (Legacy)**  
+* ***Virtio (Legacy)***  
 Maximum I/O performance but lacks some SCSI features. Requires guest compatibility.   
 
 
-* **Virtio‑SCSI (Dedicated Controller)**  
+* ***Virtio‑SCSI (Dedicated Controller)***  
 Provides a para-virtualized SCSI device with its own controller (new PCI bridge within the guest). Use when adding a Virtio‑SCSI drive on a different storage tier than existing Virtio‑SCSI drives. Keeps tiered drives on separate virtual controllers.  
 
 
-* **LSI**  
+* ***LSI***  
 native VMware‑compatible controller options provided for compatibility, where needed. 
 
-* **SATA (AHCI)**  
+* ***SATA (AHCI)***  
 Provided as a legacy compatibility fallback - scenarios that require native OS support without paravirtualized drivers, such as installing older guest operating systems, running legacy recovery environments, etc. **Only for Q35 machine type.**  
 
-* **IDE**  
+* ***IDE***  
 Provided for extreme legacy support.  **Only for PC (i440FX) machine type.** 
 
 ---
@@ -133,7 +133,7 @@ Provided for extreme legacy support.  **Only for PC (i440FX) machine type.**
 Only appears for **Disk** media type.
 
 * **Media File**  
-Appears for **CD-ROM**, **Clone Disk**, **Import Disk**, **Non-Persistent**, and **Shared Drives**  
+Appears for **CD-ROM**, **Clone Disk**, **Import Disk**, **Non-Persistent**, and **Shared Disk**  
 Select the ISO or disk image appropriate for the media type.  
 
 * CD-ROM: Select *.iso (files uploaded to vSAN) Note: *.iso file can also be selected after VM creation.
@@ -144,12 +144,12 @@ Select the ISO or disk image appropriate for the media type.
 
 * Non-Persistent Disk: Select *.raw file (existing disks on this VergeOS system).
 
-* Shared Drive: Select *.raw file (existing virtual SCSI disks on this VergeOS system)
+* Shared Disk: Select *.raw file (existing virtual SCSI disks on this VergeOS system)
 
 
 * **Preferred Tier**  
 Appears for **Disk** and **EFI Disk**.  
-Choose a storage tier or leave as **Default** (uses *Default VM drive tier* configured in system settings)
+Choose a storage tier or leave as **Default** (*Default VM drive tier* configured in system settings)
 
 * **Override Preferred Tier**  
 Appears for **Clone Disk**, **Import Disk**, and **Non-Persistent**.  
@@ -162,8 +162,9 @@ Allows placing the drive on a different tier than the media file’s current tie
 
 * **Shared Disk**  
 Allows attaching an existing disk to multiple VMs.  Useful for clustered applications or shared data volumes. 
+  * Option only applies to Media: ***Disk***
   * Option only applies to ***Virtio SCSI*** and ***Virtio SCSI (Dedicated Controller)*** interfaces.  
-  * Requires making a selection in the *Media File*  (existing virtual SCSI disk; does not provide disks attached to the same VM)
+  * Requires making a selection in the *Media File*  (select an existing virtual SCSI disk; does not allow sharing disks attached to the same VM)
 
 {% hint style="info" %}
 KB article: [Using Shared Disks for Windows Clustering](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/virtual-machines/using-shared-disks-windows-clustering) provides a guide for using shared drives to configure Windows Failover Clustering within VergeOS.
@@ -171,10 +172,30 @@ KB article: [Using Shared Disks for Windows Clustering](https://app.gitbook.com/
 {% endhint %}
 
 
+* **Serial Number**
+Appears for **Disk** only. Alphanumeric logical identifier exposed through virtual storage controller to guest OS. 
+
 
 * **Asset**  
 A unique identifier for the drive (e.g., “OS”, “Data”).  
 Used in Recipes and automation.  
+
+
+* **Strict Fsync**
+  * ***System Default*** (default)
+  * ***On***
+  * ***Off**
+
+{% hint style="info"}
+* System default=disabled (vSAN conf setting)
+* When enabled no throttle imposed on meta writes
+
+{% endhint %}
+
+
+* **Discard** (default on)
+
+Provided for backward compatibility only. 
 
 
 * **Optimize For**  
