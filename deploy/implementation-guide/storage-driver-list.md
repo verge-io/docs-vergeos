@@ -1,6 +1,6 @@
 ---
 title: "VergeOS Included Storage Drivers"
-description: "Reference list of storage, RAID, SAS, NVMe, Fibre Channel, and offload drivers packaged with VergeOS."
+description: "Reference list of storage drivers packaged with VergeOS."
 semantic_keywords:
   - "VergeOS storage drivers"
   - "RAID controller drivers"
