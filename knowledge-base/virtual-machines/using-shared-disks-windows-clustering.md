@@ -3,7 +3,7 @@ title: Using Shared Disks for Windows Clustering
 slug: using-shared-disks-windows-clustering
 description: Step-by-step setup of shared disks for use by clustering application
 author: VergeOS Documentation Team
-date: 2026-09-28T14:15:07.757Z
+date: 2026-09-28T14:15:07.627Z
 semantic_keywords:
   - "configure windows cluster drives"
   - "shared cluster disk"
