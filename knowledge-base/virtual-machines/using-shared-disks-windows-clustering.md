@@ -1,7 +1,7 @@
 ---
 title: Using Shared Disks for Windows Clustering
 slug: using-shared-disks-windows-clustering
-description: Step-by-step setup of shared disk for use by clustering applications
+description: Step-by-step setup of shared disks for use by clustering application
 author: VergeOS Documentation Team
 date: 2026-09-28T14:15:07.757Z
 semantic_keywords:
@@ -29,7 +29,7 @@ dateCreated: 2026-09-24T17:26:07.927Z
 **Key Points**
 
 - VergeOS supports shared disks using **SCSI‑3 Persistent Reservations**, enabling multiple VMs to attach the same virtual disk safely.  
-- This guide walks through creating shared disks, attaching them to multiple VMs, verifying configuration, and preparing VMs for WSFC installation.  
+- This guide walks through creating shared disks, attaching them to multiple VMs, and verifying configuration in preparation for WSFC (Windows Server Failover Cluster) installation.  
 - Windows‑side configuration (cluster creation, quorum setup, CSV enablement, etc.) must be performed using Microsoft documentation.
 
 {% endhint %}
@@ -51,13 +51,9 @@ This guide explains **how to configure shared disks in VergeOS** for use by Wind
 ---
 
 
-## 1. Prepare Active Directory and DNS
+## 1. Prepare Cluster Environment
 
-Before configuring shared disks, build/verify the foundational services required for WSFC:
-
-- Deploy and configure **Active Directory Domain Services**.  
-- Ensure **DNS** is functioning and resolvable by all future cluster nodes.  
-- Verify the domain controller is powered on and reachable before powering on cluster node VMs.
+Before configuring shared disks, build/verify the foundational services required for WSFC, including: networking, Active Directory Domain Services, and DNS resolvable by all future cluster nodes. Verify the domain controller is powered on and reachable before powering on cluster node VMs. 
 
 ---
 
@@ -76,7 +72,6 @@ Separate networks are typically recommended for cluster heartbeat and client acc
 {% endhint %}
 
 - Install Windows Server and join each VM to the domain. 
-- Power off the VMs. 
 
 ---
 
@@ -101,7 +96,7 @@ On each VM, for each shared disk:
 
 - **Name:** Use a descriptive name for administrative clarity.  
 - **Shared Disk:** Enable this option (found under **Advanced**).  
-- **Media File:** Select the desired disk.  (All SCSI disks appear in the dropdown selection organized by VM) 
+- **Media File:** Select the desired disk.  (All SCSI disks appear in the dropdown list, organized by VM) 
 
 
 Repeat for each shared disk required by the cluster.
@@ -122,7 +117,7 @@ To confirm shared disks are properly configured:
 
 ## 6. Configure Anti‑Affinity for Cluster Nodes
 
-Cluster nodes should run on **different VergeOS host nodes** to ensure high availability. Anti‑affinity prevents both VMs from running on the same physical host.
+Cluster nodes should run on **different VergeOS host nodes** to ensure high availability. Anti‑affinity helps to prevent the VMs from running on the same physical host.
 
 - Set the **HA Group** to the same value on all cluster node VMs.  
 - Submit changes.  
