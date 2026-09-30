@@ -7,7 +7,7 @@ date: 2026-09-28T14:15:07.627Z
 semantic_keywords:
   - "configure windows cluster drives"
   - "shared cluster disk"
-  - "shared drive
+  - "shared drive"
 use_cases:
   - windows clustering on VergeOS
   - multiple vms with shared disk access
