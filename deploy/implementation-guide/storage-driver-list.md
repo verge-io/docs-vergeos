@@ -7,7 +7,6 @@ semantic_keywords:
   - "SAS HBA drivers"
   - "NVMe drivers"
   - "Fibre Channel drivers"
-  - "iSCSI offload drivers"
 use_cases:
   - review_included_drivers
   - plan_storage_interface_selection
@@ -19,7 +18,6 @@ tags:
   - sas
   - nvme
   - fibre-channel
-  - iscsi
 categories:
   - Virtual Machines
   - Storage
@@ -85,17 +83,6 @@ They can help evaluate your requirements and confirm whether your hardware align
 
 ---
 
-## iSCSI Offload
-
-| Family | Driver |
-|--------|--------|
-| Emulex OneConnect iSCSI | `be2iscsi` |
-| QLogic iSCSI | `qla4xxx` |
-| Marvell FastLinQ iSCSI | `qedi` |
-| Chelsio / Broadcom iSCSI offload | `cxgb4i`, `cxgb3i`, `bnx2i` |
-
----
-
 ## NVMe, PCIe SSD, and Virtual Storage
 
 | Family | Driver |
@@ -105,7 +92,6 @@ They can help evaluate your requirements and confirm whether your hardware align
 | Micron P320/P420 PCIe SSD | `mtip32xx` |
 | VMware PVSCSI | `vmw_pvscsi` |
 | virtio-scsi | `CONFIG_SCSI_VIRTIO=m` |
-| NVMe over TCP / FC | `CONFIG_NVME_TCP=m`, `CONFIG_NVME_FC=m` |
 
 ---
 
