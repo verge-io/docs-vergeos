@@ -167,7 +167,7 @@ Allows attaching an existing disk to multiple VMs.  Useful for clustered applica
   * Requires making a selection in the *Media File*  (select an existing virtual SCSI disk; does not allow sharing disks attached to the same VM)
 
 {% hint style="info" %}
-KB article: [Using Shared Disks for Windows Clustering](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/virtual-machines/using-shared-disks-windows-clustering) provides a guide for using shared drives to configure Windows Failover Clustering within VergeOS.
+KB article: [Using Shared Disks for Windows Clustering](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/virtual-machines/using-shared-disks-windows-clustering) provides step-by-step instructions for configuring a shared disk for Windows clustering use within VergeOS.
 
 {% endhint %}
 
