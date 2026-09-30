@@ -37,9 +37,9 @@ dateCreated: 2026-09-24T17:26:07.927Z
 
 # Using Shared Disks for Windows Clustering  
   
-Windows Server Failover Clustering (WSFC) requires shared storage that supports **SCSI‑3 Persistent Reservations** so cluster nodes can safely coordinate access to quorum, data, and Cluster Shared Volumes (CSV). VergeOS supports shared disks that meet these requirements, enabling multiple VMs to access the same virtual drive concurrently.
+Windows Server Failover Clustering (WSFC) requires shared storage for cluster nodes to safely coordinate access to quorum, data, and Cluster Shared Volumes (CSV). VergeOS supports shared disks using **SCSI‑3 Persistent Reservations** that meet these requirements, enabling multiple VMs to access the same virtual drive concurrently.
 
-This guide explains **how to configure shared disks in VergeOS** for use by Windows clustering. It focuses on the VergeOS configuration steps only. For cluster creation, quorum configuration, CSV setup, and node‑level requirements, consult Microsoft’s official WSFC documentation.
+This guide explains **how to configure shared disks in VergeOS** for use by Windows clustering. It focuses on the VergeOS configuration steps only. For cluster creation, quorum configuration, CSV setup, networking, and node‑level requirements, consult Microsoft’s official WSFC documentation.
 
 
 {% hint style="warning" %}
