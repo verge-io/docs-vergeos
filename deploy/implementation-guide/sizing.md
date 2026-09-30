@@ -268,7 +268,6 @@ Single-node systems follow the **Small / Edge** profile above, with one differen
 - **Tier 0:** same guidance as Small / Edge. Where the primary tier is all-NVMe or all-SSD, a dedicated Tier 0 device is often unnecessary; metadata then resides on the primary tier, so reserve the required metadata capacity there (see [Tier 0 (metadata) sizing](#tier-0-metadata-sizing))
 - **Network:** 1 × 1 GbE NIC for the External Network; no Core Fabric NIC required
 - **Note:** A single node provides no node-level redundancy. Protect workloads with snapshots and off-site sync or backup.
-- **Note:** Not appropriate for performance-sensitive workloads
 
 ---
 
