@@ -25,6 +25,7 @@ categories:
   - Installation
 ---
 
+
 {% hint style="info" %}
 **Workload Resources**
 
@@ -32,6 +33,20 @@ The resources listed below are the **minimum requirements for VergeOS**. Additio
 {% endhint %}
 
 ## Minimum Requirements
+
+
+{% hint style="info" %}
+### Hardware Driver Reference
+
+VergeOS includes a broad set of networking and storage drivers as part of the platform.  
+If you are planning a deployment and want to review the driver inventory, see:
+
+- **Included Ethernet Drivers** — `/docs/platform/included-ethernet-drivers`
+- **Included Storage Drivers** — `/docs/platform/included-storage-drivers`
+
+If you do not see hardware you intend to use, contact **VergeOS Sales** for guidance.
+{% endhint %}
+
 
 ### Generic Requirements (All Node Types)
 
