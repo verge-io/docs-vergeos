@@ -19,6 +19,7 @@ tags:
   - storage
   - virtio
   - disk
+  - vdisk
   - cd-rom
   - non-persistent
   - golden-image
@@ -27,100 +28,237 @@ categories:
   - Virtual Machines
 ---
 
+
 # Virtual Machine Drives
 
-## Add a Drive to a VM
+This page describes how to add, configure, modify, erase, and remove virtual machine drives in VergeOS. Drive configuration is field‑based: depending on the **Media** type, **Interface**, and other selections, different fields will appear.
 
-1. From the **VM dashboard**, click **New Drive** on the left menu (near the bottom).
-2. Enter a ***Name*** for the drive (optional).
-{% hint style="success" %}
-When *Name* is not specified, the system automatically names drives in order as created, "drive\_x" where x is an integer starting with 0. For drives that will be used as a "Golden Image", it is recommended to give a name to the drive for easy selection when creating non-persistent drives based on the drive.
-{% endhint %}
+---
 
-3. The ***Read Only*** option can be useful for a drive that should not be modified, such as on a VM restore that is used to recover data.
-4. Select ***Media*** (type) for the drive:
-    - **Disk (default option)** - empty disk; emulates typical SSD/HDD device
-    - **CD-ROM** - emulates CD-ROM device; read-only; associated \*.iso file simulates inserted CD media; typically used for installing OS or other software.
-    - **Clone Disk** - create a duplicate of an existing disk from the same VergeOS cloud.
-    - **EFI Disk** - this drive type is auto-generated and handled by the system; there should never be a need to manually create a drive of this type.
-    - **Import Disk** - allows selection of a standard format disk file (\*.raw,\*.vmdk,\*.qcow, \*.vhd(x), etc).
-    - **Non-Persistent** - allows for a drive that does not maintain changes between boots; each time the VM is started, the non-persistent drive reverts back to the \*.raw file image (an existing disk drive in the VergeOS cloud) to which it is referenced. A typical use for the Non-Persistent drive would be maintaining a "golden image" OS install where all updates and modifications can be made centrally; this is particularly useful for solutions, such as VDI, where a consistent installation needs to be maintained for many virtual machines.
+## Adding a Drive
 
-5. Select ***Interface***:
-    - **Virtio-SCSI** - (typically recommended option). provides para-virtualized SCSI device; with high performance, while still maintaining standard command set, device passthrough, and device naming within guest OS. There is built-in support in most Linux distros, but not standard in default Windows installations, however, Virtio drivers are available at: [https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/virtio-win.iso](https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/virtio-win.iso) ; virtio drivers are also included within VergeOS custom Windows \*.iso files.
-    - **Virtio(Legacy)** - this driver was previously scheduled to be phased out; however, development has commenced again. It can be used for utmost I/O performance with the tradeoff being that some native SCSI features, such as TRIM are not supported.
-    - **Virtio-SCSI (Dedicated Controller)** - provides a para-virtualized SCSI device with its own controller. Use this option if adding a virtio-SCSI drive to reside on a different storage tier than existing virtio-SCSI drives within the same VM. For example, if tier 3 virtio-SCSI drive(s) have already been created for the VM, create a tier 2 Virtio-SCSI drive as Dedicated Controller to keep the different tiered drives on separate virtual controllers.
-    - **LSI***** - LSI, native VMware options provided for compatibility, where needed.
-    - **SATA(AHCI)** - option only applies to VMs with a Q35 Machine Type.
-    - **IDE** - option only applies to VMs with a PC (i440FX) Machine Type.
-6. Select ***Disk Size***. This option only applies to Media type: **Disk**.
-7. Select ***Media File***. This option only applies to Media Type: **CD-ROM/Clone Disk/Import Disk/ Non-Persistent**.
-    - For **CD-ROM:** Select *.iso file from the dropdown list. Note: \*.iso file can also be selected after VM creation.
-    - For **Clone Disk:** Select *.raw file from the dropdown list
-    - For **Import Disk:** Select disk image file* from the dropdown list. Supported file types: (*.raw,*.qcow,*.qcow2,*.vhd, *.vhdx,*.vmdk)
-    - For **Non-Persistent Disk:** Select *.raw file from the dropdown list displaying all existing VergeOS drives in this cloud.
-{% hint style="success" %}
-See [**Uploading Files to the vSAN**](../storage/uploading-files-to-vsan.md) for instructions on uploading iso and disk image files to the vSAN
-{% endhint %}
+From the **VM dashboard**, click **New Drive** on the left menu.  
+You will be presented with the **Drive Configuration** panel.
 
-8. Select ***Preferred Tier***. This option only applies to Media types: **Disk/EFI Disk**.
-    - Options include all storage tiers to which you have access.
-    - **--Default--** can also be selected to use the default storage tier defined for this cloud in system settings.
-9. Select the ***Override Preferred Tier*** checkbox: (only applies to Media type: **Clone Disk/Import Disk /Non-Persistent**), if a different Tier is desired (different from the current tier of the selected Media File.) This option only applies to Media Type: **CD-ROM/Clone Disk/Import Disk/ Non-Persistent**.
-{% hint style="success" %}
-For more information about vSAN Storage tiers, see [**Storage Tiers**](../storage/storage-tiers.md)
-{% endhint %}
+After configuring the fields, click **Submit**.  
+Repeat as needed to add additional drives.
 
-10. Enter a ***Description*** for the drive (optional, but recommended when there will be more than one drive)
-11. The ***Asset*** field can be used to define a unique identifier for this drive (e.g. OS, Data drive, etc.) for a drive that can be used within Recipes.
+---
+
+# Drive Configuration Fields
+
+## Basic Fields
+
+* **Enabled**
+Toggle to enable or disable the drive.  
+Useful when temporarily attaching a drive or staging a configuration change.
+
+* **Name**  
+Optional.  
+If omitted, VergeOS auto‑generates names (`drive_x`) in order, as created, where x is an integer starting with 0.    
+Using a distinctive name is strongly recommended for Golden Images, Shared Disks, or any drive that needs easy identification.  
+
+
+* **Read Only**  
+Default: Off  
+Useful for recovery scenarios or drives that should not be modified.  
+
+* **Description**  
+Optional but recommended when multiple drives exist. 
+
+
+---
+
+## Media
+
+* **Disk** (default option)  
+Standard virtual disk; creates a new empty raw file as source 
+Requires selecting **Disk Size** and optionally **Preferred Tier**.
+
+* **CD-ROM**  
+Read‑only. Uses an ISO file.  Typically used for installing an OS or other software. 
+ISO can be selected now or after virtual drive creation.  
+
+
+* **Clone Disk**  
+Creates a duplicate of an existing VergeOS disk (`.raw` file) within the same system.  
+Requires making a selection in the *Media File* dropdown list. 
+
+* **EFI Disk**  
+Typically system‑generated; can be created manually for custom use cases.   
+
+
+* **Import Disk**  
+Imports a disk image (`.raw`, `.qcow`, `.qcow2`, `.vhd`, `.vhdx`, `.vmdk`). Creates a new `.raw` file as disk source.
+Source file must be [Uploaded to the vSAN](product-guide/storage/uploading-files-to-vsan.md) and selected in the *Media File* dropdown list.     
+
+
+* **Non-Persistent**  
+Drive reverts to the referenced `.raw` file on each boot.  
+Ideal for Golden Image / VDI deployments where all updates and modifications can be made centrally. 
+Requires selecting an existing VergeOS `.raw` file.  
+
+
+---
+
+## Interface
+
+* ***Virtio‑SCSI***  
+Recommended option. High performance, para‑virtualized SCSI.  
+Linux supports it natively; Windows requires Virtio drivers.  
+
+
+* ***Virtio (Legacy)***  
+Maximum I/O performance but lacks some SCSI features. Requires guest compatibility.   
+
+
+* ***Virtio‑SCSI (Dedicated Controller)***  
+Provides a para-virtualized SCSI device with its own controller (new PCI bridge within the guest). Use when adding a Virtio‑SCSI drive on a different storage tier than existing Virtio‑SCSI drives. Keeps tiered drives on separate virtual controllers.  
+
+
+* ***LSI***  
+Native VMware‑compatible controller options provided for compatibility.
+
+* ***SATA (AHCI)***  
+Provided as a legacy compatibility fallback - scenarios that require native OS support without paravirtualized drivers, such as installing older guest operating systems, running legacy recovery environments, etc. **Only for Q35 machine type.**  
+
+* ***IDE***  
+Provided for extreme legacy support.  **Only for PC (i440FX) machine type.** 
+
+---
+
+## Size & Storage Fields
+
+* **Disk Size**  
+Only appears for **Disk** media type.
+
+* **Media File**  
+Appears for **CD-ROM**, **Clone Disk**, **Import Disk**, **Non-Persistent**, and **Shared Disk**  
+Select the ISO or disk image appropriate for the media type.  
+
+* CD-ROM: Select *.iso (files uploaded to vSAN) Note: *.iso file can also be selected after VM creation.
+
+* Clone Disk: Select *.raw file (existing disks on this VergeOS system)
+
+* Import Disk: Select disk image (files uploaded to vSAN) Supported file types: .raw,.qcow,.qcow2,.vhd, .vhdx,.vmdk
+
+* Non-Persistent Disk: Select *.raw file (existing disks on this VergeOS system).
+
+* Shared Disk: Select *.raw file (existing virtual SCSI disks on this VergeOS system)
+
+
+* **Preferred Tier**  
+Appears for **Disk** and **EFI Disk**.  
+Choose a storage tier or leave as **Default** (*Default VM drive tier* configured in system settings)
+
+* **Override Preferred Tier**  
+Appears for **Clone Disk**, **Import Disk**, and **Non-Persistent**.  
+Allows placing the drive on a different tier than the media file’s current tier.
+
+
+---
+
+## Advanced Fields
+
+* **Shared Disk**  
+Allows attaching an existing disk to multiple VMs.  Useful for clustered applications or shared data volumes. 
+  * Option only applies to *Media:* ***Disk***
+  * Option only applies to *Interface:* ***Virtio SCSI*** and ***Virtio SCSI (Dedicated Controller)***   
+  * Requires making a selection in the *Media File*  (select an existing virtual SCSI disk; does not allow sharing disks attached to the same VM)
+
 {% hint style="info" %}
-The Discard option is enabled by default, and is typically recommended to be enabled as it allows storage space to be recovered from deleted files.
+KB article: [Using Shared Disks for Windows Clustering](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/virtual-machines/using-shared-disks-windows-clustering) provides step-by-step instructions for configuring VMs with shared disks for Windows clustering use.
+
 {% endhint %}
 
-12. The ***Optimize For*** field can be used to override the default IO chuck size:
-    - **General Usage** 64 KB chunks, with read-ahead (default)
-    - **Large Files** up to 1 MB chunks
+
+* **Serial Number**
+Appears for **Disk** only. Alphanumeric logical identifier exposed through virtual storage controller to guest OS. 
+
+
+* **Asset**  
+A unique identifier for the drive (e.g., “OS”, “Data”).  
+Can be used to reference the drive in Recipes and automation.  
+
+
+* **Strict Fsync**
+  * ***System Default*** (default)
+  * ***On***
+  * ***Off**
+
+{% hint style="info"}
+* System default=disabled (vSAN conf setting)
+* When enabled, no throttle is imposed on meta writes
+* Enabling Strict Fsync affects performance
+
+{% endhint %}
+
+
+* **Discard** (default on)
+
+Option provided for backward compatibility only. 
+
+
+* **Optimize For**  
+  
+* ***General Usage*** – 64 KB chunks with read‑ahead (default)  
+* ***Large Files*** – up to 1 MB chunks; beneficial only for sequential access of very large files  
+
 {% hint style="info" %}
-The default **Optimize For** choice is **General Usage**, which should be the preferred choice for most use cases.  **Large Files** could be beneficial for VMs that only store very large files and that are only accessed sequentially. In most cases, the performance gains from choosing **Large Files** will be minimal.
+The default *Optimize For* choice is General Usage, which should be the preferred choice for most use cases. Large Files could be beneficial for workloads exclusively (or nearly exclusively) working with very large files accessed sequentially.
+
 {% endhint %}
 
-13. Click **Submit.**
-14. **Repeat** the process to add more drives to the VM, **as needed**.
+* **Advanced Properties**  
 
-## Erase the Data on a Drive
+Allows adding custom key/value properties for specialized configurations or integrations.
 
-{% hint style="warning" %}
-**Caution** should be used when erasing a drive since erasing a crucial drive can render the VM unusable. Take special care to ensure an erase operation is being applied to the intended drive on the intended VM. A temporary VM snapshot can be taken prior to erasing the drive, to allow a fallback if needed.
+
+---
+
+# Drive Operations
+
+{% hint style="caution" %}
+**Caution:** Erasing or removing a drive can render a VM unusable.  Take special care to ensure the operation is being applied to the intended drive on the intended VM. Consider taking a short-term VM snapshot first.  
+
 {% endhint %}
 
-The **VM must be powered off** before a drive can be erased.
+## Erase a Drive
 
-1. From the **VM dashboard**, click **Drives** from the left menu.  
-2. **Select the drive(s)** to be erased.
-3. Click **Erase** from the left menu.
-4. Click **Yes** to confirm.
+The VM must be powered off.
 
-## Remove a Drive from a VM
+1. VM dashboard → **Drives**  
+2. Select drive(s)  
+3. Click **Erase** 
+4. Confirm
 
-A **drive must be offline before it can be deleted**; a drive can be taken offline by powering off the VM or using hotplug (where enabled).
+---
 
-1. From the **VM dashboard**, click **Drives** from the left menu.  
-2. **Select the drive(s)** to be deleted.
-3. Click **Delete** from the left menu.
-4. Click **Yes** to confirm the deletion.
+## Remove a Drive
 
-## Modify a VM Drive
+Drive must be offline (VM powered off or hot‑unplugged).
 
-{% hint style="info" %}
-**Considerations**
+1. VM dashboard → **Drives**  
+2. Select drive(s)  
+3. Click **Delete** 
+4. Confirm
 
-- Once a drive is created, the *Media* field (Disk/Non-Persistent/CD-ROM) cannot be modified.
-- Drives cannot be reduced in size.
-- Modifications involving drive size or drive interface type will likely require corresponding modifications within the guest OS; specific guest OS changes will be dependent on the particular OS in use.
-{% endhint %}
+---
 
-1. From the **VM dashboard**, click **Drives** from the left menu.
-2. **Select the drive** to be modified.
-3. Click **Edit** from the left menu.
-4. **Modify** fields as desired.
-5. Click **Submit**.
+## Modify a Drive
+
+### Considerations
+
+  * Media type cannot be changed after creation  
+  * Drives cannot be reduced in size  
+  * Interface or size changes may require guest OS adjustments  
+
+
+1. VM dashboard → **Drives**  
+2. Select drive  
+3. Click **Edit**  
+4. Modify fields  
+5. Submit
+
+---
+
