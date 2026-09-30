@@ -38,7 +38,7 @@ This page describes how to add, configure, modify, erase, and remove virtual mac
 ## Adding a Drive
 
 From the **VM dashboard**, click **New Drive** on the left menu.  
-You will be presented with the **Drive Configuration** panel, which contains all fields relevant to the selected Media type and Interface.
+You will be presented with the **Drive Configuration** panel.
 
 After configuring the fields, click **Submit**.  
 Repeat as needed to add additional drives.
@@ -72,11 +72,11 @@ Optional but recommended when multiple drives exist.
 ## Media
 
 * **Disk** (default option)  
-Standard virtual disk, creates a new empty raw file as source 
+Standard virtual disk; creates a new empty raw file as source 
 Requires selecting **Disk Size** and optionally **Preferred Tier**.
 
 * **CD-ROM**  
-Read‑only. Uses an ISO file.  Typically used for installing OS or other software. 
+Read‑only. Uses an ISO file.  Typically used for installing an OS or other software. 
 ISO can be selected now or after virtual drive creation.  
 
 
@@ -89,8 +89,8 @@ Typically system‑generated; can be created manually for custom use cases.
 
 
 * **Import Disk**  
-Imports external disk (`.raw`, `.qcow`, `.qcow2`, `.vhd`, `.vhdx`, `.vmdk`). Creates a new `.raw` file as disk source.
-Requires making a selection in the *Media File* dropdown list. Source file must be [Uploaded Files to the vSAN](product-guide/storage/uploading-files-to-vsan.md)    
+Imports a disk image (`.raw`, `.qcow`, `.qcow2`, `.vhd`, `.vhdx`, `.vmdk`). Creates a new `.raw` file as disk source.
+Source file must be [Uploaded to the vSAN](product-guide/storage/uploading-files-to-vsan.md) and selected in the *Media File* dropdown list.     
 
 
 * **Non-Persistent**  
@@ -117,7 +117,7 @@ Provides a para-virtualized SCSI device with its own controller (new PCI bridge 
 
 
 * ***LSI***  
-native VMware‑compatible controller options provided for compatibility, where needed. 
+Native VMware‑compatible controller options provided for compatibility.
 
 * ***SATA (AHCI)***  
 Provided as a legacy compatibility fallback - scenarios that require native OS support without paravirtualized drivers, such as installing older guest operating systems, running legacy recovery environments, etc. **Only for Q35 machine type.**  
@@ -140,7 +140,7 @@ Select the ISO or disk image appropriate for the media type.
 
 * Clone Disk: Select *.raw file (existing disks on this VergeOS system)
 
-* Import Disk: Select disk image (files uploaded to vSAN) Supported file types: (.raw,.qcow,.qcow2,.vhd, .vhdx,.vmdk)
+* Import Disk: Select disk image (files uploaded to vSAN) Supported file types: .raw,.qcow,.qcow2,.vhd, .vhdx,.vmdk
 
 * Non-Persistent Disk: Select *.raw file (existing disks on this VergeOS system).
 
@@ -162,12 +162,12 @@ Allows placing the drive on a different tier than the media file’s current tie
 
 * **Shared Disk**  
 Allows attaching an existing disk to multiple VMs.  Useful for clustered applications or shared data volumes. 
-  * Option only applies to Media: ***Disk***
-  * Option only applies to ***Virtio SCSI*** and ***Virtio SCSI (Dedicated Controller)*** interfaces.  
+  * Option only applies to *Media:* ***Disk***
+  * Option only applies to *Interface:* ***Virtio SCSI*** and ***Virtio SCSI (Dedicated Controller)***   
   * Requires making a selection in the *Media File*  (select an existing virtual SCSI disk; does not allow sharing disks attached to the same VM)
 
 {% hint style="info" %}
-KB article: [Using Shared Disks for Windows Clustering](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/virtual-machines/using-shared-disks-windows-clustering) provides step-by-step instructions for configuring a shared disk for Windows clustering use within VergeOS.
+KB article: [Using Shared Disks for Windows Clustering](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/virtual-machines/using-shared-disks-windows-clustering) provides step-by-step instructions for configuring VMs with shared disks for Windows clustering use.
 
 {% endhint %}
 
@@ -178,7 +178,7 @@ Appears for **Disk** only. Alphanumeric logical identifier exposed through virtu
 
 * **Asset**  
 A unique identifier for the drive (e.g., “OS”, “Data”).  
-Used in Recipes and automation.  
+Can be used to reference the drive in Recipes and automation.  
 
 
 * **Strict Fsync**
@@ -188,14 +188,15 @@ Used in Recipes and automation.
 
 {% hint style="info"}
 * System default=disabled (vSAN conf setting)
-* When enabled no throttle imposed on meta writes
+* When enabled, no throttle is imposed on meta writes
+* Enabling Strict Fsync affects performance
 
 {% endhint %}
 
 
 * **Discard** (default on)
 
-Provided for backward compatibility only. 
+Option provided for backward compatibility only. 
 
 
 * **Optimize For**  
@@ -218,7 +219,7 @@ Allows adding custom key/value properties for specialized configurations or inte
 # Drive Operations
 
 {% hint style="caution" %}
-**Caution:** Erasing or removing a drive can render a VM unusable.  Take special care to ensure an erase operation is being applied to the intended drive on the intended VM. Consider taking a short-term VM snapshot first.  
+**Caution:** Erasing or removing a drive can render a VM unusable.  Take special care to ensure the operation is being applied to the intended drive on the intended VM. Consider taking a short-term VM snapshot first.  
 
 {% endhint %}
 
