@@ -79,7 +79,7 @@ For core fabric and external network design, see [Network design](network-design
 
 Review this guidance before you select disks for a profile.
 
-{% hint style="warning" %}
+{% hint style="danger" %}
 **Enterprise disks only (production)**
 
 VergeOS does not officially support consumer-grade disks in production or in backup-of-production systems. Use enterprise-grade devices. Consumer-grade disks can be acceptable for test, development, or proof of concept when data loss is acceptable. Some consumer devices fail because of firmware limits or non-standard commands.
@@ -92,7 +92,7 @@ Boot-oriented devices such as Dell BOSS cards are for **boot or OS only**. Do no
 {% endhint %}
 
 - **Tier 0:** Use enterprise media only. Do not use consumer NVMe. For endurance and capacity requirements, see [Tier 0 (metadata) sizing](#tier-0-metadata-sizing).
-- **Production workload tiers (Tier 1–5):** Use enterprise media only. Do not use consumer NVMe. For write-oriented or general-purpose media, use a **minimum of 1 DWPD**. You can use read-intensive enterprise media when that media matches the workload.
+- **Production workload tiers (Tier 1–5):** Use enterprise media only. Do not use consumer NVMe. For write-oriented or general-purpose media, use a minimum of **1 drive-write per day (DWPD)**. You can use read-intensive enterprise media when that media matches the workload.
 - HDDs larger than **8 TB** are not recommended outside archive-specific environments. Large HDDs extend rebuild time and can affect performance and availability.
 
 ### Tier 0 (metadata) sizing
@@ -103,16 +103,19 @@ Tier 0 holds vSAN metadata: the structural information VergeOS uses to track usa
 
 #### Baseline Tier 0 requirements
 
+- **Media:** enterprise SSD. Tier 0 does not have to be NVMe — enterprise SAS SSD is acceptable when it meets the endurance and capacity requirements below.
 - **Minimum endurance:** 1 DWPD
 - **Capacity:** about **5 GB of usable Tier 0 per 1 TB of usable Tier 1–5 capacity** at 3 DWPD, or an equivalent capacity and endurance profile (for example, 15 GB per 1 TB at 1 DWPD)
 
-Prefer enough capacity at 1 DWPD over a chase for 3 DWPD when 1 DWPD enterprise media meets the need.
+Both sides of this ratio are **system-wide usable capacity**, measured after redundancy. Copies of metadata — across controller nodes, and across local drives within a node — are redundancy, not added usable capacity: usable Tier 0 is raw Tier 0 divided by the number of local copies. See [Local Node Tier 0 Metadata Redundancy (D+x)](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/storage/tier0-local-redundancy).
 
-This baseline assumes the default snapshot schedule (the *System Snapshots* [snapshot profile](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/backup-and-dr/snapshot-profiles)) or similar, with about seven or fewer regularly retained snapshots.
+The equivalence trades capacity for endurance: metadata occupies about 5 GB per 1 TB either way. On 1 DWPD media, the extra capacity is endurance headroom, not additional metadata space. Prefer enough capacity at 1 DWPD over a chase for 3 DWPD when 1 DWPD enterprise media meets the need.
+
+This baseline assumes the default [*System Snapshots* profile](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/backup-and-dr/snapshot-profiles) or a similar schedule. That profile retains **7 snapshots** at once: 3 hourly, 3 daily (midnight), and 1 daily (noon). When you count your own retained snapshots, include VM and volume snapshot profiles as well as the system profile.
 
 #### When to increase Tier 0 capacity
 
-- **Snapshot retention above about seven snapshots.** Snapshot behavior is a primary driver of metadata growth. Each retained snapshot can add up to about **0.5 GB per 1 TB of usable capacity** (an upper bound). Actual use depends on the snapshot delta: write-intensive workloads such as heavy SQL or random-write patterns approach the upper bound, while sequential or low-change workloads use less metadata per snapshot. Increase Tier 0 capacity above the baseline if you plan to retain more than about seven snapshots.
+- **Snapshot retention above about 25–30 snapshots.** Snapshot behavior is a primary driver of metadata growth. Each retained snapshot can add up to about **0.5 GB per 1 TB of usable Tier 1–5 capacity** (an upper bound). Actual use depends on the snapshot delta: write-intensive workloads such as heavy SQL or random-write patterns approach the upper bound, while sequential or low-change workloads use less metadata per snapshot. The conservative baseline absorbs moderate retention beyond the default profile; increase Tier 0 capacity above the baseline if you plan to retain more than about 25–30 snapshots.
 - **Planned vSAN capacity expansion.** Size Tier 0 for total vSAN usable capacity. If you expect near-term scaling (adding storage nodes or expanding Tiers 1–5), upsize Tier 0 in advance to avoid replacing metadata devices later.
 
 To add Tier 0 after installation, see [Adding Tier 0 to an Existing System](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/storage-vsan/adding-tier-zero).
@@ -121,12 +124,12 @@ Metadata sizing involves multiple interdependent factors. VergeOS Sales and auth
 
 ### RAM for storage
 
-- **Baseline:** about **1 GB RAM per 1 TB raw storage** per node for VergeOS storage operation.
+- **Baseline:** on each node, reserve **16 GB for VergeOS plus 1 GB RAM per 1 TB of raw storage** on that node. Guest workload RAM is additional. For example, a node with 8 TB raw reserves 24 GB before guest RAM.
 - **Storage buffer (cache) RAM** is a separate, additive need. It matters most in performance environments. Do not treat a single higher GB/TB figure as a substitute for both needs. For Performance sizing, contact a VergeOS partner or the VergeOS sales team.
 
 ### CPU and storage disks
 
-For Standard Production and Backup profiles, plan about **1 CPU core per storage disk** on nodes that present storage. This rule does not scale in a linear way for very large Performance systems.
+For Standard Production and Backup profiles, plan **1 physical core per storage disk** on each node that contributes vSAN disks. Count Tier 0 devices as storage disks. Do not count the boot device, and do not count hardware threads as extra cores.
 
 ## Deployment profiles
 
@@ -145,20 +148,23 @@ Balanced, general-purpose deployments for mixed workloads with predictable perfo
 
 VergeOS supports flexible node role design. The requirements below describe the functional needs of the controller, storage, and compute roles; these roles can be combined on the same physical nodes depending on hardware availability, workload density, and deployment scale. Most Standard Production systems use nodes that serve as both controllers and storage participants, and smaller environments may run controller, storage, and compute workloads on the same nodes. For node role design, see [Clusters & Node Types](https://app.gitbook.com/s/qLUTTK5fxfW4S9FoS9GE/module-1-architecture-fundamentals/05-clusters-nodes).
 
+The generic NIC list is a floor. Production systems use two Core Fabric Networks with redundant connections, typically 4 × 10/25/40/100 GbE ports per node. See [Network design](network-design.md).
+
 #### Controller role (nodes 1 and 2; plus node 3 in an N+2 design)
 
 Nodes that fulfill the controller role can also participate in storage and run workloads, depending on deployment design. For N+1 and N+2 requirements, see [Understanding vSAN Redundancy Levels](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/storage/vsan-redundancy-levels).
 
 - **Processor:** 2.7 GHz+ CPU (base clock)
-- **RAM:** 1 GB RAM per 1 TB raw storage per node (plus guest workload RAM)
+- **RAM:** 16 GB + 1 GB per 1 TB raw storage per node, plus guest workload RAM (see [RAM for storage](#ram-for-storage))
 - **Tier 0 (metadata storage):**
-  - High-endurance enterprise SSD (NVMe or equivalent) that provides 5 GB of storage per 1 TB at 3 DWPD, or an equivalent endurance profile (for example, 15 GB per 1 TB at 1 DWPD)
+  - High-endurance enterprise SSD (NVMe or equivalent) that provides 5 GB of usable Tier 0 per 1 TB of usable Tier 1–5 capacity at 3 DWPD, or an equivalent endurance profile (for example, 15 GB per 1 TB at 1 DWPD)
   - Minimum acceptable endurance: 1 DWPD
 
 {% hint style="info" %}
 **Capacity considerations**
 
-- When more than one Tier 0 device is present, VergeOS automatically mirrors metadata locally on the additional drive. This provides extra protection for the metadata tier but does not increase Tier 0 usable capacity — the second device is used exclusively for redundancy. For details, see [Local Node Tier 0 Metadata Redundancy](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/storage/tier0-local-redundancy).
+- When a node has more than one Tier 0 drive, VergeOS automatically mirrors metadata across the local drives to match the system redundancy level (two copies on N+1, three on N+2), up to the drive count. Usable Tier 0 capacity is total raw Tier 0 capacity divided by the number of local copies; drives beyond the required copy count add usable capacity. For details, see [Local Node Tier 0 Metadata Redundancy (D+x)](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/storage/tier0-local-redundancy).
+- Install two Tier 0 drives per controller node on an N+1 system, and three on an N+2 system, for full local protection.
 - Metadata capacity must be increased for environments with high data change rates and/or expanded snapshot retention; see [Tier 0 (metadata) sizing](#tier-0-metadata-sizing).
 {% endhint %}
 
@@ -167,18 +173,17 @@ Nodes that fulfill the controller role can also participate in storage and run w
 Nodes that fulfill the storage role can also serve as controllers or run compute workloads. Use at least two nodes with identical disk configurations (except [single-node systems](#single-node-systems)).
 
 - **Processor:** 2.7 GHz+ CPU (base clock). Base clock also affects storage performance on nodes that run compute.
-- **RAM:** 1 GB RAM per 1 TB raw storage
-- **CPU:** about 1 core per storage disk
+- **RAM:** 16 GB + 1 GB per 1 TB raw storage per node (see [RAM for storage](#ram-for-storage))
+- **CPU:** 1 physical core per storage disk (see [CPU and storage disks](#cpu-and-storage-disks))
 - **Storage:**
   - At least one enterprise NVMe or SATA/SAS SSD per node (primary tier)
-  - Enterprise HDDs are acceptable for low performance, snapshots, archive, or file services
-  - HDDs larger than 8 TB are not recommended outside archive-specific environments because of extended rebuild times
+  - Enterprise HDDs are acceptable for low performance, snapshots, archive, or file services (see [disk and endurance guidance](#disk-and-endurance-guidance))
 
 #### Compute role
 
 Compute-only nodes are optional; compute workloads can run on controller or storage nodes in smaller or consolidated deployments.
 
-- **Compute-only nodes:** follow the [generic node requirements](#generic-node-requirements) and size CPU and RAM for the workloads hosted on them. CPU base clock also affects disk performance on compute nodes.
+- **Compute-only nodes:** follow the [generic node requirements](#generic-node-requirements) and size CPU and RAM for the workloads hosted on them. Base clock still affects guest disk latency: a compute-only node processes I/O even when the disks are on other nodes.
 - **Combined roles:** when compute workloads run on nodes that also serve controller or storage roles, allocate sufficient additional resources. Guest workloads require their own CPU and RAM capacity, separate from what VergeOS needs for controller functions, metadata handling, and vSAN participation. Size combined-role nodes with extra RAM for guest memory and enough CPU headroom to keep performance predictable for both system services and hosted workloads.
 
 ---
@@ -221,7 +226,7 @@ Two nodes or fewer. Compact deployments that prioritize simplicity and low opera
 #### Node requirements
 
 - **Processor:** see [generic node requirements](#generic-node-requirements)
-- **RAM:** 1 GB RAM per 1 TB raw storage
+- **RAM:** 16 GB + 1 GB per 1 TB raw storage per node (see [RAM for storage](#ram-for-storage))
 - **Tier 0:** Still plan for Tier 0 when the design needs dedicated metadata devices. Tier 0 does not have to be NVMe; enterprise SAS or NVMe SSD is acceptable.
 - On **1–2 node** systems where the primary tier is already all-NVMe or all-SSD, a **dedicated** Tier 0 device is often unnecessary. Metadata then resides on the primary tier; the same sizing guidance applies, so reserve the required metadata capacity within the primary tier (see [Tier 0 (metadata) sizing](#tier-0-metadata-sizing)). Confirm the layout with Sales, Support, or an authorized reseller when unsure.
 - **Network:** see [generic node requirements](#generic-node-requirements)
@@ -244,9 +249,9 @@ Storage-focused nodes for backup or archive retention.
 #### Node requirements
 
 - **Processor:** see [generic node requirements](#generic-node-requirements)
-- **RAM:** 1 GB RAM per 1 TB raw storage
-- **CPU:** about 1 core per storage disk
-- **Tier 0:** Size Tier 0 on the controller nodes of the backup system (nodes 1 and 2). Do not add dedicated Tier 0 devices to every backup storage node. Tier 0 does not have to be NVMe. Use enterprise SAS or NVMe SSD; do not use consumer devices. Minimum acceptable endurance: **1 DWPD**. Retaining more snapshots than the default profile can drive additional metadata consumption and may require increased Tier 0 capacity; see [Tier 0 (metadata) sizing](#tier-0-metadata-sizing).
+- **RAM:** 16 GB + 1 GB per 1 TB raw storage per node (see [RAM for storage](#ram-for-storage))
+- **CPU:** 1 physical core per storage disk (see [CPU and storage disks](#cpu-and-storage-disks))
+- **Tier 0:** Size Tier 0 on the controller nodes of the backup system (nodes 1 and 2). Backup systems in this profile run N+1, so there are two controller nodes. Do not add dedicated Tier 0 devices to every backup storage node. Tier 0 does not have to be NVMe. Use enterprise SAS or NVMe SSD; do not use consumer devices. Minimum acceptable endurance: **1 DWPD**. Retaining more snapshots than the default profile can drive additional metadata consumption and may require increased Tier 0 capacity; see [Tier 0 (metadata) sizing](#tier-0-metadata-sizing).
 - **Network:** see [generic node requirements](#generic-node-requirements)
 - **Storage:**
   - Lower-performance, lower-endurance enterprise devices are acceptable
@@ -257,17 +262,15 @@ Storage-focused nodes for backup or archive retention.
 
 ### Single-node systems
 
-Official support begins with the **October 2026** release.
-
 Single-node systems follow the **Small / Edge** profile above, with one difference: a single-node system has no node-to-node vSAN or fabric traffic, so **no Core Fabric Network is required**.
 
 #### Node requirements
 
 - **Processor:** see [generic node requirements](#generic-node-requirements)
-- **RAM:** 1 GB RAM per 1 TB raw storage
+- **RAM:** 16 GB + 1 GB per 1 TB raw storage per node (see [RAM for storage](#ram-for-storage))
 - **Tier 0:** same guidance as Small / Edge. Where the primary tier is all-NVMe or all-SSD, a dedicated Tier 0 device is often unnecessary; metadata then resides on the primary tier, so reserve the required metadata capacity there (see [Tier 0 (metadata) sizing](#tier-0-metadata-sizing))
 - **Network:** 1 × 1 GbE NIC for the External Network; no Core Fabric NIC required
-- **Note:** A single node provides no node-level redundancy. Protect workloads with snapshots and off-site sync or backup.
+- **Note:** A single node provides no node-level redundancy. Redundancy comes from copies across the node's local drives — see [Local Node Tier 0 Metadata Redundancy (D+x)](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/storage/tier0-local-redundancy). Protect workloads with snapshots and off-site sync or backup.
 
 ---
 
