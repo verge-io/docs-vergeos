@@ -1,12 +1,9 @@
 ---
 title: "VergeOS Included Ethernet Drivers"
-description: "Reference list of Ethernet drivers packaged with VergeOS for virtual machine and host networking."
+description: "Reference list of Ethernet drivers packaged with VergeOS for host nodes."
 semantic_keywords:
   - "VergeOS network drivers"
   - "Ethernet driver list"
-  - "KVM network interface support"
-  - "Linux kernel NIC drivers"
-  - "virtualization networking"
 use_cases:
   - review_included_drivers
   - plan_vm_network_interface_selection
