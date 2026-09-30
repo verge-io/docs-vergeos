@@ -44,7 +44,7 @@ This guide explains **how to configure shared disks in VergeOS** for use by Wind
 
 {% hint style="warning" %}
 
-**Important:**  Consult official WSFC documentation for guidance on cluster node configuration, disk sizing, quorum models, CSV requirements, and validation steps.
+**Important:**  Consult official WSFC documentation for guidance on cluster node configuration, disk sizing, quorum models, CSV requirements, networking, and validation steps.
 
 {% endhint %}
 
@@ -53,16 +53,11 @@ This guide explains **how to configure shared disks in VergeOS** for use by Wind
 
 ## 1. Prepare Active Directory and DNS
 
-Before configuring shared disks, build the foundational services required for WSFC:
+Before configuring shared disks, build/verify the foundational services required for WSFC:
 
 - Deploy and configure **Active Directory Domain Services**.  
 - Ensure **DNS** is functioning and resolvable by all future cluster nodes.  
-- Verify the domain controller is powered on and reachable.
-
-{% hint style="success" %}
-**Hint:** Always confirm your domain controller is online before powering on cluster node VMs.
-
-{% endhint %}
+- Verify the domain controller is powered on and reachable before powering on cluster node VMs.
 
 ---
 
@@ -70,8 +65,17 @@ Before configuring shared disks, build the foundational services required for WS
 
 Create the VMs that will serve as WSFC cluster nodes:
 
-- Deploy each VM with its own **OS disk**.  
-- Install Windows Server and join each VM to the domain.
+- Deploy each VM with its own **OS disk**.
+- For each VM, add NICs and attach to appropriate networks 
+
+{% hint style="info" %}
+**Hint** 
+
+Separate networks are typically recommended for cluster heartbeat and client access.
+
+{% endhint %}
+
+- Install Windows Server and join each VM to the domain. 
 - Power off the VMs. 
 
 ---
@@ -93,12 +97,12 @@ For each disk:
 
 ## 4. Attach Shared Disks to Additional Cluster Nodes
 
-Create the second (and any additional) cluster node VM. For each shared disk:
+On each VM, for each shared disk:
 
 - **Name:** Use a descriptive name for administrative clarity.  
 - **Shared Disk:** Enable this option (found under **Advanced**).  
-- **Media File:** Select the disk created on the first cluster node.  
-  The dropdown will list all drives belonging to that VM.
+- **Media File:** Select the desired disk.  (All SCSI disks appear in the dropdown selection organized by VM) 
+
 
 Repeat for each shared disk required by the cluster.
 
@@ -113,8 +117,6 @@ To confirm shared disks are properly configured:
 3. Verify that each shared disk appears once for **each cluster node VM**.  
 4. The **Media File** column displays the same underlying filename (e.g., disk_28_16.raw) across all nodes for a shared disk.  This identical filename indicates that all cluster nodes are attached to the same virtual disk object, which is required for WSFC.
 
-
-This ensures all nodes have access to the same virtual disk objects.
 
 ---
 
@@ -143,7 +145,6 @@ Power on the cluster node VMs and verify:
 ## 8. Proceed with WSFC Installation
 
 Your VMs are now ready for Windows Server Failover Clustering installation and configuration. Follow Microsoft’s documentation to:
-
 - Validate the cluster  
 - Configure quorum  
 - Enable CSV (if applicable)  
