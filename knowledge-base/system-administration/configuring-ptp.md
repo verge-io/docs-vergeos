@@ -28,7 +28,7 @@ If you are not certain your network equipment supports PTP—or you are unsure h
 
 ## Configuring PTP
 
-1. Set the system’s time synchronization **Mode** to ***PTP***
+1. Set the system’s time synchronization **Mode** to ***PTP***.  
 This disables NTP entirely; ensure your environment is prepared for PTP operation.
 * Navigate to **System > Time Settings**
 * Select **Edit Settings**
