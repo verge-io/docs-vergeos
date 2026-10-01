@@ -69,7 +69,7 @@ This guide outlines the process to create a bonded external network across vlann
     - *Balance Round Robin*: sends packets sequentially across all physical switch paths. Typically only appropriate for lab environments - not recommended for general VM networking.
     - *Balance TLB (Adaptive Transmit)*
     - *Balance XOR*: Uses a hashing algorithm to choose which NIC handles each flow. Switch must support static EtherChannel/port-channel.  Predictable load distribution
-    - *Broadcast*: Sends every packet out every NIC. Maximum redundancy/no load balancing. Almost never an appropriate option - only for very niche legacy HA environment
+    - *Broadcast*: Sends every packet out every NIC. Maximum redundancy/no load balancing. Almost never an appropriate option - only for very niche legacy HA environments.
 5. Click **Submit** to save the change.
   
 ## Post Configuration
