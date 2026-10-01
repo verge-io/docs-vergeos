@@ -28,13 +28,16 @@ If you are not certain your network equipment supports PTP—or you are unsure h
 
 ## Configuring PTP
 
-1. Set the system’s time synchronization **Mode** to ***PTP***.  
+### 1. Set the system’s time synchronization **Mode**
+
 This disables NTP entirely; ensure your environment is prepared for PTP operation.
 * Navigate to **System > Time Settings**
 * Select **Edit Settings**
+* In the **Mode** field select ***PTP*** 
 
 
-2. Configure PTP Settings to align with your PTP hardware and infrastructure 
+### 2. Configure PTP Settings to align with your PTP hardware and infrastructure 
+
 ## Basic Settings
 
 * **PTP Interface Network**
@@ -112,10 +115,12 @@ Allows manual configuration of expected propagation delay (in nanoseconds).
 * **Sync and Announce Receipt Timeouts**
 Controls how many intervals must pass before timing messages
 
-3. **Submit** changes.
 
+### 3. **Submit** changes
 
-## After enabling PTP
+#### 4. Verify 
+
+**After enabling PTP:**
 
 * Monitor the VergeOS Time Settings dashboard to confirm expected synchronization activity.
 * Validate Timestamp Behavior: Confirm NICs support the selected timestamp mode and that the system is receiving hardware timestamps.
