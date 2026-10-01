@@ -118,7 +118,7 @@ Controls how many intervals must pass before timing messages
 
 ### 3. **Save** changes
 
-* Click **Submit** to save your changes 
+* Click **Submit** to implement the changes.
 
 ### 4. Verify Configuration
 
