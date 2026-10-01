@@ -116,9 +116,11 @@ Allows manual configuration of expected propagation delay (in nanoseconds).
 Controls how many intervals must pass before timing messages
 
 
-### 3. **Submit** changes
+### 3. **Save** changes
 
-#### 4. Verify 
+* Click **Submit** to save your changes 
+
+### 4. Verify Configuration
 
 **After enabling PTP:**
 
