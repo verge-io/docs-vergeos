@@ -20,6 +20,8 @@ tags:
 
 {% hint style="info" %}
 
+**Key Points**  
+
 * VergeOS defaults to NTP and configures servers automatically
 
 * Most users should never change time settings
@@ -35,7 +37,8 @@ Time settings define which time sources VergeOS uses and how it synchronizes wit
 
 {% hint style="info" %}
 
-**Time Zone**
+**Time Zone**  
+
 The System *Timezone* setting is available in **System > Settings**.
 
 {% endhint %}
@@ -59,7 +62,7 @@ NTP mode provides:
 
 * Safe, predictable behavior for general-purpose clusters
 
-*  Most users should leave the mode set to NTP and allow VergeOS to manage synchronization automatically.
+Most users should leave the mode set to NTP and allow VergeOS to manage synchronization automatically.
 
 ## PTP Mode (Advanced)
 
