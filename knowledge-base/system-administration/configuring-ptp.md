@@ -6,7 +6,11 @@ This article explains how to configure Precision Time Protocol (PTP) as an alter
 {% hint style="caution" %}
 **Critical Caution Before Enabling PTP in VergeOS**
 
-Precision Time Protocol (PTP) should **only** be enabled in environments that have the **proper, PTP‑capable hardware**, a validated timing architecture, and administrators who **fully understand the implications** of replacing the default NTP configuration.  
+Precision Time Protocol (PTP) replaces the default NTP configuration and should **only** be enabled in environments that have the **proper, PTP‑capable hardware**, a validated timing architecture, and administrators who **fully understand PTP configuration settings**.
+
+PTP is a highly specialized timing mechanism. Misconfiguration can lead to **system instability**, **incorrect application time synchronization**, or **cluster‑wide timing faults**.  
+If you are not certain your network equipment supports PTP—or you are unsure how PTP behaves in your environment—**do not enable it**.
+
 {% endhint %}
 
 {% hint style="info" %}
