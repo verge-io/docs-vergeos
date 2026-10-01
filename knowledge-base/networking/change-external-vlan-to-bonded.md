@@ -65,9 +65,9 @@ This guide outlines the process to create a bonded external network across vlann
     Some modes require switch support
     {% endhint %}
     - *Active Backup*: Only one NIC is active at a time. If it fails, another NIC takes over automatically. Pure Redundancy; no load balancing. Most compatible option - works with any switch.
-    - *Balance ALB (Adaptive Load)*: Load balances outgoing traffic automatically based on NIC load. Incoming traffic stays on one NIC (advertised MAC).
+    - *Balance ALB (Adaptive Load)*: Load balances outgoing traffic automatically based on NIC load. Incoming traffic is balanced using ARP negotiation. Maximum throughput, but requires the switch to tolerate ARP manipulation.
     - *Balance Round Robin*: sends packets sequentially across all physical switch paths. Typically only appropriate for lab environments - not recommended for general VM networking.
-    - *Balance TLB (Adaptive Transmit)*
+    - *Balance TLB (Adaptive Transmit)*: Outgoing traffic is load balanced across all switch paths. Incoming traffic stays on one NIC at a time (advertised MAC) 
     - *Balance XOR*: Uses a hashing algorithm to choose which NIC handles each flow. Switch must support static EtherChannel/port-channel.  Predictable load distribution
     - *Broadcast*: Sends every packet out every NIC. Maximum redundancy/no load balancing. Almost never an appropriate option - only for very niche legacy HA environments.
 5. Click **Submit** to save the change.
