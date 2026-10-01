@@ -38,82 +38,82 @@ This disables NTP entirely; ensure your environment is prepared for PTP operatio
 
 ### 2. Configure PTP Settings to align with your PTP hardware and infrastructure 
 
-## Basic Settings
+#### Basic Settings
 
-* **PTP Interface Network**
+* **PTP Interface Network**  
 Select the physical network interface that will carry PTP traffic.  
 This must be a network connected to PTP‑capable switches or timing devices.
 
-* **PTP Transport**
+* **PTP Transport**  
 Choose the transport mechanism (e.g., `UDPv4`).  
 Select the transport appropriate for your PTP profile and network design.
 
-* **PTP Domain**
+* **PTP Domain**  
 Defines the logical PTP domain.  
 Use the domain required by your timing architecture.
 
-* **PTP Delay Mechanism**
+* **PTP Delay Mechanism**  
 Select the delay measurement mechanism (e.g., `E2E`).  
 Different network designs may require different mechanisms.
 
-* **Use Hardware Timestamps**
+* **Use Hardware Timestamps**  
 Enable if your NICs support hardware timestamping.  
 Hardware timestamping provides significantly higher accuracy.  
 If unavailable, software timestamping can be used with reduced precision.
 
 ---
 
-## Advanced Settings
+#### Advanced Settings
 
 These options allow fine‑tuning of PTP behavior. Correct values depend entirely on your timing architecture, switch capabilities, and PTP profile.
 
-* **Clock Priority 1 / Priority 2**
+* **Clock Priority 1 / Priority 2**  
 Used by the Best Master Clock Algorithm (BMCA).  
 Lower values indicate higher priority.
 
-* **Two-Step Clock**
+* **Two-Step Clock**  
 Controls whether Sync messages are sent in one-step or two-step mode.  
 Match this to your PTP network’s expectations.
 
-* **Log Sync Interval**
+* **Log Sync Interval**  
 Sets the logarithmic interval between Sync messages.  
 Choose a rate appropriate for timing accuracy and network load.
 
-* **Announce Interval**
+* **Announce Interval**  
 Controls how frequently Announce messages are sent.  
 Affects BMCA responsiveness and master selection.
 
-* **Delay Request Intervals**
+* **Delay Request Intervals**  
 Configure how often delay measurement messages are sent.  
 Values depend on whether you use E2E or P2P mechanisms.
 
-* **Unicast Transmission**
+* **Unicast Transmission**  
 Enable if your PTP peers require unicast messaging instead of multicast.
 
-* **DSCP Event / General Messages**
+* **DSCP Event / General Messages**  
 Allows marking PTP packets with DSCP values for QoS handling.
 
-* **Always Master (Disable BMCA)**
+* **Always Master (Disable BMCA)**  
 Forces VergeOS to act as the master clock.  
 Use only when VergeOS is intended to be the authoritative time source.
 
-* **Inhibit Announce / Delay Request Messages**
+* **Inhibit Announce / Delay Request Messages** 
 Suppresses specific message types if required by your timing design.
 
-* **Include Follow-Up Information**
+* **Include Follow-Up Information**  
 Adds TLVs to Follow_Up messages when required by certain profiles.
 
-* **Transport Specific Field**
+* **Transport Specific Field**  
 Used for specialized PTP profiles requiring non-default values.
 
-* **PTP Hyperperiod**
+* **PTP Hyperperiod**  
 Defines the hyperperiod used by certain profiles (e.g., 802.1AS).
 
-* **Mean Message Propagation Delay**
+* **Mean Message Propagation Delay**  
 Allows manual configuration of expected propagation delay (in nanoseconds).
 
-* **Sync and Announce Receipt Timeouts**
-Controls how many intervals must pass before timing messages
+* **Sync and Announce Receipt Timeouts**  
+Controls how many intervals must pass before timing messages are considered missing.
 
 
 ### 3. **Save** changes
@@ -124,7 +124,13 @@ Controls how many intervals must pass before timing messages
 
 **After enabling PTP:**
 
-* Monitor the VergeOS Time Settings dashboard to confirm expected synchronization activity.
-* Validate Timestamp Behavior: Confirm NICs support the selected timestamp mode and that the system is receiving hardware timestamps.
-* Monitor Network Timing Devices: Confirm VergeOS is recognized as a participant. Verify message intervals and messages match your design
-* Observe Application-level Timing: Validate that latency, jitter, or synchronization-dependent functions behave normally.
+* **Monitor the VergeOS Time Settings dashboard:** Confirm expected synchronization activity.
+* **Validate Timestamp Behavior:** Verify NICs support the selected timestamp mode and that the system is receiving hardware timestamps.
+* **Monitor Network Timing Devices:** Confirm VergeOS is recognized as a participant. Verify message intervals and messages match your design.
+* **Observe Application-level Timing:** Validate that latency, jitter, or synchronization-dependent functions behave as expected.
+
+{% hint style="warning" %}
+If PTP synchronization does not stabilize, revert to NTP until the timing architecture is validated.
+
+{% endhint %}
+
