@@ -1,6 +1,6 @@
 ---
 title: "VergeOS Time Settings Overview"
-description: "Overview of VergeOS Time Settings that control external time synchronization (NTP/PTP). Nearly all systems should use the installed default settings. 
+description: "Overview of VergeOS Time Settings that control external time synchronization (NTP/PTP). Nearly all systems should use the installed default settings."
 semantic_keywords: 
   - Time Settings
   - External time synchronization
