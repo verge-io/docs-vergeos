@@ -53,11 +53,9 @@ Note: The user ID can be found in the URL of the user's dashboard (Key=1 paramet
 
 1. Enable Bonding by selecting the checkbox
 2. Under Bond Interfaces:
-    - Select specific core fabric switches (core-fabric-1 Switch, core-fabric-2 Switch) OR
-    - Use "All" to select all available interfaces
+    - Select specific physical switches
 
 {% hint style="info" %}
-- Selecting specific interfaces provides more control over which NICs are bonded
 - The bonded configuration provides software-based network redundancy across multiple physical switches (active-backup and active-active mode options)
 {% endhint %}
 
