@@ -1,12 +1,12 @@
 ---
 title: Change External Network to VLAN Bonded
 slug: change-external-vlan-to-bonded
-description: Instructions to change an existing external network to a VLAN bonded configuration across physical networks for active-backup redundancy.
+description: Instructions to change an existing external network to a VLAN bonded configuration across physical networks for redundancy and/or load balancing.
 author: VergeOS Documentation Team
 date: 2024-11-24T18:38:59.908Z
 semantic_keywords:
   - "bond external network vlan physical networks"
-  - "active-backup bond redundancy two nics"
+  - "software-based bond redundancy two nics"
   - "change external network bonded vlan configuration"
   - "network bonding failover bare-metal"
 use_cases:
@@ -34,7 +34,7 @@ dateCreated: 2024-11-24T18:38:59.908Z
 {% hint style="info" %}
 **Key Points**
 
-- This procedure creates an active-backup bond across vlanned physical networks.
+- This procedure creates a software-based bond across vlanned physical networks.
 - It is recommended for bare-metal installations with a limitation of 2 NICs per node.
 - System downtime is not required to make this change.
 {% endhint %}
@@ -57,10 +57,20 @@ This guide outlines the process to create a bonded external network across vlann
     - Networks > Dashboard > Externals
     - Double-click External Network
     - Click **Edit** on the left menu 
-2. Change **Layer 2 Type** to ***vLAN*** and enter appropriate **Layer 2 ID** (VLAN number).
+2. Verify **Layer 2 Type**: ***vLAN*** and appropriate **Layer 2 ID** (VLAN number).
 3. **Select** the option to **Enable Bonding**.
 3. **Select** the **Physical Networks** you want to participate in the bonding.
-4. Click **Submit** to save the change.
+4. **Select** desired **Bond Mode**:
+    {% hint style="warning"}
+    Some modes require switch support
+    {% endhint %}
+    - *Active Backup*: Only one NIC is active at a time. If it fails, another NIC takes over automatically. Pure Redundancy; no load balancing. Most compatible option - works with any switch.
+    - *Balance ALB (Adaptive Load)*: Load balances outgoing traffic automatically based on NIC load. Incoming traffic stays on one NIC (advertised MAC).
+    - *Balance Round Robin*: sends packets sequentially across all physical switch paths. Typically only appropriate for lab environments - not recommended for general VM networking.
+    - *Balance TLB (Adaptive Transmit)*
+    - *Balance XOR*: Uses a hashing algorithm to choose which NIC handles each flow. Switch must support static EtherChannel/port-channel.  Predictable load distribution
+    - *Broadcast*: Sends every packet out every NIC. Maximum redundancy/no load balancing. Almost never an appropriate option - only for very niche legacy HA environment
+5. Click **Submit** to save the change.
   
 ## Post Configuration
 

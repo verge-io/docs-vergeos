@@ -209,7 +209,7 @@ External networks connect VMs and workloads to users, the internet, and existing
 | **Port Mode** | Trunk (multiple VLANs)                | Supports management and workload VLANs |
 | **VLANs**     | Management + workload VLANs as needed | Trunk only the VLANs required          |
 | **MTU**       | 1500 (standard)                       | Unless workloads require jumbo frames  |
-| **Bonding**   | LACP or Active-Backup (optional)      | Recommended for redundancy             |
+| **Bonding**   | LACP or software-based (optional)   | Recommended for redundancy             |
 
 ### NIC Identification
 
