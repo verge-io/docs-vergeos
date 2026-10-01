@@ -1,3 +1,24 @@
+---
+title: Configuring PTP in VergeOS
+slug: configuring-ptp
+description: Instructions for configuring PTP (replacing NTP) for system time synchronization.
+author: VergeOS Documentation Team
+date: 2026-09-22T15:41:14.296Z
+semantic_keywords:
+  - "configure PTP time synchronization"
+use_cases:
+  - use_ptp_in_place_of_NTP
+  - configure_ptp_for_time_synchronization
+tags:
+  - time
+  - time synchronization
+  - ptp
+categories:
+  - System Administration
+editor: markdown
+dateCreated: 2025-09-22T19:08:58.594Z
+---
+
 # Configuring PTP in VergeOS
 This article explains how to configure Precision Time Protocol (PTP) as an alternative to the default NTP-based time synchronization in VergeOS. These settings allow a VergeOS system to synchronize time using hardware or software timestamping depending on hardware capabilities.
 
