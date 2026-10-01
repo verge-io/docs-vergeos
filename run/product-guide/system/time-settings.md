@@ -1,9 +1,9 @@
 ---
 title: "VergeOS Time Settings Overview"
 description: "Overview of VergeOS Time Settings that control external time synchronization (NTP/PTP). Nearly all systems should use the installed default settings. 
-semantic_keywords:
-  - "Time Settings"
-  - "External time synchronization"
+semantic_keywords: 
+  - Time Settings
+  - External time synchronization
 use_cases:
   - view NTP settings
   - adjust NTP system settings
@@ -12,8 +12,6 @@ tags:
   - configuration
   - time synchronization
   - real-world time
-categories:
-  - System Administration
 ---
 
 # VergeOS Time Settings Overview
@@ -28,12 +26,12 @@ categories:
 
 * PTP mode is available for advanced, hardware‑specific use cases
 
-* Keeping the defaults ensures a predictable, and well‑synchronized VergeOS environment.
+* Keeping the defaults will typically ensure a predictable and well‑synchronized VergeOS environment.
 
 
 {% endhint %}
 
-Time settings determine how your VergeOS system accesses external time synchronization services to avoid drifting from real-world time. In nearly all environments, the default configuration is already optimized and should not be changed.
+Time settings define which time sources VergeOS uses and how it synchronizes with them.    In nearly all environments, the default configuration is already optimized and should not be changed.
 
 {% hint style="info" %}
 
@@ -75,13 +73,13 @@ Precision Time Protocol (PTP) is available for environments that require extreme
 
 - You understand PTP domains, delay mechanisms, and hardware timestamping
 
-For more information about PTP see the KB article: PTP Mode Requirements & Usage
+For more information about PTP see the KB article: [Configuring PTP in VergeOS](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/system-administration/configuring-ptp)
 
 ## When to Change Time Settings
 
 **Only adjust time settings if:**
 
-* You are implementing PTP for a specialized workload
+* You are implementing PTP for specialized workloads
 
 * You have a controlled environment with dedicated timing hardware
 
