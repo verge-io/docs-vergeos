@@ -8,8 +8,8 @@ This article explains how to configure Precision Time Protocol (PTP) as an alter
 
 Precision Time Protocol (PTP) replaces the default NTP configuration and should **only** be enabled in environments that have the **proper, PTP‑capable hardware**, a validated timing architecture, and administrators who **fully understand PTP configuration settings**.
 
-PTP is a highly specialized timing mechanism. Misconfiguration can lead to **system instability**, **incorrect application time synchronization**, or **cluster‑wide timing faults**.  
-If you are not certain your network equipment supports PTP—or you are unsure how PTP behaves in your environment—**do not enable it**.
+PTP is a highly specialized timing mechanism. Misconfiguration can lead to **system instability**, **incorrect application time**, or **cluster‑wide timing faults**.  
+If you are not certain your network equipment supports PTP—or you are unsure how PTP behaves in your environment, **do not enable it**.
 
 {% endhint %}
 
@@ -17,7 +17,7 @@ If you are not certain your network equipment supports PTP—or you are unsure h
 
 **Key Points**
 
-* VergeOS supports using PTP, in place of NTP, for time sychronization.
+* VergeOS supports using PTP, in place of NTP, for time synchronization.
 * PTP is used in environments requiring extremely precise timing, such as industrial automation, broadcast, financial trading, and telecom systems. 
 * VergeOS provides a full set of PTP configuration options
 
@@ -28,15 +28,14 @@ If you are not certain your network equipment supports PTP—or you are unsure h
 
 ## Configuring PTP
 
-1. Set the system’s time synchronization mode to **PTP**
-This disables NTP entirely, so ensure your environment is prepared for PTP operation.
+1. Set the system’s time synchronization **Mode** to ***PTP***
+This disables NTP entirely; ensure your environment is prepared for PTP operation.
 * Navigate to **System > Time Settings**
 * Select **Edit Settings**
 
 
 2. Configure PTP Settings to align with your PTP hardware and infrastructure 
 ## Basic Settings
-
 
 * **PTP Interface Network**
 Select the physical network interface that will carry PTP traffic.  
