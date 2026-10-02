@@ -34,6 +34,8 @@ categories:
 
 # 26.2
 
+26.2.1 (October 2026)
+
 {% hint style="info" %}
 **Release Information**
 
