@@ -68,6 +68,8 @@ VergeOS 26.2 is a major feature release. The headline capability is **shared (mu
 
 - **VergeOS 26.2 is rebased on an updated kernel and core OS packages.** The underlying operating system was refreshed including a newer kernel (6.18.x), updated firmware and networking drivers, and a modern graphics stack. This brings newer hardware support and a more current set of system utilities.
 - **The boot process is now graphical.** Nodes display a clean, branded boot screen instead of scrolling service logs, showing the system name and vSAN mounting progress. If a vSAN needs to be interrupted while mounting, or an encryption key must be entered because no USB key is present, the boot screen now prompts for it properly — the encryption key prompt on an encrypted node no longer overlays the boot status text.
+- **CLI logins now display system health.** Logging in to a node via SSH, the local console, or the serial/remote console now shows a summary of system status at login.
+- **Additional cleanup.** Node startup no longer restarts NTP/PTP services or re-flashes the boot partition when the time configuration is unchanged, the node reboot alarm message was cleaned up, and a startup open-inodes message was downgraded from an error to a warning.
 
 #### Installer
 
@@ -96,6 +98,8 @@ VergeOS 26.2 is a major feature release. The headline capability is **shared (mu
 - **vSAN can now raise alarms.** The vSAN gained a native alarm capability with dedicated alarm types, exposed for use in the UI and logged to syslog.
 - **Improved vSAN diagnostics.** vSAN diagnostics now use vcmd for inode lookups instead of the legacy find command, and more vSAN directories are included in diagnostic bundles.
 - **Volumes with a stale file handle are now reported in the UI.** Added error handling and reporting around the stale file handle condition on export volumes, so a volume that needs to be reset is surfaced to the user instead of silently failing scheduled exports.
+- **A system restore now halts when a vSAN tier is 95% or more full.** Instead of completing a restore into a tier that is critically short on space, the restore pauses and provides CLI access so space can be freed before it finishes.
+- **Additional vSAN fixes.** Alarms for a vSAN stuck in repairing now resolve automatically, hotplugging a virtio disk no longer creates a duplicate drive entry, IDE and AHCI disks now receive the same read/write error policy that SCSI disks get, and a harmless root-key error no longer appears while installing a second node.
 
 ### Virtual Machines & Compute
 
@@ -105,8 +109,10 @@ VergeOS 26.2 is a major feature release. The headline capability is **shared (mu
 - **Editing a vGPU resource group no longer overwrites its description.** The saved description is preserved instead of being replaced by the driver-file name.
 - **Added the CPU types introduced with QEMU 11.** ClearwaterForest, Diamond Rapids, EPYC-Turin, and SierraForest are now selectable, and the CPU flag warning for emulated types was corrected.
 - **VRAM size can now be configured per VM.** A new field on the video adapter settings allows more than the adapter default.
+- **A custom OVMF firmware / EFI disk image can now be imported for a VM.** An opt-in, per-VM option allows a vendor-supplied UEFI firmware image to be used in place of the auto-generated EFI disk, enabling appliances that ship their own signed firmware — such as SonicWall NSv, which validates its Secure Boot certificates at boot. The managed EFI disk remains the default.
 - **Fixed a migration stall when workloads sharing an HA group outnumbered nodes.** A VM belonging to an HA group could fail to finish migrating when the group had more members than the system had nodes.
 - **VM clones now honor the preserve options when quiescing.** Cloning a running VM with a guest agent no longer reuses the source MAC address when the preserve option is not selected.
+- **VM snapshot restores no longer drop or swap tags that differ only by letter case.** Tags were previously re-attached by a case-insensitive name match, so a restored VM could silently lose a tag or pick up the wrong case-variant tag. Tags are now restored exactly as they were attached.
 - **A Preferred Node column is available in the VM list**, hidden by default.
 - **The VM list can now show an IP Address column** populated from the Guest Agent, with sorting and filtering.
 - **Power-on failures due to insufficient resources now list the reasons**, naming the nodes considered and why each was unable to host the VM.
@@ -124,6 +130,7 @@ VergeOS 26.2 is a major feature release. The headline capability is **shared (mu
 - **DHCP broadcast option for dynamic external networks.** Added an opt-in option (off by default) that makes a dynamic external network's DHCP client request broadcast replies. This lets networks behind cable/ISP DHCP servers that only answer broadcast-flagged BOOTP requests obtain a lease, with default behavior unchanged.
 - **Advanced network options collected into a collapsible section.** The network form now groups less-frequently-used options — probe/statistics, tracing, mirror logs, rate limiting, proxy, PXE, and VXLAN multicast — into a collapsible Advanced card placed after the Network DHCP section, matching the pattern used on the VM page. DHCP-specific options appear only when the network IP type is Dynamic.
 - **VLAN load balancing bond modes for external networks.** Added software bond modes to VergeFabric External Networks beyond the existing active-backup mode, starting with Balance-SLB (source load balancing), which rebalances VM traffic across physical uplinks by measured per-source-MAC load with no switch-side configuration required. This delivers both redundancy and bandwidth aggregation without guest OS configuration.
+- **Additional networking fixes.** A node-level fabric disconnection is now recorded in the system log, the alarm for a disconnected core fabric NIC now identifies which NIC lost link, the WireGuard dashboard now indicates when the network has rules waiting to be applied, and powering on a network with no interface network no longer floods the logs with errors.
 
 ### VMware / Veeam / oVirt Integration
 
@@ -141,6 +148,7 @@ VergeOS 26.2 is a major feature release. The headline capability is **shared (mu
 - **Deleted users no longer leave orphaned VM favorites behind.** When a user was deleted and later recreated with the same name, their profile previously inherited the favorite VMs from the deleted account. Favorite records are now cleaned up when either the user or the favorite VM is removed.
 - **The warning shown when deleting a user now only appears when that user actually owns VMs**, and the owned VMs are listed. Deleting multiple users expands this warning across all affected accounts.
 - **Added a configurable idle session timeout for shell and SSH sessions.** Administrators can now set an idle timeout for CLI sessions via an advanced system setting, supporting hardening requirements such as CIS, DISA STIG, and NIST 800-53 session-termination controls. Sessions default to remaining open until this setting is configured.
+- **Fixed a spurious failed-login error for auth-source users.** Logging in to the CLI via SSH or the console as an authentication-source user no longer records a failed-login error for a successful login.
 
 ### Alarms & Monitoring
 
@@ -157,6 +165,7 @@ VergeOS 26.2 is a major feature release. The headline capability is **shared (mu
 ### User Interface & Files
 
 - **Enhanced table views with resizable and reorderable columns.** Column widths and ordering can now be adjusted and are retained per browser via local storage. Resetting a view restores both the sizing/order and the hide/show column state.
+- **The UI is now usable at 1024×768.** Dashboards previously clipped their panes at low resolutions with a scrollbar that could not reach the hidden content — a common problem when working through a BMC virtual console (iDRAC, iLO, IPMI). Layouts now reflow so the full UI remains reachable at small viewport sizes.
 - **Fixed Tags column rendering in list views.** The Tags column now displays all tags that fit the available column width rather than capping the list at five, handles tags whose names contain commas correctly, and no longer misdirects clicks on the overflow indicator to an unrelated tag.
 - **Subtenants now correctly inherit themes they have been granted access to.** A subtenant created under a tenant with read-only access to a host theme previously did not pick up the theme's styling; it now renders consistently with its parent.
 - **The node serial console is now resizable.** A control in the console window lets physical-access users set the console dimensions, and the chosen size persists in the browser. The console page also enforces a hard maximum size so it cannot be sized beyond the browser window.
@@ -169,6 +178,7 @@ VergeOS 26.2 is a major feature release. The headline capability is **shared (mu
 - **Fixed capitalization of CPU and RAM usage history labels** for consistency across the usage pages.
 - **Fixed webhook retries being silently ignored.** Webhook deliveries now honor the configured retry count instead of making exactly one attempt regardless of the setting.
 - **Fixed loader spinner behavior.** The branded spinner now renders above page content rather than behind text, and now appears when an action is applied to more than one selected item rather than only for single-item actions.
+- **Additional UI fixes.** The API Documentation page no longer loads empty, the NVIDIA device list on a node now shows only that node's devices, the guest information card no longer collapses after clicking Show More, and in-product Product Guide links now point to the new documentation site at docs.verge.io.
 
 ### Recipes, Tenants & Sites
 
@@ -184,4 +194,5 @@ VergeOS 26.2 is a major feature release. The headline capability is **shared (mu
 - **Fixed fabric heartbeat failures on systems with many networks.** Reworked the fabric so it processes topology changes quickly enough to keep up when a node accumulates hundreds of networks. Previously a node with too many vxlan devices could miss the heartbeat window, get fenced, and cascade the failure across the cluster as its workloads migrated.
 - **Fixed the appserver unexpectedly exiting on update or node1 reboot.** Addressed appserver shutdown timeouts observed across several builds; shutdown timeouts are now clearly reported as such and stale shutdown messages are cleared.
 - **Fixed tenant migrations getting stuck during an upgrade.** If tenant nodes updated out of order, they could fail to migrate workloads back once the upgrade started, leaving a node looping in maintenance.
+- **Fixed an intermittent stale file handle error on the core network during updates.** The condition could appear while a system was updating and leave a node's database in a corrupt state; it no longer occurs.
 - **Fixed a group create/delete race condition.** A group created within a few seconds of a group deletion could never accept members while appearing healthy in every field. Group membership state is now correct.
