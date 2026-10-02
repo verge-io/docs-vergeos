@@ -571,7 +571,6 @@ No reboot required (if System is currently on 26.0.1).
 **Current Limitations**
 
 - Some NVMe drives have known issues with power management; cluster setting available to disable if needed
-- VLAN bonding uses Active-Backup mode only (not compatible with LACP)
 {% endhint %}
 
 ---

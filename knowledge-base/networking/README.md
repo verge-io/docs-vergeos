@@ -8,7 +8,7 @@ description: Guides for VergeOS networking — networks, rules, routing, VPNs, a
 * [Accessing the VergeOS UI from a VM](accessing-the-ui-from-a-vm.md) — Learn how to set up hair-pinning to access the VergeOS UI from a virtual machine within your environment using a translate network rule.
 * [Adjusting BGP Timers](adjusting-bgp-timers.md) — Learn how to configure BGP hold down timers for keepalive interval and hold time in VergeOS using FRR routing commands.
 * [Best Practices - Running a pfSense Virtual Firewall](running-a-pfsense-virtual-firewall.md) — Best practices for deploying and managing pfSense as a virtual firewall within VergeOS.
-* [Change External Network to VLAN Bonded](change-external-vlan-to-bonded.md) — Instructions to change an existing external network to a VLAN bonded configuration across physical networks for active-backup redundancy.
+* [Change External Network to VLAN Bonded](change-external-vlan-to-bonded.md) — Instructions to change an existing external network to a VLAN bonded configuration across physical networks for redundancy.
 * [Configure Authoritative DNS in VergeOS](configure-authoritative-dns-vergeos.md) — Complete guide to setting up authoritative DNS services in VergeOS using BIND, including DNS views, zones, records, and firewall…
 * [Configuring VMware Service VM NIC IPv4 Settings](vmware-service-vm-nic-ipv4-configuration.md) — How to configure static IPv4 settings for VMware service VM NICs in VergeOS, including IP address, DNS, and routing.
 * [Connection Tracking State in Firewall Rules](firewall-connection-tracking-state.md) — How to use the Connection Tracking State field on VergeOS firewall rules to block new inbound connections without dropping return traffic.

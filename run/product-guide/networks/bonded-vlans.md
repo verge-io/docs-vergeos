@@ -1,9 +1,9 @@
 ---
 title: "Bonded VLAN-tagged Networks"
-description: "Create active-backup bonded network interfaces with VLAN tagging on external or maintenance networks for network redundancy and failover."
+description: "Create software-based bonded network interfaces (not LACP) with VLAN tagging on external or maintenance networks for network redundancy and failover."
 semantic_keywords:
   - "bonded VLAN tagged network configuration"
-  - "active-backup NIC bonding VergeOS"
+  - "software-based NIC bonding VergeOS"
   - "network redundancy failover bond interface"
   - "VLAN bond external maintenance network"
 use_cases:
@@ -27,7 +27,7 @@ categories:
 
 ## Overview
 
-This guide provides instructions for creating an active-backup bond on an External or Maintenance Network. For specific instructions related to bare-metal installations with 2 NICs per node, see the KB article: [Change External Network to Bonded with tagged VLAN](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/networking/change-external-vlan-to-bonded).
+This guide provides instructions for creating a software-based bond (not LACP) on an External or Maintenance Network. For specific instructions related to bare-metal installations with 2 NICs per node, see the KB article: [Change External Network to Bonded with tagged VLAN](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/networking/change-external-vlan-to-bonded).
 
 ## Prerequisites
 
@@ -53,12 +53,10 @@ Note: The user ID can be found in the URL of the user's dashboard (Key=1 paramet
 
 1. Enable Bonding by selecting the checkbox
 2. Under Bond Interfaces:
-    - Select specific core fabric switches (core-fabric-1 Switch, core-fabric-2 Switch) OR
-    - Use "All" to select all available interfaces
+    - Select specific physical switches
 
 {% hint style="info" %}
-- Selecting specific interfaces provides more control over which NICs are bonded
-- The bonded configuration provides network redundancy through active-backup mode, where one NIC remains active while others stand ready as backup
+- The bonded configuration provides software-based network redundancy across multiple physical switches (active-backup and active-active mode options)
 {% endhint %}
 
 ### Additional Network Settings

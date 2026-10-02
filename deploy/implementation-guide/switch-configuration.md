@@ -44,7 +44,7 @@ This guide covers switch port configuration for VergeOS node deployments. You'll
 
 - What switch configuration does VergeOS require?
 - How do I configure jumbo frames for storage traffic?
-- Should I use LACP or active-backup for external networks?
+- Should I use LACP or software bonding for external networks?
 - How do I isolate core fabric from external traffic? 
 
 ## Quick Reference
@@ -52,7 +52,7 @@ This guide covers switch port configuration for VergeOS node deployments. You'll
 | Network Type | Configuration | Purpose |
 |--------------|--------------|---------|
 | **Core Fabric** | Access port, Isolated VLANs, MTU 9216, No STP | Isolate cluster/storage traffic |
-| **External** | Trunk port, Multiple VLANs, Active/Backup bonding, LACP (optional) | Workload connectivity with redundancy |
+| **External** | Trunk port, Multiple VLANs, software-based bonding, LACP (optional) | Workload connectivity with redundancy |
 
 ---
 
@@ -76,7 +76,7 @@ Networks connecting VMs and workloads to users, internet, and other infrastructu
 **Requirements:**
 
 - Multiple VLANs for tenant/workload separation
-- LACP bonding for redundancy (or active-backup)
+- LACP bonding for redundancy (or software-based bonding)
 - Trunk port configuration
 - Standard MTU 1500 (or 9000 if workloads require)
 
@@ -380,7 +380,7 @@ interface 1/1/8
 - LACP mode: **active** (initiates negotiation)
 
 
-### 4. Configure External Ports (Active-Backup Alternative)
+### 4. Configure External Ports (Software-based Alternative)
 
 If LACP isn't available or preferred, configure individual trunk ports without bonding.
 <div class="grid" markdown>
@@ -429,7 +429,7 @@ interface range 1/1/7-1/1/8
 
 </div>
 {% hint style="info" %}
-VergeOS can handle failover in software using active-backup bonding if LACP is not available.
+VergeOS can handle failover in software if LACP is not available.
 {% endhint %}
 
 ---
