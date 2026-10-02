@@ -34,7 +34,6 @@ categories:
 
 # 26.2
 
-26.2.1 (October 2026)
 
 {% hint style="info" %}
 **Release Information**
@@ -45,11 +44,14 @@ categories:
 - **End-of-Life**: TBD
 {% endhint %}
 
-## Summary
+
+## 26.2.1 (October 2026)
+
+### Summary
 
 VergeOS 26.2 is a major feature release. The headline capability is **shared (multi-writer) disks**, which let a single disk be attached to multiple VMs at once and unlock guest-clustered workloads such as Windows Failover Clustering and Cluster Shared Volumes. The release also rebases the platform on an updated kernel and core OS packages, reworks VergeFabric for scale and adds advanced BGP configuration and VLAN load-balancing bond modes, brings full Precision Time Protocol (PTP) support, and significantly expands visibility with a native vSAN alarm framework and per-core CPU statistics. Alongside these, 26.2 includes a large set of stability, security, and usability fixes carried in on the 26.2.0.x and 26.2.1 patches.
 
-## Highlights
+### Highlights
 
 - **Shared disks for clustered workloads** -- Attach one disk to multiple VMs concurrently for guest-level clustered filesystems and shared-disk HA (Microsoft CSV, Windows Failover Clustering). Shared disks present proper NAA/WWN identity and support SCSI-3 Persistent Reservations.
 - **Updated kernel and core OS packages** -- Refreshed base OS packages including a newer 6.18.x kernel, updated firmware and networking drivers, and a modern graphics stack.
@@ -60,14 +62,14 @@ VergeOS 26.2 is a major feature release. The headline capability is **shared (mu
 - **Native vSAN alarms and expanded monitoring** -- A vSAN alarm framework, per-core CPU utilization, and a snapshot-retention alarm improve day-to-day visibility.
 - **Node replacement with drives is back** -- Full chassis replacement is supported again through a rebuilt, guided installer flow.
 
-## OS, Installer & Update Process
+### OS, Installer & Update Process
 
-### Operating System
+#### Operating System
 
 - **VergeOS 26.2 is rebased on an updated kernel and core OS packages.** The underlying operating system was refreshed including a newer kernel (6.18.x), updated firmware and networking drivers, and a modern graphics stack. This brings newer hardware support and a more current set of system utilities.
 - **The boot process is now graphical.** Nodes display a clean, branded boot screen instead of scrolling service logs, showing the system name and vSAN mounting progress. If a vSAN needs to be interrupted while mounting, or an encryption key must be entered because no USB key is present, the boot screen now prompts for it properly — the encryption key prompt on an encrypted node no longer overlays the boot status text.
 
-### Installer
+#### Installer
 
 - **Node replacement now supports a full chassis replacement (drives and all).** The installer's node-replace path has been rebuilt as a guided flow: choose **Node Replace**, pick the node to replace, then explicitly choose the drive disposition (new drives, keep existing drives, or PXE boot). The previous dead-end that blocked the "no, do not keep drives" answer is gone, and drives are matched to tiers with size validation so a chassis swap can be completed self-service.
 - **The installer's Controller role label no longer implies a two-node limit.** The `(node1/node2)` wording was dropped, since any node can be added as a Controller — which is how an N+1 system is converted to N+2.
@@ -75,7 +77,7 @@ VergeOS 26.2 is a major feature release. The headline capability is **shared (mu
 - **Single-node installations no longer require a core network.** VergeOS can be deployed on a single node using only two physical NICs, with both available for external and workload networking instead of dedicating one to a core-network loopback. There is no peer node, so no inter-node traffic path is needed.
 - **Fixed PXE boot on UEFI nodes**, and fixed an issue where a PXE install could appear to fail when it had actually succeeded.
 
-### Update Process
+#### Update Process
 
 - **Upgrades to 26.2 must come from 26.1.6 or later.** Systems on earlier releases must first update to a 26.1.6-or-newer build before they can upgrade; the update package enforces this.
 - **Optional packages can now be installed with their dependencies and uninstalled cleanly.** Installing an optional package automatically pulls in everything it depends on, and uninstalling one cascades to dependents, so the system is never left in an inconsistent state. This also fixed a regression where a fresh install was incorrectly flagged as needing a reboot.
@@ -84,7 +86,7 @@ VergeOS 26.2 is a major feature release. The headline capability is **shared (mu
 - **Packages now use customer-facing names.** Package aliases were finished and surfaced in the UI: `yb` is now **vergeos-ui**, `ybos` is now **vergeos**, and `yb-help` is now **help**.
 - **A hotfix was added so that node1 reboots after node2 during an update.**
 
-## Storage (vSAN)
+### Storage (vSAN)
 
 - **Shared disks are now supported for clustered workloads.** A disk can be marked as shared and attached to multiple VMs at once, allowing guest-level clustered filesystems and shared-disk HA stacks such as Microsoft Cluster Shared Volumes (CSV) and Windows Failover Clustering to run on VergeOS. Shared disks use a SCSI interface, and I/O is no longer serialized or exclusively locked when a disk is flagged shared — write coordination is left to the guest cluster.
 - **Fixed a vSAN instability when deleting a node at the same time as a repair-count query.** Resolved a timing scenario in which removing a node at the exact moment the system queried repair counts could crash the instability.
@@ -95,7 +97,7 @@ VergeOS 26.2 is a major feature release. The headline capability is **shared (mu
 - **Improved vSAN diagnostics.** vSAN diagnostics now use vcmd for inode lookups instead of the legacy find command, and more vSAN directories are included in diagnostic bundles.
 - **Volumes with a stale file handle are now reported in the UI.** Added error handling and reporting around the stale file handle condition on export volumes, so a volume that needs to be reset is surfaced to the user instead of silently failing scheduled exports.
 
-## Virtual Machines & Compute
+### Virtual Machines & Compute
 
 - **VMs now report unique serial numbers instead of sharing the host serial.** Each VM is given its own deterministic SMBIOS serial number, so asset-management and inventory tools can distinguish VMs that previously all appeared as a single device.
 - **Pass-through and vGPU devices now work beyond PCI domain 0000.** Systems with more than one PCI domain can pass through devices on every domain; devices in domain 0000 continue to display without the domain prefix, while other domains show the full address.
@@ -110,7 +112,7 @@ VergeOS 26.2 is a major feature release. The headline capability is **shared (mu
 - **Power-on failures due to insufficient resources now list the reasons**, naming the nodes considered and why each was unable to host the VM.
 - **Added a grace period for guest agent warnings.** A VM that is powering off no longer logs a guest agent warning during the normal shutdown window.
 
-## Networking & Fabric
+### Networking & Fabric
 
 - **BGP advanced configuration.** Administrators configuring BGP can now drop into a vtysh shell within the virtual network and run BGP commands directly, providing a flexible path for the complex configurations that are hard to express through the UI. Shell access is secured to prevent breaking out, and manual configuration is saved to disk so it persists across restarts.
 - **Fabric performance with hundreds of networks.** Reworked the fabric to keep up on systems running large numbers of networks (reproduced at 600). Previously, fabric change processing could take long enough to miss the heartbeat window, allowing the core to time out and fail over.
@@ -123,7 +125,7 @@ VergeOS 26.2 is a major feature release. The headline capability is **shared (mu
 - **Advanced network options collected into a collapsible section.** The network form now groups less-frequently-used options — probe/statistics, tracing, mirror logs, rate limiting, proxy, PXE, and VXLAN multicast — into a collapsible Advanced card placed after the Network DHCP section, matching the pattern used on the VM page. DHCP-specific options appear only when the network IP type is Dynamic.
 - **VLAN load balancing bond modes for external networks.** Added software bond modes to VergeFabric External Networks beyond the existing active-backup mode, starting with Balance-SLB (source load balancing), which rebalances VM traffic across physical uplinks by measured per-source-MAC load with no switch-side configuration required. This delivers both redundancy and bandwidth aggregation without guest OS configuration.
 
-## VMware / Veeam / oVirt Integration
+### VMware / Veeam / oVirt Integration
 
 - **VMware backup transfers are significantly faster.** The VMware service now uses asynchronous NFC I/O buffers (nfcAio) for NBD transfers, alongside broader performance tuning when retrieving VM lists.
 - **VMware tags and categories are now carried across with imported backups.** Tag and category associations are preserved on import, tag and category descriptions are imported with the objects, tags that share a name but belong to different categories are kept distinct, and a category's "one tag per object" cardinality is mapped to Single Tag Selection.
@@ -133,26 +135,26 @@ VergeOS 26.2 is a major feature release. The headline capability is **shared (mu
 - **VMware imports can now flag the QEMU Guest Agent per batch.** When importing a batch of VMs whose guest OS already has the agent installed, the Guest Agent setting can be applied at creation time for the whole batch rather than per VM afterwards.
 - **OVA and VMware imports no longer select a deprecated machine type.** Imported VMs with a SCSI controller are created with a current machine type instead of a deprecated Q35 version, including when cloning from OVF and VMX sources.
 
-## Users, Security & Access Control
+### Users, Security & Access Control
 
 - **Introduced a dedicated Super Users group to manage physical access.** Physical-access capability (console, BMC/IPMI, and hardware-level operations) is now governed by membership in a Super Users group rather than by a standalone user flag. The existing physical-access toggle is retained for backwards compatibility, but it now simply adds or removes the user from that group, and granting it no longer implicitly confers built-in administrator permissions.
 - **Deleted users no longer leave orphaned VM favorites behind.** When a user was deleted and later recreated with the same name, their profile previously inherited the favorite VMs from the deleted account. Favorite records are now cleaned up when either the user or the favorite VM is removed.
 - **The warning shown when deleting a user now only appears when that user actually owns VMs**, and the owned VMs are listed. Deleting multiple users expands this warning across all affected accounts.
 - **Added a configurable idle session timeout for shell and SSH sessions.** Administrators can now set an idle timeout for CLI sessions via an advanced system setting, supporting hardening requirements such as CIS, DISA STIG, and NIST 800-53 session-termination controls. Sessions default to remaining open until this setting is configured.
 
-## Alarms & Monitoring
+### Alarms & Monitoring
 
 - **Raised an alarm when system snapshots are held well past their expiration.** A snapshot that should have expired but is being retained — for example due to the minimum-snapshot setting or a non-redundant system — now generates an alarm so it can be investigated.
 - **Fixed snoozed alarms permanently showing as snoozed in the alarms list view.** Once a snooze period expired, the alarm correctly reappeared on its dashboard, but the overall alarms list continued to display it as snoozed until the page was reloaded.
 - **Acknowledging a snoozable alarm now suspends it indefinitely.** Acknowledging an alarm previously snoozed it only for the maximum snooze period; it now remains acknowledged permanently while still being visible in the list.
 - **Added per-core CPU utilization to the UI.** Node CPU views now break utilization down by individual physical core, making it possible to spot a single pegged core, NUMA imbalance, or a runaway service without SSHing to the node and running a third-party tool.
 
-## Time Sync
+### Time Sync
 
 - **PTP (Precision Time Protocol) support.** VergeOS can now enable PTP on the host and pass the kvmclock parameter through to guests, allowing guests that support PTP to synchronize accurately to the host clock. This extends the earlier PTP startup work into full end-to-end support.
 - **Time sync status on the time dashboard.** The Time Settings dashboard now shows time sync status for each node for both NTP and PTP, and raises an alarm when a node has been out of sync for more than two minutes. NTP settings for Max Clocks, Min Clocks, and Min Sane were also added.
 
-## User Interface & Files
+### User Interface & Files
 
 - **Enhanced table views with resizable and reorderable columns.** Column widths and ordering can now be adjusted and are retained per browser via local storage. Resetting a view restores both the sizing/order and the hide/show column state.
 - **Fixed Tags column rendering in list views.** The Tags column now displays all tags that fit the available column width rather than capping the list at five, handles tags whose names contain commas correctly, and no longer misdirects clicks on the overflow indicator to an unrelated tag.
@@ -168,7 +170,7 @@ VergeOS 26.2 is a major feature release. The headline capability is **shared (mu
 - **Fixed webhook retries being silently ignored.** Webhook deliveries now honor the configured retry count instead of making exactly one attempt regardless of the setting.
 - **Fixed loader spinner behavior.** The branded spinner now renders above page content rather than behind text, and now appears when an action is applied to more than one selected item rather than only for single-item actions.
 
-## Recipes, Tenants & Sites
+### Recipes, Tenants & Sites
 
 - **Recipes remain editable after a referenced object is deleted.** Previously, if an object referenced by a recipe (such as a network) was deleted, the VM or object built from that recipe became permanently unmodifiable. Recipe-tracked fields can now be edited even when a referenced object no longer exists.
 - **Fixed recipe questions being attached to the wrong recipe.** Cloned questions could carry a section belonging to a different recipe, so the same question appeared on one recipe and was missing from the other — and the affected recipe could not remove it. Questions are now validated against their recipe and section.
@@ -176,7 +178,7 @@ VergeOS 26.2 is a major feature release. The headline capability is **shared (mu
 - **Fixed remote snapshot expiration edits on the remote site not persisting.** Changing a remote snapshot's expiration now updates the remote expiration record alongside the local edit, so the value no longer reverts on the next refresh.
 - **Changed how tenant snapshots are cleaned up within system snapshots**, improving consistency of snapshot cleanup during site and system operations.
 
-## System Stability & Performance
+### System Stability & Performance
 
 - **Fixed a controller crash when backup replication filled storage.** The controller now handles out-of-space conditions on a backup system gracefully instead of crashing and taking production down with it, preventing any cascading outages seen during site-to-site replication.
 - **Fixed fabric heartbeat failures on systems with many networks.** Reworked the fabric so it processes topology changes quickly enough to keep up when a node accumulates hundreds of networks. Previously a node with too many vxlan devices could miss the heartbeat window, get fenced, and cascade the failure across the cluster as its workloads migrated.
