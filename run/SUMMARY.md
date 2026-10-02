@@ -101,6 +101,7 @@
 * [Licensing and Software Updates](product-guide/system/update-settings.md)
 * [USB Passthrough](product-guide/system/usb-passthrough.md)
 * [Users and Groups](product-guide/system/users-groups.md)
+* [Time Settings Overview](/product-guide/system/time-settings.md)
 
 ## NAS
 
