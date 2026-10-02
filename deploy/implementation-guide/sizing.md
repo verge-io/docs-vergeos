@@ -42,6 +42,17 @@ The resources listed below are the **minimum requirements for VergeOS**. Additio
 - 1 x 1GbE NIC for External Network (Intel, NVIDIA Mellanox, or Broadcom)
 - 1 x 10GbE NIC for Core Fabric Network (Intel, NVIDIA Mellanox, or Broadcom)
 
+{% hint style="info" %}
+**Hardware Driver Reference**
+
+VergeOS includes a broad set of networking and storage drivers as part of the platform. If you are planning a deployment and want to review the driver inventory, see:
+
+- [Included Ethernet Drivers](nic-driver-list.md)
+- [Included Storage Drivers](storage-driver-list.md)
+
+If you do not see hardware you intend to use, contact **VergeOS Sales** for guidance.
+{% endhint %}
+
 ### Controller Nodes (Node 1 and Node 2)
 
 - 1 x +2.7GHz CPU
