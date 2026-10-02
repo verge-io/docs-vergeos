@@ -25,5 +25,3 @@ icon: book
 <tr><td><h3><i class="fa-bug" style="color:$primary;">:beetle:</i></h3></td><td><h4><strong>Troubleshooting</strong></h4></td><td>Diagnostic procedures and fixes for common VergeOS issues.</td><td><a href="troubleshooting/README.md">troubleshooting</a></td></tr>
 </tbody></table>
 
-For peer discussion, join the [VergeOS community](https://app.gitbook.com/s/uJc5d3O7cwI7qD8muSyG/community) Discord. It is not a support channel.
-
