@@ -7,6 +7,8 @@
 * [Introduction](implementation-guide/intro.md)
 * [Core concepts](implementation-guide/concepts.md)
 * [Node sizing](implementation-guide/sizing.md)
+  * [Included Ethernet drivers](implementation-guide/nic-driver-list.md)
+  * [Included storage drivers](implementation-guide/storage-driver-list.md)
 * [Network design](implementation-guide/network-design.md)
 * [Pre-installation checklist](implementation-guide/pre-installation.md)
 * [Creating bootable installation media](implementation-guide/install-media.md)

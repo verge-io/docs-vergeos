@@ -21,7 +21,7 @@ categories:
 
 # VergeOS Included Ethernet Drivers
 
-VergeOS includes a broad set of Ethernet drivers as part of its Linux-based virtualization stack, and this page reflects the drivers packaged within the platform for the current release.
+VergeOS includes a broad set of Ethernet drivers as part of its Linux-based virtualization stack, and this page reflects the drivers packaged within the platform for the latest VergeOS release.
 
 {% hint style="info" %}
 **Need hardware not shown?**
@@ -39,7 +39,7 @@ They can help evaluate your requirements and confirm whether your hardware align
 | NetXtreme — BCM5700–5789, BCM570x/571x/572x/575x/576x, BCM5780–5788, BCM5901, BCM5906, BCM5776x–5779x | `tg3` |
 | NetXtreme II GbE — BCM5706, BCM5708, BCM5709, BCM5716 | `bnx2` |
 | NetXtreme II 10/20G — BCM577xx | `bnx2x` |
-| NetXtreme‑C/E — BCM573xx, BCM574xx, BCM575xx, BCM576xx, BCM5880x | `bnxt_en` |
+| NetXtreme-C/E — BCM573xx, BCM574xx, BCM575xx, BCM576xx, BCM5880x | `bnxt_en` |
 | BCM57708 (50–800G) | `bng_en` |
 | BCM4401/4402 | `b44` |
 
@@ -71,12 +71,12 @@ They can help evaluate your requirements and confirm whether your hardware align
 | Family / Series | Driver |
 |-----------------|--------|
 | PRO/100 — 8255x, 82562, ICH3–ICH5 LOM | `e100` |
-| PRO/1000 PCI/PCI‑X — 82542, 82543–82547 | `e1000` |
+| PRO/1000 PCI/PCI-X — 82542, 82543–82547 | `e1000` |
 | PCIe GbE — 82571–82574, 82583, ICH8–ICH10 LOM, 82577/78/79, I217, I218, I219 | `e1000e` |
 | Server GbE — 82575, 82576, 82580, I210, I211, I350, I354, DH8900CC | `igb` (+`igbvf`) |
 | 2.5G — I225, I226, Killer E3100X | `igc` |
 | 10G — 82598, 82599, X520, X540, X550, X552, X553, X557, E610 | `ixgbe` (+`ixgbevf`) |
-| 10/25/40G — X710, XL710, XXV710, X722, I710 | `i40e` (+`iavf`) |
+| 10/25/40G — X710, XL710, XXV710, X722 | `i40e` (+`iavf`) |
 | 25/100/200G — E810, E822, E823, E825, E830, E835 | `ice` |
 | IPU / Infrastructure Data Path Function | `idpf` |
 | FM10000 switch host interface | `fm10k` |
@@ -87,8 +87,8 @@ They can help evaluate your requirements and confirm whether your hardware align
 
 | Family / Series | Driver |
 |-----------------|--------|
-| Yukon II — 88E80xx PCIe/PCI‑X, SK‑9Exx, SK‑9Sxx, DGE‑5xx | `sky2` |
-| Genesis / Yukon — 88E8001, SK‑98xx, 3c940 | `skge` |
+| Yukon II — 88E80xx PCIe/PCI-X, SK-9Exx, SK-9Sxx, DGE-5xx | `sky2` |
+| Genesis / Yukon — 88E8001, SK-98xx, 3c940 | `skge` |
 
 ---
 
@@ -96,9 +96,9 @@ They can help evaluate your requirements and confirm whether your hardware align
 
 | Family / Series | Driver |
 |-----------------|--------|
-| ConnectX‑2, ConnectX‑3, ConnectX‑3 Pro (+VFs) | `mlx4_core` |
-| Connect‑IB, ConnectX‑4/4 Lx, ‑5/5 Ex, ‑6/6 Dx/6 Lx, ‑7, ‑8, ‑9, ‑10 (+VFs) | `mlx5_core` |
-| Spectrum, Spectrum‑2, ‑3, ‑4 switch ASICs | `mlxsw_spectrum` |
+| ConnectX-2, ConnectX-3, ConnectX-3 Pro (+VFs) | `mlx4_core` |
+| Connect-IB, ConnectX-4/4 Lx, -5/5 Ex, -6/6 Dx/6 Lx, -7, -8, -9, -10 (+VFs) | `mlx5_core` |
+| Spectrum, Spectrum-2, -3, -4 switch ASICs | `mlxsw_spectrum` |
 
 ---
 
@@ -109,7 +109,7 @@ They can help evaluate your requirements and confirm whether your hardware align
 | FastLinQ QL41000, QL45000 (+VFs) | `qede` |
 | cLOM8214, ISP8324 converged | `qlcnic` |
 | ISP4022, ISP4032 | `qla3xxx` |
-| BCM57840 (QLogic‑branded) | `bnx2x` |
+| BCM57840 (QLogic-branded) | `bnx2x` |
 
 ---
 
@@ -123,12 +123,17 @@ They can help evaluate your requirements and confirm whether your hardware align
 
 ---
 
+## Virtual / Paravirtual
+
+| Family / Series | Driver |
+|-----------------|--------|
+| virtio-net (paravirtual, for nested/virtualized installs) | `virtio_net` |
+
+---
+
 {% hint style="info" %}
 **Release Variability**
 
 Driver availability may vary across VergeOS releases as the Linux kernel evolves.  
-This list reflects the drivers included at build time for the current release.
+This list reflects the drivers included at build time for the latest release.
 {% endhint %}
-```
-
----

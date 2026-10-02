@@ -25,7 +25,7 @@ categories:
 
 # VergeOS Included Storage Drivers
 
-VergeOS includes a broad set of storage-related drivers as part of its Linux-based virtualization stack. This page reflects the drivers packaged within the platform for the current release.
+VergeOS includes a broad set of storage-related drivers as part of its Linux-based virtualization stack. This page reflects the drivers packaged within the platform for the latest VergeOS release.
 
 {% hint style="info" %}
 **Need hardware not shown?**
@@ -88,10 +88,10 @@ They can help evaluate your requirements and confirm whether your hardware align
 | Family | Driver |
 |--------|--------|
 | Any NVMe SSD | `nvme` (class match) |
-| NVMe behind Intel VMD | `CONFIG_VMD=m` |
+| NVMe behind Intel VMD | `vmd` |
 | Micron P320/P420 PCIe SSD | `mtip32xx` |
 | VMware PVSCSI | `vmw_pvscsi` |
-| virtio-scsi | `CONFIG_SCSI_VIRTIO=m` |
+| virtio-scsi (paravirtual, for nested/virtualized installs) | `virtio_scsi` |
 
 ---
 
@@ -99,8 +99,5 @@ They can help evaluate your requirements and confirm whether your hardware align
 **Release Variability**
 
 Driver availability may vary across VergeOS releases as the Linux kernel evolves.  
-This list reflects the drivers included at build time for the current release.
+This list reflects the drivers included at build time for the latest release.
 {% endhint %}
-```
-
----
