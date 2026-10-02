@@ -17,7 +17,7 @@ terraform {
   required_providers {
     vergeio = {
       source  = "verge-io/vergeio"
-      version = "~> 0.1.0"
+      version = "~> 2.7"
     }
   }
 }
@@ -45,29 +45,32 @@ The provider configuration is identical for OpenTofu. Simply replace `terraform`
 
 ### Resources
 
-The provider currently supports four managed resource types for creating and updating VergeOS objects:
+The provider currently supports five managed resource types for creating and updating VergeOS objects:
 
-| Resource              | Purpose                            | Key Attributes                                                                                                                                                                                  |
-| --------------------- | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`vergeio_vm`**      | Create and manage virtual machines | `cpu_cores`, `ram`, `os_family`, `machine_type`, `ha_group`, `cluster`, `guest_agent`, `uefi`, `secure_boot`, `snapshot_profile`, `powerstate`, inline `vergeio_drive` and `vergeio_nic` blocks |
-| **`vergeio_network`** | Configure virtual networks         | `network_address` (CIDR), `dhcp_enabled`, `dhcp_start`, `dhcp_end`, `dns_server_list`, `gateway`, `powerstate`                                                                                  |
-| **`vergeio_user`**    | Provision users                    | User account management within VergeOS                                                                                                                                                          |
-| **`vergeio_member`**  | Manage group membership            | Associate users with groups for RBAC                                                                                                                                                            |
+| Resource                   | Purpose                            | Key Attributes                                                                                                                                                                                  |
+| -------------------------- | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`vergeio_vm`**           | Create and manage virtual machines | `cpu_cores`, `ram`, `os_family`, `machine_type`, `ha_group`, `cluster`, `guest_agent`, `uefi`, `secure_boot`, `snapshot_profile`, `powerstate`, inline `vergeio_drive` and `vergeio_nic` blocks |
+| **`vergeio_network`**      | Configure virtual networks         | `network` (CIDR), `dhcp_enabled`, `dhcp_start`, `dhcp_stop`, `vnet_default_gateway`, `powerstate`                                                                                               |
+| **`vergeio_user`**         | Provision users                    | User account management within VergeOS                                                                                                                                                          |
+| **`vergeio_member`**       | Manage group membership            | Associate users with groups for RBAC                                                                                                                                                            |
+| **`vergeio_tag_member`**   | Assign tags to objects             | Attach tags to VMs, networks, and other VergeOS objects (VergeOS v26+)                                                                                                                          |
 
 ### Data Sources
 
-Eight read-only data sources let you query existing VergeOS objects for use in your configurations:
+Ten read-only data sources let you query existing VergeOS objects for use in your configurations:
 
-| Data Source                  | Returns                                                |
-| ---------------------------- | ------------------------------------------------------ |
-| **`vergeio_version`**        | Current VergeOS version information                    |
-| **`vergeio_clusters`**       | Available compute/storage clusters                     |
-| **`vergeio_nodes`**          | Nodes in the environment                               |
-| **`vergeio_networks`**       | Existing virtual networks                              |
-| **`vergeio_vms`**            | Virtual machines (filterable by name, snapshot status) |
-| **`vergeio_groups`**         | User groups for RBAC                                   |
-| **`vergeio_mediasources`**   | Uploaded ISOs and media files                          |
-| **`vergeio_cloudinitfiles`** | Available cloud-init configuration files               |
+| Data Source                    | Returns                                                |
+| ------------------------------ | ------------------------------------------------------ |
+| **`vergeio_version`**          | Current VergeOS version information                    |
+| **`vergeio_clusters`**         | Available compute/storage clusters                     |
+| **`vergeio_nodes`**            | Nodes in the environment                               |
+| **`vergeio_networks`**         | Existing virtual networks                              |
+| **`vergeio_vms`**              | Virtual machines (filterable by name, snapshot status) |
+| **`vergeio_groups`**           | User groups for RBAC                                   |
+| **`vergeio_mediasources`**     | Uploaded ISOs and media files                          |
+| **`vergeio_cloudinitfiles`**   | Available cloud-init configuration files               |
+| **`vergeio_resource_groups`**  | Hardware resource groups (PCI, USB, vGPU pools)        |
+| **`vergeio_tags`**             | Tags configured in VergeOS                             |
 
 ### HCL Examples
 
@@ -114,12 +117,11 @@ resource "vergeio_vm" "web_server" {
 
 ```hcl
 resource "vergeio_network" "web_network" {
-  name            = "web-internal-network"
-  network_address = "192.168.10.0/24"
-  dns_server_list = ["8.8.8.8", "8.8.4.4"]
-  dhcp_enabled    = true
-  dhcp_start      = "192.168.10.100"
-  dhcp_end        = "192.168.10.200"
+  name         = "web-internal-network"
+  network      = "192.168.10.0/24"
+  dhcp_enabled = true
+  dhcp_start   = "192.168.10.100"
+  dhcp_stop    = "192.168.10.200"
 }
 ```
 
