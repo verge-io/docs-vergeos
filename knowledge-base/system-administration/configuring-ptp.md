@@ -24,7 +24,7 @@ This article explains how to configure Precision Time Protocol (PTP) as an alter
 
 ## Overview
 
-{% hint style="caution" %}
+{% hint style="danger" %}
 **Critical Caution Before Enabling PTP in VergeOS**
 
 Precision Time Protocol (PTP) replaces the default NTP configuration and should **only** be enabled in environments that have the **proper, PTP‑capable hardware**, a validated timing architecture, and administrators who **fully understand PTP configuration settings**.
@@ -62,11 +62,11 @@ This disables NTP entirely; ensure your environment is prepared for PTP operatio
 #### Basic Settings
 
 * **PTP Interface Network**  
-Select the physical network interface that will carry PTP traffic.  
+Select the physical network that carries PTP traffic. This field is required in PTP mode.  
 This must be a network connected to PTP‑capable switches or timing devices.
 
 * **PTP Transport**  
-Choose the transport mechanism (e.g., `UDPv4`).  
+Select **UDPv4** (default), **UDPv6**, or **L2**.  
 Select the transport appropriate for your PTP profile and network design.
 
 * **PTP Domain**  
@@ -74,13 +74,12 @@ Defines the logical PTP domain.
 Use the domain required by your timing architecture.
 
 * **PTP Delay Mechanism**  
-Select the delay measurement mechanism (e.g., `E2E`).  
+Select **E2E** (end-to-end, default), **P2P** (peer-to-peer), or **Auto**.  
 Different network designs may require different mechanisms.
 
 * **Use Hardware Timestamps**  
-Enable if your NICs support hardware timestamping.  
-Hardware timestamping provides significantly higher accuracy.  
-If unavailable, software timestamping can be used with reduced precision.
+Enabled by default. Leave it enabled if your NICs support hardware timestamping. Hardware timestamping provides significantly higher accuracy.  
+If your NICs do not support hardware timestamping, disable this option to use software timestamping. VergeOS does not fall back to software timestamping automatically.
 
 ---
 
@@ -88,56 +87,67 @@ If unavailable, software timestamping can be used with reduced precision.
 
 These options allow fine‑tuning of PTP behavior. Correct values depend entirely on your timing architecture, switch capabilities, and PTP profile.
 
-* **Clock Priority 1 / Priority 2**  
-Used by the Best Master Clock Algorithm (BMCA).  
-Lower values indicate higher priority.
+* **Clock Priority 1**  
+Used by the Best Master Clock Algorithm (BMCA) to select the master clock.  
+Lower values indicate higher priority (0-255, default 128).
+
+* **Clock Priority 2**  
+BMCA tie-breaker when Clock Priority 1 is equal (0-255, default 128).
 
 * **Two-Step Clock**  
-Controls whether Sync messages are sent in one-step or two-step mode.  
+Enabled by default. Two-step sends the timestamp in a Follow_Up message. One-step embeds it in the Sync message.  
 Match this to your PTP network’s expectations.
 
 * **Log Sync Interval**  
-Sets the logarithmic interval between Sync messages.  
+Sync message rate as log2 seconds: 0 = 1 s, -1 = 0.5 s, -2 = 0.25 s, -3 = 0.125 s (-6 to 1, default 0).  
 Choose a rate appropriate for timing accuracy and network load.
 
-* **Announce Interval**  
-Controls how frequently Announce messages are sent.  
+* **Log Announce Interval**  
+Announce message rate as log2 seconds: 0 = 1 s, 1 = 2 s, 2 = 4 s (-3 to 3, default 1).  
 Affects BMCA responsiveness and master selection.
 
-* **Delay Request Intervals**  
-Configure how often delay measurement messages are sent.  
-Values depend on whether you use E2E or P2P mechanisms.
+* **Log Min Delay Request Interval**  
+Minimum delay request rate as log2 seconds, used with the E2E delay mechanism (-4 to 1, default 0).
+
+* **Log Min P-Delay Request Interval**  
+Minimum peer delay request rate as log2 seconds, used with the P2P delay mechanism (-4 to 1, default 0).
 
 * **Unicast Transmission**  
-Enable if your PTP peers require unicast messaging instead of multicast.
+Disabled by default. Enable if your PTP peers require unicast messaging instead of multicast.
 
-* **DSCP Event / General Messages**  
-Allows marking PTP packets with DSCP values for QoS handling.
+* **DSCP Event Messages (Port 319)**  
+DSCP value for PTP event messages, for QoS handling (0-63, default 0).
+
+* **DSCP General Messages (Port 320)**  
+DSCP value for PTP general messages, for QoS handling (0-63, default 0).
 
 * **Always Master (Disable BMCA)**  
-Forces VergeOS to act as the master clock.  
+Disabled by default. Forces this port to always act as master and skips the Best Master Clock Algorithm.  
 Use only when VergeOS is intended to be the authoritative time source.
 
-* **Inhibit Announce / Delay Request Messages** 
-Suppresses specific message types if required by your timing design.
+* **Inhibit Announce Messages**  
+Disabled by default. Suppresses Announce message transmission and reception.
+
+* **Inhibit Delay Request Messages**  
+Disabled by default. Suppresses Delay Request message transmission.
 
 * **Include Follow-Up Information**  
-Adds TLVs to Follow_Up messages when required by certain profiles.
+Disabled by default. Sends the follow-up information TLV in Follow_Up messages when required by certain profiles.
 
 * **Transport Specific Field**  
-Used for specialized PTP profiles requiring non-default values.
+The PTP transportSpecific field (0-255, default 0). Used with 802.1AS/gPTP, where it is typically set to 1.
 
-* **PTP Hyperperiod**  
-Defines the hyperperiod used by certain profiles (e.g., 802.1AS).
+* **Max Neighbor Propagation Delay (ns)**  
+The maximum allowed propagation delay to a neighbor, in nanoseconds (default 20000000). This is a threshold, not an expected delay value.
 
-* **Mean Message Propagation Delay**  
-Allows manual configuration of expected propagation delay (in nanoseconds).
+* **Sync Receipt Timeout**  
+Number of sync intervals before a timeout is declared (0-255, default 0 = disabled).
 
-* **Sync and Announce Receipt Timeouts**  
-Controls how many intervals must pass before timing messages are considered missing.
+* **Announce Receipt Timeout**  
+Number of announce intervals before a timeout is declared (1-255, default 3).
 
 
-### 3. **Save** changes
+### 3. **Submit** changes
 
 * Click **Submit** to implement the changes.
 

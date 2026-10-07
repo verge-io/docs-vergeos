@@ -98,10 +98,10 @@
 * [Creating Subscriptions](product-guide/system/subscriptions-overview.md)
 * [Tags](product-guide/system/tags.md)
 * [VergeOS Theme Functionality](product-guide/system/themes.md)
+* [Time Settings](product-guide/system/time-settings.md)
 * [Licensing and Software Updates](product-guide/system/update-settings.md)
 * [USB Passthrough](product-guide/system/usb-passthrough.md)
 * [Users and Groups](product-guide/system/users-groups.md)
-* [Time Settings Overview](/product-guide/system/time-settings.md)
 
 ## NAS
 
