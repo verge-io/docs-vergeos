@@ -110,7 +110,7 @@ Boot-oriented devices such as Dell BOSS cards are for **boot or OS only**. Do no
 
 Tier 0 holds vSAN metadata: the structural information VergeOS uses to track usable data. Correct Tier 0 sizing is essential for stable vSAN operation in every deployment profile. Metadata needs vary with workload behavior, snapshot strategy, and vSAN scale. See [Storage Tiers in VergeOS vSAN](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/storage/storage-tiers).
 
-**Where metadata is stored:** most deployments store metadata on a dedicated Tier 0. Small/Edge systems can store metadata on the primary tier instead. The same sizing guidance applies; reserve the required metadata capacity within the primary tier.
+**Where metadata is stored:** most deployments store metadata on a dedicated Tier 0. Small/Edge systems [can store metadata on the primary tier instead](#small--edge). The same sizing guidance applies; reserve the required metadata capacity within the primary tier.
 
 #### Baseline Tier 0 requirements
 
@@ -134,7 +134,7 @@ The conservative baseline absorbs moderate retention beyond the default profile.
 
 **Tier 0 sizing examples**
 
-| Change Rate | Snapshot Retention | Tier 0 Sizing | Notes |
+| Change Rate | Retained Snapshots | Tier 0 Sizing | Notes |
 |-------------|-------------------|---------------|-------|
 | Low to Moderate | 7 (default) | 5 GB/TB (baseline) | Baseline safely absorbs the default 7 snapshots |
 | Low to Moderate | 25–30 | 5 GB/TB (baseline) | 25–30 snapshots can still be absorbed |
@@ -154,7 +154,7 @@ Metadata sizing involves multiple interdependent factors. VergeOS Sales and auth
 ### RAM for storage
 
 - **Baseline:** on each node, reserve **16 GB for VergeOS plus 1 GB RAM per 1 TB of raw storage** on that node. Guest workload RAM is additional. For example, a node with 8 TB raw reserves 24 GB before guest RAM.
-- **Storage buffer (cache) RAM** is a separate, additive need. It matters most in performance environments. Do not treat a single higher GB/TB figure as a substitute for both needs. For Performance sizing, contact a VergeOS partner or the VergeOS sales team.
+- **Storage buffer (cache) RAM** is a separate, additive need. It matters most in performance environments. Do not treat a single higher GB/TB figure as a substitute for both needs. For sizing [Performance](#performance--high-capacity--scale) deployment model nodes and their storage buffer, contact a VergeOS partner or the VergeOS sales team.
 
 ### CPU and storage disks
 
