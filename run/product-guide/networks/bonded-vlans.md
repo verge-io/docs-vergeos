@@ -1,9 +1,9 @@
 ---
 title: "Bonded VLAN-tagged Networks"
-description: "Create software-based bonded network interfaces (not LACP) with VLAN tagging on external or maintenance networks for network redundancy and failover."
+description: "Create virtual layer bonded network interfaces (not LACP) with VLAN tagging on external or maintenance networks for network redundancy and failover."
 semantic_keywords:
   - "bonded VLAN tagged network configuration"
-  - "software-based NIC bonding VergeOS"
+  - "virtual layer NIC bonding VergeOS"
   - "network redundancy failover bond interface"
   - "VLAN bond external maintenance network"
 use_cases:
@@ -27,7 +27,7 @@ categories:
 
 ## Overview
 
-This guide provides instructions for creating a software-based bond (not LACP) on an External or Maintenance Network. For specific instructions related to bare-metal installations with 2 NICs per node, see the KB article: [Change External Network to Bonded with tagged VLAN](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/networking/change-external-vlan-to-bonded).
+This guide provides instructions for creating a virtual layer bond (not LACP) on an External or Maintenance Network. For specific instructions related to bare-metal installations with 2 NICs per node, see the KB article: [Change External Network to Bonded with tagged VLAN](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/networking/change-external-vlan-to-bonded).
 
 ## Prerequisites
 
@@ -56,7 +56,7 @@ Note: The user ID can be found in the URL of the user's dashboard (Key=1 paramet
     - Select specific physical switches
 
 {% hint style="info" %}
-- The bonded configuration provides software-based network redundancy across multiple physical switches (active-backup and active-active mode options)
+- The bonded configuration provides virtual layer network redundancy across multiple physical switches (active-backup and active-active mode options)
 {% endhint %}
 
 ### Additional Network Settings

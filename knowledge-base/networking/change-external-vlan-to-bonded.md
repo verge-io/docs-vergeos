@@ -6,7 +6,7 @@ author: VergeOS Documentation Team
 date: 2024-11-24T18:38:59.908Z
 semantic_keywords:
   - "bond external network vlan physical networks"
-  - "software-based bond redundancy two nics"
+  - "virtual layer bond redundancy two nics"
   - "change external network bonded vlan configuration"
   - "network bonding failover bare-metal"
 use_cases:
@@ -34,7 +34,7 @@ dateCreated: 2024-11-24T18:38:59.908Z
 {% hint style="info" %}
 **Key Points**
 
-- This procedure creates a software-based bond across vlanned physical networks.
+- This procedure creates a virtual layer bond across vlanned physical networks.
 - It is recommended for bare-metal installations with a limitation of 2 NICs per node.
 - System downtime is not required to make this change.
 {% endhint %}
@@ -62,7 +62,7 @@ This guide outlines the process to create a bonded external network across vlann
 3. **Select** the **Physical Networks** you want to participate in the bonding.
 4. **Select** desired **Bond Mode**:
     {% hint style="warning"}
-    Some modes require the switch to support specific link‑level behaviors.  
+    Some modes require configuration on the switching hardware to support specific link‑level behaviors.  
     {% endhint %}
     - *Active Backup*: Only one NIC is active at a time. If it fails, another NIC takes over automatically. Pure Redundancy; no load balancing. Most compatible option - works with any switch.
     - *Balance ALB (Adaptive Load)*: Load balances outgoing traffic automatically based on NIC load. Incoming traffic is balanced using ARP negotiation. Maximum throughput, but requires the switch to tolerate ARP manipulation. Very compatible with most switch configurations.
@@ -70,7 +70,9 @@ This guide outlines the process to create a bonded external network across vlann
     - *Balance TLB (Adaptive Transmit)*: Outgoing traffic is load balanced across all switch paths. Incoming traffic stays on one NIC at a time (advertised MAC). Very compatible - switch only needs to handle normal MAC learning
     - *Balance XOR*: Uses a hashing algorithm to choose which NIC handles each flow. Switch must support static EtherChannel/port-channel.  Predictable load distribution
     - *Broadcast*: Sends every packet out every NIC. Maximum redundancy/no load balancing. Almost never an appropriate option - only for very niche legacy HA environments.
-5. Click **Submit** to save the change.
+
+5.      
+6. Click **Submit** to save the change.
   
 ## Post Configuration
 

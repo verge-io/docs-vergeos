@@ -44,7 +44,7 @@ This guide covers switch port configuration for VergeOS node deployments. You'll
 
 - What switch configuration does VergeOS require?
 - How do I configure jumbo frames for storage traffic?
-- Should I use LACP or software bonding for external networks?
+- Should I use LACP or virtual layer bonding for external networks?
 - How do I isolate core fabric from external traffic? 
 
 ## Quick Reference
@@ -52,7 +52,7 @@ This guide covers switch port configuration for VergeOS node deployments. You'll
 | Network Type | Configuration | Purpose |
 |--------------|--------------|---------|
 | **Core Fabric** | Access port, Isolated VLANs, MTU 9216, No STP | Isolate cluster/storage traffic |
-| **External** | Trunk port, Multiple VLANs, software-based bonding, LACP (optional) | Workload connectivity with redundancy |
+| **External** | Trunk port, Multiple VLANs, virtual Layer bonding, LACP (optional) | Workload connectivity with redundancy |
 
 ---
 
@@ -76,7 +76,7 @@ Networks connecting VMs and workloads to users, internet, and other infrastructu
 **Requirements:**
 
 - Multiple VLANs for tenant/workload separation
-- LACP bonding for redundancy (or software-based bonding)
+- LACP bonding for redundancy (or virtual layer bonding for VLAN networks)
 - Trunk port configuration
 - Standard MTU 1500 (or 9000 if workloads require)
 
@@ -380,7 +380,7 @@ interface 1/1/8
 - LACP mode: **active** (initiates negotiation)
 
 
-### 4. Configure External Ports (Software-based Alternative)
+### 4. Configure External Ports (Virtual Layer bonding Alternative)
 
 If LACP isn't available or preferred, configure individual trunk ports without bonding.
 <div class="grid" markdown>

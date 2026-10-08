@@ -67,7 +67,7 @@ All nodes must be connected to the same switching fabric with **zero switch hops
 * External Networks configured as VLAN trunks (802.1Q tagged)
 * Multiple VLANs allowed on trunk ports for workload/tenant separation
 * LACP (802.3ad) bonding recommended for redundancy and bandwidth aggregation
-  * software bonding supported as alternative
+  * virtual-layer bonding supported as an alternative
 * Network latency <1ms acceptable for most workloads
 * Routable to upstream networks (gateways, internet, other infrastructure)
 * Spanning tree protocol allowed (standard Layer 2 operation)
