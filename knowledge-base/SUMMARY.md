@@ -23,6 +23,7 @@
   * [SonicWall NSv 7.1.1+ Will Not Boot on VergeOS](virtual-machines/sonicwall-nsv-boot-failure-signed-firmware.md)
   * [UEFI Tweaks for Imported VMs](virtual-machines/uefi-tweaks-for-imported-vms.md)
   * [Understanding VergeOS VM Memory Management](virtual-machines/guest-memory-management.md)
+  * [Using Shared Disks for Windows Clustering](virtual-machines/using-shared-disks-windows-clustering.md)
   * [VirtIO-Win Driver Compatibility with MS SQL Server Workloads](virtual-machines/virtio-win-mssql-compatibility.md)
   * [Virtual Drive TRIM](virtual-machines/virtual-drive-trim.md)
   * [VM Advanced Options](virtual-machines/vm-advanced-options.md)

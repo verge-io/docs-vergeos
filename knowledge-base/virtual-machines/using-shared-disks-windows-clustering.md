@@ -9,8 +9,8 @@ semantic_keywords:
   - "shared cluster disk"
   - "shared drive"
 use_cases:
-  - windows clustering on VergeOS
-  - multiple vms with shared disk access
+  - windows_failover_clustering_on_vergeos
+  - shared_disk_multi_vm_access
 tags:
   - drive
   - disk
@@ -23,6 +23,8 @@ editor: markdown
 dateCreated: 2026-09-24T17:26:07.927Z
 ---
 
+# Using Shared Disks for Windows Clustering
+
 ## Overview
 
 {% hint style="info" %}
@@ -34,9 +36,6 @@ dateCreated: 2026-09-24T17:26:07.927Z
 
 {% endhint %}
 
-
-# Using Shared Disks for Windows Clustering  
-  
 Windows Server Failover Clustering (WSFC) requires shared storage for cluster nodes to safely coordinate access to quorum, data, and Cluster Shared Volumes (CSV). VergeOS supports shared disks using **SCSI‑3 Persistent Reservations** that meet these requirements, enabling multiple VMs to access the same virtual drive concurrently.
 
 This guide explains **how to configure shared disks in VergeOS** for use by Windows clustering. It focuses on the VergeOS configuration steps only. For cluster creation, quorum configuration, CSV setup, networking, and node‑level requirements, consult Microsoft’s official WSFC documentation.
@@ -83,8 +82,8 @@ For each disk:
 
 - **Name:** Use a clear, descriptive name (e.g., `Cluster-Quorum`, `Cluster-Data01`, `Cluster-CSV01`).  
   This name will appear when attaching the disk to other nodes.
-- **Media:** `Disk`  
-- **Interface:** `virtio SCSI` or `virtio SCSI (Dedicated Controller)`  
+- **Media:** **Disk**  
+- **Interface:** **Virtio-SCSI** or **Virtio-SCSI (Dedicated Controller)**  
   These interfaces support SCSI‑3 PR behavior required by WSFC.
 
 
@@ -123,7 +122,7 @@ Cluster nodes should run on **different VergeOS host nodes** to ensure high avai
 - Submit changes.  
 - This ensures VergeOS places the VMs on separate nodes whenever possible.
 
-For more details, see the KB article on [Settings that Influence VM Placement](automation-api/determine-node-where-vm-runs.md)
+For more details, see the KB article [Settings that Influence VM Node Selection](../automation-api/determine-node-where-vm-runs.md).
 
 ---
 

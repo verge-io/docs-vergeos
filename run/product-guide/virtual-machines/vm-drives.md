@@ -45,9 +45,9 @@ Repeat as needed to add additional drives.
 
 ---
 
-# Drive Configuration Fields
+## Drive Configuration Fields
 
-## Basic Fields
+### Basic Fields
 
 * **Enabled**
 Toggle to enable or disable the drive.  
@@ -69,7 +69,7 @@ Optional but recommended when multiple drives exist.
 
 ---
 
-## Media
+### Media
 
 * **Disk** (default option)  
 Standard virtual disk; creates a new empty raw file as source 
@@ -90,7 +90,7 @@ Typically system‑generated; can be created manually for custom use cases.
 
 * **Import Disk**  
 Imports a disk image (`.raw`, `.qcow`, `.qcow2`, `.vhd`, `.vhdx`, `.vmdk`). Creates a new `.raw` file as disk source.
-Source file must be [Uploaded to the vSAN](product-guide/storage/uploading-files-to-vsan.md) and selected in the *Media File* dropdown list.     
+Source file must be [uploaded to the vSAN](../storage/uploading-files-to-vsan.md) and selected in the *Media File* dropdown list.     
 
 
 * **Non-Persistent**  
@@ -101,7 +101,7 @@ Requires selecting an existing VergeOS `.raw` file.
 
 ---
 
-## Interface
+### Interface
 
 * ***Virtio‑SCSI***  
 Recommended option. High performance, para‑virtualized SCSI.  
@@ -116,35 +116,33 @@ Maximum I/O performance but lacks some SCSI features. Requires guest compatibili
 Provides a para-virtualized SCSI device with its own controller (new PCI bridge within the guest). Use when adding a Virtio‑SCSI drive on a different storage tier than existing Virtio‑SCSI drives. Keeps tiered drives on separate virtual controllers.  
 
 
-* ***LSI***  
-Native VMware‑compatible controller options provided for compatibility.
+* ***LSI controllers***  
+Four VMware‑compatible controller options provided for compatibility: **LSI53C895A SCSI**, **LSI MegaRAID SAS 1078**, **LSI MegaRAID SAS 2108**, and **LSI SAS 1608**.
 
 * ***SATA (AHCI)***  
 Provided as a legacy compatibility fallback - scenarios that require native OS support without paravirtualized drivers, such as installing older guest operating systems, running legacy recovery environments, etc. **Only for Q35 machine type.**  
 
+* ***USB***  
+Presents the drive as a USB storage device.
+
 * ***IDE***  
-Provided for extreme legacy support.  **Only for PC (i440FX) machine type.** 
+Provided for legacy support.  **Only for PC (i440FX) machine type.** 
 
 ---
 
-## Size & Storage Fields
+### Size & Storage Fields
 
 * **Disk Size**  
 Only appears for **Disk** media type.
 
 * **Media File**  
-Appears for **CD-ROM**, **Clone Disk**, **Import Disk**, **Non-Persistent**, and **Shared Disk**  
-Select the ISO or disk image appropriate for the media type.  
-
-* CD-ROM: Select *.iso (files uploaded to vSAN) Note: *.iso file can also be selected after VM creation.
-
-* Clone Disk: Select *.raw file (existing disks on this VergeOS system)
-
-* Import Disk: Select disk image (files uploaded to vSAN) Supported file types: .raw,.qcow,.qcow2,.vhd, .vhdx,.vmdk
-
-* Non-Persistent Disk: Select *.raw file (existing disks on this VergeOS system).
-
-* Shared Disk: Select *.raw file (existing virtual SCSI disks on this VergeOS system)
+Appears for **CD-ROM**, **Clone Disk**, **Import Disk**, **Non-Persistent**, and **Shared Disk**.  
+Select the ISO or disk image appropriate for the media type:
+  * CD-ROM: Select a \*.iso file (files uploaded to the vSAN). The \*.iso file can also be selected after drive creation.
+  * Clone Disk: Select a \*.raw file (existing disks on this VergeOS system).
+  * Import Disk: Select a disk image (files uploaded to the vSAN). Supported file types: .raw, .qcow, .qcow2, .vhd, .vhdx, .vmdk.
+  * Non-Persistent Disk: Select a \*.raw file (existing disks on this VergeOS system).
+  * Shared Disk: Select an existing disk on this VergeOS system (grouped by VM, shown as drive name and description).
 
 
 * **Preferred Tier**  
@@ -158,13 +156,13 @@ Allows placing the drive on a different tier than the media file’s current tie
 
 ---
 
-## Advanced Fields
+### Advanced Fields
 
-* **Shared Disk**  
-Allows attaching an existing disk to multiple VMs.  Useful for clustered applications or shared data volumes. 
-  * Option only applies to *Media:* ***Disk***
-  * Option only applies to *Interface:* ***Virtio SCSI*** and ***Virtio SCSI (Dedicated Controller)***   
-  * Requires making a selection in the *Media File*  (select an existing virtual SCSI disk; does not allow sharing disks attached to the same VM)
+* **Shared Disk** *(VergeOS 26.2 or later)*  
+Attaches an existing disk to multiple VMs at the same time, for clustered applications or shared data volumes. Shared disks support SCSI-3 Persistent Reservations.
+  * Must be set when the drive is created.
+  * Applies to *Media:* ***Disk***. When enabled, *Interface* choices are limited to ***Virtio-SCSI*** and ***Virtio-SCSI (Dedicated Controller)***.
+  * Select the disk to attach in *Media File* (existing disks, grouped by VM; a disk cannot be shared with the same VM twice).
 
 {% hint style="info" %}
 KB article: [Using Shared Disks for Windows Clustering](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/virtual-machines/using-shared-disks-windows-clustering) provides step-by-step instructions for configuring VMs with shared disks for Windows clustering use.
@@ -184,9 +182,9 @@ Can be used to reference the drive in Recipes and automation.
 * **Strict Fsync**
   * ***System Default*** (default)
   * ***On***
-  * ***Off**
+  * ***Off***
 
-{% hint style="info"}
+{% hint style="info" %}
 * System default=disabled (vSAN conf setting)
 * When enabled, no throttle is imposed on meta writes
 * Enabling Strict Fsync affects performance
@@ -196,13 +194,12 @@ Can be used to reference the drive in Recipes and automation.
 
 * **Discard** (default on)
 
-Option provided for backward compatibility only. 
+Frees unused blocks on the vSAN when the guest deletes data. Leave enabled unless directed otherwise by support. See [VM Disk Discard](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/virtual-machines/vm-disk-discard) for details. 
 
 
 * **Optimize For**  
-  
-* ***General Usage*** – 64 KB chunks with read‑ahead (default)  
-* ***Large Files*** – up to 1 MB chunks; beneficial only for sequential access of very large files  
+  * ***General Usage*** – 64 KB chunks with read‑ahead (default)  
+  * ***Large Files*** – up to 1 MB chunks; beneficial only for sequential access of very large files  
 
 {% hint style="info" %}
 The default *Optimize For* choice is General Usage, which should be the preferred choice for most use cases. Large Files could be beneficial for workloads exclusively (or nearly exclusively) working with very large files accessed sequentially.
@@ -216,14 +213,14 @@ Allows adding custom key/value properties for specialized configurations or inte
 
 ---
 
-# Drive Operations
+## Drive Operations
 
-{% hint style="caution" %}
+{% hint style="warning" %}
 **Caution:** Erasing or removing a drive can render a VM unusable.  Take special care to ensure the operation is being applied to the intended drive on the intended VM. Consider taking a short-term VM snapshot first.  
 
 {% endhint %}
 
-## Erase a Drive
+### Erase a Drive
 
 The VM must be powered off.
 
@@ -234,7 +231,7 @@ The VM must be powered off.
 
 ---
 
-## Remove a Drive
+### Remove a Drive
 
 Drive must be offline (VM powered off or hot‑unplugged).
 
@@ -245,9 +242,9 @@ Drive must be offline (VM powered off or hot‑unplugged).
 
 ---
 
-## Modify a Drive
+### Modify a Drive
 
-### Considerations
+#### Considerations
 
   * Media type cannot be changed after creation  
   * Drives cannot be reduced in size  
