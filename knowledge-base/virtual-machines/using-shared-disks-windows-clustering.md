@@ -1,26 +1,32 @@
 ---
 title: Using Shared Disks for Windows Clustering
 slug: using-shared-disks-windows-clustering
-description: Step-by-step setup of shared disks for use by clustering application
 author: VergeOS Documentation Team
-date: 2026-09-28T14:15:07.627Z
+date: 2026-10-08T12:00:00.000Z
 semantic_keywords:
-  - "configure windows cluster drives"
-  - "shared cluster disk"
-  - "shared drive"
+  - "configure windows cluster shared drives"
+  - "shared cluster disk WSFC failover"
+  - "scsi-3 persistent reservations shared drive"
 use_cases:
   - windows_failover_clustering_on_vergeos
   - shared_disk_multi_vm_access
-tags:
-  - drive
-  - disk
-  - cluster
-  - persistent reservations
+  - cluster_shared_volumes_setup
 categories:
   - VM
   - vSAN
 editor: markdown
 dateCreated: 2026-09-24T17:26:07.927Z
+description: >-
+  Configure VergeOS shared disks for Windows Server Failover Clustering:
+  create the disks, attach them to each cluster node VM, verify, and set
+  anti-affinity.
+tags:
+  - drive
+  - disk
+  - cluster
+  - shared-disk
+  - persistent-reservations
+  - wsfc
 ---
 
 # Using Shared Disks for Windows Clustering
@@ -30,120 +36,101 @@ dateCreated: 2026-09-24T17:26:07.927Z
 {% hint style="info" %}
 **Key Points**
 
-- VergeOS supports shared disks using **SCSI‑3 Persistent Reservations**, enabling multiple VMs to attach the same virtual disk safely.  
-- This guide walks through creating shared disks, attaching them to multiple VMs, and verifying configuration in preparation for WSFC (Windows Server Failover Cluster) installation.  
-- Windows‑side configuration (cluster creation, quorum setup, CSV enablement, etc.) must be performed using Microsoft documentation.
-
+- VergeOS supports shared disks with **SCSI‑3 Persistent Reservations**, so multiple VMs can attach the same virtual disk safely.
+- This article covers the VergeOS configuration only: create the shared disks, attach them to each cluster node VM, verify, and set anti-affinity.
+- Perform all Windows-side configuration (cluster validation, quorum, CSV) with Microsoft's WSFC documentation.
 {% endhint %}
 
-Windows Server Failover Clustering (WSFC) requires shared storage for cluster nodes to safely coordinate access to quorum, data, and Cluster Shared Volumes (CSV). VergeOS supports shared disks using **SCSI‑3 Persistent Reservations** that meet these requirements, enabling multiple VMs to access the same virtual drive concurrently.
+Windows Server Failover Clustering (WSFC) requires shared storage that all cluster nodes can access. VergeOS shared disks meet this requirement: one virtual disk attaches to multiple VMs concurrently, and SCSI-3 Persistent Reservations let the guest cluster coordinate access.
 
-This guide explains **how to configure shared disks in VergeOS** for use by Windows clustering. It focuses on the VergeOS configuration steps only. For cluster creation, quorum configuration, CSV setup, networking, and node‑level requirements, consult Microsoft’s official WSFC documentation.
+## Prerequisites
 
+- VergeOS 26.2 or later.
+- A user with permission to create and modify VMs.
+- Networking, Active Directory Domain Services, and DNS reachable by all planned cluster nodes.
+- Windows Server installation media and licenses for each cluster node.
+
+## How shared disks work
+
+A shared disk exists once. Create it as a normal **Disk** on the first cluster node. On every other node, add a drive with the **Shared Disk** option enabled and select the existing disk — this attaches the same disk, it does not create new storage.
 
 {% hint style="warning" %}
-
-**Important:**  Consult official WSFC documentation for guidance on cluster node configuration, disk sizing, quorum models, CSV requirements, networking, and validation steps.
-
+Enable **Shared Disk** when you create the drive on each additional node. The option cannot be turned on later by editing the drive.
 {% endhint %}
 
----
+## Steps
 
+### 1. Create the cluster node VMs
 
-## 1. Prepare Cluster Environment
+1. Create each cluster node VM with its own OS disk.
+2. Add a NIC for client access and, if your design requires it, a separate NIC for cluster heartbeat.
+3. Install Windows Server on each VM.
+4. Join each VM to the domain.
 
-Before configuring shared disks, build/verify the foundational services required for WSFC, including: networking, Active Directory Domain Services, and DNS resolvable by all future cluster nodes. Verify the domain controller is powered on and reachable before powering on cluster node VMs. 
+Make sure the domain controller is powered on and reachable before you power on the cluster node VMs.
 
----
+For drive and NIC field details, see [Virtual Machine Drives](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/virtual-machines/vm-drives).
 
-## 2. Create Cluster Node Virtual Machines
+### 2. Add the shared disks to the first cluster node
 
-Create the VMs that will serve as WSFC cluster nodes:
-
-- Deploy each VM with its own **OS disk**.
-- For each VM, add NICs and attach to appropriate networks 
-
-{% hint style="info" %}
-**Hint** 
-
-Separate networks are typically recommended for cluster heartbeat and client access.
-
-{% endhint %}
-
-- Install Windows Server and join each VM to the domain. 
-
----
-
-## 3. Add Shared Disks to the First Cluster Node
-
-On the first cluster node VM, add the disks that will be shared across the cluster (e.g., **quorum**, **application/data**, **CSV** disks).
+On the first cluster node VM, create the disks the cluster shares — for example a quorum disk, data disks, and CSV disks.
 
 For each disk:
 
-- **Name:** Use a clear, descriptive name (e.g., `Cluster-Quorum`, `Cluster-Data01`, `Cluster-CSV01`).  
-  This name will appear when attaching the disk to other nodes.
-- **Media:** **Disk**  
-- **Interface:** **Virtio-SCSI** or **Virtio-SCSI (Dedicated Controller)**  
-  These interfaces support SCSI‑3 PR behavior required by WSFC.
+1. From the VM dashboard, click **New Drive**.
+2. Enter a clear **Name**, for example `Cluster-Quorum`, `Cluster-Data01`, or `Cluster-CSV01`. This name identifies the disk when you attach it to the other nodes.
+3. Set **Media** to **Disk**.
+4. Set **Interface** to **Virtio-SCSI** or **Virtio-SCSI (Dedicated Controller)**. These interfaces support the SCSI-3 Persistent Reservations WSFC requires.
+5. Set the **Disk Size**.
+6. Click **Submit**.
 
+### 3. Attach the shared disks to each additional cluster node
 
----
+On each additional cluster node VM, attach every shared disk:
 
-## 4. Attach Shared Disks to Additional Cluster Nodes
+1. From the VM dashboard, click **New Drive**.
+2. Enter a descriptive **Name**.
+3. Expand the **Advanced** section and enable **Shared Disk**. The **Interface** choices reduce to **Virtio-SCSI** and **Virtio-SCSI (Dedicated Controller)**.
+4. In **Media File**, select the disk created on the first node. The list shows existing disks grouped by VM, as drive name and description.
+5. Click **Submit**.
 
-On each VM, for each shared disk:
+Repeat for each shared disk the cluster requires.
 
-- **Name:** Use a descriptive name for administrative clarity.  
-- **Shared Disk:** Enable this option (found under **Advanced**).  
-- **Media File:** Select the desired disk.  (All SCSI disks appear in the dropdown list, organized by VM) 
+### 4. Verify the shared disk configuration
 
+1. Navigate to **Virtual Machines > VM Drives**.
+2. In the filter row under the **Shared** column, select **Yes**.
+3. Verify each shared disk appears once for each cluster node VM.
+4. Verify the **Media File** column shows the same file name (for example `disk_28_16.raw`) on every node's entry for a given disk. The identical file name confirms all nodes attach the same virtual disk.
 
-Repeat for each shared disk required by the cluster.
+### 5. Configure anti-affinity for the cluster nodes
 
----
+Run the cluster node VMs on different VergeOS nodes so one physical failure takes down only one cluster node.
 
-## 5. Verify Shared Disk Configuration in VergeOS
+1. On each cluster node VM, click **Edit**.
+2. Set **HA Group** to the same value on every cluster node VM, for example `wsfc-nodes`. Do not start the value with `+` — a leading `+` requests same-node affinity, the opposite behavior.
+3. Click **Submit**.
 
-To confirm shared disks are properly configured:
+VergeOS now places the VMs on separate nodes whenever possible. For details, see [Settings that Influence VM Node Selection](../automation-api/determine-node-where-vm-runs.md).
 
-1. Navigate to **Virtual Machines → VM Drives**.  
-2. Under the **Shared** column, select **Yes** to filter the list.  
-3. Verify that each shared disk appears once for **each cluster node VM**.  
-4. The **Media File** column displays the same underlying filename (e.g., disk_28_16.raw) across all nodes for a shared disk.  This identical filename indicates that all cluster nodes are attached to the same virtual disk object, which is required for WSFC.
+### 6. Power on the cluster nodes
 
+1. Power on each cluster node VM.
+2. Verify each VM starts on a different VergeOS node.
+3. In Windows Disk Management on each node, verify all shared disks are visible.
 
----
+### 7. Continue with WSFC installation
 
-## 6. Configure Anti‑Affinity for Cluster Nodes
+The VergeOS configuration is complete. Follow Microsoft's WSFC documentation to validate the cluster, configure quorum, enable CSV if applicable, and install clustered roles. The **Cluster Validation Wizard** confirms shared disk behavior before you finalize the cluster.
 
-Cluster nodes should run on **different VergeOS host nodes** to ensure high availability. Anti‑affinity helps to prevent the VMs from running on the same physical host.
+## Additional Resources
 
-- Set the **HA Group** to the same value on all cluster node VMs.  
-- Submit changes.  
-- This ensures VergeOS places the VMs on separate nodes whenever possible.
+- [Virtual Machine Drives](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/virtual-machines/vm-drives) — all drive configuration fields, including Shared Disk.
+- [Settings that Influence VM Node Selection](../automation-api/determine-node-where-vm-runs.md) — HA groups, preferred node, and cluster placement.
+- [26.2 Release Notes](https://app.gitbook.com/s/33mA7es4mQYkyUa7dMvu/2026/26-2-release-notes) — the release that introduced shared disks.
 
-For more details, see the KB article [Settings that Influence VM Node Selection](../automation-api/determine-node-where-vm-runs.md).
+{% hint style="info" %}
+**Need Help?**
 
----
-
-## 7. Power On Cluster Nodes
-
-Power on the cluster node VMs and verify:
-
-- Each VM starts on a **different VergeOS host node**.  
-- All shared disks are visible inside Windows Disk Management.  
-- The domain controller is online and reachable.
-
----
-
-## 8. Proceed with WSFC Installation
-
-Your VMs are now ready for Windows Server Failover Clustering installation and configuration. Follow Microsoft’s documentation to:
-- Validate the cluster  
-- Configure quorum  
-- Enable CSV (if applicable)  
-- Install clustered roles or applications
-
-Tools such as **Failover Cluster Manager** and **Cluster Validation Wizard** can confirm shared disk behavior before finalizing cluster setup.
-
----
+If you have questions or problems with this procedure, contact the VergeOS support team.
+{% endhint %}
