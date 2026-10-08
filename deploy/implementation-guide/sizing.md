@@ -2,8 +2,7 @@
 title: "Node sizing"
 description: >-
   Baseline hardware profiles for VergeOS nodes. Use these recommendations to
-  plan Standard Production, Small/Edge, and Backup deployments. Contact a
-  partner or Sales for Performance and large-scale designs.
+  plan Standard Production, Small/Edge, Backup deployments. Contact Sales or a partner for Performance or large-scale designs.
 semantic_keywords:
   - "VergeOS node sizing CPU RAM storage"
   - "VergeOS hardware baseline Standard Production HCI"
