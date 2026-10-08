@@ -130,7 +130,7 @@ This baseline assumes the default [*System Snapshots* profile](https://app.gitbo
 
 Snapshot behavior is a primary driver of metadata growth. Each retained snapshot can add up to about **0.5 GB per 1 TB of usable Tier 1–5 capacity** (an upper bound). Actual use depends on the snapshot delta: write-intensive workloads such as heavy SQL or random-write patterns approach the upper bound, while sequential or low-change workloads use less metadata per snapshot.
 
-The conservative baseline absorbs moderate retention beyond the default profile. For most systems with a **low or moderate change rate**, the baseline (5 GB/TB) can hold about **25–30 snapshots**. Fleet telemetry confirms this: the 75th percentile at 25 snapshots is about 4.7 GB/TB, right at the baseline. Systems with **very high change rate** (for example dense SQL database usage, high-frequency trading systems, PLCs) should increase to about **10 GB usable Tier 0 per 1 TB usable Tier 1–5 capacity** when retaining 25–30 snapshots.
+The conservative baseline absorbs moderate retention beyond the default profile. For most systems with a **low to moderate change rate**, the baseline (5 GB/TB) can hold about **25–30 snapshots**. Fleet telemetry confirms this: the 75th percentile at 25 snapshots is about 4.7 GB/TB, right at the baseline. Systems with **moderate to high change rate** (for example dense SQL database usage, high-frequency trading systems, PLCs) should increase to about **10 GB usable Tier 0 per 1 TB usable Tier 1–5 capacity** when retaining 25–30 snapshots.
 
 **Tier 0 sizing examples**
 
@@ -139,7 +139,7 @@ The conservative baseline absorbs moderate retention beyond the default profile.
 | Low to Moderate | 7 (default) | 5 GB/TB (baseline) | Baseline safely absorbs the default 7 snapshots |
 | Low to Moderate | 25–30 | 5 GB/TB (baseline) | 25–30 snapshots can still be absorbed |
 | Moderate to High | 7 (default) | 5 GB/TB (baseline) | Baseline safely absorbs the default 7 snapshots |
-| Very High | 25–30 | 10 GB/TB | Higher guideline for increased snapshot retention with very high change rate |
+| Moderate to High | 25–30 | 10 GB/TB | Higher guideline for increased snapshot retention with moderate to high change rate |
 
 If you plan to retain more than about 25–30 snapshots or face workloads beyond this table, contact VergeOS Sales or an authorized reseller partner for assistance. See [Contact Verge.io](https://www.verge.io/contact/).
 
