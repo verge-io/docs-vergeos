@@ -39,12 +39,24 @@ The profiles below are **baseline recommendations**, not hard minimums. Start wi
 Values in this guide cover VergeOS system operation. Allocate extra CPU, RAM, and storage for virtual machines, applications, peak load, and growth.
 {% endhint %}
 
+## Deployment model selection
+
+Use this table to select the correct profile to size nodes. These models are intended as directional guidance rather than rigid prescriptions. Choose the model that fits your environment, then adapt to your specific requirements.
+
+| Deployment Model | Typical Use Cases | Key Characteristics | When to Choose |
+|------------------|------------------|---------------------|----------------|
+| [**Standard Production**](#standard-production) | Mixed workloads, moderate databases, general business apps | Balanced CPU/RAM, predictable performance, full redundancy | General-purpose deployments that need straightforward scaling and predictable performance for line-of-business applications |
+| [**Backup**](#backup-nodes) | Archive retention, synchronized backups | Lower endurance media acceptable, Tier 0 only on controller nodes | When nodes store backup data, not production workloads |
+| [**Small / Edge**](#small--edge) | Retail, remote sites, sensors, light analytics | 1–2 nodes, simple, low density, often no dedicated Tier 0 | When simplicity and footprint matter more than performance |
+| [**Single-node**](#single-node-systems) | Small sites, labs, test environments | No Core Fabric, metadata on primary tier | When redundancy is not required |
+| [**Performance / High Capacity / Scale**](#performance--high-capacity--scale) | High-IOPS databases, GPU analytics, large VDI, multi-tenant hosting | High base clock CPUs, large RAM buffers, high-endurance Tier 0, NVMe-heavy | When performance or scale is the primary requirement |
+
 ## How to use this guide
 
-1. Select the profile that matches your deployment.
-2. Apply the [generic node requirements](#generic-node-requirements) to every node.
-3. Size [Tier 0 (metadata)](#tier-0-metadata-sizing) from usable Tier 1–5 capacity and from your snapshot schedule and retention.
-4. Add CPU and RAM for guest workloads.
+1. [Apply generic node requirements](#generic-node-requirements) — CPU, RAM, NICs, disk type, endurance
+2. [Identify your deployment model](#deployment-model-selection) — use the table above to select your profile
+3. [Size Tier 0 (metadata)](#tier-0-metadata-sizing) — based on usable Tier 1–5 capacity and snapshot retention
+4. [Add CPU and RAM for workloads](#ram-for-storage) — VergeOS system requirements plus guest workload resources
 
 Most Standard Production systems run as one HCI cluster. Cluster count is a short proxy for the deployment model:
 
@@ -71,7 +83,7 @@ These minimums apply to all node types and profiles:
 - IPMI, iDRAC, iLO, or equivalent out-of-band management
 - HBA or RAID controller in **JBOD or IT mode** (no RAID); NVMe direct-attach preferred
 - **1 × 1 GbE** NIC for the External Network (Intel, NVIDIA Mellanox, or Broadcom)
-- **1 × 10 GbE** NIC for the Core Fabric Network (Intel, NVIDIA Mellanox, or Broadcom)
+- **1 × 10 GbE** NIC for the Core Fabric Network (Intel, NVIDIA Mellanox, or Broadcom; not required for single-node deployments)
 
 For core fabric and external network design, see [Network design](network-design.md).
 
@@ -115,8 +127,26 @@ This baseline assumes the default [*System Snapshots* profile](https://app.gitbo
 
 #### When to increase Tier 0 capacity
 
-- **Snapshot retention above about 25–30 snapshots.** Snapshot behavior is a primary driver of metadata growth. Each retained snapshot can add up to about **0.5 GB per 1 TB of usable Tier 1–5 capacity** (an upper bound). Actual use depends on the snapshot delta: write-intensive workloads such as heavy SQL or random-write patterns approach the upper bound, while sequential or low-change workloads use less metadata per snapshot. The conservative baseline absorbs moderate retention beyond the default profile; increase Tier 0 capacity above the baseline if you plan to retain more than about 25–30 snapshots.
-- **Planned vSAN capacity expansion.** Size Tier 0 for total vSAN usable capacity. If you expect near-term scaling (adding storage nodes or expanding Tiers 1–5), upsize Tier 0 in advance to avoid replacing metadata devices later.
+**Increased snapshot retention**
+
+Snapshot behavior is a primary driver of metadata growth. Each retained snapshot can add up to about **0.5 GB per 1 TB of usable Tier 1–5 capacity** (an upper bound). Actual use depends on the snapshot delta: write-intensive workloads such as heavy SQL or random-write patterns approach the upper bound, while sequential or low-change workloads use less metadata per snapshot.
+
+The conservative baseline absorbs moderate retention beyond the default profile. For most systems with a **low or moderate change rate**, the baseline (5 GB/TB) can hold about **25–30 snapshots**. Fleet telemetry confirms this: the 75th percentile at 25 snapshots is about 4.7 GB/TB, right at the baseline. Systems with **very high change rate** (for example dense SQL database usage, high-frequency trading systems, PLCs) should increase to about **10 GB usable Tier 0 per 1 TB usable Tier 1–5 capacity** when retaining 25–30 snapshots.
+
+**Tier 0 sizing examples**
+
+| Change Rate | Snapshot Retention | Tier 0 Sizing | Notes |
+|-------------|-------------------|---------------|-------|
+| Low to Moderate | 7 (default) | 5 GB/TB (baseline) | Baseline safely absorbs the default 7 snapshots |
+| Low to Moderate | 25–30 | 5 GB/TB (baseline) | 25–30 snapshots can still be absorbed |
+| Moderate to High | 7 (default) | 5 GB/TB (baseline) | Baseline safely absorbs the default 7 snapshots |
+| Very High | 25–30 | 10 GB/TB | Higher guideline for increased snapshot retention with very high change rate |
+
+If you plan to retain more than about 25–30 snapshots or face workloads beyond this table, contact VergeOS Sales or an authorized reseller partner for assistance. See [Contact Verge.io](https://www.verge.io/contact/).
+
+**Planned vSAN capacity expansion**
+
+Size Tier 0 for total vSAN usable capacity. If you expect near-term scaling (adding storage nodes or expanding Tiers 1–5), upsize Tier 0 in advance to avoid replacing metadata devices later.
 
 To add Tier 0 after installation, see [Adding Tier 0 to an Existing System](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/storage-vsan/adding-tier-zero).
 
