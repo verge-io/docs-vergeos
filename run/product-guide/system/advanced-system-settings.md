@@ -77,7 +77,7 @@ For detailed information on these settings and their effects, please contact Ver
 | ***Flush the application framework database every X ms*** | **Do not modify this setting unless expressly directed by VergeIO support** | 5000 |
 | ***Historical long term stats expire every X second(s)***|Defaults for historical stat expiration settings are optimized for 95th-percentile calculations/reporting. The default for long term stat expiration allows more than 30 days to ensure that monthly data will be available.   | 3888000 |
 | ***Historical short term stats expire every X second(s)***|Defaults for historical stat expiration settings are optimized for 95th-percentile calculations| 300 |
-| ***List of NTP servers to synchronize time with (space delimited)*** | time.nist.gov 0.pool.ntp.org 1.pool.ntp.org 2.pool.ntp.org 3.pool.ntp.org |
+| ***List of NTP servers to synchronize time with (space delimited)*** | In VergeOS 26.2 and later, change the NTP servers in **System > Time Settings**. See [Time Settings](time-settings.md). | 0.pool.ntp.org 1.pool.ntp.org 2.pool.ntp.org 3.pool.ntp.org |
 | ***Logon banner header*** | Sets the header text displayed on the login page banner. Can be used to display organizational or security notices. | |
 | ***Logon banner text*** | Defines the main text content displayed on the login page banner. Typically used for legal disclaimers, usage policies, or system-specific notices. | |
 | ***MAC address prefix for machine NICs*** | Default is the Verge.io(aka Yottabyte) OUI IEEE registered Prefix. VergeOS uses this OUI plus a system ID to ensure unique MAC addressing. | F0:DB:30 |
