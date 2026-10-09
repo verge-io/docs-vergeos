@@ -45,7 +45,7 @@ terraform {
   required_providers {
     vergeio = {
       source = "verge-io/vergeio"
-      version = "~> 0.1.0"
+      version = "~> 2.7"
     }
   }
 }
@@ -64,7 +64,7 @@ terraform {
   required_providers {
     vergeio = {
       source = "verge-io/vergeio"
-      version = "~> 0.1.0"
+      version = "~> 2.7"
     }
   }
 }
@@ -76,7 +76,9 @@ The provider supports management of the following VergeOS resources:
 
 - `vergeio_vm` - Create and manage virtual machines
 - `vergeio_network` - Configure and manage virtual networks
-- `vergeio_user` - Provision and manage storage resources
+- `vergeio_user` - Provision and manage users
+- `vergeio_member` - Manage group membership
+- `vergeio_tag_member` - Assign tags to VergeOS objects
 
 ## Usage Examples
 
@@ -107,13 +109,11 @@ resource "vergeio_vm" "example" {
 
 ```hcl
 resource "vergeio_network" "example" {
-  name             = "example-internal-network"
-  network_address  = "192.168.1.0/24"
-  dns_server_list  = ["8.8.8.8", "8.8.4.4"]
-  dhcp_enabled     = true
-  dhcp_start       = "192.168.1.100"
-  dhcp_end         = "192.168.1.200"
-  }
+  name         = "example-internal-network"
+  network      = "192.168.1.0/24"
+  dhcp_enabled = true
+  dhcp_start   = "192.168.1.100"
+  dhcp_stop    = "192.168.1.200"
 }
 ```
 

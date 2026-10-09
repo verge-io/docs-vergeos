@@ -4,6 +4,7 @@ description: Platform administration topics — updates, security, authenticatio
 
 # System Administration
 
+* [Configuring PTP in VergeOS](configuring-ptp.md) — Instructions for configuring PTP (replacing NTP) for system time synchronization.
 * [Configuring VergeOS as an OIDC Client](configuring-vergeos-as-oidc-client.md) — Step-by-step guide on setting up a VergeOS system or tenant to use OIDC authentication with another VergeOS identity provider.
 * [CPU Overprovisioning and Resource Planning](cpu-overprovisioning-guide.md) — Understanding CPU allocation, overcommit ratios, and performance implications in VergeOS, including recommended ratios by workload type and…
 * [Customizing the User Interface](customizing-the-user-interface.md) — Guide on how to customize branding, logos, colors, and themes in the VergeOS UI, including light and dark mode support and multi-tenant…

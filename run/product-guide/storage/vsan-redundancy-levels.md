@@ -108,11 +108,8 @@ To check the current redundancy configuration and status of a vSAN tier:
 | Storage overhead (before dedup) | \~2x      | \~3x      |
 | Default                         | Yes       | No        |
 
-***
 
-{% hint style="info" %}
-**Document Information**
 
-* Last Updated: 2026-03-03
-* VergeOS Version: 26.1.2
-{% endhint %}
+## Additional Tier 0 Redundancy (D+x)
+
+When a controller node has more than one Tier 0 drive, VergeOS also mirrors metadata locally across those drives, matching the system redundancy level up to the drive count. See [Local Node Tier 0 Metadata Redundancy (D+x)](tier0-local-redundancy.md).

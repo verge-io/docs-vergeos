@@ -4,6 +4,7 @@
 
 ## 2026
 
+* [26.2](2026/26-2-release-notes.md)
 * [26.1](2026/26-1-release-notes.md)
 * [26.0](2026/26-0-release-notes.md)
 
