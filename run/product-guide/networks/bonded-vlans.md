@@ -51,17 +51,36 @@ Note: The user ID can be found in the URL of the user's dashboard (Key=1 paramet
 
 ### Bonding Configuration
 
-1. Enable Bonding by selecting the checkbox
-2. Under Bond Interfaces:
-    - Select specific physical switches
+1. Select the **Enable Bonding** option. 
+{% hint style="info" %}
+- The bonded configuration provides virtual layer network redundancy across multiple physical networks 
+{% endhint %}
+2. Under **Bond Interfaces:**
+    - Select specific physical networks for the bond.
+3. Select **Bond Mode**
+{% hint style="warning"}
+    Some modes require configuration on the switching hardware to support specific link‑level behaviors.  
+    {% endhint %}
+    - *Active Backup*(default): Only one NIC is active at a time. If it fails, another NIC takes over automatically. Pure Redundancy; no load balancing. Most compatible option - works with any switch.
+    - *Balance ALB (Adaptive Load)*: Load balances outgoing traffic automatically based on NIC load. Incoming traffic is balanced using ARP negotiation. Maximum throughput, but requires the switch to tolerate ARP manipulation. Very compatible with most switch configurations.
+    - *Balance Round Robin*: Sends packets sequentially across all physical switch paths. Typically only appropriate for lab environments - not recommended for general VM networking.
+    - *Balance TLB (Adaptive Transmit)*: Outgoing traffic is load balanced across all switch paths. Incoming traffic stays on one NIC at a time (advertised MAC). Very compatible - switch only needs to handle normal MAC learning
+    - *Balance XOR*: Uses a hashing algorithm to choose which NIC handles each flow. Switch must support static EtherChannel/port-channel.  Predictable load distribution
+    - *Broadcast*: Sends every packet out every NIC. Maximum redundancy/no load balancing. Almost never an appropriate option - only for very niche legacy HA environments.
+
+4. Select a **Primary Bond Interface** to specify the preferred physical network for the bond. In *Active Backup* mode, the primary interface carries all traffic whenever it is available. 
 
 {% hint style="info" %}
-- The bonded configuration provides virtual layer network redundancy across multiple physical switches (active-backup and active-active mode options)
+When *Primary Bond Interface* selection is left at --None-- a network is automatically selected based on registration order. 
+
 {% endhint %}
 
-### Additional Network Settings
+5. **Configure Additional Network Settings**
 
-See KB article: [How to Create an External Network](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/networking/create-external-network) for information on configuring other external network options.
+See KB article: [How to Create an External Network](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/networking/create-external-network) for information on other external network configuration options.
+
+6. **Submit Changes**
+
 
 ## Testing and Verification
 

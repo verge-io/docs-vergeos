@@ -59,19 +59,14 @@ This guide outlines the process to create a bonded external network across vlann
     - Click **Edit** on the left menu 
 2. Verify **Layer 2 Type**: ***vLAN*** and appropriate **Layer 2 ID** (VLAN number).
 3. **Select** the option to **Enable Bonding**.
-3. **Select** the **Physical Networks** you want to participate in the bonding.
-4. **Select** desired **Bond Mode**:
-    {% hint style="warning"}
-    Some modes require configuration on the switching hardware to support specific link‑level behaviors.  
-    {% endhint %}
-    - *Active Backup*: Only one NIC is active at a time. If it fails, another NIC takes over automatically. Pure Redundancy; no load balancing. Most compatible option - works with any switch.
-    - *Balance ALB (Adaptive Load)*: Load balances outgoing traffic automatically based on NIC load. Incoming traffic is balanced using ARP negotiation. Maximum throughput, but requires the switch to tolerate ARP manipulation. Very compatible with most switch configurations.
-    - *Balance Round Robin*: Sends packets sequentially across all physical switch paths. Typically only appropriate for lab environments - not recommended for general VM networking.
-    - *Balance TLB (Adaptive Transmit)*: Outgoing traffic is load balanced across all switch paths. Incoming traffic stays on one NIC at a time (advertised MAC). Very compatible - switch only needs to handle normal MAC learning
-    - *Balance XOR*: Uses a hashing algorithm to choose which NIC handles each flow. Switch must support static EtherChannel/port-channel.  Predictable load distribution
-    - *Broadcast*: Sends every packet out every NIC. Maximum redundancy/no load balancing. Almost never an appropriate option - only for very niche legacy HA environments.
+4. **Select the checkbox for each physical network** to participate in the bond (e.g., core-switch1, core-switch2)
+5. **Select the desired bond mode** and **Primary Bond Interface** (v. 26.2 or later)
+{% hint style="info" %}
+For detailed information about **Bond mode** and **Primary Bond Interface** selections , see: [Bonded VLAN-tagged Networks]((https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/networking/bonded-vlans))
 
-5.      
+{% endhint %}
+
+
 6. Click **Submit** to save the change.
   
 ## Post Configuration
