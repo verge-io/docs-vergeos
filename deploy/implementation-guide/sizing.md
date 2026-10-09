@@ -46,9 +46,9 @@ Use this table to select the correct profile to size nodes. These models are int
 |------------------|------------------|---------------------|----------------|
 | [**Standard Production**](#standard-production) | Mixed workloads, moderate databases, general business apps | Balanced CPU/RAM, predictable performance, full redundancy | General-purpose deployments that need straightforward scaling and predictable performance for line-of-business applications |
 | [**Backup**](#backup-nodes) | Archive retention, synchronized backups | Lower endurance media acceptable, Tier 0 only on controller nodes | When nodes store backup data, not production workloads |
-| [**Small / Edge**](#small--edge) | Retail, remote sites, sensors, light analytics | 1–2 nodes, simple, low density, often no dedicated Tier 0 | When simplicity and footprint matter more than performance |
+| [**Small / Edge**](#small-edge) | Retail, remote sites, sensors, light analytics | 1–2 nodes, simple, low density, often no dedicated Tier 0 | When simplicity and footprint matter more than performance |
 | [**Single-node**](#single-node-systems) | Small sites, labs, test environments | No Core Fabric, metadata on primary tier | When redundancy is not required |
-| [**Performance / High Capacity / Scale**](#performance--high-capacity--scale) | High-IOPS databases, GPU analytics, large VDI, multi-tenant hosting | High base clock CPUs, large RAM buffers, high-endurance Tier 0, NVMe-heavy | When performance or scale is the primary requirement |
+| [**Performance / High Capacity / Scale**](#performance-high-capacity-scale) | High-IOPS databases, GPU analytics, large VDI, multi-tenant hosting | High base clock CPUs, large RAM buffers, high-endurance Tier 0, NVMe-heavy | When performance or scale is the primary requirement |
 
 ## How to use this guide
 
@@ -68,7 +68,7 @@ For HCI and UCI models, node types, and when to separate roles, see [HCI vs UCI:
 {% hint style="info" %}
 **HCI is the default**
 
-Most Standard Production systems run as one HCI cluster. Controller, storage, and compute roles can share the same nodes. Dedicated controller, storage-only, or compute-only nodes are optional design choices, not a requirement for every deployment.
+Dedicated controller, storage-only, or compute-only nodes are optional design choices, not a requirement for every deployment.
 {% endhint %}
 
 VergeOS Sales, Support, and authorized resellers can help with workload review and hardware selection. See [Contact Verge.io](https://www.verge.io/contact/).
@@ -121,7 +121,7 @@ Boot-oriented devices such as Dell BOSS cards are for **boot or OS only**. Do no
 
 Tier 0 holds vSAN metadata: the structural information VergeOS uses to track usable data. Correct Tier 0 sizing is essential for stable vSAN operation in every deployment profile. Metadata needs vary with workload behavior, snapshot strategy, and vSAN scale. See [Storage Tiers in VergeOS vSAN](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/storage/storage-tiers).
 
-**Where metadata is stored:** most deployments store metadata on a dedicated Tier 0. Small/Edge systems [can store metadata on the primary tier instead](#small--edge). The same sizing guidance applies; reserve the required metadata capacity within the primary tier.
+**Where metadata is stored:** most deployments store metadata on a dedicated Tier 0. Small/Edge systems [can store metadata on the primary tier instead](#small-edge). The same sizing guidance applies; reserve the required metadata capacity within the primary tier.
 
 #### Baseline Tier 0 requirements
 
@@ -165,7 +165,7 @@ Metadata sizing involves multiple interdependent factors. VergeOS Sales and auth
 ### RAM for storage
 
 - **Baseline:** on each node, reserve **16 GB for VergeOS plus 1 GB RAM per 1 TB of raw storage** on that node. Guest workload RAM is additional. For example, a node with 8 TB raw reserves 24 GB before guest RAM.
-- **Storage buffer (cache) RAM** is a separate, additive need. It matters most in performance environments. Do not treat a single higher GB/TB figure as a substitute for both needs. For sizing [Performance](#performance--high-capacity--scale) deployment model nodes and their storage buffer, contact a VergeOS partner or the VergeOS sales team.
+- **Storage buffer (cache) RAM** is a separate, additive need. It matters most in performance environments. Do not treat a single higher GB/TB figure as a substitute for both needs. For sizing [Performance](#performance-high-capacity-scale) deployment model nodes and their storage buffer, contact a VergeOS partner or the VergeOS sales team.
 
 ### CPU and storage disks
 
