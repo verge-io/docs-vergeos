@@ -59,8 +59,11 @@ This guide outlines the process to create a bonded external network across vlann
     - Click **Edit** on the left menu 
 2. Verify **Layer 2 Type**: ***vLAN*** and appropriate **Layer 2 ID** (VLAN number).
 3. **Select** the option to **Enable Bonding**.
-4. **Select the checkbox for each physical network** to participate in the bond (e.g., core-switch1, core-switch2)
-5. **Select the desired bond mode** and **Primary Bond Interface** (v. 26.2 or later)
+4. **Select the checkbox for each physical network** to participate in the bond (e.g., core1-switch, core2-switch)
+{% hint style="info" %}
+Version 26.2 and above lets you select a bond mode and a primary bond interface. Prior versions only support active-backup mode for virtual layer bonding.
+{% endhint %} 
+6. **Select the desired bond mode** and **Primary Bond Interface** (version 26.2+ only)
 {% hint style="info" %}
 For detailed information about **Bond mode** and **Primary Bond Interface** selections , see: [Bonded VLAN-tagged Networks]((https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/networking/bonded-vlans))
 
