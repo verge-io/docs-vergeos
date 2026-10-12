@@ -429,7 +429,7 @@ interface range 1/1/7-1/1/8
 
 </div>
 {% hint style="info" %}
-VergeOS can handle failover in software if LACP is not available.
+VergeOS can handle failover in software if LACP is not available.  See [Bonded VLAN-tagged Networks](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/networking/bonded-vlans)
 {% endhint %}
 
 ---
