@@ -57,7 +57,7 @@ Note: The user ID can be found in the URL of the user's dashboard (Key=1 paramet
 {% endhint %}
 2. Under **Bond Interfaces:**
     - Select specific physical networks for the bond.
-3. Select **Bond Mode**
+3. Select **Bond Mode** (Version 26.2 and above; prior versions automatically use active-backup mode for virtual layer bonding.)
 {% hint style="warning"}
     Some modes require configuration on the switching hardware to support specific link‑level behaviors.  
     {% endhint %}
@@ -68,7 +68,7 @@ Note: The user ID can be found in the URL of the user's dashboard (Key=1 paramet
     - *Balance XOR*: Uses a hashing algorithm to choose which NIC handles each flow. Switch must support static EtherChannel/port-channel.  Predictable load distribution
     - *Broadcast*: Sends every packet out every NIC. Maximum redundancy/no load balancing. Almost never an appropriate option - only for very niche legacy HA environments.
 
-4. Select a **Primary Bond Interface** to specify the preferred physical network for the bond. In *Active Backup* mode, the primary interface carries all traffic whenever it is available. 
+4. Select a **Primary Bond Interface** (version 26.2 and above) to specify the preferred physical network for the bond. In *Active Backup* mode, the primary interface carries all traffic whenever it is available. 
 
 {% hint style="info" %}
 When *Primary Bond Interface* selection is left at --None-- a network is automatically selected based on registration order. 
