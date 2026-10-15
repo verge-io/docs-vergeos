@@ -158,8 +158,12 @@ A unique identifier for the drive (for example `OS` or `Data`), used to referenc
 Options: **System Default** (default), **On**, **Off**.  
 When on, metadata writes are not throttled for this drive, which affects performance. The system default is off (a vSAN configuration setting). Leave at **System Default** unless directed by support.
 
-* **Discard**  
-Default: on. Frees unused blocks on the vSAN when the guest deletes data. Leave enabled unless directed otherwise by support. See [VM Disk Discard](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/virtual-machines/vm-disk-discard) for details.
+* **Discard** Default: on.
+{% hint style="info" %}
+**VergeOS enables discard by default and should remain enabled for almost all workloads.**
+     
+VergeOS’s vSAN handles UNMAP/TRIM commands efficiently at the storage layer without performance degradation. Disabling discard at the disk level prevents the platform from reclaiming freed storage blocks, and can lead to inflated storage usage.  In rare cases where TRIM causes issues - such as legacy guest operating systems or specialized workloads that require deterministic delete latency, discard should typically be managed or disabled within the guest OS (e.g., disabling fstrim timers or mount options) rather than disabling the host-level setting. 
+{% endhint %}
 
 * **Optimize For**  
   * ***General Usage*** – 64 KB chunks with read‑ahead (default). The right choice for most workloads.
