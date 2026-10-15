@@ -38,7 +38,7 @@
   * [Accessing the VergeOS UI from a VM](networking/accessing-the-ui-from-a-vm.md)
   * [Adjusting BGP Timers](networking/adjusting-bgp-timers.md)
   * [Best Practices - Running a pfSense Virtual Firewall](networking/running-a-pfsense-virtual-firewall.md)
-  * [Change External Network to VLAN Bonded](networking/change-external-vlan-to-bonded.md)
+  * [Bonded External Network on a Bare-metal System](networking/bond-external-vlan-bare-metal.md)
   * [Configure Authoritative DNS in VergeOS](networking/configure-authoritative-dns-vergeos.md)
   * [Configuring VMware Service VM NIC IPv4 Settings](networking/vmware-service-vm-nic-ipv4-configuration.md)
   * [Connection Tracking State in Firewall Rules](networking/firewall-connection-tracking-state.md)

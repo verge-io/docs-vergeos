@@ -32,7 +32,7 @@ A virtual layer bond lets an External network fail over between two physical net
 
 ## Prerequisites
 
-{% hint style="warning" %}
+{% hint style="danger" %}
 **Before Making Network Changes**
 
 - Verify associated network switch ports are configured for the VLAN tag
@@ -63,19 +63,19 @@ Some bond modes only work if the physical switches are set up for them, for exam
 
 {% endhint %}
     
-  - *Active Backup*(default): Only one NIC is active at a time; if it fails, another NIC takes over automatically. Pure Redundancy; no load balancing. Most compatible option - works with any switch topology.
-  - *Balance TLB (Adaptive Transmit)*: Outgoing traffic is load balanced across all switch paths. Incoming traffic stays on one NIC at a time (advertised MAC). Very compatible - switch only needs to handle normal MAC learning.
-  - *Balance ALB (Adaptive Load)*: Balances outbound traffic by NIC load and inbound traffic by answering ARP requests with different NIC MACs.  No switch configuration needed; works with most switches, but features like dynamic ARP inspection or port-security MAC limits can interfere.
-  - *Balance XOR*: Uses a hashing algorithm to choose which NIC handles each flow. Switch must support static EtherChannel/port-channel; MLAG required across multiple switches.  Only use when switches are already configured for it.
-  - *Balance Round Robin*: Sends packets sequentially across all physical switch paths.  Requires static port-channel. Typically only appropriate for lab environments - not recommended for general VM networking.
-  - *Broadcast*: Sends every packet out every NIC. Maximum redundancy/no load balancing.  Each underlying physical network must be a separate layer 2 with no connection between them; otherwise duplicate frames and MAC flapping will occur. **Almost never an appropriate option - only for very niche legacy HA environments.**
+  - ***Active Backup*(default)**: Only one NIC is active at a time; if it fails, another NIC takes over automatically. Pure Redundancy; no load balancing. Most compatible option - works with any switch topology.
+  - ***Balance TLB (Adaptive Transmit)***: Outgoing traffic is load balanced across all switch paths. Incoming traffic stays on one NIC at a time (advertised MAC). Very compatible - switch only needs to handle normal MAC learning.
+  - ***Balance ALB (Adaptive Load)***: Balances outbound traffic by NIC load and inbound traffic by answering ARP requests with different NIC MACs.  No switch configuration needed; works with most switches, but features like dynamic ARP inspection or port-security MAC limits can interfere.
+  - ***Balance XOR***: Uses a hashing algorithm to choose which NIC handles each flow. Switch must support static EtherChannel/port-channel; MLAG required across multiple switches.  Only use when switches are already configured for it.
+  - ***Balance Round Robin***: Sends packets sequentially across all physical switch paths.  Requires static port-channel. Typically only appropriate for lab environments - not recommended for general VM networking.
+  - ***Broadcast***: Sends every packet out every NIC. Maximum redundancy/no load balancing.  Each underlying physical network must be a separate layer 2 with no connection between them; otherwise duplicate frames and MAC flapping will occur. **Almost never an appropriate option - only for very niche legacy HA environments.**
 
 4. Select a **Primary Bond Interface** (version 26.2 and later) to specify the preferred physical network for the bond. 
 
 {% hint style="info" %}
 - Primary Bond Interface only applies to *Active Backup*, *Balance TLB*, and *Balance ALB* modes.
 - In *Active Backup* mode, the primary interface carries all traffic whenever it is available. 
-- When *Primary Bond Interface* selection is left at --None-- the first network in the list is automatically selected as primary. 
+- When *Primary Bond Interface* selection is left at *--None--* the first network in the list is automatically selected as primary. 
 
 {% endhint %}
 
@@ -103,7 +103,7 @@ For other fields on this form, see KB article: [How to Create an External Networ
     - UI should indicate the disconnected NIC is in "Down" status
     - Verify network maintains connectivity through the backup NIC
 
-{% hint style="warning" %}
+{% hint style="danger" %}
 **Important**
 
 Before disconnecting any network cable, verify:
@@ -114,23 +114,21 @@ Before disconnecting any network cable, verify:
 
 ## Troubleshooting
 
-### Common Issues
+{% hint style="warning" %}
+**Common Issues**
 
-#### Connectivity works until failover, then drops
+* **Connectivity works until failover, then drops**:VLAN not tagged on the backup path's switch ports; verify correct VLAN configuration on backup path
 
-* **VLAN not tagged on the backup path's switch ports**: verify correct VLAN configuration on backup path
+* **Intermittent loss/ MAC flapping alerts on switch**:  Load-balancing mode used without required port-channel; switch to *Active Backup* mode or configure the port-channel.
 
-#### Intermittent loss/ MAC flapping alerts on switch
-
-* **Load-balancing mode used without required port-channel**: switch to Active Backup mode or configure the port-channel.
-
+{% endhint %}
 
 **If you encounter issues:**
 
 1. Verify switch configuration matches VLAN settings
 2. Check physical cable connections
 3. Confirm bond interface selections are correct
-4. Check the external network logs (Select Diagnostics on the left menu > select Query: Logs and click Send.)
+4. Check the external network's logs (Diagnostics > select Query: Logs > Send.)
 5. Review switch logs for error messages
 6. Test connectivity from multiple points in the network
 

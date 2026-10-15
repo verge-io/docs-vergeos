@@ -34,7 +34,7 @@
   "accessing-the-ui-from-a-vm": "Networking",
   "adjusting-bgp-timers": "Networking",
   "running-a-pfsense-virtual-firewall": "Networking",
-  "change-external-vlan-to-bonded": "Networking",
+  "bond-external-vlan-bare-metal": "Networking",
   "configure-authoritative-dns-vergeos": "Networking",
   "vmware-service-vm-nic-ipv4-configuration": "Networking",
   "enabling-system-ssh": "Networking",
