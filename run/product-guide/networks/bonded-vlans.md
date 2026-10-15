@@ -1,6 +1,6 @@
 ---
 title: "Bonded VLAN-tagged Networks"
-description: "Create virtual layer bonded network interfaces (not LACP) with VLAN tagging on external or maintenance networks for network redundancy and failover."
+description: "Create virtual layer bonded network interfaces (not LACP) with VLAN tagging on external networks for network redundancy and failover."
 semantic_keywords:
   - "bonded VLAN tagged network configuration"
   - "virtual layer NIC bonding VergeOS"
@@ -27,7 +27,12 @@ categories:
 
 ## Overview
 
-This guide provides instructions for creating a virtual layer bond (not LACP) on an External or Maintenance Network. For specific instructions related to bare-metal installations with 2 NICs per node, see the KB article: [Change External Network to Bonded with tagged VLAN](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/networking/change-external-vlan-to-bonded).
+This guide provides instructions for creating a virtual layer bond on an External Network. This feature is particulary useful in bare-metal installations where there are only 2 NICs per node. Both interfaces are needed to provide independent redundant networks for the core fabric so the external network runs on these same interfaces - but within a vlan.  You can create a virtual layer bond across the 2 physical paths for the external network to provide failover and optional load balancing. 
+
+
+## Overview
+
+A virtual layer bond lets an External network fail over between two physical network paths (and optional load balancing in version 26.2 and later).  This allows two-NIC nodes e.g., bare-metal installations, to simultaneously carry two independent redundant core fabric paths and bond paths for the External network to run on those same NICs as a tagged VLAN. Bonding the External network across both paths means it stays up if either NIC, cable, or switch fails.
 
 ## Prerequisites
 
@@ -44,7 +49,7 @@ Note: The user ID can be found in the URL of the user's dashboard (Key=1 paramet
 
 ### Basic Network Settings
 
-1. Create or edit the network
+1. Create or edit the network (**Networks** > **Externals**. Click **Edit** or **New** to create one.)
 2. Configure Layer 2 settings:
    - Set Layer 2 Type to vLAN
    - Enter the VLAN ID number in Layer 2 ID field
@@ -57,29 +62,34 @@ Note: The user ID can be found in the URL of the user's dashboard (Key=1 paramet
 {% endhint %}
 2. Under **Bond Interfaces:**
     - Select specific physical networks for the bond.
-3. Select **Bond Mode** (Version 26.2 and above; prior versions automatically use active-backup mode for virtual layer bonding.)
-{% hint style="warning"}
-    Some modes require configuration on the switching hardware to support specific link‑level behaviors.  
-    {% endhint %}
-    - *Active Backup*(default): Only one NIC is active at a time. If it fails, another NIC takes over automatically. Pure Redundancy; no load balancing. Most compatible option - works with any switch.
-    - *Balance ALB (Adaptive Load)*: Load balances outgoing traffic automatically based on NIC load. Incoming traffic is balanced using ARP negotiation. Maximum throughput, but requires the switch to tolerate ARP manipulation. Very compatible with most switch configurations.
-    - *Balance Round Robin*: Sends packets sequentially across all physical switch paths. Typically only appropriate for lab environments - not recommended for general VM networking.
-    - *Balance TLB (Adaptive Transmit)*: Outgoing traffic is load balanced across all switch paths. Incoming traffic stays on one NIC at a time (advertised MAC). Very compatible - switch only needs to handle normal MAC learning
-    - *Balance XOR*: Uses a hashing algorithm to choose which NIC handles each flow. Switch must support static EtherChannel/port-channel.  Predictable load distribution
-    - *Broadcast*: Sends every packet out every NIC. Maximum redundancy/no load balancing. Almost never an appropriate option - only for very niche legacy HA environments.
+3. Select **Bond Mode** (Version 26.2 and later; prior versions automatically use active-backup mode for virtual layer bonding.)
+ 
+{% hint style="danger" %}
+**Choose a bond mode carefully**
 
-4. Select a **Primary Bond Interface** (version 26.2 and above) to specify the preferred physical network for the bond. In *Active Backup* mode, the primary interface carries all traffic whenever it is available. 
+Some bond modes only work if the physical switches are set up for them, for example with a port-channel/LAG or a particular network layout. If you pick a mode your switches don't support, traffic can drop, and you can lose the entire network, including remote access to the VergeOS UI. Before you pick any mode other than **Active Backup**, check with your network administrator that the switches support it. If you're not sure, use **Active Backup**: it works with any switch setup.
+
+{% endhint %}
+    
+    - *Active Backup*(default): Only one NIC is active at a time; if it fails, another NIC takes over automatically. Pure Redundancy; no load balancing. Most compatible option - works with any switch topology.
+    - *Balance TLB (Adaptive Transmit)*: Outgoing traffic is load balanced across all switch paths. Incoming traffic stays on one NIC at a time (advertised MAC). Very compatible - switch only needs to handle normal MAC learning.
+    - *Balance ALB (Adaptive Load)*: Balances outbound traffic by NIC load and inbound traffic by answering ARP requests with different NIC MACs.  No switch configuration needed; works with most switches, but features like dynamic ARP inspection or port-security MAC limits can interfere.
+    - *Balance XOR*: Uses a hashing algorithm to choose which NIC handles each flow. Switch must support static EtherChannel/port-channel; MLAG required across multiple switches.  Only use when switches are already configured for it.
+    - *Balance Round Robin*: Sends packets sequentially across all physical switch paths.  Requires static port-channel. Typically only appropriate for lab environments - not recommended for general VM networking.
+    - *Broadcast*: Sends every packet out every NIC. Maximum redundancy/no load balancing.  Each underlying physical network must be a separate layer 2 with no connection between them; otherwise duplicate frames and MAC flapping will occur. **Almost never an appropriate option - only for very niche legacy HA environments.**
+
+4. Select a **Primary Bond Interface** (version 26.2 and later) to specify the preferred physical network for the bond. 
 
 {% hint style="info" %}
-When *Primary Bond Interface* selection is left at --None-- a network is automatically selected based on registration order. 
+- Primary Bond Interface only applies to *Active Backup*, *Balance TLB*, and *Balance ALB* modes.
+- In *Active Backup* mode, the primary interface carries all traffic whenever it is available. 
+- When *Primary Bond Interface* selection is left at --None-- the first network in the list is automatically selected as primary. 
 
 {% endhint %}
 
-5. **Configure Additional Network Settings**
+For other fields on this form, see KB article: [How to Create an External Network](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/networking/create-external-network). 
 
-See KB article: [How to Create an External Network](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/networking/create-external-network) for information on other external network configuration options.
-
-6. **Submit Changes**
+5. **Submit Changes**
 
 
 ## Testing and Verification
@@ -112,16 +122,27 @@ Before disconnecting any network cable, verify:
 
 ## Troubleshooting
 
-If you encounter issues:
+### Common Issues
+
+#### Connectivity works until failover, then drops
+
+* **VLAN not tagged on the backup path's switch ports**: verify correct VLAN configuration on backup path
+
+#### Intermittent loss/ MAC flapping alerts on switch
+
+* **load-balancing mode used without required port-channel**: switch to Active Backup mode or configure the port-channel.
+
+
+**If you encounter issues:**
 
 1. Verify switch configuration matches VLAN settings
 2. Check physical cable connections
 3. Confirm bond interface selections are correct
-4. Review network logs for error messages
-5. Test connectivity from multiple points in the network
+4. Check the external network logs (Select Diagnostics on the left menu > select Query: Logs and click Send.)
+5. Review switch logs for error messages
+6. Test connectivity from multiple points in the network
 
 ## Related Articles
 
 - [How to Create an External Network](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/networking/create-external-network)
-- [Change External Network to Bonded with tagged VLAN](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/networking/change-external-vlan-to-bonded)
 - [Network Diagnostics Tool](network-diagnostics.md)
