@@ -25,14 +25,10 @@ categories:
 
 # Bonded VLAN-tagged Networks
 
-## Overview
-
-This guide provides instructions for creating a virtual layer bond on an External Network. This feature is particulary useful in bare-metal installations where there are only 2 NICs per node. Both interfaces are needed to provide independent redundant networks for the core fabric so the external network runs on these same interfaces - but within a vlan.  You can create a virtual layer bond across the 2 physical paths for the external network to provide failover and optional load balancing. 
-
 
 ## Overview
 
-A virtual layer bond lets an External network fail over between two physical network paths (and optional load balancing in version 26.2 and later).  This allows two-NIC nodes e.g., bare-metal installations, to simultaneously carry two independent redundant core fabric paths and bond paths for the External network to run on those same NICs as a tagged VLAN. Bonding the External network across both paths means it stays up if either NIC, cable, or switch fails.
+A virtual layer bond lets an External network fail over between two physical network paths (optional load balancing in version 26.2 and later).  This allows two-NIC nodes e.g., bare-metal installations, to simultaneously carry two independent redundant core fabric paths and bonded External network paths on the same NICs as a tagged VLAN. Bonding the External network across both paths means it stays up if either NIC, cable, or switch fails.
 
 ## Prerequisites
 
@@ -57,11 +53,7 @@ Note: The user ID can be found in the URL of the user's dashboard (Key=1 paramet
 ### Bonding Configuration
 
 1. Select the **Enable Bonding** option. 
-{% hint style="info" %}
-- The bonded configuration provides virtual layer network redundancy across multiple physical networks 
-{% endhint %}
-2. Under **Bond Interfaces:**
-    - Select specific physical networks for the bond.
+2. Under **Bond Interfaces:**  Select specific physical networks for the bond. 
 3. Select **Bond Mode** (Version 26.2 and later; prior versions automatically use active-backup mode for virtual layer bonding.)
  
 {% hint style="danger" %}
@@ -71,12 +63,12 @@ Some bond modes only work if the physical switches are set up for them, for exam
 
 {% endhint %}
     
-    - *Active Backup*(default): Only one NIC is active at a time; if it fails, another NIC takes over automatically. Pure Redundancy; no load balancing. Most compatible option - works with any switch topology.
-    - *Balance TLB (Adaptive Transmit)*: Outgoing traffic is load balanced across all switch paths. Incoming traffic stays on one NIC at a time (advertised MAC). Very compatible - switch only needs to handle normal MAC learning.
-    - *Balance ALB (Adaptive Load)*: Balances outbound traffic by NIC load and inbound traffic by answering ARP requests with different NIC MACs.  No switch configuration needed; works with most switches, but features like dynamic ARP inspection or port-security MAC limits can interfere.
-    - *Balance XOR*: Uses a hashing algorithm to choose which NIC handles each flow. Switch must support static EtherChannel/port-channel; MLAG required across multiple switches.  Only use when switches are already configured for it.
-    - *Balance Round Robin*: Sends packets sequentially across all physical switch paths.  Requires static port-channel. Typically only appropriate for lab environments - not recommended for general VM networking.
-    - *Broadcast*: Sends every packet out every NIC. Maximum redundancy/no load balancing.  Each underlying physical network must be a separate layer 2 with no connection between them; otherwise duplicate frames and MAC flapping will occur. **Almost never an appropriate option - only for very niche legacy HA environments.**
+  - *Active Backup*(default): Only one NIC is active at a time; if it fails, another NIC takes over automatically. Pure Redundancy; no load balancing. Most compatible option - works with any switch topology.
+  - *Balance TLB (Adaptive Transmit)*: Outgoing traffic is load balanced across all switch paths. Incoming traffic stays on one NIC at a time (advertised MAC). Very compatible - switch only needs to handle normal MAC learning.
+  - *Balance ALB (Adaptive Load)*: Balances outbound traffic by NIC load and inbound traffic by answering ARP requests with different NIC MACs.  No switch configuration needed; works with most switches, but features like dynamic ARP inspection or port-security MAC limits can interfere.
+  - *Balance XOR*: Uses a hashing algorithm to choose which NIC handles each flow. Switch must support static EtherChannel/port-channel; MLAG required across multiple switches.  Only use when switches are already configured for it.
+  - *Balance Round Robin*: Sends packets sequentially across all physical switch paths.  Requires static port-channel. Typically only appropriate for lab environments - not recommended for general VM networking.
+  - *Broadcast*: Sends every packet out every NIC. Maximum redundancy/no load balancing.  Each underlying physical network must be a separate layer 2 with no connection between them; otherwise duplicate frames and MAC flapping will occur. **Almost never an appropriate option - only for very niche legacy HA environments.**
 
 4. Select a **Primary Bond Interface** (version 26.2 and later) to specify the preferred physical network for the bond. 
 
@@ -130,7 +122,7 @@ Before disconnecting any network cable, verify:
 
 #### Intermittent loss/ MAC flapping alerts on switch
 
-* **load-balancing mode used without required port-channel**: switch to Active Backup mode or configure the port-channel.
+* **Load-balancing mode used without required port-channel**: switch to Active Backup mode or configure the port-channel.
 
 
 **If you encounter issues:**

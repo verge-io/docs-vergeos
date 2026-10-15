@@ -1,6 +1,6 @@
 ---
-title: Change External Network to Bonded with Tagged VLAN
-slug: change-external-vlan-to-bonded
+title: Bonded External Network on a bare-metal system
+slug: bond-external-vlan-bare-metal
 description: On bare-metal nodes with only two NICs, bond the External network's VLAN across both physical networks for failover.
 author: VergeOS Documentation Team
 date: 2026-10-14T12:00:00.000Z
@@ -12,6 +12,7 @@ semantic_keywords:
 use_cases:
   - configure_bonded_external_network
   - enable_vlan_bonding_redundancy
+  - ui_redundancy_bare-metal
 tags:
   - bonded
   - network
