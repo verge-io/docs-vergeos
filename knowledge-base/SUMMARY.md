@@ -27,7 +27,6 @@
   * [VirtIO-Win Driver Compatibility with MS SQL Server Workloads](virtual-machines/virtio-win-mssql-compatibility.md)
   * [Virtual Drive TRIM](virtual-machines/virtual-drive-trim.md)
   * [VM Advanced Options](virtual-machines/vm-advanced-options.md)
-  * [VM Disk Discard](virtual-machines/vm-disk-discard.md)
   * [Windows - Slow to Format a New Disk](virtual-machines/windows--slow-to-format-a-new-disk.md)
   * [Windows - Time Shift](virtual-machines/windows-time-shift.md)
   * [Windows Disks Showing Offline After Restarting](virtual-machines/windows-disks-showing-offline-after-restarting.md)

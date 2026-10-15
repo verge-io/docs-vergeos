@@ -160,7 +160,7 @@ When on, metadata writes are not throttled for this drive, which affects perform
 
 * **Discard** Default: on.
 {% hint style="info" %}
-**VergeOS enables discard by default and should remain enabled for almost all workloads.**
+**VergeOS enables discard by default and should remain enabled for almost all workloads**
      
 VergeOS’s vSAN handles UNMAP/TRIM commands efficiently at the storage layer without performance degradation. Disabling discard at the disk level prevents the platform from reclaiming freed storage blocks, and can lead to inflated storage usage.  In rare cases where TRIM causes issues - such as legacy guest operating systems or specialized workloads that require deterministic delete latency, discard should typically be managed or disabled within the guest OS (e.g., disabling fstrim timers or mount options) rather than disabling the host-level setting. 
 {% endhint %}
