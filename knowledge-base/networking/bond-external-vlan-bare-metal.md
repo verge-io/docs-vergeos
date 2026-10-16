@@ -1,5 +1,5 @@
 ---
-title: Bonded External Network on a bare-metal system
+title: Create Bonded External Network on a bare-metal system
 slug: bond-external-vlan-bare-metal
 description: On bare-metal nodes with only two NICs, bond the External network's VLAN across both physical networks for failover.
 author: VergeOS Documentation Team
