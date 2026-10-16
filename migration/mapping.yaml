@@ -804,11 +804,6 @@
   dest: virtual-machines/vm-advanced-options.md
   group: 'Virtual Machines'
   title: 'VM Advanced Options'
-- src: knowledge-base/posts/Disk-Discard.md
-  space: knowledge-base
-  dest: virtual-machines/vm-disk-discard.md
-  group: 'Virtual Machines'
-  title: 'VM Disk Discard'
 - src: knowledge-base/posts/windows-slow-format.md
   space: knowledge-base
   dest: virtual-machines/windows--slow-to-format-a-new-disk.md
