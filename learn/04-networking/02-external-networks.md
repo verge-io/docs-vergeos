@@ -110,8 +110,8 @@ External Networks can use **virtual layer bonding** as an alternative for 2-NIC 
 4. Under **Bond Interfaces**, select the physical networks to participate:
    - Select specific fabrics (e.g., `core-fabric-1 Switch`, `core-fabric-2 Switch`), or
    - Select **All** to bond across all available interfaces
-5. Select **Bond Type** and **Primary Bond Interface** (version 26.2 and above).
-{% hint style="info"}
+5. Select **Bond Mode** and **Primary Bond Interface** (version 26.2 and above).
+{% hint style="info" %}
 ***Active Backup*** mode is the most compatible: it does not require any switch setup.
 
 {% endhint %}
