@@ -136,10 +136,10 @@ If you make the change remotely, have physical console or IPMI access open and r
  If the bond cables also carry core fabric networks (as on two-NIC nodes), confirm both core networks are healthy before you start: the node stays in the cluster over the remaining core network while one cable is out. Test one cable at a time.
 {% endhint %}
 
-    - Physically disconnect the cable for the **primary** interface network (Active Backup), or either network (ALB/TLB)
-    - In the UI, confirm the NIC shows **Down** and the network stays reachable.
-    - Reconnect the cable and confirm the NIC returns to **Up**. In Active Backup, traffic moves back to the primary — expect a brief interruption.
-    - Repeat for the other bond network(s).
+  - Physically disconnect the cable for the **primary** interface network (Active Backup), or either network (ALB/TLB)
+  - In the UI, confirm the NIC shows **Down** and the network stays reachable.
+  - Reconnect the cable and confirm the NIC returns to **Up**. In Active Backup, traffic moves back to the primary — expect a brief interruption.
+  - Repeat for the other bond network(s).
 
 
 ## Troubleshooting
