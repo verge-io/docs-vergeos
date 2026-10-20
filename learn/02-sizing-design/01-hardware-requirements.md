@@ -221,7 +221,7 @@ graph LR
         N2S["Node 2<br/>Controller + Storage + Compute"]
     end
 
-    subgraph dedicated["Dedicated Controllers (Optional / Large Production)"]
+    subgraph dedicated["Dedicated Controllers (Optional)"]
         N1D["Node 1<br/>Controller Only<br/>(Tier 0 metadata)"]
         N2D["Node 2<br/>Controller Only<br/>(Tier 0 metadata)"]
         N3["Node 3+<br/>Storage + Compute"]
