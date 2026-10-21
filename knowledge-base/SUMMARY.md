@@ -124,5 +124,6 @@
 * [Troubleshooting](troubleshooting/README.md)
   * [Configuring Remote Log Forwarding (Syslog)](troubleshooting/configuring-remote-log-forwarding.md)
   * [Generating System Diagnostics](troubleshooting/generating-system-diagnostics.md)
+  * [NVMe Controllers Resetting Due to AER](troubleshooting/nvme-aer-reset-loop.md)
   * [System Logs](troubleshooting/system-logs.md)
   * [VergeOS Update Instructions](troubleshooting/VergeOS-update-instructions.md)
