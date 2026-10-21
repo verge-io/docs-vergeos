@@ -5,14 +5,12 @@ author: VergeOS Documentation Team
 date: 2026-10-21T15:45:00.000Z
 semantic_keywords:
   - nvme controller reset aer pcie error
-  - advanced error reporting hardware troubleshooting
   - multiple nvme reset loop shared path
-  - installation boot failure nvme devices
+  - installation boot failure nvme drives
 use_cases:
   - troubleshoot_nvme_aer_reset
-  - diagnose_pcie_link_errors
-  - stabilize_nvme_storage_path
-  - resolve_installation_boot_failure
+  - diagnose_shared_path_symptoms
+  - stabilize_before_install_retry
 categories:
   - Troubleshooting
   - Storage
@@ -37,6 +35,14 @@ tags:
 
 ## Overview
 
+{% hint style="info" %}
+**Key Points**
+
+- When one NVMe drive resets repeatedly, the problem is in that drive or its PCIe link.
+- When several NVMe drives reset together in a short window, the problem is in a shared path component.
+- Stabilize the shared path or PCIe link before you retry installation.
+{% endhint %}
+
 The console or `dmesg` shows NVMe controllers resetting repeatedly with messages like:
 
 ```
@@ -46,6 +52,10 @@ nvme nvme0: 80/0/0 default/read/poll queues
 
 This message indicates that the PCIe link reported an error and the kernel reset the NVMe controller to recover. AER stands for Advanced Error Reporting, a PCIe feature that reports hardware-level errors to the operating system.
 
+## Prerequisites
+
+- Physical or remote management access to the host.
+
 ## Understanding AER Reset Patterns
 
 The pattern of resets determines whether the problem is isolated to a single device. It also shows whether multiple devices share a hardware path and are affected together.
@@ -54,8 +64,8 @@ The pattern of resets determines whether the problem is isolated to a single dev
 
 When one NVMe controller resets repeatedly (for example, `nvme0` resets but `nvme1` through `nvme7` remain stable):
 
-- The problem is likely specific to that NVMe device or its direct connection.
-- Investigate the device itself, its PCIe slot, and the link between the device and the host.
+- The problem is in that NVMe drive or its PCIe link.
+- Check the drive, its PCIe slot, and the PCIe link between the drive and the host.
 
 ### Multiple Controllers Resetting Together
 
@@ -63,51 +73,39 @@ When several NVMe controllers (for example, `nvme0` through `nvme7`) reset toget
 
 - This is a shared-path symptom.
 - The problem is not a single failing drive.
-- Check the PCIe switch, backplane, power delivery, system firmware, or root complex that all the affected controllers share.
+- Check the PCIe switch, backplane, power delivery, firmware, and root complex that all the affected drives share.
 
 {% hint style="warning" %}
 **Installation and vSAN Boot Failures**
 
-VergeOS installation and vSAN boot can fail when NVMe controllers are resetting. The installer cannot reliably write to the drives while the controllers cycle. Stabilize the PCIe or storage path before you retry the installation.
+VergeOS installation and vSAN boot can fail when NVMe controllers reset repeatedly. Stabilize the shared path or PCIe link before you retry the installation.
 {% endhint %}
 
 ## What to Check
 
 ### For a Single Resetting Controller
 
-1. Check the physical connection between the NVMe device and its slot.
-2. Verify the device is fully seated.
-3. Check for physical damage to the device or slot.
-4. Check the PCIe slot health in the BIOS or system management interface.
-5. Check firmware versions for the NVMe device.
+1. Check the NVMe drive.
+2. Check its PCIe slot.
+3. Check the PCIe link between the drive and the host.
 
 ### For Multiple Controllers Resetting Together
 
-1. Check the PCIe switch that connects the NVMe devices to the CPU.
-2. Verify the backplane firmware and connections.
-3. Check power delivery to the drives and the PCIe switch.
-4. Check system firmware (BIOS and BMC) for updates.
-5. Check for PCIe root complex errors in the system event log.
-
-{% hint style="info" %}
-**Firmware and Configuration**
-
-Firmware updates and BIOS configuration changes should be tested in a non-production environment when possible. Contact your hardware vendor for specific guidance on firmware versions and settings for your configuration.
-{% endhint %}
-
-## Prerequisites
-
-- Physical access to the host or remote management interface access.
-- Administrative access to the system BIOS or BMC.
+1. Check the PCIe switch.
+2. Check the backplane.
+3. Check power delivery.
+4. Check firmware.
+5. Check the root complex.
+6. Contact your hardware vendor to diagnose the shared path.
 
 ## Additional Resources
 
-- [Node Sizing](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/implementation-guide/sizing) — Hardware requirements for VergeOS, including NVMe and storage controller recommendations.
-- [Installation Guide](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/implementation-guide/installation-guide) — Complete installation procedure for VergeOS.
-- [Pre-installation Checklist](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/implementation-guide/pre-installation) — Hardware and network verification steps before installation.
+- [Node Sizing](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/implementation-guide/sizing): Hardware requirements for VergeOS, including NVMe and storage controller recommendations.
+- [Installation Guide](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/implementation-guide/installation-guide): Complete installation procedure for VergeOS.
+- [Pre-installation Checklist](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/implementation-guide/pre-installation): Hardware and network verification steps before installation.
 
 {% hint style="info" %}
 **Need Help?**
 
-If the PCIe link or storage path remains unstable after checking hardware connections and firmware, contact VergeOS support for assistance.
+If the PCIe link or shared path remains unstable after checking hardware connections and firmware, contact VergeOS support for assistance.
 {% endhint %}
