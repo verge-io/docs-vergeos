@@ -239,7 +239,13 @@ Add nodes to specific clusters based on which resource is the bottleneck:
 
 ### Best Practices for Scaling
 
-- **Hardware consistency within clusters** — Use the same hardware specs for all nodes in a cluster. Mixing different hardware within a cluster can cause performance and reliability issues.
+{% hint style="info" %}
+**System vs. Cluster**
+
+A VergeOS system can contain multiple clusters. A cluster is a group of like nodes inside a system, not the whole environment (as "cluster" means at some HCI vendors). To add different hardware, such as a newer server generation, create a new cluster in the same system. For more details, see [Clusters Overview](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/system-administration/clusters-overview).
+{% endhint %}
+
+- **Hardware consistency within clusters** — Use the same hardware specs for all nodes in a cluster. Mixing different hardware within a cluster can cause performance and reliability issues. To add different hardware, such as a newer server generation, create a new cluster in the same system.
 - **Plan for N+1 redundancy** — Size each cluster so that losing one node still leaves enough capacity for all workloads
 - **Monitor before scaling** — Use VergeOS dashboard metrics (CPU utilization, RAM usage, vSAN capacity) to identify which resource needs expansion
 - **Scale without downtime** — New nodes can be added to a running system without interrupting existing workloads
