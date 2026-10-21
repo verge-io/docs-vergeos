@@ -58,7 +58,7 @@ This message indicates that the PCIe link reported an error and the kernel reset
 
 ## Understanding AER Reset Patterns
 
-The pattern of resets determines whether the problem is isolated to a single device. It also shows whether multiple devices share a hardware path and are affected together.
+The pattern of resets shows whether the problem is in one NVMe drive or in a shared path that several NVMe drives use.
 
 ### Single Controller Resetting
 
