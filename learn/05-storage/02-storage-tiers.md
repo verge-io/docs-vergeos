@@ -40,9 +40,9 @@ The following table summarizes each tier's hardware type, purpose, and typical u
 
 Tier 0 deserves special attention because it is fundamentally different from the workload tiers. It stores **only** vSAN metadata — the filesystem index and the per-tier device maps from which block placement is derived. There is no central table tracking block locations or reference counts: placement is computed from each block's content hash against the device maps, and reference counts are rebuilt by the vSAN Walk.
 
-**Sizing guideline:** Allocate approximately **5 GB of Tier 0 capacity per 1 TB of usable storage** (minimum) or **10 GB per 1 TB** (recommended) across your workload tiers. Use enterprise NVMe drives rated for **3 DWPD or equivalent (i.e. TBW)**. Always maintain at least **30% free space** on Tier 0 to avoid metadata pressure.
+**Sizing guideline:** Allocate approximately **5 GB of Tier 0 capacity per 1 TB of usable storage** (minimum) or **10 GB per 1 TB** (recommended) across your workload tiers. The baseline 5 GB/TB is equivalent to about 15 GB/TB at 1 DWPD — the equivalence trades capacity for endurance. Always maintain at least **30% free space** on Tier 0 to avoid metadata pressure.
 
-**Hardware requirements:** Use enterprise-grade NVMe drives with a minimum of **3 DWPD** (Drive Writes Per Day) endurance. Consumer NVMe drives are not supported for Tier 0 in production environments.
+**Hardware requirements:** Use enterprise SSD (NVMe or SAS) with a minimum of **1 DWPD** (Drive Writes Per Day) endurance. Consumer NVMe drives are not supported for Tier 0 in production environments.
 
 ### Workload Tiers (1–5)
 

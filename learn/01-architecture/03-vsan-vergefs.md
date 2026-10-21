@@ -39,7 +39,7 @@ VergeOS vSAN organizes drives into **tiers** numbered 0 through 5. Each tier is 
 - **Hardware**: High-endurance NVMe SSDs
 - **Purpose**: Stores the vSAN filesystem index and internal metadata exclusively
 - **Key requirement**: Tier 0 lives only on controller nodes — nodes 1–2 for N+1, or nodes 1–3 for N+2
-- **Best practice**: Use enterprise NVMe drives rated for 3 DWPD (Drive Writes Per Day) or equivalent (i.e. if you only need 500 GB for vSAN metadata, a larger 2 TB drive rated at 1 DWPD provides comparable total write endurance); maintain at least 30% free space on Tier 0
+- **Best practice**: Use enterprise SSD (NVMe or SAS) with a minimum of 1 DWPD (Drive Writes Per Day) endurance. The baseline Tier 0 capacity is about 5 GB per 1 TB of usable Tier 1–5 capacity at 3 DWPD, or an equivalent capacity and endurance profile (for example, 15 GB per 1 TB at 1 DWPD). Maintain at least 30% free space on Tier 0.
 
 ### Tiers 1–5: Workload Data
 
