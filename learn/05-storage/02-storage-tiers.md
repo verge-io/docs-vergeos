@@ -179,7 +179,7 @@ Add more drives to existing nodes within a tier. This increases the capacity and
 - New drives must match the type, capacity, and performance of existing drives in the tier
 - Add the same number of drives to **each storage node** to maintain balanced distribution
 - Take a system snapshot before beginning the scale-up process
-- Follow the [vSAN Scale Up SOP](https://docs.verge.io/product-guide/operations/vsan-scale-up-sop/) for the complete procedure
+- Follow the [vSAN Scale Up SOP](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/operations/vsan-scale-up-sop) for the complete procedure
 
 ### Horizontal Scaling (Scale Out)
 
@@ -191,7 +191,7 @@ Add new nodes to the cluster. This increases capacity, compute resources, and ag
 - Network connectivity (Core Fabric) must be verified before adding the node
 - The new node is installed via USB and joins the existing cluster
 - After joining, vSAN automatically begins distributing data to the new node
-- Follow the [vSAN Scale Out Guide](https://docs.verge.io/implementation-guide/scale-out-nodes/) for the complete procedure
+- Follow the [vSAN Scale Out Guide](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/implementation-guide/scale-out-nodes) for the complete procedure
 
 ### Scaling Decision Matrix
 

@@ -126,7 +126,7 @@ The RFC 5424 template above works with common collectors:
 
 ## Additional Resources
 
-For more information on syslog templates and formatting options, visit the [Rsyslog Documentation](https://www.rsyslog.com/doc/master/configuration/examples.html).
+For more information on syslog templates and formatting options, visit the [Rsyslog Documentation](https://www.rsyslog.com/doc/configuration/examples.html).
 
 ## Verification
 

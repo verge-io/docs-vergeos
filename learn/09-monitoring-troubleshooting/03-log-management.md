@@ -143,7 +143,7 @@ Use the literal `1` after `<%PRI%>` — it is the RFC 5424 version field. Do not
 {% hint style="success" %}
 **Template Customization**
 
-Replace `your-hostname-here` with your actual hostname to make log entries easily identifiable in your centralized log platform. The template follows rsyslog syntax -- consult the [rsyslog documentation](https://www.rsyslog.com/doc/master/configuration/examples.html) for additional format options.
+Replace `your-hostname-here` with your actual hostname to make log entries easily identifiable in your centralized log platform. The template follows rsyslog syntax -- consult the [rsyslog documentation](https://www.rsyslog.com/doc/configuration/examples.html) for additional format options.
 {% endhint %}
 
 4. Click **Submit** to save
