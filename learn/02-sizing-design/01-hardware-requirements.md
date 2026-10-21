@@ -98,7 +98,7 @@ Storage nodes participate in the vSAN and contribute disk capacity to the shared
 
 | Component           | Specification                                     | Notes                                           |
 | ------------------- | ------------------------------------------------- | ----------------------------------------------- |
-| **CPU**             | 3.0 GHz+, 1 core per disk                         | Count Tier 0 devices as storage disks; do not count boot devices or hardware threads (hyperthreading/SMT) as extra cores |
+| **CPU**             | 3.0 GHz+, 1 core per disk                         | Count Tier 0 devices as storage disks; do not count boot devices. Use physical CPU cores only; hardware threads (hyperthreading/SMT) do not count as extra cores |
 | **RAM**             | 1.5 GB per 1 TB of storage per node               | Better performance under heavy workloads        |
 | **Primary Storage** | 2+ NVMe or SAS/SATA SSDs per node                 | More spindles = more IOPS                       |
 | **Redundancy**      | At least 2 nodes with matching disk configuration | Required for vSAN data redundancy               |
