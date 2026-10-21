@@ -246,7 +246,7 @@ Use this quick-reference card when scoping a new deployment:
 | How much RAM per storage node?   | 16 GB base + 1 GB per 1 TB raw (minimum) or 1.5 GB per 1 TB (recommended) |
 | How many Tier 0 drives?          | 2 per controller on N+1; 3 per controller on N+2 for full local protection                |
 | How large should Tier 0 be?      | 5 GB/TB usable (baseline, absorbs default 7 snapshots at any change rate and can hold 25-30 snapshots at low to moderate change rate); 10 GB/TB for moderate to high change rate with 25-30 snapshots       |
-| What endurance for Tier 0?            | 1 DWPD minimum; capacity and endurance are equivalent (5 GB/TB at 3 DWPD ≈ 15 GB/TB at 1 DWPD)                                    |
+| What endurance for Tier 0?            | Minimum 1 DWPD; size Tier 0 so write budget ≈ 15 GB/TB/day (e.g. 5 GB/TB @ 3 DWPD or 15 GB/TB @ 1 DWPD). |                                 |
 | What media for Tier 0? | Enterprise SSD (NVMe or SAS); dedicated Tier 0 often unnecessary on all-flash 1-2 node systems |
 | How many cores per storage disk? | 1 core per disk (recommended)                                             |
 | Minimum nodes for vSAN?          | 2 nodes with matching disk configuration                                  |
