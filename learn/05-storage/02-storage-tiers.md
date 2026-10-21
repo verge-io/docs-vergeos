@@ -40,7 +40,7 @@ The following table summarizes each tier's hardware type, purpose, and typical u
 
 Tier 0 deserves special attention because it is fundamentally different from the workload tiers. It stores **only** vSAN metadata — the filesystem index and the per-tier device maps from which block placement is derived. There is no central table tracking block locations or reference counts: placement is computed from each block's content hash against the device maps, and reference counts are rebuilt by the vSAN Walk.
 
-**Sizing guideline:** Allocate about **5 GB of usable Tier 0 per 1 TB of usable Tier 1–5 capacity** at 3 DWPD across your workload tiers. An equivalent capacity and endurance profile is 15 GB per 1 TB at 1 DWPD. This baseline absorbs the default 7 retained snapshots at any change rate. For most systems with a low to moderate change rate, the baseline can hold about 25–30 snapshots. Systems with a moderate to high change rate should increase to about 10 GB per 1 TB when retaining 25–30 snapshots. Always maintain at least **30% free space** on Tier 0.
+**Sizing guideline:** Allocate about **5 GB of usable Tier 0 per 1 TB of usable Tier 1–5 capacity** at 3 DWPD. An equivalent capacity and endurance profile is 15 GB per 1 TB at 1 DWPD. This baseline absorbs the default 7 retained snapshots. For most systems with a low to moderate change rate, the baseline holds about 25–30 snapshots. Systems with a moderate to high change rate need about 10 GB per 1 TB to retain 25–30 snapshots. Always maintain at least **30% free space** on Tier 0.
 
 **Hardware requirements:** Use enterprise SSD (NVMe or SAS) with a minimum of **1 DWPD** (Drive Writes Per Day) endurance. Consumer NVMe drives are not supported for Tier 0 in production.
 
