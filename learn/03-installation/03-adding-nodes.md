@@ -25,7 +25,7 @@ Before adding any node to your VergeOS system, ensure the following conditions a
 {% hint style="info" %}
 **System vs. Cluster**
 
-A VergeOS system can contain multiple clusters. A cluster is a group of like nodes inside a system, not the whole environment (as "cluster" means at some HCI vendors). For more details, see [Clusters Overview](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/system-administration/clusters-overview).
+A VergeOS system can contain multiple clusters. A cluster is a group of nodes with matching hardware inside a system. Some other HCI platforms use "cluster" to mean the whole environment. For more details, see [Clusters Overview](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/system-administration/clusters-overview).
 {% endhint %}
 
 {% hint style="warning" %}
