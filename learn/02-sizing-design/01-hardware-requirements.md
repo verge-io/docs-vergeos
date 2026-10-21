@@ -56,21 +56,28 @@ The first two nodes in any VergeOS system are the **controller nodes**. They hos
 | ------------------- | ---------------------------------------------- | ----------------------------------------------- |
 | **CPU**             | 1 x 2.7 GHz+                                   | Higher clock speed benefits metadata operations |
 | **RAM**             | 16 GB + 1 GB per 1 TB of storage               | The 1 GB/TB ratio is for vSAN metadata overhead |
-| **Tier 0 Storage**  | 1 x Enterprise NVMe SSD (3 DWPD or equivalent) | Stores the vSAN hash map and filesystem index   |
-| **Tier 0 Capacity** | 5 GB per 1 TB of usable capacity               | Dedicated metadata storage                      |
+| **Tier 0 Storage**  | 2 x Enterprise SSD per controller on N+1; 3 on N+2 for full local protection (1 DWPD minimum) | Stores the vSAN hash map and filesystem index   |
+| **Tier 0 Capacity** | 5 GB per 1 TB of usable capacity (baseline)    | Absorbs default 7 snapshots at any change rate                      |
 
 ### Recommended Specifications
 
 | Component           | Specification                                  | Notes                                           |
 | ------------------- | ---------------------------------------------- | ----------------------------------------------- |
 | **CPU**             | 1 x 3.0 GHz+                                   | Improves metadata and orchestration performance |
-| **Tier 0 Storage**  | 2 x Enterprise NVMe SSD (3 DWPD or equivalent) | Redundant metadata configuration                |
-| **Tier 0 Capacity** | 10 GB per 1 TB of usable capacity              | Additional headroom for metadata growth         |
+| **Tier 0 Capacity** | 10 GB per 1 TB of usable capacity              | For moderate to high change rates with 25-30 retained snapshots         |
 
 {% hint style="success" %}
 **Tier 0 Is Metadata Only**
 
-Tier 0 stores the vSAN hash map and filesystem index -- it is **not** a workload data tier. It lives on fast NVMe specifically for performance: keeping the dedup hash map and filesystem index on low-latency media is what ensures fast lookups across the entire storage pool. Tier 0 is write-intensive, so the drives need high endurance — **3 DWPD or equivalent**. Endurance scales with capacity (DWPD × capacity = writes/day), so a larger drive at a lower DWPD is equivalent: a 1 TB drive at 3 DWPD and a 3 TB drive at 1 DWPD both absorb 3 TB of writes/day. The larger, lower-DWPD drive is often the better choice — typically cheaper and more available, with capacity headroom as a bonus.
+Tier 0 stores the vSAN hash map and filesystem index — it is **not** a workload data tier. It lives on fast SSD specifically for performance: keeping the dedup hash map and filesystem index on low-latency media ensures fast lookups across the entire storage pool.
+
+**Endurance and capacity trade-off:** Tier 0 needs high write endurance. The minimum is **1 DWPD**, but endurance scales with capacity (DWPD × capacity = writes/day). This creates an equivalence: you can satisfy Tier 0's endurance requirement with either higher DWPD on smaller capacity, or lower DWPD on larger capacity. For example, 5 GB/TB at 3 DWPD and 15 GB/TB at 1 DWPD both absorb the same total writes per day. The larger, lower-DWPD drive is often the better choice — typically cheaper and more available, with capacity headroom as a bonus.
+
+**Capacity requirement:** the baseline is about **5 GB of usable Tier 0 per 1 TB of usable Tier 1–5 capacity** (after redundancy). This baseline absorbs the default 7 retained snapshots at any change rate. For most systems with a **low to moderate change rate**, the baseline can also hold about **25–30 snapshots**. Systems with **moderate to high change rate** should increase to about **10 GB per 1 TB** when retaining 25–30 snapshots. For detailed guidance on metadata sizing, including the equivalence calculations and when to increase capacity, see the [Tier 0 (metadata) sizing](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/implementation-guide/sizing#tier-0-metadata-sizing) section in the node sizing guide.
+
+**Media:** Tier 0 does not have to be NVMe. Enterprise SAS SSD is acceptable when it meets the endurance and capacity requirements. For Small/Edge deployments, on all-flash 1-2 node systems, a dedicated Tier 0 device is often unnecessary — metadata can reside on the primary tier.
+
+**Local redundancy:** usable Tier 0 is raw capacity divided by the number of local copies. VergeOS mirrors metadata across local drives: 2 copies on N+1, 3 copies on N+2. Install 2 Tier 0 drives per controller on N+1 and 3 on N+2 for full local protection. See [Local Node Tier 0 Metadata Redundancy](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/storage/tier0-local-redundancy) for details.
 {% endhint %}
 
 ## Storage Nodes
@@ -91,7 +98,7 @@ Storage nodes participate in the vSAN and contribute disk capacity to the shared
 
 | Component           | Specification                                     | Notes                                           |
 | ------------------- | ------------------------------------------------- | ----------------------------------------------- |
-| **CPU**             | 3.0 GHz+, 1 core per disk                         | Dedicated core per disk improves I/O throughput |
+| **CPU**             | 3.0 GHz+, 1 core per disk                         | Count Tier 0 devices as storage disks; do not count boot devices. Use physical CPU cores only; hardware threads (hyperthreading/SMT) do not count as extra cores |
 | **RAM**             | 1.5 GB per 1 TB of storage per node               | Better performance under heavy workloads        |
 | **Primary Storage** | 2+ NVMe or SAS/SATA SSDs per node                 | More spindles = more IOPS                       |
 | **Redundancy**      | At least 2 nodes with matching disk configuration | Required for vSAN data redundancy               |
@@ -203,30 +210,32 @@ Verge.io still recommends direct-attached disks for best performance and simplic
 
 ## Dedicated vs. Shared Controller Nodes
 
-For production environments, VergeOS recommends **dedicated controller nodes** -- nodes that handle only the vSAN metadata (Tier 0) and system management, without running guest workloads or contributing to workload storage tiers.
+VergeOS supports flexible node role design. Controller, storage, and compute roles can be combined on the same physical nodes depending on hardware availability, workload density, and deployment scale. **Most systems use nodes that serve multiple roles** — for example, nodes that are both controllers and storage participants. Smaller environments may run controller, storage, and compute workloads on the same nodes.
+
+**Dedicated controller nodes** — nodes that handle only the vSAN metadata (Tier 0) and system management, without running guest workloads or contributing to workload storage tiers — are an optional design choice. Similarly, dedicated storage-only or compute-only nodes are optional design choices, not a requirement for every deployment.
 
 ```mermaid
 graph LR
-    subgraph shared["Shared Controllers (Small / PoC)"]
+    subgraph shared["Combined Roles (Default / Small Systems)"]
         N1S["Node 1<br/>Controller + Storage + Compute"]
         N2S["Node 2<br/>Controller + Storage + Compute"]
     end
 
-    subgraph dedicated["Dedicated Controllers (Production)"]
+    subgraph dedicated["Dedicated Controllers (Optional)"]
         N1D["Node 1<br/>Controller Only<br/>(Tier 0 metadata)"]
         N2D["Node 2<br/>Controller Only<br/>(Tier 0 metadata)"]
         N3["Node 3+<br/>Storage + Compute"]
         N4["Node 4+<br/>Storage + Compute"]
     end
 
-    style shared fill:#fef3c7,stroke:#d97706
-    style dedicated fill:#d1fae5,stroke:#059669
+    style shared fill:#d1fae5,stroke:#059669
+    style dedicated fill:#fef3c7,stroke:#d97706
 ```
 
 | Approach                  | When to Use                    | Trade-off                                                         |
 | ------------------------- | ------------------------------ | ----------------------------------------------------------------- |
-| **Shared controllers**    | 2-node clusters, PoC, dev/test | Fewer nodes, but metadata I/O competes with workloads             |
-| **Dedicated controllers** | Production, 4+ nodes           | Extra nodes, but metadata operations are isolated and predictable |
+| **Combined roles**    | Most systems, smaller deployments | Fewer nodes, simpler design             |
+| **Dedicated controllers** | Optional design choice | Extra nodes, but metadata operations are isolated and predictable |
 
 ## Sizing Quick Reference
 
@@ -235,9 +244,10 @@ Use this quick-reference card when scoping a new deployment:
 | Question                         | Guidance                                                                  |
 | -------------------------------- | ------------------------------------------------------------------------- |
 | How much RAM per storage node?   | 16 GB base + 1 GB per 1 TB raw (minimum) or 1.5 GB per 1 TB (recommended) |
-| How many Tier 0 drives?          | 1 per controller (minimum), 2 per controller (recommended)                |
-| How large should Tier 0 be?      | 5 GB per 1 TB usable (minimum), 10 GB per 1 TB usable (recommended)       |
-| What DWPD for Tier 0?            | 3 DWPD or equivalent (enterprise NVMe)                                    |
+| How many Tier 0 drives?          | 2 per controller on N+1; 3 per controller on N+2 for full local protection                |
+| How large should Tier 0 be?      | 5 GB/TB usable (baseline, absorbs default 7 snapshots at any change rate and can hold 25-30 snapshots at low to moderate change rate); 10 GB/TB for moderate to high change rate with 25-30 snapshots       |
+| What endurance for Tier 0?            | Minimum 1 DWPD; size Tier 0 so write budget ≈ 15 GB/TB/day (e.g. 5 GB/TB @ 3 DWPD or 15 GB/TB @ 1 DWPD). |                                 |
+| What media for Tier 0? | Enterprise SSD (NVMe or SAS); dedicated Tier 0 often unnecessary on all-flash 1-2 node systems |
 | How many cores per storage disk? | 1 core per disk (recommended)                                             |
 | Minimum nodes for vSAN?          | 2 nodes with matching disk configuration                                  |
 | Maximum nodes per system?        | 200                                                                       |
