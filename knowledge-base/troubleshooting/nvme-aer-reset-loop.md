@@ -48,7 +48,7 @@ This message indicates that the PCIe link reported an error and the kernel reset
 
 ## Understanding AER Reset Patterns
 
-The pattern of resets determines whether the problem is isolated to a single device or affects multiple devices that share a hardware path.
+The pattern of resets determines whether the problem is isolated to a single device. It also shows whether multiple devices share a hardware path and are affected together.
 
 ### Single Controller Resetting
 
@@ -102,7 +102,7 @@ Firmware updates and BIOS configuration changes should be tested in a non-produc
 
 ## Additional Resources
 
-- [Node Sizing](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/implementation-guide/node-sizing) — Hardware requirements for VergeOS, including NVMe and storage controller recommendations.
+- [Node Sizing](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/implementation-guide/sizing) — Hardware requirements for VergeOS, including NVMe and storage controller recommendations.
 - [Installation Guide](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/implementation-guide/installation-guide) — Complete installation procedure for VergeOS.
 - [Pre-installation Checklist](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/implementation-guide/pre-installation) — Hardware and network verification steps before installation.
 
