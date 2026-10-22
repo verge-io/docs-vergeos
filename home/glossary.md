@@ -41,7 +41,7 @@ Refers to each autonomous Virtual Data Center (VDC) created within a VergeIO sys
 Point-in-time captures of an entire VergeOS cloud, tenant, individual virtual machine, or NAS volume. Used for recovery, development, and testing purposes.
 
 ### **Cluster**: 
-A group of nodes with matching hardware within a single VergeOS system, used as a pool for storage, compute, or HCI functions. A cluster is a logical grouping inside a system, not the entire environment. A single VergeOS system can contain multiple clusters for different performance or cost options. In some HCI platforms, "cluster" refers to the entire environment, which is closer to a VergeOS system. For more details, see [Clusters Overview](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/system-administration/clusters-overview).
+A group of nodes with matching hardware within a single VergeOS system, used as a pool for storage, compute, or HCI functions. A cluster is a logical grouping inside a system, not the entire environment. A single VergeOS system can contain multiple clusters for different performance or cost options. In some HCI platforms, "cluster" refers to the entire environment - closer to what VergeOS calls a system. For more details, see [Clusters Overview](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/system-administration/clusters-overview).
 
 ### **Compute-Only Cluster**: 
 A set of nodes in VergeOS added solely to expand compute resources.
