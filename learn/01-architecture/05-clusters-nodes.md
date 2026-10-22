@@ -242,7 +242,7 @@ Add nodes to specific clusters based on which resource is the bottleneck:
 {% hint style="info" %}
 **System vs. Cluster**
 
-A VergeOS system can contain multiple clusters. A cluster is a group of nodes with matching hardware inside a system. Some other HCI platforms use "cluster" to mean the whole environment. For more details, see [Clusters Overview](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/system-administration/clusters-overview).
+In VergeOS, a cluster is a group of nodes with the same hardware characteristics. A single VergeOS system can contain multiple clusters, each optimized for different workload or hardware profiles. This differs from some HCI platforms, where “cluster” refers to the entire environment. For more details, see [Clusters Overview](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/system-administration/clusters-overview).
 {% endhint %}
 
 - **Hardware consistency within clusters** — Use the same hardware specs for all nodes in a cluster. Mixing different hardware within a cluster can cause performance and reliability issues. To add different hardware, such as a newer server generation, create a new cluster in the same system.
