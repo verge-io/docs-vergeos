@@ -28,7 +28,7 @@ categories:
 
 Welcome to the Scale-out Node Installation Guide for VergeOS. This guide provides step-by-step instructions for installing additional Scale-out nodes using a USB installer.
 
-These nodes are designed to have identical hardware specifications to your controller nodes, including CPU, storage, network capabilities, and RAM, ensuring uniformity and compatibility within your infrastructure. When added, the disks from Scale-out nodes will integrate seamlessly into your existing vSAN tiers, increasing your cluster's storage capacity.
+These nodes are designed to have identical hardware specifications to your controller nodes, including CPU, storage, network capabilities, and RAM, ensuring uniformity and compatibility within your infrastructure. To add different hardware, such as a newer server generation, create a new cluster in the same system. When added, the disks from Scale-out nodes will integrate seamlessly into your existing vSAN tiers, increasing your cluster's storage capacity.
 
 By deploying additional Scale-out nodes, you effectively enlarge your hyper-converged cluster, boosting its overall performance and resilience. This guide will ensure that your expansion is executed smoothly and effectively, maintaining the high standards of efficiency and reliability expected in your VergeOS environment.
 
