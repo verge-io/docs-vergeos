@@ -121,7 +121,7 @@ VergeFabric delivers software-defined networking (SDN) for simplified and flexib
 * [**Granular User Permissions**](../system/permissions.md) - Configure precise access control for all your VergeOS assets with role-based permissions
 * [**Multifactor Authentication (MFA)**](../auth/multifactor-auth.md) - Ensure only authorized users access your systems and data by requiring an added layer of authentication
 * [**OIDC Identity Management**](../auth/oidc-apps-overview.md) - Centralize user identity administration across multiple VergeOS systems
-* [**Third-party Identity Integration**](../auth/auth-sources-overview.md) - Employ your existing OAuth2 management systems (such as Okta, GitLab, Azure AD/Entra, or Google Cloud Identity) for VergeOS logins
+* [**Third-party Identity Integration**](../auth/auth-sources-general.md) - Employ your existing OAuth2 management systems (such as Okta, GitLab, Azure AD/Entra, or Google Cloud Identity) for VergeOS logins
 
 ## Monitoring and Alerting
 

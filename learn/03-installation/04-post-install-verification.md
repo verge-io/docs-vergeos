@@ -150,7 +150,7 @@ Confirm external/management connectivity:
 
 ## Step 4: Initial Configuration
 
-With health checks complete, configure the system settings that prepare your environment for production workloads. VergeOS provides a [New System Configuration Checklist](https://docs.verge.io/product-guide/intro/new-system-configuration/) in the Product Guide — the key items are summarized below.
+With health checks complete, configure the system settings that prepare your environment for production workloads. VergeOS provides a [New System Configuration Checklist](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/platform-overview/new-system-configuration) in the Product Guide — the key items are summarized below.
 
 ### Review Cluster Settings
 
@@ -231,7 +231,7 @@ VergeOS uses **Subscriptions** to deliver alerts and reports via email. Create b
 - vSAN tier dashboard (weekly)
 - System snapshots inventory (daily)
 
-Navigate to **System > Subscriptions > New** to create each subscription. See the [Subscriptions Guide](https://docs.verge.io/product-guide/system/subscriptions-overview/) for detailed configuration options.
+Navigate to **System > Subscriptions > New** to create each subscription. See the [Subscriptions Guide](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/system-administration/subscriptions-overview) for detailed configuration options.
 
 ### Configure Site Syncs (If DR is Planned)
 

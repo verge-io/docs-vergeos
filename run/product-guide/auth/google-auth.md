@@ -55,7 +55,7 @@ Client ID and Secret can typically be generated at: [***https://console.develope
 {% endhint %}
 
 11. **Additional Optional Fields**
-See [**Authorization Sources - Overview**](auth-sources-overview.md) for information regarding additional optional Fields.
+See [**Authorization Sources - Overview**](auth-sources-general.md) for information regarding additional optional Fields.
 
 12. After completing the configuration, click **Submit** to save the new authorization source.
 

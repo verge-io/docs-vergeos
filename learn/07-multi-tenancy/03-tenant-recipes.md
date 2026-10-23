@@ -189,7 +189,7 @@ Each database question includes a **Database Context** field that determines whe
 - **Tenant context:** Configure settings inside the new tenant itself
 
 {% hint style="info" %}
-Database interaction questions reference the VergeOS API tables. Consult the [API Tables Description](https://docs.verge.io/knowledge-base/api-tables-description) and [API Guide](https://docs.verge.io/knowledge-base/verge-api-guide) for table names, field names, and filter syntax.
+Database interaction questions reference the VergeOS API tables. Consult the [API Tables Description](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/automation-api/api-tables-description) and [API Guide](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/automation-api/verge-api-guide) for table names, field names, and filter syntax.
 {% endhint %}
 
 ## Modifying and Republishing Recipes
@@ -266,7 +266,7 @@ When recipes are updated at the source, both tenants and remote systems see a no
 
 ## Real-World Example: CSP S3-Compatible Storage Offering
 
-To illustrate the power of tenant recipes, consider this scenario from the [VergeOS CSP Reference Architecture](https://docs.verge.io/reference-architecture/csp/):
+To illustrate the power of tenant recipes, consider this scenario from the [VergeOS CSP Reference Architecture](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/reference-architectures/csp):
 
 **CloudHoster**, a mid-sized cloud provider, wants to offer an S3-compatible storage service called "Cloud Storage" to their customers. Rather than manually configuring each customer's environment, they build a tenant recipe that automates the entire deployment:
 

@@ -89,7 +89,7 @@ VergeOS can be configured to allow users to authenticate using their corporate A
 * _**Update User Display Name:**_ - Update VergeOS user display name to match display name within Entra ID.
 * _**Update Group Membership:**_ - Update the groups that a VergeOS user is a member of. (A Group Scope is required for this to function.)
 
-19. **Additional Optional Fields:** See [**Authorization Sources (General)**](auth-sources-overview.md) for information regarding additional optional Fields.
+19. **Additional Optional Fields:** See [**Authorization Sources (General)**](auth-sources-general.md) for information regarding additional optional Fields.
 
 ## Add Azure Groups to VergeOS
 
