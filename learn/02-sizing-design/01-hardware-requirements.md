@@ -1,7 +1,7 @@
 ---
 description: >-
   Minimum and recommended hardware specifications for VergeOS controller nodes,
-  storage nodes, and compute-only nodes, plus maximum supported limits.
+  storage nodes, and compute-only nodes.
 ---
 
 # Hardware Requirements
@@ -160,23 +160,6 @@ VergeOS supports network adapters from three vendors:
 Consumer-grade or off-brand NICs are not supported. Using unsupported NICs may result in driver compatibility issues, poor performance, or system instability.
 {% endhint %}
 
-## Maximum Supported Specifications
-
-The following table outlines the maximum supported hardware specifications as of VergeOS version 4.12:
-
-| Resource                          | Maximum | Notes                                                                                                          |
-| --------------------------------- | ------- | -------------------------------------------------------------------------------------------------------------- |
-| **Nodes per system**              | 200     | Across all clusters                                                                                            |
-| **Individual physical disk size** | 64 TB   | Per physical drive                                                                                             |
-| **RAM per host**                  | 5 TB    | vSAN nodes require 1 GB RAM per 1 TB storage                                                                   |
-| **vDisk size**                    | 256 TB  | Per virtual disk                                                                                               |
-| **Disks per VM**                  | 2,000   | Requires Virtio-SCSI interface                                                                                 |
-| **Clusters per system**           | 100     | Mix of compute, storage, and HCI clusters                                                                      |
-| **Storage tiers per system**      | 5       | 5 workload tiers (Tier 1 high-performance through Tier 5 archive); Tier 0 metadata is separate and system-only |
-| **vSAN fault domains per system** | 2       | Provides data redundancy                                                                                       |
-
-These limits accommodate extremely large-scale deployments. Most production environments operate well within these boundaries.
-
 ## Storage Warnings and Considerations
 
 ### Consumer-Grade Disks
@@ -250,7 +233,6 @@ Use this quick-reference card when scoping a new deployment:
 | What media for Tier 0? | Enterprise SSD (NVMe or SAS); dedicated Tier 0 often unnecessary on all-flash 1-2 node systems |
 | How many cores per storage disk? | 1 core per disk (recommended)                                             |
 | Minimum nodes for vSAN?          | 2 nodes with matching disk configuration                                  |
-| Maximum nodes per system?        | 200                                                                       |
 | Core fabric NIC speed?           | 10 GbE minimum; 25/100 GbE recommended                                    |
 
 ## Next Steps
