@@ -90,7 +90,7 @@ Systems on 26.1.6, 26.1.7, or 26.1.8 can upgrade directly to 26.2.2.1. Systems o
 
 - **Fixed upgrades on systems with hundreds of networks.** The network fabric now updates before the rest of the update starts.
 - **A node interrupted by a hard reboot during an upgrade now repairs its kernel mismatch automatically on boot.**
-- Fixed PXE nodes losing network visibility during the update process, which could cause QMP socket errors on VMs.
+- Fixed PXE nodes losing network visibility during the update process, which could cause errors on VMs.
 - Optional packages are now correctly marked after an upgrade, so previously installed AI packages can be uninstalled.
 
 ### Networking
