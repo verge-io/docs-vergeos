@@ -49,16 +49,71 @@ categories:
 
 VergeOS 26.2 is a major feature release. The headline capability is **shared (multi-writer) disks**, which let a single disk be attached to multiple VMs at once and unlock guest-clustered workloads such as Windows Failover Clustering and Cluster Shared Volumes. The release also rebases the platform on an updated kernel and core OS packages, reworks VergeFabric for scale and adds advanced BGP configuration and VLAN load-balancing bond modes, brings full Precision Time Protocol (PTP) support, and significantly expands visibility with a native vSAN alarm framework and per-core CPU statistics. Alongside these, 26.2 includes a large set of stability, security, and usability fixes carried in on the 26.2.x patches.
 
-### Highlights
+### Shared Disks for Clustered Workloads
 
-- **Shared disks for clustered workloads** -- Attach one disk to multiple VMs concurrently for guest-level clustered filesystems and shared-disk HA (Microsoft CSV, Windows Failover Clustering). Shared disks present proper NAA/WWN identity and support SCSI-3 Persistent Reservations.
-- **Updated kernel and core OS packages** -- Refreshed base OS packages including a newer 6.18.x kernel, updated firmware and networking drivers, and a modern graphics stack.
-- **Graphical boot** -- Nodes now show a clean, branded boot screen with system name and vSAN mount progress, replacing scrolling service logs.
-- **Advanced BGP configuration** -- Configure BGP directly from a secured console shell inside the virtual network, with configuration persisted across restarts.
-- **Precision Time Protocol (PTP)** -- Enable PTP on the host and pass kvmclock through to guests, with per-node time-sync status on the time dashboard.
-- **Super Users group for physical access** -- Physical-access capability is now governed by group membership rather than a standalone user flag.
-- **Native vSAN alarms and expanded monitoring** -- A vSAN alarm framework, per-core CPU utilization, and a snapshot-retention alarm improve day-to-day visibility.
-- **Node replacement with drives is back** -- Full chassis replacement is supported again through a rebuilt, guided installer flow.
+{% hint style="success" %}
+**Multi-Writer Disk Support**
+
+- Attach one disk to multiple VMs concurrently for guest-level clustered filesystems and shared-disk HA (Microsoft CSV, Windows Failover Clustering)
+- Shared disks present proper NAA/WWN identity and support SCSI-3 Persistent Reservations
+{% endhint %}
+
+### Updated Kernel and Core OS Packages
+
+{% hint style="success" %}
+**Refreshed Platform Foundation**
+
+- Refreshed base OS packages including a newer 6.18.x kernel, updated firmware and networking drivers, and a modern graphics stack
+{% endhint %}
+
+### Graphical Boot
+
+{% hint style="success" %}
+**Clean Boot Screen**
+
+- Nodes show a clean, branded boot screen with system name and vSAN mount progress, replacing scrolling service logs
+{% endhint %}
+
+### Advanced BGP Configuration
+
+{% hint style="success" %}
+**Direct BGP Console Access**
+
+- Configure BGP directly from a secured console shell inside the virtual network, with configuration persisted across restarts
+{% endhint %}
+
+### Precision Time Protocol (PTP)
+
+{% hint style="success" %}
+**Host and Guest Time Synchronization**
+
+- Enable PTP on the host and pass kvmclock through to guests
+- Per-node time-sync status on the time dashboard
+{% endhint %}
+
+### Super Users Group for Physical Access
+
+{% hint style="success" %}
+**Group-Based Physical Access Control**
+
+- Physical-access capability is now governed by group membership rather than a standalone user flag
+{% endhint %}
+
+### Native vSAN Alarms and Expanded Monitoring
+
+{% hint style="success" %}
+**Enhanced Visibility**
+
+- A vSAN alarm framework, per-core CPU utilization, and a snapshot-retention alarm improve day-to-day visibility
+{% endhint %}
+
+### Node Replacement with Drives
+
+{% hint style="success" %}
+**Full Chassis Replacement**
+
+- Full chassis replacement is supported again through a rebuilt, guided installer flow
+{% endhint %}
 
 ## 26.2.2.1 (October 2026)
 
