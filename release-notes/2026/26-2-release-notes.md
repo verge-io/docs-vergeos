@@ -63,9 +63,9 @@ The Linux kernel in 26.2.2.1 is updated to 6.18.57, which includes the fix for [
 Systems on 26.1.6, 26.1.7, or 26.1.8 can upgrade directly to 26.2.2.1. Systems on 26.0, or on 26.1 earlier than 26.1.6, must first update to [26.1.8.1](26-1-release-notes.md#id-26.1.8.1-october-2026). Release 26.1.8.1 includes a hotfix that improves stability for systems with hundreds of networks.
 {% endhint %}
 
-### Changes
-
-- During the upgrade to 26.2.2.1, node 2 reboots before node1
+{% hint style="info" %}
+During the upgrade to 26.2.2.1, node 2 reboots before node1.
+{% endhint %}
 
 ### Security
 
