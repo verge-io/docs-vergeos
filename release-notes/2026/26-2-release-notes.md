@@ -55,17 +55,17 @@ VergeOS 26.2.2 is a maintenance release delivering stability improvements and ta
 {% hint style="warning" %}
 **Upgrade Paths for Systems with 50 or More Networks**
 
-Systems on 26.1.6, 26.1.7, or 26.1.8 can upgrade directly to 26.2.2. Systems on earlier 26.1 versions must first update to 26.1.8.1, which includes a fabric hotfix. Systems on 26.0 must also go through 26.1.8.1.
+Systems on 26.1.6, 26.1.7, or 26.1.8 can upgrade directly to 26.2.2. Systems on earlier 26.1 versions must first update to [26.1.8.1](26-1-release-notes.md), which includes a fabric hotfix. Systems on 26.0 must also go through 26.1.8.1.
 {% endhint %}
 
-- Fixed node failing to self-heal kernel mismatch when upgrade interrupted by hard reboot on a 2-node cluster
+- Fixed an issue where a node did not repair a kernel mismatch on its own after a hard reboot interrupted an upgrade on a 2-node system
 - Fixed PXE nodes losing network visibility during updates
 
 ### Bug Fixes
 
 #### Storage (vSAN)
 
-- Fixed an issue where snapshots being synced to a site could get stuck in repairs and lose data
+- Fixed an issue where snapshots being synced to a site could get stuck in repairs
 - Fixed VM exports permanently broken after a volume stale/reset cycle
 - Fixed an issue where an HBA failure could cause a Fibre Channel path to be associated with the wrong device
 - Fixed concurrent boot partition updates stalling on vSAN master handoff timeout with SQUASHFS read errors
@@ -87,8 +87,8 @@ Systems on 26.1.6, 26.1.7, or 26.1.8 can upgrade directly to 26.2.2. Systems on 
 
 #### Users, Security & Access Control
 
-- Fixed rejected user create leaving an enabled identity that can log in
-- Fixed root permission guard keying off user key instead of physical access
+- Fixed an issue where a user creation that failed validation could still leave behind an enabled account that can log in
+- Fixed root permission protection so that it is based on a user's physical access rights rather than on the user's internal ID
 - Updated the Linux kernel to 6.18.57 to fix the PWNEscape vulnerability
 
 #### Alarms & Monitoring
@@ -99,8 +99,8 @@ Systems on 26.1.6, 26.1.7, or 26.1.8 can upgrade directly to 26.2.2. Systems on 
 
 #### User Interface & Files
 
-- Fixed WebUI and API upload speeds significantly slower compared to 26.0
-- Fixed dragging columns in VM list view causing issues
+- Fixed slow file uploads through the UI and API (slower than in 26.0)
+- Fixed an issue where dragging a column in the VM list view could remove it from the view
 - Fixed capitalization of "acknowledge" alarm button
 - Fixed API key modals covering each other when clicking the kebab menu
 
