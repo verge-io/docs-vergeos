@@ -65,7 +65,6 @@ Systems on 26.1.6, 26.1.7, or 26.1.8 can upgrade directly to 26.2.2.1. Systems o
 
 ### Changes
 
-- vSAN now waits longer before a read times out when all nodes are online, so Fibre Channel multipath has time to fail over to another path
 - During an update, node1 now reboots first
 
 ### Security
@@ -83,6 +82,7 @@ Systems on 26.1.6, 26.1.7, or 26.1.8 can upgrade directly to 26.2.2.1. Systems o
 - Fixed Windows failover-cluster VMs losing recognition of newly attached shared disks after repeated cluster validations.
 - Fixed SCSI-3 persistent reservation validation failures on shared virtio-scsi disks during Windows cluster validation.
 - Fixed Fibre Channel device-path mismatches during some HBA failures, where LUNs could end up associated with the wrong device path.
+- Increased the multipath read timeout when all nodes are online, so a path that recovers quickly is no longer abandoned prematurely.
 - Fixed vSAN errors when removing a node from a cluster.
 - Restored accurate CPU IO Wait reporting. Idle cores no longer display inflated IO Wait values, and the temporary workaround that suppressed these statistics is no longer needed.
 
