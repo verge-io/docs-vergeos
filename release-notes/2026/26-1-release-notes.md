@@ -87,7 +87,7 @@ categories:
 
 ## 26.1.8.1 (October 2026)
 
-Hotfix to improve subsequent updates for systems with more than 50 networks
+Hotfix to improve network stability on systems with hundreds of networks
 
 
 ## 26.1.8 (August 2026)
