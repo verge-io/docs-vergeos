@@ -34,7 +34,7 @@ categories:
 **Release Information**
 
 - **Release Date**: January 2026
-- **Latest Version**: 26.1.8 (August 2026)
+- **Latest Version**: 26.1.8.1 (October 2026)
 - **Status**: Supported
 - **End-of-Life**: TBD
 {% endhint %}
@@ -84,6 +84,11 @@ categories:
 
 
 ---
+
+## 26.1.8.1 (October 2026)
+
+Hotfix to improve subsequent updates for systems with more than 50 networks
+
 
 ## 26.1.8 (August 2026)
 
