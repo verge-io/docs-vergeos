@@ -356,7 +356,7 @@ errors.
 ### Review the Diagnostics Guide
 
 Read the full [vSAN Diagnostics
-Guide](https://docs.verge.io/product-guide/storage/vsan-diagnostics/) and
+Guide](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/storage/vsan-diagnostics) and
 [NAS Diagnostics
-Guide](https://docs.verge.io/product-guide/nas/nas-diagnostics/) in the
+Guide](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/nas/nas-diagnostics) in the
 official docs.

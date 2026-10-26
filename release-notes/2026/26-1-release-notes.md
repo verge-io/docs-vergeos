@@ -34,7 +34,7 @@ categories:
 **Release Information**
 
 - **Release Date**: January 2026
-- **Latest Version**: 26.1.8 (August 2026)
+- **Latest Version**: 26.1.8.1 (October 2026)
 - **Status**: Latest Production Release
 - **End-of-Life**: TBD
 {% endhint %}
@@ -81,6 +81,10 @@ categories:
 - Added support for N+2 (RF3) vSAN redundancy, also known as Replication Factor 3
 - Provides additional fault tolerance beyond standard N+1 configurations
 {% endhint %}
+
+## 26.1.8.1 (October 2026)
+
+Hotfix to improve stability for systems with hundreds of networks 
 
 ## 26.1.8 (August 2026)
 

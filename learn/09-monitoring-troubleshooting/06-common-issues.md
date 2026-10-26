@@ -67,7 +67,7 @@ Network connectivity problems are the most common support topic. Before diving i
 
 1. Verify a NIC exists in the VM's **NICs** section within VergeOS
 2. Connect to the VM via the **Remote Console**
-3. Install the VirtIO drivers from the guest agent ISO — refer to the VergeOS documentation on [VM Guest Agent](https://docs.verge.io/product-guide/virtual-machines/vm-guest-agent/) for download and installation steps
+3. Install the VirtIO drivers from the guest agent ISO — refer to the VergeOS documentation on [VM Guest Agent](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/virtual-machines/vm-guest-agent) for download and installation steps
 4. After driver installation, Windows will detect the network adapter automatically
 
 ### Improper Guest IP Configuration

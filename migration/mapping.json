@@ -1386,13 +1386,6 @@
   "title": "Change External Network to VLAN Bonded"
  },
  {
-  "src": "knowledge-base/posts/Disk-Discard.md",
-  "space": "knowledge-base",
-  "dest": "virtual-machines/vm-disk-discard.md",
-  "group": "Virtual Machines",
-  "title": "VM Disk Discard"
- },
- {
   "src": "knowledge-base/posts/Importing-vms-from-files.md",
   "space": "knowledge-base",
   "dest": "virtual-machines/import-vms-from-files.md",

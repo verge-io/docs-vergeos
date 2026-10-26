@@ -107,14 +107,14 @@ Utilize VergeOS as the main router and network manager for your lab and home LAN
 {% hint style="success" %}
 **Installation Note**
 
-During installation, use your **LAN** network as the initial external network. Once installation is complete, add the WAN network for internet connectivity. For detailed instructions, refer to the [Knowledge Base article on creating an external network](https://docs.verge.io/knowledge-base/create-external-network/).
+During installation, use your **LAN** network as the initial external network. Once installation is complete, add the WAN network for internet connectivity. For detailed instructions, refer to the [Knowledge Base article on creating an external network](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/networking/create-external-network).
 {% endhint %}
 
 **NAS Service:**
 
 To set up a robust NAS for your home environment, VergeOS offers a built-in NAS service, perfect for managing shared storage with high capacity and redundancy.
 
-For step-by-step instructions on configuring and deploying the NAS service, see the [NAS Service Product Guide](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/nas/nas-service). Additional configuration options and troubleshooting steps are covered in the [Knowledge Base](https://docs.verge.io/knowledge-base/category/nas/#troubleshooting-nas-cifs-shares).
+For step-by-step instructions on configuring and deploying the NAS service, see the [NAS Service Product Guide](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/nas/nas-service). Additional configuration options and troubleshooting steps are covered in the [Knowledge Base](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/storage-vsan/troubleshooting-nas-shares).
 
 **GPU Support:**
 

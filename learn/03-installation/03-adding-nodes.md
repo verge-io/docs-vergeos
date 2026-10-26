@@ -18,9 +18,16 @@ Before adding any node to your VergeOS system, ensure the following conditions a
 | ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Operational 2-node cluster** | The primary and secondary controller nodes from the [Installation Guide](02-controller-installation.md) must be fully installed and healthy |
 | **Network readiness**          | VLANs, physical NIC assignments, and core fabric cabling must match the configuration documented during initial setup                                      |
-| **Matching hardware**          | Scale-out and storage-only nodes should have identical hardware specifications (CPU, storage, NICs, RAM) to existing nodes in the target cluster           |
+| **Matching hardware**          | Scale-out and storage-only nodes should have identical hardware specifications (CPU, storage, NICs, RAM) to existing nodes in the target cluster. To add different hardware, such as a newer server generation, create a new cluster in the same system. |
 | **USB installer**              | VergeOS installer media matching the version running on your existing cluster                                                                              |
 | **Cluster created in UI**      | If adding a **new cluster type** (storage-only or compute-only) for the first time, create the cluster in the VergeOS UI **before** booting the installer  |
+
+{% hint style="info" %}
+**System vs. Cluster**
+
+In VergeOS, a cluster is a group of nodes with the same hardware characteristics. A single VergeOS system can contain multiple clusters, each optimized for different workload or hardware profiles. This differs from some HCI platforms, where “cluster” refers to the entire environment. For more details, see [Clusters Overview](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/system-administration/clusters-overview).
+
+{% endhint %}
 
 {% hint style="warning" %}
 **Create Clusters Before Installing Nodes**

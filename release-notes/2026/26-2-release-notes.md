@@ -34,7 +34,6 @@ categories:
 
 # 26.2
 
-
 {% hint style="info" %}
 **Release Information**
 
@@ -44,23 +43,114 @@ categories:
 - **End-of-Life**: TBD
 {% endhint %}
 
-
-## 26.2.1 (October 2026)
+## Major Features & Themes
 
 ### Summary
 
-VergeOS 26.2 is a major feature release. The headline capability is **shared (multi-writer) disks**, which let a single disk be attached to multiple VMs at once and unlock guest-clustered workloads such as Windows Failover Clustering and Cluster Shared Volumes. The release also rebases the platform on an updated kernel and core OS packages, reworks VergeFabric for scale and adds advanced BGP configuration and VLAN load-balancing bond modes, brings full Precision Time Protocol (PTP) support, and significantly expands visibility with a native vSAN alarm framework and per-core CPU statistics. Alongside these, 26.2 includes a large set of stability, security, and usability fixes carried in on the 26.2.0.x and 26.2.1 patches.
+VergeOS 26.2 is a major feature release. The headline capability is **shared (multi-writer) disks**, which let a single disk be attached to multiple VMs at once and unlock guest-clustered workloads such as Windows Failover Clustering and Cluster Shared Volumes. The release also rebases the platform on an updated kernel and core OS packages, reworks VergeFabric for scale and adds advanced BGP configuration and VLAN load-balancing bond modes, brings full Precision Time Protocol (PTP) support, and significantly expands visibility with a native vSAN alarm framework and per-core CPU statistics. Alongside these, 26.2 includes a large set of stability, security, and usability fixes carried in on the 26.2.x patches.
 
-### Highlights
+### Shared Disks for Clustered Workloads
 
-- **Shared disks for clustered workloads** -- Attach one disk to multiple VMs concurrently for guest-level clustered filesystems and shared-disk HA (Microsoft CSV, Windows Failover Clustering). Shared disks present proper NAA/WWN identity and support SCSI-3 Persistent Reservations.
-- **Updated kernel and core OS packages** -- Refreshed base OS packages including a newer 6.18.x kernel, updated firmware and networking drivers, and a modern graphics stack.
-- **Graphical boot** -- Nodes now show a clean, branded boot screen with system name and vSAN mount progress, replacing scrolling service logs.
-- **Advanced BGP configuration** -- Configure BGP directly from a secured console shell inside the virtual network, with configuration persisted across restarts.
-- **Precision Time Protocol (PTP)** -- Enable PTP on the host and pass kvmclock through to guests, with per-node time-sync status on the time dashboard.
-- **Super Users group for physical access** -- Physical-access capability is now governed by group membership rather than a standalone user flag.
-- **Native vSAN alarms and expanded monitoring** -- A vSAN alarm framework, per-core CPU utilization, and a snapshot-retention alarm improve day-to-day visibility.
-- **Node replacement with drives is back** -- Full chassis replacement is supported again through a rebuilt, guided installer flow.
+{% hint style="success" %}
+**Multi-Writer Disk Support**
+
+- Attach one disk to multiple VMs concurrently for guest-level clustered filesystems and shared-disk HA (Microsoft CSV, Windows Failover Clustering)
+- Shared disks present proper NAA/WWN identity and support SCSI-3 Persistent Reservations
+{% endhint %}
+
+### Single-Node Deployments
+
+{% hint style="success" %}
+**No Core Fabric Network Required**
+
+- A single-node system has no node-to-node vSAN or fabric traffic, so no Core Fabric Network is required
+- See [Single-node systems](https://docs.verge.io/plan-and-deploy/implementation-guide/sizing#single-node-systems) for node requirements
+{% endhint %}
+
+### Advanced BGP Configuration
+
+{% hint style="success" %}
+**Direct BGP Console Access**
+
+- Configure BGP directly from a secured console shell inside the virtual network, with configuration persisted across restarts
+{% endhint %}
+
+### Precision Time Protocol (PTP)
+
+{% hint style="success" %}
+**Host and Guest Time Synchronization**
+
+- Enable PTP on the host and pass kvmclock through to guests
+- Per-node time-sync status on the time dashboard
+{% endhint %}
+
+## 26.2.2.1 (October 2026)
+
+### Summary
+
+VergeOS 26.2.2.1 is a maintenance release focused on storage reliability, cluster availability, and security. It includes a kernel update that addresses a critical virtualization escape vulnerability, a set of vSAN fixes for shared-disk clustering and node maintenance, improved update behavior for large environments and PXE nodes, and a collection of UI, audit-log, and permissions corrections.
+
+{% hint style="warning" %}
+**Upgrade Paths to 26.2.2.1**
+
+Systems on 26.1.6, 26.1.7, or 26.1.8 can upgrade directly to 26.2.2.1. Systems on 26.0, or on 26.1 earlier than 26.1.6, must first update to [26.1.8.1](26-1-release-notes.md#id-26.1.8.1-october-2026). Release 26.1.8.1 includes a hotfix that improves stability for systems with hundreds of networks.
+{% endhint %}
+
+{% hint style="info" %}
+During the upgrade to 26.2.2.1, node 2 reboots before node1.
+{% endhint %}
+
+### Security
+
+- The Linux kernel in 26.2.2.1 is updated to 6.18.57, which includes the fix for [CVE-2026-99999](https://nvd.nist.gov/vuln/detail/CVE-2026-99999) (PwnEscape), a critical vulnerability that could let an untrusted guest VM escape to the host. Update affected systems as soon as practical.
+- **Fixed an issue where a rejected user creation could still leave a working login.** A create request rejected with a validation error no longer leaves behind an enabled identity with a credential.
+- **Fixed a permission check that did not use the user's physical-access setting.** Permission edits could fail for some users, and other users were not fully protected.
+
+### Storage (vSAN)
+
+- **Fixed an issue where snapshots being synced to a site could get stuck in repairs.**
+- **Fixed VMs stopping with I/O errors while another node was in a maintenance reboot.**
+- **Fixed an issue where a node could enter maintenance mode before its data was fully redundant.**
+- **Shared disks now pass I/O errors through to the guest** instead of stopping the VM, allowing clustered guests to make their own failover decisions.
+- Fixed boot partition updates that could stall when several nodes updated at the same time.
+- Fixed Windows failover-cluster VMs losing recognition of newly attached shared disks after repeated cluster validations.
+- Fixed SCSI-3 persistent reservation validation failures on shared virtio-scsi disks during Windows cluster validation.
+- Fixed Fibre Channel device-path mismatches during some HBA failures, where LUNs could end up associated with the wrong device path.
+- Increased the multipath read timeout when all nodes are online, so a path that recovers quickly is no longer abandoned prematurely.
+- Fixed vSAN errors when removing a node from a cluster.
+- Restored accurate CPU IO Wait reporting. Idle cores no longer display inflated IO Wait values, and the temporary workaround that suppressed these statistics is no longer needed.
+
+### Update & Installation
+
+- **Fixed upgrades on systems with hundreds of networks.** The network fabric now updates before the rest of the update starts.
+- **A node interrupted by a hard reboot during an upgrade now repairs its kernel mismatch automatically on boot.**
+- Fixed PXE nodes losing network visibility during the update process, which could cause errors on VMs.
+- Optional packages are now correctly marked after an upgrade, so previously installed AI packages can be uninstalled.
+
+### Networking
+
+- Corrected the bonding options shown when creating or editing an external network, including the primary bond interface field and bridged-mode selection.
+
+### Snapshots
+
+- Fixed a snapshot error when a VM has two tags in the same category whose names differ only by letter case. The snapshot now completes without logging an error.
+
+### System & Logging
+
+- Cluster edits now write an audit entry to the System Log, including changes such as disabling CPU sleep states and KVM nesting.
+
+### Alarms & Monitoring
+
+- Fixed nodes showing 100% CPU usage caused by an ACPI power-management module.
+
+### User Interface
+
+- Fixed column dragging in the VM list view, which could remove columns or leave visual artifacts.
+- Fixed menus stacking on top of each other when more than one ⋮ menu was opened.
+- Improved WebUI and API upload throughput, which had regressed relative to 26.0 in some environments.
+
+
+## 26.2.1 (October 2026)
 
 ### OS, Installer & Update Process
 
@@ -76,7 +166,7 @@ VergeOS 26.2 is a major feature release. The headline capability is **shared (mu
 - **Node replacement now supports a full chassis replacement (drives and all).** The installer's node-replace path has been rebuilt as a guided flow: choose **Node Replace**, pick the node to replace, then explicitly choose the drive disposition (new drives, keep existing drives, or PXE boot). The previous dead-end that blocked the "no, do not keep drives" answer is gone, and drives are matched to tiers with size validation so a chassis swap can be completed self-service.
 - **The installer's Controller role label no longer implies a two-node limit.** The `(node1/node2)` wording was dropped, since any node can be added as a Controller — which is how an N+1 system is converted to N+2.
 - **The installer now reports licensing limits when adding nodes.** Attempting to install more nodes than a license permits now produces a clear message identifying the license restriction, instead of a generic failure that looked like a configuration problem.
-- **Single-node installations no longer require a core network.** VergeOS can be deployed on a single node using only two physical NICs, with both available for external and workload networking instead of dedicating one to a core-network loopback. There is no peer node, so no inter-node traffic path is needed.
+- **Single-node installations no longer require a core network.** A single node has no peer node, so no inter-node traffic path is needed.
 - **Fixed PXE boot on UEFI nodes**, and fixed an issue where a PXE install could appear to fail when it had actually succeeded.
 
 #### Update Process

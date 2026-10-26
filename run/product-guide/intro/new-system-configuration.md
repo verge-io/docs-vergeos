@@ -106,7 +106,7 @@ _Full_ System Snapshots provide a point-in-time backup of your entire system. By
 
 ## Authentication/Authorization Settings
 
-1. **Third-party Authorization Sources:** [**Configure an Authorization Source**](../auth/auth-sources-overview.md) for any external identity service (such as Google SSO or Microsoft Entra ID) you wish to utilize for VergeOS logins.
+1. **Third-party Authorization Sources:** [**Configure an Authorization Source**](../auth/auth-sources-general.md) for any external identity service (such as Google SSO or Microsoft Entra ID) you wish to utilize for VergeOS logins.
 2. **Multifactor Authentication (MFA):** MFA adds a critical security layer to your user accounts, ensuring that even if a password is compromised, unauthorized access is nearly impossible. With cyber threats on the rise, enabling MFA helps protect your systems and data. It is strongly advised that you require multifactor authentication for all user logins. [**Configure Multifactor Authentication for direct VergeOS logins**](../auth/multifactor-auth.md).
 
 {% hint style="info" %}

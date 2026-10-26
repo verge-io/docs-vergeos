@@ -361,5 +361,5 @@ The `vergeio.vergeos` collection follows the standard Ansible pattern: API-drive
 - [Ansible Collection — GitHub](https://github.com/verge-io/ansible-collection-vergeos)
 - [Ansible Galaxy — vergeio.vergeos](https://galaxy.ansible.com/vergeio/vergeos)
 - [pyvergeos Python SDK — PyPI](https://pypi.org/project/pyvergeos/)
-- [VergeOS Docs — Python SDK](https://docs.verge.io/product-guide/tools-integrations/python-sdk/)
+- [VergeOS Docs — Python SDK](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/integrations-and-apis/python-sdk)
 - [Ansible Documentation](https://docs.ansible.com/)
