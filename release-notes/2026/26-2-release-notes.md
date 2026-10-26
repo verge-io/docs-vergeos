@@ -112,7 +112,7 @@ Systems on 26.1.6, 26.1.7, or 26.1.8 can upgrade directly to 26.2.2.1. Systems o
 ### User Interface
 
 - Fixed column dragging in the VM list view, which could remove columns or leave visual artifacts.
-- Fixed modal menus stacking on top of each other when opened from the kebab menu.
+- Fixed menus stacking on top of each other when more than one ⋮ menu was opened.
 - Improved WebUI and API upload throughput, which had regressed relative to 26.0 in some environments.
 
 
