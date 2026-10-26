@@ -34,7 +34,7 @@ This method allows for the import of many VMs at once. It does not require uploa
 {% endhint %}
 
 {% hint style="info" %}
-**NAS Import is only for VMs, not disks. This process is for VMX or OVF files only. Any other formats will need to [Importing VMs from Files](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/virtual-machines/import-vms-from-files).**
+**NAS Import is only for VMs, not disks. This process supports VMX, OVF, OVA, and YBVM (VergeOS VM export) file formats. VergeOS `.ybvm` exports require no conversion to OVF. To import other formats, see [Importing VMs from Files](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/virtual-machines/import-vms-from-files).**
 
 
 {% endhint %}

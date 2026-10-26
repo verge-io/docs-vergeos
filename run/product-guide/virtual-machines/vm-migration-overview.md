@@ -108,7 +108,7 @@ Import VMs directly from CIFS or NFS network shares where VM files are stored. E
 * Bulk import multiple VMs simultaneously
 * Direct access to existing NFS/CIFS shares
 * No need to upload files to vSAN first
-* Supports VMX and OVF configuration formats
+* Supports VMX, OVF, OVA, and YBVM (VergeOS VM export) formats
 
 #### [**VergeOS Clone Utility**](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/virtual-machines/importing-a-physicalvirtual-machine-into-vergeio)
 
