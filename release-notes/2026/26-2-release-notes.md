@@ -58,22 +58,6 @@ VergeOS 26.2 is a major feature release. The headline capability is **shared (mu
 - Shared disks present proper NAA/WWN identity and support SCSI-3 Persistent Reservations
 {% endhint %}
 
-### Updated Kernel and Core OS Packages
-
-{% hint style="success" %}
-**Refreshed Platform Foundation**
-
-- Refreshed base OS packages including a newer 6.18.x kernel, updated firmware and networking drivers, and a modern graphics stack
-{% endhint %}
-
-### Graphical Boot
-
-{% hint style="success" %}
-**Clean Boot Screen**
-
-- Nodes show a clean, branded boot screen with system name and vSAN mount progress, replacing scrolling service logs
-{% endhint %}
-
 ### Advanced BGP Configuration
 
 {% hint style="success" %}
@@ -91,29 +75,13 @@ VergeOS 26.2 is a major feature release. The headline capability is **shared (mu
 - Per-node time-sync status on the time dashboard
 {% endhint %}
 
-### Super Users Group for Physical Access
+### Other Highlights
 
-{% hint style="success" %}
-**Group-Based Physical Access Control**
-
-- Physical-access capability is now governed by group membership rather than a standalone user flag
-{% endhint %}
-
-### Native vSAN Alarms and Expanded Monitoring
-
-{% hint style="success" %}
-**Enhanced Visibility**
-
-- A vSAN alarm framework, per-core CPU utilization, and a snapshot-retention alarm improve day-to-day visibility
-{% endhint %}
-
-### Node Replacement with Drives
-
-{% hint style="success" %}
-**Full Chassis Replacement**
-
-- Full chassis replacement is supported again through a rebuilt, guided installer flow
-{% endhint %}
+- **Updated kernel and core OS packages** -- Refreshed base OS packages including a newer 6.18.x kernel, updated firmware and networking drivers, and a modern graphics stack.
+- **Graphical boot** -- Nodes now show a clean, branded boot screen with system name and vSAN mount progress, replacing scrolling service logs.
+- **Super Users group for physical access** -- Physical-access capability is now governed by group membership rather than a standalone user flag.
+- **Native vSAN alarms and expanded monitoring** -- A vSAN alarm framework, per-core CPU utilization, and a snapshot-retention alarm improve day-to-day visibility.
+- **Node replacement with drives is back** -- Full chassis replacement is supported again through a rebuilt, guided installer flow.
 
 ## 26.2.2.1 (October 2026)
 
