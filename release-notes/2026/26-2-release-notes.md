@@ -63,7 +63,7 @@ VergeOS 26.2 is a major feature release. The headline capability is **shared (mu
 {% hint style="success" %}
 **No Core Fabric Network Required**
 
-- A single-node system has no node-to-node vSAN or fabric traffic, so no Core Fabric Network or Core Fabric NIC is required
+- A single-node system has no node-to-node vSAN or fabric traffic, so no Core Fabric Network is required
 - See [Single-node systems](https://docs.verge.io/plan-and-deploy/implementation-guide/sizing#single-node-systems) for node requirements
 {% endhint %}
 
@@ -179,7 +179,7 @@ During the upgrade to 26.2.2.1, node 2 reboots before node1.
 - **Node replacement now supports a full chassis replacement (drives and all).** The installer's node-replace path has been rebuilt as a guided flow: choose **Node Replace**, pick the node to replace, then explicitly choose the drive disposition (new drives, keep existing drives, or PXE boot). The previous dead-end that blocked the "no, do not keep drives" answer is gone, and drives are matched to tiers with size validation so a chassis swap can be completed self-service.
 - **The installer's Controller role label no longer implies a two-node limit.** The `(node1/node2)` wording was dropped, since any node can be added as a Controller — which is how an N+1 system is converted to N+2.
 - **The installer now reports licensing limits when adding nodes.** Attempting to install more nodes than a license permits now produces a clear message identifying the license restriction, instead of a generic failure that looked like a configuration problem.
-- **Single-node installations no longer require a core network.** VergeOS can be deployed on a single node using only two physical NICs, with both available for external and workload networking instead of dedicating one to a core-network loopback. There is no peer node, so no inter-node traffic path is needed.
+- **Single-node installations no longer require a core network.** A single node has no peer node, so no inter-node traffic path is needed.
 - **Fixed PXE boot on UEFI nodes**, and fixed an issue where a PXE install could appear to fail when it had actually succeeded.
 
 #### Update Process
