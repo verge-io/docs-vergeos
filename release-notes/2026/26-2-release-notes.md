@@ -64,12 +64,18 @@ VergeOS 26.2 is a major feature release. The headline capability is **shared (mu
 
 VergeOS 26.2.2 is a maintenance release delivering stability improvements and targeted bug fixes for the update process, vSAN reliability, shared disk support, networking, security, monitoring, and user interface. Highlights include fixes for running VMs dying with I/O errors during a maintenance reboot on a 2-node cluster, Windows Failover Cluster validation and shared disk detection issues, and a kernel security update.
 
+{% hint style="danger" %}
+**Security fix**
+
+The Linux kernel in 26.2.2 is updated to 6.18.57, which includes the fix for [CVE-2026-99999](https://nvd.nist.gov/vuln/detail/CVE-2026-99999) (PWNEscape), a critical vulnerability.
+{% endhint %}
+
 ### Update Process
 
 {% hint style="warning" %}
-**Upgrade Paths**
+**Upgrade Paths to 26.2.2**
 
-Systems on 26.1.6, 26.1.7, or 26.1.8 can upgrade directly to 26.2.2. Systems on 26.0 or on 26.1 earlier than 26.1.6 must first update to [26.1.8.1](26-1-release-notes.md). Release 26.1.8.1 includes a fabric hotfix for systems with 50 or more networks.
+Systems on 26.1.6, 26.1.7, or 26.1.8 can upgrade directly to 26.2.2. Systems on 26.0, or on 26.1 earlier than 26.1.6, must first update to [26.1.8.1](26-1-release-notes.md). Release 26.1.8.1 includes a fabric hotfix so systems with 50 or more networks upgrade reliably.
 {% endhint %}
 
 - Fixed an issue where a node did not repair a kernel mismatch on its own after a hard reboot interrupted an upgrade on a 2-node system
@@ -91,7 +97,7 @@ On shared disks, VergeOS no longer stops the VM on an I/O error. The error passe
 #### Storage (vSAN)
 
 - Fixed an issue where snapshots being synced to a site could get stuck in repairs
-- Fixed VM exports permanently broken after a volume stale/reset cycle
+- Fixed VM exports on a NAS service that stayed broken after an export volume went stale and was reset
 - Fixed an issue where an HBA failure could cause a Fibre Channel path to be associated with the wrong device
 - Fixed concurrent boot partition updates stalling on vSAN master handoff timeout with SQUASHFS read errors
 - Fixed running VMs on the surviving node dying with io-error during maintenance reboot on a 2-node cluster
@@ -111,14 +117,13 @@ On shared disks, VergeOS no longer stops the VM on an I/O error. The error passe
 #### Users, Security & Access Control
 
 - Fixed an issue where a user creation that failed validation could still leave behind an enabled account that can log in
-- Fixed root permission protection so that it checks physical access (Super Users group membership) instead of the user's internal ID
-- Updated the Linux kernel to 6.18.57 to fix the PWNEscape vulnerability
+- Fixed root permission protection so that it checks physical access (Super Users group membership) instead of the user's internal ID, and protects physical-access users as intended
+- Fixed cluster setting changes not being recorded in the audit log
 
 #### Alarms & Monitoring
 
 - Fixed nodes showing 100% CPU usage caused by the acpi_pad kernel module
-- IO Wait now reports actual values. Earlier 26.2 releases showed inflated IO Wait on idle CPUs, and a temporary fix then reported IO Wait as zero
-- Fixed cluster edits writing no audit log entry
+- Fixed IO Wait metrics, which 26.2 reported as zero: IO Wait now reflects actual I/O wait on each core
 
 #### User Interface & Files
 

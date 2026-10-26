@@ -88,8 +88,9 @@ VergeOS 26.1.8.1 is a maintenance release that prepares systems with a large num
 
 ### Update Process
 
-- On systems with 50 or more networks, the fabric could struggle to keep up during an upgrade; 26.1.8.1 includes a hotfix that applies the updated fabric during the upgrade so these systems can upgrade to 26.2.2
-- Systems on 26.0 or on 26.1 earlier than 26.1.6 must update to 26.1.8.1 before upgrading to 26.2.2; systems on 26.1.6, 26.1.7, or 26.1.8 can upgrade directly to 26.2.2
+- Systems on 26.1.6, 26.1.7, or 26.1.8 can upgrade directly to 26.2.2
+- Systems on 26.0, or on 26.1 earlier than 26.1.6, must first update to 26.1.8.1 before upgrading to 26.2.2
+- Release 26.1.8.1 includes a fabric hotfix so systems with 50 or more networks upgrade reliably
 
 ---
 
