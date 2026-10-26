@@ -70,7 +70,7 @@ Systems on 26.1.6, 26.1.7, or 26.1.8 can upgrade directly to 26.2.2.1. Systems o
 
 ### Storage (vSAN)
 
-- **Fixed an issue where `.snap_` snapshots being synced could become stuck in an endless repair loop and lose data.** This affected site syncs in some environments.
+- **Fixed an issue where snapshots being synced to a site could get stuck in repairs.**
 - **Fixed an issue where running VMs on the surviving node of a two-node cluster could fail with I/O errors while the other node was down for a maintenance reboot.** VMs now continue running normally through the maintenance window.
 - **Prevented a node from entering maintenance mode before it is actually redundant**, which could occur when reference walks were long and replays missed their window.
 - **Shared disks now pass I/O errors through to the guest** instead of stopping the VM, allowing clustered guests to make their own failover decisions.
