@@ -62,7 +62,7 @@ VergeOS 26.2 is a major feature release. The headline capability is **shared (mu
 
 ## 26.2.2 (October 2026)
 
-VergeOS 26.2.2 is a maintenance release delivering stability improvements and targeted bug fixes for the update process, vSAN reliability, shared disk support, networking, security, monitoring, and user interface. Highlights include fixes for nodes showing 100% CPU usage caused by the acpi_pad kernel module, slow file uploads through the UI and API, and Windows Failover Cluster validation and shared disk detection issues.
+VergeOS 26.2.2 is a maintenance release delivering stability improvements and targeted bug fixes for the update process, vSAN reliability, shared disk support, networking, security, monitoring, and user interface. Highlights include fixes for nodes showing 100% CPU usage, slow file uploads through the UI and API, and Windows Failover Cluster validation and shared disk detection issues.
 
 {% hint style="danger" %}
 **Security fix**
@@ -78,7 +78,7 @@ The Linux kernel in 26.2.2 is updated to 6.18.57, which includes the fix for [CV
 Systems on 26.1.6, 26.1.7, or 26.1.8 can upgrade directly to 26.2.2. Systems on 26.0, or on 26.1 earlier than 26.1.6, must first update to [26.1.8.1](26-1-release-notes.md#id-26.1.8.1-october-2026). Release 26.1.8.1 includes a fabric hotfix so systems with 50 or more networks upgrade reliably.
 {% endhint %}
 
-- Fixed an issue where a node did not repair a kernel mismatch on its own after a hard reboot interrupted an upgrade on a 2-node system
+- Fixed an issue where a node did not repair a kernel mismatch on its own after a hard reboot interrupted an upgrade
 - Fixed PXE nodes losing network visibility during updates
 
 ### Changes
@@ -98,7 +98,7 @@ On shared disks, VergeOS no longer stops the VM on an I/O error. The error passe
 - Fixed an issue where snapshots being synced to a site could get stuck in repairs
 - Fixed VM exports on a NAS service that stayed broken after an export volume went stale and was reset
 - Fixed an issue where an HBA failure could cause a Fibre Channel path to be associated with the wrong device
-- Fixed concurrent boot partition updates stalling on vSAN master handoff timeout with SQUASHFS read errors
+- Fixed boot partition updates that could stall when several nodes updated at the same time
 - Fixed VMs stopping with I/O errors while another node was in a maintenance reboot
 - Fixed nodes entering maintenance mode too early while still non-redundant
 - Fixed vSAN errors when deleting a node
@@ -121,7 +121,7 @@ On shared disks, VergeOS no longer stops the VM on an I/O error. The error passe
 
 #### Alarms & Monitoring
 
-- Fixed nodes showing 100% CPU usage caused by the acpi_pad kernel module
+- Fixed nodes showing 100% CPU usage
 - Fixed IO Wait metrics, which 26.2 reported as zero: IO Wait now reflects actual I/O wait on each core
 
 #### User Interface & Files
