@@ -65,12 +65,6 @@ Systems on 26.1.6, 26.1.7, or 26.1.8 can upgrade directly to 26.2.2.1. Systems o
 
 ### Changes
 
-{% hint style="info" %}
-**Shared Disk I/O Error Handling**
-
-On shared disks, VergeOS no longer stops the VM on an I/O error. The error passes to the guest, and the guest cluster (for example Windows Failover Clustering) handles failover.
-{% endhint %}
-
 - vSAN now waits longer before a read times out when all nodes are online, so Fibre Channel multipath has time to fail over to another path
 - During an update, node1 now reboots first
 
@@ -84,6 +78,7 @@ On shared disks, VergeOS no longer stops the VM on an I/O error. The error passe
 - **Fixed an issue where snapshots being synced to a site could get stuck in repairs.**
 - **Fixed VMs stopping with I/O errors while another node was in a maintenance reboot.**
 - **Fixed an issue where a node could enter maintenance mode before its data was fully redundant.**
+- **Shared disks now pass I/O errors through to the guest** instead of stopping the VM, allowing clustered guests to make their own failover decisions.
 - Fixed boot partition updates that could stall when several nodes updated at the same time.
 - Fixed Windows failover-cluster VMs losing recognition of newly attached shared disks after repeated cluster validations.
 - Fixed SCSI-3 persistent reservation validation failures on shared virtio-scsi disks during Windows cluster validation.
