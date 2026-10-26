@@ -47,7 +47,7 @@ categories:
 
 ## Summary
 
-VergeOS 26.2 is a major feature release. The headline capability is **shared (multi-writer) disks**, which let a single disk be attached to multiple VMs at once and unlock guest-clustered workloads such as Windows Failover Clustering and Cluster Shared Volumes. The release also rebases the platform on an updated kernel and core OS packages, reworks VergeFabric for scale and adds advanced BGP configuration and VLAN load-balancing bond modes, brings full Precision Time Protocol (PTP) support, and significantly expands visibility with a native vSAN alarm framework and per-core CPU statistics. Alongside these, 26.2 includes a large set of stability, security, and usability fixes carried in on the 26.2.0.x and 26.2.1 patches.
+VergeOS 26.2 is a major feature release. The headline capability is **shared (multi-writer) disks**, which let a single disk be attached to multiple VMs at once and unlock guest-clustered workloads such as Windows Failover Clustering and Cluster Shared Volumes. The release also rebases the platform on an updated kernel and core OS packages, reworks VergeFabric for scale and adds advanced BGP configuration and VLAN load-balancing bond modes, brings full Precision Time Protocol (PTP) support, and significantly expands visibility with a native vSAN alarm framework and per-core CPU statistics. Alongside these, 26.2 includes a large set of stability, security, and usability fixes carried in on the 26.2.x patches.
 
 ## Highlights
 
@@ -75,7 +75,7 @@ The Linux kernel in 26.2.2 is updated to 6.18.57, which includes the fix for [CV
 {% hint style="warning" %}
 **Upgrade Paths to 26.2.2**
 
-Systems on 26.1.6, 26.1.7, or 26.1.8 can upgrade directly to 26.2.2. Systems on 26.0, or on 26.1 earlier than 26.1.6, must first update to [26.1.8.1](26-1-release-notes.md). Release 26.1.8.1 includes a fabric hotfix so systems with 50 or more networks upgrade reliably.
+Systems on 26.1.6, 26.1.7, or 26.1.8 can upgrade directly to 26.2.2. Systems on 26.0, or on 26.1 earlier than 26.1.6, must first update to [26.1.8.1](26-1-release-notes.md#id-26.1.8.1-october-2026). Release 26.1.8.1 includes a fabric hotfix so systems with 50 or more networks upgrade reliably.
 {% endhint %}
 
 - Fixed an issue where a node did not repair a kernel mismatch on its own after a hard reboot interrupted an upgrade on a 2-node system

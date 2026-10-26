@@ -84,7 +84,7 @@ categories:
 
 ## 26.1.8.1 (October 2026)
 
-VergeOS 26.1.8.1 is a maintenance release that prepares systems with a large number of networks for the upgrade to 26.2.
+VergeOS 26.1.8.1 is the required intermediate release for upgrading older systems to 26.2, and includes a fabric hotfix for systems with many networks.
 
 ### Update Process
 
