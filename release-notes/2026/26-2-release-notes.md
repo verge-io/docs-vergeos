@@ -61,10 +61,10 @@ VergeOS 26.2 is a major feature release. The headline capability is **shared (mu
 ### Single-Node Deployments
 
 {% hint style="success" %}
-**No Core Network Required**
+**No Core Fabric Network Required**
 
-- Deploy VergeOS on a single node with only two physical NICs
-- Both NICs are available for external and workload networking, with no NIC dedicated to a core-network loopback
+- A single-node system has no node-to-node vSAN or fabric traffic, so no Core Fabric Network or Core Fabric NIC is required
+- See [Single-node systems](https://docs.verge.io/plan-and-deploy/implementation-guide/sizing#single-node-systems) for node requirements
 {% endhint %}
 
 ### Advanced BGP Configuration
