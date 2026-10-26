@@ -34,7 +34,7 @@ categories:
 **Release Information**
 
 - **Release Date**: January 2026
-- **Latest Version**: 26.1.8.1 (October 2026)
+- **Latest Version**: 26.1.8 (August 2026)
 - **Status**: Supported
 - **End-of-Life**: TBD
 {% endhint %}
@@ -82,15 +82,6 @@ categories:
 - Provides additional fault tolerance beyond standard N+1 configurations
 {% endhint %}
 
-## 26.1.8.1 (October 2026)
-
-VergeOS 26.1.8.1 is the required intermediate release for upgrading older systems to 26.2, and includes a fabric hotfix for systems with many networks.
-
-### Update Process
-
-- Systems on 26.1.6, 26.1.7, or 26.1.8 can upgrade directly to 26.2.2
-- Systems on 26.0, or on 26.1 earlier than 26.1.6, must first update to 26.1.8.1 before upgrading to 26.2.2
-- Release 26.1.8.1 includes a fabric hotfix so systems with 50 or more networks upgrade reliably
 
 ---
 
