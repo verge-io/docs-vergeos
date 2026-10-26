@@ -89,7 +89,6 @@ Systems on 26.1.6, 26.1.7, or 26.1.8 can upgrade directly to 26.2.2. Systems on 
 On shared disks, VergeOS no longer stops the VM on an I/O error. The error passes to the guest, and the guest cluster (for example Windows Failover Clustering) handles failover.
 {% endhint %}
 
-- Changed shared disk I/O error handling to pass errors through to the guest: VMs using shared disks for clustering now handle their own failover instead of being stopped by the host
 - vSAN now waits longer before a read times out when all nodes are online, so Fibre Channel multipath has time to fail over to another path
 
 ### Bug Fixes
