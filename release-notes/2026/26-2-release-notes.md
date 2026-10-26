@@ -105,6 +105,10 @@ Systems on 26.1.6, 26.1.7, or 26.1.8 can upgrade directly to 26.2.2.1. Systems o
 
 - Cluster edits now write an audit entry to the System Log, including changes such as disabling CPU sleep states and KVM nesting.
 
+### Alarms & Monitoring
+
+- Fixed nodes showing 100% CPU usage.
+
 ### User Interface
 
 - Fixed column dragging in the VM list view, which could remove columns or leave visual artifacts.
