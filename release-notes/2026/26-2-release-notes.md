@@ -58,6 +58,15 @@ VergeOS 26.2 is a major feature release. The headline capability is **shared (mu
 - Shared disks present proper NAA/WWN identity and support SCSI-3 Persistent Reservations
 {% endhint %}
 
+### Single-Node Deployments
+
+{% hint style="success" %}
+**No Core Network Required**
+
+- Deploy VergeOS on a single node with only two physical NICs
+- Both NICs are available for external and workload networking, with no NIC dedicated to a core-network loopback
+{% endhint %}
+
 ### Advanced BGP Configuration
 
 {% hint style="success" %}
