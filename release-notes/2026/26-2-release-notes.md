@@ -48,63 +48,61 @@ categories:
 
 ## 26.2.2 (October 2026)
 
-VergeOS 26.2.2 is a maintenance release delivering stability improvements and targeted bug fixes for vSAN reliability, shared disk support, security, system administration, and user interface consistency.
+VergeOS 26.2.2 is a maintenance release delivering stability improvements and targeted bug fixes for the update process, vSAN reliability, shared disk support, networking, security, monitoring, and user interface.
+
+### Update Process
+
+{% hint style="warning" %}
+**Upgrade Paths for Systems with 50 or More Networks**
+
+Systems on 26.1.6, 26.1.7, or 26.1.8 can upgrade directly to 26.2.2. Systems on earlier 26.1 versions must first update to 26.1.8.1, which includes a fabric hotfix. Systems on 26.0 must also go through 26.1.8.1.
+{% endhint %}
+
+- Fixed node failing to self-heal kernel mismatch when upgrade interrupted by hard reboot on a 2-node cluster
+- Fixed PXE nodes losing network visibility during updates
 
 ### Bug Fixes
 
 #### Storage (vSAN)
 
-- Fixed site sync snapshots getting stuck in repairs with data loss: snapshots being synced no longer enter an infinite repair process
-- Fixed VM exports permanently broken after a volume stale/reset cycle: export volumes now recover properly after being reset
-- Fixed Fibre Channel device path mismatch during HBA failures: paths are now validated against the underlying device to ensure they reference the correct LUN
-- Fixed concurrent boot partition updates stalling on vSAN master handoff timeout with SQUASHFS read errors: both nodes can now update boot partitions simultaneously without timeouts
-- Fixed running VMs on the surviving node dying with io-error during maintenance reboot on a 2-node cluster: VMs on the online node now continue running without I/O errors while the other node reboots
-- Fixed nodes entering maintenance mode too early while still non-redundant: nodes now wait for full redundancy before entering maintenance
-- Increased vSAN multipath read timeout when all nodes are online: the short timeout was removed, and all reads now use the longer timeout to allow Fibre Channel path failover to complete
-- Fixed vSAN errors when deleting a node: node removal now completes without vSAN stability issues
+- Fixed an issue where snapshots being synced to a site could get stuck in repairs and lose data
+- Fixed VM exports permanently broken after a volume stale/reset cycle
+- Fixed an issue where an HBA failure could cause a Fibre Channel path to be associated with the wrong device
+- Fixed concurrent boot partition updates stalling on vSAN master handoff timeout with SQUASHFS read errors
+- Fixed running VMs on the surviving node dying with io-error during maintenance reboot on a 2-node cluster
+- Fixed nodes entering maintenance mode too early while still non-redundant
+- vSAN now waits longer before a read times out when all nodes are online, so Fibre Channel multipath has time to fail over to another path
+- Fixed vSAN errors when deleting a node
 
 #### Virtual Machines & Compute
 
-- Fixed snapshot errors when using multiple tags that differ only in letter case: tags are now handled case-sensitively during snapshot creation, and all source tags are propagated to the snapshot VM
-- Fixed Windows Test-Cluster SCSI-3 Persistent Reservation validation failing on shared virtio-scsi disks: the validation test now completes successfully during Windows Failover Cluster setup
-- Fixed Windows failover cluster VMs stopping recognition of newly attached shared disks after repeated cluster validations: shared disk enumeration now remains consistent
+- Fixed snapshot errors when using multiple tags that differ only in letter case
+- Windows Failover Cluster validation (Test-Cluster) no longer fails the SCSI-3 Persistent Reservation test on shared disks, and repeated validations no longer leave a VM unable to detect newly attached shared disks
 - Changed shared disk I/O error handling to pass errors through to the guest: VMs using shared disks for clustering now handle their own failover instead of being stopped by the host
-- Fixed idle CPU cores reported with inflated IO Wait values: IO Wait metrics now reflect actual I/O wait instead of being suppressed
 
 #### Networking & Fabric
 
 - Fixed UI options for external network bonding: the primary bond interface field now appears only when bonding is enabled, and the Layer 2 Type dropdown no longer includes Bond/Bond Secondary options
-- Fixed physical switch networks unable to power on: the interface network guard added in 26.2.1 now correctly skips physical networks, and auto-start failures now log the refusal reason
-
-#### VMware Integration
-
-- Fixed WebUI and API upload speeds significantly slower compared to 26.0: upload performance through the UI and API has been restored
+- Fixed physical switch networks that could not be powered on, and auto-start failures now log the refusal reason
 
 #### Users, Security & Access Control
 
-- Fixed rejected user create leaving an enabled identity that can log in: a user creation request rejected with 422 validation errors no longer leaves behind a loginable orphan identity
-- Fixed root permission guard keying off user key instead of physical access: the root permission guard now correctly checks the user's physical access flag instead of the user key number
-- Fixed security vulnerability via updated upstream Linux kernel 6.18.57: addressed the PWNEscape vulnerability
+- Fixed rejected user create leaving an enabled identity that can log in
+- Fixed root permission guard keying off user key instead of physical access
+- Updated the Linux kernel to 6.18.57 to fix the PWNEscape vulnerability
 
-#### User Interface
+#### Alarms & Monitoring
 
-- Fixed dragging columns in VM list view causing issues: columns can now be reordered without disappearing from the list view
-- Fixed capitalization of "acknowledge" alarm button: the button text is now consistently capitalized
-- Fixed API key modals covering each other when clicking the kebab menu: opening a new menu now closes the previous one
+- Fixed nodes showing 100% CPU usage caused by the acpi_pad kernel module
+- Fixed idle CPU cores reported with inflated IO Wait values
+- Fixed cluster edits writing no audit log entry
 
-#### Update Process
+#### User Interface & Files
 
-- Added fabric patch for systems with 50 or more networks before updating: systems on 26.1.6, 26.1.7, or 26.1.8 can upgrade directly to 26.2.2; systems on earlier 26.1 versions must first update to 26.1.8.1, which includes a hotfix for the fabric; systems on 26.0 must also go through 26.1.8.1
-
-#### Tenants & Sites
-
-- Fixed node failing to self-heal kernel mismatch when upgrade interrupted by hard reboot on a 2-node cluster: nodes now detect and correct kernel mismatches after an interrupted upgrade
-
-#### System Administration
-
-- Fixed nodes showing 100% CPU usage due to the acpi_pad kernel module: the module is now properly managed to prevent false CPU usage spikes
-- Fixed cluster edits writing no audit log entry: user-initiated cluster edits now generate audit log entries
-- Fixed PXE nodes losing network visibility during updates: PXE nodes now maintain network connectivity throughout the update process
+- Fixed WebUI and API upload speeds significantly slower compared to 26.0
+- Fixed dragging columns in VM list view causing issues
+- Fixed capitalization of "acknowledge" alarm button
+- Fixed API key modals covering each other when clicking the kebab menu
 
 ---
 
