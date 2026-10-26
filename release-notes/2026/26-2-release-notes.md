@@ -45,6 +45,59 @@ categories:
 {% endhint %}
 
 
+## 26.2.2.1 (October 2026)
+
+### Summary
+
+VergeOS 26.2.2.1 is a maintenance release focused on storage reliability, cluster availability, and security. It includes a kernel update that addresses a critical virtualization escape vulnerability, a set of vSAN fixes for shared-disk clustering and node maintenance, improved update behavior for large environments and PXE nodes, and a collection of UI, audit-log, and permissions corrections.
+
+
+### Security
+
+- **Updated the kernel to address PwnEscape (CVE-2026-99999)**, a critical Linux networking vulnerability that could allow an untrusted guest virtual machine to escape to the host. **Affected systems should be updated as soon as practical.**
+- **Fixed an issue where a rejected user creation could still leave a working login.** A create request rejected with a validation error no longer leaves behind an enabled identity with a credential.
+- **Corrected the root permission guard**, which determined physical access from the user's internal key rather than the user's actual physical-access setting. This caused permission edits to fail for some users and left others inadequately protected.
+
+### Storage (vSAN)
+
+- **Fixed an issue where `.snap_` snapshots being synced could become stuck in an endless repair loop and lose data.** This affected site syncs in some environments.
+- **Fixed an issue where running VMs on the surviving node of a two-node cluster could fail with I/O errors while the other node was down for a maintenance reboot.** VMs now continue running normally through the maintenance window.
+- **Prevented a node from entering maintenance mode before it is actually redundant**, which could occur when reference walks were long and replays missed their window.
+- **Shared disks now pass I/O errors through to the guest** instead of stopping the VM, allowing clustered guests to make their own failover decisions.
+- Fixed a case where concurrent boot-partition updates stalled on a vSAN master handoff timeout and then produced SQUASHFS read errors, even though the update reported success.
+- Fixed Windows failover-cluster VMs losing recognition of newly attached shared disks after repeated cluster validations.
+- Fixed SCSI-3 persistent reservation validation failures on shared virtio-scsi disks during Windows cluster validation.
+- Fixed Fibre Channel device-path mismatches during some HBA failures, where LUNs could end up associated with the wrong device path.
+- Increased the multipath read timeout when all nodes are online, so a path that recovers quickly is no longer abandoned prematurely.
+- Fixed vSAN errors when removing a node from a cluster.
+- Restored accurate CPU IO Wait reporting. Idle cores no longer display inflated IO Wait values, and the temporary workaround that suppressed these statistics is no longer needed.
+
+### Update & Installation
+
+- **Systems with 50 or more networks are now handled correctly during upgrade** — the network fabric is updated before the main update begins, avoiding fabric contention on large environments.
+- **A node interrupted by a hard reboot during an upgrade now repairs its kernel mismatch automatically on boot.**
+- Fixed PXE nodes losing network visibility during the update process, which could cause QMP socket errors on VMs.
+- Optional packages are now correctly marked after an upgrade, so previously installed AI packages can be uninstalled.
+
+### Networking
+
+- Corrected the bonding options shown when creating or editing an external network, including the primary bond interface field and bridged-mode selection.
+
+### Snapshots
+
+- Fixed a snapshot error when a VM has two tags in the same category whose names differ only by letter case. The snapshot now completes without logging an error.
+
+### System & Logging
+
+- Cluster edits now write an audit entry to the System Log, including changes such as disabling CPU sleep states and KVM nesting.
+
+### User Interface
+
+- Fixed column dragging in the VM list view, which could remove columns or leave visual artifacts.
+- Fixed modal menus stacking on top of each other when opened from the kebab menu.
+- Improved WebUI and API upload throughput, which had regressed relative to 26.0 in some environments.
+
+
 ## 26.2.1 (October 2026)
 
 ### Summary
