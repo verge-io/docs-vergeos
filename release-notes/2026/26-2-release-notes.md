@@ -71,10 +71,10 @@ Systems on 26.1.6, 26.1.7, or 26.1.8 can upgrade directly to 26.2.2.1. Systems o
 ### Storage (vSAN)
 
 - **Fixed an issue where snapshots being synced to a site could get stuck in repairs.**
-- **Fixed an issue where running VMs on the surviving node of a two-node cluster could fail with I/O errors while the other node was down for a maintenance reboot.** VMs now continue running normally through the maintenance window.
-- **Prevented a node from entering maintenance mode before it is actually redundant**, which could occur when reference walks were long and replays missed their window.
+- **Fixed VMs stopping with I/O errors while another node was in a maintenance reboot.**
+- **Fixed an issue where a node could enter maintenance mode before its data was fully redundant.**
 - **Shared disks now pass I/O errors through to the guest** instead of stopping the VM, allowing clustered guests to make their own failover decisions.
-- Fixed a case where concurrent boot-partition updates stalled on a vSAN master handoff timeout and then produced SQUASHFS read errors, even though the update reported success.
+- Fixed boot partition updates that could stall when several nodes updated at the same time.
 - Fixed Windows failover-cluster VMs losing recognition of newly attached shared disks after repeated cluster validations.
 - Fixed SCSI-3 persistent reservation validation failures on shared virtio-scsi disks during Windows cluster validation.
 - Fixed Fibre Channel device-path mismatches during some HBA failures, where LUNs could end up associated with the wrong device path.
