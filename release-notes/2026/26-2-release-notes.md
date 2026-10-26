@@ -90,12 +90,6 @@ VergeOS 26.2 is a major feature release. The headline capability is **shared (mu
 
 VergeOS 26.2.2.1 is a maintenance release focused on storage reliability, cluster availability, and security. It includes a kernel update that addresses a critical virtualization escape vulnerability, a set of vSAN fixes for shared-disk clustering and node maintenance, improved update behavior for large environments and PXE nodes, and a collection of UI, audit-log, and permissions corrections.
 
-{% hint style="danger" %}
-**Security fix**
-
-The Linux kernel in 26.2.2.1 is updated to 6.18.57, which includes the fix for [CVE-2026-99999](https://nvd.nist.gov/vuln/detail/CVE-2026-99999) (PwnEscape), a critical vulnerability that could let an untrusted guest VM escape to the host. Update affected systems as soon as practical.
-{% endhint %}
-
 {% hint style="warning" %}
 **Upgrade Paths to 26.2.2.1**
 
@@ -108,6 +102,7 @@ During the upgrade to 26.2.2.1, node 2 reboots before node1.
 
 ### Security
 
+- The Linux kernel in 26.2.2.1 is updated to 6.18.57, which includes the fix for [CVE-2026-99999](https://nvd.nist.gov/vuln/detail/CVE-2026-99999) (PwnEscape), a critical vulnerability that could let an untrusted guest VM escape to the host. Update affected systems as soon as practical.
 - **Fixed an issue where a rejected user creation could still leave a working login.** A create request rejected with a validation error no longer leaves behind an enabled identity with a credential.
 - **Fixed a permission check that did not use the user's physical-access setting.** Permission edits could fail for some users, and other users were not fully protected.
 
