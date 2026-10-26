@@ -51,12 +51,22 @@ categories:
 
 VergeOS 26.2.2.1 is a maintenance release focused on storage reliability, cluster availability, and security. It includes a kernel update that addresses a critical virtualization escape vulnerability, a set of vSAN fixes for shared-disk clustering and node maintenance, improved update behavior for large environments and PXE nodes, and a collection of UI, audit-log, and permissions corrections.
 
+{% hint style="danger" %}
+**Security fix**
+
+The Linux kernel in 26.2.2.1 is updated to 6.18.57, which includes the fix for [CVE-2026-99999](https://nvd.nist.gov/vuln/detail/CVE-2026-99999) (PwnEscape), a critical vulnerability that could let an untrusted guest VM escape to the host. Update affected systems as soon as practical.
+{% endhint %}
+
+{% hint style="warning" %}
+**Upgrade Paths to 26.2.2.1**
+
+Systems on 26.1.6, 26.1.7, or 26.1.8 can upgrade directly to 26.2.2.1. Systems on 26.0, or on 26.1 earlier than 26.1.6, must first update to [26.1.8.1](26-1-release-notes.md#id-26.1.8.1-october-2026). Release 26.1.8.1 includes a hotfix that improves stability for systems with hundreds of networks.
+{% endhint %}
 
 ### Security
 
-- **Updated the kernel to address PwnEscape (CVE-2026-99999)**, a critical Linux networking vulnerability that could allow an untrusted guest virtual machine to escape to the host. **Affected systems should be updated as soon as practical.**
 - **Fixed an issue where a rejected user creation could still leave a working login.** A create request rejected with a validation error no longer leaves behind an enabled identity with a credential.
-- **Corrected the root permission guard**, which determined physical access from the user's internal key rather than the user's actual physical-access setting. This caused permission edits to fail for some users and left others inadequately protected.
+- **Fixed a permission check that did not use the user's physical-access setting.** Permission edits could fail for some users, and other users were not fully protected.
 
 ### Storage (vSAN)
 

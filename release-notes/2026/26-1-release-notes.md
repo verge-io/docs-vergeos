@@ -82,7 +82,7 @@ categories:
 - Provides additional fault tolerance beyond standard N+1 configurations
 {% endhint %}
 
-## 26.1.8.1 (October 2026) 
+## 26.1.8.1 (October 2026)
 
 Hotfix to improve stability for systems with hundreds of networks 
 
