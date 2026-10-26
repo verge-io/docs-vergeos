@@ -84,14 +84,6 @@ VergeOS 26.2 is a major feature release. The headline capability is **shared (mu
 - Per-node time-sync status on the time dashboard
 {% endhint %}
 
-### Other Highlights
-
-- **Updated kernel and core OS packages** -- Refreshed base OS packages including a newer 6.18.x kernel, updated firmware and networking drivers, and a modern graphics stack.
-- **Graphical boot** -- Nodes now show a clean, branded boot screen with system name and vSAN mount progress, replacing scrolling service logs.
-- **Super Users group for physical access** -- Physical-access capability is now governed by group membership rather than a standalone user flag.
-- **Native vSAN alarms and expanded monitoring** -- A vSAN alarm framework, per-core CPU utilization, and a snapshot-retention alarm improve day-to-day visibility.
-- **Node replacement with drives is back** -- Full chassis replacement is supported again through a rebuilt, guided installer flow.
-
 ## 26.2.2.1 (October 2026)
 
 ### Summary
