@@ -90,6 +90,7 @@ On shared disks, VergeOS no longer stops the VM on an I/O error. The error passe
 {% endhint %}
 
 - vSAN now waits longer before a read times out when all nodes are online, so Fibre Channel multipath has time to fail over to another path
+- The update process now updates node 2 first
 
 ### Bug Fixes
 
