@@ -52,7 +52,7 @@ Produce a bill of materials for each node:
 
 1. CPU model and core count
 2. Memory per node
-3. Storage configuration (boot drive, performance tier (e.g., NVMe for Tier 1), capacity tier (e.g., HDD for Tier 4), Tier 0 metadata NVMe on controller nodes (3 DWPD or equivalent; 1 minimum, 2 recommended))
+3. Storage configuration (boot drive, performance tier (e.g., NVMe for Tier 1), capacity tier (e.g., HDD for Tier 4), Tier 0 metadata enterprise SSD on controller nodes (1 DWPD minimum; 2 drives per controller on N+1, 3 on N+2))
 4. Network interfaces (how many, what speed)
 
 ### Part 4: Diagram
@@ -72,5 +72,5 @@ Your design is complete when you can answer **yes** to all of the following:
 - [ ] The topology provides high availability (no single point of failure)
 - [ ] Network design includes redundant core fabric connections
 - [ ] Storage is sized with appropriate tier separation (fast tier for performance-sensitive workloads, capacity tier for archive/snapshots)
-- [ ] Controller nodes include Tier 0 metadata NVMe (3 DWPD or equivalent; 1 minimum, 2 recommended)
+- [ ] Controller nodes include Tier 0 metadata enterprise SSD (1 DWPD minimum; 2 drives per controller on N+1, 3 on N+2)
 - [ ] You can justify your HCI vs UCI decision with specific customer requirements
