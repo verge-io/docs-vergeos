@@ -62,7 +62,7 @@ VergeOS 26.2 is a major feature release. The headline capability is **shared (mu
 
 ## 26.2.2 (October 2026)
 
-VergeOS 26.2.2 is a maintenance release delivering stability improvements and targeted bug fixes for the update process, vSAN reliability, shared disk support, networking, security, monitoring, and user interface. Highlights include fixes for running VMs dying with I/O errors during a maintenance reboot on a 2-node cluster, Windows Failover Cluster validation and shared disk detection issues, and a kernel security update.
+VergeOS 26.2.2 is a maintenance release delivering stability improvements and targeted bug fixes for the update process, vSAN reliability, shared disk support, networking, security, monitoring, and user interface. Highlights include fixes for nodes showing 100% CPU usage caused by the acpi_pad kernel module, slow file uploads through the UI and API, and Windows Failover Cluster validation and shared disk detection issues.
 
 {% hint style="danger" %}
 **Security fix**
@@ -99,7 +99,7 @@ On shared disks, VergeOS no longer stops the VM on an I/O error. The error passe
 - Fixed VM exports on a NAS service that stayed broken after an export volume went stale and was reset
 - Fixed an issue where an HBA failure could cause a Fibre Channel path to be associated with the wrong device
 - Fixed concurrent boot partition updates stalling on vSAN master handoff timeout with SQUASHFS read errors
-- Fixed running VMs on the surviving node dying with io-error during maintenance reboot on a 2-node cluster
+- Fixed VMs stopping with I/O errors while another node was in a maintenance reboot
 - Fixed nodes entering maintenance mode too early while still non-redundant
 - Fixed vSAN errors when deleting a node
 
@@ -129,7 +129,7 @@ On shared disks, VergeOS no longer stops the VM on an I/O error. The error passe
 - Fixed slow file uploads through the UI and API (slower than in 26.0)
 - Fixed an issue where dragging a column in the VM list view could remove it from the view
 - Fixed capitalization of "acknowledge" alarm button
-- Fixed API key modals covering each other when clicking the kebab menu
+- Fixed API key dialogs overlapping when opened from the ⋮ menu
 
 ---
 
