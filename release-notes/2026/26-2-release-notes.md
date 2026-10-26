@@ -63,6 +63,17 @@ The Linux kernel in 26.2.2.1 is updated to 6.18.57, which includes the fix for [
 Systems on 26.1.6, 26.1.7, or 26.1.8 can upgrade directly to 26.2.2.1. Systems on 26.0, or on 26.1 earlier than 26.1.6, must first update to [26.1.8.1](26-1-release-notes.md#id-26.1.8.1-october-2026). Release 26.1.8.1 includes a hotfix that improves stability for systems with hundreds of networks.
 {% endhint %}
 
+### Changes
+
+{% hint style="info" %}
+**Shared Disk I/O Error Handling**
+
+On shared disks, VergeOS no longer stops the VM on an I/O error. The error passes to the guest, and the guest cluster (for example Windows Failover Clustering) handles failover.
+{% endhint %}
+
+- vSAN now waits longer before a read times out when all nodes are online, so Fibre Channel multipath has time to fail over to another path
+- During an update, node1 now reboots first
+
 ### Security
 
 - **Fixed an issue where a rejected user creation could still leave a working login.** A create request rejected with a validation error no longer leaves behind an enabled identity with a credential.
@@ -73,12 +84,10 @@ Systems on 26.1.6, 26.1.7, or 26.1.8 can upgrade directly to 26.2.2.1. Systems o
 - **Fixed an issue where snapshots being synced to a site could get stuck in repairs.**
 - **Fixed VMs stopping with I/O errors while another node was in a maintenance reboot.**
 - **Fixed an issue where a node could enter maintenance mode before its data was fully redundant.**
-- **Shared disks now pass I/O errors through to the guest** instead of stopping the VM, allowing clustered guests to make their own failover decisions.
 - Fixed boot partition updates that could stall when several nodes updated at the same time.
 - Fixed Windows failover-cluster VMs losing recognition of newly attached shared disks after repeated cluster validations.
 - Fixed SCSI-3 persistent reservation validation failures on shared virtio-scsi disks during Windows cluster validation.
 - Fixed Fibre Channel device-path mismatches during some HBA failures, where LUNs could end up associated with the wrong device path.
-- Increased the multipath read timeout when all nodes are online, so a path that recovers quickly is no longer abandoned prematurely.
 - Fixed vSAN errors when removing a node from a cluster.
 - Restored accurate CPU IO Wait reporting. Idle cores no longer display inflated IO Wait values, and the temporary workaround that suppressed these statistics is no longer needed.
 
