@@ -107,7 +107,7 @@ Systems on 26.1.6, 26.1.7, or 26.1.8 can upgrade directly to 26.2.2.1. Systems o
 
 ### Alarms & Monitoring
 
-- Fixed nodes showing 100% CPU usage.
+- Fixed nodes showing 100% CPU usage caused by an ACPI power-management module.
 
 ### User Interface
 
