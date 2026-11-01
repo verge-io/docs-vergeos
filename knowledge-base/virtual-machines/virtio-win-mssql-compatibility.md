@@ -92,7 +92,7 @@ SQL Server reports the **retry** outcome, which succeeds on the second attempt. 
 * A Windows VM running MS SQL Server (or a similarly I/O-heavy database workload) on VergeOS
 * Administrative access to the Windows guest
 * A snapshot of the VM taken before changing any drivers
-* The **virtio-win v0.1.300 ISO** uploaded to your VergeOS environment under **Files**. Archived ISOs are available from the [stable-virtio archive on Fedora People](https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/)
+* The **virtio-win v0.1.302 (or later) ISO** uploaded to your VergeOS environment under **Files**. Archived ISOs are available from the [stable-virtio archive on Fedora People](https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/)
 
 ## Identifying the Installed VirtIO Driver Version
 
