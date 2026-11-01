@@ -36,7 +36,7 @@ tags:
 # VirtIO-Win Driver Compatibility with MS SQL Server Workloads
 
 {% hint style="success" %}
-**Resolved in virtio-win v0.1.300 and Later** 
+**Resolved in virtio-win v0.1.302 and Later** 
 The Storport SRB ID race condition described in this article was merged upstream and resolved in virtio-win v0.1.300 and newer builds. If your VM is running affected builds (v0.1.285 or v0.1.292), follow the Upgrade Procedure below. The legacy downgrade procedure to v0.1.271 is preserved as a fallback reference.
 
 
@@ -45,9 +45,9 @@ The Storport SRB ID race condition described in this article was merged upstream
 {% hint style="info" %}
 **Key Points**
 
-* **Resolved Upstream:** Upstream issue #1453 (a non-atomic SRB ID assignment in vioscsi and viostor) was resolved in January 2026 and released in **virtio-win v0.1.300+**.
+* **Resolved Upstream:** Upstream issue #1453 (a non-atomic SRB ID assignment in vioscsi and viostor) was resolved in January 2026 and released in **virtio-win v0.1.302+**.
 * **Affected Releases:** virtio-win v0.1.285 and v0.1.292 contain the race condition, which surfaces as false-positive read-retry warnings or SQL Server service hangs under heavy concurrent I/O.
-* **Recommended Action:** Upgrade guest drivers to v0.1.300 (or your platform's current validated release).
+* **Recommended Action:** Upgrade guest drivers to v0.1.302 (or your platform's current validated release).
 * **Environment Impact:** Symptoms are most pronounced on Windows Server 2025 guests due to aggressive StartIo parallelization, though earlier Windows Server releases can also trigger the issue.
 * **Data Integrity:** Database files on disk remain uncorrupted; the driver delivered an incorrect buffer on an initial read attempt, which succeeded on the retry.
 * **Safe Execution:** Always take a VM snapshot and quiesce SQL Server services before applying storage driver updates.
@@ -80,7 +80,7 @@ SQL Server reports the **retry** outcome, which succeeds on the second attempt. 
 
 |Version     | Status   | Operational Guidance       |
 |----------- | -------- | -------------------------- |
-| v0.1.300+  | Current Recommended | Upstream fix included. Stable under sustained parallel database I/O. |
+| v0.1.302+  | Current Recommended | Upstream fix included. Stable under sustained parallel database I/O. |
 | v0.1.285   | Defective (Do not use) | Contains Storport SRB race condition; causes read-retry errors on SQL VMs. |
 | v0.1.292   | Defective (Do not use) | Contains Storport SRB race condition; causes read-retry errors on SQL VMs. |
 | v0.1.271   | Legacy Fallback        | Precedes the defect commit. Stable fallback if newer packages cannot be applied.|
@@ -122,7 +122,7 @@ The defect affects both drivers. If the VM uses one bus type for the OS disk and
 The stable virtio-win ISO downloads are available from the [Fedora People stable-virtio repository](https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/), and older releases from the [archive-virtio directory](https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/).
 
 
-## Upgrading to virtio-win v0.1.300 or Later (Recommended)
+## Upgrading to virtio-win v0.1.302 or Later (Recommended)
 
 ### Prerequisites
 
@@ -135,10 +135,10 @@ The stable virtio-win ISO downloads are available from the [Fedora People stable
 1. **Stop MS SQL Server services in the guest**
    * From an elevated PowerShell or the Services console, stop the **SQL Server (MSSQLSERVER)** service and any dependent services (SQL Agent, full-text, Reporting Services, etc.) to quiesce I/O before changing the storage driver.
 2. **Take a VM Snapshot:** providing a rollback point prior to the driver upgrade.
-3. **Mount the virtio-win v0.1.300 ISO**
-   * In VergeOS, add a new drive with Media type: CD-ROM  (or edit an existing)   to attach the virtio ISO (**virtio-win-0.1.302.iso or later**)
+3. **Mount the virtio-win v0.1.302 (or later) ISO**
+   * In VergeOS, add a new drive with Media type: CD-ROM  (or edit an existing), to attach the virtio ISO file (**virtio-win-0.1.302.iso or later**)
    * Confirm the ISO is visible inside Windows.
-4. **Attach the Updated ISO:** In VergeOS, select the virtio-win-0.1.300.iso as the Media File on an existing CD-ROM drive (or add a new CD-ROM drive) and ensure it appears within Windows Explorer.
+4. **Attach the Updated ISO:** In VergeOS, select the virtio-win-***.iso as the Media File on an existing CD-ROM drive (or add a new CD-ROM drive) and ensure it appears within Windows Explorer.
 5. **Execute In-Place Upgrade:** Run the guest installer: *virtio-win-gt-x64.msi* from the mounted media.
 6. **Reboot the Guest:** Restart the Windows VM to unload legacy drivers and bind the updated Storport miniport stack.
 7. **Verify Installed Build:** Open **Device Manager** → **Storage controllers** → Open the controller's **Properties** → **Driver** tab. Ensure the version stamp reflects **.30000 or higher**.
@@ -150,7 +150,7 @@ The stable virtio-win ISO downloads are available from the [Fedora People stable
 <details>
 <summary>LEGACY WORKAROUND - Downgrading to virtio-win v0.1.271</summary>
 
-**Use this procedure only if environmental constraints prevent deploying v0.1.300+.**  Because Windows does not support native in-place driver downgrades via MSI, the existing package must be stripped first.
+**Use this procedure only if environmental constraints prevent deploying v0.1.302+.**  Because Windows does not support native in-place driver downgrades via MSI, the existing package must be stripped first.
 
 
 {% hint style="warning" %}
@@ -190,12 +190,11 @@ Before changing any virtio driver in the guest, take a VergeOS snapshot of the V
 {% hint style="warning" %}
 **Common Issues**
 
-* **Installer reports "newer version already installed"** — The virtio-win MSI does not perform an in-place downgrade. Complete the uninstall step (and reboot) before running the v0.1.271 installer.
-* **Uninstall fails with error 0x80070643** — A known virtio-win-guest-tools quirk. Use Microsoft's _Program Install and Uninstall troubleshooter_ to clear the failed installer state, reboot, and try the v0.1.271 install again.
 * **VM fails to boot after driver change** — Restore the snapshot taken in the prerequisites and retry the procedure with SQL Server services fully stopped first.
-* **Storage controller shows a yellow exclamation in Device Manager** — The driver did not load cleanly. Right-click the controller, choose **Update driver → Browse my computer**, and point it at the folder on the v0.1.271 ISO matching your Windows version (e.g. `vioscsi\2k25\amd64` for Windows Server 2025).
-* **Read-retry messages persist after downgrading** — Verify that **both** `vioscsi` and `viostor` (whichever the VM uses) now show the v0.1.271 build in Device Manager. If they do and the messages continue, capture a fresh sample of the Application log and SQL Server error log and contact VergeOS support.
-* **A newer virtio-win release is available** — Releases published after January 2026 may include the upstream fix and be a better long-term choice than staying on v0.1.271. Confirm the specific build with VergeOS support before rolling it out to production database VMs.
+* **Storage controller shows a yellow exclamation in Device Manager** — The driver did not load cleanly. Right-click the controller, choose **Update driver → Browse my computer**, and point it at the folder on the virtio ISO matching your Windows version `vioscsi\2k25\amd64` for Windows Server 2025).
+* **Read-retry messages persist after upgrade** — Verify that **both** `vioscsi` and `viostor` (whichever the VM uses) now show the new build (e.g., v0.1.302) in Device Manager. If they do and the messages continue, capture a fresh sample of the Application log and SQL Server error log and contact VergeOS support.
+* **Installer reports "newer version already installed"** — (downgrade only) The virtio-win MSI does not perform an in-place downgrade. Complete the uninstall step (and reboot) before running the v0.1.271 installer.
+* **Uninstall fails with error 0x80070643**  —  (downgrade only) A known virtio-win-guest-tools quirk. Use Microsoft's _Program Install and Uninstall troubleshooter_ to clear the failed installer state, reboot, and try the v0.1.271 install again.
 {% endhint %}
 
 ## Additional Resources
