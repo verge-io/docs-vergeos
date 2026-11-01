@@ -7,7 +7,7 @@ semantic_keywords:
   - virtio-win driver compatibility ms sql server
   - windows vm sql server read retry incorrect checksum
   - virtio-win 0.1.285 0.1.292 sql server bug
-  - virtio-win 0.1.300 recommended version vergeos
+  - virtio-win 0.1.302+ recommended version vergeos
   - upgrade virtio-win drivers windows guest
   - vioscsi storport srb id race condition windows server 2025
 use_cases:
@@ -45,12 +45,12 @@ The Storport SRB ID race condition described in this article was merged upstream
 {% hint style="info" %}
 **Key Points**
 
-Resolved Upstream: Upstream issue #1453 (a non-atomic SRB ID assignment in vioscsi and viostor) was resolved in January 2026 and released in **virtio-win v0.1.300+**.
-Affected Releases: virtio-win v0.1.285 and v0.1.292 contain the race condition, which surfaces as false-positive read-retry warnings or SQL Server service hangs under heavy concurrent I/O.
-Recommended Action: Upgrade guest drivers to v0.1.300 (or your platform's current validated release).
-Environment Impact: Symptoms are most pronounced on Windows Server 2025 guests due to aggressive StartIo parallelization, though earlier Windows Server releases can also trigger the issue.
-Data Integrity: Database files on disk remain uncorrupted; the driver delivered an incorrect buffer on an initial read attempt, which succeeded on the retry.
-Safe Execution: Always take a VM snapshot and quiesce SQL Server services before applying storage driver updates.
+* **Resolved Upstream:** Upstream issue #1453 (a non-atomic SRB ID assignment in vioscsi and viostor) was resolved in January 2026 and released in **virtio-win v0.1.300+**.
+* **Affected Releases:** virtio-win v0.1.285 and v0.1.292 contain the race condition, which surfaces as false-positive read-retry warnings or SQL Server service hangs under heavy concurrent I/O.
+* **Recommended Action:** Upgrade guest drivers to v0.1.300 (or your platform's current validated release).
+* **Environment Impact:** Symptoms are most pronounced on Windows Server 2025 guests due to aggressive StartIo parallelization, though earlier Windows Server releases can also trigger the issue.
+* **Data Integrity:** Database files on disk remain uncorrupted; the driver delivered an incorrect buffer on an initial read attempt, which succeeded on the retry.
+* **Safe Execution:** Always take a VM snapshot and quiesce SQL Server services before applying storage driver updates.
 
 {% endhint %}
 
@@ -127,25 +127,26 @@ The stable virtio-win ISO downloads are available from the [Fedora People stable
 ### Prerequisites
 
   * A VergeOS VM snapshot taken immediately prior to the change.
-  * The virtio-win-0.1.300.iso (or later validated ISO) uploaded to Files in VergeOS.
+  * The virtio-win-0.1.302.iso (or later validated ISO) uploaded to Files in VergeOS.
   * Administrative access to the Windows guest OS.
 
 ### Procedure
 
 1. **Stop MS SQL Server services in the guest**
    * From an elevated PowerShell or the Services console, stop the **SQL Server (MSSQLSERVER)** service and any dependent services (SQL Agent, full-text, Reporting Services, etc.) to quiesce I/O before changing the storage driver.
-2. **Mount the virtio-win v0.1.300 ISO**
-   * In VergeOS, edit the VM and attach **virtio-win-0.1.271.iso** as a CD/DVD device.
-   * Confirm the ISO is visible inside Windows (typically the next available drive letter).
-3. **Attach the Updated ISO:** In VergeOS, select the virtio-win-0.1.300.iso as the Media File on an existing CD-ROM drive (or add a new CD-ROM drive) and ensure it appears within Windows Explorer.
+2. **Take a VM Snapshot:** providing a rollback point prior to the driver upgrade.
+3. **Mount the virtio-win v0.1.300 ISO**
+   * In VergeOS, add a new drive with Media type: CD-ROM  (or edit an existing)   to attach the virtio ISO (**virtio-win-0.1.302.iso or later**)
+   * Confirm the ISO is visible inside Windows.
+4. **Attach the Updated ISO:** In VergeOS, select the virtio-win-0.1.300.iso as the Media File on an existing CD-ROM drive (or add a new CD-ROM drive) and ensure it appears within Windows Explorer.
 Execute In-Place Upgrade: Run the guest installer from the mounted media:
 PowerShell
 Start-Process -FilePath "D:\virtio-win-gt-x64.msi" -ArgumentList "/qn /norestart" -Wait
-4. **Execute In-Place Upgrade:** Run the guest installer: *virtio-win-gt-x64.msi* from the mounted media:
-5. **Reboot the Guest:** Restart the Windows VM to unload legacy drivers and bind the updated Storport miniport stack.
-6. **Verify Installed Build:** Open Device Manager → Storage controllers → Open the controller's **Properties** → **Driver** tab. Ensure the version stamp reflects .30000 or higher.
-7. **Start SQL Server:** Restart the database services:
-8. **Monitor Logs:** Verify normal database operations and confirm that SQL Server error logs and Windows Application event logs remain clear of checksum retry notices.  Sustained operation without retries is the success criterion.
+5. **Execute In-Place Upgrade:** Run the guest installer: *virtio-win-gt-x64.msi* from the mounted media.
+6. **Reboot the Guest:** Restart the Windows VM to unload legacy drivers and bind the updated Storport miniport stack.
+7. **Verify Installed Build:** Open **Device Manager** → **Storage controllers** → Open the controller's **Properties** → **Driver** tab. Ensure the version stamp reflects **.30000 or higher**.
+8. **Start SQL Server:** Restart the database services:
+9. **Monitor Logs:** Verify normal database operations and confirm that SQL Server error logs and Windows Application event logs remain clear of checksum retry notices.  Sustained operation without retries is the success criterion.
 
 
 
