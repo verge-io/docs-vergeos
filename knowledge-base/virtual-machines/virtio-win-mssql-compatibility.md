@@ -38,6 +38,7 @@ tags:
 
 {% hint style="success" %}
 **Resolved in virtio-win v0.1.302 and Later** 
+
 The Storport SRB ID race condition described in this article was merged upstream and resolved in virtio-win v0.1.302 and newer builds. If your VM is running affected builds (v0.1.285 or v0.1.292), follow the Upgrade Procedure below. The legacy downgrade procedure to v0.1.271 is preserved as a fallback reference.
 {% endhint %}
 
@@ -48,7 +49,7 @@ The Storport SRB ID race condition described in this article was merged upstream
 
 * **Resolved Upstream:** Upstream issue #1453 (a non-atomic SRB ID assignment in vioscsi and viostor) was resolved in January 2026 and released in **virtio-win v0.1.302+**.
 * **Affected Releases:** virtio-win v0.1.285 and v0.1.292 contain the race condition, which surfaces as false-positive read-retry warnings or SQL Server service hangs under heavy concurrent I/O.
-* **Recommended Action:** Upgrade guest drivers to v0.1.302 (or your platform's current validated release).
+* **Recommended Action:** Upgrade guest drivers to v0.1.302 (or later stable release).
 * **Environment Impact:** Symptoms are most pronounced on Windows Server 2025 guests due to aggressive StartIo parallelization, though earlier Windows Server releases can also trigger the issue.
 * **Safe Execution:** Always quiesce SQL Server services and take a VM snapshot before applying storage driver updates.
 
@@ -115,8 +116,8 @@ Before changing anything, confirm which virtio-win build the guest is currently 
 4. **Decode Version Revision:** VirtIO builds follow the 100.<minor>.<build>.<revision> scheme:
    * A driver ending in .28500 indicates v0.1.285.
    * A driver ending in .29200 indicates v0.1.292.
-   * A driver ending in .30000 or higher indicates the patched release.
-If you are unsure which ISO produced the installed driver, mount the candidate ISO inside the guest and compare its `vioscsi.inf` / `viostor.inf` `DriverVer` line against the value shown in Device Manager.
+   * A driver ending in .30200 or higher indicates the patched release.
+   * If you are unsure which ISO produced the installed driver, mount the candidate ISO inside the guest and compare its `vioscsi.inf` / `viostor.inf` `DriverVer` line against the value shown in Device Manager.
 
 {% hint style="warning" %}
 **Check both vioscsi and viostor**
@@ -133,15 +134,15 @@ The defect affects both drivers. If the VM uses one bus type for the OS disk and
 
 1. **Stop MS SQL Server services in the guest**
    * From an elevated PowerShell or the Services console, stop the **SQL Server (MSSQLSERVER)** service and any dependent services (SQL Agent, full-text, Reporting Services, etc.) to quiesce I/O before changing the storage driver.
-2. **Take a VM Snapshot:** providing a rollback point before the driver upgrade.
+2. **Take a VM Snapshot:** This is your rollback point if the VM fails to boot after the driver change.
 3. **Mount the virtio-win v0.1.302 (or later) ISO**
    * In VergeOS, add a new drive with Media type: CD-ROM  (or edit an existing CD-ROM drive) to attach the virtio ISO file (**virtio-win-0.1.302.iso or later**)
    * Confirm the ISO is visible inside Windows.
 4. **Execute In-Place Upgrade:** Run the guest installer: *virtio-win-gt-x64.msi* from the mounted media.
-5. **Reboot the Guest:** Restart the Windows VM to unload legacy drivers and bind the updated Storport miniport stack.
-6. **Verify Installed Build:** Open **Device Manager** → **Storage controllers** → Open the controller's **Properties** → **Driver** tab. Ensure the version stamp reflects **.30000 or higher**.
+5. **Reboot the Guest:** Restart the Windows VM so the new drivers load.
+6. **Verify Installed Build:** Open **Device Manager** → **Storage controllers** → Open the controller's **Properties** → **Driver** tab. Ensure the version stamp reflects **.30200 or higher**.
 7. **Start SQL Server:** Restart the database services.
-8. **Monitor Logs:** Verify normal database operations and confirm that SQL Server error logs and Windows Application event logs remain clear of checksum retry notices.  Sustained operation without retries is the success criterion.
+8. **Monitor Logs:** Verify normal database operations and confirm that SQL Server error logs and Windows Application event logs remain clear of checksum retry notices. Confirm no new error 825 entries in the SQL Server error log.  Sustained operation without retries is the success criterion.
 
 
 
@@ -160,7 +161,7 @@ Before changing any virtio driver in the guest, take a VergeOS snapshot of the V
 1. **Stop MS SQL Server services in the guest**
    * From an elevated PowerShell or the Services console, stop the **SQL Server (MSSQLSERVER)** service and any dependent services (SQL Agent, full-text, Reporting Services, etc.) to quiesce I/O before changing the storage driver.
 2. **Mount the virtio-win v0.1.271 ISO**
-   * In VergeOS, edit the VM and attach **virtio-win-0.1.271.iso** as a CD/DVD device.
+   * In VergeOS, edit the VM and attach **virtio-win-0.1.271.iso** as a CD-ROM drive.
    * Confirm the ISO is visible inside Windows (typically the next available drive letter).
 3. **Uninstall the current virtio-win guest tools**
    * Open **Settings → Apps & features** (or **Programs and Features** in the Control Panel) inside the guest.
@@ -188,8 +189,8 @@ Before changing any virtio driver in the guest, take a VergeOS snapshot of the V
 {% hint style="warning" %}
 **Common Issues**
 
-* **VM fails to boot after driver change** — Restore the snapshot taken in the prerequisites and retry the procedure with SQL Server services fully stopped first.
-* **Storage controller shows a yellow exclamation in Device Manager** — The driver did not load cleanly. Right-click the controller, choose **Update driver → Browse my computer**, and point it at the folder on the virtio ISO matching your Windows version `vioscsi\2k25\amd64` for Windows Server 2025).
+* **VM fails to boot after driver change** — Restore the VM snapshot, or load the drivers manually using Loading Virtio Drivers in Windows Recovery Console.
+* **Storage controller shows a yellow exclamation in Device Manager** — The driver did not load cleanly. Right-click the controller, choose **Update driver → Browse my computer**, and point it at the folder on the virtio ISO matching your Windows version (for example, vioscsi\2k25\amd64 or viostor\2k25\amd64 for Windows Server 2025).
 * **Read-retry messages persist after upgrade** — Verify that **both** `vioscsi` and `viostor` (whichever the VM uses) now show the new build (e.g., v0.1.302) in Device Manager. If they do and the messages continue, capture a fresh sample of the Application log and SQL Server error log and contact VergeOS support.
 * **Installer reports "newer version already installed"** — (downgrade only) The virtio-win MSI does not perform an in-place downgrade. Complete the uninstall step (and reboot) before running the v0.1.271 installer.
 * **Uninstall fails with error 0x80070643**  —  (downgrade only) A known virtio-win-guest-tools quirk. Use Microsoft's _Program Install and Uninstall troubleshooter_ to clear the failed installer state, reboot, and try the v0.1.271 install again.
