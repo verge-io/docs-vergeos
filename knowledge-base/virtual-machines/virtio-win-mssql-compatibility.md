@@ -2,27 +2,25 @@
 title: VirtIO-Win Driver Compatibility with MS SQL Server Workloads
 slug: virtio-win-mssql-compatibility
 author: VergeOS Documentation Team
-date: 2026-05-22T00:00:00.000Z
+date: 2026-11-01T00:00:00.000Z
 semantic_keywords:
   - virtio-win driver compatibility ms sql server
   - windows vm sql server read retry incorrect checksum
   - virtio-win 0.1.285 0.1.292 sql server bug
-  - virtio-win 0.1.271 recommended version vergeos
-  - downgrade virtio-win drivers windows guest
+  - virtio-win 0.1.300 recommended version vergeos
+  - upgrade virtio-win drivers windows guest
   - vioscsi storport srb id race condition windows server 2025
 use_cases:
   - resolve_mssql_read_retry_errors_on_windows_vm
   - identify_installed_virtio_win_driver_version
-  - downgrade_virtio_win_drivers_to_stable_release
+  - update_virtio_win_drivers_to_stable_release
 categories:
   - VMs
   - Troubleshooting
 editor: markdown
 dateCreated: 2026-05-22T00:00:00.000Z
 description: >-
-  Known virtio-win driver compatibility issue affecting Windows VMs running MS
-  SQL Server under heavy I/O, including the recommended version, verification
-  steps, and a clean downgrade procedure.
+ Known virtio-win driver compatibility issue affecting Windows VMs running MS SQL Server under heavy I/O, including the resolution build, verification steps, recommended upgrade path, and legacy downgrade reference.
 tags:
   - virtio
   - virtio-win
@@ -37,23 +35,28 @@ tags:
 
 # VirtIO-Win Driver Compatibility with MS SQL Server Workloads
 
+{% hint style="success" %}
+**Resolved in virtio-win v0.1.300 and Later** 
+The Storport SRB ID race condition described in this article was merged upstream and resolved in virtio-win v0.1.300 and newer builds. If your VM is running affected builds (v0.1.285 or v0.1.292), follow the Upgrade Procedure below. The legacy downgrade procedure to v0.1.271 is preserved as a fallback reference.
+
+
 ## Overview
 
 {% hint style="info" %}
 **Key Points**
 
-* virtio-win **v0.1.285** and **v0.1.292** contain a race condition in the `vioscsi` and `viostor` storage drivers that surfaces on heavily loaded MS SQL Server VMs
-* **v0.1.271** is the last release before the affected commit and is the recommended version for Windows guests running database workloads
-* Symptoms are most pronounced on **Windows Server 2025** guests under sustained parallel I/O
-* The upstream fix landed in January 2026; later virtio-win releases that include it should also be safe — verify the build before deploying widely
-* Take a snapshot of the VM and stop SQL Server services before changing storage drivers
+Resolved Upstream: Upstream issue #1453 (a non-atomic SRB ID assignment in vioscsi and viostor) was resolved in January 2026 and released in **virtio-win v0.1.300+**.
+Affected Releases: virtio-win v0.1.285 and v0.1.292 contain the race condition, which surfaces as false-positive read-retry warnings or SQL Server service hangs under heavy concurrent I/O.
+Recommended Action: Upgrade guest drivers to v0.1.300 (or your platform's current validated release).
+Environment Impact: Symptoms are most pronounced on Windows Server 2025 guests due to aggressive StartIo parallelization, though earlier Windows Server releases can also trigger the issue.
+Data Integrity: Database files on disk remain uncorrupted; the driver delivered an incorrect buffer on an initial read attempt, which succeeded on the retry.
+Safe Execution: Always take a VM snapshot and quiesce SQL Server services before applying storage driver updates.
+
 {% endhint %}
 
 Windows VMs running MS SQL Server on VergeOS can produce a stream of SQL Server "read-retry" log entries — and in some cases a hung SQL Server service after a few days of sustained load — when the guest is using **virtio-win v0.1.285 or v0.1.292**. The root cause is a non-atomic SRB ID assignment in the `vioscsi`/`viostor` Storport miniports that allows duplicate IDs to be issued when Windows dispatches I/O across multiple CPUs in parallel (tracked upstream as [virtio-win issue #1453](https://github.com/virtio-win/kvm-guest-drivers-windows/issues/1453)).
 
 The behavior is most reproducible on **Windows Server 2025** because its Storport implementation parallelizes `StartIo` more aggressively than earlier Windows Server releases. Older Windows guests are exposed to the same bug but trigger it less often.
-
-Downgrading the guest's virtio-win drivers to **v0.1.271** is a stable workaround. A fix for the underlying race condition was merged upstream and shipped in newer virtio-win builds, so later releases that include it should also be safe — confirm with VergeOS support which builds in your environment are known-good before upgrading mid-incident.
 
 ## Symptoms
 
@@ -73,12 +76,23 @@ If you suspect this issue on a VergeOS Windows VM, look for the following in the
 SQL Server reports the **retry** outcome, which succeeds on the second attempt. `DBCC CHECKDB` typically comes back clean — the database pages on disk are intact. The driver is delivering the wrong buffer to the first read because of the duplicate SRB ID, and the second read returns the correct data. Persistent retries still indicate a real problem and should be addressed even when no corruption is detected.
 {% endhint %}
 
+## Recommended Versions
+
+|Version     | Status   | Operational Guidance       |
+|----------- | -------- | -------------------------- |
+| v0.1.300+  | Current Recommended | Upstream fix included. Stable under sustained parallel database I/O. |
+| v0.1.285   | Defective (Do not use) | Contains Storport SRB race condition; causes read-retry errors on SQL VMs. |
+| v0.1.292   | Defective (Do not use) | Contains Storport SRB race condition; causes read-retry errors on SQL VMs. |
+| v0.1.271   | Legacy Fallback        | Precedes the defect commit. Stable fallback if newer packages cannot be applied.|
+
+
+
 ## Prerequisites
 
 * A Windows VM running MS SQL Server (or a similarly I/O-heavy database workload) on VergeOS
 * Administrative access to the Windows guest
 * A snapshot of the VM taken before changing any drivers
-* The **virtio-win v0.1.271 ISO** uploaded to your VergeOS environment under **Files**. Archived ISOs are available from the [stable-virtio archive on Fedora People](https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/)
+* The **virtio-win v0.1.300 ISO** uploaded to your VergeOS environment under **Files**. Archived ISOs are available from the [stable-virtio archive on Fedora People](https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/)
 
 ## Identifying the Installed VirtIO Driver Version
 
@@ -92,28 +106,54 @@ Before changing anything, confirm which virtio-win build the guest is currently 
 3. **Check the driver version and date**
    * Switch to the **Driver** tab.
    * Note the **Driver Version** and **Driver Date** fields.
-4. **Cross-reference against the source ISO**
-   * The driver version stamp follows a `100.<minor>.<build>.<revision>` format, where the trailing revision component is built from the virtio-win ISO version. For example, a `vioscsi` driver from **virtio-win 0.1.285** typically ends in `.28500`; **0.1.271** typically ends in `.27100`.
-   * If you are unsure which ISO produced the installed driver, mount the candidate ISO inside the guest and compare its `vioscsi.inf` / `viostor.inf` `DriverVer` line against the value shown in Device Manager.
 
-{% hint style="success" %}
+4. **Decode Version Revision:** VirtIO builds follow the 100.<minor>.<build>.<revision> scheme:
+   * A driver ending in .28500 indicates v0.1.285.
+   * A driver ending in .29200 indicates v0.1.292.
+   * A driver ending in .30000 or higher indicates the patched release.
+If you are unsure which ISO produced the installed driver, mount the candidate ISO inside the guest and compare its `vioscsi.inf` / `viostor.inf` `DriverVer` line against the value shown in Device Manager.
+
+{% hint style="warning" %}
 **Check both vioscsi and viostor**
 
-The upstream bug affects both the `vioscsi` (Virtio SCSI) and `viostor` (Virtio block) drivers. If the VM uses one bus type for the OS disk and the other for data disks, verify both controllers.
+The defect affects both drivers. If the VM uses one bus type for the OS disk and the other for data disks, verify both controllers.
 {% endhint %}
-
-## Recommended Versions
-
-| Version                                             | Status                                                                                                      |
-| --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| **v0.1.271**                                        | **Recommended workaround.** Last release before the affected commit; confirmed stable under heavy SQL load. |
-| **v0.1.285**                                        | **Avoid.** Contains the `vioscsi`/`viostor` SRB ID race; produces read-retry errors on busy SQL VMs.        |
-| **v0.1.292**                                        | **Avoid.** Same defect as v0.1.285.                                                                         |
-| Builds **after the upstream fix** (Jan 2026 onward) | Should be safe in principle. Confirm the specific build with VergeOS support before deploying.              |
 
 The stable virtio-win ISO downloads are available from the [Fedora People stable-virtio repository](https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/), and older releases from the [archive-virtio directory](https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/).
 
-## Downgrading to virtio-win v0.1.271
+
+## Upgrading to virtio-win v0.1.300 or Later (Recommended)
+
+### Prerequisites
+
+  * A VergeOS VM snapshot taken immediately prior to the change.
+  * The virtio-win-0.1.300.iso (or later validated ISO) uploaded to Files in VergeOS.
+  * Administrative access to the Windows guest OS.
+
+### Procedure
+
+1. **Stop MS SQL Server services in the guest**
+   * From an elevated PowerShell or the Services console, stop the **SQL Server (MSSQLSERVER)** service and any dependent services (SQL Agent, full-text, Reporting Services, etc.) to quiesce I/O before changing the storage driver.
+2. **Mount the virtio-win v0.1.300 ISO**
+   * In VergeOS, edit the VM and attach **virtio-win-0.1.271.iso** as a CD/DVD device.
+   * Confirm the ISO is visible inside Windows (typically the next available drive letter).
+3. **Attach the Updated ISO:** In VergeOS, select the virtio-win-0.1.300.iso as the Media File on an existing CD-ROM drive (or add a new CD-ROM drive) and ensure it appears within Windows Explorer.
+Execute In-Place Upgrade: Run the guest installer from the mounted media:
+PowerShell
+Start-Process -FilePath "D:\virtio-win-gt-x64.msi" -ArgumentList "/qn /norestart" -Wait
+4. **Execute In-Place Upgrade:** Run the guest installer: *virtio-win-gt-x64.msi* from the mounted media:
+5. **Reboot the Guest:** Restart the Windows VM to unload legacy drivers and bind the updated Storport miniport stack.
+6. **Verify Installed Build:** Open Device Manager → Storage controllers → Open the controller's **Properties** → **Driver** tab. Ensure the version stamp reflects .30000 or higher.
+7. **Start SQL Server:** Restart the database services:
+8. **Monitor Logs:** Verify normal database operations and confirm that SQL Server error logs and Windows Application event logs remain clear of checksum retry notices.  Sustained operation without retries is the success criterion.
+
+
+
+<details>
+<summary>LEGACY WORKAROUND - Downgrading to virtio-win v0.1.271</summary>
+
+**Use this procedure only if environmental constraints prevent deploying v0.1.300+.**  Because Windows does not support native in-place driver downgrades via MSI, the existing package must be stripped first.
+
 
 {% hint style="warning" %}
 **Take a snapshot first**
@@ -144,6 +184,8 @@ Before changing any virtio driver in the guest, take a VergeOS snapshot of the V
    * Start the SQL Server service and any dependents and confirm the databases come online cleanly.
 9. **Monitor under load**
    * Resume normal workloads and watch the SQL Server error log and Windows Application log for the read-retry messages described above. Sustained operation without retries is the success criterion.
+
+</details>
 
 ## Troubleshooting
 
