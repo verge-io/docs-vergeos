@@ -139,9 +139,6 @@ The stable virtio-win ISO downloads are available from the [Fedora People stable
    * In VergeOS, add a new drive with Media type: CD-ROM  (or edit an existing)   to attach the virtio ISO (**virtio-win-0.1.302.iso or later**)
    * Confirm the ISO is visible inside Windows.
 4. **Attach the Updated ISO:** In VergeOS, select the virtio-win-0.1.300.iso as the Media File on an existing CD-ROM drive (or add a new CD-ROM drive) and ensure it appears within Windows Explorer.
-Execute In-Place Upgrade: Run the guest installer from the mounted media:
-PowerShell
-Start-Process -FilePath "D:\virtio-win-gt-x64.msi" -ArgumentList "/qn /norestart" -Wait
 5. **Execute In-Place Upgrade:** Run the guest installer: *virtio-win-gt-x64.msi* from the mounted media.
 6. **Reboot the Guest:** Restart the Windows VM to unload legacy drivers and bind the updated Storport miniport stack.
 7. **Verify Installed Build:** Open **Device Manager** → **Storage controllers** → Open the controller's **Properties** → **Driver** tab. Ensure the version stamp reflects **.30000 or higher**.
