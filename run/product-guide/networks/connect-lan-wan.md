@@ -86,7 +86,7 @@ Connecting to a network that exists outside your VergeOS environment, such as an
 
 An external network with **Layer 2 Type** ***none*** can carry a VLAN trunk into a VM. The guest OS creates its own VLAN interfaces and tags its own traffic, and the network passes 802.1Q-tagged frames in both directions with the tags intact: from the physical switch to the VM, from the VM to the physical switch, and between VMs on the same network.
 
-This works on a physical network that is **not** bridged (**Physical Bridged** unchecked).
+Physical bridge mode (**Physical Bridged**) is not required.
 
 1. Confirm the physical switch port is a trunk that allows every VLAN ID the guest needs.
 2. Create a new external network as described above, with these settings:
