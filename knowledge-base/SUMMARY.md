@@ -60,6 +60,7 @@
   * [Adding Tier 0 to an Existing System](storage-vsan/adding-tier-zero.md)
   * [NAS Volume Browser API Reference](storage-vsan/nas-volume-browser-api.md)
   * [Preferred Tier Usage](storage-vsan/preferred-tier-usage.md)
+  * [Replacement Drive Shows "Device is empty" and Won't Join the vSAN](storage-vsan/vsan-replacement-drive-device-empty.md)
   * [Scaling Down a vSAN (Removing Drives)](storage-vsan/scaling-down-a-vsan.md)
   * [Scaling Up a vSAN](storage-vsan/scaling-up-a-vsan.md)
   * [Troubleshooting NAS Shares](storage-vsan/troubleshooting-nas-shares.md)
