@@ -35,7 +35,7 @@ This method allows for the import of many VMs at once. It does not require uploa
 
 {% hint style="info" %}
 
-**NAS Import supports complete virtual machine packages—VMX, OVF, OVA, and YBVM (VergeOS VM export). It does not support importing stand‑alone virtual disk files. YBVM is a native VergeOS format and can be imported directly without any conversion. For other formats, see Importing VMs from Files.**
+* NAS Import supports **complete virtual machine packages—VMX, OVF, OVA, and YBVM (VergeOS VM export)**.  It does not support importing stand‑alone virtual disk files. YBVM is a native VergeOS format and can be imported directly without any conversion. For other formats, see [Import VMs from Files](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/virtual-machines/import-vms-from-files).
 
 {% endhint %}
 
