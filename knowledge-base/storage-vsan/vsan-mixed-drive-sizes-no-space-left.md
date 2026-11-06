@@ -4,7 +4,7 @@ title: >-
   Space (Mixed Drive Sizes)
 slug: vsan-mixed-drive-sizes-no-space-left
 author: VergeOS Documentation Team
-date: 2026-10-30T00:00:00.000Z
+date: 2026-11-05T00:00:00.000Z
 semantic_keywords:
   - vsan no space left on device tier not full
   - error writing block to tier no space left on device
@@ -22,10 +22,7 @@ categories:
 editor: markdown
 dateCreated: 2026-10-30T00:00:00.000Z
 description: >-
-  When a vSAN tier mixes drive sizes, the tier can only use each drive up to the
-  size of the smallest one. Writes can fail with "No space left on device" while
-  the tier percentage still looks healthy. Here is how to confirm it and what to
-  do.
+  When a vSAN tier mixes drive sizes, the tier can only use each drive up to the size of the smallest one. Writes can fail with "No space left on device" while the tier percentage still looks healthy. Here is how to confirm it and what to do.
 tags:
   - vsan
   - storage
@@ -48,7 +45,7 @@ VMs stop and writes fail with "No space left on device", yet the vSAN tier repor
 
 - All drives in a tier should be the same capacity. When sizes are mixed, the tier can only use each drive up to the size of the smallest drive.
 - In this situation the tier's usage figure can show much more free space than the drives can actually take.
-- Check each drive's vSAN used and max values, not the tier percentage. Free space by expiring old snapshots and turning on **Discard** with a guest TRIM, then plan matching-size drives.
+- Check individual drive sizes and usage, not the tier percentage. Free space where you can (e.g.  expiring old snapshots, removing unnecessary files or backups, etc.), then plan matching-size drives.
 {% endhint %}
 
 ## Symptoms
@@ -100,8 +97,6 @@ The node with the lowest result tends to set the practical limit for the tier. T
 
 ### Free space now
 
-
-
 1. **Review older, never-expiring, and heavily changed snapshots first.** A snapshot starts out identical to its source and costs more space as the data diverges, so the cost depends on how much has changed, not on age alone (see [System Snapshots](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/backup-and-dr/system-snapshots)). Review **System → System Snapshots** for snapshots set to never expire or kept longer than you need, and remove what you can. Before you delete one, make sure it isn't queued or actively syncing to a DR site. Deleting it mid-sync aborts that transfer, and the snapshot never arrives on the other side. Removing a snapshot is permanent, so confirm you don't need it as a restore point first. Immutable snapshots can't be deleted until they're unlocked and their waiting period has passed (see [Immutable Snapshots](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/backup-and-dr/immutable-snapshots)), so start with the ones you can remove now.
 2. **Check other places space builds up.** [Understanding and Explaining Unexpected vSAN Growth](understanding-and-explaining-unexpected-vsan-growth.md) has a checklist of other common causes, such as files, incoming syncs, and tenants.
 3. **Expect a delay.** vSAN frees deleted blocks in the background, so used space drops over time, not the moment you delete (see [vSAN Deletion Process](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/storage/vsan-deletion-process)).
@@ -114,12 +109,12 @@ Once you've freed enough space for VMs to run again, consider checking whether *
 Enabling Discard doesn't reclaim space that's already free inside the guest. To recover that space, run a TRIM inside the running guest: `Optimize-Volume -DriveLetter <letter> -ReTrim` on Windows, or `sudo fstrim -av` on Linux. See [Virtual Drive TRIM](../virtual-machines/virtual-drive-trim.md) for details.
 {% endhint %}
 
+4. **Restart the stopped VMs once the smallest drives show headroom.** VMs that stopped on a write error don't resume on their own. Check that the smallest tier drives have dropped in usage and show adequate headroom, then power the VMs on. If you restart them before space has actually been freed, they'll stop again on their next write.
 
 ### Fix the capacity long term
 
 - **Add capacity only in balanced, consistently sized sets.** [Scaling Up a vSAN](scaling-up-a-vsan.md) requires all drives in a tier to be alike, and a drive larger than the tier's smallest adds only as much space as that smallest drive. So adding larger drives while the small ones remain doesn't unlock the unused space on the large ones. Add drives in equal numbers across the nodes, as [vSAN Architecture](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/storage/vsan-architecture) describes. Follow the [vSAN Scale Up SOP](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/operations/vsan-scale-up-sop) for the procedure itself.
-- **When checking the 30% free-space rule before scaling up, validate each drive's effective headroom as well as the tier summary.** A tier that shows 58% used can have smaller drives that are already below 30% free.
-- **To use the full size of larger drives, the smaller drives have to be replaced.** Removing drives from a tier isn't a self-service operation (see the [vSAN Scale Up SOP](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/operations/vsan-scale-up-sop)), and it needs free space to move data onto, so contact VergeOS support to plan the replacement.
+- **To use the full size of the larger drives, replace the smaller ones.** Replace each smaller drive in the tier with one that matches the larger drives, one drive at a time. Follow [Scenario 2: Proactively Replace a Working Drive](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/operations/drive-replacement#scenario-2-proactively-replace-a-working-drive) in Replacing a Defective or End-of-life Drive, and wait until each replacement finishes repairing and shows **Online** before you start the next. The tier gains no usable capacity until every smaller drive in the tier, on every node, has been replaced.
 
 ## When to Contact Support
 
