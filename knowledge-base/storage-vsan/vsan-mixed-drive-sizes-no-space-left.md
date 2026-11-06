@@ -75,7 +75,7 @@ Meanwhile, everything else looks healthy. All nodes are online, the tier is redu
 
 ## Why It Happens
 
-The [Scaling Up a vSAN](scaling-up-a-vsan.md) article states the rule: all drives in a tier must be alike, and if a drive of a different size is added, the tier can only use the space of the smallest drive. In practice, a larger drive fills to the same point as the smaller drives beside it and stops there. The rest of that drive is unreachable.
+As a design rule, every drive in a vSAN tier should be the same size, on every node. This is a design requirement: [Node sizing](https://app.gitbook.com/s/Q2bN3ctQdjv01GivTI08/implementation-guide/sizing) calls for identical disk configurations across storage nodes, and [Scaling Up a vSAN](scaling-up-a-vsan.md) requires any drives added later to match. When sizes are mixed, whether at deployment or during a later scale-up, the tier can only use each drive up to the size of the smallest drive in the tier. A larger drive fills to the same point as the smaller drives and stops there. The rest of that drive is unreachable.
 
 vSAN also spreads data evenly across the nodes in a tier (see [vSAN Architecture](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/storage/vsan-architecture)). When the drives on one node reach their limit, writes to the tier start failing, even if other drives still have room.
 
@@ -91,19 +91,29 @@ The node with the lowest result tends to set the practical limit for the tier. T
 
 ## What to Check
 
-1. For each node, go to **Nodes**, open the node, select **Drives**, and note the size of every drive in the tier named in the error (the `tier <T>` value). If they aren't all the same size, keep going.
-2. Check per-drive usage. Open each drive in that tier and compare its vSAN used value to its vSAN max. Keep the physical size from step 1 as context, but judge how full a drive is from the vSAN values. Smaller drives near their max while the tier reads in the 50s or 60s point to this issue. **System → vSAN Diagnostics → Get Device Status** shows the same per-drive state (see [vSAN Diagnostics](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/storage/vsan-diagnostics)).
-3. Go to **Infrastructure → vSAN Tiers** and double-click the tier. Confirm **Repairs** is 0, **Unavailable Drives** is 0 (called **Bad Drives** in the linked article), and **Redundant** is checked. Those values make an active drive loss or repair less likely and fit a capacity diagnosis, but on their own they don't rule out every storage or workload issue. These values can be briefly non-zero or unchecked during a journal walk, which [vSAN Tier Status (Journal Walks)](understanding-journal-walks-and-vsan-tier-status.md) explains along with each field.
+1. **Rule out drive failures and repairs.** Go to **Infrastructure → vSAN Tiers** and double-click the tier named in the error (the `tier <T>` value). Confirm that **Repairs** is 0, **Unavailable Drives** (labeled **Bad Drives** in some versions) is 0, and **Redundant** is checked. If all three are clean, a failed drive or an active repair isn't the cause, so keep going. These values can be briefly non-zero or unchecked while a journal walk is running. If they are, wait for the walk to finish and check again. [vSAN Tier Status (Journal Walks)](understanding-journal-walks-and-vsan-tier-status.md) explains each field.
+2. **Check whether the tier has mixed drive sizes.** Go to **Nodes**, open a node, and select **Drives**. Filter the list to the affected tier using the tier column heading, and note the size of each drive. Repeat for each node in the tier. If every drive is the same size, this article doesn't apply; see [Understanding and Explaining Unexpected vSAN Growth](understanding-and-explaining-unexpected-vsan-growth.md) instead. If the sizes differ, note where one of the smallest drives and one of the largest drives are.
+3. **Check usage on one of the smallest drives.** Open one of the smallest drives in the tier. In the **vSAN Status** card, the **Used** field shows how much space is in use on that drive, with a percentage bar. If this issue is the cause, the bar will be at or near 100%. A drive in that state can't accept new writes for the tier.
+4. **Compare it with one of the largest drives.** Go back to the drive list, open one of the largest drives in the tier, and check its **Used** field. If the larger drive shows a noticeably lower percentage while the smaller drive is full, the diagnosis is confirmed. The tier can only use each drive up to the size of its smallest drive, so the remaining space on the larger drives can't be used.
 
 ## Resolution
 
 ### Free space now
 
-1. **Review older, never-expiring, and heavily changed snapshots first.** A snapshot starts out identical to its source and costs more space as the data diverges, so the cost depends on how much has changed, not on age alone (see [System Snapshots](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/backup-and-dr/system-snapshots)). Review **System → System Snapshots** for snapshots set to never expire or kept longer than you need, and remove what you can. Before you delete one, make sure it isn't queued or actively syncing to a DR site. Deleting it mid-sync aborts that transfer, and the snapshot never arrives on the other side. Removing a snapshot is permanent, so confirm you don't need it as a restore point first. Immutable snapshots can't be deleted until they're unlocked and their waiting period has passed (see [Immutable Snapshots](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/backup-and-dr/immutable-snapshots)), so start with the ones you can remove now.
-2. **Expect a delay.** vSAN frees deleted blocks in the background, so used space drops over time, not the moment you delete (see [vSAN Deletion Process](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/storage/vsan-deletion-process)).
-3. **Turn on Discard on VM drives where it's off, then run a TRIM inside the guest.** Without Discard, files deleted inside the guest don't return space to the vSAN, so usage only climbs. Discard works on drives that use the **virtIO-SCSI** or **SATA** interface and sit on a solid-state tier (usually tier 1–3). Turning it on doesn't reclaim space that's already free inside the guest; a TRIM does that (`Optimize-Volume -DriveLetter <letter> -ReTrim` on Windows, `sudo fstrim -av` on Linux). See [Virtual Drive TRIM](../virtual-machines/virtual-drive-trim.md).
 
-[Understanding and Explaining Unexpected vSAN Growth](understanding-and-explaining-unexpected-vsan-growth.md) lists other places space builds up, such as files, incoming syncs, and tenants. Use its checklist of causes.
+
+1. **Review older, never-expiring, and heavily changed snapshots first.** A snapshot starts out identical to its source and costs more space as the data diverges, so the cost depends on how much has changed, not on age alone (see [System Snapshots](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/backup-and-dr/system-snapshots)). Review **System → System Snapshots** for snapshots set to never expire or kept longer than you need, and remove what you can. Before you delete one, make sure it isn't queued or actively syncing to a DR site. Deleting it mid-sync aborts that transfer, and the snapshot never arrives on the other side. Removing a snapshot is permanent, so confirm you don't need it as a restore point first. Immutable snapshots can't be deleted until they're unlocked and their waiting period has passed (see [Immutable Snapshots](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/backup-and-dr/immutable-snapshots)), so start with the ones you can remove now.
+2. **Check other places space builds up.** [Understanding and Explaining Unexpected vSAN Growth](understanding-and-explaining-unexpected-vsan-growth.md) has a checklist of other common causes, such as files, incoming syncs, and tenants.
+3. **Expect a delay.** vSAN frees deleted blocks in the background, so used space drops over time, not the moment you delete (see [vSAN Deletion Process](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/storage/vsan-deletion-process)).
+
+{% hint style="success" %}
+**Reclaim additional space with Discard and TRIM**
+
+Once you've freed enough space for VMs to run again, consider checking whether **Discard** is enabled on your VM drives. Without it, files deleted inside a guest don't return space to the vSAN, so the guest's usage on the tier only grows.
+
+Enabling Discard doesn't reclaim space that's already free inside the guest. To recover that space, run a TRIM inside the running guest: `Optimize-Volume -DriveLetter <letter> -ReTrim` on Windows, or `sudo fstrim -av` on Linux. See [Virtual Drive TRIM](../virtual-machines/virtual-drive-trim.md) for details.
+{% endhint %}
+
 
 ### Fix the capacity long term
 
