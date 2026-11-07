@@ -36,7 +36,7 @@ tags:
 
 # vSAN Writes Fail with "No space left on device" While the Tier Shows Free Space (Mixed Drive Sizes)
 
-VMs stop and writes fail with "No space left on device", yet the vSAN tier reports something like 58% or 68% used. If that tier has drives of different sizes, the tier may have used up the space it can actually allocate, even though it doesn't look full. This article shows how to confirm it and how to get space back.
+VMs stop and writes fail with "No space left on device", yet the vSAN tier reports well under 100% used. If that tier has drives of different sizes, the tier may have used up the space it can actually allocate, even though it doesn't look full.
 
 ## Overview
 
@@ -45,12 +45,13 @@ VMs stop and writes fail with "No space left on device", yet the vSAN tier repor
 
 - All drives in a tier should be the same capacity. When sizes are mixed, the tier can only use each drive up to the size of the smallest drive.
 - In this situation the tier's usage figure can show much more free space than the drives can actually take.
-- Check individual drive sizes and usage, not the tier percentage. Free space where you can (e.g.  expiring old snapshots, removing unnecessary files or backups, etc.), then plan matching-size drives.
+- Check individual drive sizes and usage, not the tier percentage. 
+- Free space where you can (e.g.  expiring old snapshots, removing unnecessary files or backups, etc.), then plan matching-size drives.
 {% endhint %}
 
 ## Symptoms
 
-Writes fail across the system and VMs stop. Logs show lines like these:
+Writes fail across the system and VMs stop. System logs show lines like these:
 
 ```
 ybvsan: Error writing block to tier <T>: (28) No space left on device
@@ -99,7 +100,7 @@ The node with the lowest result sets the practical limit for the tier. This is r
 
 ## What to Check
 
-1. **Rule out drive failures and repairs.** Go to **Infrastructure → vSAN Tiers** and double-click the tier named in the error (the `tier <T>` value). Confirm that **Repairs** is 0, **Unavailable Drives** (labeled **Bad Drives** in some versions) is 0, and **Redundant** is checked. If all three are clean, a failed drive or an active repair isn't the cause, so keep going. These values can be briefly non-zero or unchecked while a journal walk is running. If they are, wait for the walk to finish and check again. [vSAN Tier Status (Journal Walks)](understanding-journal-walks-and-vsan-tier-status.md) explains each field.
+1. **Rule out drive failures and repairs.** Go to **Infrastructure → vSAN Tiers** and double-click the tier named in the error (the `tier <T>` value). Confirm that **Repairs** is 0, **Unavailable Drives** (labeled **Bad Drives** in some versions) is 0, and **Redundant** is checked. If all three are clean, a drive failure or repair isn't what's causing the errors - capacity is the likely cause, so keep going. These values can be briefly non-zero or unchecked while a journal walk is running. If they are, wait for the walk to finish and check again. [vSAN Tier Status (Journal Walks)](understanding-journal-walks-and-vsan-tier-status.md) explains each field.
 2. **Check whether the tier has mixed drive sizes.** From the same tier dashboard, select **Drives** to list every drive in the tier across all nodes, and compare the values in the **Size** column. If every drive is the same size, this article doesn't apply; see [Understanding and Explaining Unexpected vSAN Growth](understanding-and-explaining-unexpected-vsan-growth.md) instead. If the sizes differ, note one of the smallest drives and one of the largest drives for the next two steps.
 3. **Check usage on one of the smallest drives.** Open one of the smallest drives in the tier. In the **vSAN Status** card, the **Used** field shows how much space is in use on that drive, with a percentage bar. If this issue is the cause, the bar will be at or near 100%. A drive in that state can't accept new writes for the tier.
 4. **Compare it with one of the largest drives.** Go back to the drive list, open one of the largest drives in the tier, and check its **Used** field. If the larger drive shows a noticeably lower percentage while the smaller drive is full, the diagnosis is confirmed. The tier can only use each drive up to the size of its smallest drive, so the remaining space on the larger drives can't be used.
@@ -136,6 +137,11 @@ Enabling Discard doesn't reclaim space that's already free inside the guest. To 
 - **Add capacity only in balanced, consistently sized sets.** [Scaling Up a vSAN](scaling-up-a-vsan.md) requires all drives in a tier to be alike, and a drive larger than the tier's smallest adds only as much space as that smallest drive. So adding larger drives while the small ones remain doesn't unlock the unused space on the large ones. Add drives in equal numbers across the nodes, as [vSAN Architecture](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/storage/vsan-architecture) describes. Follow the [vSAN Scale Up SOP](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/operations/vsan-scale-up-sop) for the procedure itself.
 - **To use the full size of the larger drives, replace the smaller ones.** Replace each smaller drive in the tier with one that matches the larger drives, one drive at a time. Follow [Scenario 2: Proactively Replace a Working Drive](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/operations/drive-replacement#scenario-2-proactively-replace-a-working-drive) in Replacing a Defective or End-of-life Drive, and wait until each replacement finishes repairing and shows **Online** before you start the next. The tier gains no usable capacity until every smaller drive in the tier, on every node, has been replaced.
 
+## Prevention
+
+- **Keep drive sizes consistent within each tier.** When you buy drives for a tier, whether at deployment or for a scale-up, match the size of the drives already in it.
+- **Monitor the smallest drives in any mixed-size tier.** Until the smaller drives have been replaced, check the **Used** value on the tier's smallest drives, not the tier percentage, so you catch the problem before writes fail and VMs stop. Plan capacity from the usable figure, not the raw total (see the example in [Why It Happens](#why-it-happens)).
+
 ## When to Contact Support
 
 Contact VergeOS support, and include a system diagnostics report ([Generating System Diagnostics](../troubleshooting/generating-system-diagnostics.md)), if:
@@ -151,3 +157,13 @@ Contact VergeOS support, and include a system diagnostics report ([Generating Sy
 - [vSAN Diagnostics](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/storage/vsan-diagnostics)
 - [vSAN Tier Status (Journal Walks)](understanding-journal-walks-and-vsan-tier-status.md)
 - [Understanding and Explaining Unexpected vSAN Growth](understanding-and-explaining-unexpected-vsan-growth.md)
+- [Understanding vSAN Redundancy Levels](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/storage/vsan-redundancy-levels)
+
+---
+
+{% hint style="info" %}
+**Document Information**
+
+- Last Updated: 2026-11-06
+- VergeOS Version: 26.2
+{% endhint %}
