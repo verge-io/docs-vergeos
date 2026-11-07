@@ -4,7 +4,7 @@ title: >-
   Space (Mixed Drive Sizes)
 slug: vsan-mixed-drive-sizes-no-space-left
 author: VergeOS Documentation Team
-date: 2026-11-05T00:00:00.000Z
+date: 2026-11-06T00:00:00.000Z
 semantic_keywords:
   - vsan no space left on device tier not full
   - error writing block to tier no space left on device
@@ -20,7 +20,7 @@ categories:
   - Troubleshooting
   - vSAN
 editor: markdown
-dateCreated: 2026-10-30T00:00:00.000Z
+dateCreated: 2026-11-06T00:00:00.000Z
 description: >-
   When a vSAN tier mixes drive sizes, the tier can only use each drive up to the size of the smallest one. Writes can fail with "No space left on device" while the tier percentage still looks healthy. Here is how to confirm it and what to do.
 tags:
@@ -134,8 +134,9 @@ Enabling Discard doesn't reclaim space that's already free inside the guest. To 
 
 ### Fix the capacity long term
 
-- **Add capacity only in balanced, consistently sized sets.** [Scaling Up a vSAN](scaling-up-a-vsan.md) requires all drives in a tier to be alike, and a drive larger than the tier's smallest adds only as much space as that smallest drive. So adding larger drives while the small ones remain doesn't unlock the unused space on the large ones. Add drives in equal numbers across the nodes, as [vSAN Architecture](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/storage/vsan-architecture) describes. Follow the [vSAN Scale Up SOP](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/operations/vsan-scale-up-sop) for the procedure itself.
 - **To use the full size of the larger drives, replace the smaller ones.** Replace each smaller drive in the tier with one that matches the larger drives, one drive at a time. Follow [Scenario 2: Proactively Replace a Working Drive](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/operations/drive-replacement#scenario-2-proactively-replace-a-working-drive) in Replacing a Defective or End-of-life Drive, and wait until each replacement finishes repairing and shows **Online** before you start the next. The tier gains no usable capacity until every smaller drive in the tier, on every node, has been replaced.
+- **Add capacity only in balanced, consistently sized sets.** [Scaling Up a vSAN](scaling-up-a-vsan.md) requires all drives in a tier to be alike, and a drive larger than the tier's smallest adds only as much space as that smallest drive. So adding larger drives while the small ones remain doesn't unlock the unused space on the large ones. Add drives in equal numbers across the nodes, as [vSAN Architecture](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/storage/vsan-architecture) describes. Follow the [vSAN Scale Up SOP](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/operations/vsan-scale-up-sop) for the procedure itself.
+
 
 ## Prevention
 
