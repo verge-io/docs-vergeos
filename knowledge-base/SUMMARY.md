@@ -66,6 +66,7 @@
   * [Understanding and Explaining Unexpected vSAN Growth](storage-vsan/understanding-and-explaining-unexpected-vsan-growth.md)
   * [Understanding vSAN Tier Status/Journal Walks](storage-vsan/understanding-journal-walks-and-vsan-tier-status.md)
   * [vSAN Encryption Information](storage-vsan/vsan-encryption-information.md)
+  * [vSAN "No Space Left on Device" with Mixed Drive Sizes](storage-vsan/vsan-mixed-drive-sizes-no-space-left.md)
 * [Tenants](tenants/README.md)
   * [Allow Root to Tenant Site Connection](tenants/allow-root-to-tenant-site-connection.md)
   * [Configuring Proxy](tenants/configuring-proxy.md)
