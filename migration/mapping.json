@@ -1381,7 +1381,7 @@
  {
   "src": "knowledge-base/posts/Chg-external-vlan-bonded.md",
   "space": "knowledge-base",
-  "dest": "networking/change-external-vlan-to-bonded.md",
+  "dest": "networking/bond-external-vlan-bare-metal.md",
   "group": "Networking",
   "title": "Change External Network to VLAN Bonded"
  },
