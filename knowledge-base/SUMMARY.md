@@ -65,6 +65,7 @@
   * [Troubleshooting NAS Shares](storage-vsan/troubleshooting-nas-shares.md)
   * [Understanding and Explaining Unexpected vSAN Growth](storage-vsan/understanding-and-explaining-unexpected-vsan-growth.md)
   * [Understanding vSAN Tier Status/Journal Walks](storage-vsan/understanding-journal-walks-and-vsan-tier-status.md)
+  * [vSAN "because tier N slow" Messages and VM Stalls: Check the Tier's Drive Class](storage-vsan/vsan-tier1-slow-drive-class.md)
   * [vSAN Encryption Information](storage-vsan/vsan-encryption-information.md)
   * [vSAN "No Space Left on Device" with Mixed Drive Sizes](storage-vsan/vsan-mixed-drive-sizes-no-space-left.md)
 * [Tenants](tenants/README.md)
