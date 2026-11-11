@@ -29,7 +29,7 @@ categories:
 
 ## How to Connect to an Existing Network
 
-Connecting to a network that exists outside your VergeOS environment, such as an existing company LAN, or a WAN connection, requires a VergeOS external network. Typically, one external network is created during the VergeOS system install and mapped to a physical network that is also defined during installation. Multiple externals can be created to take advantage of multiple available physicals. More than one external network can be mapped to the same physical network, with each utilizing a different VLAN. The following instructions walk through creating an external network after install, from the VergeOS UI. Additionally, an external network created during installation can be modified using the settings information provided.
+Connecting to a network that exists outside your VergeOS environment, such as an existing company LAN, or a WAN connection, requires a VergeOS External network. Typically, one External network is created during the VergeOS system install and mapped to a physical network that is also defined during installation. Multiple Externals can be created to take advantage of multiple available physicals. More than one external network can be mapped to the same physical network, with each utilizing a different VLAN. The following instructions walk through creating an external network after install, from the VergeOS UI. Additionally, an external network created during installation can be modified using the settings information provided.
 
 ## Create a New External Network
 
@@ -39,11 +39,17 @@ Connecting to a network that exists outside your VergeOS environment, such as an
 4. Optionally, a **Description** can be entered for the network.
 5. Optionally, a **HA Group** can be defined for the network. HA Groups define two or more networks to provide high availability. When multiple networks are assigned to the same HA Group, the system attempts to run the networks across different physical nodes to increase availability.
 6. Select the appropriate **Layer 2 Type**:
-    - ***vLan*** (VLAN id specified in Layer 2 ID field)
-    - ***Bond*** - supports switch ports configured for lag group-active/main physical device
-    - ***Bond Slave*** - supports switches configured for lag group-secondary device
-    - ***none*** - simple direct connect (also passes guest-tagged 802.1Q VLANs to VMs; see [Pass Guest-Tagged VLANs to a VM](#pass-guest-tagged-vlans-to-a-vm))
-    - ***vxLan*** (VXLAN id specified in Layer 2 ID field)
+    - ***vLan***: (VLAN id specified in Layer 2 ID field)
+    - ***Bond***: supports switch ports configured for lag group-active/main physical device
+    - ***Bond Slave***: supports switches configured for lag group-secondary device
+    - ***vxLan***: (VXLAN id specified in Layer 2 ID field)
+    - ***none***: direct connect; no vlan/vxlan management - vlan tags pass through unmodified
+
+    {% hint style="info"}
+    **When **Layer 2 Type** set to ***none*** all VLANs will pass this network except any that are claimed by another external network (i.e. network with vlan specified as Layer 2 Type) on the same physical network.  802.1Q guest-tagged VLANs will also pass the network - for more information, about virtual guest tagging, see KB article: [Pass Guest-Tagged VLANs to a VM](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/networking/pass-guest-tagged-vlans-to-a-vm).
+
+    {% endhint %}
+   
 7. Enter a **Layer 2 ID**, if applicable (VLAN/VXLAN)
 8. Enter the appropriate **MTU size** for the existing network.
 9. Optionally, a specific **Cluster** can be selected to specify the primary cluster where this VNet will run.
