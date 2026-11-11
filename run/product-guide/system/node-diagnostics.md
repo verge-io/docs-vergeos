@@ -633,13 +633,38 @@ nc -zv [HOST] [PORT]
 
 **Parameters:**
 
-- **Interface:** Network interface to monitor
-- **Filter:** Packet filter expression
+- **Number of packets:** Packets to capture (100 to 1000, default 100)
+- **Timeout in seconds:** Capture duration (1 to 30, default 15)
+- **Interface Type:** ***Physical***, ***VXLAN***, ***Bridges***, or ***TAP devices***
+- **Name:** The interface to capture on, filtered by **Interface Type**.
+- **Verbose Output:** ***None***, ***Low***, ***Medium***, or ***High***
+- **Show Link-Level Header (VLAN, MAC):** Adds `-e` to the command so each packet shows its MAC addresses and 802.1Q VLAN tag
+- **Expression:** Packet filter expression (for example, `vlan 210` or `not vlan 1`), appended to the command as entered
+
+{% hint style="info" %}
+**Interface Name List**
+
+The **Physical** list shows the node's physical NICs. **Bridges** and **TAP devices** only list bridges and taps for networks and VMs that are running on the selected node, so run the capture on the node where the network or VM is running.
+{% endhint %}
+
+{% hint style="info" %}
+**Seeing VLAN Tags**
+
+By default, the capture does not print link-level headers, so VLAN-tagged frames appear as plain IP traffic with no VLAN ID. Check **Show Link-Level Header (VLAN, MAC)** to see tags, for example `ethertype 802.1Q (0x8100) ... vlan 210, p 0`.
+{% endhint %}
 
 **CLI Syntax:**
 
+Enable **Show Command** to see the exact command used. The default command is:
+
 ```bash
-tcpdump -i [INTERFACE] [FILTER]
+busybox timeout 15 tcpdump -lni [INTERFACE] -c 100
+```
+
+With **Show Link-Level Header (VLAN, MAC)** checked and an **Expression** entered:
+
+```bash
+busybox timeout 15 tcpdump -lni [INTERFACE] -c 100 -e [EXPRESSION]
 ```
 
 {% hint style="warning" %}
