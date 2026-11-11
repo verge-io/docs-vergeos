@@ -1,11 +1,40 @@
-## Pass Guest-Tagged VLANs to a VM
+---
+title: Pass Guest-Tagged VLANs to a VM
+slug: pass-guest-tagged-vlans-to-a-vm
+description: Use an external network with Layer 2 Type none to pass an 802.1Q VLAN trunk into a VM so the guest OS can tag its own traffic.
+author: VergeOS Documentation Team
+date: 2026-11-11
+semantic_keywords:
+  - "pass vlan trunk to vm guest tagging"
+  - "802.1q guest-tagged vlans external network layer 2 type none"
+  - "vm creates its own vlan interfaces tagged frames"
+  - "vlan trunk to virtual machine without physical bridged"
+use_cases:
+  - pass_vlan_trunk_to_vm
+  - configure_guest_vlan_tagging
+  - verify_vlan_tags_with_tcpdump
+tags:
+  - networking
+  - vlan
+  - trunk
+  - 802.1q
+  - guest-tagging
+  - external
+  - vm
+categories:
+  - Networking
+editor: markdown
+dateCreated: 2026-11-11
+---
+
+# Pass Guest-Tagged VLANs to a VM
 
 An external network with **Layer 2 Type** ***none*** can carry a VLAN trunk into a VM. The guest OS creates its own VLAN interfaces and tags its own traffic, and the network passes 802.1Q-tagged frames in both directions with the tags intact: from the physical switch to the VM, from the VM to the physical switch, and between VMs on the same network.
 
 Physical bridge mode (**Physical Bridged**) is not required.
 
 1. Confirm the physical switch port is a trunk that allows every VLAN ID the guest needs.
-2. Create a new external network as described above, with these settings:
+2. Create a new external network as described in [How to Create an External Network](create-external-network.md), with these settings:
     - **Layer 2 Type**: ***none***
     - **Interface Network**: the physical network that carries the trunk
     - **IP Address Type**: ***None***
