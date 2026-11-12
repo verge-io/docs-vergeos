@@ -97,7 +97,7 @@ For environments that require double-tagging (e.g., service provider edge), sele
 
 ## Bonded Interfaces
 
-Bonding provides NIC redundancy for external connectivity. The general recommendation for external networks is **LACP (802.3ad)** when the upstream switch supports it, with **active-backup** as the alternative for 2-NIC bare-metal installations where both NICs carry core fabric traffic and the external connection must share those same physical interfaces via VLANs. LAG/MLAG applies to external networks only — never to the core fabric.
+Bonding provides NIC redundancy for external connectivity. LACP (802.3ad) applies to install-time bonds configured with a switch-side LAG (Link Aggregation Group). Network-level VLAN bonding, configured through the **Enable Bonding** checkbox, does not support LACP. Use network-level bonding when the selected physical networks are standalone NICs, not install-time bonds. For more information about bond modes and configuration, see [Bonded VLAN-tagged Networks](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/networking/bonded-vlans).
 
 ### Creating a Bonded External Network
 
@@ -105,8 +105,8 @@ Bonding provides NIC redundancy for external connectivity. The general recommend
 2. Set **Layer 2 Type** to `vLAN` and enter the appropriate VLAN ID
 3. Enable the **Bonding** checkbox
 4. Under **Bond Interfaces**, select the physical networks to participate:
-   - Select specific fabrics (e.g., `core-fabric-1 Switch`, `core-fabric-2 Switch`), or
-   - Select **All** to bond across all available interfaces
+   - Select specific physical networks if they are standalone NICs (for example, `core-fabric-1 Switch`, `core-fabric-2 Switch`)
+   - Do NOT select **All** or individual bond members when the physical network is an install-time bond
 5. Click **Submit**
 
 ### Testing Bond Failover
@@ -264,7 +264,7 @@ Coming from Nutanix AHV? VergeOS sets VLANs at the network level, builds DHCP/DN
 | **Layer 2 types**      | vLAN (most common), Bond, Bond Secondary, none (direct connect), vxLAN                                      |
 | **IP types**           | Static, Dynamic/DHCP, BGP/OSPF, None (Layer 2 only)                                                         |
 | **Default route**      | Required after creation — without it, the network runs but cannot route traffic                             |
-| **Bonding**            | LACP (802.3ad) preferred for external networks; active-backup is the alternative for 2-NIC bare-metal nodes |
+| **Bonding**            | LACP (802.3ad) applies to install-time bonds with switch-side LAG; network-level VLAN bonding does not support LACP and requires standalone NICs, not install-time bonds |
 | **HA Groups**          | Distribute network instances across nodes for high availability                                             |
 | **Gateway monitoring** | Detect upstream connectivity loss — always recommended for production                                       |
 | **DHCP**               | Optional built-in DHCP server with dynamic or sequential address assignment                                 |
