@@ -55,6 +55,22 @@ Because SMTP can involve inherently complex and error-prone configuration (DNS, 
     * **Use SASL Authorization:** Typically, valid authentication credentials will be required when using a relay host; enable this option to enter username/password needed to access the relay server.
 4. Click **Submit** to save the configuration.
 
+### Relay Through Microsoft 365 (Inbound Connector)
+
+Microsoft 365 is retiring Basic authentication for SMTP AUTH, which is what **Use SASL Authorization** uses against `smtp.office365.com`. To relay through Microsoft 365 without a username and password, use an inbound connector that identifies your VergeOS system by its public IP address.
+
+1. In the Exchange admin center, create an inbound connector (from **Your organization's email server** to **Office 365**) that accepts mail from your VergeOS system's static **public** IP address. A private address (for example, 192.168.x.x or 10.x.x.x) is rejected as a reserved IP range. Microsoft's steps are in [How to set up a multifunction device or application to send email using Microsoft 365](https://learn.microsoft.com/en-us/exchange/mail-flow-best-practices/how-to-set-up-a-multifunction-device-or-application-to-send-email-using-microsoft-365-or-office-365).
+2. In VergeOS, go to **System > SMTP** and click **Edit Settings**.
+3. Set **Relay Host** to your tenant's MX endpoint, the host name in your domain's MX record (for example, `yourdomain-com.mail.protection.outlook.com`). This is not `smtp.office365.com`.
+4. Set **Relay Port** to **25**.
+5. Enable **Use TLS** and disable **Use SASL Authorization**.
+6. Set **From Address** to an address in one of your Microsoft 365 accepted domains.
+7. Click **Submit**, then [send a test email](#test-smtp-configuration).
+
+{% hint style="info" %}
+Outbound port 25 must be open from your VergeOS system to the internet. If you can't use a static public IP, a third-party SMTP relay service that accepts a username and password works with **Use SASL Authorization**.
+{% endhint %}
+
 ## Test SMTP Configuration
 
 1. Start at the **SMTP Dashboard (System > SMTP)**.
