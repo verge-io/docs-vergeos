@@ -40,7 +40,7 @@ An external network with **Layer 2 Type** ***none*** can carry a VLAN trunk into
 For most VMs, let VergeOS manage VLANs: create a ***vLan*** external network for each VLAN, as described in [How to Create an External Network](create-external-network.md), and attach a VM NIC to each one.
 {% endhint %}
 
-VergeOS-managed VLANs are the better choice in most cases:
+**VergeOS-managed VLANs are the better choice in most cases:**
 
 - **Isolation**: Each VM receives only the VLANs its NICs are attached to. A ***none*** network delivers every unclaimed VLAN on the trunk to the VM.
 - **Visibility**: Each VLAN is its own network in VergeOS, with its own rules and statistics. VLANs tagged inside a guest are not visible to VergeOS.
