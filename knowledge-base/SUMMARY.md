@@ -50,6 +50,7 @@
   * [IPsec Configuration Example - Tenant/NAT](networking/ipsec-example-tenant-nat-ui-ip.md)
   * [IPsec Example - Dedicated Public IP](networking/ipsec-example-dedicated-ip.md)
   * [Network Blocks](networking/network-blocks.md)
+  * [Pass Guest-Tagged VLANs to a VM](networking/pass-guest-tagged-vlans-to-a-vm.md)
   * [Routing Between Internal VergeOS Networks](networking/routing-between-internal-vergeio-networks.md)
   * [Routing Layer 2 Networks with VergeOS](networking/routing-l2-networks.md)
   * [Understanding Traffic Flow](networking/understanding-traffic-flow.md)
