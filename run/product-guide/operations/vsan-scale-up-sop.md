@@ -104,7 +104,7 @@ Perform these checks on the day of scheduled maintenance, before beginning the s
 - [ ] Ensure no large storage operations are in progress (VMWare Backups, Imports, NAS file copies, Site Syncs)
 - [ ] Resource availability - System is N+1
     - Verify RAM usage is enough to run workloads with a node offline (HCI Systems)
-    - Verify there are no active or snoozed capacity alarms on the tier being expanded
+    - Verify the tier has no capacity alarms, including snoozed alarms
 - [ ] System Snapshots are recent and available
     - Set the most recent Snapshot to expire several days in the future for extra retention
 - [ ] Confirm Outbound Syncs (if configured) are current
