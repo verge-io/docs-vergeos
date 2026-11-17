@@ -32,16 +32,15 @@ A virtual layer bond lets a VLAN-tagged External network fail over between two p
 
 
 {% hint style="info" %} 
-**Common Use Case - Bare-metal Installations**
+**Common Use Cases - Provider-hosted Bare-metal Installations and Blade Servers**
 
-Using a virtual layer bond in deployments where each node is limited to 2 NICs, e.g., bare-metal installations, allows for independent redundant core fabric paths and bonded External network paths on the same NICs as a tagged VLAN. Bonding the External network across both paths allows it to stay up if either NIC, cable, or switch fails.
+Using a virtual layer bond in deployments where each node is limited to 2 NICs, e.g., provider-hosted bare-metal installations or blade servers, allows for independent redundant core fabric paths and bonded External network paths on the same NICs as a tagged VLAN. Bonding the External network across both paths allows it to stay up if either NIC, cable, or switch fails.
 
 {% endhint %}
 
 
 ## Prerequisites
-
-- Verify the associated switch ports are configured for the VLAN tag.
+- For the Interface Network chosen for this External Network, verify the associated physical switch ports are configured for the VLAN tag
 - Confirm you know the password for the built-in **admin** account (user ID 1), or another administrator account with console access. If the UI becomes unreachable, you'll need it to log in at the node console and work from the command line.
 
 {% hint style="danger" %}
@@ -74,7 +73,7 @@ If you make the change remotely, have physical console or IPMI access open and r
 
 * Some bond modes only work if the physical switches are set up for them, such as a port-channel/LAG or fully separate layer 2 networks. If you pick a mode your switches don't support, traffic can drop, and you can lose the entire network, including remote access to the VergeOS UI. Before you pick any mode other than **Active Backup**, check the mode's requirements below and verify with your network administrator that the switches support it. If you're not sure, use **Active Backup**: it works with any switch setup.
 
-* **Two-NIC bare-metal nodes:** both NICs also carry core fabric traffic, and core fabric ports can't be placed in a port-channel. Use **Active Backup**, **Balance TLB**, or **Balance ALB** only.
+* **Two-NIC nodes:** both NICs also carry core fabric traffic, and core fabric ports can't be placed in a port-channel. Use **Active Backup**, **Balance TLB**, or **Balance ALB** only.
 
 {% endhint %}
     
