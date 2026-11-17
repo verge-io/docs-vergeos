@@ -27,7 +27,7 @@ editor: markdown
 dateCreated: 2024-11-24T18:38:59.908Z
 ---
 
-# Create Bonded External Network on a Bare-metal System
+# Create Bonded External Network on a Provider-hosted Bare-metal System
 
 On a provider-hosted, bare-metal node with only two NICs, each NIC carries its own core fabric network. Because both NICs are in use by the core fabric, the External network runs on those same NICs as a tagged VLAN. Bonding that VLAN across both physical networks keeps the External network, including remote access to the VergeOS UI, available if either NIC, cable, or switch fails.
 
