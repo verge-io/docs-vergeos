@@ -95,12 +95,14 @@ For environments that require double-tagging (e.g., service provider edge), sele
 
 ## Bonded Interfaces
 
-**LACP** 
+**LACP**  
+
 Bonding provides redundancy for external connectivity. The general recommendation for external networks is **LACP (802.3ad)** when the upstream switch supports it. Specify ***Bond***  and ***Secondary bond*** interfaces during **physical interface** enumeration in the VergeOS installation. 
 
 
-**Virtual Layer Bonding**
-External Networks can use **virtual layer bonding** as an alternative for 2-NIC bare-metal installations where both NICs carry core fabric traffic, and the external connection must share those same physical interfaces via VLANs. LAG/MLAG applies to external networks only — never to the core fabric.
+**Virtual Layer Bonding**  
+
+External Networks can use **virtual layer bonding** as an alternative for 2-NIC bare-metal installations where both NICs carry core fabric traffic and the external connection must share those same physical interfaces via VLANs. LAG/MLAG applies to external networks only — never to the core fabric.
 
 ### Creating a Bonded External Network
 
