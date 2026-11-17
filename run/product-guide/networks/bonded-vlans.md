@@ -34,7 +34,7 @@ A virtual layer bond lets a VLAN-tagged External network fail over between two p
 {% hint style="info" %} 
 **Common Use Cases - Provider-hosted Bare-metal Installations and Blade Servers**
 
-Using a virtual layer bond in deployments where each node is limited to 2 NICs, e.g., provider-hosted bare-metal installations or blade servers, allows for independent redundant core fabric paths and bonded External network paths on the same NICs as a tagged VLAN. Bonding the External network across both paths allows it to stay up if either NIC, cable, or switch fails.
+Using a virtual layer bond in deployments where each node is limited to 2 NICs (e.g., blade servers or provider-hosted bare-metal installations), allows independent redundant core fabric paths and bonded External network paths (as a tagged VLAN) on the same NICs. Bonding the External network across both paths allows it to stay up if either NIC, cable, or switch fails.
 
 {% endhint %}
 
