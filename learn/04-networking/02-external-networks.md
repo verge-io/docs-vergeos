@@ -96,7 +96,7 @@ For environments that require double-tagging (e.g., service provider edge), sele
 ## Bonded Interfaces
 
 **LACP** 
-Bonding provides redundancy for external connectivity. The general recommendation for external networks is **LACP (802.3ad)** when the upstream switch supports it. Specify ***Bond***  and ***Secondary bond*** interfaces during physical interface enumeration in the VergeOS installation. 
+Bonding provides redundancy for external connectivity. The general recommendation for external networks is **LACP (802.3ad)** when the upstream switch supports it. Specify ***Bond***  and ***Secondary bond*** interfaces during **physical interface** enumeration in the VergeOS installation. 
 
 
 **Virtual Layer Bonding**
