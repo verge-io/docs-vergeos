@@ -420,6 +420,27 @@ Field functions:
 | _ct_     | Contains text (case insensitive) |
 | _rx_     | Regex match                      |
 
+**Reserved characters in filter string literals**
+
+Three characters are reserved inside a single-quoted filter value. Escape each one with a backslash:
+
+| Character | Meaning                      | Escaped as |
+| --------- | ---------------------------- | ---------- |
+| `\`       | Escape character             | `\\`       |
+| `'`       | Ends the string literal      | `\'`       |
+| `{`       | Opens a `{...}` group        | `\{`       |
+
+* `}` is not reserved. It does not need an escape.
+* Escape only these three characters. A backslash before another character does not always produce that character.
+* Escape backslashes first. Otherwise, the backslashes you add for `'` and `{` are escaped a second time.
+* Example: `filter=name eq 'my\{app}-01'` matches the name `my{app}-01`.
+
+{% hint style="danger" %}
+Always escape `{` in filter values that come from user input or object names. The API removes an unescaped, balanced `{...}` group before it evaluates the filter, and does not return an error. For example, `name eq 'web{1}-01'` matches the object named `web-01`. A client that then updates or deletes the result changes the wrong object.
+{% endhint %}
+
+An unescaped `{` without a matching `}` returns HTTP 422 (`Invalid argument`). A trailing unescaped `\` also returns HTTP 422. The API removes `{...}` groups from the entire filter string, not only from string literals.
+
 #### Sort
 
 * Sort results by the specified field.
