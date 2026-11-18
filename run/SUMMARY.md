@@ -65,6 +65,22 @@
 * [Two-Factor Authentication (MFA)](product-guide/auth/multifactor-auth.md)
 * [VergeOS OIDC Applications Overview](product-guide/auth/oidc-apps-overview.md)
 
+## Security hardening
+
+* [Security Baseline](product-guide/security/overview.md)
+* [Identity and Access](product-guide/security/identity-access.md)
+* [Management Access and TLS](product-guide/security/management-tls.md)
+* [Networking](product-guide/security/networking.md)
+* [Compute and VMs](product-guide/security/compute-vms.md)
+* [Tenant Isolation](product-guide/security/tenants.md)
+* [Storage and Recovery](product-guide/security/storage-recovery.md)
+* [NAS](product-guide/security/nas.md)
+* [Logging and Monitoring](product-guide/security/logging-monitoring.md)
+* [VergeIQ](product-guide/security/vergeiq.md)
+* [Integrations](product-guide/security/integrations.md)
+* [Platform Operations](product-guide/security/platform-operations.md)
+* [Hardening Checklist](product-guide/security/checklist.md)
+
 ## System administration
 
 * [Advanced System Settings](product-guide/system/advanced-system-settings.md)
