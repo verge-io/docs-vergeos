@@ -13,7 +13,7 @@ Every VergeOS system requires at least one external network, which is typically 
 External networks sit between **physical networks** (Layer 2 switch connections) and the **DMZ** (the Layer 3 routing backbone). Traffic flowing from VMs to the Internet must pass through an external network to reach the physical infrastructure.
 
 ```mermaid
-graph 
+graph
     DMZ["DMZ Network<br/>(routing backbone)"]
     EXT["External Network<br/>(your config)"]
     PHY["Physical Network<br/>(switch connection)"]
@@ -95,11 +95,13 @@ For environments that require double-tagging (e.g., service provider edge), sele
 
 ## Bonded Interfaces
 
-**LACP** 
-Bonding provides redundancy for external connectivity. The general recommendation for external networks is **LACP (802.3ad)** when the upstream switch supports it. Specify ***Bond***  and ***Secondary bond*** interfaces during physical interface enumeration in the VergeOS installation. 
+**LACP**
+
+Bonding provides redundancy for external connectivity. The general recommendation for external networks is **LACP (802.3ad)** when the upstream switch supports it. Specify ***Bond***  and ***Bond Secondary*** interfaces during physical interface enumeration in the VergeOS installation.
 
 
 **Virtual Layer Bonding**
+
 External Networks can use **virtual layer bonding** as an alternative for 2-NIC bare-metal installations where both NICs carry core fabric traffic, and the external connection must share those same physical interfaces via VLANs. LAG/MLAG applies to external networks only — never to the core fabric.
 
 ### Creating a Bonded External Network
@@ -270,10 +272,10 @@ Coming from Nutanix AHV? VergeOS sets VLANs at the network level, builds DHCP/DN
 | Concept                | Summary                                                                                                     |
 | ---------------------- | ----------------------------------------------------------------------------------------------------------- |
 | **Purpose**            | External networks connect VergeOS to upstream LAN, WAN, and Internet infrastructure                         |
-| **Layer 2 types**      | vLAN (most common), Bond, Bond Secondary, none (direct connect), vxLAN                                      |
+| **Layer 2 types**      | vLAN (most common), none (direct connect), vxLAN                                      |
 | **IP types**           | Static, Dynamic/DHCP, BGP/OSPF, None (Layer 2 only)                                                         |
 | **Default route**      | Required after creation — without it, the network runs but cannot route traffic                             |
-| **Bonding**            | LACP (802.3ad) preferred for external networks; virtual layer bonding is the alternative for 2-NIC bare-metal nodes |
+| **Bonding**            | LACP (802.3ad) preferred for external networks; virtual layer bonding is the alternative for 2-NIC nodes |
 | **HA Groups**          | Distribute network instances across nodes for high availability                                             |
 | **Gateway monitoring** | Detect upstream connectivity loss — always recommended for production                                       |
 | **DHCP**               | Optional built-in DHCP server with dynamic or sequential address assignment                                 |

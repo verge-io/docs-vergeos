@@ -1,5 +1,5 @@
 ---
-title: Create Bonded External Network on a Bare-metal system
+title: Create Bonded External Network on a Provider-hosted Bare-metal system
 slug: bond-external-vlan-bare-metal
 description: On bare-metal nodes with only two NICs, bond the External network's VLAN across both physical networks for failover.
 author: VergeOS Documentation Team
@@ -27,7 +27,7 @@ editor: markdown
 dateCreated: 2024-11-24T18:38:59.908Z
 ---
 
-# Create Bonded External Network on a Bare-metal System
+# Create Bonded External Network on a Provider-hosted Bare-metal System
 
 On a bare-metal node with only two NICs, each NIC carries its own core fabric network. Because both NICs are in use by the core fabric, the External network runs on those same NICs as a tagged VLAN. Bonding that VLAN across both physical networks keeps the External network, including remote access to the VergeOS UI, available if either NIC, cable, or switch fails.
 
@@ -42,7 +42,7 @@ Use a bonded, VLAN-tagged External network when:
 ## Before you start
 
 {% hint style="warning" %}
-- Changing the External network can interrupt remote access to the VergeOS UI. Make this change from the node console or IPMI so you can revert it if you lose external UI access. 
+- Changing the External network can interrupt remote access to the VergeOS UI. Make this change from the node console or IPMI so you can revert it if you lose external UI access.
 
 - If the External network is currently untagged, the **VLAN must be added to the ports on both core switches** before the network's Layer 2 settings are changed.
 

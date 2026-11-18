@@ -55,7 +55,7 @@ Please review the [core concepts](concepts.md) first to learn more about VergeOS
 * Network latency between nodes on Core Fabric Networks should be <0.05ms (no switch hops)
 
 {% hint style="warning" %}
-**Core Fabric Network - No Switch Hops Between Nodes**
+**Core Fabric Network — No Switch Hops Between Nodes**
 
 All nodes must be connected to the same switching fabric with **zero switch hops** between them. Adding switch hops in the core fabric path will introduce latency that can significantly impact cluster performance and stability. This requirement applies to all Core Fabric Networks.
 {% endhint %}
@@ -67,7 +67,7 @@ All nodes must be connected to the same switching fabric with **zero switch hops
 * External Networks configured as VLAN trunks (802.1Q tagged)
 * Multiple VLANs allowed on trunk ports for workload/tenant separation
 * LACP (802.3ad) bonding recommended for redundancy and bandwidth aggregation
-  * virtual-layer bonding supported as an alternative
+  * Virtual layer bonding supported as an alternative
 * Network latency <1ms acceptable for most workloads
 * Routable to upstream networks (gateways, internet, other infrastructure)
 * Spanning tree protocol allowed (standard Layer 2 operation)
@@ -85,15 +85,15 @@ This model uses a bonded Layer 2 network for the External, UI and API Management
 ### Requirements
 
 * 4 x 10/25/40/100GbE network ports per node
-* Switching infrastructure that supports stacking (MLAG) - For External Network
+* Switching infrastructure that supports stacking (MLAG) — for External Network
 
 ### Network Configuration
 
 * 4 VergeOS Physical Networks:
   * Core Fabric Network 1
   * Core Fabric Network 2
-  * External Network 1 - Primary bond
-  * External Network 2 - Secondary bond
+  * External Network 1 — Primary bond
+  * External Network 2 — Secondary bond
 * Core Fabric Networks 1 and 2 on their **own** dedicated layer 2 networks
 * A single VLAN for UI/API Management (on primary bonded External Network)
 * Any other VLANs required for your workloads (on primary bonded External Network)
@@ -147,7 +147,7 @@ This model uses a bonded Layer 3 network for the External, UI and API Management
 ### Requirements
 
 * 4 x 10/25/40/100Gb network adapter ports per controller node
-* Switching infrastructure that supports stacking (MLAG) - For External Network
+* Switching infrastructure that supports stacking (MLAG) — for External Network
 * Layer 3 capable switching infrastructure for the External network
 * Using VergeOS Internal Networks for workloads
 
@@ -156,8 +156,8 @@ This model uses a bonded Layer 3 network for the External, UI and API Management
 * 4 VergeOS Physical Networks:
   * Core Fabric Network 1
   * Core Fabric Network 2
-  * External Network 1 - Primary bond
-  * External Network 2 - Secondary bond
+  * External Network 1 — Primary bond
+  * External Network 2 — Secondary bond
 * Core Fabric Networks 1 and 2 on their **own** dedicated layer 2 networks
 * A single statically routed network for UI/API Management
 * Any other statically routed networks required for your workloads
@@ -170,7 +170,7 @@ This model uses a bonded Layer 3 network for the External, UI and API Management
 
 In this model, all networks (Core Fabric, External/Management, Workloads) are combined into a single bonded network VergeOS Physical Network.
 
-### Use Cases - 2 network ports
+### Use Cases — 2 network ports
 
 * Proof of concepts
 * Small Edge deployments
@@ -182,12 +182,12 @@ In this model, all networks (Core Fabric, External/Management, Workloads) are co
 **Each statically assigned network you route to VergeOS in this system design will be non-redundant**
 {% endhint %}
 
-### Requirements - 2 network ports
+### Requirements — 2 network ports
 
 * 2 x 10/25/40/100GbE network adapter ports per node
 * Ability to trunk VLANs and set a native VLAN on switch
 
-### Network Configuration - 2 network ports
+### Network Configuration — 2 network ports
 
 * 2 Physical Networks
   * Core Fabric Network 1
@@ -197,7 +197,7 @@ In this model, all networks (Core Fabric, External/Management, Workloads) are co
 * A single VLAN for UI/API Management (Either Core Fabric Network)
 * Any other VLANs required for your workloads (Either Core Fabric Network)
 
-### Diagram - 2 network ports
+### Diagram — 2 network ports
 
 ![Layer 2 Bonded](<../.gitbook/assets/2nic (1).png>)
 

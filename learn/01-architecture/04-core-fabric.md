@@ -143,7 +143,7 @@ A typical VergeOS node has **four network interfaces** — two for core fabric a
 
 The actual NIC device names vary by hardware (e.g., `eno1`, `enp3s0f0`, `eth0`). During installation, you select which physical NIC maps to each role.
 
-The external NICs are typically **bonded** (LACP or virtual-layer bond) for redundancy. VergeOS supports both switch-based bonding (LACP) and **virtual layer bonding** -no switch configuration required (mode dependent). The two core fabric NICs **must not** be bonded — physical LAG or port bonding interferes with the fabric's built-in redundancy, which detects a wider range of problems (dropped packets, MTU mismatches, NIC lockups, bad firmware) at the application layer than LAG can. Each core fabric NIC connects to its own independent switch.
+The external NICs are typically **bonded** (LACP or virtual layer bond) for redundancy. VergeOS supports both switch-based bonding (LACP) and **virtual layer bonding** — no switch configuration required (mode dependent). The two core fabric NICs **must not** be bonded — physical LAG or port bonding interferes with the fabric's built-in redundancy, which detects a wider range of problems (dropped packets, MTU mismatches, NIC lockups, bad firmware) at the application layer than LAG can. Each core fabric NIC connects to its own independent switch.
 
 ```mermaid
 graph LR
@@ -179,7 +179,7 @@ VergeOS enforces a strict separation between external-facing traffic and interna
 - Carry user-facing traffic: management UI access, VM workload connectivity, internet access
 - Use standard MTU (1500) unless workloads require jumbo frames
 - Configured as VLAN trunks (802.1Q tagged) to support multiple VLANs for tenant and workload separation
-- Typically bonded (LACP or virtual-layer bonded) for redundancy
+- Typically bonded (LACP or virtual layer bonded) for redundancy
 - Can have multiple external networks per system (e.g., management VLAN, production VLAN, DMZ VLAN)
 
 ### Core Fabric Networks

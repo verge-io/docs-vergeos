@@ -114,7 +114,7 @@ Key characteristics:
 - **Multiple supported** — A single system can have multiple external networks, each with its own physical connection or VLAN
 - **VLAN-capable** — Multiple external networks can share a single physical connection using dedicated VLAN IDs
 - **Created during or after install** — The first external network is typically configured during installation; additional networks can be added at any time
-- **Layer 2 type options** — vLAN, Bond, Bond Secondary, none, or vxLAN depending on your topology
+- **Layer 2 type options** — vLAN, none, or vxLAN depending on your topology
 - **IP address type options** — Static, Dynamic (DHCP), BGP/OSPF, or None (Layer 2 only)
 
 External networks connect to the DMZ, which then routes traffic to and from internal networks. This architecture means that workload traffic never touches physical switch infrastructure directly — it always passes through the VergeOS SDN layer where security rules can be applied.
