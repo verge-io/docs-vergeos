@@ -36,7 +36,7 @@ Block placement in vSAN is **derived from the SHA-1 content hash** combined with
 {% hint style="warning" %}
 **Tier 0 is Metadata Only**
 
-Tier 0 does **not** function as a performance cache or hot-data tier. It stores only the vSAN filesystem index and per-tier device maps. Workload data resides on Tiers 1–5. Always use enterprise NVMe drives rated for 3 DWPD or equivalent for Tier 0 and maintain at least 30% free space.
+Tier 0 does **not** function as a performance cache or hot-data tier. It stores only the vSAN filesystem index and per-tier device maps. Workload data resides on Tiers 1–5. Always use enterprise SSD (NVMe or SAS) with a minimum of 1 DWPD endurance for Tier 0 and maintain at least 30% free space.
 {% endhint %}
 
 ### How the Hash Map Works
