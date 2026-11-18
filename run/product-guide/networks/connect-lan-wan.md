@@ -46,7 +46,7 @@ Connecting to a network that exists outside your VergeOS environment, such as an
     - ***none***: direct connect; no vlan/vxlan management - vlan tags pass through unmodified
 
     {% hint style="info" %}
-    **When **Layer 2 Type** set to ***none*** all VLANs will pass this network except any that are claimed by another external network (i.e. network with vlan specified as Layer 2 Type) on the same physical network.  802.1Q guest-tagged VLANs will also pass the network - for more information, about virtual guest tagging, see KB article: [Pass Guest-Tagged VLANs to a VM](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/networking/pass-guest-tagged-vlans-to-a-vm).
+    When **Layer 2 Type** is set to ***none***, all VLANs pass over this network, except VLANs claimed by another external network on the same physical network (a network with **Layer 2 Type** set to ***vlan***). 802.1Q guest-tagged VLANs also pass over the network. For more information about virtual guest tagging, see the KB article [Pass Guest-Tagged VLANs to a VM](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/networking/pass-guest-tagged-vlans-to-a-vm).
 
     {% endhint %}
    

@@ -137,7 +137,7 @@ These settings are in the **Advanced PTP Settings** panel. The defaults work wit
 
 ## Additional Resources
 
-- [Time Settings](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/system-administration/time-settings)
+- [Time Settings](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/system-administration/time-settings) — system time, NTP, and when to use PTP
 - [System Settings](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/system-administration/settings-overview)
 - [VergeOS 26.2 release notes](https://app.gitbook.com/s/33mA7es4mQYkyUa7dMvu/2026/26-2-release-notes)
 
