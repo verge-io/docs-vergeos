@@ -128,8 +128,8 @@ Encryption selection is **not reversible** post-install. Changing from encrypted
     - Any drive not intended for vSAN use
 
 23. **Assign storage tiers** -- The installer auto-detects a tier for each drive. Select **"Yes"** to review and optionally change tier assignments:
-    - **Tier 0** -- Metadata storage (NVMe, high write endurance recommended; plan ~5 GB minimum / 10 GB recommended per 1 TB usable vSAN)
-    - **Tier 1** -- High-performance, write-intensive workloads (high-endurance NVMe)
+    - **Tier 0** -- Metadata storage (enterprise SSD, NVMe or SAS, minimum 1 DWPD; plan ~5 GB minimum / 10 GB recommended per 1 TB usable vSAN)
+    - **Tier 1** -- High-performance, write-intensive workloads (high-endurance SSD)
     - **Tier 2** -- Mixed workloads, general-purpose VMs (mid-range SSD)
     - **Tier 3** -- High-speed HDD or hybrid (conventional; not mandatory)
     - **Tier 4** -- Standard HDD / capacity (conventional; not mandatory)

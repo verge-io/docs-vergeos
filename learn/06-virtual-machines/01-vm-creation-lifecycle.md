@@ -125,7 +125,7 @@ Drives are added to the VM after creation. From the **VM Dashboard**, click **Dr
 
 Every disk drive is assigned a **preferred tier** that determines which vSAN storage tier holds its data. Select based on your workload requirements:
 
-- **Tier 1** (NVMe) -- Highest performance for databases and latency-sensitive workloads
+- **Tier 1** (high-endurance SSD) -- Highest performance for databases and latency-sensitive workloads
 - **Tier 2** (SSD) -- Good balance of performance and capacity
 - **Tier 3** (SSD/HDD) -- General-purpose storage
 - **Tier 4–5** (HDD/Archive) -- Capacity-optimized for cold data

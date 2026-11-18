@@ -45,19 +45,19 @@ VergeOS vSAN organizes drives into **tiers** numbered 0 through 5. Each tier is 
 
 | Tier       | Hardware                 | Purpose                              | Typical Use Cases                                         |
 | ---------- | ------------------------ | ------------------------------------ | --------------------------------------------------------- |
-| **Tier 1** | High-endurance NVMe SSDs | Write-intensive workloads            | High-performance databases, transaction logs              |
+| **Tier 1** | High-endurance SSDs      | Write-intensive workloads            | High-performance databases, transaction logs              |
 | **Tier 2** | Mid-range SSDs           | Balanced read/write workloads        | General-purpose VMs, mixed applications, dev environments |
 | **Tier 3** | Read-optimized SSDs      | Read-intensive workloads             | Content delivery, application repos, reference data       |
 | **Tier 4** | High-capacity HDDs       | Less frequently accessed data        | File servers, backup targets                              |
 | **Tier 5** | Archival-grade HDDs      | Cold storage and long-term retention | Compliance archives, backup archives                      |
 
-Not every deployment uses all five workload tiers. A common production configuration might use only tier 1 (NVMe for performance-sensitive workloads) and tier 4 (HDD for capacity). The Terraform playground uses tier 0 and tier 1 only.
+Not every deployment uses all five workload tiers. A common production configuration might use only tier 1 (high-endurance SSD for performance-sensitive workloads) and tier 4 (HDD for capacity). The Terraform playground uses tier 0 and tier 1 only.
 
 ```mermaid
 graph LR
     subgraph "vSAN Tier Architecture"
-        T0["Tier 0<br/>Metadata<br/>NVMe"]
-        T1["Tier 1<br/>High-Performance<br/>NVMe SSD"]
+        T0["Tier 0<br/>Metadata<br/>Enterprise SSD"]
+        T1["Tier 1<br/>High-Performance<br/>SSD"]
         T2["Tier 2<br/>Mixed Workload<br/>SSD"]
         T3["Tier 3<br/>Read-Optimized<br/>SSD"]
         T4["Tier 4<br/>Capacity<br/>HDD"]

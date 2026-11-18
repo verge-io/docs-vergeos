@@ -34,7 +34,7 @@ Set up storage tiers to organize physical disks by performance characteristics.
    - Identify SSD vs HDD drives
    - Note drive sizes and current assignments
 3. Configure storage tiers:
-   - Assign NVMe / high-endurance SSDs to Tier 1, SATA/SAS SSDs to Tier 2, standard HDDs to Tier 4, and archive HDDs to Tier 5 — leave any unpopulated tier empty
+   - Assign high-endurance SSDs (NVMe, SAS, or SATA) to Tier 1, mid-range SSDs to Tier 2, standard HDDs to Tier 4, and archive HDDs to Tier 5 — leave any unpopulated tier empty
    - The UI's auto-detected tier is the starting point; override only when needed
 4. Verify the vSAN pool shows correct disk assignments and available capacity
 5. Review the configured redundancy level on each vSAN tier (Infrastructure > vSAN Tiers > tier dashboard > Status card) and confirm it reports Redundant. Changing redundancy levels on an existing system requires Verge.io Support and is not part of this lab.
