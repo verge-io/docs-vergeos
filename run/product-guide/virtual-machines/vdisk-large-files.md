@@ -33,28 +33,46 @@ This guide tells how to use the **Optimize For** setting on a vDisk to increase 
 
 Each VM drive of media type **Disk** has an **Optimize For** setting with two options:
 
-- **General Usage** (default) – the vDisk accepts I/O requests of up to 64 KB from the guest.
-- **Large Files** – the vDisk accepts I/O requests of up to 1 MB from the guest.
+- **General Usage** (default) – the vDisk advertises an optimal I/O size of 64 KB to the guest. This value is the native vSAN block size.
+- **Large Files** – the vDisk advertises an optimal I/O size of 1 MB to the guest.
 
-Each I/O request crosses from the guest to the host. This transition is the expensive part of a VM disk operation. With **Large Files**, the guest sends fewer, larger requests for the same data. Fewer transitions give more throughput, mainly for sequential I/O and for large block sizes.
+The setting is a hint to the guest. It is not a limit that the host enforces. The host accepts requests larger than the advertised size with either setting. Some guests use the hint to set their maximum request size, and other guests ignore it. See [Guests and interfaces that use the setting](#guests-and-interfaces-that-use-the-setting).
 
-### Why General Usage is the default
+Each I/O request crosses from the guest to the host. This transition is the expensive part of a VM disk operation. When the guest uses the hint, **Large Files** makes the guest send fewer, larger requests for the same data. Fewer transitions give more throughput, mainly for sequential I/O and for large block sizes.
 
-Many VergeOS systems run a large number of workloads on one cluster, for example in a multi-tenant or MSP environment. The 64 KB cap keeps one VM from using a large share of the vSAN at the cost of the other workloads. **General Usage** is the correct choice when many workloads share a cluster and no single workload must have maximum throughput.
+### Guests and interfaces that use the setting
+
+The setting has an effect only when the vDisk interface sends the hint and the guest uses it.
+
+The vDisk sends the hint on these interfaces:
+
+- **Virtio-SCSI** and **Virtio-SCSI (Dedicated Controller)**
+- The **LSI** controllers
+- **SATA (AHCI)**, **IDE**, and **USB**
+
+The vDisk does not send the hint on **Virtio (Legacy)** or **NVMe**. On these interfaces, the setting does nothing.
+
+| Guest | Uses the hint |
+|-------|---------------|
+| Linux, kernel 6.10 or earlier (for example RHEL 8 and 9, Ubuntu 22.04, Debian 12), on a SCSI-family interface | Yes. The guest sets its maximum request size to the advertised value. |
+| Linux, kernel 6.11 or later | No. The guest records the value but does not use it as its maximum request size. |
+| Windows, with the `vioscsi` driver | No. The driver sets its maximum request size from its own limits. |
+
+To see the value that a Linux guest uses, read `/sys/block/<device>/queue/max_sectors_kb`. On a guest that uses the hint, the value is `64` with **General Usage** and `1024` with **Large Files**.
 
 ### When to use Large Files
 
-Use **Large Files** for a vDisk that gives high-throughput I/O on a cluster where that workload has priority. Examples:
+Use **Large Files** for a vDisk that gives high-throughput I/O on a cluster where that workload has priority, on a guest that uses the hint. Examples:
 
-- A dedicated database VM, for example SQL Server data and log volumes.
+- A dedicated database VM on a Linux guest that uses the hint.
 - An analytics or reporting VM that reads large files sequentially.
 - A VM that is the only important workload on its cluster or node.
 
-In internal tests on a dedicated VM, **Large Files** increased throughput for most block sizes, from 4 KB to 2 MB, for read and for write. The one regression in those tests was 64 KB direct writes at an I/O depth of 32. That result was approximately 30-40% slower. Test your own workload before you change production vDisks.
+In tests on a dedicated single-node system, **Large Files** increased throughput for most block sizes, from 4 KB to 2 MB, for read and for write. The one regression in those tests was 64 KB direct writes at an I/O depth of 32. That result was approximately 30-40% slower. Test your own workload before you change production vDisks.
 
 ### What does not change
 
-The setting changes only the size of the requests between the guest and the host. The vSAN does not change:
+The setting changes only the optimal I/O size that the vDisk advertises to the guest. The vSAN does not change:
 
 - The vSAN keeps its native 64 KB block size. It divides each request of up to 1 MB into 64 KB blocks.
 - Hashes, deduplication, and redundancy use the same 64 KB blocks as before.
@@ -76,6 +94,7 @@ A write smaller than 64 KB is not in the native vSAN format. The vSAN reads the 
 ### What you'll need
 
 - A user with permission to edit the VM.
+- A vDisk on an interface that sends the hint, in a guest that uses it. See [Guests and interfaces that use the setting](#guests-and-interfaces-that-use-the-setting).
 - Knowledge of [VM drives](vm-drives.md) and [storage tiers](../storage/storage-tiers.md).
 - A benchmark tool in the guest, such as `fio`.
 - A maintenance window, because the VM must restart to apply the change.
@@ -104,6 +123,8 @@ Do not run write tests on a vDisk that holds production data. Use a test file, a
 7. Restart the VM to apply the setting.
 
 The vDisk shows **Large Files** in the **Optimize For** field.
+
+On a Linux guest, read `/sys/block/<device>/queue/max_sectors_kb`. If the value did not change to `1024`, the guest does not use the hint, and the setting has no effect on this vDisk.
 
 Run the same `fio` tests again and compare the results with the baseline. If the workload is slower, set **Optimize For** back to **General Usage** and restart the VM.
 
@@ -156,13 +177,13 @@ fio --name=seqread --filename=/data/fio-test --size=20G \
     --group_reporting
 ```
 
-On a Windows guest, use `--ioengine=windowsaio` and a Windows path, for example `--filename=D\:\fio-test`.
+On a Windows guest, use `--ioengine=windowsaio` and a Windows path, for example `--filename=D\:\fio-test`. The Windows `vioscsi` driver does not use the hint, so expect little or no change on a Windows guest.
 
 Change `--rw`, `--bs`, `--iodepth`, and `--numjobs` for each test in the table. Compare the `bw` (throughput) and `lat` (latency) values in the output between the two settings.
 
 ## Summary
 
-You set **Optimize For** to **Large Files** on a vDisk and measured the change with `fio`. The vDisk now accepts I/O requests of up to 1 MB from the guest. The vSAN still stores, hashes, and deduplicates the data in 64 KB blocks.
+You set **Optimize For** to **Large Files** on a vDisk and measured the change with `fio`. The vDisk now advertises an optimal I/O size of 1 MB to the guest, and a guest that uses the hint sends requests of up to 1 MB. The vSAN still stores, hashes, and deduplicates the data in 64 KB blocks.
 
 ### Next steps
 
