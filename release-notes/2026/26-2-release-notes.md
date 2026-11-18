@@ -43,6 +43,17 @@ categories:
 - **End-of-Life**: TBD
 {% endhint %}
 
+{% hint style="warning" %}
+**Node Reboot Order When Upgrading from 26.1**
+
+When you upgrade from 26.1 to any 26.2 release, the order in which nodes reboot depends on the 26.1 version you upgrade from:
+
+- **From 26.1.6:** node1 reboots last. This prevents large or busy systems from running a transaction validation when they reconnect to node1 after the update.
+- **From 26.1.7 or a later 26.1 release:** node2 reboots first.
+
+If you reboot nodes manually instead of selecting **Reboot** in **System > Updates**, follow the same order. Reboot one node at a time, put each node into [Maintenance Mode](https://docs.verge.io/run-the-platform/operations/maintenance-mode) before you reboot it, and wait for it to return to service. Before you continue to the next node, wait until the vSAN shows all tiers as online and healthy (green).
+{% endhint %}
+
 ## Major Features & Themes
 
 ### Summary
@@ -86,57 +97,63 @@ VergeOS 26.2 is a major feature release. The headline capability is **shared (mu
 
 ## 26.2.3 (November 2026)
 
-
 ### Summary
 
 VergeOS 26.2.3 is a maintenance release with fixes for site sync, VM placement and migration, VMware and OVA import, and a set of vSAN, networking, and dashboard issues. It also updates the kernel and firmware baseline.
 
+{% hint style="warning" %}
+**Upgrade Paths to 26.2.3**
+
+Systems on 26.1.6 or later, or on any 26.2 release, can upgrade directly to 26.2.3. Systems on 26.0, or on 26.1 earlier than 26.1.6, must first update to [26.1.8.1](26-1-release-notes.md#id-26.1.8.1-october-2026).
+{% endhint %}
+
+### Security
+
+- The Linux kernel is updated to 6.18.63 and linux-firmware to the October 19, 2026 snapshot, which include the fix for [CVE-2026-99288](https://nvd.nist.gov/vuln/detail/CVE-2026-99288). No manual action is required.
 
 ### Storage (vSAN)
 
-- Fixed Fibre Channel paths timing out under load, and the transport timeout is now adjustable.
+- **Fixed site sync setup leaving stray vSAN users behind when it fails part-way.** Setup now cleans up after itself, and leftover users from an earlier failed setup are removed automatically after upgrading.
+- **Fixed Fibre Channel paths timing out under load.** The transport timeout is now adjustable.
 - Fixed a disk being treated as uninitialized when it was re-presented on a different path.
 - Fixed multipath failover sometimes preferring a worse path than the one already in use.
 - Fixed spurious permission errors logged when the vSAN master is in legacy mode.
-- Fixed controller elections being blocked by a local node, and files left stranded on non-master nodes.
+- Fixed controller elections being blocked by a local node.
+- Fixed files left stranded on non-master nodes.
 - ISO cloning now waits for storage to shut down cleanly before exiting.
-- Site sync setup now cleans up after itself if it fails part-way, so a failed or interrupted setup no longer leaves stray vSAN users behind.
 
 ### Virtualization
 
-- Power-on failures now report the reason for every machine type — tenant nodes, service containers, and VMware containers now state which resource is short and what was requested versus available.
-- VM migrations now lock usable RAM to prevent a scenario where rapid API calls could potentially over-book memory on a node.
+- **Fixed migrations over-committing RAM on a destination node when several VMs migrate at once**, such as during maintenance mode or a bulk migrate. This could leave a VM stuck retrying its migration.
+- **Power-on failures now report the reason for tenant nodes and other non-VM machines**, stating which resource is short and what was requested versus available, as VM power-on already does.
 - Fixed hot-plugging a drive that reuses the slot of a drive removed earlier, which could leave the drive stuck and undeletable until the VM was stopped.
-- Power-on actions using the new API path `/v4/<TABLE>/<KEY>/<ACTION>` now honor a machine's preferred node.
+- Power-on requests sent through `/v4/<type>/<key>/poweron` now honor `preferred_node` for VMs, networks, and containers.
 
 ### Import & Export
 
-- VMware Services that connect directly to an ESXi host (not vCenter) collect VM inventory again.
-- Fixed importing VMs from NAS volumes.
-- Fixed importing a Shared Object created inside a tenant.
+- **Fixed VMware Services that connect directly to an ESXi host (not vCenter) failing to collect VM inventory on 26.2.** Inventory collection resumes after the upgrade, with no reconfiguration needed.
+- Fixed an error that prevented importing a VM from an OVA file on a volume.
+- Fixed an error when a provider imports a Shared Object that a tenant created.
 
 ### Networking
 
 - Fixed network fabric startup problems on systems with a large number of networks.
 - Increased the default neighbor (ARP) table thresholds for larger environments.
-- VergeOS now manages its reverse-path filter per device.
 - The tenant Layer2 Networks list now shows the interface network and VLAN.
 
 ### Platform & Drivers
 
-- Updated the kernel to 6.18.63 and linux-firmware to the October 19, 2026 snapshot (including fixes for CVE-2026-99288).
-- Disabled GRO and LRO on Broadcom `bnx2x` adapters, which could reduce throughput in some configurations.
+- Disabled GRO and LRO on Broadcom `bnx2x` adapters, which caused reduced throughput in some configurations.
 
 ### Update & Installation
 
-- "Reboot and Apply Updates" now requires a typed confirmation when any node is in maintenance mode, and names the node or nodes involved.
+- **Selecting Reboot in System > Updates now requires a typed confirmation when any node is in maintenance mode**, and names the node or nodes involved.
 - Fixed boot file generation when updating from an older version.
 
 ### System & Logging
 
 - Remote syslog forwarding over TCP now reconnects after a node reboot or failover instead of staying down until the setting is re-saved.
 - The login dashboard now shows the external IP addresses used for API/UI access.
-- Fixed a rare crash in impersonated timed events.
 
 ### User Interface
 
@@ -144,14 +161,8 @@ VergeOS 26.2.3 is a maintenance release with fixes for site sync, VM placement a
 - Fixed the Networks dashboard rendering a blank page when no networks are running.
 - List-view filters can now be pinned so they persist through your session.
 - Tenant node lists now show per-node RAM usage.
-- Fixed a VMware dashboard graph refresh issue.
+- Fixed the VMware Service dashboard jumping and losing its scroll position each time the Service Stats graph refreshed. Zooming in on the graph also works correctly now.
 - Removed the redundant "(MB)" from Max RAM on the Clusters page.
-
-### Upgrade Notes
-
-- The kernel and firmware updates are included; no manual action is required.
-- Any leftover vSAN users from a previously failed site sync setup are cleaned up automatically after upgrading.
-- VMware Services pointed at a direct ESXi host resume inventory collection after the upgrade — no reconfiguration is needed.
 
 ## 26.2.2.1 (October 2026)
 
@@ -163,10 +174,6 @@ VergeOS 26.2.2.1 is a maintenance release focused on storage reliability, cluste
 **Upgrade Paths to 26.2.2.1**
 
 Systems on 26.1.6, 26.1.7, or 26.1.8 can upgrade directly to 26.2.2.1. Systems on 26.0, or on 26.1 earlier than 26.1.6, must first update to [26.1.8.1](26-1-release-notes.md#id-26.1.8.1-october-2026). Release 26.1.8.1 includes a hotfix that improves stability for systems with hundreds of networks.
-{% endhint %}
-
-{% hint style="info" %}
-During the upgrade to 26.2.2.1, node 2 reboots before node1.
 {% endhint %}
 
 ### Security
