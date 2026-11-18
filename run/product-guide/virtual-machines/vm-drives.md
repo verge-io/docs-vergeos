@@ -166,8 +166,8 @@ VergeOS’s vSAN handles UNMAP/TRIM commands efficiently at the storage layer wi
 {% endhint %}
 
 * **Optimize For**  
-  * ***General Usage*** – 64 KB chunks with read‑ahead (default). The right choice for most workloads.
-  * ***Large Files*** – up to 1 MB chunks. Only benefits workloads that access very large files sequentially.
+  * ***General Usage*** – the vDisk advertises an optimal I/O size of 64 KB to the guest, with read‑ahead (default). The correct choice for most workloads.
+  * ***Large Files*** – the vDisk advertises an optimal I/O size of 1 MB to the guest. On a guest that uses this hint, the guest sends larger requests, which can increase throughput for a dedicated, high-throughput workload. The effect depends on the interface and the guest OS. See [Optimize a vDisk with the Large Files Setting](vdisk-large-files.md) and [Guest and Interface Support for the Large Files Setting](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/virtual-machines/optimize-for-large-files-guest-support).
 
 * **Advanced Properties**  
 Custom key/value properties for specialized configurations or integrations.

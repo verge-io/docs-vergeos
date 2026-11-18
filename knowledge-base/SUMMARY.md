@@ -8,6 +8,7 @@
 * [Virtual Machines](virtual-machines/README.md)
   * [Changing Resolution on a UEFI VM](virtual-machines/changing-resolution-on-a-uefi-vm.md)
   * [Emulate a USB Device](virtual-machines/emulate-usb.md)
+  * [Guest and Interface Support for the Large Files Setting](virtual-machines/optimize-for-large-files-guest-support.md)
   * [How to Add a TPM Device to a Virtual Machine](virtual-machines/add-tpm-device-to-vm.md)
   * [How to Import a Linux VM (RHEL, CentOS, SUSE, Debian, Ubuntu)](virtual-machines/import-rhel-centos-vm.md)
   * [Importing Physical Machines and Individual VMs into VergeOS](virtual-machines/importing-a-physicalvirtual-machine-into-vergeio.md)
