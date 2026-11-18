@@ -1,16 +1,17 @@
 ---
 title: "Sharing Disks Between Virtual Machines"
-description: "Overview of the supported methods for sharing disks and data between virtual machines in VergeOS, including Clone Disk and NAS-based file sharing, with guidance on when to use each."
+description: "Compare the methods to share disks and data between VMs in VergeOS: Clone Disk, NAS shares, and Shared Disk (26.2 or later), with guidance on when to use each."
 semantic_keywords:
   - "share disk between VMs VergeOS"
   - "shared storage virtual machines"
-  - "clone disk vs NAS share"
+  - "clone disk vs NAS share vs shared disk"
   - "multi-attach disk VergeOS"
   - "shared file system VMs SMB NFS"
 use_cases:
   - share_data_between_vms
   - seed_vm_from_existing_disk
   - provide_shared_file_storage
+  - attach_disk_to_multiple_vms
   - choose_disk_sharing_method
 tags:
   - virtual-machines
@@ -18,6 +19,7 @@ tags:
   - storage
   - sharing
   - clone-disk
+  - shared-disk
   - nas
   - shares
 categories:
@@ -28,11 +30,11 @@ categories:
 
 ## Overview
 
-VergeOS does not currently attach a single block device to multiple running VMs at the same time. When we need to share data across VMs today, we have two supported approaches: **duplicate the disk** (Clone Disk) so each VM gets its own independent copy, or **share a file system over the network** by mounting a NAS share from each guest. This page explains what each method does, when to choose it, and where to find the procedure.
+VergeOS gives three methods to share a disk or its data between virtual machines. **Clone Disk** gives each VM its own independent copy of a disk. A **NAS share** gives multiple VMs file-level access to the same data over the network. **Shared Disk** (VergeOS 26.2 or later) attaches one block device to multiple running VMs at the same time, for guest clusters. This page explains what each method does, when to choose it, and where to find the procedure.
 
 ### What You'll Learn
 
-- The difference between Clone Disk and NAS-based file sharing
+- The difference between Clone Disk, NAS shares, and Shared Disk
 - When to use each method based on your use case
 
 ### What You'll Need
@@ -40,6 +42,7 @@ VergeOS does not currently attach a single block device to multiple running VMs 
 - A running VergeOS environment with at least two virtual machines
 - Administrative access to the VergeOS UI
 - For NAS shares: a configured [NAS service](../nas/overview.md)
+- For Shared Disk: VergeOS 26.2 or later, and a cluster-aware guest OS or application
 
 ## Comparison
 
@@ -47,42 +50,59 @@ VergeOS does not currently attach a single block device to multiple running VMs 
 |---|---|---|---|---|
 | **Clone Disk** | An independent copy of an existing `.raw` disk, made at drive-creation time | Each VM owns a private read/write copy. Changes are **not** synchronized back to the source or to other clones. | Seeding new VMs from a known-good disk image, handing off a point-in-time dataset to another VM | One-time copy only — not a live sharing mechanism. Clones diverge from the source the moment they are created. Permissions are inherited from the source disk. |
 | **NAS share (SMB/NFS)** | A NAS volume exposed as a network share and mounted by multiple guests | Concurrent read/write at the **file** level, mediated by the NAS service and the share protocol | Shared application data, file repositories, content libraries, and any workflow where multiple VMs need to read or write the same files | File-level only, not block-level. Network overhead compared to local disk I/O. Concurrency, locking, and performance depend on the protocol and the guest OS. Granular share-level and filesystem-level permissions are available. |
+| **Shared Disk** *(26.2 or later)* | One `.raw` disk attached as a block device to multiple running VMs | Concurrent read/write at the **block** level. The guest cluster coordinates access with SCSI-3 Persistent Reservations. | Guest clusters that need shared block storage, such as Windows Server Failover Clustering and Cluster Shared Volumes (CSV) | The guest must coordinate writes. Set **Shared Disk** when you create the drive; you cannot turn it on later. Interface must be **Virtio-SCSI** or **Virtio-SCSI (Dedicated Controller)**. |
 
 ## Method 1 — Clone Disk
 
-A **Clone Disk** is a point-in-time copy of an existing `.raw` drive (the default format for VergeOS VM disks) in the same VergeOS cloud. It is created when we add a drive to a VM and select **Clone Disk** as the media type. Once created, the clone is fully independent of the source: writes from the cloned VM stay in the clone, and writes to the source are not visible to the clone. Because the clone is a full copy, it is unaffected if the source drive is later modified or deleted. This is the right choice for *initializing* a VM from an existing disk, not for keeping data in sync between VMs.
+A **Clone Disk** is a point-in-time copy of an existing `.raw` drive (the default format for VergeOS VM disks) on the same VergeOS system. To create one, add a drive to a VM and select **Clone Disk** as the media type. The clone is fully independent of the source: writes to the clone stay in the clone, and writes to the source do not show in the clone. Because the clone is a full copy, later changes to the source drive, or its removal, do not affect it. Use Clone Disk to *initialize* a VM from an existing disk, not to keep data in sync between VMs.
 
-For the step-by-step procedure, see [**Virtual Machine Drives**](vm-drives.md#add-a-drive-to-a-vm) and select **Clone Disk** at the *Media* step.
+For the step-by-step procedure, see [**Virtual Machine Drives**](vm-drives.md#adding-a-drive) and select **Clone Disk** in the **Media** field.
 
 ## Method 2 — NAS Share
 
-A **NAS share** is a volume hosted by the VergeOS NAS service and exposed over SMB or NFS. Each VM mounts the share like any other network file system, and the NAS coordinates concurrent access across all connected guests. This is the supported way to give multiple VMs simultaneous read/write access to the same data.
+A **NAS share** is a volume on the VergeOS NAS service, exposed over SMB or NFS. Each VM mounts the share like any other network file system, and the NAS coordinates concurrent access from all connected guests. Use a NAS share when multiple VMs need simultaneous read/write access to the same files.
 
 For setup, see the [**NAS Overview**](../nas/overview.md) and [**NAS Shares**](../nas/nas-shares.md).
 
+## Method 3 — Shared Disk
+
+A **Shared Disk** attaches one existing disk to multiple VMs at the same time. The disk exists once. You create it as a normal **Disk** on the first VM. On each other VM, you add a drive with **Shared Disk** enabled and select that disk in **Media File**. This attaches the same disk; it does not create new storage.
+
+Shared disks present NAA/WWN identity and support SCSI-3 Persistent Reservations, which guest clusters use to coordinate access. If an I/O error occurs, VergeOS passes it through to the guest and does not stop the VM. The clustered guest can then make its own failover decision.
+
+Requirements:
+
+- Enable **Shared Disk** when you create the drive. You cannot turn it on later by editing the drive.
+- Set the **Interface** to **Virtio-SCSI** or **Virtio-SCSI (Dedicated Controller)**.
+- You cannot attach the same disk to the same VM twice.
+
+{% hint style="danger" %}
+Do not use Shared Disk with a file system that is not cluster-aware, such as a standard NTFS, ext4, or XFS volume. VergeOS does not coordinate writes between the VMs. Uncoordinated writes from multiple VMs corrupt the file system.
+{% endhint %}
+
+For the field details, see [**Virtual Machine Drives**](vm-drives.md#advanced-fields). For a full procedure, see the KB article [Using Shared Disks for Windows Clustering](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/virtual-machines/using-shared-disks-windows-clustering).
+
 ## Choosing Between Them
 
-- **Use Clone Disk** when we need a new VM to *start* with a copy of an existing disk and then evolve independently — for example, deploying several VMs from the same prepared OS or data disk.
-- **Use Clone Disk** for a one-time data hand-off where the receiving VM should own its copy.
+- **Use Clone Disk** when a new VM must *start* with a copy of an existing disk and then change independently — for example, to deploy several VMs from the same prepared OS or data disk.
+- **Use Clone Disk** for a one-time data hand-off where the receiving VM must own its copy.
 - **Use a NAS share** when two or more VMs need to read or write the *same* files concurrently.
 - **Use a NAS share** for shared application content, team file storage, build artifacts, media libraries, or any workflow where consistency across VMs matters.
+- **Use Shared Disk** when a guest cluster needs the same block device on every node — for example, a Windows Server Failover Clustering quorum disk or CSV volume.
 - **Do not** use Clone Disk to keep data in sync between VMs — clones diverge immediately and there is no merge-back.
-
-{% hint style="info" %}
-**Roadmap**
-
-Simultaneous multi-VM attach of a single drive — both read-only and read/write — is planned for a future VergeOS release. This page will be updated when that capability is available.
-{% endhint %}
+- **Do not** use Shared Disk as a general file-sharing method between VMs that are not clustered. Use a NAS share instead.
 
 ## Summary
 
-In short: **Clone Disk for seeding, NAS for sharing.** We covered the two supported methods for sharing data between virtual machines in VergeOS:
+In short: **Clone Disk for seeding, NAS for file sharing, Shared Disk for guest clusters.** This page covered the three methods to share data between virtual machines in VergeOS:
 
-- **Clone Disk** for creating independent, point-in-time copies of an existing drive — local block-level I/O, no network overhead, but no synchronization
-- **NAS shares** for concurrent, file-level access from multiple VMs over SMB or NFS — with granular access control and live collaboration, at the cost of network overhead
+- **Clone Disk** for independent, point-in-time copies of an existing drive — local block-level I/O, no network overhead, but no synchronization
+- **NAS shares** for concurrent, file-level access from multiple VMs over SMB or NFS — with granular access control, at the cost of network overhead
+- **Shared Disk** for concurrent, block-level access from the nodes of a guest cluster — with SCSI-3 Persistent Reservations, where the guest cluster coordinates writes
 
 ### Next Steps
 
-- [Virtual Machine Drives](vm-drives.md#add-a-drive-to-a-vm) — Create a Clone Disk
+- [Virtual Machine Drives](vm-drives.md#adding-a-drive) — Create a Clone Disk or Shared Disk
 - [NAS Overview](../nas/overview.md) — Set up the NAS service
 - [NAS Shares](../nas/nas-shares.md) — Create and manage file shares
+- [Using Shared Disks for Windows Clustering](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/virtual-machines/using-shared-disks-windows-clustering) — Configure shared disks for a Windows failover cluster

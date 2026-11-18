@@ -143,6 +143,7 @@ Attaches an existing disk to multiple VMs at the same time, for clustered applic
   * Must be set when the drive is created.
   * Applies to *Media:* ***Disk***. When enabled, *Interface* choices are limited to ***Virtio-SCSI*** and ***Virtio-SCSI (Dedicated Controller)***.
   * Select the disk to attach in *Media File* (existing disks, grouped by VM; a disk cannot be shared with the same VM twice).
+  * To compare Shared Disk with Clone Disk and NAS shares, see [Sharing Disks Between Virtual Machines](sharing-disks-between-vms.md).
 
 {% hint style="info" %}
 The KB article [Using Shared Disks for Windows Clustering](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/virtual-machines/using-shared-disks-windows-clustering) provides step-by-step instructions for configuring VMs with shared disks for Windows clustering.
