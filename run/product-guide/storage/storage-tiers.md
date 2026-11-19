@@ -35,18 +35,22 @@ For vSAN sizing recommendations, see the [Node Sizing Guide](https://app.gitbook
 
 ## Tier Specifications
 
+{% hint style="info" %}
+Only Tier 0 has hardware requirements. The hardware descriptions for Tiers 1–5 are guidelines. VergeOS assumes that the drives you assign to each tier match that tier's description, but it does not enforce them. For example, Tier 1 does not have to be NVMe: any SSD with fast reads, fast writes, and high endurance fits Tier 1.
+{% endhint %}
+
 ### Tier 0: Metadata Tier
 
-- **Hardware**: High-endurance NVMe-based SSD
+- **Hardware**: Enterprise SSD (NVMe or SAS) with a minimum endurance of 1 DWPD (drive writes per day). Do not use consumer drives.
 - **Purpose**: Used exclusively for vSAN metadata
 - **Characteristics**: Optimized for ultra-low latency operations
 - **Use Case**: System metadata management
 
 ### Tier 1: High-Performance Tier
 
-- **Hardware**: High-endurance NVMe-based SSDs
+- **Hardware**: High-endurance SSDs with fast reads and fast writes (NVMe, SAS, or SATA)
 - **Purpose**: Write-intensive workloads
-- **Characteristics**: Maximum I/O performance, high durability
+- **Characteristics**: Maximum I/O performance, high endurance
 - **Use Cases**:
     - High-performance databases
     - Heavily used transaction logs
@@ -132,7 +136,7 @@ For vSAN sizing recommendations, see the [Node Sizing Guide](https://app.gitbook
 
 1. **Metadata Tier (Tier 0)**:
     - Allocate sufficient space for metadata growth
-    - Use highest-endurance NVMe drives available
+    - Use enterprise SSDs (NVMe or SAS) with a minimum endurance of 1 DWPD
     - Maintain at least 30% free space
 
 2. **Performance Tiers (Tier 1-3)**:

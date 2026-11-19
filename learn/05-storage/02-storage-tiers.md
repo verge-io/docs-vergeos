@@ -14,7 +14,7 @@ vSAN filesystem index and per-tier device maps. Required on controller
 nodes. Not a cache — exclusively metadata.
 ### Tiers 1–3 — Performance
 
-NVMe and SSD tiers for write-intensive, mixed, and read-optimized workloads
+SSD tiers for write-intensive, mixed, and read-optimized workloads
 respectively.
 ### Tiers 4–5 — Capacity
 
@@ -29,12 +29,14 @@ The following table summarizes each tier's hardware type, purpose, and typical u
 
 | Tier  | Media Type               | Purpose                    | Typical Use Cases                                                     |
 | ----- | ------------------------ | -------------------------- | --------------------------------------------------------------------- |
-| **0** | High-endurance NVMe      | vSAN metadata              | Filesystem index, per-tier device maps — required on controller nodes |
-| **1** | High-endurance NVMe SSDs | Write-intensive workloads  | High-performance databases, transaction logs, write-heavy apps        |
+| **0** | Enterprise SSD, 1+ DWPD  | vSAN metadata              | Filesystem index, per-tier device maps — required on controller nodes |
+| **1** | High-endurance SSDs      | Write-intensive workloads  | High-performance databases, transaction logs, write-heavy apps        |
 | **2** | Mid-range SSDs           | Mixed read/write workloads | General-purpose VMs, mixed application workloads, dev/test            |
 | **3** | Read-optimized SSDs      | Read-intensive workloads   | Content delivery, application repositories, reference data            |
 | **4** | High-capacity HDDs       | Bulk capacity              | File servers, backup targets, infrequently accessed data              |
 | **5** | Archival-grade HDDs      | Cold storage / archive     | Compliance archives, long-term retention, regulatory data             |
+
+Only Tier 0 has hardware requirements. The media types for Tiers 1–5 are guidelines: VergeOS assumes that the drives in each tier match the tier's description, but it does not enforce them. For example, Tier 1 does not have to be NVMe. Any SSD with fast reads, fast writes, and high endurance fits Tier 1.
 
 ### Tier 0: The Metadata Tier
 
@@ -251,7 +253,7 @@ VergeOS exposes 5 workload tiers (1–5) plus a dedicated metadata tier (Tier 0)
 
 | Concept                  | Summary                                                                                                                        |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
-| **Tier model**           | 5 workload tiers (1–5) plus a dedicated metadata tier (Tier 0); Tiers 1–3 = performance (NVMe/SSD); Tiers 4–5 = capacity (HDD) |
+| **Tier model**           | 5 workload tiers (1–5) plus a dedicated metadata tier (Tier 0); Tiers 1–3 = performance (SSD); Tiers 4–5 = capacity (HDD)      |
 | **No automatic tiering** | Data stays on the provisioned tier — no hot/cold migration engine                                                              |
 | **Preferred tier**       | Set per VM disk; falls back to nearest available tier if requested tier is absent                                              |
 | **Drive rules**          | Similar drives per tier, equal counts across nodes, controller nodes need Tier 0                                               |
