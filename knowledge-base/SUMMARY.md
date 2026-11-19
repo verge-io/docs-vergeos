@@ -109,6 +109,7 @@
   * [VM Power Management API](automation-api/vm-power-management.md)
 * [System Administration](system-administration/README.md)
   * [Cluster Recovery After Full Power Outage](system-administration/cluster-recovery-after-power-outage.md)
+  * [Configuring Microsoft 365 SMTP Relay with an Inbound Connector](system-administration/smtp-add-ms365-relay-inbound-connector.md)
   * [Configuring PTP in VergeOS](system-administration/configuring-ptp.md)
   * [Configuring VergeOS as an OIDC Client](system-administration/configuring-vergeos-as-oidc-client.md)
   * [CPU Overprovisioning and Resource Planning](system-administration/cpu-overprovisioning-guide.md)

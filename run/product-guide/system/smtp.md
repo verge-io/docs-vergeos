@@ -51,9 +51,13 @@ Because SMTP can involve inherently complex and error-prone configuration (DNS, 
     * **From Name:** the display from name to appear in email messages
     * **From Address:** the source email address to appear in email messages
     * **Relay Host:** address of the email relay server (blank for direct sending)
-    * **Relay Port:** TCP port used by relay host, e.g. 25 (unencrypted), 587 (TLS), 465 (SSL/legacy-deprecated); blank for direct sending
+    * **Relay Port:** TCP port used by the relay host, typically 587 (submission) or 25 (standard SMTP); leave blank for direct sending. With **Use TLS** on, VergeOS upgrades the connection with STARTTLS, so use a port that accepts STARTTLS. Port 465 (implicit TLS) isn't supported.
     * **Use SASL Authorization:** Typically, valid authentication credentials will be required when using a relay host; enable this option to enter username/password needed to access the relay server.
 4. Click **Submit** to save the configuration.
+
+{% hint style="info" %}
+**Relaying through Microsoft 365?** See [Configuring Microsoft 365 SMTP Relay with an Inbound Connector](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/system-administration/smtp-add-ms365-relay-inbound-connector) in the Knowledge Base.
+{% endhint %}
 
 ## Test SMTP Configuration
 
@@ -83,7 +87,7 @@ Flushing the SMTP queue expedites sending messages by forcing the mail server to
 2. Click **Flush Queue** on the left menu.
 3. Click **Yes** to confirm the operation.
 
-## SMTP Logs 
+## SMTP Logs
 
 ### View a Log of Sent Messages (Mail Log)
 1. Start at the **SMTP Dashboard (System > SMTP)**.
@@ -102,36 +106,35 @@ SMTP reports provide a **summary of recent SMTP activity**, containing informati
 
 ## SMTP Troubleshooting
 
-### Check SPAM folders
+### Check Spam Folders
 
 Verify messages are not being sent to the recipient's SPAM/Junk folder.   
 
-### Check Logs 
+### Check Logs
 
-Error messages in the SMTP log can provide information when email messages fail, such as warnings about incorrect SMTP settings or STMP disabled, etc. Check the ***Logs* section at the bottom** of the SMTP page.
+Error messages in the SMTP log can provide information when email messages fail, such as warnings about incorrect SMTP settings or SMTP disabled, etc. Check the **Logs** section at the bottom of the SMTP page.
 
 ### Verify Appropriate Firewall Rules and Network Policies
 
-Outgoing SMTP connections are commonly blocked by default.  Make sure port 25, 587, or 465 (depending on your configuration) are open and allowed; in some cases, this may require contacting your service provider.  
+Outgoing SMTP connections are commonly blocked by default.  Make sure port 25 or 587 (depending on your configuration) is open and allowed; in some cases, this may require contacting your service provider.  
 
-### Using a Relay: 
+### Using a Relay
 
 **Confirm Relay settings**
 
-* Some email servers require explicit relay permissions.  Ensure the email server allows your VergeOS system to relay messages, typically by enabling authentication or whitelisting IP addresses.
+* Some email servers require explicit relay permissions.  Ensure the email server allows your VergeOS system to relay messages, typically by enabling authentication or allowlisting (whitelisting) IP addresses.
   
-* You may need to configure the “From Address” field to use the same domain you are sending emails to. Typically, your relay host has the correct SPF/DMARC/reverse DNS records for your domain but is not authorized to send emails from the default system@cloud.verge.io address.
+* You may need to set the **From Address** to an address in your own domain (a domain the relay host is authorized to send for). Typically, your relay host has the correct SPF/DMARC/reverse DNS records for your domain but is not authorized to send emails from the default system@cloud.verge.io address.
 
 * Confirm the correct server address and port are configured for the relay server. Verify you are using the name/address expected by the relaying mail system.
 
 * Confirm TLS setting conforms to relay server requirements.  Many email servers require a TLS secure connection.
+
 {% hint style="success" %}
-**Some email servers will utilize STARTTLS where the connection starts unencrypted on a standard SMTP port (25 or 587) with encryption negotiated after the connection is established.**
-
-
+Some email servers will utilize STARTTLS where the connection starts unencrypted on a standard SMTP port (25 or 587) with encryption negotiated after the connection is established.
 {% endhint %}
 
-### Sending Direct:
+### Sending Direct
 
 **Verify SPF/ DMARC/ reverse DNS records**  
 If emails are marked as spam or fail to deliver, ensure proper reverse DNS records and that your domain has correct SPF (Sender Policy Framework) and DMARC (Domain-based Message Authentication, Reporting & Conformance) records.  When these records do not correspond correctly to your system, attempted messages can be detected as impersonation, resulting in delivery failures and/or emails flagged as suspicious. Repeated impersonation can get your domain/IP blacklisted which can affect future email deliveries. 
