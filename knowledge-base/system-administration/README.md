@@ -4,6 +4,7 @@ description: Platform administration topics — updates, security, authenticatio
 
 # System Administration
 
+* [Configuring Microsoft 365 SMTP Relay with an Inbound Connector](smtp-add-ms365-relay-inbound-connector.md) — How to relay VergeOS SMTP email through Microsoft 365 using an IP address-based inbound connector instead of SMTP AUTH.
 * [Configuring PTP in VergeOS](configuring-ptp.md) — Instructions for configuring PTP (replacing NTP) for system time synchronization.
 * [Configuring VergeOS as an OIDC Client](configuring-vergeos-as-oidc-client.md) — Step-by-step guide on setting up a VergeOS system or tenant to use OIDC authentication with another VergeOS identity provider.
 * [CPU Overprovisioning and Resource Planning](cpu-overprovisioning-guide.md) — Understanding CPU allocation, overcommit ratios, and performance implications in VergeOS, including recommended ratios by workload type and…
