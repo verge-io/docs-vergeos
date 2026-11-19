@@ -44,7 +44,7 @@ This guide explains how to import VMware virtual machines using VergeOS's VMware
 
 - Access to both VMware and VergeOS environments
 - VMware service configured and running in VergeOS
-- On VergeOS 26.2 and later, vixDiskLib (VDDK) must be installed on the VMware Service ([Installing vixDiskLib (VDDK)](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/backup-dr/vmwarebackupdrguide#installing-vixdisklib-vddk-vergeos-26.2-and-later))
+- On VergeOS 26.2 and later, if the VMware Service shows **vixDiskLib Installed:** None, install VDDK 9.1 ([Installing vixDiskLib (VDDK)](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/backup-dr/vmwarebackupdrguide#installing-vixdisklib-vddk-vergeos-26.2-and-later))
 - Sufficient storage space in VergeOS vSAN
 - Network connectivity between VMware and VergeOS environments
 - Appropriate permissions in both environments
@@ -111,7 +111,7 @@ Keeping MAC addresses unchanged (default setting) helps avoid network reconfigur
 - **VM Won't Start**:
   - Solution: Ensure VMware tools are installed and verify hardware compatibility
 - **vixDiskLib is not installed** (VergeOS 26.2 and later):
-  - Solution: The service page shows "vixDiskLib is not installed. Backups and restores will not work until it has been installed properly. Install vixDiskLib". Install vixDiskLib on the VMware Service. See [Installing vixDiskLib (VDDK)](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/backup-dr/vmwarebackupdrguide#installing-vixdisklib-vddk-vergeos-26.2-and-later).
+  - Solution: This banner appears only when **vixDiskLib Installed:** reads **None** (no library at all): "vixDiskLib is not installed. Backups and restores will not work until it has been installed properly. Install vixDiskLib". Install VDDK 9.1. See [Installing vixDiskLib (VDDK)](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/backup-dr/vmwarebackupdrguide#installing-vixdisklib-vddk-vergeos-26.2-and-later).
 {% endhint %}
 
 ## Additional Resources

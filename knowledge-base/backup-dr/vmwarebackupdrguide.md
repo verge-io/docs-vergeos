@@ -46,7 +46,7 @@ The VergeOS VMware feature provides a direct interface with vSphere (storage ind
 #### **Setting up VMware Backups - High-level Steps**
 
 * **Create a VMware Service** (This creates a direct connection to the vSphere environment.)
-* **Install vixDiskLib (VDDK)** (VergeOS 26.2 and later. Backups and restores will not work until it is installed on the service.)
+* **Install vixDiskLib (VDDK)** (VergeOS 26.2 and later. Install VDDK 9.1 when **vixDiskLib Installed:** reads **None** and the service shows the warning banner.)
 * **Create Schedule(s).**
 * **Assign Schedules to VMs** (different schedules can be assigned to different VMs.)
 
@@ -139,21 +139,25 @@ See Appendix A: Troubleshooting Connection Errors for more information.
 
 #### Installing vixDiskLib (VDDK) (VergeOS 26.2 and later)
 
-On VergeOS 26.2 and later, the VMware Service needs VMware's vixDiskLib library (VDDK) before VMware backups and restores will work. VergeOS 26.1.8 has no **Install vixDiskLib** action. VergeOS does not download VDDK.
+VergeOS 26.2 and later supports uploading VMware's vixDiskLib 9.1 library (VDDK) to the VMware Service. Install VDDK 9.1 when the service shows **None** and the warning banner. VergeOS 26.1.8 has no **Install vixDiskLib** action. VergeOS does not download VDDK.
+
+The service details show a **vixDiskLib Installed:** row. It has three values:
+
+* **None**: no vixDiskLib library at all. This is the only value that shows the warning banner.
+* **Legacy**: an older library bundled with the service. A new service may show **Legacy** with no banner.
+* **v9.1**: the VDDK 9.1 library uploaded through **Install vixDiskLib** is installed.
 
 {% hint style="warning" %}
 **vixDiskLib is not installed**
 
-When vixDiskLib is missing, the service page shows this warning banner:
+When **vixDiskLib Installed:** reads **None**, the service page shows this warning banner:
 
 "vixDiskLib is not installed. Backups and restores will not work until it has been installed properly. Install vixDiskLib"
-
-The service details show a **vixDiskLib Installed:** row, which reads None when the library is not installed.
 {% endhint %}
 
 Per Broadcom's [VDDK 9.1 release notes](https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere-sdks-tools/9-1/release-notes/virtual-disk-development-kit/virtual-disk-development-kit-91-release-notes.html), VDDK 9.1 supports vSphere 7.0.x and 8.0.x.
 
-VDDK must be obtained from Broadcom. At the time of writing it is available through the Broadcom Support Portal ([support.broadcom.com](https://support.broadcom.com)) and requires a Broadcom account with the appropriate entitlement; Broadcom's download process may change.
+VDDK must be obtained from Broadcom. The Broadcom Support Portal is the only known source. At the time of writing it is available through the Broadcom Support Portal ([support.broadcom.com](https://support.broadcom.com)) and requires a Broadcom account with the appropriate entitlement; Broadcom's download process may change.
 
 1. Create the VMware Service, if needed: **Import/Export** > **VMware Services** > **New Service**. **Host**, **Username**, and **Password** are required. See [Creating a VMware Service](#creating-a-vmware-service).
 2. Open the service. The service must be running.
@@ -168,7 +172,7 @@ VDDK must be obtained from Broadcom. At the time of writing it is available thro
 {% hint style="info" %}
 **Confirm vixDiskLib**
 
-After the install, open the service and check the **vixDiskLib Installed:** row.
+After a successful VDDK 9.1 install, open the service. The **vixDiskLib Installed:** row should show **v9.1**. The warning banner appears only when the row reads **None**.
 {% endhint %}
 
 ***
@@ -385,11 +389,9 @@ Note: Check Logs (at the bottom of the Dashboard page) for possible additional i
 
 #### vixDiskLib is not installed
 
-On VergeOS 26.2 and later, the service page shows this warning banner when vixDiskLib is missing:
+On VergeOS 26.2 and later, this warning banner appears only when **vixDiskLib Installed:** reads **None** (no vixDiskLib library at all):
 
 "vixDiskLib is not installed. Backups and restores will not work until it has been installed properly. Install vixDiskLib"
-
-The **vixDiskLib Installed:** row reads None.
 
 Click **Install vixDiskLib** (the banner link, or the left-menu action) and follow [Installing vixDiskLib (VDDK) (VergeOS 26.2 and later)](#installing-vixdisklib-vddk-vergeos-26.2-and-later). The same action is on the **VMware Services** list, for one or more selected services at once.
 
