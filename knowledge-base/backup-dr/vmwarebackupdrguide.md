@@ -8,6 +8,7 @@ semantic_keywords:
   - VMware backup schedule differential full
   - CBT changed block tracking VMware DR
   - VMware service vSphere connection setup
+  - vmware service vixdisklib vddk install
   - VMware VM restore disaster recovery
 use_cases:
   - configure_vmware_backup_service
@@ -45,6 +46,7 @@ The VergeOS VMware feature provides a direct interface with vSphere (storage ind
 #### **Setting up VMware Backups - High-level Steps**
 
 * **Create a VMware Service** (This creates a direct connection to the vSphere environment.)
+* **Install vixDiskLib (VDDK)** (VergeOS 26.2 and later. Backups and restores will not work until it is installed on the service.)
 * **Create Schedule(s).**
 * **Assign Schedules to VMs** (different schedules can be assigned to different VMs.)
 
@@ -132,6 +134,42 @@ On the Dashboard, check the Status (top left). If the service successfully conne
 An Error Status indicates the connection was not made due to: incorrect login credentials, insecure SSL (without enabling the option for insecure SSL), invalid address, or a network issue reaching the VSphere system.&#x20;
 
 See Appendix A: Troubleshooting Connection Errors for more information.
+
+***
+
+#### Installing vixDiskLib (VDDK) (VergeOS 26.2 and later)
+
+On VergeOS 26.2 and later, the VMware Service needs VMware's vixDiskLib library (VDDK) before VMware backups and restores will work. VergeOS 26.1.8 has no **Install vixDiskLib** action. VergeOS does not download VDDK.
+
+{% hint style="warning" %}
+**vixDiskLib is not installed**
+
+When vixDiskLib is missing, the service page shows this warning banner:
+
+"vixDiskLib is not installed. Backups and restores will not work until it has been installed properly. Install vixDiskLib"
+
+The service details show a **vixDiskLib Installed:** row, which reads None when the library is not installed.
+{% endhint %}
+
+Per Broadcom's [VDDK 9.1 release notes](https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere-sdks-tools/9-1/release-notes/virtual-disk-development-kit/virtual-disk-development-kit-91-release-notes.html), VDDK 9.1 supports vSphere 7.0.x and 8.0.x.
+
+VDDK must be obtained from Broadcom. At the time of writing it is available through the Broadcom Support Portal ([support.broadcom.com](https://support.broadcom.com)) and requires a Broadcom account with the appropriate entitlement; Broadcom's download process may change.
+
+1. Create the VMware Service, if needed: **Import/Export** > **VMware Services** > **New Service**. **Host**, **Username**, and **Password** are required. See [Creating a VMware Service](#creating-a-vmware-service).
+2. Open the service. The service must be running.
+3. Click **Install vixDiskLib** (the banner link, or the left-menu action on the service page). **Install vixDiskLib** is also on the **VMware Services** list, for one or more selected services at once.
+
+   The **VDDK Install** dialog opens: "Upload the VMware vixDiskLib 9.1 library, then it can be installed." The dialog names the file `VMware-vix-disklib-9.1.0.0.25379531.x86_64.tar.gz` with md5 `345404b0f80087589a02dee87d9a3158`, and warns "Backup and restore will fail until all the steps are complete".
+
+   **Step 1:** click **Select VDDK** and choose the library file. Only `.tar.gz` and `.tgz` files are accepted. With no file selected, or with any other file type, the dialog shows "Please select a .tar.gz file."
+
+   **Step 2:** click **Install** to finalize. The file uploads from the browser into VergeOS vSAN Files (the media catalog), and then the install runs on the VMware Service.
+
+{% hint style="info" %}
+**Confirm vixDiskLib**
+
+After the install, open the service and check the **vixDiskLib Installed:** row.
+{% endhint %}
 
 ***
 
@@ -342,6 +380,18 @@ Note: Check Logs (at the bottom of the Dashboard page) for possible additional i
   * Must be the correct username/password for a VSphere administrator account
 * **SSL Certificate**
   * If using a self-signed certificate, the option to allow insecure certificates must be enabled.  To modify an existing VMware service: From the _VMware Service Dashboard -> Edit -> check the box for Disable SSL host certificate verification_
+
+***
+
+#### vixDiskLib is not installed
+
+On VergeOS 26.2 and later, the service page shows this warning banner when vixDiskLib is missing:
+
+"vixDiskLib is not installed. Backups and restores will not work until it has been installed properly. Install vixDiskLib"
+
+The **vixDiskLib Installed:** row reads None.
+
+Click **Install vixDiskLib** (the banner link, or the left-menu action) and follow [Installing vixDiskLib (VDDK) (VergeOS 26.2 and later)](#installing-vixdisklib-vddk-vergeos-26.2-and-later). The same action is on the **VMware Services** list, for one or more selected services at once.
 
 ### Appendix B
 
