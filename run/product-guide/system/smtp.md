@@ -51,7 +51,7 @@ Because SMTP can involve inherently complex and error-prone configuration (DNS, 
     * **From Name:** the display from name to appear in email messages
     * **From Address:** the source email address to appear in email messages
     * **Relay Host:** address of the email relay server (blank for direct sending)
-    * **Relay Port:** TCP port used by the relay host, typically 587 (submission with STARTTLS), 25 (standard SMTP, which can also use STARTTLS), or 465 (implicit TLS); leave blank for direct sending. Use the port your relay provider specifies.
+    * **Relay Port:** TCP port used by the relay host, typically 587 (submission) or 25 (standard SMTP); leave blank for direct sending. With **Use TLS** on, VergeOS upgrades the connection with STARTTLS, so use a port that accepts STARTTLS. Port 465 (implicit TLS) isn't supported.
     * **Use SASL Authorization:** Typically, valid authentication credentials will be required when using a relay host; enable this option to enter username/password needed to access the relay server.
 4. Click **Submit** to save the configuration.
 
@@ -116,7 +116,7 @@ Error messages in the SMTP log can provide information when email messages fail,
 
 ### Verify Appropriate Firewall Rules and Network Policies
 
-Outgoing SMTP connections are commonly blocked by default.  Make sure port 25, 587, or 465 (depending on your configuration) are open and allowed; in some cases, this may require contacting your service provider.  
+Outgoing SMTP connections are commonly blocked by default.  Make sure port 25 or 587 (depending on your configuration) is open and allowed; in some cases, this may require contacting your service provider.  
 
 ### Using a Relay
 
