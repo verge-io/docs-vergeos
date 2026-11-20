@@ -73,7 +73,7 @@ This section defines the fundamental properties of your cluster.
 - When there is available RAM, beyond system and virtual workload needs, consider increasing this setting
 - Increasing the *Storage buffer per node* can significantly improve read/write performance
 - As a general rule of thumb, aim for no more than 80% RAM utilization during normal operation
-- A compute-only node cannot join a cluster that has storage enabled. It needs its own compute cluster (storage unchecked and compute checked), and that cluster has its own *Storage buffer per node* value
+- Compute-only nodes are in a separate compute cluster, so they use that cluster's *Storage buffer per node* value, not the value set on the storage cluster
 - On a compute-only cluster, the buffer is reserved RAM used as a local vSAN read cache. Raise it when those nodes have spare RAM and run storage-heavy VMs. The reserved RAM is no longer available to VMs on those nodes, and the cache stays idle when nothing on the node is reading from vSAN
 - A change takes effect only after each node in the cluster is rebooted. No *Need Restart* message appears for this setting. Reboot each node manually, following proper [Maintenance Mode procedures](../operations/maintenance-mode.md) to avoid workload disruptions
 {% endhint %}
