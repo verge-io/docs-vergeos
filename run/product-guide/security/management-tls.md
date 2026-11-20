@@ -75,10 +75,17 @@ openssl s_client -connect MANAGEMENT_DNS:443 -tls1_2 -cipher AES128-SHA </dev/nu
 
 **Configure:**
 
-1. In **System > Certificates > Listeners**, edit the HTTP listener and clear **Enabled**.
-2. In the External network's **Rules**, remove unneeded port 80 rules and click **Apply Rules**.
+First find out if anything depends on port 80, such as ACME HTTP validation for certificate renewal. Then use the steps for your case.
 
-Keep port 80 only for an approved dependency, such as ACME HTTP validation.
+If nothing depends on port 80:
+
+1. In **System > Certificates > Listeners**, edit the HTTP listener and clear **Enabled**.
+2. In the External network's **Rules**, remove the port 80 rules and click **Apply Rules**.
+
+If an approved dependency needs port 80:
+
+1. Keep the HTTP listener enabled. If you disable it, certificate renewal fails.
+2. In the External network's **Rules**, keep only the port 80 rule that the dependency needs. Remove the other port 80 rules and click **Apply Rules**.
 
 **Verify:**
 

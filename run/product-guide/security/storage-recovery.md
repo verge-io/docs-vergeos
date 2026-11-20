@@ -107,7 +107,7 @@ A completed snapshot or sync does not prove you can recover.
 **Default:** No restore schedule or recovery target exists.
 
 {% hint style="danger" %}
-Do not use a full system restore as a recovery drill. It rolls back the whole system, and it is supported only on the system that took the snapshot. You cannot restore one system over another. The final confirmation gives you 60 seconds to cancel. After that, with **Auto Reboot All Nodes** selected (the default), every node resets and you cannot stop the restore.
+Do not use a full system restore as a recovery drill. It rolls back the whole system, and it is supported only on the system that took the snapshot. You cannot restore one system over another. At the final confirmation, **Proceed** starts the restore immediately. If you do nothing, the restore starts by itself after 60 seconds. To stop it, click **Cancel** within those 60 seconds. After the restore starts, with **Auto Reboot All Nodes** selected (the default), every node resets and you cannot stop the restore.
 {% endhint %}
 
 **Configure:** Schedule restores of representative VMs, volumes, and applications, for example quarterly. If disaster recovery is in scope, plan a separately approved failover exercise, for example yearly. Document identity, network, and DNS cutover, and how you protect the recovered primary.
