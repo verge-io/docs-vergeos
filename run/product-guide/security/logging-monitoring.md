@@ -74,7 +74,7 @@ Remote syslog does not export every application log. Collect high-value logs sep
 
 **Configure:**
 
-1. List the logs to keep: **System > Logs**, user **Logs** and **Current Sessions**, task **Logs**, SMTP logs, outgoing sync **Logs**, **NAS > Antivirus**, and archived alarms. Include per-user authentication and API key events, and session and permission changes.
+1. List the logs to keep: **Logs** in the top menu, user **Logs** and **Current Sessions**, task **Logs**, SMTP logs, outgoing sync **Logs**, each volume's **Antivirus** page, and archived alarms. Include per-user authentication and API key events, and session and permission changes.
 2. Use a read-only integration to collect the logs that syslog does not export.
 3. Use a protected transport. The TCP `@@` syntax is not TLS, even on port 6514.
 4. Set collector retention by policy (for example, 90 days).
@@ -106,7 +106,7 @@ Error events do not show missing jobs or abnormal change. Watch for these from o
 
 **Configure:** Track the newest good local and remote recovery point for each protected scope. Also track sync queue progress, retries and retention skips, volume sync errors and deletes, antivirus results, write-rate changes, policy edits, and storage health. Set per-workload thresholds (for example, 1.5 times the snapshot interval, 80% tier use, 20% I/O wait). Confirm which conditions the product exposes before you design alert rules. Use [external monitoring](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/integrations-and-apis/external-monitoring) for conditions the product does not alert on, and do not give the collector write access.
 
-Sources include **System Snapshots**, the outgoing sync **Snapshot Queue** and **Statistics**, **NAS > Volume Syncs**, **NAS > Antivirus**, and the storage tier and node dashboards.
+Sources include **System Snapshots**, the outgoing sync **Snapshot Queue** and **History**, **NAS > Volume Syncs**, each volume's **Antivirus** page, and the storage tier and node dashboards.
 
 **Verify:** Test missing-job detection separately from error alerts, and measure detection time. Match a harmless test event to its source record and to the receiver acknowledgment. Check immutable and remote snapshot availability, capacity, no-redundancy, bad-drive, and repair conditions. Test antivirus detection with a safe test file, and confirm a manual scan works before you rely on automatic protection.
 
