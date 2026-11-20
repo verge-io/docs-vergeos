@@ -4,3 +4,4 @@ structure:
   summary: SUMMARY.md
 redirects:
   getting-started/requesting-an-airgap-license: system-administration/requesting-an-airgap-license.md
+  networking/change-external-vlan-to-bonded: networking/bond-external-vlan-bare-metal.md
