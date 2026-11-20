@@ -119,7 +119,7 @@ dig @DNS_SERVER_IP ZONE_NAME AXFR
 
 Authenticate peers, keep strong encryption, and limit which networks a tunnel carries.
 
-**Default:** Phase 1 uses **Key Exchange** auto (`ike`), `aes256-sha256-modp2048`, and a pre-shared key. Phase 2 uses ESP with AES-128.
+**Default:** Phase 1 uses **Key Exchange Version** set to **Auto** (`ike`), `aes256-sha256-modp2048`, and a pre-shared key. Phase 2 uses ESP with AES-128.
 
 **Configure:** In **Phase 1**, use IKEv2 if the peer supports it, a strong unique pre-shared key or a certificate, and only approved proposals. In **Phase 2**, select approved proposals, for example AES-256, and set the local and remote networks to the narrowest CIDRs. Review the generated firewall rules. Test on an isolated tunnel first.
 
@@ -208,7 +208,7 @@ Apply DNS after changes.
 
 ## NET13: Use trusted NTP or an explicitly designed PTP domain
 
-Keep authentication, certificate checks, and log timestamps accurate.
+Keep authentication, certificate checks, and log timestamps accurate. This control applies to the host system. A tenant has no **System > Time Settings** page.
 
 **Default:** **NTP Servers** is `0.pool.ntp.org` through `3.pool.ntp.org`. **NTP Max Clocks** is 11, **NTP Min Clocks** is 4, and **NTP Min Sane** is 1.
 
