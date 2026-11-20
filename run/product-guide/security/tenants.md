@@ -34,7 +34,7 @@ Defaults can change between releases. Confirm the current value before you chang
 
 **Default:** A tenant has no Layer 2 grants until you add one. A new grant is enabled.
 
-**Configure:** In the tenant's **Layer 2 Networks**, add only approved parent networks. Disable or delete grants that are no longer needed.
+**Configure:** On the tenant dashboard, select **Network > Layer2 Networks**. Add only approved parent networks. Disable or delete grants that are no longer needed.
 
 **Verify:** Only approved networks show in the list. From the tenant, a NIC cannot attach to an ungranted network, and other tenants' management addresses are not reachable.
 
@@ -51,12 +51,12 @@ Defaults can change between releases. Confirm the current value before you chang
 **Default:** Depends on the tenant's networks and upstream connections.
 
 {% hint style="warning" %}
-**Isolate Network** blocks network traffic only. It does not freeze storage or remove a compromise. Do not test it on a production tenant.
+**Enable Isolation** blocks network traffic only. It does not freeze storage or remove a compromise. Do not test it on a production tenant.
 {% endhint %}
 
-**Configure:** Keep tenant network rules, permissions, quotas, and service exposure current. Document when to use **Isolate Network** and how to restore the network.
+**Configure:** Keep tenant network rules, permissions, quotas, and service exposure current. Document when to use **Network > Enable Isolation** on the tenant dashboard, and how to restore the network with **Disable Isolation**.
 
-**Verify:** On a disposable tenant, run **Isolate Network**. Traffic that worked before is blocked. Record the guest power state and whether guest storage writes continue. After you restore the network, traffic returns.
+**Verify:** On a disposable tenant, select **Network > Enable Isolation**. Traffic that worked before is blocked. Record the guest power state and whether guest storage writes continue. After you select **Disable Isolation**, traffic returns.
 
 ## Related pages
 
