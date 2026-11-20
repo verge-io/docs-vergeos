@@ -182,8 +182,9 @@ than 70–80% of your smallest node's physical RAM to ensure workloads can
 always migrate during maintenance or failover.
 ### Storage Buffer per Node
 
-Default is **2 GB**. This value is set per cluster, so review it on each
-cluster you use, including any compute-only cluster; details are in
+Default is **2 GB** on the first cluster and **1 GB** on clusters added later.
+This value is set per cluster, so review it on each cluster you use,
+including any compute-only cluster; details are in
 [Cluster Settings](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/system-administration/cluster-settings).
 When spare RAM is available, increasing this value can significantly improve
 vSAN read/write performance.

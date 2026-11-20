@@ -66,16 +66,16 @@ This section defines the fundamental properties of your cluster.
 
 {% endhint %}
 
-5. **Storage buffer per node (default 2 GB):** The amount of additional RAM to reserve on each node in this cluster for vSAN performance caching. This is a per-cluster setting: changing it affects only the nodes in the cluster you are editing, and a storage cluster's buffer never applies to a node in a different cluster. A compute-only node cannot join a cluster that has storage enabled. It needs its own compute cluster (storage unchecked and compute checked), and that cluster has its own *Storage buffer per node* value.
+5. **Storage buffer per node (default 2 GB on the first cluster, 1 GB on clusters added later):** The amount of additional RAM to reserve on each node in this cluster for vSAN performance caching. This is a per-cluster setting: changing it affects only the nodes in the cluster you are editing.
 {% hint style="info" %}
 **Considerations**
 
 - When there is available RAM, beyond system and virtual workload needs, consider increasing this setting
 - Increasing the *Storage buffer per node* can significantly improve read/write performance
 - As a general rule of thumb, aim for no more than 80% RAM utilization during normal operation
-- A new compute cluster (storage off) starts with *Storage buffer per node* set to **0**. Nodes in that cluster still keep a small default vSAN cache
+- A compute-only node cannot join a cluster that has storage enabled. It needs its own compute cluster (storage unchecked and compute checked), and that cluster has its own *Storage buffer per node* value
 - On a compute-only cluster, the buffer is reserved RAM used as a local vSAN read cache. Raise it when those nodes have spare RAM and run storage-heavy VMs. The reserved RAM is no longer available to VMs on those nodes, and the cache stays idle when nothing on the node is reading from vSAN
-- A change takes effect only after each node in the cluster is rebooted. Follow proper [Maintenance Mode procedures](../operations/maintenance-mode.md) when rebooting nodes to avoid workload disruptions
+- A change takes effect only after each node in the cluster is rebooted. No *Need Restart* message appears for this setting. Reboot each node manually, following proper [Maintenance Mode procedures](../operations/maintenance-mode.md) to avoid workload disruptions
 {% endhint %}
 
 ### Cluster Security/Performance
