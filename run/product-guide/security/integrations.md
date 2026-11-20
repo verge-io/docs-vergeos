@@ -60,7 +60,7 @@ Certificate validation stops an impersonated service from capturing credentials 
 
 1. Use an approved HTTPS **URL** and keep **Allow Insecure Certificates** clear.
 2. Set the **Authorization Type** the receiver requires, with a credential scoped to alert ingestion.
-3. Set a finite **Timeout** and **Retries** (for example, 5 to 10 seconds and three retries).
+3. Keep **Timeout** and **Retries** finite. The defaults are 5 seconds and 3 retries.
 
 Send only the event data the receiver needs, and restrict who can change webhooks.
 
@@ -68,15 +68,15 @@ Send only the event data the receiver needs, and restrict who can change webhook
 
 ## INT04: Protect SMTP when used for security notifications or MFA
 
-**Default:** SMTP **Enabled** defaults to on, but the deployment controls actual use. TLS and authentication have no declared default; the deployment controls them.
+**Default:** SMTP **Enabled** is on. **Use TLS** and **Use SASL Authorization** are not set.
 
 {% hint style="warning" %}
 Test mail delivery before you depend on email MFA. A failed relay blocks MFA codes.
 {% endhint %}
 
-**Configure:** In **System > SMTP > Edit Settings**, set the approved **Relay Host** and **Relay Port** (587 for STARTTLS or 465 for implicit TLS, as the relay supports). Turn on **Use TLS** and **Use SASL Authorization**, and protect the relay credential. Confirm **Hostname** and **From Address** with the mail owner. A port change alone does not prove encryption.
+**Configure:** In **System > SMTP > Edit Settings**, set the approved **Relay Host** and **Relay Port** (587 with STARTTLS; port 465 with implicit TLS does not work). Turn on **Use TLS** and **Use SASL Authorization**, and protect the relay credential. **Use TLS** requires encryption, so delivery fails instead of falling back to plain text. Confirm **Hostname** and **From Address** with the mail owner. A port change alone does not prove encryption.
 
-**Verify:** Click **Send Test Email** and check the **Mail Queue** and **Mail Log**. Confirm the relay negotiates TLS with a valid certificate. Where encryption is mandatory, confirm the relay rejects a non-TLS session; **Use TLS** alone does not prove this. Alert on SMTP failure through a separate channel.
+**Verify:** Click **Send Test Email** and check the **Mail Queue** and **Mail Log**. On the relay, confirm the session used TLS. Alert on SMTP failure through a separate channel.
 
 ## INT05: Disable authentication source debug logging
 

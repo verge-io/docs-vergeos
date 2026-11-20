@@ -31,7 +31,7 @@ This page covers software updates, out-of-band (BMC) access, and the ownership a
 Defaults can change between releases. Confirm the current value before you change it.
 {% endhint %}
 
-## OPS01: Use supported signed updates with bounded rollback exposure
+## OPS01: Use supported updates with bounded rollback exposure
 
 **Default:** Update checks, installation, and reboot behavior depend on the cluster settings.
 
@@ -41,11 +41,11 @@ Do not manually replace packaged components or stop appserver, vSAN, or service 
 
 **Configure:**
 
-1. In **System > Updates > Edit Settings**, turn on **Auto Check For Updates**. Keep **Auto Update** and automatic reboots off unless a change process governs them. Use **Warm Reboot** only if you tested it.
+1. In **System > Updates > Edit Settings**, keep **Auto Check For Updates** on. Keep **Auto Update** and automatic reboots off unless a change process governs them. Use **Warm Reboot (Fast)** only if you tested it.
 2. Before each update, review the release notes and pre-install checks, and confirm cluster and tenant health.
-3. Keep pre-update snapshots and spare capacity (for example, 24 to 72 hours of retention and **Max vSAN Usage Percentage** at 80).
-4. Update multiple clusters in stages.
-5. Confirm with Verge.io how the update process verifies package signatures and origin.
+3. Turn on **Take System Snapshot on Update**. Its snapshot expires after 6 hours by default. Set a longer expiration if your checks take longer, for example 24 to 72 hours.
+4. Keep spare capacity. Keep **Max vSAN Usage Percentage** at 80, the default.
+5. Update multiple clusters in stages.
 
 **Verify:** In **System > Updates**, confirm the version and status. After an update, confirm the pre-update recovery point exists and storage, VMs, networks, and applications are healthy. These checks do not prove that a rollback works.
 
@@ -59,9 +59,9 @@ A BMC controls node power and console, so protect it separately from tenant netw
 
 1. Put BMCs on a dedicated out-of-band VLAN or physical network, reached only through ACLs, VPN, or jump hosts. Do not NAT a BMC to a public address.
 2. On each BMC, set non-default accounts, strong passwords, HTTPS, MFA where supported, and current firmware.
-3. In **System > Nodes**, edit each node and enter the matching IPMI address, user, and password. Keep **Capture Logs** on, restrict LLDP on untrusted Layer 2 networks, and keep **PXE Network** on the provisioning network.
+3. In **Infrastructure > Nodes**, edit each node and enter the matching IPMI address, user, and password. Keep **Capture System Logs** on, turn off **Send/Receive LLDP Advertisements** on nodes that connect to untrusted Layer 2 networks, and keep **PXE Network** on the provisioning network.
 
-VergeOS does not create or rotate the BMC account. Rotate it on the BMC, then update the node. Treat a fallback from IPMI LANplus to legacy LAN as technical debt.
+VergeOS does not create or rotate the BMC account. Rotate it on the BMC, then update the node. If a BMC falls back from IPMI LANplus to legacy LAN, plan to update or replace it.
 
 **Verify:** Confirm BMCs are reachable from approved paths only, not from workload or public networks. With authorization, run **IPMI > Test** on the node (no power operations) and confirm **IPMI Status** shows **OK**. Check SEL capacity. Test the BMC login itself; isolation and a saved password do not prove the BMC enforces authentication.
 

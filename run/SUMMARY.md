@@ -76,7 +76,6 @@
 * [Storage and Recovery](product-guide/security/storage-recovery.md)
 * [NAS](product-guide/security/nas.md)
 * [Logging and Monitoring](product-guide/security/logging-monitoring.md)
-* [VergeIQ](product-guide/security/vergeiq.md)
 * [Integrations](product-guide/security/integrations.md)
 * [Platform Operations](product-guide/security/platform-operations.md)
 * [Hardening Checklist](product-guide/security/checklist.md)

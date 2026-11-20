@@ -40,17 +40,17 @@ An off-cluster copy keeps security events safe from a compromised platform admin
 
 **Default:** `remote_syslog_server` and `syslog_template` are empty.
 
-**Configure:** In **System > Settings > Advanced Settings**, set `remote_syslog_server` to an external collector: `@@host:port` for TCP or `@host:port` for UDP. Authenticated TLS transport was not verified.
+**Configure:** In **System > Settings > Advanced Settings**, set `remote_syslog_server` to an external collector: `@@host:port` for TCP or `@host:port` for UDP. This setting sends plain TCP or UDP syslog, not TLS. Send it over a protected network path.
 
 **Verify:** Make a failed test login and a harmless configuration change. At the collector, confirm the timestamp, source, and actor of each event.
 
 ## AUD02: Capture node logs and preserve trustworthy timestamps
 
-**Default:** Node log capture has no explicit default. NTP uses time.nist.gov plus four pool hosts.
+**Default:** Node log capture has no explicit default. NTP uses `0.pool.ntp.org` through `3.pool.ntp.org`.
 
-**Configure:** In **System > Nodes**, edit each node and keep **Capture Logs** on. In **System > Time Settings**, use approved, reachable time sources (see NET13 in [Networking Hardening](networking.md)).
+**Configure:** In **Infrastructure > Nodes**, edit each node and keep **Capture System Logs** on. In **System > Time Settings**, use approved, reachable time sources (see NET13 in [Networking Hardening](networking.md)).
 
-**Verify:** Confirm logs from each node reach the collector with matching timestamps. In **System > Time Settings**, confirm each node shows as synchronized. Check the actual time peers on every node; one status sample does not prove time service behavior.
+**Verify:** Confirm logs from each node reach the collector with matching timestamps. In **System > Time Settings**, confirm each node shows as synchronized. Check the actual time peers: node 1 uses the external sources, and the other nodes use node 1. One status sample does not prove time service behavior.
 
 ## AUD03: Retain finite API abuse limits
 
@@ -66,7 +66,7 @@ Test lower limits on an isolated system first. Limits that are too low can block
 
 **Verify:** On an isolated system, lower `max_sess_api_rate` and compare a request sample before and after. Excess requests are delayed, not rejected, and still return success. Confirm that a separate administrator session stays responsive. Test the connection and command limits separately, then restore the original values.
 
-## AUD04: Export application audit tables separately from node syslog
+## AUD04: Export application logs separately from node syslog
 
 Remote syslog does not export every application log. Collect high-value logs separately so evidence outlives local retention and collector outages.
 
@@ -75,14 +75,14 @@ Remote syslog does not export every application log. Collect high-value logs sep
 **Configure:**
 
 1. List the logs to keep: **System > Logs**, user **Logs** and **Current Sessions**, task **Logs**, SMTP logs, outgoing sync **Logs**, **NAS > Antivirus**, and archived alarms. Include per-user authentication and API key events, and session and permission changes.
-2. Collect the logs that syslog does not export through a read-only integration.
+2. Use a read-only integration to collect the logs that syslog does not export.
 3. Use a protected transport. The TCP `@@` syntax is not TLS, even on port 6514.
 4. Set collector retention by policy (for example, 90 days).
 5. If events from a collector outage are not replayed, add a second collection path.
 
 **Verify:** Make test events in each selected log and compare counts, timestamps, and redaction at the collector. Stop the collector briefly and check for gaps. Check the actual retention period and record cap of each selected log. Confirm collection runs before local records expire or reach their cap. Confirm that a retention change takes effect before you rely on it.
 
-## AUD05: Route alarms and exact-owner sync events through tested tasks
+## AUD05: Route alarms and sync events to an owner through tested tasks
 
 **Default:** Recipients, events, and delivery paths depend on the configured groups, tasks, and integrations.
 

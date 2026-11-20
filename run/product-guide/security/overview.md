@@ -62,6 +62,5 @@ Keep a working recovery path while you change identity, certificate, or routing 
 | [Storage and recovery](storage-recovery.md) | STO01, STO03–STO07 | vSAN encryption, immutable snapshots, replication, Site Sync, recovery tests |
 | [NAS](nas.md) | NAS01–NAS11 | Volume encryption, SMB, NFS, antivirus, NAS sync |
 | [Logging and monitoring](logging-monitoring.md) | AUD01–AUD06 | Log export, timestamps, API rate limits, alarms |
-| [VergeIQ](vergeiq.md) | AI01–AI02 | AI permissions, chat history retention |
 | [Integrations](integrations.md) | INT01–INT05 | Repositories, catalogs, webhooks, SMTP, authentication sources |
 | [Platform operations](platform-operations.md) | OPS01–OPS03 | Updates, BMC access, inventory and reviews |

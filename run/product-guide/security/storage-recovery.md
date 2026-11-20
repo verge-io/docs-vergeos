@@ -31,6 +31,8 @@ This page covers vSAN encryption, immutable snapshots, Site Sync replication, an
 Defaults can change between releases. Confirm the current value before you change it.
 {% endhint %}
 
+This baseline has no STO02 control.
+
 ## STO01: Encrypt vSAN during initial installation
 
 vSAN encryption protects stored data if someone removes the physical drives.
@@ -47,13 +49,15 @@ You can turn on vSAN encryption only during installation. To encrypt an existing
 
 ## STO03: Protect recovery points with immutability
 
-An immutable snapshot cannot be deleted early, even by a compromised administrator.
+An immutable snapshot cannot be deleted while it is locked. If someone removes the immutable flag, deletion stays blocked for up to 7 more days. That delay is your time to respond.
 
-**Default:** The **System Snapshots** profile keeps hourly snapshots for 3 hours, immutable. Unlocking an immutable snapshot has a 7-day delay.
+**Default:** The hourly period of the **System Snapshots** profile keeps snapshots for 3 hours and is immutable. Other periods are not immutable until you select **Immutable**. An immutable snapshot stays locked until it expires. If someone removes the immutable flag, the snapshot stays locked for 7 days or until it expires, whichever comes first. For example, a snapshot with 30-day retention that is unlocked on day 2 can be deleted on day 9.
 
-**Configure:** In **System > Snapshot Profiles > System Snapshots**, edit each period that must resist deletion. Select **Immutable** and set a retention long enough to detect and recover from an attack.
+**Configure:** In **System > Snapshot Profiles > System Snapshots**, edit each period that must resist deletion. Select **Immutable** and set a retention long enough to detect and recover from an attack. Plan capacity for snapshots that you cannot delete.
 
-**Verify:** In **System > System Snapshots**, the required snapshots show as locked. A test snapshot cannot be deleted or unlocked immediately. The 7-day unlock delay is separate from snapshot retention.
+An unlock request is accepted while a snapshot is locked. Its status changes to unlocking and an alarm fires. Deletion stays blocked during the unlock delay. Route that alarm to an owner (AUD05).
+
+**Verify:** In **System > System Snapshots**, the required snapshots show as locked. A test snapshot cannot be deleted while it is locked. An unlock request raises an alarm.
 
 ## STO04: Encrypt replication and restrict intersite authority
 
@@ -67,7 +71,7 @@ An immutable snapshot cannot be deleted early, even by a compromised administrat
 
 **Default:** Depends on the assigned snapshot profile.
 
-**Configure:** In **System > Snapshot Profiles**, set retention, minimum count, private visibility, immutability, and scope for each period. Assign the profile with **System > System Snapshots > Set Snapshot Profile**. Keep snapshot-count warnings on and check capacity cost. Example policy:
+**Configure:** In **System > Snapshot Profiles**, set **Retention**, **Minimum Snapshots**, **Private**, **Immutable**, and scope for each period. Assign the profile with **System > System Snapshots > Set Snapshot Profile**. Keep snapshot-count warnings on and check capacity cost. Example policy:
 
 | Period | Retention | Minimum |
 | ------ | --------- | ------- |
@@ -88,7 +92,7 @@ Treat system snapshots as crash-consistent. A guest agent or quiesce tag does no
 
 1. Use trusted HTTPS endpoints. Keep machine management and repair authority disabled unless needed.
 2. Create the incoming sync on the destination, then register the outgoing sync on the source. Protect the registration code.
-3. Tune threads, retries, and throttle for the workload, for example 8 data threads, 4 file threads, 10 retries, and a 50–80% WAN throttle.
+3. Tune threads, retries, and throttle for the workload. The defaults are 8 data threads, 4 file threads, 10 retries, and no send throttle. On a shared WAN link, set a throttle, for example 50–80% of the link.
 4. Link each snapshot period to **Auto Sync** with remote retention, priority, and immutability.
 5. If local retention is shorter than the transfer time, select **Do not expire snapshot**.
 
@@ -103,7 +107,7 @@ A completed snapshot or sync does not prove you can recover.
 **Default:** No restore schedule or recovery target exists.
 
 {% hint style="danger" %}
-A full system restore overwrites the target and can reboot all nodes. Restore only to a designated isolated target. Keep its backup snapshot, and know the cancellation deadline before you start.
+A full system restore overwrites the target. With **Auto Reboot All Nodes** selected (the default), every node resets as soon as you confirm the restore, and you cannot cancel. Restore only to a designated isolated target and keep its backup snapshot. Clear **Auto Reboot All Nodes** to control when the nodes restart.
 {% endhint %}
 
 **Configure:** Schedule restores of representative VMs, volumes, and applications, for example quarterly. If disaster recovery is in scope, plan a separately approved failover exercise, for example yearly. Document identity, network, and DNS cutover, and how you protect the recovered primary. Use **System > System Snapshots > Restore** or the VM and tenant recovery actions on the target.

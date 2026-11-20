@@ -69,23 +69,23 @@ Save the guest's encryption recovery keys before you change the boot mode or TPM
 
 1. If the guest boots with legacy BIOS, convert the guest OS to UEFI first.
 2. Edit the VM and select **UEFI** and **Secure Boot**.
-3. In **Devices**, click **New** and add a **Trusted Platform Module** (TPM 2.0 with CRB, if the guest supports it).
+3. In **Devices**, click **New** and add a **Trusted Platform Module (vTPM)**. Set **Version** to **2.0** and **Model** to **CRB**, if the guest supports it.
 
 Guest encryption is separate from vSAN encryption. A vTPM alone does not prove measured boot.
 
 **Verify:** In the guest, Secure Boot is on and the TPM is present. On a test guest, an unsigned boot image is rejected.
 
-## HV04: Restrict VM consoles and snapshot exports
+## HV04: Restrict VM consoles and VM exports
 
-**Default:** **Console** is **VNC**. **Console Password Enabled** is cleared. **Allow Export** is selected.
+**Default:** **Console Type** is **VNC**. **Console Password Enabled** is cleared. **Allow Export** is selected.
 
 **Configure:**
 
 1. Grant VM permissions only to approved console operators. VM read permission includes console access.
-2. To add a second challenge, select **Console Password Enabled**.
-3. On VMs with protected data, clear **Allow Export**. This removes the VM's snapshots from NAS VM Export volumes.
+2. To add a second challenge, power off the VM and select **Console Password Enabled**. You cannot change this setting while the VM runs.
+3. On VMs with protected data, clear **Allow Export**. This removes the VM from NAS VM Export jobs. It does not control access to existing snapshots; use permissions for that.
 
-**Verify:** An unauthorized account cannot open the console. The VM's snapshots do not appear in the NAS VM Export volume. Console ports are unreachable from untrusted zones. Check other export paths separately.
+**Verify:** An unauthorized account cannot open the console. New NAS VM Export runs do not include the VM. Console ports are unreachable from untrusted zones. Check other export paths separately.
 
 ## HV05: Constrain SR-IOV, vGPU, and direct-device privileges
 

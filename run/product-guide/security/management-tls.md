@@ -37,7 +37,7 @@ Clients must authenticate the management hostname before they send credentials.
 
 **Default:** Installation creates a self-signed certificate. HTTPS uses port 443.
 
-**Configure:** In **System > Certificates**, click **New**. Select **Manual** and enter the certificate, private key, and issuing chain, or select **ACME** to issue through an approved ACME service. Cover every management and tenant hostname. Keep the default local access certificate. Set an expiry alert, for example 30 days before expiration. Make sure ACME challenge access does not expose the management UI.
+**Configure:** In **System > Certificates**, click **New**. Select **Manual** and enter the certificate, private key, and issuing chain, or select **Let's Encrypt** to issue through an approved ACME service. Cover every management and tenant hostname. Keep the default local access certificate. Set an expiry alert, for example 30 days before expiration. Make sure ACME challenge access does not expose the management UI.
 
 **Verify:** From each supported client, confirm the chain, hostname, lifetime, and SNI. A wrong CA or hostname must fail before credentials are sent. Check the certificate with strict parsing:
 
@@ -45,10 +45,10 @@ Clients must authenticate the management hostname before they send credentials.
 openssl verify -x509_strict -CAfile CA.pem -verify_hostname MANAGEMENT_DNS server.pem
 ```
 
-Confirm the certificate that each listener presents. Do not assume that you can select a certificate per listener.
+Then check the live listener. Run this command for each hostname, with your approved trust roots. The handshake must fail on any verification error. Do not assume that you can select a certificate per listener.
 
 ```bash
-openssl s_client -connect MANAGEMENT_DNS:443 -servername MANAGEMENT_DNS -showcerts </dev/null
+openssl s_client -connect MANAGEMENT_DNS:443 -servername MANAGEMENT_DNS -CAfile CA.pem -verify_hostname MANAGEMENT_DNS -verify_return_error </dev/null
 ```
 
 ## TLS02: Limit management TLS cipher suites
@@ -76,11 +76,14 @@ openssl s_client -connect MANAGEMENT_DNS:443 -tls1_2 -cipher AES128-SHA </dev/nu
 **Configure:**
 
 1. In **System > Certificates > Listeners**, edit the HTTP listener and clear **Enabled**.
-2. In **Networking > External > Rules**, remove unneeded port 80 rules and click **Apply Rules**.
+2. In the External network's **Rules**, remove unneeded port 80 rules and click **Apply Rules**.
 
 Keep port 80 only for an approved dependency, such as ACME HTTP validation.
 
-**Verify:** From each network zone, port 80 is unreachable and HTTPS works. If renewal used port 80, test a renewal.
+**Verify:**
+
+- **Listener disabled:** From each network zone, port 80 is unreachable and HTTPS works.
+- **Port 80 kept for ACME validation:** A certificate renewal succeeds. Port 80 is reachable only from the sources that validation needs. An HTTP request to the management UI gives no plain-text access.
 
 ## TLS04: Limit trusted CA roots and certificate renewal exposure
 

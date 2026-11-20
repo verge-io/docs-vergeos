@@ -58,7 +58,11 @@ Block unapproved lateral movement and egress between tenant, workload, and manag
 
 **Default:** A new rule accepts any incoming protocol. Generated rules differ by network type.
 
-**Configure:** In the network's **Rules**, create narrow Accept rules for each required flow (source, destination, protocol, port). Add a Drop or Reject rule for the remaining traffic, then click **Apply Rules**. Attach each VM to the correct network in its **NICs**. Router rules do not filter traffic on a shared layer 2 segment, so put the block where traffic actually crosses a router. See NET11 for rule order.
+**Configure:** In the network's **Rules**, create narrow Accept rules for each required flow (source, destination, protocol, port). Click **Apply Rules**. Unmatched incoming traffic is already dropped, except forwarded traffic on BGP networks. Attach each VM to the correct network in its **NICs**. Router rules do not filter traffic on a shared layer 2 segment, so put the block where traffic actually crosses a router. See NET11 for rule order.
+
+{% hint style="warning" %}
+The rule that accepts reply traffic comes after your rules. A broad Drop or Reject rule also blocks the replies for allowed flows.
+{% endhint %}
 
 **Verify:** From real guest and tenant sources, test allowed and denied flows in both directions, including existing sessions.
 
@@ -68,19 +72,23 @@ Allow connections to the site replication service only from approved peers.
 
 **Default:** Site replication uses port 14201. Source restrictions depend on the installed rules.
 
-**Configure:** In the External network's **Rules**, set the replication rule's **Source** to the approved peer CIDRs and its port to the configured replication port. If you do not use replication, clear **Enabled**. Click **Submit**, then **Apply Rules**.
+**Configure:** In the External network's **Rules**, set the replication rule's **Source** to the approved peer CIDRs and its port to the configured replication port. The replication rule is disabled by default. Do not enable it unless you use replication. If you no longer use replication, clear **Enabled**. Click **Submit**, then **Apply Rules**.
 
 **Verify:** An approved peer connects to the replication port and an excluded source cannot. Check for overlapping rules that permit the same connection. This control does not isolate or verify the core link.
 
-## NET04: Log boundary decisions without persistent packet tracing
+## NET04: Track boundary traffic without persistent packet tracing
 
-Record accept and deny decisions without collecting packet contents.
+Count the traffic that matches boundary rules without collecting packet contents. Rule statistics are counters. They do not record the time, source, or destination of each connection. If you need that record, collect it at an upstream device.
 
-**Default:** Rule logging, **Trace/Debug Rule**, network trace, and **Port Mirroring** are off.
+**Default:** **Trace/Debug Rule**, network trace, and **Port Mirroring** are off.
 
-**Configure:** Turn on **Log** for management and trust-boundary rules, and leave **Trace/Debug Rule** off. Keep **Port Mirroring** off in the network settings. Use trace and port mirroring only during an approved investigation.
+{% hint style="warning" %}
+The **Log this rule** option does not create log entries. Do not rely on it for boundary logging.
+{% endhint %}
 
-**Verify:** Trigger one logged Deny rule. The event arrives at your external log collector and contains no credentials or payloads.
+**Configure:** Turn on **Track Rule Statistics** for management and trust-boundary rules. Leave **Trace/Debug Rule** and **Port Mirroring** off. Use trace and port mirroring only during an approved investigation.
+
+**Verify:** Send allowed and denied traffic across a boundary. The statistics counters for the matching rules increase. Trace and port mirroring are off after each investigation.
 
 ## NET05: Control IPv6 exposure
 
@@ -88,7 +96,7 @@ Keep IPv6 paths from bypassing the network policy.
 
 **Default:** `ipv6_enabled` is false.
 
-**Configure:** In **System > Settings > Advanced Settings**, keep `ipv6_enabled` false unless the platform must route IPv6. If you turn it on, add equivalent IPv6 firewall, management, and DNS controls.
+**Configure:** In **System > Settings > Advanced Settings**, keep `ipv6_enabled` false unless the platform must route IPv6. This setting is a kernel boot option, so a change takes effect only after each node restarts. If you turn it on, add equivalent IPv6 firewall, management, and DNS controls.
 
 **Verify:** Test management access and traffic between zones over IPv6. This setting does not block IPv6 between guests on the same layer 2 segment, so test guest traffic separately.
 
@@ -111,9 +119,9 @@ dig @DNS_SERVER_IP ZONE_NAME AXFR
 
 Authenticate peers, keep strong encryption, and limit which networks a tunnel carries.
 
-**Default:** Phase 1 uses **Key Exchange** auto (`ike`), `aes256-sha256-modp2048`, and a pre-shared key. Phase 2 uses ESP with AES, SHA256, and DH 2048.
+**Default:** Phase 1 uses **Key Exchange** auto (`ike`), `aes256-sha256-modp2048`, and a pre-shared key. Phase 2 uses ESP with AES-128.
 
-**Configure:** In **Phase 1**, use IKEv2 if the peer supports it, a strong unique pre-shared key or a certificate, and only approved proposals. In **Phase 2**, set the local and remote networks to the narrowest CIDRs. Review the generated firewall rules. Test on an isolated tunnel first.
+**Configure:** In **Phase 1**, use IKEv2 if the peer supports it, a strong unique pre-shared key or a certificate, and only approved proposals. In **Phase 2**, select approved proposals, for example AES-256, and set the local and remote networks to the narrowest CIDRs. Review the generated firewall rules. Test on an isolated tunnel first.
 
 **Verify:** The tunnel negotiates the expected algorithms. A peer with a wrong key fails, and traffic outside the selectors does not cross the tunnel.
 
@@ -143,7 +151,7 @@ Keep untrusted neighbors and unapproved routes out of the fabric.
 
 **Default:** No peer or authentication policy exists. A new route map permits.
 
-**Configure:** In **Route Maps**, create restrictive import and export maps first. In **BGP Routers**, add explicit neighbors with authentication and attach the maps. In **OSPF Commands**, set `passive-interface default`, then enable only interfaces that face approved peers. Restart the routing configuration when prompted. Keep neighbor passwords out of reports.
+**Configure:** In the network's routing settings, create restrictive import and export route maps first. Add BGP routers with explicit, authenticated neighbors, and attach the maps. In the OSPF commands, set `passive-interface default`, then enable only interfaces that face approved peers. Restart the routing configuration when prompted. Keep neighbor passwords out of reports.
 
 **Verify:** On an isolated peer, an unknown neighbor, a wrong password, and an unapproved prefix are all rejected. Approved routes stay stable.
 
@@ -153,8 +161,10 @@ Make the default-deny policy explicit and test the real routed path.
 
 **Default:** Depends on the network type and its rules.
 
+Unmatched incoming traffic is already dropped, except forwarded traffic on BGP networks. The rule that accepts reply traffic comes after your rules.
+
 {% hint style="danger" %}
-Do not add a catch-all Drop until you know where the generated reply rules sit. A Drop above them blocks return traffic and can cut off management access.
+Do not add a catch-all incoming Drop. It adds no protection and blocks reply traffic, which can cut off management access.
 {% endhint %}
 
 **Configure:** Order the rules:
@@ -163,9 +173,9 @@ Do not add a catch-all Drop until you know where the generated reply rules sit. 
 2. Service and east-west Accept rules from approved sources, for example SSH 22, RDP 3389, monitoring 9100, PostgreSQL 5432, and HTTPS 443.
 3. Required egress Accept rules.
 4. Narrow Translate rules, only on the receiving external network.
-5. Pinned **Bottom**: an incoming Drop.
+5. On BGP networks only: an incoming Drop for forwarded traffic. Set its **Connection Tracking State** to `!= { established, related }` so that it does not drop reply traffic. Apply it while the second management path is available, then test return traffic with this exact rule set.
 
-Add an outgoing Drop only after DNS (UDP and TCP 53), NTP (UDP 123), updates, SMTP, backups, monitoring, and application dependencies work. Do not edit **System Rules**. Test a **Connection Tracking State** of `!= { established, related }` on an isolated network before you use it. Keep **Interface** at **Auto** unless you need Router, DMZ, or WireGuard.
+Add an outgoing Drop only after DNS (UDP and TCP 53), NTP (UDP 123), updates, SMTP, backups, monitoring, and application dependencies work. Edit **System Rules** only as NET01 and NET03 describe. Test a **Connection Tracking State** of `!= { established, related }` on an isolated network before you use it. Keep **Interface** at **Auto** unless you need Router, DMZ, or WireGuard.
 
 **Verify:** Keep a second management path. Apply in small steps. Test new flows, return traffic, existing sessions, and denied sources in both directions, and check **Track Rule Statistics** counters. A network rule covers only traffic that crosses that network, so protect node management upstream.
 
@@ -181,7 +191,7 @@ Do not change DNS, DHCP, or PXE on the Core or provisioning networks. The nodes 
 
 **Configure:** In each network's settings:
 
-- **DNS:** **Disabled** unless the network must serve Simple or BIND DNS. Use only approved resolvers. With upstream DHCP, review **Override DHCP DNS**, and turn on DHCP broadcast only if required.
+- **DNS:** **Disabled** unless the network must serve Simple or BIND DNS. Use only approved resolvers. With upstream DHCP, review **Override DHCP DNS**, and turn on **DHCP Broadcast** only if required.
 - **DHCP:** On only where the network must assign addresses. Use static leases for infrastructure and keep the dynamic range clear of router, VIP, and static addresses. Turn off **Dynamic DHCP** on infrastructure networks.
 - **PXE:** None, with TFTP cleared, except on an isolated provisioning network.
 
@@ -193,11 +203,11 @@ Apply DNS after changes.
 
 Keep authentication, certificate checks, and log timestamps accurate.
 
-**Default:** Depends on system settings.
+**Default:** **NTP Servers** is `0.pool.ntp.org` through `3.pool.ntp.org`. **NTP Max Clocks** is 11, **NTP Min Clocks** is 4, and **NTP Min Sane** is 1.
 
 **Configure:** In **System > Time Settings**, set **NTP Servers** to reachable, approved sources. Do not set a quorum the sources cannot meet. For example, four independent sources can use **NTP Max Clocks** 4, **NTP Min Clocks** 3, and **NTP Min Sane** 2; [Time Settings](../system/time-settings.md) advises changing these only with VergeOS support. Use PTP only with a dedicated physical timing network and interface, an assigned domain, and hardware timestamp support. Review priority (for example, 128), two-step, and DSCP against that design. Restrict timing traffic to approved infrastructure.
 
-**Verify:** Every node synchronizes with the intended sources, time alarms clear, and node timestamps agree. The quorum holds when one source is lost.
+**Verify:** Node 1 synchronizes with the intended sources, and the other nodes synchronize with node 1. Time alarms clear, and node timestamps agree. The quorum holds when one source is lost.
 
 ## Related pages
 

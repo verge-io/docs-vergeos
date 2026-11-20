@@ -49,15 +49,15 @@ Make sure a second administrator with working MFA exists before you enforce MFA.
 
 **Configure:**
 
-1. In **System > Users**, edit each interactive administrator account.
-2. Select **Two Factor Authentication**, set the type to **Authenticator**, and require setup at next login.
+1. In **System > Users**, edit each interactive account. Start with the administrators.
+2. Select **Two Factor Authentication**, set **Two Factor Type** to **Authenticator (TOTP)**, and select **Configure 2FA At Next Login**.
 3. In **System > Settings > Advanced Settings**, set `two_factor_authentication` to **Required**.
 
-The global setting applies only to new accounts. It does not turn on MFA for existing accounts. For API keys, apply IAM08 to IAM10.
+Do not rely on the global setting alone to cover existing accounts. Confirm that **Two Factor Authentication** is on for each existing interactive account. For API keys, apply IAM08 to IAM10.
 
 Email is the default factor. Make sure each local user with MFA has a valid email address, or the user cannot sign in.
 
-**Verify:** Sign in as a normal user from a new browser session. A login with only a password fails. Test HTTP Basic authentication and each external authentication source separately. If a Basic credential still works with only a password, turn MFA off and on again for that account and test again. Test this sequence on a disposable account first. A TOTP code that was already used must fail.
+**Verify:** Sign in from a new browser session as a normal user that existed before the change. A login with only a password fails. Test HTTP Basic authentication and each external authentication source separately. A TOTP code that was already used must fail.
 
 ## IAM02: Limit MFA device trust
 
@@ -66,6 +66,8 @@ Limit how long a trusted device skips the MFA challenge.
 **Default:** Trusted devices expire after 7884000 seconds (about 91 days). Email codes expire after 300 seconds. A device expiry of 0 means the device never expires.
 
 **Configure:** In **System > Settings > Advanced Settings**, set `two_factor_authentication_uuid_expire` to a nonzero lifetime, for example 86400 seconds. Keep `two_factor_authentication_code_expire` at 300 seconds.
+
+A new lifetime applies only to devices trusted after the change. Existing trusted devices keep their original expiry, 91 days by default. Remove them from each user so the new lifetime applies.
 
 **Verify:** A new browser gets the challenge. A trusted browser skips the challenge before expiry and gets the challenge after it. An expired email code fails.
 
@@ -89,13 +91,17 @@ The policy applies only when a password is set. External authentication sources 
 
 **Configure:** In **System > Settings > Advanced Settings**, set `failed_login_lockout_attempts` to a nonzero value, for example 5. Keep `failed_login_lockout_minutes` at 15 or set your recovery interval. A very low threshold lets an attacker lock out real users.
 
+{% hint style="warning" %}
+A lockout disables the whole user, including its API keys. The built-in admin user has no exemption. Anyone who knows a user name can lock out an administrator or stop an integration. Give API users names that are hard to guess (IAM08).
+{% endhint %}
+
 **Verify:** Reach the threshold with wrong passwords. The correct password fails during the lockout and works after the interval. Test a manual unlock separately.
 
 ## IAM05: Bound interactive session lifetime
 
 **Default:** `token_inactivity_timeout` is 86400 seconds. `token_expiration` is 259200 seconds.
 
-**Configure:** In **System > Settings > Advanced Settings**, set `token_inactivity_timeout` (for example, 900 seconds) and `token_expiration` (for example, 28800 seconds). Use restricted API identities for automation instead of long human sessions.
+**Configure:** In **System > Settings > Advanced Settings**, set `token_inactivity_timeout` (for example, 900 seconds) and `token_expiration` (for example, 28800 seconds). The minimum for each is 300 seconds. Use restricted API identities for automation instead of long human sessions.
 
 Review active sessions and their source addresses, and end suspicious sessions.
 
@@ -114,17 +120,17 @@ Permissions add up across direct grants and groups.
 3. Add permissions only for the object types or objects the identity needs.
 4. In **Groups**, remove members who do not need administrator membership.
 
-Use one group per role (for example, network, storage, auditors, automation). Avoid direct user grants and broad delete rights. Review Super Users separately. Scope VergeIQ access with [AI01](vergeiq.md).
+Use one group per role (for example, network, storage, auditors, automation). Avoid direct user grants and broad delete rights. Review Super Users separately.
 
 **Verify:** As the restricted identity, first confirm that a permitted read succeeds. A denial proves nothing until a permitted operation works. Then confirm that lists show only permitted objects, and other reads and unauthorized changes fail. Check grants inherited from groups as well as direct grants.
 
 ## IAM07: Restrict physical and SSH administration
 
-**Default:** **Physical Access** is off. When on, it gives full node administration, including passwordless sudo.
+**Default:** **Physical Access** is off. When on, it gives full node administration, including passwordless sudo. In VergeOS 26.2 and later, membership in the Super Users group governs physical access. The **Physical Access** option adds the user to that group or removes the user from it.
 
-**Configure:** In **System > Users**, select **Physical Access** only for designated administrators. Remove unused **SSH Keys**. Restrict SSH network access with [NET01](networking.md). See also IAM13.
+**Configure:** In **System > Users**, select **Physical Access** only for designated administrators. In **System > Groups**, review the members of the Super Users group and remove each member who does not need physical access. Remove unused **SSH Keys**. Restrict SSH network access with [NET01](networking.md). See also IAM13.
 
-**Verify:** A designated administrator can connect over SSH. An ordinary user cannot. Do not replace the generated SSH configuration.
+**Verify:** A designated administrator can connect over SSH. An ordinary user cannot, and an administrator whose physical access you removed cannot. Do not replace the generated SSH configuration.
 
 ## IAM08: Use restricted API identities
 
@@ -134,8 +140,8 @@ Limit what a stolen automation credential can do.
 
 **Configure:**
 
-1. In **System > Users**, create a user with type **API**.
-2. Grant only the permissions the integration needs. Remove the default broad reads (IAM06, [AI01](vergeiq.md)).
+1. In **System > Users**, create a user with type **API**. Use a name that is hard to guess, because a lockout needs only the user name (IAM04).
+2. Grant only the permissions the integration needs. Remove the default broad reads (IAM06).
 3. Create the API key under this user and store it in a secret manager.
 4. Move integrations to the new key, then delete old administrator-owned keys.
 
@@ -147,13 +153,13 @@ Use one API user per integration and one key per caller. Rotate keys on a schedu
 
 **Default:** **Expiration Type** is **Set Date**.
 
-**Configure:** In **System > Users > *user* > API Keys**, set **Expiration Type** to **Set Date** and set **Expires** for each key. To revoke a key, delete it.
+**Configure:** In **System > Users > *user* > API Keys**, keep **Expiration Type** at **Set Date** and set **Expires** for each key. Do not select **Never Expire**. To revoke a key, delete it.
 
 Expiry runs in the background, so a key can work briefly after its expiry date.
 
 If you need immediate containment, also disable the account that owns the key. Then confirm that the access path is denied.
 
-**Verify:** Use a previously used test key before expiry, after expiry, and after deletion. Record how long it still worked. A successful delete does not prove that its sessions have ended. Treat any access that continues after deletion as an open issue.
+**Verify:** Use a test key before expiry, after expiry, and after deletion. The key works before expiry. It fails after expiry and after deletion, once background processing completes. Deleting a key does not always end its active sessions. If access continues after deletion, disable the account that owns the key.
 
 ## IAM10: Restrict API keys by source address
 
@@ -162,7 +168,7 @@ If you need immediate containment, also disable the account that owns the key. T
 **Configure:** When you create a key, add the approved CIDR range to the **IP Allow List**. Use the source address after NAT.
 
 {% hint style="warning" %}
-Do not edit the list of a key already in use. A previously used key kept working for minutes after the edit. Create a new restricted key, then delete the old key.
+Do not edit the list of a key already in use. A key that is in use can continue to work for several minutes after the edit. Create a new restricted key, then delete the old key.
 {% endhint %}
 
 **Verify:** A request from an approved address succeeds and one from another address fails. A replaced key no longer authenticates.
@@ -172,8 +178,6 @@ Do not edit the list of a key already in use. A previously used key kept working
 **Default:** New users are enabled.
 
 **Configure:** In **System > Users**, edit each identity that no longer needs access and clear **Enabled**.
-
-Before you delete an identity, remove its VergeIQ permissions and confirm that none remain. A new identity with the same identifier can inherit them.
 
 **Verify:** Password and API key sign-in both fail for the user.
 
@@ -195,7 +199,7 @@ Assign users and groups before you select **Restrict Access**. Leave **Map User*
 
 ## IAM13: Preserve break-glass access and bound host sessions
 
-**Default:** Depends on node configuration.
+**Default:** `shell_idle_timeout` is 0, which turns off the idle timeout for shell and SSH sessions to nodes.
 
 {% hint style="danger" %}
 Test a second host or console access path before you remove host access. Without it, you can lose administrative access to the nodes.
@@ -204,10 +208,10 @@ Test a second host or console access path before you remove host access. Without
 **Configure:**
 
 1. Give each host administrator an individual account with **Physical Access** and approved **SSH Keys**.
-2. In **System > Settings > Advanced Settings**, set **Shell/SSH Idle Timeout**, for example 900 to 1800 seconds.
+2. In **System > Settings > Advanced Settings**, set `shell_idle_timeout`, for example 900 to 1800 seconds.
 3. Review whether SSH allows password-only sign-in. Portal MFA does not apply to SSH.
 
-The `/vsan/.ssh_no_password` marker is not a UI setting. Confirm release support and test console recovery before you use it.
+Do not rely on the `/vsan/.ssh_no_password` marker to block SSH password sign-in. It turns off password authentication, but keyboard-interactive authentication stays on and can still accept a password. Restrict SSH by source address with [NET01](networking.md).
 
 **Verify:** In a maintenance window, an approved key connects, an ordinary user is denied, an idle shell disconnects, and break-glass recovery works. `sudo sshd -T` shows the effective SSH configuration.
 
