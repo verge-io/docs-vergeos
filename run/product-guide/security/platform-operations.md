@@ -33,6 +33,8 @@ Defaults can change between releases. Confirm the current value before you chang
 
 ## OPS01: Use supported updates with bounded rollback exposure
 
+This control applies to the host system. A tenant has no **System > Updates** page.
+
 **Default:** Update checks, installation, and reboot behavior depend on the cluster settings.
 
 {% hint style="danger" %}
@@ -59,7 +61,7 @@ A BMC controls node power and console, so protect it separately from tenant netw
 
 1. Put BMCs on a dedicated out-of-band VLAN or physical network, reached only through ACLs, VPN, or jump hosts. Do not NAT a BMC to a public address.
 2. On each BMC, set non-default accounts, strong passwords, HTTPS, MFA where supported, and current firmware.
-3. In **Infrastructure > Nodes**, edit each node and enter the matching IPMI address, user, and password. Keep **Capture System Logs** on, turn off **Send/Receive LLDP Advertisements** on nodes that connect to untrusted Layer 2 networks, and keep **PXE Network** on the provisioning network.
+3. In **Infrastructure > Nodes**, edit each node and enter the matching **IPMI User** and **IPMI Password**. Keep **Capture System Logs** on, turn off **Send/Receive LLDP Advertisements** on nodes that connect to untrusted Layer 2 networks, and keep **PXE Network** on the provisioning network.
 
 VergeOS does not create or rotate the BMC account. Rotate it on the BMC, then update the node. If a BMC falls back from IPMI LANplus to legacy LAN, plan to update or replace it.
 
