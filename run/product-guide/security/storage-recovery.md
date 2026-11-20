@@ -61,9 +61,9 @@ An unlock request is accepted while a snapshot is locked. Its status changes to 
 
 ## STO04: Encrypt replication and restrict intersite authority
 
-**Default:** Outgoing syncs have **Encryption** and **Network Integrity** on. **Allow Insecure SSL Connection** is cleared. Machine management and cloud snapshot management between sites are disabled.
+**Default:** Outgoing syncs have **Encryption** and **Checksum Network Traffic** on. **Allow Insecure SSL Connection** is cleared. **Machine Management** and **System snapshots** between sites are **Disabled**.
 
-**Configure:** In **System > Sites**, keep **Allow Insecure SSL Connection** cleared and enable only the management directions you need. Keep **Encryption** on for each outgoing sync. Restrict network access between peers. **Network Integrity** is a checksum, not authentication.
+**Configure:** In **System > Sites**, keep **Allow Insecure SSL Connection** cleared, and set **Machine Management** and **System snapshots** to only the directions you need. Keep **Encryption** on for each outgoing sync. Restrict network access between peers. **Checksum Network Traffic** is a checksum, not authentication.
 
 **Verify:** A peer with the wrong certificate fails to connect. Replication completes with encryption. With a management direction disabled, the peer cannot manage VMs on this system.
 
@@ -93,12 +93,12 @@ Treat system snapshots as crash-consistent. A guest agent or quiesce tag does no
 1. Use trusted HTTPS endpoints. Keep machine management and repair authority disabled unless needed.
 2. Create the incoming sync on the destination, then register the outgoing sync on the source. Protect the registration code.
 3. Tune threads, retries, and throttle for the workload. The defaults are 8 data threads, 4 file threads, 10 retries, and no send throttle. On a shared WAN link, set a throttle, for example 50–80% of the link.
-4. Link each snapshot period to **Auto Sync** with remote retention, priority, and immutability.
+4. In the outgoing sync's **Auto Sync Config**, link each snapshot period with remote retention, priority, and immutability.
 5. If local retention is shorter than the transfer time, select **Do not expire snapshot**.
 
 Sync-back creates a return path. It does not fail back automatically.
 
-**Verify:** Each site authenticates, and every intended snapshot period is linked. Remote snapshots are locked, private, and expire as planned. Investigate any persistent **Error**, **Retry**, retention skip, or **Not Ready** status. Confirm whether a queue is idle or its destination is unavailable, and watch source capacity while transfers fail. Test returning an isolated recovery point without touching production.
+**Verify:** Each site authenticates, and every intended snapshot period is linked. Remote snapshots are locked, private, and expire as planned. Investigate any persistent **Error**, **Retry from error**, **Skipped due to retention**, or **Skipped because the snapshot is still building** status. Confirm whether a queue is idle or its destination is unavailable, and watch source capacity while transfers fail. Test returning an isolated recovery point without touching production.
 
 ## STO07: Validate recovery without treating a system restore as a harmless test
 
@@ -107,12 +107,12 @@ A completed snapshot or sync does not prove you can recover.
 **Default:** No restore schedule or recovery target exists.
 
 {% hint style="danger" %}
-Do not use a full system restore as a recovery drill. It rolls back the whole system, and it is supported only on the system that took the snapshot. You cannot restore one system over another. At the final confirmation, **Proceed** starts the restore immediately. If you do nothing, the restore starts by itself after 60 seconds. To stop it, click **Cancel** within those 60 seconds. After the restore starts, with **Auto Reboot All Nodes** selected (the default), every node resets and you cannot stop the restore.
+Do not use a full system restore as a recovery drill. It rolls back the whole system, and it is supported only on the system that took the snapshot. You cannot restore one system over another. **Proceed** opens a final **Are you sure?** prompt. Nothing is restored unless you click **Yes**. If you click **No**, or do not answer within 60 seconds, the request is dropped. After you click **Yes**, with **Reboot all nodes after restore** selected (the default), every node resets and you cannot stop the restore.
 {% endhint %}
 
 **Configure:** Schedule restores of representative VMs, volumes, and applications, for example quarterly. If disaster recovery is in scope, plan a separately approved failover exercise, for example yearly. Document identity, network, and DNS cutover, and how you protect the recovered primary.
 
-For routine drills, restore selected VMs or tenants from a system snapshot. A selective restore creates a copy and leaves the original in place. Test a full system restore only on a disposable system, from its own snapshot. Clear **Auto Reboot All Nodes** if you must control when the nodes restart.
+For routine drills, restore selected VMs or tenants from a system snapshot. A selective restore creates a copy and leaves the original in place. Test a full system restore only on a disposable system, from its own snapshot. Clear **Reboot all nodes after restore** if you must control when the nodes restart.
 
 **Verify:** A restored test dataset passes integrity checks within the recovery objective. Record the release, source snapshot, target, and cleanup.
 
