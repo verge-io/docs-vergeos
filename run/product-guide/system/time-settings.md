@@ -98,7 +98,7 @@ Precision Time Protocol (PTP) gives more precise time than NTP. Use PTP only whe
 - Your NICs, switches, and cabling support PTP.
 - You have a PTP grandmaster clock, and you know its domain, transport, and delay mechanism.
 
-For the procedure and all PTP settings, see [Configuring PTP in VergeOS](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/system-administration/configuring-ptp).
+For the procedure and all PTP settings, see the KB article [Configuring PTP in VergeOS](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/system-administration/configuring-ptp).
 
 ## Summary
 
