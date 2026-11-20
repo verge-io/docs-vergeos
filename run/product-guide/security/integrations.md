@@ -1,6 +1,6 @@
 ---
 title: "Integrations Hardening"
-description: "Harden VergeOS integrations: validate certificates for repositories and VMware connectors, restrict catalog publishing, and protect webhooks, SMTP, and auth source logging."
+description: "Harden VergeOS integrations: validate certificates for repositories and VMware services, restrict catalog publishing, and protect webhooks, SMTP, and auth source logging."
 semantic_keywords:
   - "VergeOS allow insecure certificate validation"
   - "catalog publishing scope private"
@@ -38,9 +38,9 @@ Defaults can change between releases. Confirm the current value before you chang
 
 Certificate validation stops an impersonated service from capturing credentials or supplying untrusted content.
 
-**Default:** **Allow Insecure** is off for catalog repositories and VMware connectors.
+**Default:** **Allow Insecure Certificates** is off for catalog repositories and VMware services.
 
-**Configure:** Use approved HTTPS endpoints and keep **Allow Insecure** clear on each repository and VMware connector. For an internal CA, register it in **System > Certificates > Root CAs > New** instead of turning on **Allow Insecure**.
+**Configure:** Use approved HTTPS endpoints and keep **Allow Insecure Certificates** clear on each repository and VMware service. For an internal CA, register it in **System > Certificates > Root CAs > New** instead of turning on **Allow Insecure Certificates**.
 
 **Verify:** Against a test endpoint, confirm a wrong or untrusted certificate fails before authentication or download. Confirm the approved endpoint works with its trusted chain.
 
@@ -80,11 +80,11 @@ Test mail delivery before you depend on email MFA. A failed relay blocks MFA cod
 
 ## INT05: Disable authentication source debug logging
 
-**Default:** **Debug Mode** is off. When on, it stops automatically after one hour.
+**Default:** **Debug** is off. When on, it stops automatically after one hour.
 
-**Configure:** In **System > Auth Sources**, keep **Debug Mode** clear on each source during normal operation.
+**Configure:** In **System > Auth Sources**, keep **Debug** clear on each source during normal operation.
 
-**Verify:** Confirm normal successful and failed login events still appear in the logs without verbose provider diagnostics. **Debug Mode** does not configure external MFA or group authorization.
+**Verify:** Confirm normal successful and failed login events still appear in the logs without verbose provider diagnostics. **Debug** does not configure external MFA or group authorization.
 
 ## Related pages
 
