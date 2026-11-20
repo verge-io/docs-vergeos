@@ -153,7 +153,14 @@ Keep untrusted neighbors and unapproved routes out of the fabric.
 
 **Configure:** In the network's routing settings, create restrictive import and export route maps first. Add BGP routers with explicit, authenticated neighbors, and attach the maps. In the OSPF commands, set `passive-interface default`, then enable only interfaces that face approved peers. Restart the routing configuration when prompted. Keep neighbor passwords out of reports.
 
-**Verify:** On an isolated peer, an unknown neighbor, a wrong password, and an unapproved prefix are all rejected. Approved routes stay stable.
+A passive interface only limits where an OSPF adjacency can form. It does not authenticate the peer on an active interface. Configure OSPF authentication on each active interface if your release supports it. If it does not, put each OSPF peer link on a dedicated segment that no other device can reach.
+
+**Verify:** Test on an isolated peer.
+
+- **BGP:** An unknown neighbor, a wrong password, and an unapproved prefix are all rejected.
+- **OSPF:** The approved peer forms an adjacency. No adjacency forms on a passive interface. If you configured authentication, a peer with a wrong key is rejected.
+
+Approved routes stay stable.
 
 ## NET11: Apply an ordered firewall policy without blocking reply traffic
 
@@ -207,7 +214,10 @@ Keep authentication, certificate checks, and log timestamps accurate.
 
 **Configure:** In **System > Time Settings**, set **NTP Servers** to reachable, approved sources. Do not set a quorum the sources cannot meet. For example, four independent sources can use **NTP Max Clocks** 4, **NTP Min Clocks** 3, and **NTP Min Sane** 2; [Time Settings](../system/time-settings.md) advises changing these only with VergeOS support. Use PTP only with a dedicated physical timing network and interface, an assigned domain, and hardware timestamp support. Review priority (for example, 128), two-step, and DSCP against that design. Restrict timing traffic to approved infrastructure.
 
-**Verify:** Node 1 synchronizes with the intended sources, and the other nodes synchronize with node 1. Time alarms clear, and node timestamps agree. The quorum holds when one source is lost.
+**Verify:** Use the check for your mode. In both modes, time alarms clear and node timestamps agree.
+
+- **NTP:** Node 1 synchronizes with the intended sources, and the other nodes synchronize with node 1. The quorum holds when one source is lost.
+- **PTP:** NTP does not run. Each node shows as synchronized, and each node appears on the intended domain at the grandmaster or switch.
 
 ## Related pages
 

@@ -107,10 +107,12 @@ A completed snapshot or sync does not prove you can recover.
 **Default:** No restore schedule or recovery target exists.
 
 {% hint style="danger" %}
-A full system restore overwrites the target. With **Auto Reboot All Nodes** selected (the default), every node resets as soon as you confirm the restore, and you cannot cancel. Restore only to a designated isolated target and keep its backup snapshot. Clear **Auto Reboot All Nodes** to control when the nodes restart.
+Do not use a full system restore as a recovery drill. It rolls back the whole system, and it is supported only on the system that took the snapshot. You cannot restore one system over another. The final confirmation gives you 60 seconds to cancel. After that, with **Auto Reboot All Nodes** selected (the default), every node resets and you cannot stop the restore.
 {% endhint %}
 
-**Configure:** Schedule restores of representative VMs, volumes, and applications, for example quarterly. If disaster recovery is in scope, plan a separately approved failover exercise, for example yearly. Document identity, network, and DNS cutover, and how you protect the recovered primary. Use **System > System Snapshots > Restore** or the VM and tenant recovery actions on the target.
+**Configure:** Schedule restores of representative VMs, volumes, and applications, for example quarterly. If disaster recovery is in scope, plan a separately approved failover exercise, for example yearly. Document identity, network, and DNS cutover, and how you protect the recovered primary.
+
+For routine drills, restore selected VMs or tenants from a system snapshot. A selective restore creates a copy and leaves the original in place. Test a full system restore only on a disposable system, from its own snapshot. Clear **Auto Reboot All Nodes** if you must control when the nodes restart.
 
 **Verify:** A restored test dataset passes integrity checks within the recovery objective. Record the release, source snapshot, target, and cleanup.
 

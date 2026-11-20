@@ -50,7 +50,7 @@ An off-cluster copy keeps security events safe from a compromised platform admin
 
 **Configure:** In **Infrastructure > Nodes**, edit each node and keep **Capture System Logs** on. In **System > Time Settings**, use approved, reachable time sources (see NET13 in [Networking Hardening](networking.md)).
 
-**Verify:** Confirm logs from each node reach the collector with matching timestamps. In **System > Time Settings**, confirm each node shows as synchronized. Check the actual time peers: node 1 uses the external sources, and the other nodes use node 1. One status sample does not prove time service behavior.
+**Verify:** Confirm logs from each node reach the collector with matching timestamps. In **System > Time Settings**, confirm each node shows as synchronized. Check the actual time peers. In NTP mode, node 1 uses the external sources, and the other nodes use node 1. In PTP mode, each node synchronizes through the PTP domain (see NET13). One status sample does not prove time service behavior.
 
 ## AUD03: Retain finite API abuse limits
 

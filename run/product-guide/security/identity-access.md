@@ -159,7 +159,12 @@ Expiry runs in the background, so a key can work briefly after its expiry date.
 
 If you need immediate containment, also disable the account that owns the key. Then confirm that the access path is denied.
 
-**Verify:** Use a test key before expiry, after expiry, and after deletion. The key works before expiry. It fails after expiry and after deletion, once background processing completes. Deleting a key does not always end its active sessions. If access continues after deletion, disable the account that owns the key.
+**Verify:** Use two disposable keys, so that one result cannot explain the other.
+
+- **Expiry:** The first key works before its expiry date and fails after it, once background processing completes.
+- **Deletion:** Confirm that the second key works, then delete it immediately. A new request with the key fails. A session that the key opened before deletion also ends.
+
+Deleting a key does not always end its active sessions. If access continues after deletion, disable the account that owns the key.
 
 ## IAM10: Restrict API keys by source address
 

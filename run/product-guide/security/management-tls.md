@@ -83,7 +83,7 @@ Keep port 80 only for an approved dependency, such as ACME HTTP validation.
 **Verify:**
 
 - **Listener disabled:** From each network zone, port 80 is unreachable and HTTPS works.
-- **Port 80 kept for ACME validation:** A certificate renewal succeeds. Port 80 is reachable only from the sources that validation needs. An HTTP request to the management UI gives no plain-text access.
+- **Port 80 kept for ACME validation:** The challenge is reachable from outside, and a certificate renewal succeeds. An HTTP request to the management UI gives no plain-text access. Filter port 80 by source only if your CA publishes its validation addresses. Let's Encrypt does not, so a source filter can break a later renewal.
 
 ## TLS04: Limit trusted CA roots and certificate renewal exposure
 
