@@ -156,7 +156,7 @@
 * [Importing VMs from VMware Service Backup Jobs](product-guide/virtual-machines/import-from-vmware.md)
 * [Live Migrations](product-guide/virtual-machines/live-migrations.md)
 * [Virtual Machine Management (VergeHV)](product-guide/virtual-machines/overview.md)
-* [Sharing Disks Between Virtual Machines](product-guide/virtual-machines/sharing-disks-between-vms.md)
+* [Sharing Data Between Virtual Machines](product-guide/virtual-machines/sharing-data-between-vms.md)
 * [VDI Administrator Instructions](product-guide/virtual-machines/vdi-administrator.md)
 * [Virtual Desktop Infrastructure (VDI)](product-guide/virtual-machines/vdi-overview.md)
 * [VDI User Instructions](product-guide/virtual-machines/vdi-user.md)
