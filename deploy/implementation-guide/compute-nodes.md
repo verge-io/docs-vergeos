@@ -40,9 +40,9 @@ Ensure the following before starting the installation of a Compute Only node:
 * All network configurations, including VLANs and physical NIC assignments, have been set up according to the main installation guide.
 
 {% hint style="warning" %}
-**If this will be the first node in a new **compute** cluster**
+**If this will be the first node in a new compute cluster**
 
-In the VergeOS UI navigate to Clusters and Create a new cluster selecting only **Compute**
+A compute-only node cannot join a cluster that has storage enabled. Before you install the first compute-only node, navigate to **Infrastructure** > **Clusters** in the VergeOS UI and create a new cluster with only **Compute** selected.
 {% endhint %}
 
 ---
@@ -74,6 +74,10 @@ In the VergeOS UI navigate to Clusters and Create a new cluster selecting only *
    - After rebooting, log into the VergeOS web UI using the cluster’s IP address.
    - Check the Nodes page to ensure that the Compute Only node has been successfully added and is operational.
 
+8. **Review the Storage Buffer:**
+   - The compute cluster has its own *Storage buffer per node* value, separate from the storage cluster. A cluster added after the first one defaults to 1 GB.
+   - Review this value on the compute cluster. See [Cluster Settings](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/system-administration/cluster-settings) for guidance.
+
 ---
 
 ## Troubleshooting & Support
@@ -82,8 +86,13 @@ If issues arise during installation:
 - Press `Esc` to cancel and get a command prompt.
 - Type `yb-install` to resume or `yb-install --restart` to start over.
 
+### No clusters available to join
 
+If the installer shows this message, the system has no compute-only cluster for the node to join, or the wrong install option was selected at the first menu:
 
----
+```
+There are no clusters in the system that this node is able to join, ensure you selected the correct install option (compute, scale-out, etc) at the first menu. If you believe you selected the correct entry, log into the user interface and verify you have a cluster that matches this config. (Compute: No storage checked, and compute checked. Scale-out: Requires storage checked)
+```
 
-This guide now focuses on Compute Only nodes, emphasizing their role in boosting computational power without contributing to storage management, which is essential for certain types of deployments where high processing capabilities are prioritized.
+1. In the VergeOS UI, navigate to **Infrastructure** > **Clusters** and create a new cluster with only **Compute** selected.
+2. On the node, type `yb-install --restart` to start the installation again.

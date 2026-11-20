@@ -7,6 +7,7 @@ semantic_keywords:
   - "max RAM cores per machine compute allocation"
   - "nested virtualization vGPU live migration"
   - "node temperature monitoring swap storage"
+  - "storage buffer per node compute cluster vSAN read cache"
 use_cases:
   - configure_cluster_cpu_and_ram_settings
   - tune_security_performance_mitigations
@@ -65,13 +66,16 @@ This section defines the fundamental properties of your cluster.
 
 {% endhint %}
 
-5. **Storage buffer per node (default 2 GB):** The amount of additional RAM to allocate per node for vSAN performance caching.     
+5. **Storage buffer per node (default 2 GB on the first cluster, 1 GB on clusters added later):** The amount of additional RAM to reserve on each node in this cluster for vSAN performance caching. This is a per-cluster setting: changing it affects only the nodes in the cluster you are editing.
 {% hint style="info" %}
 **Considerations**
 
 - When there is available RAM, beyond system and virtual workload needs, consider increasing this setting
 - Increasing the *Storage buffer per node* can significantly improve read/write performance
-- As a general rule of thumb, aim for no more than 80% RAM utilization during normal operation  
+- As a general rule of thumb, aim for no more than 80% RAM utilization during normal operation
+- Compute-only nodes are in a separate compute cluster, so they use that cluster's *Storage buffer per node* value, not the value set on the storage cluster
+- On a compute-only cluster, the buffer is reserved RAM used as a local vSAN read cache. Raise it when those nodes have spare RAM and run storage-heavy VMs. The reserved RAM is no longer available to VMs on those nodes, and the cache stays idle when nothing on the node is reading from vSAN
+- A change takes effect only after each node in the cluster is rebooted. No *Need Restart* message appears for this setting. Reboot each node manually, following proper [Maintenance Mode procedures](../operations/maintenance-mode.md) to avoid workload disruptions
 {% endhint %}
 
 ### Cluster Security/Performance
