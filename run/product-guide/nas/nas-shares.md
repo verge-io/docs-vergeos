@@ -37,19 +37,17 @@ Shares can be created to provide NFS and/or CIFS access to a NAS volume.
 
 ## Create an NFS Share
 
-1. From the Cloud Dashboard, select **NAS** from the left menu.
-2. Select **Volumes** from the left menu.
-3. Double-click the desired **Volume** in the list to display the volume dashboard.
-4. Select **NFS Shares** from the left menu.
-5. Select **New** from the left menu.
-6. Enter a ***Name*** for the new NFS share (required).
-7. Enter a ***Share Path*** (or leave blank to share the entire volume).
-8. Enter a ***Description*** for the share (optional).
-9. The ***Allow Everyone*** checkbox can be selected to allow all hosts
-10. Specify one or more ***Allowed Hosts*** to grant access only from particular machines. Hosts can be specified by IP address or FQDN; wildcards can be used to allow entire domains, example: *.companyabc.com.
-11. Optionally, a ***Filesystem ID*** can be specified.
-12. Select desired ***Data Access*** from the dropdown list (Read Only or Read and Write).
-13. Select ***User/Group Squashing*** option
+1. From the top menu, select **NAS** > **NFS Shares**.
+2. Select **New** from the left menu.
+3. Select the **Volume** to share.
+4. Enter a **Name** for the new NFS share (required).
+5. Enter a **Share Path** (or leave blank to share the entire volume).
+6. Enter a **Description** for the share (optional).
+7. The **Allow Everyone** checkbox can be selected to allow all hosts
+8. Specify one or more **Allowed Hosts** to grant access only from particular machines. Hosts can be specified by IP address or FQDN; wildcards can be used to allow entire domains, example: *.companyabc.com.
+9. Optionally, a **Filesystem ID** can be specified.
+10. Select desired **Data Access** from the dropdown list (***Read Only*** or ***Read and Write***).
+11. Select **User/Group Squashing** option
     - ***No Squashing (default)***
     - ***Squash Root***
     - ***Squash All***
@@ -60,30 +58,48 @@ Shares can be created to provide NFS and/or CIFS access to a NAS volume.
 
 {% endhint %}
 
-13. Specify ***Anonymous User ID*** (optional). Anonymously-connected users are given permission level of ID assigned here.
-14. Specify ***Anonymous Group ID*** (optional). Anonymously-connected users operate as if they were in group assigned here.
-15. The ***Asynchronous*** option can be selected to improve performance. However, in the event of an unclean server restart, there is a risk of data corruption/loss when the asynchronous option is enabled.
-16. Optionally, the ***No ACLs*** option can be selected to disable ACLs (access-control lists).
-17. Click **Submit** to save the settings and create the new NFS share.
+12. Specify **Anonymous User ID** (optional). Anonymously-connected users are given permission level of ID assigned here.
+13. Specify **Anonymous Group ID** (optional). Anonymously-connected users operate as if they were in group assigned here.
+14. The **Asynchronous** option can be selected to improve performance. However, in the event of an unclean server restart, there is a risk of data corruption/loss when the asynchronous option is enabled.
+15. Optionally, the **No ACLs** option can be selected to disable ACLs (access-control lists).
+16. Click **Submit** to save the settings and create the new NFS share.
 
 ## Create a CIFS Share
 
-1. From the Cloud Dashboard, select **NAS** from the left menu.
-2. Select **Volumes** from the left menu.
-3. Select **CIFS Shares** from the left menu.
-4. Select **New** from the left menu.
-5. Enter a ***Name*** for the new CIFS share (required).
-6. Enter a ***Share Path*** (or leave blank to share the entire volume).
-7. Optionally, a ***Description*** can be entered for the share.
-8. Enter a ***Comment*** for the share (optional).
-9. Specify a ***Valid Users*** list (optional). List one user per line.
-10. Specify a ***Valid Groups*** list (optional). List one group per line.
-11. Specify an ***Allowed Hosts*** list (optional). One host per line. Hostname, IP address, domain name, netgroup, and subnet are all valid entries.
-12. Specify a ***Denied Hosts*** list (optional). One host per line. Hostname, IP address, domain name, netgroup, and subnet are all valid entries.
-13. The ***Read Only*** option can be selected to deny any write operations via this share.
-14. The ***Browseable*** option can be selected to make the share visible in lists of available shares. This option is disabled by default.
-15. Specify a list of ***Admin Users*** (optional).
-16. A ***Force User Option / Force Group Option*** can be specified to define a user or group that will be used for all file operations performed via this share (regardless of the user account used to connect).
-17. ***Advanced Configuration Options (advanced samba share options)*** can be specified to handle special-case scenarios. (Advanced use only; please consult with VergeOS Support for assistance.)
-18. Click **Submit** to save the settings and create the new CIFS share.
+1. From the top menu, select **NAS** > **CIFS Shares**.
+2. Select **New** from the left menu.
+3. Select the **Volume** to share.
+4. Enter a **Name** for the new CIFS share (required).
+5. Enter a **Share Path** to share a specific path within the volume, or leave blank to share the entire volume from the root.
+6. Optionally, a **Description** can be entered for the share to record additional administrative information. 
+7. Optionally, The **Comment** field can be used to record descriptive information for the share that is available to SMB clients during share enumeration and discovery.
+8. Optionally, specify **Valid Users** and/or **Valid Groups** lists to limit which users and groups can connect to the share. List one user or group per line.
+   {% hint style="warning" %}
+   **Valid Users and Valid Groups restrict who can connect**
+
+   If you enter a **Valid Users** or **Valid Groups** list, only the users and groups in those lists can connect to the share. Everyone else is denied, including users and groups listed in **Admin Users**. To give an admin access to a share that has a valid users or groups list, also add them to **Valid Users** or **Valid Groups**.
+
+   Leave both lists empty to allow any authenticated user to connect, subject to file and folder permissions.
+   {% endhint %}
+
+9. Optionally, limit which client machines or networks can connect to the share. Use **one** of the following lists, not both. List one entry per line; valid entries are hostnames, IP addresses, domain names, netgroups, and subnets.
+    - **Allowed Hosts** - Only the hosts in this list can connect. All others are blocked.
+    - **Denied Hosts** - The hosts in this list are blocked. All others can connect.
+
+    Host lists only control which machines can connect. Users connecting from an allowed host must still authenticate and have permission to the share.
+
+    {% hint style="warning" %}
+    **Don't combine Allowed Hosts and Denied Hosts**
+
+    When both lists are set, a host on the Allowed Hosts list can connect even if it's also denied, and a host on neither list **can** connect. Adding a Denied Hosts list to an Allowed Hosts list therefore opens the share to every host that isn't listed. 
+
+    {% endhint %}
+
+10. The **Read Only** option can be selected to deny any write operations via this share.
+11. The **Browseable** option can be selected to make the share visible in lists of available shares. This option is disabled by default.
+12. Specify a list of **Admin Users** and/or **Admin Groups** (optional). Admin Users/Groups are treated as root/administrator when accessing files through the share.  If the share has a **Valid Users** or **Valid Groups** list, admin users must also be included in one of those lists to connect.
+13. A **Force User Option / Force Group Option** can be specified to define a user or group that will be used for all file operations performed via this share (regardless of the user account used to connect).
+14. Select **Enable shadow copy** to let Windows users restore earlier versions of files and folders from the **Previous Versions** tab, using the volume's mounted snapshots. This also requires **Automatically Mount Snapshots** on the volume. See [Enabling Windows Previous Versions (Shadow Copy) on NAS CIFS Shares](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/storage-vsan/how-to-enable-win-previous-versions-cifs-share).
+15. **Advanced Configuration Options (advanced samba share options)** can be specified to handle special-case scenarios. (Advanced use only; please consult with VergeOS Support for assistance.)
+16. Click **Submit** to save the settings and create the new CIFS share.
 
