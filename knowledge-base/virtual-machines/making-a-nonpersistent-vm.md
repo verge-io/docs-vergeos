@@ -42,7 +42,7 @@ This ensures the data is in a good state for cloning.
 5. Click the **Edit** icon ![edit icon pencil](../.gitbook/assets/edit-icon-pencil.png) for the original **Disk Media Type**.
 
 {% hint style="info" %}
-he new disk will show a **Media Type** of **Non-Persistent**. Any changes made to this disk will be reverted upon a reboot of the VM.
+The new disk will show a **Media Type** of **Non-Persistent**. Any changes made to this disk will be reverted upon a reboot of the VM.
 {% endhint %}
 
 6. Uncheck the **Enabled** checkbox.
