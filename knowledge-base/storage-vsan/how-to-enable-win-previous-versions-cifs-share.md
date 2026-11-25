@@ -33,7 +33,7 @@ dateCreated: 2026-11-22T00:00:00.000Z
 
 # Enabling Windows Previous Versions (Shadow Copy) on NAS CIFS Shares
 
-Windows users can restore an earlier copy of a file or folder on a NAS CIFS share themselves. They right-click the item on the mapped drive and open the **Previous Versions** tab. This lets users recover from an accidental change or deletion without an administrator restoring the whole volume.
+Windows users can recover earlier copies of files and folders on a NAS CIFS share themselves, directly from the volume's snapshots. They right-click the item on the mapped drive and open the **Previous Versions** tab, so an accidental change or deletion can be undone without an administrator restoring the whole volume.
 
 ## Overview
 
