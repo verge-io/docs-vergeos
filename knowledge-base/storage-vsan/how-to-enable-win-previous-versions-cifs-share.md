@@ -48,7 +48,7 @@ Windows users can recover earlier copies of files and folders on a NAS CIFS shar
 
 ## Prerequisites
 
-- A NAS service with a **local** volume. Volume snapshots aren't supported on remote (CIFS or NFS) volumes, so Previous Versions isn't available on shares of a remote volume. See [Local Volumes](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/nas/nas-local-volumes).
+- A NAS service with a **local** volume. Volume snapshots aren't supported on remote volumes, so *Previous Versions* isn't available on shares of a remote volume. See [Local Volumes](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/nas/nas-local-volumes).
 - A CIFS share on that volume, and Windows clients that can already map and use it. See [Shares](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/nas/nas-shares).
 - Recommended: a [Snapshot Profile](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/backup-and-dr/snapshot-profiles) whose schedule and retention match how far back you want users to be able to go. You can use an existing profile or create one for this volume. Without a profile, users can only restore from manual snapshots.
 
