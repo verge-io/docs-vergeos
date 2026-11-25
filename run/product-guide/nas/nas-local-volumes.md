@@ -68,7 +68,7 @@ Local volumes are file systems stored within VergeOS, consuming storage in the V
    {% hint style="info" %}
    **Let users restore earlier file versions from Windows**
 
-   With **Automatically Mount Snapshots** enabled, you can also turn on the CIFS share's **Enable shadow copy** option. Windows users can then restore earlier copies of files and folders themselves from the **Previous Versions** tab. Any volume snapshot is available, whether taken manually or on a schedule; assign a **Snapshot Profile** to take snapshots regularly and handle retention automatically. See [Enabling Windows Previous Versions (Shadow Copy) on NAS CIFS Shares](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/storage-vsan/how-to-enable-win-previous-versions-cifs-share).
+   With **Automatically Mount Snapshots** enabled, you can also turn on the CIFS share's **Enable shadow copy** option. Windows users can then restore earlier copies of files and folders themselves from the **Previous Versions** tab. Both manual and scheduled volume snapshots can be used; assign a **Snapshot Profile** to take snapshots regularly and handle retention automatically. See [Enabling Windows Previous Versions (Shadow Copy) on NAS CIFS Shares](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/storage-vsan/how-to-enable-win-previous-versions-cifs-share).
    {% endhint %}
 
 13. Specify **Owner** for the volume directory (optional).

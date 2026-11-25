@@ -54,7 +54,7 @@ Windows users can recover earlier copies of files and folders on a NAS CIFS shar
 
 ## Step 1: Enable Automatically Mount Snapshots on the Volume
 
-1. Navigate to **NAS > Volumes** and double-click the volume to open its dashboard.
+1. Navigate to **NAS** > **Volumes** and double-click the volume to open its dashboard.
 2. Click **Edit** on the left menu.
 3. Select **Automatically Mount Snapshots**.
 4. Click **Submit**.
@@ -128,7 +128,7 @@ Using **Restore** replaces the current file or folder contents on the share. If 
 
 - **Only changed files list versions.** Windows doesn't list every snapshot for every file. It lists a previous version only when the file's contents differ from the copy in the next newer snapshot (or from the current file), so identical copies are skipped. A file that hasn't changed since the oldest retained snapshot shows no previous versions at all, even though snapshots exist. Folders behave the same way, based on changes to their contents.
 - **Restore points follow the volume's snapshots.** Scheduled snapshots expire according to the snapshot profile's retention, and manual snapshots expire at the **Expires** date set when they were taken. When a snapshot expires, its version disappears from the Previous Versions list. Users can't go back further than the oldest retained volume snapshot.
-- **Snapshots are read-only.** Users can open, copy, and restore from a previous version, but they can't change or delete snapshots from Windows. Administrators manage snapshots from the volume dashboard.
+- **Snapshots are read-only.** Users can open and restore from a previous version, but they can't change or delete snapshots from Windows. Administrators manage snapshots from the volume dashboard.
 - **Permissions still apply.** A user can only open or restore items through the share that they have access to. Previous versions also keep the permissions the file had when the snapshot was taken.
 - **Whole-volume recovery is still available.** For large-scale recovery, such as after ransomware, restore the whole volume from a snapshot with **Restore over Source** or **Restore To New** instead. See [NAS Volume Snapshots and Restores](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/nas/volume-snapshots-restores).
 
