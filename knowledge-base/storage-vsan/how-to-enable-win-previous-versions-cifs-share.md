@@ -78,11 +78,11 @@ To offer Previous Versions on more than one share of the same volume, select **E
 
 Users need at least one volume snapshot to see previous versions. To test:
 
-1. Take a manual snapshot of the volume (volume dashboard > **Take Snapshot**).
-2. On a Windows client, open the mapped share in File Explorer and edit and save a test file. A file lists a previous version only if it changed after the snapshot was taken.
-3. Right-click the file and select **Properties**, then select the **Previous Versions** tab. (On Windows 11, you can also right-click and select **Show more options > Restore previous versions**.)
-
-4. Confirm the list shows an entry with a date that matches the snapshot.
+1. On a Windows client, open the mapped share in File Explorer and create and save a test file.
+2. Take a manual snapshot of the volume (volume dashboard > **Take Snapshot**). The snapshot captures the test file as it is now.
+3. Edit and save the test file again. A file lists a previous version only if it changed after the snapshot was taken.
+4. Right-click the file and select **Properties**, then select the **Previous Versions** tab. (On Windows 11, you can also right-click and select **Show more options > Restore previous versions**.)
+5. Confirm the list shows an entry with a date that matches the snapshot.
 
 ![Previous Versions tab in the Windows file Properties dialog, listing an earlier version of a file on a mapped NAS share](../.gitbook/assets/previous-version-windows-properties.png)
 
