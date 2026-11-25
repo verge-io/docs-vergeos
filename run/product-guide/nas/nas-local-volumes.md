@@ -64,6 +64,7 @@ Local volumes are file systems stored within VergeOS, consuming storage in the V
 10. The **Discard** option is enabled by default. When discard enabled: as data is deleted from the volume, that space is reclaimed back to the vSAN.
 11. The volume can optionally be set to **Read Only**.
 12. The **Automatically Mount Snapshots** option can be selected to make snapshots readily available for browsing/file restores. Snapshots are mounted in a `.snapshots` folder at the root of the volume. This folder is excluded from [volume syncs](volume-syncs.md) by default.
+
    {% hint style="info" %}
    **Let users restore earlier file versions from Windows**
 
