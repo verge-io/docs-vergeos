@@ -81,9 +81,9 @@ Imports a disk image (`.raw`, `.qcow`, `.qcow2`, `.vhd`, `.vhdx`, `.vmdk`) and c
 The source file must be [uploaded to the vSAN](../storage/uploading-files-to-vsan.md) first; select it in **Media File**.
 
 * **Non-Persistent**  
-The drive reverts to the referenced `.raw` file on each boot.  
-Designed for Golden Image / VDI deployments where all updates are made centrally.  
-Select the referenced disk in **Media File**.
+The drive is created as a copy of the selected `.raw` file and reverts to that state on each boot.  
+Designed for Golden Image / VDI deployments. Later changes to the source file do not reach an existing Non-Persistent drive.  
+Select the source disk in **Media File**.
 
 ### Interface
 
@@ -121,7 +121,7 @@ Select the ISO or disk appropriate for the media type:
   * CD-ROM: Select a \*.iso file (files uploaded to the vSAN). The \*.iso file can also be selected after drive creation.
   * Clone Disk: Select a \*.raw file (existing disks on this VergeOS system).
   * Import Disk: Select a disk image (files uploaded to the vSAN). Supported file types: .raw, .qcow, .qcow2, .vhd, .vhdx, .vmdk.
-  * Non-Persistent Disk: Select a \*.raw file (existing disks on this VergeOS system).
+  * Non-Persistent: Select a \*.raw file (existing disks on this VergeOS system).
   * Shared Disk: Select an existing disk on this VergeOS system (grouped by VM, shown as drive name and description).
 
 * **Preferred Tier**  
@@ -143,6 +143,7 @@ Attaches an existing disk to multiple VMs at the same time, for clustered applic
   * Must be set when the drive is created.
   * Applies to *Media:* ***Disk***. When enabled, *Interface* choices are limited to ***Virtio-SCSI*** and ***Virtio-SCSI (Dedicated Controller)***.
   * Select the disk to attach in *Media File* (existing disks, grouped by VM; a disk cannot be shared with the same VM twice).
+  * To compare Shared Disk with Clone Disk, Non-Persistent drives, and NAS shares, see [Sharing Data Between Virtual Machines](sharing-data-between-vms.md).
 
 {% hint style="info" %}
 The KB article [Using Shared Disks for Windows Clustering](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/virtual-machines/using-shared-disks-windows-clustering) provides step-by-step instructions for configuring VMs with shared disks for Windows clustering.
