@@ -71,7 +71,7 @@ Confirm your configuration follows recommended guidelines.
 
 1. Review tier assignments against workload requirements
 2. Confirm each vSAN tier reports Redundant in its Status card
-3. Check that the vSAN has at least 30% free capacity (the documented scale-up minimum and a reasonable operational floor); per-tier alerts trigger at 80% utilization, critical at 90%
+3. Check that no vSAN tier has active or snoozed capacity alarms; per-tier alerts trigger at 80% utilization, critical at 90%
 4. Document your storage configuration for future reference
 
 ## Verification

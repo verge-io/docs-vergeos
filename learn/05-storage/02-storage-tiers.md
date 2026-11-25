@@ -175,7 +175,7 @@ Add more drives to existing nodes within a tier. This increases the capacity and
 
 **Key requirements for scaling up:**
 
-- Ensure the vSAN has at least **30% free capacity** before adding drives (unless you are doubling the drive count)
+- Ensure the tier being expanded has **no capacity alarms**, including snoozed alarms, before adding drives
 - New drives must match the type, capacity, and performance of existing drives in the tier
 - Add the same number of drives to **each storage node** to maintain balanced distribution
 - Take a system snapshot before beginning the scale-up process

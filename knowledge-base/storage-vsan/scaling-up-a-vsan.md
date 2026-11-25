@@ -36,13 +36,13 @@ tags:
 Please review the complete [vSAN Scale Up SOP](https://app.gitbook.com/s/pODKGSQETqL1gSqyxIq3/operations/vsan-scale-up-sop) for comprehensive preparation, execution, and verification procedures.
 {% endhint %}
 
-To scale up a vSAN, follow the steps below. However, before proceeding, ensure that your current vSAN has at least **30% free capacity**.
+To scale up a vSAN, follow the steps below. However, before proceeding, ensure that the tier you are expanding has **no capacity alarms**, including snoozed alarms.
 
 {% hint style="warning" %}
 **Important**
 
 * All drives in a tier must be alike. If a drive of an incorrect size is added to an existing tier, the tier will only be able to use the space of the smallest drive.
-* Ensure that your vSAN has at least 30% free capacity unless you are doubling the capacity. If the free space is less than 30% and you are not doubling the drive count, consider scaling out by adding a node or opening up a support ticket for assistance.
+* Ensure that the tier you are expanding has no capacity alarms, including snoozed alarms. If the tier is low on free space, consider scaling out by adding a node, or open a support ticket for assistance.
 {% endhint %}
 
 {% hint style="info" %}
