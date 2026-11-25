@@ -63,7 +63,14 @@ Local volumes are file systems stored within VergeOS, consuming storage in the V
 9. Specify a **Max Size** for the volume, by entering an integer and selecting the unit (B/KB/MB/GB/TB). (When max size is reached, the volume will show out of space and will continue to be readable, but will not allow further writes.)
 10. The **Discard** option is enabled by default. When discard enabled: as data is deleted from the volume, that space is reclaimed back to the vSAN.
 11. The volume can optionally be set to **Read Only**.
-12. The **Automatically Mount Snapshots** option can be selected to make snapshots readily available for browsing/file restores.
+12. The **Automatically Mount Snapshots** option can be selected to make snapshots readily available for browsing/file restores. Snapshots are mounted in a `.snapshots` folder at the root of the volume. This folder is excluded from [volume syncs](volume-syncs.md) by default.
+
+   {% hint style="info" %}
+   **Let users restore earlier file versions from Windows**
+
+   With **Automatically Mount Snapshots** enabled, you can also turn on the CIFS share's **Enable shadow copy** option. Windows users can then restore earlier copies of files and folders themselves from the **Previous Versions** tab. Both manual and scheduled volume snapshots can be used; assign a **Snapshot Profile** to take snapshots regularly and handle retention automatically. See [Enabling Windows Previous Versions (Shadow Copy) on NAS CIFS Shares](https://app.gitbook.com/s/QZBMFpokMv2vWTIRbFzA/storage-vsan/how-to-enable-win-previous-versions-cifs-share).
+   {% endhint %}
+
 13. Specify **Owner** for the volume directory (optional).
 14. Specify a **Group** for volume directory (optional).
 15. Select a **Snapshot Profile** for the volume (optional). See [**Snapshot Profiles**](https://app.gitbook.com/s/sppYQkyIET58BuAo0kqm/backup-and-dr/snapshot-profiles) for information regarding snapshot profiles.

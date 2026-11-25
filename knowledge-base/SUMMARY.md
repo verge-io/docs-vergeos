@@ -60,6 +60,7 @@
   * [Wireguard - Setup Remote Access VPN](networking/wireguard--setup-remote-access-vpn.md)
 * [Storage & vSAN](storage-vsan/README.md)
   * [Adding Tier 0 to an Existing System](storage-vsan/adding-tier-zero.md)
+  * [Enabling Windows Previous Versions (Shadow Copy) on NAS CIFS Shares](storage-vsan/how-to-enable-win-previous-versions-cifs-share.md)
   * [NAS Volume Browser API Reference](storage-vsan/nas-volume-browser-api.md)
   * [Preferred Tier Usage](storage-vsan/preferred-tier-usage.md)
   * [Scaling Down a vSAN (Removing Drives)](storage-vsan/scaling-down-a-vsan.md)
